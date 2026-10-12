@@ -1,0 +1,18 @@
+{
+  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAnXupbHxtbzAL8PNk+ycEKvs1NVNbd4uQ1urbGe0QAIztucUUqYb8dkLto7Gb5QxufZsr3bfxqFyWkrZ3t0chINMZrRHrtMpv5KMOIETfKxM0ai5OfYc9aqO4kNoPq4mwNWuSJhiNgPplbrZgaSVY4ek/CPHjElvZukOlEj0UuiTz5nRJUtx24YDY5NdD8Uh/iPfj9gcJqc/VKOhrg5pMK9KQtf7WzUc7/8QVH2jiLONyz61FNQGj1llwVZ++mXiHx8VZRoPtO9m0/E1pYAcDS7jQwfIpzPwxUCMmMh8vnnTrxsxHcXKJ+ROszaq6Vpe0qiT4q8MlbHETy7Us+BIIIQIDAQAB",
+  "minimum_chrome_version": "116",
+  "permissions": [
+    "identity",
+    "proxy",
+    "storage",
+    "alarms",
+    "webRequest",
+    "webRequestAuthProvider",
+    "privacy",
+    "declarativeNetRequest"
+  ],
+  "background": {
+    "service_worker": "background/service-worker.js",
+    "type": "module"
+  }
+}

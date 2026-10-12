@@ -1,0 +1,830 @@
+{
+  "extensionName": {
+    "message": "FuzeVPN"
+  },
+  "extensionDescription": {
+    "message": "ایک کلک میں اپنی رازداری برقرار رکھیں اور اپنی سیکیورٹی مضبوط بنائیں۔"
+  },
+  "siteExclusionsReloadRequired": {
+    "message": "اپ ڈیٹ مکمل کرنے اور سائٹ کے استثنا استعمال کرنے کے لیے براؤزر کے ایکسٹینشن مینیجر سے FuzeVPN دوبارہ لوڈ کریں۔"
+  },
+  "extensionCommunicationError": {
+    "message": "ایکسٹینشن جواب نہیں دے رہی۔ یہ ونڈو بند کریں، پھر براؤزر کے ایکسٹینشن مینیجر سے FuzeVPN دوبارہ لوڈ کریں۔"
+  },
+  "actionDisconnected": {
+    "message": "FuzeVPN — منقطع"
+  },
+  "actionConnected": {
+    "message": "FuzeVPN — براؤزر محفوظ ہے"
+  },
+  "actionReconnecting": {
+    "message": "FuzeVPN — دوبارہ جڑنا"
+  },
+  "actionError": {
+    "message": "FuzeVPN — توجہ درکار ہے۔"
+  },
+  "browserProtection": {
+    "message": "براؤزر تحفظ"
+  },
+  "loginTitle": {
+    "message": "میں خوش آمدید FuzeVPN"
+  },
+  "loginSubtitle": {
+    "message": "اس براؤزر میں اپنی براؤزنگ کی حفاظت کے لیے سائن ان کریں۔"
+  },
+  "email": {
+    "message": "ای میل ایڈریس"
+  },
+  "emailPlaceholder": {
+    "message": "you@example.com"
+  },
+  "password": {
+    "message": "پاس ورڈ"
+  },
+  "signIn": {
+    "message": "سائن ان کریں۔"
+  },
+  "signingIn": {
+    "message": "سائن ان ہو رہا ہے…"
+  },
+  "forgotPassword": {
+    "message": "پاس ورڈ بھول گئے؟"
+  },
+  "createAccount": {
+    "message": "ایک اکاؤنٹ بنائیں"
+  },
+  "settings": {
+    "message": "ترتیبات"
+  },
+  "close": {
+    "message": "بند"
+  },
+  "statusDisconnected": {
+    "message": "منقطع"
+  },
+  "statusConnecting": {
+    "message": "منسلک ہو رہا ہے…"
+  },
+  "statusChanging": {
+    "message": "مقام تبدیل ہو رہا ہے…"
+  },
+  "statusProtected": {
+    "message": "براؤزر محفوظ ہے"
+  },
+  "statusRefreshing": {
+    "message": "محفوظ طریقے سے تجدید ہو رہا ہے…"
+  },
+  "statusDisconnecting": {
+    "message": "منقطع ہو رہا ہے…"
+  },
+  "statusError": {
+    "message": "تحفظ رک گیا۔"
+  },
+  "browserOnlyDetail": {
+    "message": "تحفظ صرف اس براؤزر کے لیے ہے۔"
+  },
+  "location": {
+    "message": "مقام"
+  },
+  "change": {
+    "message": "تبدیلی"
+  },
+  "noLocation": {
+    "message": "کوئی مقام دستیاب نہیں ہے۔"
+  },
+  "protectBrowser": {
+    "message": "براؤزر کی حفاظت کریں"
+  },
+  "disconnect": {
+    "message": "منقطع کرنا"
+  },
+  "subscription": {
+    "message": "رکنیت"
+  },
+  "refreshSubscription": {
+    "message": "سبسکرپشن ریفریش کریں۔"
+  },
+  "refreshingSubscription": {
+    "message": "سبسکرپشن کو ریفریش کیا جا رہا ہے…"
+  },
+  "subscriptionActive": {
+    "message": "فعال"
+  },
+  "subscriptionInactive": {
+    "message": "غیر فعال"
+  },
+  "expiresOn": {
+    "message": "میعاد ختم ہو رہی ہے $1"
+  },
+  "noExpiry": {
+    "message": "کوئی میعاد ختم ہونے کی تاریخ نہیں۔"
+  },
+  "browserOnlyNotice": {
+    "message": "تحفظ صرف اس براؤزر کے لیے ہے۔ دوسرے براؤزرز اور ایپس محفوظ نہیں ہوتے۔"
+  },
+  "resendVerification": {
+    "message": "ای میل دوبارہ بھیجیں۔"
+  },
+  "incognitoHelp": {
+    "message": "نجی براؤزنگ میں یہی تحفظ صرف تب ملتا ہے جب براؤزر کی ترتیبات میں ایکسٹینشن کو نجی ونڈوز میں چلنے کی اجازت دی گئی ہو۔"
+  },
+  "manageAccount": {
+    "message": "میرے اکاؤنٹ کا نظم کریں۔"
+  },
+  "account": {
+    "message": "اکاؤنٹ"
+  },
+  "devices": {
+    "message": "آلات"
+  },
+  "manageDevices": {
+    "message": "آلات کا نظم کریں۔"
+  },
+  "refreshDevices": {
+    "message": "آلات کو ریفریش کریں۔"
+  },
+  "deviceCount": {
+    "message": "$1 / $2 آلات"
+  },
+  "loadingDevices": {
+    "message": "آلات لوڈ ہو رہے ہیں…"
+  },
+  "noDevices": {
+    "message": "کوئی فعال آلات نہیں ہیں۔"
+  },
+  "currentDevice": {
+    "message": "یہ ڈیوائس"
+  },
+  "deviceKindBrowser": {
+    "message": "براؤزر کی توسیع"
+  },
+  "deviceKindVpn": {
+    "message": "VPN ڈیوائس"
+  },
+  "profile_browser_proxy": {
+    "message": "براؤزر پراکسی"
+  },
+  "profile_wireguard": {
+    "message": "وائر گارڈ"
+  },
+  "profile_openvpn": {
+    "message": "اوپن وی پی این"
+  },
+  "none": {
+    "message": "کوئی نہیں"
+  },
+  "deviceCreatedOn": {
+    "message": "$1 پر تخلیق کیا گیا"
+  },
+  "deleteDevice": {
+    "message": "ڈیوائس کو حذف کریں۔"
+  },
+  "confirmDeleteDevice": {
+    "message": "\"$1\" کو ہٹائیں؟ اس کے VPN کنکشن بند ہو جائیں گے اور اس کے پروفائلز کو ہٹا دیا جائے گا۔"
+  },
+  "resetDevice": {
+    "message": "ڈیوائس کو ری سیٹ کریں۔"
+  },
+  "confirmResetDevice": {
+    "message": "اس ایکسٹینشن کو ری سیٹ کریں؟ اگلی بار جب آپ اسے استعمال کریں گے تو اسے ایک نئے آلے کے طور پر رجسٹر کیا جائے گا۔"
+  },
+  "signOutAccount": {
+    "message": "اکاؤنٹ سے سائن آؤٹ کریں۔"
+  },
+  "chooseLocation": {
+    "message": "ایک مقام کا انتخاب کریں۔"
+  },
+  "error_invalid_credentials": {
+    "message": "ای میل ایڈریس یا پاس ورڈ غلط ہے۔"
+  },
+  "error_unauthorized": {
+    "message": "آپ کا سیشن ختم ہو گیا ہے۔ براہ کرم دوبارہ سائن ان کریں۔"
+  },
+  "error_email_verification_required": {
+    "message": "تحفظ کو فعال کرنے سے پہلے اپنے ای میل ایڈریس کی تصدیق کریں۔"
+  },
+  "errorVerificationCooldown": {
+    "message": "ایک نئے ای میل کی درخواست $1 سیکنڈ میں کی جا سکتی ہے۔"
+  },
+  "error_verification_email_cooldown": {
+    "message": "براہ کرم ایک اور ای میل کی درخواست کرنے سے پہلے انتظار کریں۔"
+  },
+  "error_subscription_required": {
+    "message": "براؤزر کی حفاظت کے لیے فعال رکنیت درکار ہے۔"
+  },
+  "error_device_limit": {
+    "message": "آلات کی زیادہ سے زیادہ تعداد پوری ہو گئی ہے۔ براہ کرم ایک آلہ ہٹا دیں۔"
+  },
+  "error_device_identity_revoked": {
+    "message": "یہ آلہ اب مجاز نہیں ہے۔ دوبارہ جڑنے کی کوشش کریں۔"
+  },
+  "error_device_proof_invalid": {
+    "message": "ہم اس آلہ کی تصدیق نہیں کر سکے۔ اپنے کمپیوٹر کی تاریخ اور وقت چیک کریں، پھر دوبارہ کوشش کریں۔"
+  },
+  "error_device_proof_replayed": {
+    "message": "اس درخواست پر پہلے ہی کارروائی ہو چکی ہے۔ دوبارہ کوشش کریں۔"
+  },
+  "error_invalid_device": {
+    "message": "اس آلے کی شناخت نہیں ہو سکی۔ دوبارہ جڑنے کی کوشش کریں۔"
+  },
+  "error_device_exists": {
+    "message": "اس آلہ کی شناخت پہلے ہی کسی دوسرے اکاؤنٹ سے منسلک ہے۔"
+  },
+  "error_not_found": {
+    "message": "یہ کارروائی اب دستیاب نہیں ہے۔ دوبارہ کوشش کریں۔"
+  },
+  "error_invalid_location": {
+    "message": "یہ مقام دستیاب نہیں ہے۔ ایک اور کا انتخاب کریں۔"
+  },
+  "error_rate_limited": {
+    "message": "بہت زیادہ کوششیں ایک لمحہ انتظار کریں اور دوبارہ کوشش کریں۔"
+  },
+  "error_proxy_unavailable": {
+    "message": "یہ سرور عارضی طور پر دستیاب نہیں ہے۔ ایک لمحے میں دوبارہ کوشش کریں۔"
+  },
+  "error_api_token_expired": {
+    "message": "آپ کے اکاؤنٹ سیشن کی میعاد ختم ہو گئی ہے۔ براہ کرم دوبارہ سائن ان کریں۔"
+  },
+  "error_network_error": {
+    "message": "نیٹ ورک دستیاب نہیں ہے۔ اپنا انٹرنیٹ کنکشن چیک کریں۔"
+  },
+  "error_request_timeout": {
+    "message": "سروس کو جواب دینے میں کافی وقت لگا۔ دوبارہ کوشش کریں۔"
+  },
+  "error_invalid_response": {
+    "message": "سروس نے ایک غیر متوقع جواب واپس کیا۔"
+  },
+  "error_proxy_certificate_invalid": {
+    "message": "ہم سرور کی سیکیورٹی کی تصدیق نہیں کر سکے۔ کنکشن بند کر دیا گیا ہے۔"
+  },
+  "error_proxy_controlled_by_extension": {
+    "message": "فی الحال ایک اور ایکسٹینشن براؤزر کی پراکسی کو کنٹرول کر رہی ہے۔"
+  },
+  "error_proxy_controlled_by_policy": {
+    "message": "ایڈمنسٹریٹر کی پالیسی FuzeVPN کو پراکسی کو تبدیل کرنے سے روکتی ہے۔"
+  },
+  "error_proxy_authentication_failed": {
+    "message": "سرور نے کنکشن قبول نہیں کیا۔ دوبارہ جڑنے کی کوشش کریں۔"
+  },
+  "error_session_expired": {
+    "message": "آپ کے محفوظ کنکشن کی میعاد ختم ہو گئی ہے۔ دوبارہ جڑیں۔"
+  },
+  "error_email_delivery_unavailable": {
+    "message": "ای میل ابھی نہیں بھیجی جا سکتی۔"
+  },
+  "error_unknown_error": {
+    "message": "ایک غیر متوقع خرابی پیش آگئی۔ دوبارہ کوشش کریں۔"
+  },
+  "actionBlocked": {
+    "message": "FuzeVPN — براؤزنگ مسدود ہے۔"
+  },
+  "statusBlockedRetry": {
+    "message": "براؤزنگ روک دی گئی — دوبارہ منسلک ہو رہی ہے۔"
+  },
+  "statusBlockedAction": {
+    "message": "براؤزنگ موقوف ہے - کنکشن چیک کریں۔"
+  },
+  "statusProtectionUnavailable": {
+    "message": "تحفظ دستیاب نہیں ہے - براؤزنگ مسدود نہیں ہے۔"
+  },
+  "recoveryHelp": {
+    "message": "تحفظ کو دوبارہ شروع کرنے کی کوشش کریں۔ منقطع آپ کو بغیر FuzeVPN کے براؤز کرنے دیتا ہے۔"
+  },
+  "retryConnection": {
+    "message": "دوبارہ کوشش کریں۔"
+  },
+  "killSwitch": {
+    "message": "سوئچ کو مار ڈالو"
+  },
+  "killSwitchHelp": {
+    "message": "VPN کنکشن کم ہونے پر نئی ویب درخواستوں کو روکتا ہے۔ خارج کردہ سائٹیں VPN سے باہر قابل رسائی رہتی ہیں۔"
+  },
+  "webRtcProtection": {
+    "message": "WebRTC تحفظ"
+  },
+  "webRtcHelp": {
+    "message": "ویب کالز کے دوران آپ کے IP ایڈریس کو نجی رکھنے میں مدد کرتا ہے۔ ہو سکتا ہے کچھ کالز کام نہ کریں۔ اسے آف کرنے سے آپ کا اصلی IP پتہ ظاہر ہو سکتا ہے۔"
+  },
+  "securityEffectiveState": {
+    "message": "$1 · $2"
+  },
+  "securityBlocked": {
+    "message": "براؤزنگ مسدود ہے۔"
+  },
+  "securityNotBlocked": {
+    "message": "براؤزنگ مسدود نہیں ہے۔"
+  },
+  "securityWebRtcActive": {
+    "message": "WebRTC پابندی فعال ہے۔"
+  },
+  "securityWebRtcInactive": {
+    "message": "WebRTC پابندی غیر فعال ہے۔"
+  },
+  "localNetworkHelp": {
+    "message": "مقامی IP پتے اور عام مقامی نام تحفظ کے دوران مسدود ہیں۔ ایک خارج شدہ ڈومین اب بھی مقامی نیٹ ورک تک رسائی فراہم کر سکتا ہے۔ سسٹم IPv6 سیٹنگز میں کوئی تبدیلی نہیں کی گئی ہے۔"
+  },
+  "securityLimits": {
+    "message": "اس تحفظ کے بارے میں"
+  },
+  "killSwitchLimits": {
+    "message": "تحفظ صرف اس براؤزر کے لیے ہے: موجودہ کنکشنز اور براؤزر یا دیگر ایکسٹینشنز کی کچھ اندرونی مواصلات جاری رہ سکتی ہیں۔ FuzeVPN کے ردعمل سے پہلے کوئی دوسری ایکسٹینشن یا پالیسی پراکسی کو بدل سکتی ہے۔ ایکسٹینشن غیر فعال کرنے سے تحفظ ختم ہو جاتا ہے۔ پورے سسٹم پر بلاکنگ نہیں ہوتی۔"
+  },
+  "error_traffic_guard_failed": {
+    "message": "براؤزنگ بلاک کی تصدیق نہیں ہو سکی۔ تحفظ کی ضمانت نہیں ہے۔ توسیع کی اجازتوں کو چیک کریں۔"
+  },
+  "error_webrtc_control_unavailable": {
+    "message": "WebRTC پابندی لاگو نہیں ہو سکی۔ اپنی سیٹنگز، دیگر ایکسٹینشنز یا ایڈمنسٹریٹر پالیسی چیک کریں۔"
+  },
+  "language": {
+    "message": "زبان"
+  },
+  "languageAutomatic": {
+    "message": "خودکار — براؤزر کی زبان"
+  },
+  "languageHelp": {
+    "message": "تبدیلیاں فوراً لاگو ہوتی ہیں۔ خودکار اختیار براؤزر کی زبان استعمال کرتا ہے، جو آپریٹنگ سسٹم کی زبان سے مختلف ہو سکتی ہے۔"
+  },
+  "languageSaveError": {
+    "message": "زبان محفوظ نہ ہو سکی۔ آپ کی پچھلی پسند برقرار ہے۔ دوبارہ کوشش کریں۔"
+  },
+  "publicIp": {
+    "message": "عوامی IP"
+  },
+  "vpnIp": {
+    "message": "وی پی این آئی پی"
+  },
+  "ipChecking": {
+    "message": "چیک ہو رہا ہے…"
+  },
+  "ipUnavailable": {
+    "message": "دستیاب نہیں۔"
+  },
+  "ipLookupExplanation": {
+    "message": "آپ کے موجودہ کنکشن کا استعمال کرتے ہوئے ipify کے ساتھ آئی پی کی جانچ کی گئی۔ کوئی براؤزنگ ہسٹری نہیں بھیجی جاتی ہے۔"
+  },
+  "automaticLocation": {
+    "message": "خودکار"
+  },
+  "automaticLocationHelp": {
+    "message": "بہترین حالیہ جوابی وقت، یا آپ کا آخری مقام۔"
+  },
+  "automaticLocationName": {
+    "message": "خودکار · $1"
+  },
+  "searchLocations": {
+    "message": "ملک یا شہر تلاش کریں۔"
+  },
+  "locationFilters": {
+    "message": "مقامات کو فلٹر کریں۔"
+  },
+  "allLocations": {
+    "message": "تمام"
+  },
+  "favoriteLocations": {
+    "message": "پسندیدہ"
+  },
+  "recentLocations": {
+    "message": "حالیہ"
+  },
+  "noMatchingLocations": {
+    "message": "کوئی مقام آپ کی تلاش سے مماثل نہیں ہے۔"
+  },
+  "noFavoriteLocations": {
+    "message": "اپنے پسندیدہ مقامات کو یہاں رکھنے کے لیے ایک ستارہ شامل کریں۔"
+  },
+  "noRecentLocations": {
+    "message": "آپ کے حال ہی میں منسلک مقامات یہاں ظاہر ہوں گے۔"
+  },
+  "addFavorite": {
+    "message": "$1 کو پسندیدہ میں شامل کریں۔"
+  },
+  "removeFavorite": {
+    "message": "پسندیدہ سے $1 کو ہٹا دیں۔"
+  },
+  "unavailableFavoriteLocation": {
+    "message": "غیر دستیاب پسندیدہ مقام $1"
+  },
+  "locationSaveError": {
+    "message": "تبدیلی مکمل نہیں ہو سکی۔ ہو سکتا ہے کچھ سیٹنگز محفوظ ہو گئی ہوں۔ دوبارہ کوشش کرنے سے پہلے ظاہر کردہ انتخاب کو چیک کریں۔"
+  },
+  "siteExclusions": {
+    "message": "خارج کردہ سائٹس"
+  },
+  "siteExclusionsHelp": {
+    "message": "یہ سائٹیں FuzeVPN کے بغیر آپ کا کنکشن استعمال کرتی ہیں، چاہے VPN نیچے چلا جائے۔"
+  },
+  "siteExclusionsEnabled": {
+    "message": "مستثنیات کو فعال کریں۔"
+  },
+  "siteExclusionInput": {
+    "message": "ڈومین یا URL"
+  },
+  "siteExclusionPlaceholder": {
+    "message": "example.com"
+  },
+  "siteExclusionPreview": {
+    "message": "منتخب ڈومین: $1"
+  },
+  "siteExclusionSubdomains": {
+    "message": "ذیلی ڈومینز شامل کریں۔"
+  },
+  "siteExclusionAdd": {
+    "message": "سائٹ شامل کریں۔"
+  },
+  "siteExclusionsEmpty": {
+    "message": "کوئی خارج شدہ سائٹس نہیں۔ صرف وہی سائٹیں شامل کریں جنہیں آپ VPN کے بغیر استعمال کرنا چاہتے ہیں۔"
+  },
+  "siteExclusionsCount": {
+    "message": "$1 / 100 سائٹس"
+  },
+  "siteExclusionScopeSubdomains": {
+    "message": "ڈومین اور ذیلی ڈومینز"
+  },
+  "siteExclusionScopeExact": {
+    "message": "صرف عین مطابق ڈومین"
+  },
+  "siteExclusionRemove": {
+    "message": "ہٹائیں $1"
+  },
+  "siteExclusionsDetails": {
+    "message": "مستثنیات کیسے کام کرتی ہیں؟"
+  },
+  "siteExclusionsResources": {
+    "message": "دوسرے ڈومینز کے وسائل محفوظ رہتے ہیں۔ کسی صفحہ کو چھوڑنا خود بخود اس کے دوسرے مواد کو خارج نہیں کرتا ہے۔"
+  },
+  "siteExclusionsReload": {
+    "message": "تبدیلی کے بعد سائٹ کو دوبارہ لوڈ کریں۔ موجودہ کنکشن اپنے سابقہ ​​راستے کو برقرار رکھ سکتے ہیں۔"
+  },
+  "siteExclusionsWebRtc": {
+    "message": "WebRTC تحفظ ایک عالمی ترتیب ہے، بشمول خارج کردہ سائٹس کے لیے۔"
+  },
+  "siteExclusionsLocal": {
+    "message": "صرف اس براؤزر میں محفوظ کیا جاتا ہے اور آپ کے اکاؤنٹ سے سائن آؤٹ کرنے کے بعد رکھا جاتا ہے۔"
+  },
+  "siteExclusionsOn": {
+    "message": "مستثنیات فعال ہیں۔"
+  },
+  "siteExclusionsOff": {
+    "message": "مستثنیات غیر فعال"
+  },
+  "siteExclusionsSummary": {
+    "message": "$1 VPN سے باہر سائٹس"
+  },
+  "siteExclusionsPending": {
+    "message": "مستثنیات کا اطلاق ہو رہا ہے…"
+  },
+  "siteExclusionsInterrupted": {
+    "message": "تبدیلی میں خلل پڑا۔ عارضی گارڈ اپنی جگہ پر موجود ہے۔"
+  },
+  "siteExclusionsSaveError": {
+    "message": "تبدیلی ختم نہیں ہو سکی۔ اپنی ترتیبات چیک کریں اور دوبارہ کوشش کریں۔"
+  },
+  "siteExclusionsRetry": {
+    "message": "دوبارہ کوشش کریں۔"
+  },
+  "siteExclusionInvalid": {
+    "message": "ایک درست عوامی ڈومین درج کریں۔ IPs، مقامی نام، وائلڈ کارڈز، عوامی لاحقے اور محفوظ ڈومینز قبول نہیں کیے جاتے ہیں۔"
+  },
+  "siteExclusionDuplicate": {
+    "message": "یہ ڈومین پہلے سے ہی فہرست میں ہے۔"
+  },
+  "siteExclusionsLimit": {
+    "message": "100 سائٹ کی حد پوری ہو گئی ہے۔ دوسری سائٹ شامل کرنے کے لیے ایک سائٹ کو ہٹا دیں۔"
+  },
+  "statusProtectedExceptions": {
+    "message": "VPN فعال · $1 مستثنیات"
+  },
+  "statusBlockedExceptions": {
+    "message": "صرف خارج کردہ سائٹیں ہی قابل رسائی رہتی ہیں۔"
+  },
+  "securityBlockedExceptions": {
+    "message": "خارج کردہ سائٹوں کے علاوہ براؤزنگ مسدود ہے۔"
+  },
+  "securityBlockUnverified": {
+    "message": "بلاک کرنے کی تصدیق نہیں ہوئی۔"
+  },
+  "logoutLocalComplete": {
+    "message": "مقامی سائن آؤٹ مکمل۔"
+  },
+  "logoutApiSession": {
+    "message": "کرنٹ اکاؤنٹ سیشن"
+  },
+  "logoutProxySessions": {
+    "message": "مشہور وی پی این سیشنز"
+  },
+  "logoutRevocationPending": {
+    "message": "منسوخی جاری ہے…"
+  },
+  "logoutRevocationConfirmed": {
+    "message": "منسوخی کی تصدیق ہو گئی۔"
+  },
+  "logoutRevocationUnconfirmed": {
+    "message": "منسوخی کی تصدیق نہیں ہوئی۔"
+  },
+  "logoutUnconfirmedHelp": {
+    "message": "کچھ ریموٹ سیشنز اس وقت تک فعال رہ سکتے ہیں جب تک ان کی میعاد ختم نہ ہو جائے۔"
+  },
+  "deviceQuotaLoading": {
+    "message": "ڈیوائس کی حد لوڈ ہو رہی ہے…"
+  },
+  "deviceQuotaUnknown": {
+    "message": "ڈیوائس کی حد دستیاب نہیں ہے۔"
+  },
+  "error_proxy_creation_uncertain": {
+    "message": "سرور نے نئے کنکشن کی تخلیق کی تصدیق نہیں کی۔ خودکار دوبارہ کنکشن موقوف ہے۔"
+  },
+  "siteExclusionsPreferencesReset": {
+    "message": "آپ کی محفوظ کردہ سائٹ کی مستثنیات کو پڑھے جانے کے بعد دوبارہ ترتیب دیا گیا تھا۔ وہ سائٹس شامل کریں جنہیں آپ دوبارہ خارج کرنا چاہتے ہیں۔"
+  },
+  "siteExclusionsConflict": {
+    "message": "خارج کردہ سائٹس کی فہرست بدل گئی ہے۔ اس کا جائزہ لیں، پھر اپنی تبدیلی کو دوبارہ آزمائیں۔"
+  },
+  "unavailableLocation": {
+    "message": "مقام دستیاب نہیں ہے۔"
+  },
+  "verificationSending": {
+    "message": "توثیقی ای میل بھیجی جا رہی ہے…"
+  },
+  "verificationSent": {
+    "message": "تصدیقی ای میل بھیجی گئی۔ اپنا ان باکس اور اسپام فولڈر چیک کریں۔"
+  },
+  "error_login_requires_disconnect": {
+    "message": "دوسرے اکاؤنٹ میں سائن ان کرنے سے پہلے موجودہ VPN کنکشن منقطع کریں۔"
+  },
+  "error_storage_unavailable": {
+    "message": "مقامی اکاؤنٹ کی ترتیبات دستیاب نہیں ہیں۔ براؤزر اسٹوریج دستیاب ہونے پر دوبارہ کوشش کریں۔ آپ کا محفوظ کردہ اکاؤنٹ محفوظ کر دیا گیا ہے۔"
+  },
+  "diagnosticsAssistance": {
+    "message": "حمایت"
+  },
+  "diagnosticsTitle": {
+    "message": "تشخیص"
+  },
+  "diagnosticsIntro": {
+    "message": "اپنے تحفظ کو تبدیل کیے بغیر FuzeVPN اور موجودہ کنکشن کو چیک کریں۔"
+  },
+  "diagnosticsPrivacyTitle": {
+    "message": "آپ کا ڈیٹا"
+  },
+  "diagnosticsPrivacy": {
+    "message": "رپورٹس میں تکنیکی حالتیں اور ایرر کوڈز شامل ہوتے ہیں، کبھی پاس ورڈ، ٹوکن، ای میل ایڈریس، آئی پی ایڈریسز، وزٹ کیے گئے یو آر ایل یا خارج کیے گئے ڈومینز نہیں ہوتے۔"
+  },
+  "diagnosticsAuto": {
+    "message": "اہم غلطی کی رپورٹ خود بخود بھیجیں۔"
+  },
+  "diagnosticsAutoHelp": {
+    "message": "بطور ڈیفالٹ آف۔ اس اکاؤنٹ کے لیے صرف سادہ تکنیکی رپورٹیں بھیجی جاتی ہیں، براؤزنگ ہسٹری کے بغیر۔ سپورٹ انہیں 30 دنوں تک رکھتا ہے۔"
+  },
+  "diagnosticsHistoryHelp": {
+    "message": "تکنیکی تاریخ مقامی رہتی ہے: 10 منٹ میں 200 واقعات تک، یہاں تک کہ جب خودکار بھیجنا بند ہو۔ اس میں کوئی براؤزنگ ہسٹری نہیں ہے اور براؤزر بند ہونے یا اکاؤنٹ تبدیل ہونے پر اسے صاف کر دیا جاتا ہے۔"
+  },
+  "diagnosticsHistoryCount": {
+    "message": "$1 مقامی تکنیکی واقعات"
+  },
+  "diagnosticsAccountRequired": {
+    "message": "بھیجنے کو فعال کرنے کے لیے سائن ان کریں۔ آپ اب بھی اکاؤنٹ کے بغیر رپورٹ دیکھ اور برآمد کر سکتے ہیں۔"
+  },
+  "diagnosticsRun": {
+    "message": "تشخیص چلائیں۔"
+  },
+  "diagnosticsClearHistory": {
+    "message": "مقامی تاریخ کو صاف کریں۔"
+  },
+  "diagnosticsPreparing": {
+    "message": "رپورٹ کی تیاری…"
+  },
+  "diagnosticsReports": {
+    "message": "رپورٹس"
+  },
+  "diagnosticsEmpty": {
+    "message": "ابھی تک کوئی مقامی رپورٹ نہیں ہے۔"
+  },
+  "diagnosticsChooseReport": {
+    "message": "ایک رپورٹ کا انتخاب کریں۔"
+  },
+  "diagnosticsReportLabel": {
+    "message": "$1 · $2 · $3"
+  },
+  "diagnosticsTypeFull": {
+    "message": "مکمل رپورٹ"
+  },
+  "diagnosticsTypeSimple": {
+    "message": "خرابی کی رپورٹ"
+  },
+  "diagnosticsSummary": {
+    "message": "$1 پر جمع کیا گیا۔ FuzeVPN ورژن $2۔"
+  },
+  "diagnosticsJson": {
+    "message": "رپورٹ کا مواد دیکھیں (JSON)"
+  },
+  "diagnosticsExport": {
+    "message": "رپورٹ برآمد کریں۔"
+  },
+  "diagnosticsDelete": {
+    "message": "مقامی رپورٹ کو حذف کریں۔"
+  },
+  "diagnosticsRetention": {
+    "message": "بھیجی گئی رپورٹس آپ کے سائن ان کردہ اکاؤنٹ سے منسلک ہوتی ہیں اور 30 دنوں تک سپورٹ کے ذریعے رکھی جاتی ہیں۔ مقامی رپورٹ کو حذف کرنے سے سپورٹ کے ذریعے پہلے سے موصول ہونے والی رپورٹ حذف نہیں ہوتی ہے۔"
+  },
+  "diagnosticsConsent": {
+    "message": "اس رپورٹ کو سپورٹ کے لیے بھیجیں۔"
+  },
+  "diagnosticsDataCollectionRequired": {
+    "message": "تشخیصی رپورٹس بھیجنے کے لیے Firefox کو تکنیکی ڈیٹا جمع کرنے کی اجازت دینی ہوگی۔ دوبارہ کوشش کریں اور یہ اجازت دیں۔"
+  },
+  "diagnosticsSendHelp": {
+    "message": "بھیجنا اختیاری ہے۔ ایک بار منظور ہونے کے بعد، یہ اسی اکاؤنٹ کے لیے ایک درست سیشن کے ساتھ 24 گھنٹے تک دوبارہ کوشش کر سکتا ہے۔ آپ مزید کوششیں منسوخ کر سکتے ہیں۔ تاخیر سے منسوخ کرنا اس بات کی ضمانت نہیں دیتا کہ سرور کو پہلے ہی رپورٹ موصول نہیں ہوئی ہے۔"
+  },
+  "diagnosticsSend": {
+    "message": "رپورٹ بھیجیں۔"
+  },
+  "diagnosticsCancel": {
+    "message": "بھیجنا منسوخ کریں۔"
+  },
+  "diagnosticsReload": {
+    "message": "اس صفحہ کو دوبارہ لوڈ کریں۔"
+  },
+  "diagnosticsUnavailable": {
+    "message": "تشخیصی معلومات دستیاب نہیں ہیں۔ براؤزر کے ایکسٹینشن مینیجر سے FuzeVPN دوبارہ لوڈ کریں، پھر یہ صفحہ دوبارہ کھولیں۔ آپ کا VPN کنکشن تبدیل نہیں ہوا۔"
+  },
+  "diagnosticsQueueFull": {
+    "message": "بھیجنے کی قطار بھری ہوئی ہے۔ مقامی رپورٹ کو حذف کریں یا زیر التواء رپورٹ کے ختم ہونے کا انتظار کریں۔"
+  },
+  "diagnosticsContentUnavailable": {
+    "message": "رپورٹ کا مواد دستیاب نہیں ہے۔ اگر مقامی رپورٹ دستیاب ہو تو برآمد کریں اور سپورٹ سے رابطہ کریں۔"
+  },
+  "diagnosticsFailure": {
+    "message": "تشخیصی کارروائی مکمل نہیں ہو سکی۔ آپ کا VPN غیر تبدیل شدہ ہے۔"
+  },
+  "diagnosticsChecks": {
+    "message": "چیک کرتا ہے۔"
+  },
+  "diagnosticsCheckFallback": {
+    "message": "تکنیکی جانچ: $1"
+  },
+  "diagnosticsCheckLine": {
+    "message": "$1 — $2"
+  },
+  "diagnosticsProxy": {
+    "message": "براؤزر پراکسی"
+  },
+  "diagnosticsStorage": {
+    "message": "مقامی اسٹوریج"
+  },
+  "diagnosticsNetwork": {
+    "message": "نیٹ ورک کنکشن"
+  },
+  "diagnosticsCleanup": {
+    "message": "سیشن کی صفائی"
+  },
+  "diagnosticsResult_passed": {
+    "message": "پاس کیا۔"
+  },
+  "diagnosticsResult_failed": {
+    "message": "ناکام"
+  },
+  "diagnosticsResult_skipped": {
+    "message": "انجام نہیں دیا گیا۔"
+  },
+  "diagnosticsResult_unknown": {
+    "message": "نامعلوم"
+  },
+  "diagnosticsStatus_ready": {
+    "message": "اس ڈیوائس پر تیار ہے۔"
+  },
+  "diagnosticsStatus_pending": {
+    "message": "بھیجنے کا انتظار ہے۔"
+  },
+  "diagnosticsStatus_sending": {
+    "message": "بھیج رہا ہے…"
+  },
+  "diagnosticsStatus_session_required": {
+    "message": "اسی اکاؤنٹ کے لیے ایک درست سیشن کا انتظار ہے۔"
+  },
+  "diagnosticsStatus_received": {
+    "message": "حمایت کی طرف سے موصول"
+  },
+  "diagnosticsStatus_failed": {
+    "message": "بھیجنا ناکام ہو گیا۔"
+  },
+  "diagnosticsStatus_cancelled": {
+    "message": "بھیجنا منسوخ ہو گیا۔"
+  },
+  "diagnosticsStatus_expired": {
+    "message": "بھیجنے کی آخری تاریخ ختم ہو گئی۔"
+  },
+  "diagnosticsReceivedAt": {
+    "message": "$1 پر موصول ہوا"
+  },
+  "error_private_browsing_required": {
+    "message": "Firefox کو عام ونڈوز میں بھی VPN ترتیب دینے کے لیے اس اجازت کی ضرورت ہے۔ about:addons → FuzeVPN کھولیں، نجی ونڈوز میں چلانے کی اجازت دیں، پھر دوبارہ کوشش کریں۔"
+  },
+  "error_host_permissions_required": {
+    "message": "Firefox میں about:addons ← FuzeVPN ← اجازتیں کھولیں اور تمام ویب سائٹس تک رسائی کی اجازت دیں، پھر دوبارہ کوشش کریں۔"
+  },
+  "cancelAction": {
+    "message": "منسوخ کریں"
+  },
+  "refreshLocations": {
+    "message": "مقامات تازہ کریں"
+  },
+  "refreshingLocations": {
+    "message": "مقامات تازہ کیے جا رہے ہیں…"
+  },
+  "locationsRefreshError": {
+    "message": "مقامات کی فہرست تازہ نہیں ہو سکی۔ دوبارہ کوشش کریں۔"
+  },
+  "error_device_revoked_limit": {
+    "message": "اس آلے کی اجازت منسوخ کر دی گئی ہے۔ آلات کی زیادہ سے زیادہ تعداد پوری ہو گئی ہے: براہ کرم ایک آلہ ہٹا دیں۔"
+  },
+  "noAvailableLocations": {
+    "message": "اس وقت کوئی مقام دستیاب نہیں ہے۔ کچھ دیر بعد دوبارہ کوشش کریں۔"
+  },
+  "noAvailableFavoriteLocations": {
+    "message": "آپ کے پسندیدہ مقامات عارضی طور پر دستیاب نہیں ہیں۔"
+  },
+  "error_server_full": {
+    "message": "یہ سرور بھر چکا ہے۔ کوئی دوسرا مقام منتخب کریں۔"
+  },
+  "error_capacity_unavailable": {
+    "message": "اس وقت اس سرور کی دستیابی کی تصدیق نہیں ہو سکتی۔ کچھ دیر بعد دوبارہ کوشش کریں۔"
+  },
+  "locationHierarchyHelp": {
+    "message": "نام دبانے سے سرور منتخب ہوتا ہے؛ تیر تفصیلات دکھاتا ہے۔"
+  },
+  "locationCountrySelect": {
+    "message": "دستیاب سرور منتخب کریں: $1"
+  },
+  "locationCitySelect": {
+    "message": "دستیاب سرور منتخب کریں: $1"
+  },
+  "locationShowCities": {
+    "message": "شہر دکھائیں: $1"
+  },
+  "locationHideCities": {
+    "message": "شہر چھپائیں: $1"
+  },
+  "locationShowServers": {
+    "message": "سرور دکھائیں: $1"
+  },
+  "locationHideServers": {
+    "message": "سرور چھپائیں: $1"
+  },
+  "locationAvailableServers": {
+    "message": "دستیاب سرور: $1"
+  },
+  "legalInformation": {
+    "message": "قانونی معلومات"
+  },
+  "privacyPolicy": {
+    "message": "رازداری کی پالیسی"
+  },
+  "termsAndConditions": {
+    "message": "استعمال اور فروخت کی شرائط"
+  },
+  "legalNotice": {
+    "message": "قانونی نوٹس"
+  },
+  "contactSupport": {
+    "message": "معاونت سے رابطہ کریں"
+  },
+  "webSignIn": {
+    "message": "FuzeVPN میں سائن ان کریں"
+  },
+  "webSignInDisconnect": {
+    "message": "کنکشن ختم کرکے سائن ان کریں"
+  },
+  "webSignInPending": {
+    "message": "سائن ان ہو رہا ہے…"
+  },
+  "webSignInHelp": {
+    "message": "FuzeVPN کے کسٹمر ایریا میں Google یا اپنے ای میل سے سائن ان کریں یا اکاؤنٹ بنائیں۔"
+  },
+  "webSignInDisconnectHelp": {
+    "message": "یہ بٹن براؤزر کا تحفظ روک دیتا ہے تاکہ آپ Google یا ای میل سے سائن ان کر سکیں۔ سائن ان کے دوران آپ کی براؤزنگ غیر محفوظ ہوگی۔"
+  },
+  "webSignInStatus": {
+    "message": "FuzeVPN کی سائن ان ونڈو میں جاری رکھیں۔ مکمل ہونے پر ایکسٹینشن خود بخود اپ ڈیٹ ہو جائے گی۔ منسوخ کرنے کے لیے وہ ونڈو بند کریں۔"
+  },
+  "error_web_login_cancelled": {
+    "message": "سائن ان منسوخ ہوگیا۔ دوبارہ کوشش کریں۔"
+  },
+  "error_web_login_timeout": {
+    "message": "سائن ان میں بہت وقت لگا۔ دوبارہ کوشش کریں۔"
+  },
+  "error_web_login_unavailable": {
+    "message": "ویب سے سائن ان دستیاب نہیں۔ بعد میں کوشش کریں۔"
+  },
+  "error_web_login_invalid_callback": {
+    "message": "سائن ان کی تصدیق نہیں ہو سکی۔ ایکسٹینشن سے دوبارہ شروع کریں۔"
+  },
+  "error_web_login_denied": {
+    "message": "سائن ان کی اجازت نہیں ملی۔ دوبارہ کوشش کریں۔"
+  },
+  "error_web_login_busy": {
+    "message": "دوبارہ کوشش کرنے سے پہلے پہلے سے کھلی سائن ان ونڈو بند کریں۔"
+  },
+  "deviceKindFirefox": {
+    "message": "Firefox براؤزر"
+  }
+}

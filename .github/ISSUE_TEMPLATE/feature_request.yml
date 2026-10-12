@@ -1,0 +1,18 @@
+name: Feature request
+description: Suggest a change to the shared browser extension.
+title: "[Feature] "
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem to solve
+      description: Describe the user need without including personal account data.
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed behavior
+      description: Specify whether this should apply to Firefox, Chrome and Edge.
+    validations:
+      required: true

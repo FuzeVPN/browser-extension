@@ -1,0 +1,830 @@
+{
+  "extensionName": {
+    "message": "FuzeVPN"
+  },
+  "extensionDescription": {
+    "message": "ワンクリックでプライバシーを守り、セキュリティを強化。"
+  },
+  "siteExclusionsReloadRequired": {
+    "message": "ブラウザーの拡張機能管理画面で FuzeVPN を再読み込みして、更新を完了し、サイト除外を利用できるようにしてください。"
+  },
+  "extensionCommunicationError": {
+    "message": "拡張機能が応答していません。このウィンドウを閉じて、ブラウザーの拡張機能管理画面で FuzeVPN を再読み込みしてください。"
+  },
+  "actionDisconnected": {
+    "message": "FuzeVPN — 切断されました"
+  },
+  "actionConnected": {
+    "message": "FuzeVPN — ブラウザーは保護されています"
+  },
+  "actionReconnecting": {
+    "message": "FuzeVPN — 再接続中"
+  },
+  "actionError": {
+    "message": "FuzeVPN — 注意が必要です"
+  },
+  "browserProtection": {
+    "message": "ブラウザ保護"
+  },
+  "loginTitle": {
+    "message": "FuzeVPN へようこそ"
+  },
+  "loginSubtitle": {
+    "message": "このブラウザーでの閲覧を保護するには、ログインしてください。"
+  },
+  "email": {
+    "message": "メールアドレス"
+  },
+  "emailPlaceholder": {
+    "message": "you@example.com"
+  },
+  "password": {
+    "message": "パスワード"
+  },
+  "signIn": {
+    "message": "サインイン"
+  },
+  "signingIn": {
+    "message": "サインイン中…"
+  },
+  "forgotPassword": {
+    "message": "パスワードをお忘れですか?"
+  },
+  "createAccount": {
+    "message": "アカウントを作成する"
+  },
+  "settings": {
+    "message": "設定"
+  },
+  "close": {
+    "message": "閉じる"
+  },
+  "statusDisconnected": {
+    "message": "切断されました"
+  },
+  "statusConnecting": {
+    "message": "接続中…"
+  },
+  "statusChanging": {
+    "message": "場所を変更中…"
+  },
+  "statusProtected": {
+    "message": "ブラウザーは保護されています"
+  },
+  "statusRefreshing": {
+    "message": "安全に更新中…"
+  },
+  "statusDisconnecting": {
+    "message": "切断中…"
+  },
+  "statusError": {
+    "message": "保護が停止しました"
+  },
+  "browserOnlyDetail": {
+    "message": "保護対象はこのブラウザーのみです。"
+  },
+  "location": {
+    "message": "場所"
+  },
+  "change": {
+    "message": "変更"
+  },
+  "noLocation": {
+    "message": "利用できる場所がありません"
+  },
+  "protectBrowser": {
+    "message": "ブラウザーを保護"
+  },
+  "disconnect": {
+    "message": "切断する"
+  },
+  "subscription": {
+    "message": "定期購入"
+  },
+  "refreshSubscription": {
+    "message": "サブスクリプションを更新する"
+  },
+  "refreshingSubscription": {
+    "message": "サブスクリプションを更新しています…"
+  },
+  "subscriptionActive": {
+    "message": "アクティブ"
+  },
+  "subscriptionInactive": {
+    "message": "非アクティブ"
+  },
+  "expiresOn": {
+    "message": "$1 に期限切れになります"
+  },
+  "noExpiry": {
+    "message": "有効期限なし"
+  },
+  "browserOnlyNotice": {
+    "message": "保護対象はこのブラウザーのみです。他のブラウザーやアプリは保護されません。"
+  },
+  "resendVerification": {
+    "message": "メールを再送信する"
+  },
+  "incognitoHelp": {
+    "message": "プライベートウィンドウでも同じ保護を利用するには、ブラウザーの設定でプライベートウィンドウでの拡張機能の実行を許可してください。"
+  },
+  "manageAccount": {
+    "message": "アカウントを管理する"
+  },
+  "account": {
+    "message": "アカウント"
+  },
+  "devices": {
+    "message": "デバイス"
+  },
+  "manageDevices": {
+    "message": "デバイスの管理"
+  },
+  "refreshDevices": {
+    "message": "デバイスをリフレッシュする"
+  },
+  "deviceCount": {
+    "message": "$1 / $2 デバイス"
+  },
+  "loadingDevices": {
+    "message": "デバイスを読み込んでいます…"
+  },
+  "noDevices": {
+    "message": "アクティブなデバイスはありません。"
+  },
+  "currentDevice": {
+    "message": "このデバイス"
+  },
+  "deviceKindBrowser": {
+    "message": "ブラウザ拡張機能"
+  },
+  "deviceKindVpn": {
+    "message": "VPNデバイス"
+  },
+  "profile_browser_proxy": {
+    "message": "ブラウザプロキシ"
+  },
+  "profile_wireguard": {
+    "message": "ワイヤーガード"
+  },
+  "profile_openvpn": {
+    "message": "OpenVPN"
+  },
+  "none": {
+    "message": "なし"
+  },
+  "deviceCreatedOn": {
+    "message": "$1 に作成されました"
+  },
+  "deleteDevice": {
+    "message": "デバイスの削除"
+  },
+  "confirmDeleteDevice": {
+    "message": "「$1」を削除しますか? VPN 接続が停止し、プロファイルが削除されます。"
+  },
+  "resetDevice": {
+    "message": "デバイスをリセットする"
+  },
+  "confirmResetDevice": {
+    "message": "この拡張機能をリセットしますか?次回使用時に新しいデバイスとして登録されます。"
+  },
+  "signOutAccount": {
+    "message": "アカウントからサインアウトする"
+  },
+  "chooseLocation": {
+    "message": "場所を選択してください"
+  },
+  "error_invalid_credentials": {
+    "message": "メールアドレスまたはパスワードが間違っています。"
+  },
+  "error_unauthorized": {
+    "message": "セッションの有効期限が切れました。再度サインインしてください。"
+  },
+  "error_email_verification_required": {
+    "message": "保護を有効にする前に、電子メール アドレスを確認してください。"
+  },
+  "errorVerificationCooldown": {
+    "message": "新しいメールは $1 秒以内にリクエストできます。"
+  },
+  "error_verification_email_cooldown": {
+    "message": "別のメールをリクエストする前にお待ちください。"
+  },
+  "error_subscription_required": {
+    "message": "ブラウザーの保護には、有効なサブスクリプションが必要です。"
+  },
+  "error_device_limit": {
+    "message": "デバイス数の上限に達しました。デバイスを1台削除してください。"
+  },
+  "error_device_identity_revoked": {
+    "message": "このデバイスは承認されなくなりました。もう一度接続をお試しください。"
+  },
+  "error_device_proof_invalid": {
+    "message": "このデバイスを確認できませんでした。コンピュータの日付と時刻を確認して、再試行してください。"
+  },
+  "error_device_proof_replayed": {
+    "message": "このリクエストはすでに処理されています。もう一度やり直してください。"
+  },
+  "error_invalid_device": {
+    "message": "このデバイスを認識できませんでした。もう一度接続をお試しください。"
+  },
+  "error_device_exists": {
+    "message": "このデバイス ID はすでに別のアカウントにリンクされています。"
+  },
+  "error_not_found": {
+    "message": "この操作は現在利用できません。もう一度お試しください。"
+  },
+  "error_invalid_location": {
+    "message": "この場所は利用できません。別のものを選択してください。"
+  },
+  "error_rate_limited": {
+    "message": "試行回数が多すぎます。しばらく待ってからもう一度試してください。"
+  },
+  "error_proxy_unavailable": {
+    "message": "このサーバーは一時的に利用できません。しばらくしてからもう一度試してください。"
+  },
+  "error_api_token_expired": {
+    "message": "アカウントセッションの有効期限が切れました。再度サインインしてください。"
+  },
+  "error_network_error": {
+    "message": "ネットワークが利用できません。インターネット接続を確認してください。"
+  },
+  "error_request_timeout": {
+    "message": "サービスの応答に時間がかかりすぎました。もう一度やり直してください。"
+  },
+  "error_invalid_response": {
+    "message": "サービスは予期しない応答を返しました。"
+  },
+  "error_proxy_certificate_invalid": {
+    "message": "サーバーのセキュリティを確認できませんでした。接続が停止されました。"
+  },
+  "error_proxy_controlled_by_extension": {
+    "message": "現在、別の拡張機能がブラウザーのプロキシを制御しています。"
+  },
+  "error_proxy_controlled_by_policy": {
+    "message": "管理者ポリシーにより、FuzeVPN によるプロキシの変更は禁止されています。"
+  },
+  "error_proxy_authentication_failed": {
+    "message": "サーバーは接続を受け入れませんでした。もう一度接続してみてください。"
+  },
+  "error_session_expired": {
+    "message": "保護された接続の有効期限が切れました。再度接続してください。"
+  },
+  "error_email_delivery_unavailable": {
+    "message": "現在メールを送信できません。"
+  },
+  "error_unknown_error": {
+    "message": "予期しないエラーが発生しました。もう一度やり直してください。"
+  },
+  "actionBlocked": {
+    "message": "FuzeVPN — 閲覧がブロックされました"
+  },
+  "statusBlockedRetry": {
+    "message": "閲覧一時停止 — 再接続中"
+  },
+  "statusBlockedAction": {
+    "message": "ブラウジングが一時停止されました — 接続を確認してください"
+  },
+  "statusProtectionUnavailable": {
+    "message": "保護は利用できません - 閲覧はブロックされていません"
+  },
+  "recoveryHelp": {
+    "message": "保護の再開を再試行してください。切断すると、FuzeVPN なしで閲覧できます。"
+  },
+  "retryConnection": {
+    "message": "再試行"
+  },
+  "killSwitch": {
+    "message": "キルスイッチ"
+  },
+  "killSwitchHelp": {
+    "message": "VPN 接続が切断された場合、新しい Web リクエストをブロックします。除外されたサイトには、VPN の外部から引き続きアクセスできます。"
+  },
+  "webRtcProtection": {
+    "message": "WebRTC 保護"
+  },
+  "webRtcHelp": {
+    "message": "Web 通話中に IP アドレスをプライベートに保つのに役立ちます。一部の通話は機能しない場合があります。これをオフにすると、実際の IP アドレスが公開される可能性があります。"
+  },
+  "securityEffectiveState": {
+    "message": "$1 · $2"
+  },
+  "securityBlocked": {
+    "message": "閲覧がブロックされました"
+  },
+  "securityNotBlocked": {
+    "message": "閲覧はブロックされていません"
+  },
+  "securityWebRtcActive": {
+    "message": "WebRTC制限が有効です"
+  },
+  "securityWebRtcInactive": {
+    "message": "WebRTC制限が無効です"
+  },
+  "localNetworkHelp": {
+    "message": "ローカル IP アドレスと一般的なローカル名は、保護中にブロックされます。除外されたドメインでもローカル ネットワークへのアクセスが提供される場合があります。システムの IPv6 設定は変更されません。"
+  },
+  "securityLimits": {
+    "message": "この保護について"
+  },
+  "killSwitchLimits": {
+    "message": "このブラウザーのみが対象です。既存の接続や、ブラウザー内部または他の拡張機能による一部の通信は継続する場合があります。FuzeVPN が応答する前に、別の拡張機能やポリシーがプロキシを変更する可能性があります。拡張機能を無効にすると、保護は解除されます。システム全体の通信はブロックしません。"
+  },
+  "error_traffic_guard_failed": {
+    "message": "閲覧ブロックを確認できませんでした。保護は保証されません。拡張機能の権限を確認してください。"
+  },
+  "error_webrtc_control_unavailable": {
+    "message": "WebRTC制限を適用できませんでした。設定、他の拡張機能、または管理者ポリシーを確認してください。"
+  },
+  "language": {
+    "message": "言語"
+  },
+  "languageAutomatic": {
+    "message": "自動 — ブラウザーの言語"
+  },
+  "languageHelp": {
+    "message": "変更はすぐに反映されます。「自動」ではブラウザーの言語を使用します。OS の言語とは異なる場合があります。"
+  },
+  "languageSaveError": {
+    "message": "言語を保存できませんでした。以前の選択は保持されます。もう一度やり直してください。"
+  },
+  "publicIp": {
+    "message": "パブリックIP"
+  },
+  "vpnIp": {
+    "message": "VPN IP"
+  },
+  "ipChecking": {
+    "message": "確認中…"
+  },
+  "ipUnavailable": {
+    "message": "利用不可"
+  },
+  "ipLookupExplanation": {
+    "message": "現在の接続を使用して IP が ipify でチェックされました。閲覧履歴は送信されません。"
+  },
+  "automaticLocation": {
+    "message": "自動"
+  },
+  "automaticLocationHelp": {
+    "message": "最近の最良の応答時間、または最後の場所。"
+  },
+  "automaticLocationName": {
+    "message": "自動 · $1"
+  },
+  "searchLocations": {
+    "message": "国または都市を検索する"
+  },
+  "locationFilters": {
+    "message": "フィルタの場所"
+  },
+  "allLocations": {
+    "message": "すべて"
+  },
+  "favoriteLocations": {
+    "message": "お気に入り"
+  },
+  "recentLocations": {
+    "message": "最近の"
+  },
+  "noMatchingLocations": {
+    "message": "検索に一致する場所はありません。"
+  },
+  "noFavoriteLocations": {
+    "message": "お気に入りの場所をここに保存するには、スターを追加します。"
+  },
+  "noRecentLocations": {
+    "message": "最近接続した場所がここに表示されます。"
+  },
+  "addFavorite": {
+    "message": "$1をお気に入りに追加"
+  },
+  "removeFavorite": {
+    "message": "$1 をお気に入りから削除します"
+  },
+  "unavailableFavoriteLocation": {
+    "message": "利用できないお気に入り $1"
+  },
+  "locationSaveError": {
+    "message": "変更を完了できませんでした。一部の設定が保存されている可能性があります。再試行する前に、表示された選択肢を確認してください。"
+  },
+  "siteExclusions": {
+    "message": "除外サイト"
+  },
+  "siteExclusionsHelp": {
+    "message": "これらのサイトは、VPN がダウンした場合でも、FuzeVPN なしで接続を使用します。"
+  },
+  "siteExclusionsEnabled": {
+    "message": "例外を有効にする"
+  },
+  "siteExclusionInput": {
+    "message": "ドメインまたはURL"
+  },
+  "siteExclusionPlaceholder": {
+    "message": "例.com"
+  },
+  "siteExclusionPreview": {
+    "message": "選択したドメイン: $1"
+  },
+  "siteExclusionSubdomains": {
+    "message": "サブドメインを含める"
+  },
+  "siteExclusionAdd": {
+    "message": "サイトを追加"
+  },
+  "siteExclusionsEmpty": {
+    "message": "除外サイトはありません。 VPN なしで使用したいサイトのみを追加します。"
+  },
+  "siteExclusionsCount": {
+    "message": "$1 / 100 サイト"
+  },
+  "siteExclusionScopeSubdomains": {
+    "message": "ドメインとサブドメイン"
+  },
+  "siteExclusionScopeExact": {
+    "message": "正確なドメインのみ"
+  },
+  "siteExclusionRemove": {
+    "message": "$1 を削除します"
+  },
+  "siteExclusionsDetails": {
+    "message": "例外はどのように機能するのでしょうか?"
+  },
+  "siteExclusionsResources": {
+    "message": "他のドメインのリソースは保護されたままになります。ページを除外しても、そのページの他のコンテンツは自動的に除外されません。"
+  },
+  "siteExclusionsReload": {
+    "message": "変更後にサイトをリロードします。既存の接続は以前のルートを保持する場合があります。"
+  },
+  "siteExclusionsWebRtc": {
+    "message": "WebRTC 保護は、除外されたサイトを含むグローバル設定のままです。"
+  },
+  "siteExclusionsLocal": {
+    "message": "このブラウザにのみ保存され、アカウントからサインアウトした後も保持されます。"
+  },
+  "siteExclusionsOn": {
+    "message": "例外を有効にする"
+  },
+  "siteExclusionsOff": {
+    "message": "例外は無効です"
+  },
+  "siteExclusionsSummary": {
+    "message": "VPN 外部の $1 サイト"
+  },
+  "siteExclusionsPending": {
+    "message": "例外を適用しています…"
+  },
+  "siteExclusionsInterrupted": {
+    "message": "変更が中断されました。臨時警備はそのままです。"
+  },
+  "siteExclusionsSaveError": {
+    "message": "変更を完了できませんでした。設定を確認して、もう一度試してください。"
+  },
+  "siteExclusionsRetry": {
+    "message": "再試行"
+  },
+  "siteExclusionInvalid": {
+    "message": "有効なパブリック ドメインを入力します。 IP、ローカル名、ワイルドカード、パブリックサフィックス、予約済みドメインは受け入れられません。"
+  },
+  "siteExclusionDuplicate": {
+    "message": "このドメインはすでにリストに載っています。"
+  },
+  "siteExclusionsLimit": {
+    "message": "100 サイトの制限に達しました。サイトを削除して別のサイトを追加します。"
+  },
+  "statusProtectedExceptions": {
+    "message": "VPN アクティブ · $1 例外"
+  },
+  "statusBlockedExceptions": {
+    "message": "除外されたサイトのみがアクセス可能になります"
+  },
+  "securityBlockedExceptions": {
+    "message": "除外サイト以外の閲覧はブロックされます"
+  },
+  "securityBlockUnverified": {
+    "message": "ブロックは検証されていません"
+  },
+  "logoutLocalComplete": {
+    "message": "ローカルサインアウトが完了しました。"
+  },
+  "logoutApiSession": {
+    "message": "当座預金セッション"
+  },
+  "logoutProxySessions": {
+    "message": "既知の VPN セッション"
+  },
+  "logoutRevocationPending": {
+    "message": "取り消し中…"
+  },
+  "logoutRevocationConfirmed": {
+    "message": "失効が確認されました"
+  },
+  "logoutRevocationUnconfirmed": {
+    "message": "取り消しは確認されていません"
+  },
+  "logoutUnconfirmedHelp": {
+    "message": "一部のリモート セッションは、有効期限が切れるまでアクティブなままになる場合があります。"
+  },
+  "deviceQuotaLoading": {
+    "message": "読み込みデバイスの制限…"
+  },
+  "deviceQuotaUnknown": {
+    "message": "デバイス制限は利用できません"
+  },
+  "error_proxy_creation_uncertain": {
+    "message": "サーバーは新しい接続の作成を確認しませんでした。自動再接続は一時停止されます。"
+  },
+  "siteExclusionsPreferencesReset": {
+    "message": "保存されたサイトの例外は、読み取れなくなった後にリセットされました。除外したいサイトを再度追加します。"
+  },
+  "siteExclusionsConflict": {
+    "message": "除外サイトのリストが変更されました。内容を確認してから、変更を再試行してください。"
+  },
+  "unavailableLocation": {
+    "message": "位置情報が利用できません"
+  },
+  "verificationSending": {
+    "message": "確認メールを送信中…"
+  },
+  "verificationSent": {
+    "message": "確認メールが送信されました。受信箱とスパムフォルダーを確認してください。"
+  },
+  "error_login_requires_disconnect": {
+    "message": "別のアカウントにサインインする前に、現在の VPN 接続を切断します。"
+  },
+  "error_storage_unavailable": {
+    "message": "ローカルアカウント設定は利用できません。ブラウザのストレージが利用可能なときに再試行してください。保存したアカウントは保存されています。"
+  },
+  "diagnosticsAssistance": {
+    "message": "サポート"
+  },
+  "diagnosticsTitle": {
+    "message": "診断"
+  },
+  "diagnosticsIntro": {
+    "message": "保護を変更せずに、FuzeVPN と現在の接続を確認してください。"
+  },
+  "diagnosticsPrivacyTitle": {
+    "message": "あなたのデータ"
+  },
+  "diagnosticsPrivacy": {
+    "message": "レポートには技術的な状態とエラー コードが含まれますが、パスワード、トークン、電子メール アドレス、IP アドレス、訪問した URL、または除外されたドメインは含まれません。"
+  },
+  "diagnosticsAuto": {
+    "message": "重要なエラー レポートを自動的に送信する"
+  },
+  "diagnosticsAutoHelp": {
+    "message": "デフォルトではオフです。このアカウントには簡単な技術レポートのみが送信され、閲覧履歴は送信されません。サポートでは 30 日間保管されます。"
+  },
+  "diagnosticsHistoryHelp": {
+    "message": "技術履歴はローカルに残ります。自動送信がオフの場合でも、10 分間で最大 200 件のイベントが保存されます。これには閲覧履歴は含まれず、ブラウザを閉じるかアカウントを変更すると消去されます。"
+  },
+  "diagnosticsHistoryCount": {
+    "message": "$1 のローカル技術イベント"
+  },
+  "diagnosticsAccountRequired": {
+    "message": "サインインして送信を有効にします。アカウントがなくてもレポートを表示およびエクスポートできます。"
+  },
+  "diagnosticsRun": {
+    "message": "診断を実行する"
+  },
+  "diagnosticsClearHistory": {
+    "message": "地元の歴史をクリアする"
+  },
+  "diagnosticsPreparing": {
+    "message": "レポートを準備しています…"
+  },
+  "diagnosticsReports": {
+    "message": "レポート"
+  },
+  "diagnosticsEmpty": {
+    "message": "現地レポートはまだありません。"
+  },
+  "diagnosticsChooseReport": {
+    "message": "レポートを選択してください"
+  },
+  "diagnosticsReportLabel": {
+    "message": "$1 · $2 · $3"
+  },
+  "diagnosticsTypeFull": {
+    "message": "完全なレポート"
+  },
+  "diagnosticsTypeSimple": {
+    "message": "エラーレポート"
+  },
+  "diagnosticsSummary": {
+    "message": "$1 で収集されました。 FuzeVPN バージョン $2。"
+  },
+  "diagnosticsJson": {
+    "message": "レポート内容（JSON）を表示する"
+  },
+  "diagnosticsExport": {
+    "message": "レポートのエクスポート"
+  },
+  "diagnosticsDelete": {
+    "message": "ローカルレポートを削除する"
+  },
+  "diagnosticsRetention": {
+    "message": "送信されたレポートはサインインしたアカウントにリンクされ、サポートによって 30 日間保管されます。ローカル レポートを削除しても、サポートがすでに受信したレポートは削除されません。"
+  },
+  "diagnosticsConsent": {
+    "message": "このレポートをサポートに送信してください"
+  },
+  "diagnosticsDataCollectionRequired": {
+    "message": "診断を送信するには、Firefox で技術データの収集を許可する必要があります。もう一度試して、この権限を許可してください。"
+  },
+  "diagnosticsSendHelp": {
+    "message": "送信は任意です。承認されると、同じアカウントの有効なセッションで最大 24 時間再試行できます。それ以降の試行はキャンセルできます。キャンセルが遅れても、サーバーがまだレポートを受信して​​いないことが保証されるわけではありません。"
+  },
+  "diagnosticsSend": {
+    "message": "レポートの送信"
+  },
+  "diagnosticsCancel": {
+    "message": "送信をキャンセルする"
+  },
+  "diagnosticsReload": {
+    "message": "このページをリロードする"
+  },
+  "diagnosticsUnavailable": {
+    "message": "診断を利用できません。ブラウザーの拡張機能管理画面で FuzeVPN を再読み込みし、このページを開き直してください。VPN 接続は変更されていません。"
+  },
+  "diagnosticsQueueFull": {
+    "message": "送信キューがいっぱいです。ローカル レポートを削除するか、保留中のレポートが完了するまで待ちます。"
+  },
+  "diagnosticsContentUnavailable": {
+    "message": "レポートの内容は利用できません。ローカル レポートが利用可能な場合はエクスポートし、サポートに連絡してください。"
+  },
+  "diagnosticsFailure": {
+    "message": "診断アクションを完了できませんでした。 VPN は変更されません。"
+  },
+  "diagnosticsChecks": {
+    "message": "小切手"
+  },
+  "diagnosticsCheckFallback": {
+    "message": "技術チェック: $1"
+  },
+  "diagnosticsCheckLine": {
+    "message": "$1 — $2"
+  },
+  "diagnosticsProxy": {
+    "message": "ブラウザプロキシ"
+  },
+  "diagnosticsStorage": {
+    "message": "ローカルストレージ"
+  },
+  "diagnosticsNetwork": {
+    "message": "ネットワーク接続"
+  },
+  "diagnosticsCleanup": {
+    "message": "セッションのクリーンアップ"
+  },
+  "diagnosticsResult_passed": {
+    "message": "合格"
+  },
+  "diagnosticsResult_failed": {
+    "message": "失敗しました"
+  },
+  "diagnosticsResult_skipped": {
+    "message": "未実施"
+  },
+  "diagnosticsResult_unknown": {
+    "message": "不明"
+  },
+  "diagnosticsStatus_ready": {
+    "message": "このデバイスで準備完了"
+  },
+  "diagnosticsStatus_pending": {
+    "message": "送信を待っています"
+  },
+  "diagnosticsStatus_sending": {
+    "message": "送信中…"
+  },
+  "diagnosticsStatus_session_required": {
+    "message": "同じアカウントの有効なセッションを待機しています"
+  },
+  "diagnosticsStatus_received": {
+    "message": "サポートで受け取った"
+  },
+  "diagnosticsStatus_failed": {
+    "message": "送信に失敗しました"
+  },
+  "diagnosticsStatus_cancelled": {
+    "message": "送信がキャンセルされました"
+  },
+  "diagnosticsStatus_expired": {
+    "message": "送信期限が切れました"
+  },
+  "diagnosticsReceivedAt": {
+    "message": "$1 で受信"
+  },
+  "error_private_browsing_required": {
+    "message": "Firefox で VPN を設定するには、通常のウィンドウでもこの権限が必要です。about:addons → FuzeVPN を開き、プライベートウィンドウでの実行を許可してから再試行してください。"
+  },
+  "error_host_permissions_required": {
+    "message": "Firefox で about:addons → FuzeVPN → 権限を開き、すべてのウェブサイトへのアクセスを許可してから再試行してください。"
+  },
+  "cancelAction": {
+    "message": "キャンセル"
+  },
+  "refreshLocations": {
+    "message": "接続先を更新"
+  },
+  "refreshingLocations": {
+    "message": "接続先を更新しています…"
+  },
+  "locationsRefreshError": {
+    "message": "接続先の一覧を更新できませんでした。もう一度お試しください。"
+  },
+  "error_device_revoked_limit": {
+    "message": "このデバイスの承認が取り消されました。デバイス数の上限に達しているため、デバイスを1台削除してください。"
+  },
+  "noAvailableLocations": {
+    "message": "現在、利用できる接続先はありません。しばらくしてからもう一度お試しください。"
+  },
+  "noAvailableFavoriteLocations": {
+    "message": "お気に入りの接続先は一時的に利用できません。"
+  },
+  "error_server_full": {
+    "message": "このサーバーは満員です。別の接続先を選択してください。"
+  },
+  "error_capacity_unavailable": {
+    "message": "現在、このサーバーが利用可能か確認できません。しばらくしてからもう一度お試しください。"
+  },
+  "locationHierarchyHelp": {
+    "message": "名前を押すとサーバーを選択し、矢印を押すと詳細を表示します。"
+  },
+  "locationCountrySelect": {
+    "message": "利用可能なサーバーを選択：$1"
+  },
+  "locationCitySelect": {
+    "message": "利用可能なサーバーを選択：$1"
+  },
+  "locationShowCities": {
+    "message": "都市を表示：$1"
+  },
+  "locationHideCities": {
+    "message": "都市を非表示：$1"
+  },
+  "locationShowServers": {
+    "message": "サーバーを表示：$1"
+  },
+  "locationHideServers": {
+    "message": "サーバーを非表示：$1"
+  },
+  "locationAvailableServers": {
+    "message": "利用可能なサーバー：$1"
+  },
+  "legalInformation": {
+    "message": "法的情報"
+  },
+  "privacyPolicy": {
+    "message": "プライバシーポリシー"
+  },
+  "termsAndConditions": {
+    "message": "利用・販売条件"
+  },
+  "legalNotice": {
+    "message": "法的表示"
+  },
+  "contactSupport": {
+    "message": "サポートに問い合わせる"
+  },
+  "webSignIn": {
+    "message": "FuzeVPNにログイン"
+  },
+  "webSignInDisconnect": {
+    "message": "切断してログイン"
+  },
+  "webSignInPending": {
+    "message": "ログイン中…"
+  },
+  "webSignInHelp": {
+    "message": "FuzeVPNの会員ページで、Googleまたはメールアドレスを使ってログインまたはアカウントを作成してください。"
+  },
+  "webSignInDisconnectHelp": {
+    "message": "このボタンは、Googleまたはメールアドレスでログインできるようブラウザの保護を停止します。ログイン中はブラウジングが保護されません。"
+  },
+  "webSignInStatus": {
+    "message": "FuzeVPNのログインウィンドウで続行してください。完了すると拡張機能が自動的に更新されます。キャンセルするには、そのウィンドウを閉じてください。"
+  },
+  "error_web_login_cancelled": {
+    "message": "ログインがキャンセルされました。もう一度お試しください。"
+  },
+  "error_web_login_timeout": {
+    "message": "ログインに時間がかかりすぎました。もう一度お試しください。"
+  },
+  "error_web_login_unavailable": {
+    "message": "ウェブでのログインは利用できません。後でもう一度お試しください。"
+  },
+  "error_web_login_invalid_callback": {
+    "message": "ログインを確認できませんでした。拡張機能からやり直してください。"
+  },
+  "error_web_login_denied": {
+    "message": "ログインが許可されませんでした。もう一度お試しください。"
+  },
+  "error_web_login_busy": {
+    "message": "もう一度試す前に、すでに開いているログインウィンドウを閉じてください。"
+  },
+  "deviceKindFirefox": {
+    "message": "Firefox ブラウザー"
+  }
+}

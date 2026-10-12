@@ -1,0 +1,830 @@
+{
+  "extensionName": {
+    "message": "FuzeVPN"
+  },
+  "extensionDescription": {
+    "message": "Jaga privasi dan tingkatkan keamanan Anda dengan satu klik."
+  },
+  "siteExclusionsReloadRequired": {
+    "message": "Muat ulang FuzeVPN melalui pengelola ekstensi peramban untuk menyelesaikan pembaruan dan menggunakan pengecualian situs."
+  },
+  "extensionCommunicationError": {
+    "message": "Ekstensi tidak merespons. Tutup jendela ini, lalu muat ulang FuzeVPN melalui pengelola ekstensi peramban."
+  },
+  "actionDisconnected": {
+    "message": "FuzeVPN — Terputus"
+  },
+  "actionConnected": {
+    "message": "FuzeVPN — Peramban terlindungi"
+  },
+  "actionReconnecting": {
+    "message": "FuzeVPN — Menyambungkan kembali"
+  },
+  "actionError": {
+    "message": "FuzeVPN — Diperlukan perhatian"
+  },
+  "browserProtection": {
+    "message": "Perlindungan peramban"
+  },
+  "loginTitle": {
+    "message": "Selamat datang di FuzeVPN"
+  },
+  "loginSubtitle": {
+    "message": "Masuk untuk melindungi penjelajahan Anda di peramban ini."
+  },
+  "email": {
+    "message": "Alamat email"
+  },
+  "emailPlaceholder": {
+    "message": "you@example.com"
+  },
+  "password": {
+    "message": "Kata sandi"
+  },
+  "signIn": {
+    "message": "Masuk"
+  },
+  "signingIn": {
+    "message": "Masuk…"
+  },
+  "forgotPassword": {
+    "message": "Lupa kata sandi?"
+  },
+  "createAccount": {
+    "message": "Buat akun"
+  },
+  "settings": {
+    "message": "Pengaturan"
+  },
+  "close": {
+    "message": "Tutup"
+  },
+  "statusDisconnected": {
+    "message": "Terputus"
+  },
+  "statusConnecting": {
+    "message": "Menghubungkan…"
+  },
+  "statusChanging": {
+    "message": "Mengubah lokasi…"
+  },
+  "statusProtected": {
+    "message": "Peramban terlindungi"
+  },
+  "statusRefreshing": {
+    "message": "Memperbarui dengan aman…"
+  },
+  "statusDisconnecting": {
+    "message": "Memutuskan sambungan…"
+  },
+  "statusError": {
+    "message": "Perlindungan terhenti"
+  },
+  "browserOnlyDetail": {
+    "message": "Perlindungan hanya untuk peramban ini."
+  },
+  "location": {
+    "message": "Lokasi"
+  },
+  "change": {
+    "message": "Perubahan"
+  },
+  "noLocation": {
+    "message": "Tidak ada lokasi yang tersedia"
+  },
+  "protectBrowser": {
+    "message": "Lindungi peramban"
+  },
+  "disconnect": {
+    "message": "Putuskan sambungan"
+  },
+  "subscription": {
+    "message": "Berlangganan"
+  },
+  "refreshSubscription": {
+    "message": "Segarkan langganan"
+  },
+  "refreshingSubscription": {
+    "message": "Menyegarkan langganan…"
+  },
+  "subscriptionActive": {
+    "message": "Aktif"
+  },
+  "subscriptionInactive": {
+    "message": "Tidak aktif"
+  },
+  "expiresOn": {
+    "message": "Kedaluwarsa pada $1"
+  },
+  "noExpiry": {
+    "message": "Tidak ada tanggal kedaluwarsa"
+  },
+  "browserOnlyNotice": {
+    "message": "Hanya peramban ini yang dilindungi. Peramban dan aplikasi lain tidak dilindungi."
+  },
+  "resendVerification": {
+    "message": "Kirim ulang email"
+  },
+  "incognitoHelp": {
+    "message": "Jendela privat mendapat perlindungan yang sama hanya jika ekstensi diizinkan berjalan di jendela privat melalui pengaturan peramban."
+  },
+  "manageAccount": {
+    "message": "Kelola akun saya"
+  },
+  "account": {
+    "message": "Akun"
+  },
+  "devices": {
+    "message": "Perangkat"
+  },
+  "manageDevices": {
+    "message": "Kelola perangkat"
+  },
+  "refreshDevices": {
+    "message": "Segarkan perangkat"
+  },
+  "deviceCount": {
+    "message": "$1 / $2 perangkat"
+  },
+  "loadingDevices": {
+    "message": "Memuat perangkat…"
+  },
+  "noDevices": {
+    "message": "Tidak ada perangkat yang aktif."
+  },
+  "currentDevice": {
+    "message": "Perangkat ini"
+  },
+  "deviceKindBrowser": {
+    "message": "Ekstensi peramban"
+  },
+  "deviceKindVpn": {
+    "message": "perangkat VPN"
+  },
+  "profile_browser_proxy": {
+    "message": "Proksi peramban"
+  },
+  "profile_wireguard": {
+    "message": "Penjaga Kawat"
+  },
+  "profile_openvpn": {
+    "message": "OpenVPN"
+  },
+  "none": {
+    "message": "tidak ada"
+  },
+  "deviceCreatedOn": {
+    "message": "Dibuat pada $1"
+  },
+  "deleteDevice": {
+    "message": "Hapus perangkat"
+  },
+  "confirmDeleteDevice": {
+    "message": "Hapus “$1”? Koneksi VPN-nya akan berhenti dan profilnya akan dihapus."
+  },
+  "resetDevice": {
+    "message": "Setel ulang perangkat"
+  },
+  "confirmResetDevice": {
+    "message": "Setel ulang ekstensi ini? Ini akan didaftarkan sebagai perangkat baru saat Anda menggunakannya lagi."
+  },
+  "signOutAccount": {
+    "message": "Keluar dari akun"
+  },
+  "chooseLocation": {
+    "message": "Pilih lokasi"
+  },
+  "error_invalid_credentials": {
+    "message": "Alamat email atau kata sandi salah."
+  },
+  "error_unauthorized": {
+    "message": "Sesi Anda telah berakhir. Silakan masuk lagi."
+  },
+  "error_email_verification_required": {
+    "message": "Verifikasi alamat email Anda sebelum mengaktifkan perlindungan."
+  },
+  "errorVerificationCooldown": {
+    "message": "Email baru dapat diminta dalam $1 detik."
+  },
+  "error_verification_email_cooldown": {
+    "message": "Harap tunggu sebelum meminta email lain."
+  },
+  "error_subscription_required": {
+    "message": "Langganan aktif diperlukan untuk melindungi peramban."
+  },
+  "error_device_limit": {
+    "message": "Batas jumlah perangkat tercapai. Harap hapus satu perangkat."
+  },
+  "error_device_identity_revoked": {
+    "message": "Perangkat ini tidak lagi diizinkan. Coba hubungkan kembali."
+  },
+  "error_device_proof_invalid": {
+    "message": "Kami tidak dapat memverifikasi perangkat ini. Periksa tanggal dan waktu komputer Anda, lalu coba lagi."
+  },
+  "error_device_proof_replayed": {
+    "message": "Permintaan ini telah diproses. Coba lagi."
+  },
+  "error_invalid_device": {
+    "message": "Perangkat ini tidak dikenali. Coba hubungkan kembali."
+  },
+  "error_device_exists": {
+    "message": "Identitas perangkat ini sudah tertaut ke akun lain."
+  },
+  "error_not_found": {
+    "message": "Tindakan ini tidak lagi tersedia. Coba lagi."
+  },
+  "error_invalid_location": {
+    "message": "Lokasi ini tidak tersedia. Pilih yang lain."
+  },
+  "error_rate_limited": {
+    "message": "Terlalu banyak upaya. Tunggu sebentar dan coba lagi."
+  },
+  "error_proxy_unavailable": {
+    "message": "Server ini untuk sementara tidak tersedia. Coba lagi sebentar lagi."
+  },
+  "error_api_token_expired": {
+    "message": "Sesi akun Anda telah kedaluwarsa. Silakan masuk lagi."
+  },
+  "error_network_error": {
+    "message": "Jaringan tidak tersedia. Periksa koneksi Internet Anda."
+  },
+  "error_request_timeout": {
+    "message": "Pelayanannya terlalu lama untuk direspon. Coba lagi."
+  },
+  "error_invalid_response": {
+    "message": "Layanan ini memberikan respons yang tidak terduga."
+  },
+  "error_proxy_certificate_invalid": {
+    "message": "Kami tidak dapat memverifikasi keamanan server. Koneksi telah dihentikan."
+  },
+  "error_proxy_controlled_by_extension": {
+    "message": "Ekstensi lain saat ini mengontrol proksi peramban."
+  },
+  "error_proxy_controlled_by_policy": {
+    "message": "Kebijakan administrator mencegah FuzeVPN mengubah proksi."
+  },
+  "error_proxy_authentication_failed": {
+    "message": "Server tidak menerima koneksi. Coba sambungkan lagi."
+  },
+  "error_session_expired": {
+    "message": "Koneksi Anda yang dilindungi telah kedaluwarsa. Hubungkan lagi."
+  },
+  "error_email_delivery_unavailable": {
+    "message": "Email tidak dapat dikirim saat ini."
+  },
+  "error_unknown_error": {
+    "message": "Terjadi kesalahan yang tidak terduga. Coba lagi."
+  },
+  "actionBlocked": {
+    "message": "FuzeVPN — Penjelajahan diblokir"
+  },
+  "statusBlockedRetry": {
+    "message": "Penjelajahan dijeda — menghubungkan kembali"
+  },
+  "statusBlockedAction": {
+    "message": "Penjelajahan dijeda — periksa koneksi"
+  },
+  "statusProtectionUnavailable": {
+    "message": "Perlindungan tidak tersedia — penjelajahan tidak diblokir"
+  },
+  "recoveryHelp": {
+    "message": "Coba lagi untuk melanjutkan perlindungan. Putuskan sambungan memungkinkan Anda menjelajah tanpa FuzeVPN."
+  },
+  "retryConnection": {
+    "message": "Coba lagi"
+  },
+  "killSwitch": {
+    "message": "Tombol pemutus"
+  },
+  "killSwitchHelp": {
+    "message": "Memblokir permintaan web baru jika koneksi VPN terputus. Situs yang dikecualikan tetap dapat diakses di luar VPN."
+  },
+  "webRtcProtection": {
+    "message": "Perlindungan WebRTC"
+  },
+  "webRtcHelp": {
+    "message": "Membantu menjaga kerahasiaan alamat IP Anda selama panggilan web. Beberapa panggilan mungkin tidak berfungsi. Mematikan ini mungkin mengungkapkan alamat IP Anda yang sebenarnya."
+  },
+  "securityEffectiveState": {
+    "message": "$1 · $2"
+  },
+  "securityBlocked": {
+    "message": "Penjelajahan diblokir"
+  },
+  "securityNotBlocked": {
+    "message": "Penjelajahan tidak diblokir"
+  },
+  "securityWebRtcActive": {
+    "message": "Pembatasan WebRTC aktif"
+  },
+  "securityWebRtcInactive": {
+    "message": "Pembatasan WebRTC tidak aktif"
+  },
+  "localNetworkHelp": {
+    "message": "Alamat IP lokal dan nama lokal umum diblokir selama perlindungan. Domain yang dikecualikan masih dapat memberikan akses ke jaringan lokal. Pengaturan sistem IPv6 tidak berubah."
+  },
+  "securityLimits": {
+    "message": "Tentang perlindungan ini"
+  },
+  "killSwitchLimits": {
+    "message": "Hanya untuk peramban ini: koneksi yang sudah ada serta sebagian komunikasi internal peramban atau ekstensi lain dapat berlanjut. Ekstensi atau kebijakan lain dapat mengganti proksi sebelum FuzeVPN merespons. Menonaktifkan ekstensi menghapus perlindungan. Tidak ada pemblokiran di seluruh sistem."
+  },
+  "error_traffic_guard_failed": {
+    "message": "Blok penjelajahan tidak dapat diverifikasi. Perlindungan tidak dijamin. Periksa izin ekstensi."
+  },
+  "error_webrtc_control_unavailable": {
+    "message": "Pembatasan WebRTC tidak dapat diterapkan. Periksa pengaturan Anda, ekstensi lain, atau kebijakan administrator."
+  },
+  "language": {
+    "message": "Bahasa"
+  },
+  "languageAutomatic": {
+    "message": "Otomatis — bahasa peramban"
+  },
+  "languageHelp": {
+    "message": "Perubahan langsung berlaku. Pilihan otomatis mengikuti bahasa peramban, yang mungkin berbeda dari bahasa sistem operasi."
+  },
+  "languageSaveError": {
+    "message": "Tidak dapat menyimpan bahasa. Pilihan Anda sebelumnya disimpan. Coba lagi."
+  },
+  "publicIp": {
+    "message": "IP Publik"
+  },
+  "vpnIp": {
+    "message": "IP VPN"
+  },
+  "ipChecking": {
+    "message": "Memeriksa…"
+  },
+  "ipUnavailable": {
+    "message": "Tidak tersedia"
+  },
+  "ipLookupExplanation": {
+    "message": "IP diperiksa dengan ipify menggunakan koneksi Anda saat ini. Tidak ada riwayat penelusuran yang dikirim."
+  },
+  "automaticLocation": {
+    "message": "Otomatis"
+  },
+  "automaticLocationHelp": {
+    "message": "Waktu respons terkini terbaik, atau lokasi terakhir Anda."
+  },
+  "automaticLocationName": {
+    "message": "Otomatis · $1"
+  },
+  "searchLocations": {
+    "message": "Cari negara atau kota"
+  },
+  "locationFilters": {
+    "message": "Filter lokasi"
+  },
+  "allLocations": {
+    "message": "Semua"
+  },
+  "favoriteLocations": {
+    "message": "Favorit"
+  },
+  "recentLocations": {
+    "message": "Baru-baru ini"
+  },
+  "noMatchingLocations": {
+    "message": "Tidak ada lokasi yang cocok dengan pencarian Anda."
+  },
+  "noFavoriteLocations": {
+    "message": "Tambahkan bintang untuk menyimpan lokasi favorit Anda di sini."
+  },
+  "noRecentLocations": {
+    "message": "Lokasi Anda yang baru-baru ini terhubung akan muncul di sini."
+  },
+  "addFavorite": {
+    "message": "Tambahkan $1 ke favorit"
+  },
+  "removeFavorite": {
+    "message": "Hapus $1 dari favorit"
+  },
+  "unavailableFavoriteLocation": {
+    "message": "Lokasi favorit tidak tersedia $1"
+  },
+  "locationSaveError": {
+    "message": "Perubahan tidak dapat diselesaikan. Beberapa pengaturan mungkin telah disimpan. Periksa pilihan yang ditampilkan sebelum mencoba lagi."
+  },
+  "siteExclusions": {
+    "message": "Situs yang dikecualikan"
+  },
+  "siteExclusionsHelp": {
+    "message": "Situs-situs ini menggunakan koneksi Anda tanpa FuzeVPN, meskipun VPN sedang down."
+  },
+  "siteExclusionsEnabled": {
+    "message": "Aktifkan pengecualian"
+  },
+  "siteExclusionInput": {
+    "message": "Domain atau URL"
+  },
+  "siteExclusionPlaceholder": {
+    "message": "contoh.com"
+  },
+  "siteExclusionPreview": {
+    "message": "Domain yang dipilih: $1"
+  },
+  "siteExclusionSubdomains": {
+    "message": "Sertakan subdomain"
+  },
+  "siteExclusionAdd": {
+    "message": "Tambahkan situs"
+  },
+  "siteExclusionsEmpty": {
+    "message": "Tidak ada situs yang dikecualikan. Tambahkan hanya situs yang ingin Anda gunakan tanpa VPN."
+  },
+  "siteExclusionsCount": {
+    "message": "$1 / 100 situs"
+  },
+  "siteExclusionScopeSubdomains": {
+    "message": "Domain dan subdomain"
+  },
+  "siteExclusionScopeExact": {
+    "message": "Hanya domain yang tepat"
+  },
+  "siteExclusionRemove": {
+    "message": "Hapus $1"
+  },
+  "siteExclusionsDetails": {
+    "message": "Bagaimana cara kerja pengecualian?"
+  },
+  "siteExclusionsResources": {
+    "message": "Sumber daya dari domain lain tetap terlindungi. Mengecualikan suatu halaman tidak secara otomatis mengecualikan konten lainnya."
+  },
+  "siteExclusionsReload": {
+    "message": "Muat ulang situs setelah perubahan. Koneksi yang ada mungkin tetap menggunakan rute sebelumnya."
+  },
+  "siteExclusionsWebRtc": {
+    "message": "Perlindungan WebRTC tetap menjadi pengaturan global, termasuk untuk situs yang dikecualikan."
+  },
+  "siteExclusionsLocal": {
+    "message": "Hanya disimpan di browser ini dan disimpan setelah keluar dari akun Anda."
+  },
+  "siteExclusionsOn": {
+    "message": "Pengecualian diaktifkan"
+  },
+  "siteExclusionsOff": {
+    "message": "Pengecualian dinonaktifkan"
+  },
+  "siteExclusionsSummary": {
+    "message": "$1 situs di luar VPN"
+  },
+  "siteExclusionsPending": {
+    "message": "Menerapkan pengecualian…"
+  },
+  "siteExclusionsInterrupted": {
+    "message": "Perubahan terhenti. Penjagaan sementara tetap di tempatnya."
+  },
+  "siteExclusionsSaveError": {
+    "message": "Tidak dapat menyelesaikan perubahan. Periksa pengaturan Anda dan coba lagi."
+  },
+  "siteExclusionsRetry": {
+    "message": "Coba lagi"
+  },
+  "siteExclusionInvalid": {
+    "message": "Masukkan domain publik yang valid. IP, nama lokal, wildcard, sufiks publik, dan domain cadangan tidak diterima."
+  },
+  "siteExclusionDuplicate": {
+    "message": "Domain ini sudah ada dalam daftar."
+  },
+  "siteExclusionsLimit": {
+    "message": "Batas 100 situs telah tercapai. Hapus situs untuk menambahkan situs lain."
+  },
+  "statusProtectedExceptions": {
+    "message": "VPN aktif · $1 pengecualian"
+  },
+  "statusBlockedExceptions": {
+    "message": "Hanya situs-situs yang dikecualikan yang tetap dapat diakses"
+  },
+  "securityBlockedExceptions": {
+    "message": "Penjelajahan diblokir kecuali situs yang dikecualikan"
+  },
+  "securityBlockUnverified": {
+    "message": "Pemblokiran tidak terverifikasi"
+  },
+  "logoutLocalComplete": {
+    "message": "Keluar lokal selesai."
+  },
+  "logoutApiSession": {
+    "message": "Sesi akun saat ini"
+  },
+  "logoutProxySessions": {
+    "message": "Sesi VPN yang dikenal"
+  },
+  "logoutRevocationPending": {
+    "message": "Pencabutan sedang berlangsung…"
+  },
+  "logoutRevocationConfirmed": {
+    "message": "Pencabutan dikonfirmasi"
+  },
+  "logoutRevocationUnconfirmed": {
+    "message": "Pencabutan tidak dikonfirmasi"
+  },
+  "logoutUnconfirmedHelp": {
+    "message": "Beberapa sesi jarak jauh mungkin tetap aktif hingga habis masa berlakunya."
+  },
+  "deviceQuotaLoading": {
+    "message": "Memuat batas perangkat…"
+  },
+  "deviceQuotaUnknown": {
+    "message": "Batas perangkat tidak tersedia"
+  },
+  "error_proxy_creation_uncertain": {
+    "message": "Server tidak mengonfirmasi pembuatan koneksi baru. Sambungan ulang otomatis dijeda."
+  },
+  "siteExclusionsPreferencesReset": {
+    "message": "Pengecualian situs tersimpan Anda disetel ulang setelah tidak dapat dibaca. Tambahkan kembali situs yang ingin Anda kecualikan."
+  },
+  "siteExclusionsConflict": {
+    "message": "Daftar situs yang dikecualikan telah berubah. Tinjau, lalu coba perubahan Anda lagi."
+  },
+  "unavailableLocation": {
+    "message": "Lokasi tidak tersedia"
+  },
+  "verificationSending": {
+    "message": "Mengirim email verifikasi…"
+  },
+  "verificationSent": {
+    "message": "Email verifikasi terkirim. Periksa kotak masuk dan folder spam Anda."
+  },
+  "error_login_requires_disconnect": {
+    "message": "Putuskan koneksi VPN saat ini sebelum masuk ke akun lain."
+  },
+  "error_storage_unavailable": {
+    "message": "Pengaturan akun lokal tidak tersedia. Coba lagi ketika penyimpanan browser tersedia; akun simpanan Anda telah dipertahankan."
+  },
+  "diagnosticsAssistance": {
+    "message": "Dukungan"
+  },
+  "diagnosticsTitle": {
+    "message": "Diagnostik"
+  },
+  "diagnosticsIntro": {
+    "message": "Periksa FuzeVPN dan koneksi saat ini tanpa mengubah perlindungan Anda."
+  },
+  "diagnosticsPrivacyTitle": {
+    "message": "Data Anda"
+  },
+  "diagnosticsPrivacy": {
+    "message": "Laporan berisi status teknis dan kode kesalahan, tidak pernah berisi kata sandi, token, alamat email, alamat IP, URL yang dikunjungi, atau domain yang dikecualikan."
+  },
+  "diagnosticsAuto": {
+    "message": "Kirim laporan kesalahan penting secara otomatis"
+  },
+  "diagnosticsAutoHelp": {
+    "message": "Mati secara default. Hanya laporan teknis sederhana yang dikirim untuk akun ini, tanpa riwayat penelusuran. Dukungan menyimpannya selama 30 hari."
+  },
+  "diagnosticsHistoryHelp": {
+    "message": "Riwayat teknis tetap bersifat lokal: hingga 200 peristiwa selama 10 menit, meskipun pengiriman otomatis nonaktif. Ini tidak berisi riwayat penelusuran dan dihapus ketika browser ditutup atau akun diubah."
+  },
+  "diagnosticsHistoryCount": {
+    "message": "$1 acara teknis lokal"
+  },
+  "diagnosticsAccountRequired": {
+    "message": "Masuk untuk mengaktifkan pengiriman. Anda masih dapat melihat dan mengekspor laporan tanpa akun."
+  },
+  "diagnosticsRun": {
+    "message": "Jalankan diagnostik"
+  },
+  "diagnosticsClearHistory": {
+    "message": "Hapus riwayat lokal"
+  },
+  "diagnosticsPreparing": {
+    "message": "Mempersiapkan laporan…"
+  },
+  "diagnosticsReports": {
+    "message": "Laporan"
+  },
+  "diagnosticsEmpty": {
+    "message": "Belum ada laporan lokal."
+  },
+  "diagnosticsChooseReport": {
+    "message": "Pilih laporan"
+  },
+  "diagnosticsReportLabel": {
+    "message": "$1 · $2 · $3"
+  },
+  "diagnosticsTypeFull": {
+    "message": "Laporan lengkap"
+  },
+  "diagnosticsTypeSimple": {
+    "message": "Laporan kesalahan"
+  },
+  "diagnosticsSummary": {
+    "message": "Dikumpulkan pada $1. FuzeVPN versi $2."
+  },
+  "diagnosticsJson": {
+    "message": "Lihat konten laporan (JSON)"
+  },
+  "diagnosticsExport": {
+    "message": "Ekspor laporan"
+  },
+  "diagnosticsDelete": {
+    "message": "Hapus laporan lokal"
+  },
+  "diagnosticsRetention": {
+    "message": "Laporan yang terkirim ditautkan ke akun masuk Anda dan disimpan oleh dukungan selama 30 hari. Menghapus laporan lokal tidak menghapus laporan yang sudah diterima oleh dukungan."
+  },
+  "diagnosticsConsent": {
+    "message": "Kirim laporan ini ke dukungan"
+  },
+  "diagnosticsDataCollectionRequired": {
+    "message": "Firefox harus mengizinkan pengumpulan data teknis untuk mengirim diagnostik. Coba lagi dan berikan izin ini."
+  },
+  "diagnosticsSendHelp": {
+    "message": "Mengirim adalah opsional. Setelah disetujui, dapat dicoba lagi hingga 24 jam dengan sesi valid untuk akun yang sama. Anda dapat membatalkan upaya selanjutnya. Pembatalan yang terlambat tidak menjamin server belum menerima laporan."
+  },
+  "diagnosticsSend": {
+    "message": "Kirim laporan"
+  },
+  "diagnosticsCancel": {
+    "message": "Batalkan pengiriman"
+  },
+  "diagnosticsReload": {
+    "message": "Muat ulang halaman ini"
+  },
+  "diagnosticsUnavailable": {
+    "message": "Diagnostik tidak tersedia. Muat ulang FuzeVPN melalui pengelola ekstensi peramban, lalu buka kembali halaman ini. Koneksi VPN Anda tidak berubah."
+  },
+  "diagnosticsQueueFull": {
+    "message": "Antrian pengiriman penuh. Hapus laporan lokal atau tunggu hingga laporan yang tertunda selesai."
+  },
+  "diagnosticsContentUnavailable": {
+    "message": "Konten laporan tidak tersedia. Ekspor laporan lokal jika tersedia dan hubungi dukungan."
+  },
+  "diagnosticsFailure": {
+    "message": "Tindakan diagnostik tidak dapat diselesaikan. VPN Anda tidak berubah."
+  },
+  "diagnosticsChecks": {
+    "message": "Cek"
+  },
+  "diagnosticsCheckFallback": {
+    "message": "Pemeriksaan teknis: $1"
+  },
+  "diagnosticsCheckLine": {
+    "message": "$1 — $2"
+  },
+  "diagnosticsProxy": {
+    "message": "Proksi peramban"
+  },
+  "diagnosticsStorage": {
+    "message": "Penyimpanan lokal"
+  },
+  "diagnosticsNetwork": {
+    "message": "Koneksi jaringan"
+  },
+  "diagnosticsCleanup": {
+    "message": "Pembersihan sesi"
+  },
+  "diagnosticsResult_passed": {
+    "message": "Lulus"
+  },
+  "diagnosticsResult_failed": {
+    "message": "Gagal"
+  },
+  "diagnosticsResult_skipped": {
+    "message": "Tidak dilakukan"
+  },
+  "diagnosticsResult_unknown": {
+    "message": "Tidak diketahui"
+  },
+  "diagnosticsStatus_ready": {
+    "message": "Siap di perangkat ini"
+  },
+  "diagnosticsStatus_pending": {
+    "message": "Menunggu untuk dikirim"
+  },
+  "diagnosticsStatus_sending": {
+    "message": "Mengirim…"
+  },
+  "diagnosticsStatus_session_required": {
+    "message": "Menunggu sesi yang valid untuk akun yang sama"
+  },
+  "diagnosticsStatus_received": {
+    "message": "Diterima oleh dukungan"
+  },
+  "diagnosticsStatus_failed": {
+    "message": "Pengiriman gagal"
+  },
+  "diagnosticsStatus_cancelled": {
+    "message": "Pengiriman dibatalkan"
+  },
+  "diagnosticsStatus_expired": {
+    "message": "Batas waktu pengiriman telah habis"
+  },
+  "diagnosticsReceivedAt": {
+    "message": "Diterima pada $1"
+  },
+  "error_private_browsing_required": {
+    "message": "Firefox memerlukan izin ini untuk mengatur VPN, bahkan di jendela biasa. Buka about:addons → FuzeVPN, izinkan berjalan di jendela pribadi, lalu coba lagi."
+  },
+  "error_host_permissions_required": {
+    "message": "Di Firefox, buka about:addons → FuzeVPN → Izin dan izinkan akses ke semua situs, lalu coba lagi."
+  },
+  "cancelAction": {
+    "message": "Batal"
+  },
+  "refreshLocations": {
+    "message": "Perbarui lokasi"
+  },
+  "refreshingLocations": {
+    "message": "Memperbarui lokasi…"
+  },
+  "locationsRefreshError": {
+    "message": "Daftar lokasi tidak dapat diperbarui. Silakan coba lagi."
+  },
+  "error_device_revoked_limit": {
+    "message": "Izin perangkat ini telah dicabut. Batas jumlah perangkat tercapai: harap hapus satu perangkat."
+  },
+  "noAvailableLocations": {
+    "message": "Tidak ada lokasi yang tersedia saat ini. Silakan coba lagi sebentar lagi."
+  },
+  "noAvailableFavoriteLocations": {
+    "message": "Lokasi favorit Anda tidak tersedia untuk sementara."
+  },
+  "error_server_full": {
+    "message": "Server ini penuh. Pilih lokasi lain."
+  },
+  "error_capacity_unavailable": {
+    "message": "Ketersediaan server ini tidak dapat dikonfirmasi saat ini. Silakan coba lagi sebentar lagi."
+  },
+  "locationHierarchyHelp": {
+    "message": "Nama memilih server; panah menampilkan detail."
+  },
+  "locationCountrySelect": {
+    "message": "Pilih server yang tersedia: $1"
+  },
+  "locationCitySelect": {
+    "message": "Pilih server yang tersedia: $1"
+  },
+  "locationShowCities": {
+    "message": "Tampilkan kota: $1"
+  },
+  "locationHideCities": {
+    "message": "Sembunyikan kota: $1"
+  },
+  "locationShowServers": {
+    "message": "Tampilkan server: $1"
+  },
+  "locationHideServers": {
+    "message": "Sembunyikan server: $1"
+  },
+  "locationAvailableServers": {
+    "message": "Server yang tersedia: $1"
+  },
+  "legalInformation": {
+    "message": "Informasi hukum"
+  },
+  "privacyPolicy": {
+    "message": "Kebijakan privasi"
+  },
+  "termsAndConditions": {
+    "message": "Ketentuan penggunaan dan penjualan"
+  },
+  "legalNotice": {
+    "message": "Pemberitahuan hukum"
+  },
+  "contactSupport": {
+    "message": "Hubungi dukungan"
+  },
+  "webSignIn": {
+    "message": "Masuk ke FuzeVPN"
+  },
+  "webSignInDisconnect": {
+    "message": "Putuskan koneksi dan masuk"
+  },
+  "webSignInPending": {
+    "message": "Sedang masuk…"
+  },
+  "webSignInHelp": {
+    "message": "Masuk atau buat akun dengan Google atau email Anda di area pelanggan FuzeVPN."
+  },
+  "webSignInDisconnectHelp": {
+    "message": "Tombol ini menghentikan perlindungan browser agar Anda dapat masuk dengan Google atau email. Penjelajahan Anda tidak terlindungi selama proses masuk."
+  },
+  "webSignInStatus": {
+    "message": "Lanjutkan di jendela masuk FuzeVPN. Ekstensi diperbarui otomatis setelah selesai. Tutup jendela tersebut untuk membatalkan."
+  },
+  "error_web_login_cancelled": {
+    "message": "Proses masuk dibatalkan. Coba lagi."
+  },
+  "error_web_login_timeout": {
+    "message": "Proses masuk terlalu lama. Coba lagi."
+  },
+  "error_web_login_unavailable": {
+    "message": "Masuk melalui web tidak tersedia. Coba lagi nanti."
+  },
+  "error_web_login_invalid_callback": {
+    "message": "Proses masuk tidak dapat diverifikasi. Mulai lagi dari ekstensi."
+  },
+  "error_web_login_denied": {
+    "message": "Proses masuk tidak diizinkan. Coba lagi."
+  },
+  "error_web_login_busy": {
+    "message": "Tutup jendela masuk yang sudah terbuka sebelum mencoba lagi."
+  },
+  "deviceKindFirefox": {
+    "message": "Browser Firefox"
+  }
+}

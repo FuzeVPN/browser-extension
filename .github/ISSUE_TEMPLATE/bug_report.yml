@@ -1,0 +1,39 @@
+name: Bug report
+description: Report a reproducible browser-extension bug.
+title: "[Bug] "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        For security vulnerabilities, follow SECURITY.md instead of posting details here.
+        Do not include credentials, live tokens, unredacted diagnostics or a browser profile.
+  - type: input
+    id: extension-version
+    attributes:
+      label: Extension version
+      placeholder: "0.9.2"
+    validations:
+      required: true
+  - type: dropdown
+    id: browser
+    attributes:
+      label: Browser
+      options:
+        - Firefox
+        - Chrome
+        - Microsoft Edge
+    validations:
+      required: true
+  - type: input
+    id: environment
+    attributes:
+      label: Browser version and operating system
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Reproduction steps
+      description: Include the expected and actual behavior and any displayed error.
+    validations:
+      required: true

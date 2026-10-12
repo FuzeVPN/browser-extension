@@ -1,0 +1,29 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "useDefineForClassFields": true,
+    "lib": ["ES2022", "DOM", "WebWorker"],
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "strict": true,
+    "noUncheckedIndexedAccess": true,
+    "noImplicitOverride": true,
+    "noFallthroughCasesInSwitch": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "skipLibCheck": true,
+    "types": ["firefox-webext-browser", "chrome", "node", "vitest/globals"],
+    "baseUrl": ".",
+    "paths": { "@platform/*": ["src/platform/firefox/*"] }
+  },
+  "include": [
+    "src",
+    "tests/**/*.ts",
+    "vite.config.ts",
+    "vitest.config.ts",
+    "vitest.chromium.config.ts"
+  ]
+}

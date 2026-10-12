@@ -1,0 +1,830 @@
+{
+  "extensionName": {
+    "message": "FuzeVPN"
+  },
+  "extensionDescription": {
+    "message": "一键守护您的隐私，增强您的安全防护。"
+  },
+  "siteExclusionsReloadRequired": {
+    "message": "请在浏览器的扩展程序管理器中重新加载 FuzeVPN，以完成更新并使用网站排除功能。"
+  },
+  "extensionCommunicationError": {
+    "message": "扩展程序未响应。请关闭此窗口，然后在浏览器的扩展程序管理器中重新加载 FuzeVPN。"
+  },
+  "actionDisconnected": {
+    "message": "FuzeVPN — 已断开连接"
+  },
+  "actionConnected": {
+    "message": "FuzeVPN — 浏览器已受保护"
+  },
+  "actionReconnecting": {
+    "message": "FuzeVPN — 重新连接"
+  },
+  "actionError": {
+    "message": "FuzeVPN — 需要注意"
+  },
+  "browserProtection": {
+    "message": "浏览器保护"
+  },
+  "loginTitle": {
+    "message": "欢迎来到FuzeVPN"
+  },
+  "loginSubtitle": {
+    "message": "登录以保护您在此浏览器中的网页浏览。"
+  },
+  "email": {
+    "message": "电子邮件地址"
+  },
+  "emailPlaceholder": {
+    "message": "you@example.com"
+  },
+  "password": {
+    "message": "密码"
+  },
+  "signIn": {
+    "message": "登录"
+  },
+  "signingIn": {
+    "message": "正在登录..."
+  },
+  "forgotPassword": {
+    "message": "忘记密码？"
+  },
+  "createAccount": {
+    "message": "创建帐户"
+  },
+  "settings": {
+    "message": "设置"
+  },
+  "close": {
+    "message": "关闭"
+  },
+  "statusDisconnected": {
+    "message": "已断开连接"
+  },
+  "statusConnecting": {
+    "message": "正在连接…"
+  },
+  "statusChanging": {
+    "message": "改变位置…"
+  },
+  "statusProtected": {
+    "message": "浏览器已受保护"
+  },
+  "statusRefreshing": {
+    "message": "安全更新..."
+  },
+  "statusDisconnecting": {
+    "message": "正在断开连接..."
+  },
+  "statusError": {
+    "message": "保护已停止"
+  },
+  "browserOnlyDetail": {
+    "message": "仅保护此浏览器。"
+  },
+  "location": {
+    "message": "地点"
+  },
+  "change": {
+    "message": "改变"
+  },
+  "noLocation": {
+    "message": "没有可用的位置"
+  },
+  "protectBrowser": {
+    "message": "保护浏览器"
+  },
+  "disconnect": {
+    "message": "断开连接"
+  },
+  "subscription": {
+    "message": "订阅"
+  },
+  "refreshSubscription": {
+    "message": "刷新订阅"
+  },
+  "refreshingSubscription": {
+    "message": "正在刷新订阅..."
+  },
+  "subscriptionActive": {
+    "message": "活跃"
+  },
+  "subscriptionInactive": {
+    "message": "不活跃"
+  },
+  "expiresOn": {
+    "message": "到期日期 $1"
+  },
+  "noExpiry": {
+    "message": "无有效期"
+  },
+  "browserOnlyNotice": {
+    "message": "仅保护此浏览器，不保护其他浏览器或应用。"
+  },
+  "resendVerification": {
+    "message": "重新发送电子邮件"
+  },
+  "incognitoHelp": {
+    "message": "只有在浏览器设置中允许扩展程序在无痕窗口中运行，无痕窗口才会获得相同的保护。"
+  },
+  "manageAccount": {
+    "message": "管理我的帐户"
+  },
+  "account": {
+    "message": "账户"
+  },
+  "devices": {
+    "message": "设备"
+  },
+  "manageDevices": {
+    "message": "管理设备"
+  },
+  "refreshDevices": {
+    "message": "刷新设备"
+  },
+  "deviceCount": {
+    "message": "$1 / $2 设备"
+  },
+  "loadingDevices": {
+    "message": "加载设备..."
+  },
+  "noDevices": {
+    "message": "没有活动设备。"
+  },
+  "currentDevice": {
+    "message": "这个装置"
+  },
+  "deviceKindBrowser": {
+    "message": "浏览器扩展"
+  },
+  "deviceKindVpn": {
+    "message": "VPN设备"
+  },
+  "profile_browser_proxy": {
+    "message": "浏览器代理"
+  },
+  "profile_wireguard": {
+    "message": "线卫"
+  },
+  "profile_openvpn": {
+    "message": "开放VPN"
+  },
+  "none": {
+    "message": "无"
+  },
+  "deviceCreatedOn": {
+    "message": "创建于 $1"
+  },
+  "deleteDevice": {
+    "message": "删除设备"
+  },
+  "confirmDeleteDevice": {
+    "message": "删除“$1”？其 VPN 连接将停止，其配置文件将被删除。"
+  },
+  "resetDevice": {
+    "message": "复位装置"
+  },
+  "confirmResetDevice": {
+    "message": "重置此扩展程序？下次使用时，它将被注册为新设备。"
+  },
+  "signOutAccount": {
+    "message": "退出帐户"
+  },
+  "chooseLocation": {
+    "message": "选择地点"
+  },
+  "error_invalid_credentials": {
+    "message": "电子邮件地址或密码不正确。"
+  },
+  "error_unauthorized": {
+    "message": "您的会话已过期。请重新登录。"
+  },
+  "error_email_verification_required": {
+    "message": "在启用保护之前验证您的电子邮件地址。"
+  },
+  "errorVerificationCooldown": {
+    "message": "可以在 $1 秒内请求新电子邮件。"
+  },
+  "error_verification_email_cooldown": {
+    "message": "请稍候，然后再请求另一封电子邮件。"
+  },
+  "error_subscription_required": {
+    "message": "保护浏览器需要有效的订阅。"
+  },
+  "error_device_limit": {
+    "message": "已达到设备数量上限。请移除一台设备。"
+  },
+  "error_device_identity_revoked": {
+    "message": "此设备已不再获得授权。请尝试重新连接。"
+  },
+  "error_device_proof_invalid": {
+    "message": "我们无法验证该设备。检查计算机的日期和时间，然后重试。"
+  },
+  "error_device_proof_replayed": {
+    "message": "该请求已被处理。再试一次。"
+  },
+  "error_invalid_device": {
+    "message": "未能识别此设备。请尝试重新连接。"
+  },
+  "error_device_exists": {
+    "message": "此设备身份已链接到另一个帐户。"
+  },
+  "error_not_found": {
+    "message": "此操作已不可用。请重试。"
+  },
+  "error_invalid_location": {
+    "message": "该位置不可用。选择另一个。"
+  },
+  "error_rate_limited": {
+    "message": "尝试次数太多。稍等片刻，然后重试。"
+  },
+  "error_proxy_unavailable": {
+    "message": "该服务器暂时不可用。稍后再试一次。"
+  },
+  "error_api_token_expired": {
+    "message": "您的帐户会话已过期。请重新登录。"
+  },
+  "error_network_error": {
+    "message": "网络不可用。检查您的互联网连接。"
+  },
+  "error_request_timeout": {
+    "message": "该服务响应时间太长。再试一次。"
+  },
+  "error_invalid_response": {
+    "message": "该服务返回了意外的响应。"
+  },
+  "error_proxy_certificate_invalid": {
+    "message": "我们无法验证服务器的安全性。连接已停止。"
+  },
+  "error_proxy_controlled_by_extension": {
+    "message": "另一个扩展程序当前正在控制浏览器的代理。"
+  },
+  "error_proxy_controlled_by_policy": {
+    "message": "管理员策略阻止 FuzeVPN 更改代理。"
+  },
+  "error_proxy_authentication_failed": {
+    "message": "服务器不接受连接。再次尝试连接。"
+  },
+  "error_session_expired": {
+    "message": "您的受保护连接已过期。再次连接。"
+  },
+  "error_email_delivery_unavailable": {
+    "message": "目前无法发送电子邮件。"
+  },
+  "error_unknown_error": {
+    "message": "发生意外错误。再试一次。"
+  },
+  "actionBlocked": {
+    "message": "FuzeVPN — 浏览被阻止"
+  },
+  "statusBlockedRetry": {
+    "message": "浏览已暂停 — 正在重新连接"
+  },
+  "statusBlockedAction": {
+    "message": "浏览已暂停 — 检查连接"
+  },
+  "statusProtectionUnavailable": {
+    "message": "保护不可用——浏览未被阻止"
+  },
+  "recoveryHelp": {
+    "message": "重试恢复保护。断开连接让您无需 FuzeVPN 即可浏览。"
+  },
+  "retryConnection": {
+    "message": "重试"
+  },
+  "killSwitch": {
+    "message": "终止开关"
+  },
+  "killSwitchHelp": {
+    "message": "如果 VPN 连接断开，则阻止新的 Web 请求。排除的站点在 VPN 外部仍然可以访问。"
+  },
+  "webRtcProtection": {
+    "message": "WebRTC 保护"
+  },
+  "webRtcHelp": {
+    "message": "有助于在网络通话期间保护您的 IP 地址的私密性。有些通话可能无法进行。关闭此功能可能会泄露您的真实 IP 地址。"
+  },
+  "securityEffectiveState": {
+    "message": "$1·$2"
+  },
+  "securityBlocked": {
+    "message": "浏览被阻止"
+  },
+  "securityNotBlocked": {
+    "message": "浏览未被阻止"
+  },
+  "securityWebRtcActive": {
+    "message": "WebRTC 限制已激活"
+  },
+  "securityWebRtcInactive": {
+    "message": "WebRTC 限制无效"
+  },
+  "localNetworkHelp": {
+    "message": "本地IP地址和常见本地名称在保护期间被阻止。排除的域仍然可以提供对本地网络的访问。系统 IPv6 设置不变。"
+  },
+  "securityLimits": {
+    "message": "关于此保护"
+  },
+  "killSwitchLimits": {
+    "message": "仅限此浏览器：现有连接以及浏览器内部或其他扩展程序的部分通信可能会继续。其他扩展程序或策略可能在 FuzeVPN 响应前更改代理。停用扩展程序将解除保护，不会阻断整个系统的通信。"
+  },
+  "error_traffic_guard_failed": {
+    "message": "无法验证浏览块。无法保证保护。检查扩展权限。"
+  },
+  "error_webrtc_control_unavailable": {
+    "message": "无法应用 WebRTC 限制。检查您的设置、其他扩展或管理员策略。"
+  },
+  "language": {
+    "message": "语言"
+  },
+  "languageAutomatic": {
+    "message": "自动 — 浏览器语言"
+  },
+  "languageHelp": {
+    "message": "更改立即生效。选择“自动”将使用浏览器的语言，该语言可能与操作系统的语言不同。"
+  },
+  "languageSaveError": {
+    "message": "无法保存语言。您之前的选择将被保留。再试一次。"
+  },
+  "publicIp": {
+    "message": "公共IP"
+  },
+  "vpnIp": {
+    "message": "虚拟专用网IP"
+  },
+  "ipChecking": {
+    "message": "正在检查..."
+  },
+  "ipUnavailable": {
+    "message": "不可用"
+  },
+  "ipLookupExplanation": {
+    "message": "使用 ipify 使用当前连接检查 IP。不发送浏览历史记录。"
+  },
+  "automaticLocation": {
+    "message": "自动"
+  },
+  "automaticLocationHelp": {
+    "message": "最近的最佳响应时间或您的最后位置。"
+  },
+  "automaticLocationName": {
+    "message": "自动·$1"
+  },
+  "searchLocations": {
+    "message": "搜索国家或城市"
+  },
+  "locationFilters": {
+    "message": "过滤位置"
+  },
+  "allLocations": {
+    "message": "全部"
+  },
+  "favoriteLocations": {
+    "message": "收藏夹"
+  },
+  "recentLocations": {
+    "message": "最近"
+  },
+  "noMatchingLocations": {
+    "message": "没有符合您搜索条件的地点。"
+  },
+  "noFavoriteLocations": {
+    "message": "添加一颗星以将您最喜爱的地点保留在此处。"
+  },
+  "noRecentLocations": {
+    "message": "您最近连接的位置将显示在这里。"
+  },
+  "addFavorite": {
+    "message": "将 $1 添加到收藏夹"
+  },
+  "removeFavorite": {
+    "message": "从收藏夹中删除 $1"
+  },
+  "unavailableFavoriteLocation": {
+    "message": "不可用的收藏位置 $1"
+  },
+  "locationSaveError": {
+    "message": "更改无法完成。某些设置可能已保存。在重试之前检查显示的选项。"
+  },
+  "siteExclusions": {
+    "message": "排除的网站"
+  },
+  "siteExclusionsHelp": {
+    "message": "这些网站无需 FuzeVPN 即可使用您的连接，即使 VPN 出现故障也是如此。"
+  },
+  "siteExclusionsEnabled": {
+    "message": "启用例外"
+  },
+  "siteExclusionInput": {
+    "message": "域名或网址"
+  },
+  "siteExclusionPlaceholder": {
+    "message": "example.com"
+  },
+  "siteExclusionPreview": {
+    "message": "选定的域：$1"
+  },
+  "siteExclusionSubdomains": {
+    "message": "包括子域"
+  },
+  "siteExclusionAdd": {
+    "message": "添加站点"
+  },
+  "siteExclusionsEmpty": {
+    "message": "没有排除的站点。仅添加您想要在不使用 VPN 的情况下使用的站点。"
+  },
+  "siteExclusionsCount": {
+    "message": "$1 / 100 个站点"
+  },
+  "siteExclusionScopeSubdomains": {
+    "message": "域和子域"
+  },
+  "siteExclusionScopeExact": {
+    "message": "仅精确域"
+  },
+  "siteExclusionRemove": {
+    "message": "删除$1"
+  },
+  "siteExclusionsDetails": {
+    "message": "例外情况如何运作？"
+  },
+  "siteExclusionsResources": {
+    "message": "来自其他域的资源受到保护。排除页面不会自动排除其其他内容。"
+  },
+  "siteExclusionsReload": {
+    "message": "更改后重新加载网站。现有连接可能会保留其先前的路线。"
+  },
+  "siteExclusionsWebRtc": {
+    "message": "WebRTC 保护仍然是全局设置，包括排除的站点。"
+  },
+  "siteExclusionsLocal": {
+    "message": "仅保存在此浏览器中，并在退出帐户后保留。"
+  },
+  "siteExclusionsOn": {
+    "message": "启用例外"
+  },
+  "siteExclusionsOff": {
+    "message": "禁用例外"
+  },
+  "siteExclusionsSummary": {
+    "message": "$1 VPN 之外的站点"
+  },
+  "siteExclusionsPending": {
+    "message": "应用例外..."
+  },
+  "siteExclusionsInterrupted": {
+    "message": "变化中断。临时警卫仍留在原地。"
+  },
+  "siteExclusionsSaveError": {
+    "message": "无法完成更改。检查您的设置并重试。"
+  },
+  "siteExclusionsRetry": {
+    "message": "重试"
+  },
+  "siteExclusionInvalid": {
+    "message": "输入有效的公共域。不接受 IP、本地名称、通配符、公共后缀和保留域。"
+  },
+  "siteExclusionDuplicate": {
+    "message": "该域名已在列表中。"
+  },
+  "siteExclusionsLimit": {
+    "message": "已达到 100 个站点的限制。删除一个站点以添加另一个站点。"
+  },
+  "statusProtectedExceptions": {
+    "message": "VPN 活动 · $1 例外"
+  },
+  "statusBlockedExceptions": {
+    "message": "仅排除的网站仍可访问"
+  },
+  "securityBlockedExceptions": {
+    "message": "浏览被阻止，排除的网站除外"
+  },
+  "securityBlockUnverified": {
+    "message": "阻止未验证"
+  },
+  "logoutLocalComplete": {
+    "message": "本地注销完成。"
+  },
+  "logoutApiSession": {
+    "message": "当前账户会话"
+  },
+  "logoutProxySessions": {
+    "message": "已知 VPN 会话"
+  },
+  "logoutRevocationPending": {
+    "message": "撤销正在进行中..."
+  },
+  "logoutRevocationConfirmed": {
+    "message": "撤销已确认"
+  },
+  "logoutRevocationUnconfirmed": {
+    "message": "撤销未确认"
+  },
+  "logoutUnconfirmedHelp": {
+    "message": "某些远程会话可能会保持活动状态，直到过期。"
+  },
+  "deviceQuotaLoading": {
+    "message": "加载设备限制..."
+  },
+  "deviceQuotaUnknown": {
+    "message": "设备限制不可用"
+  },
+  "error_proxy_creation_uncertain": {
+    "message": "服务器未确认新连接的创建。自动重新连接已暂停。"
+  },
+  "siteExclusionsPreferencesReset": {
+    "message": "您保存的网站例外在无法读取后已被重置。再次添加您要排除的网站。"
+  },
+  "siteExclusionsConflict": {
+    "message": "排除的站点列表已更改。检查它，然后再次尝试您的更改。"
+  },
+  "unavailableLocation": {
+    "message": "位置不可用"
+  },
+  "verificationSending": {
+    "message": "正在发送验证电子邮件..."
+  },
+  "verificationSent": {
+    "message": "验证电子邮件已发送。检查您的收件箱和垃圾邮件文件夹。"
+  },
+  "error_login_requires_disconnect": {
+    "message": "在登录另一个帐户之前断开当前的 VPN 连接。"
+  },
+  "error_storage_unavailable": {
+    "message": "本地帐户设置不可用。当浏览器存储可用时重试；您保存的帐户已被保留。"
+  },
+  "diagnosticsAssistance": {
+    "message": "支持"
+  },
+  "diagnosticsTitle": {
+    "message": "诊断"
+  },
+  "diagnosticsIntro": {
+    "message": "检查 FuzeVPN 和当前连接，而不更改您的保护。"
+  },
+  "diagnosticsPrivacyTitle": {
+    "message": "您的数据"
+  },
+  "diagnosticsPrivacy": {
+    "message": "报告包含技术状态和错误代码，而不包含密码、令牌、电子邮件地址、IP 地址、访问过的 URL 或排除的域。"
+  },
+  "diagnosticsAuto": {
+    "message": "自动发送重要错误报告"
+  },
+  "diagnosticsAutoHelp": {
+    "message": "默认关闭。该帐户仅发送简单的技术报告，没有浏览历史记录。支持让他们保留 30 天。"
+  },
+  "diagnosticsHistoryHelp": {
+    "message": "技术历史记录保留在本地：即使自动发送关闭，10 分钟内最多可记录 200 个事件。它不包含浏览历史记录，并且会在浏览器关闭或帐户更改时被清除。"
+  },
+  "diagnosticsHistoryCount": {
+    "message": "$1 当地技术活动"
+  },
+  "diagnosticsAccountRequired": {
+    "message": "登录以启用发送。您仍然可以在没有帐户的情况下查看和导出报告。"
+  },
+  "diagnosticsRun": {
+    "message": "运行诊断"
+  },
+  "diagnosticsClearHistory": {
+    "message": "清除本地历史记录"
+  },
+  "diagnosticsPreparing": {
+    "message": "准备报告..."
+  },
+  "diagnosticsReports": {
+    "message": "报告"
+  },
+  "diagnosticsEmpty": {
+    "message": "当地还没有报道。"
+  },
+  "diagnosticsChooseReport": {
+    "message": "选择报告"
+  },
+  "diagnosticsReportLabel": {
+    "message": "$1·$2·$3"
+  },
+  "diagnosticsTypeFull": {
+    "message": "完整报告"
+  },
+  "diagnosticsTypeSimple": {
+    "message": "错误报告"
+  },
+  "diagnosticsSummary": {
+    "message": "收集于$1。 FuzeVPN版本$2。"
+  },
+  "diagnosticsJson": {
+    "message": "查看报告内容（JSON）"
+  },
+  "diagnosticsExport": {
+    "message": "出口报告"
+  },
+  "diagnosticsDelete": {
+    "message": "删除本地报告"
+  },
+  "diagnosticsRetention": {
+    "message": "发送的报告会链接到您登录的帐户，并由支持人员保留 30 天。删除本地报告不会删除支持人员已收到的报告。"
+  },
+  "diagnosticsConsent": {
+    "message": "将此报告发送给支持人员"
+  },
+  "diagnosticsDataCollectionRequired": {
+    "message": "发送诊断需要 Firefox 允许收集技术数据。请重试并授予此权限。"
+  },
+  "diagnosticsSendHelp": {
+    "message": "发送是可选的。一旦获得批准，它可能会在最多 24 小时内使用同一帐户的有效会话重试。您可以取消进一步的尝试。延迟取消并不能保证服务器尚未收到报告。"
+  },
+  "diagnosticsSend": {
+    "message": "发送报告"
+  },
+  "diagnosticsCancel": {
+    "message": "取消发送"
+  },
+  "diagnosticsReload": {
+    "message": "重新加载此页面"
+  },
+  "diagnosticsUnavailable": {
+    "message": "无法使用诊断功能。请在浏览器的扩展程序管理器中重新加载 FuzeVPN，然后重新打开此页面。您的 VPN 连接未发生变化。"
+  },
+  "diagnosticsQueueFull": {
+    "message": "发送队列已满。删除本地报告或等待待处理的报告完成。"
+  },
+  "diagnosticsContentUnavailable": {
+    "message": "报告内容不可用。导出本地报告（如果可用）并联系支持人员。"
+  },
+  "diagnosticsFailure": {
+    "message": "诊断操作无法完成。您的 VPN 没有变化。"
+  },
+  "diagnosticsChecks": {
+    "message": "支票"
+  },
+  "diagnosticsCheckFallback": {
+    "message": "技术检查：$1"
+  },
+  "diagnosticsCheckLine": {
+    "message": "$1 — $2"
+  },
+  "diagnosticsProxy": {
+    "message": "浏览器代理"
+  },
+  "diagnosticsStorage": {
+    "message": "本地存储"
+  },
+  "diagnosticsNetwork": {
+    "message": "网络连接"
+  },
+  "diagnosticsCleanup": {
+    "message": "会话清理"
+  },
+  "diagnosticsResult_passed": {
+    "message": "通过"
+  },
+  "diagnosticsResult_failed": {
+    "message": "失败"
+  },
+  "diagnosticsResult_skipped": {
+    "message": "未执行"
+  },
+  "diagnosticsResult_unknown": {
+    "message": "未知"
+  },
+  "diagnosticsStatus_ready": {
+    "message": "在此设备上准备就绪"
+  },
+  "diagnosticsStatus_pending": {
+    "message": "等待发送"
+  },
+  "diagnosticsStatus_sending": {
+    "message": "正在发送..."
+  },
+  "diagnosticsStatus_session_required": {
+    "message": "等待同一帐户的有效会话"
+  },
+  "diagnosticsStatus_received": {
+    "message": "支持收到"
+  },
+  "diagnosticsStatus_failed": {
+    "message": "发送失败"
+  },
+  "diagnosticsStatus_cancelled": {
+    "message": "发送已取消"
+  },
+  "diagnosticsStatus_expired": {
+    "message": "发送截止日期已过"
+  },
+  "diagnosticsReceivedAt": {
+    "message": "收到于 $1"
+  },
+  "error_private_browsing_required": {
+    "message": "Firefox 需要此权限才能配置 VPN，即使在普通窗口中也是如此。请打开 about:addons → FuzeVPN，允许在隐私窗口中运行，然后重试。"
+  },
+  "error_host_permissions_required": {
+    "message": "在 Firefox 中打开 about:addons → FuzeVPN → 权限，允许访问所有网站，然后重试。"
+  },
+  "cancelAction": {
+    "message": "取消"
+  },
+  "refreshLocations": {
+    "message": "刷新位置"
+  },
+  "refreshingLocations": {
+    "message": "正在刷新位置…"
+  },
+  "locationsRefreshError": {
+    "message": "无法刷新位置列表。请重试。"
+  },
+  "error_device_revoked_limit": {
+    "message": "此设备的授权已被撤销。已达到设备数量上限：请移除一台设备。"
+  },
+  "noAvailableLocations": {
+    "message": "目前没有可用位置。请稍后重试。"
+  },
+  "noAvailableFavoriteLocations": {
+    "message": "您收藏的位置暂时不可用。"
+  },
+  "error_server_full": {
+    "message": "此服务器已满。请选择其他位置。"
+  },
+  "error_capacity_unavailable": {
+    "message": "目前无法确认此服务器是否可用。请稍后重试。"
+  },
+  "locationHierarchyHelp": {
+    "message": "点击名称选择服务器，点击箭头查看详情。"
+  },
+  "locationCountrySelect": {
+    "message": "选择可用服务器：$1"
+  },
+  "locationCitySelect": {
+    "message": "选择可用服务器：$1"
+  },
+  "locationShowCities": {
+    "message": "显示城市：$1"
+  },
+  "locationHideCities": {
+    "message": "隐藏城市：$1"
+  },
+  "locationShowServers": {
+    "message": "显示服务器：$1"
+  },
+  "locationHideServers": {
+    "message": "隐藏服务器：$1"
+  },
+  "locationAvailableServers": {
+    "message": "可用服务器：$1"
+  },
+  "legalInformation": {
+    "message": "法律信息"
+  },
+  "privacyPolicy": {
+    "message": "隐私政策"
+  },
+  "termsAndConditions": {
+    "message": "使用和销售条款"
+  },
+  "legalNotice": {
+    "message": "法律声明"
+  },
+  "contactSupport": {
+    "message": "联系客服"
+  },
+  "webSignIn": {
+    "message": "登录 FuzeVPN"
+  },
+  "webSignInDisconnect": {
+    "message": "断开连接并登录"
+  },
+  "webSignInPending": {
+    "message": "正在登录…"
+  },
+  "webSignInHelp": {
+    "message": "在 FuzeVPN 客户中心使用 Google 或电子邮箱登录或创建账号。"
+  },
+  "webSignInDisconnectHelp": {
+    "message": "此按钮会停止浏览器保护，以便您使用 Google 或电子邮箱登录。登录期间，您的浏览将不受保护。"
+  },
+  "webSignInStatus": {
+    "message": "请在 FuzeVPN 登录窗口中继续。完成后，扩展程序会自动更新。关闭该窗口可取消登录。"
+  },
+  "error_web_login_cancelled": {
+    "message": "登录已取消。请重试。"
+  },
+  "error_web_login_timeout": {
+    "message": "登录时间过长。请重试。"
+  },
+  "error_web_login_unavailable": {
+    "message": "暂时无法通过网站登录。请稍后重试。"
+  },
+  "error_web_login_invalid_callback": {
+    "message": "无法验证登录。请从扩展程序重新开始。"
+  },
+  "error_web_login_denied": {
+    "message": "登录未获授权。请重试。"
+  },
+  "error_web_login_busy": {
+    "message": "重试之前，请先关闭已经打开的登录窗口。"
+  },
+  "deviceKindFirefox": {
+    "message": "Firefox 浏览器"
+  }
+}

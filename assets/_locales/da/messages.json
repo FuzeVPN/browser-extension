@@ -1,0 +1,830 @@
+{
+  "extensionName": {
+    "message": "FuzeVPN"
+  },
+  "extensionDescription": {
+    "message": "Beskyt dit privatliv, og styrk din sikkerhed med ét klik."
+  },
+  "siteExclusionsReloadRequired": {
+    "message": "Genindlæs FuzeVPN via browserens udvidelsesadministrator for at afslutte opdateringen og bruge undtagelser for websteder."
+  },
+  "extensionCommunicationError": {
+    "message": "Udvidelsen svarer ikke. Luk dette vindue, og genindlæs derefter FuzeVPN via browserens udvidelsesadministrator."
+  },
+  "actionDisconnected": {
+    "message": "FuzeVPN — Afbrudt"
+  },
+  "actionConnected": {
+    "message": "FuzeVPN — Beskyttet i denne browser"
+  },
+  "actionReconnecting": {
+    "message": "FuzeVPN — Genopretter forbindelse"
+  },
+  "actionError": {
+    "message": "FuzeVPN — Handling påkrævet"
+  },
+  "browserProtection": {
+    "message": "Browserbeskyttelse"
+  },
+  "loginTitle": {
+    "message": "Velkommen til FuzeVPN"
+  },
+  "loginSubtitle": {
+    "message": "Log ind for at beskytte din browsing i denne browser."
+  },
+  "email": {
+    "message": "E-mailadresse"
+  },
+  "emailPlaceholder": {
+    "message": "dig@eksempel.dk"
+  },
+  "password": {
+    "message": "Adgangskode"
+  },
+  "signIn": {
+    "message": "Log ind"
+  },
+  "signingIn": {
+    "message": "Logger ind…"
+  },
+  "forgotPassword": {
+    "message": "Glemt adgangskoden?"
+  },
+  "createAccount": {
+    "message": "Opret en konto"
+  },
+  "settings": {
+    "message": "Indstillinger"
+  },
+  "close": {
+    "message": "Luk"
+  },
+  "statusDisconnected": {
+    "message": "Afbrudt"
+  },
+  "statusConnecting": {
+    "message": "Opretter forbindelse…"
+  },
+  "statusChanging": {
+    "message": "Skifter placering…"
+  },
+  "statusProtected": {
+    "message": "Beskyttet i denne browser"
+  },
+  "statusRefreshing": {
+    "message": "Fornyer sikkert…"
+  },
+  "statusDisconnecting": {
+    "message": "Afbryder forbindelsen…"
+  },
+  "statusError": {
+    "message": "Beskyttelsen er stoppet"
+  },
+  "browserOnlyDetail": {
+    "message": "Beskyttelse til denne browser."
+  },
+  "location": {
+    "message": "Placering"
+  },
+  "change": {
+    "message": "Skift"
+  },
+  "noLocation": {
+    "message": "Ingen placering tilgængelig"
+  },
+  "protectBrowser": {
+    "message": "Beskyt browseren"
+  },
+  "disconnect": {
+    "message": "Afbryd"
+  },
+  "subscription": {
+    "message": "Abonnement"
+  },
+  "refreshSubscription": {
+    "message": "Opdater abonnement"
+  },
+  "refreshingSubscription": {
+    "message": "Opdaterer abonnement…"
+  },
+  "subscriptionActive": {
+    "message": "Aktivt"
+  },
+  "subscriptionInactive": {
+    "message": "Inaktivt"
+  },
+  "expiresOn": {
+    "message": "Udløber $1"
+  },
+  "noExpiry": {
+    "message": "Ingen udløbsdato"
+  },
+  "browserOnlyNotice": {
+    "message": "Kun i denne browser. Andre apps og browsere er ikke dækket."
+  },
+  "resendVerification": {
+    "message": "Send e-mail igen"
+  },
+  "incognitoHelp": {
+    "message": "Privat browsing bruger kun den samme beskyttelse, når udvidelsen er tilladt i privat tilstand i browserens indstillinger."
+  },
+  "manageAccount": {
+    "message": "Administrer min konto"
+  },
+  "account": {
+    "message": "Konto"
+  },
+  "devices": {
+    "message": "Enheder"
+  },
+  "manageDevices": {
+    "message": "Administrer enheder"
+  },
+  "refreshDevices": {
+    "message": "Opdater enheder"
+  },
+  "deviceCount": {
+    "message": "$1 / $2 enheder"
+  },
+  "loadingDevices": {
+    "message": "Indlæser enheder…"
+  },
+  "noDevices": {
+    "message": "Ingen aktive enheder."
+  },
+  "currentDevice": {
+    "message": "Denne enhed"
+  },
+  "deviceKindBrowser": {
+    "message": "Browserudvidelse"
+  },
+  "deviceKindVpn": {
+    "message": "VPN-enhed"
+  },
+  "profile_browser_proxy": {
+    "message": "Browserproxy"
+  },
+  "profile_wireguard": {
+    "message": "WireGuard"
+  },
+  "profile_openvpn": {
+    "message": "OpenVPN"
+  },
+  "none": {
+    "message": "ingen"
+  },
+  "deviceCreatedOn": {
+    "message": "Oprettet $1"
+  },
+  "deleteDevice": {
+    "message": "Slet enhed"
+  },
+  "confirmDeleteDevice": {
+    "message": "Fjern ”$1”? VPN-forbindelserne afbrydes, og profilerne fjernes."
+  },
+  "resetDevice": {
+    "message": "Nulstil enhed"
+  },
+  "confirmResetDevice": {
+    "message": "Nulstil denne udvidelse? Den registreres som en ny enhed, næste gang du bruger den."
+  },
+  "signOutAccount": {
+    "message": "Log ud af kontoen"
+  },
+  "chooseLocation": {
+    "message": "Vælg en placering"
+  },
+  "error_invalid_credentials": {
+    "message": "E-mailadressen eller adgangskoden er forkert."
+  },
+  "error_unauthorized": {
+    "message": "Din session er udløbet. Log ind igen."
+  },
+  "error_email_verification_required": {
+    "message": "Bekræft din e-mailadresse, før du aktiverer beskyttelsen."
+  },
+  "errorVerificationCooldown": {
+    "message": "Du kan anmode om en ny e-mail om $1 sekunder."
+  },
+  "error_verification_email_cooldown": {
+    "message": "Vent, før du anmoder om endnu en e-mail."
+  },
+  "error_subscription_required": {
+    "message": "Et aktivt abonnement er nødvendigt for at beskytte denne browser."
+  },
+  "error_device_limit": {
+    "message": "Grænsen for antal enheder er nået. Fjern venligst en enhed."
+  },
+  "error_device_identity_revoked": {
+    "message": "Denne enhed er ikke længere godkendt. Prøv at oprette forbindelse igen."
+  },
+  "error_device_proof_invalid": {
+    "message": "Enheden kunne ikke bekræftes. Kontrollér computerens dato og klokkeslæt, og prøv igen."
+  },
+  "error_device_proof_replayed": {
+    "message": "Denne anmodning er allerede behandlet. Prøv igen."
+  },
+  "error_invalid_device": {
+    "message": "Enheden blev ikke genkendt. Prøv at oprette forbindelse igen."
+  },
+  "error_device_exists": {
+    "message": "Denne enhedsidentitet er allerede knyttet til en anden konto."
+  },
+  "error_not_found": {
+    "message": "Denne handling er ikke længere tilgængelig. Prøv igen."
+  },
+  "error_invalid_location": {
+    "message": "Denne placering er ikke tilgængelig. Vælg en anden."
+  },
+  "error_rate_limited": {
+    "message": "For mange forsøg. Vent et øjeblik, og prøv igen."
+  },
+  "error_proxy_unavailable": {
+    "message": "Serveren er midlertidigt utilgængelig. Prøv igen om lidt."
+  },
+  "error_api_token_expired": {
+    "message": "Din kontosession er udløbet. Log ind igen."
+  },
+  "error_network_error": {
+    "message": "Netværket er utilgængeligt. Kontrollér din internetforbindelse."
+  },
+  "error_request_timeout": {
+    "message": "Tjenesten var for længe om at svare. Prøv igen."
+  },
+  "error_invalid_response": {
+    "message": "Tjenesten gav et uventet svar."
+  },
+  "error_proxy_certificate_invalid": {
+    "message": "Serverens sikkerhed kunne ikke bekræftes. Forbindelsen er afbrudt."
+  },
+  "error_proxy_controlled_by_extension": {
+    "message": "En anden udvidelse styrer i øjeblikket browserens proxy."
+  },
+  "error_proxy_controlled_by_policy": {
+    "message": "En administratorpolitik forhindrer FuzeVPN i at ændre proxyen."
+  },
+  "error_proxy_authentication_failed": {
+    "message": "Serveren accepterede ikke forbindelsen. Prøv at oprette forbindelse igen."
+  },
+  "error_session_expired": {
+    "message": "Din beskyttede forbindelse er udløbet. Opret forbindelse igen."
+  },
+  "error_email_delivery_unavailable": {
+    "message": "E-mailen kan ikke sendes lige nu."
+  },
+  "error_unknown_error": {
+    "message": "Der opstod en uventet fejl. Prøv igen."
+  },
+  "actionBlocked": {
+    "message": "FuzeVPN — Browsing blokeret"
+  },
+  "statusBlockedRetry": {
+    "message": "Browsing sat på pause — genopretter forbindelse"
+  },
+  "statusBlockedAction": {
+    "message": "Browsing sat på pause — kontrollér forbindelsen"
+  },
+  "statusProtectionUnavailable": {
+    "message": "Beskyttelse utilgængelig — browsing ikke blokeret"
+  },
+  "recoveryHelp": {
+    "message": "Prøv igen for at genoptage beskyttelsen. Afbryd lader dig browse uden FuzeVPN."
+  },
+  "retryConnection": {
+    "message": "Prøv igen"
+  },
+  "killSwitch": {
+    "message": "Nødafbryder"
+  },
+  "killSwitchHelp": {
+    "message": "Blokerer nye webanmodninger, hvis VPN-forbindelsen afbrydes. Undtagne websteder er fortsat tilgængelige uden VPN."
+  },
+  "webRtcProtection": {
+    "message": "WebRTC-beskyttelse"
+  },
+  "webRtcHelp": {
+    "message": "Hjælper med at holde din IP-adresse privat under webopkald. Nogle opkald virker muligvis ikke. Deaktivering kan afsløre din rigtige IP-adresse."
+  },
+  "securityEffectiveState": {
+    "message": "$1 · $2"
+  },
+  "securityBlocked": {
+    "message": "Browsing blokeret"
+  },
+  "securityNotBlocked": {
+    "message": "Browsing ikke blokeret"
+  },
+  "securityWebRtcActive": {
+    "message": "WebRTC-begrænsning aktiv"
+  },
+  "securityWebRtcInactive": {
+    "message": "WebRTC-begrænsning inaktiv"
+  },
+  "localNetworkHelp": {
+    "message": "Lokale IP-adresser og almindelige lokale navne blokeres under beskyttelsen. Et undtaget domæne kan dog stadig give adgang til det lokale netværk. Systemets IPv6-indstillinger ændres ikke."
+  },
+  "securityLimits": {
+    "message": "Om beskyttelsen"
+  },
+  "killSwitchLimits": {
+    "message": "Kun denne browser: eksisterende forbindelser og visse interne forbindelser i browseren eller andre udvidelser kan fortsætte. En anden udvidelse eller politik kan erstatte proxyen, før FuzeVPN reagerer. Deaktivering af udvidelsen fjerner beskyttelsen. Ingen blokering af hele systemet."
+  },
+  "error_traffic_guard_failed": {
+    "message": "Blokeringen af browsing kunne ikke bekræftes. Beskyttelsen er ikke garanteret. Kontrollér udvidelsens tilladelser."
+  },
+  "error_webrtc_control_unavailable": {
+    "message": "WebRTC-begrænsningen kunne ikke anvendes. Kontrollér indstillingerne, andre udvidelser eller administratorpolitikken."
+  },
+  "language": {
+    "message": "Sprog"
+  },
+  "languageAutomatic": {
+    "message": "Automatisk — browserens sprog"
+  },
+  "languageHelp": {
+    "message": "Ændringer gælder straks. Automatisk følger browserens sprog, som kan være forskelligt fra systemsproget."
+  },
+  "languageSaveError": {
+    "message": "Sproget kunne ikke gemmes. Dit tidligere valg er bevaret. Prøv igen."
+  },
+  "publicIp": {
+    "message": "Offentlig IP"
+  },
+  "vpnIp": {
+    "message": "VPN-IP"
+  },
+  "ipChecking": {
+    "message": "Kontrollerer…"
+  },
+  "ipUnavailable": {
+    "message": "Ikke tilgængelig"
+  },
+  "ipLookupExplanation": {
+    "message": "IP kontrolleres med ipify via din aktuelle forbindelse. Ingen browserhistorik sendes."
+  },
+  "automaticLocation": {
+    "message": "Automatisk"
+  },
+  "automaticLocationHelp": {
+    "message": "Bedste seneste svartid eller din seneste placering."
+  },
+  "automaticLocationName": {
+    "message": "Automatisk · $1"
+  },
+  "searchLocations": {
+    "message": "Søg efter land eller by"
+  },
+  "locationFilters": {
+    "message": "Filtrer placeringer"
+  },
+  "allLocations": {
+    "message": "Alle"
+  },
+  "favoriteLocations": {
+    "message": "Favoritter"
+  },
+  "recentLocations": {
+    "message": "Seneste"
+  },
+  "noMatchingLocations": {
+    "message": "Ingen placeringer matcher din søgning."
+  },
+  "noFavoriteLocations": {
+    "message": "Markér en stjerne for at gemme dine favoritplaceringer her."
+  },
+  "noRecentLocations": {
+    "message": "Dine senest tilsluttede placeringer vises her."
+  },
+  "addFavorite": {
+    "message": "Føj $1 til favoritter"
+  },
+  "removeFavorite": {
+    "message": "Fjern $1 fra favoritter"
+  },
+  "unavailableFavoriteLocation": {
+    "message": "Utilgængelig favoritplacering $1"
+  },
+  "locationSaveError": {
+    "message": "Ændringen kunne ikke fuldføres. Nogle indstillinger kan være blevet gemt. Kontrollér det viste valg, før du prøver igen."
+  },
+  "siteExclusions": {
+    "message": "Undtagne websteder"
+  },
+  "siteExclusionsHelp": {
+    "message": "Disse websteder bruger din forbindelse uden FuzeVPN, selv hvis VPN-forbindelsen svigter."
+  },
+  "siteExclusionsEnabled": {
+    "message": "Aktivér undtagelser"
+  },
+  "siteExclusionInput": {
+    "message": "Domæne eller URL"
+  },
+  "siteExclusionPlaceholder": {
+    "message": "eksempel.dk"
+  },
+  "siteExclusionPreview": {
+    "message": "Valgt domæne: $1"
+  },
+  "siteExclusionSubdomains": {
+    "message": "Medtag underdomæner"
+  },
+  "siteExclusionAdd": {
+    "message": "Tilføj websted"
+  },
+  "siteExclusionsEmpty": {
+    "message": "Ingen undtagne websteder. Tilføj kun websteder, du vil bruge uden VPN."
+  },
+  "siteExclusionsCount": {
+    "message": "$1 / 100 websteder"
+  },
+  "siteExclusionScopeSubdomains": {
+    "message": "Domæne og underdomæner"
+  },
+  "siteExclusionScopeExact": {
+    "message": "Kun det præcise domæne"
+  },
+  "siteExclusionRemove": {
+    "message": "Fjern $1"
+  },
+  "siteExclusionsDetails": {
+    "message": "Hvordan fungerer undtagelser?"
+  },
+  "siteExclusionsResources": {
+    "message": "Ressourcer fra andre domæner er fortsat beskyttet. Hvis du undtager en side, undtages dens øvrige indhold ikke automatisk."
+  },
+  "siteExclusionsReload": {
+    "message": "Genindlæs webstedet efter en ændring. Eksisterende forbindelser kan beholde deres tidligere rute."
+  },
+  "siteExclusionsWebRtc": {
+    "message": "WebRTC-beskyttelse er fortsat en global indstilling, også for undtagne websteder."
+  },
+  "siteExclusionsLocal": {
+    "message": "Gemmes kun i denne browser og bevares, når du logger ud af kontoen."
+  },
+  "siteExclusionsOn": {
+    "message": "Undtagelser aktiveret"
+  },
+  "siteExclusionsOff": {
+    "message": "Undtagelser deaktiveret"
+  },
+  "siteExclusionsSummary": {
+    "message": "$1 websteder uden for VPN"
+  },
+  "siteExclusionsPending": {
+    "message": "Anvender undtagelser…"
+  },
+  "siteExclusionsInterrupted": {
+    "message": "Ændringen blev afbrudt. Den midlertidige beskyttelse er stadig aktiv."
+  },
+  "siteExclusionsSaveError": {
+    "message": "Ændringen kunne ikke fuldføres. Kontrollér indstillingerne, og prøv igen."
+  },
+  "siteExclusionsRetry": {
+    "message": "Prøv igen"
+  },
+  "siteExclusionInvalid": {
+    "message": "Indtast et gyldigt offentligt domæne. IP-adresser, lokale navne, jokertegn, offentlige suffikser og reserverede domæner accepteres ikke."
+  },
+  "siteExclusionDuplicate": {
+    "message": "Dette domæne er allerede på listen."
+  },
+  "siteExclusionsLimit": {
+    "message": "Grænsen på 100 websteder er nået. Fjern et websted for at tilføje et andet."
+  },
+  "statusProtectedExceptions": {
+    "message": "VPN aktiv · $1 undtagelser"
+  },
+  "statusBlockedExceptions": {
+    "message": "Kun undtagne websteder er fortsat tilgængelige"
+  },
+  "securityBlockedExceptions": {
+    "message": "Browsing blokeret undtagen undtagne websteder"
+  },
+  "securityBlockUnverified": {
+    "message": "Blokering ikke bekræftet"
+  },
+  "logoutLocalComplete": {
+    "message": "Lokal udlogning er fuldført."
+  },
+  "logoutApiSession": {
+    "message": "Aktuel kontosession"
+  },
+  "logoutProxySessions": {
+    "message": "Kendte VPN-sessioner"
+  },
+  "logoutRevocationPending": {
+    "message": "Tilbagekaldelse i gang…"
+  },
+  "logoutRevocationConfirmed": {
+    "message": "Tilbagekaldelse bekræftet"
+  },
+  "logoutRevocationUnconfirmed": {
+    "message": "Tilbagekaldelse ikke bekræftet"
+  },
+  "logoutUnconfirmedHelp": {
+    "message": "Nogle fjernsessioner kan forblive aktive, indtil de udløber."
+  },
+  "deviceQuotaLoading": {
+    "message": "Indlæser enhedsgrænse…"
+  },
+  "deviceQuotaUnknown": {
+    "message": "Enhedsgrænse ikke tilgængelig"
+  },
+  "error_proxy_creation_uncertain": {
+    "message": "Serveren bekræftede ikke oprettelsen af den nye forbindelse. Automatisk genoprettelse af forbindelsen er sat på pause."
+  },
+  "siteExclusionsPreferencesReset": {
+    "message": "Dine gemte undtagelser for websteder blev nulstillet, fordi de ikke kunne læses. Tilføj de websteder, du vil undtage, igen."
+  },
+  "siteExclusionsConflict": {
+    "message": "Listen over undtagne websteder er ændret. Gennemgå den, og prøv ændringen igen."
+  },
+  "unavailableLocation": {
+    "message": "Placering ikke tilgængelig"
+  },
+  "verificationSending": {
+    "message": "Sender bekræftelsesmail…"
+  },
+  "verificationSent": {
+    "message": "Bekræftelsesmail sendt. Tjek din indbakke og spammappe."
+  },
+  "error_login_requires_disconnect": {
+    "message": "Afbryd den aktuelle VPN-forbindelse, før du logger ind på en anden konto."
+  },
+  "error_storage_unavailable": {
+    "message": "De lokale kontoindstillinger er ikke tilgængelige. Prøv igen, når browserens lager er tilgængeligt. Din gemte konto er bevaret."
+  },
+  "diagnosticsAssistance": {
+    "message": "Support"
+  },
+  "diagnosticsTitle": {
+    "message": "Diagnostik"
+  },
+  "diagnosticsIntro": {
+    "message": "Kontrollér FuzeVPN og den aktuelle forbindelse uden at ændre din beskyttelse."
+  },
+  "diagnosticsPrivacyTitle": {
+    "message": "Dine oplysninger"
+  },
+  "diagnosticsPrivacy": {
+    "message": "Rapporter indeholder tekniske tilstande og fejlkoder, aldrig adgangskoder, tokens, e-mailadresser, IP-adresser, besøgte webadresser eller undtagne domæner."
+  },
+  "diagnosticsAuto": {
+    "message": "Send automatisk rapporter om vigtige fejl"
+  },
+  "diagnosticsAutoHelp": {
+    "message": "Slået fra som standard. Der sendes kun enkle tekniske rapporter for denne konto, uden browserhistorik. Supporten gemmer dem i 30 dage."
+  },
+  "diagnosticsHistoryHelp": {
+    "message": "Den tekniske historik forbliver lokal: højst 200 hændelser over 10 minutter, også uden automatisk afsendelse. Den indeholder ingen browserhistorik og slettes, når browseren lukkes eller kontoen skiftes."
+  },
+  "diagnosticsHistoryCount": {
+    "message": "$1 lokale tekniske hændelser"
+  },
+  "diagnosticsAccountRequired": {
+    "message": "Log ind for at aktivere afsendelse. Du kan se og eksportere en rapport uden en konto."
+  },
+  "diagnosticsRun": {
+    "message": "Start diagnostik"
+  },
+  "diagnosticsClearHistory": {
+    "message": "Ryd lokal historik"
+  },
+  "diagnosticsPreparing": {
+    "message": "Forbereder rapporten…"
+  },
+  "diagnosticsReports": {
+    "message": "Rapporter"
+  },
+  "diagnosticsEmpty": {
+    "message": "Ingen lokal rapport endnu."
+  },
+  "diagnosticsChooseReport": {
+    "message": "Vælg rapport"
+  },
+  "diagnosticsReportLabel": {
+    "message": "$1 · $2 · $3"
+  },
+  "diagnosticsTypeFull": {
+    "message": "Fuld rapport"
+  },
+  "diagnosticsTypeSimple": {
+    "message": "Fejlrapport"
+  },
+  "diagnosticsSummary": {
+    "message": "Indsamlet $1. FuzeVPN-version $2."
+  },
+  "diagnosticsJson": {
+    "message": "Vis rapportens indhold (JSON)"
+  },
+  "diagnosticsExport": {
+    "message": "Eksportér rapport"
+  },
+  "diagnosticsDelete": {
+    "message": "Slet lokal rapport"
+  },
+  "diagnosticsRetention": {
+    "message": "Sendte rapporter knyttes til den konto, du er logget ind på, og gemmes af supporten i 30 dage. Sletning af en lokal rapport sletter ikke en rapport, som supporten allerede har modtaget."
+  },
+  "diagnosticsConsent": {
+    "message": "Send denne rapport til supporten"
+  },
+  "diagnosticsDataCollectionRequired": {
+    "message": "Firefox skal tillade indsamling af tekniske data for at sende diagnosticering. Prøv igen, og giv denne tilladelse."
+  },
+  "diagnosticsSendHelp": {
+    "message": "Afsendelse er valgfri. Efter din tilladelse kan den forsøges igen i op til 24 timer med en gyldig session for samme konto. Du kan annullere yderligere forsøg. En sen annullering garanterer ikke, at serveren ikke allerede har modtaget rapporten."
+  },
+  "diagnosticsSend": {
+    "message": "Send rapport"
+  },
+  "diagnosticsCancel": {
+    "message": "Annuller afsendelse"
+  },
+  "diagnosticsReload": {
+    "message": "Genindlæs denne side"
+  },
+  "diagnosticsUnavailable": {
+    "message": "Diagnostik er ikke tilgængelig. Genindlæs FuzeVPN via browserens udvidelsesadministrator, og åbn siden igen. Din VPN er uændret."
+  },
+  "diagnosticsQueueFull": {
+    "message": "Afsendelseskøen er fuld. Slet en lokal rapport, eller vent, til en ventende afsendelse er færdig."
+  },
+  "diagnosticsContentUnavailable": {
+    "message": "Rapportens indhold er ikke tilgængeligt. Eksportér den lokale rapport, hvis den er tilgængelig, og kontakt support."
+  },
+  "diagnosticsFailure": {
+    "message": "Diagnostikhandlingen kunne ikke fuldføres. Din VPN er uændret."
+  },
+  "diagnosticsChecks": {
+    "message": "Kontroller"
+  },
+  "diagnosticsCheckFallback": {
+    "message": "Teknisk kontrol: $1"
+  },
+  "diagnosticsCheckLine": {
+    "message": "$1 — $2"
+  },
+  "diagnosticsProxy": {
+    "message": "Browserproxy"
+  },
+  "diagnosticsStorage": {
+    "message": "Lokal lagring"
+  },
+  "diagnosticsNetwork": {
+    "message": "Netværksforbindelse"
+  },
+  "diagnosticsCleanup": {
+    "message": "Sessionsoprydning"
+  },
+  "diagnosticsResult_passed": {
+    "message": "Bestået"
+  },
+  "diagnosticsResult_failed": {
+    "message": "Mislykket"
+  },
+  "diagnosticsResult_skipped": {
+    "message": "Ikke udført"
+  },
+  "diagnosticsResult_unknown": {
+    "message": "Ukendt"
+  },
+  "diagnosticsStatus_ready": {
+    "message": "Klar på denne enhed"
+  },
+  "diagnosticsStatus_pending": {
+    "message": "Venter på afsendelse"
+  },
+  "diagnosticsStatus_sending": {
+    "message": "Sender…"
+  },
+  "diagnosticsStatus_session_required": {
+    "message": "Venter på en gyldig session for samme konto"
+  },
+  "diagnosticsStatus_received": {
+    "message": "Modtaget af supporten"
+  },
+  "diagnosticsStatus_failed": {
+    "message": "Afsendelsen mislykkedes"
+  },
+  "diagnosticsStatus_cancelled": {
+    "message": "Afsendelsen annulleret"
+  },
+  "diagnosticsStatus_expired": {
+    "message": "Fristen for afsendelse er udløbet"
+  },
+  "diagnosticsReceivedAt": {
+    "message": "Modtaget $1"
+  },
+  "error_private_browsing_required": {
+    "message": "Firefox kræver denne tilladelse for at konfigurere VPN, også i almindelige vinduer. Åbn about:addons → FuzeVPN, tillad kørsel i private vinduer, og prøv igen."
+  },
+  "error_host_permissions_required": {
+    "message": "Åbn about:addons → FuzeVPN → Tilladelser i Firefox, og tillad adgang til alle websteder. Prøv derefter igen."
+  },
+  "cancelAction": {
+    "message": "Annuller"
+  },
+  "refreshLocations": {
+    "message": "Opdater placeringer"
+  },
+  "refreshingLocations": {
+    "message": "Opdaterer placeringer…"
+  },
+  "locationsRefreshError": {
+    "message": "Listen over placeringer kunne ikke opdateres. Prøv igen."
+  },
+  "error_device_revoked_limit": {
+    "message": "Godkendelsen af denne enhed er tilbagekaldt. Grænsen for antal enheder er nået: fjern venligst en enhed."
+  },
+  "noAvailableLocations": {
+    "message": "Ingen placeringer er tilgængelige i øjeblikket. Prøv igen om lidt."
+  },
+  "noAvailableFavoriteLocations": {
+    "message": "Dine foretrukne placeringer er midlertidigt utilgængelige."
+  },
+  "error_server_full": {
+    "message": "Denne server er fuld. Vælg en anden placering."
+  },
+  "error_capacity_unavailable": {
+    "message": "Denne servers tilgængelighed kan ikke bekræftes lige nu. Prøv igen om lidt."
+  },
+  "locationHierarchyHelp": {
+    "message": "Navnet vælger en server; pilen viser detaljer."
+  },
+  "locationCountrySelect": {
+    "message": "Vælg en tilgængelig server: $1"
+  },
+  "locationCitySelect": {
+    "message": "Vælg en tilgængelig server: $1"
+  },
+  "locationShowCities": {
+    "message": "Vis byer: $1"
+  },
+  "locationHideCities": {
+    "message": "Skjul byer: $1"
+  },
+  "locationShowServers": {
+    "message": "Vis servere: $1"
+  },
+  "locationHideServers": {
+    "message": "Skjul servere: $1"
+  },
+  "locationAvailableServers": {
+    "message": "Tilgængelige servere: $1"
+  },
+  "legalInformation": {
+    "message": "Juridiske oplysninger"
+  },
+  "privacyPolicy": {
+    "message": "Privatlivspolitik"
+  },
+  "termsAndConditions": {
+    "message": "Brugs- og salgsbetingelser"
+  },
+  "legalNotice": {
+    "message": "Juridisk meddelelse"
+  },
+  "contactSupport": {
+    "message": "Kontakt support"
+  },
+  "webSignIn": {
+    "message": "Log ind på FuzeVPN"
+  },
+  "webSignInDisconnect": {
+    "message": "Afbryd forbindelsen og log ind"
+  },
+  "webSignInPending": {
+    "message": "Logger ind…"
+  },
+  "webSignInHelp": {
+    "message": "Log ind eller opret en konto med Google eller din e-mail i FuzeVPNs kundeområde."
+  },
+  "webSignInDisconnectHelp": {
+    "message": "Denne knap stopper browserbeskyttelsen, så du kan logge ind med Google eller e-mail. Din browsing er ubeskyttet under login."
+  },
+  "webSignInStatus": {
+    "message": "Fortsæt i FuzeVPNs loginvindue. Udvidelsen opdateres automatisk, når du er færdig. Luk det vindue for at annullere."
+  },
+  "error_web_login_cancelled": {
+    "message": "Login blev annulleret. Prøv igen."
+  },
+  "error_web_login_timeout": {
+    "message": "Login tog for lang tid. Prøv igen."
+  },
+  "error_web_login_unavailable": {
+    "message": "Login via web er ikke tilgængeligt. Prøv igen senere."
+  },
+  "error_web_login_invalid_callback": {
+    "message": "Login kunne ikke bekræftes. Start igen fra udvidelsen."
+  },
+  "error_web_login_denied": {
+    "message": "Login blev ikke godkendt. Prøv igen."
+  },
+  "error_web_login_busy": {
+    "message": "Luk det loginvindue, der allerede er åbent, før du prøver igen."
+  },
+  "deviceKindFirefox": {
+    "message": "Firefox-browser"
+  }
+}

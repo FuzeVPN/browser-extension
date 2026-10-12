@@ -1,0 +1,830 @@
+{
+  "extensionName": {
+    "message": "FuzeVPN"
+  },
+  "extensionDescription": {
+    "message": "Bescherm je privacy en versterk je veiligheid met één klik."
+  },
+  "siteExclusionsReloadRequired": {
+    "message": "Laad FuzeVPN opnieuw via de extensiebeheerder van de browser om de update te voltooien en website-uitzonderingen te gebruiken."
+  },
+  "extensionCommunicationError": {
+    "message": "De extensie reageert niet. Sluit dit venster en laad FuzeVPN opnieuw via de extensiebeheerder van de browser."
+  },
+  "actionDisconnected": {
+    "message": "FuzeVPN — Verbinding verbroken"
+  },
+  "actionConnected": {
+    "message": "FuzeVPN — Beschermd in deze browser"
+  },
+  "actionReconnecting": {
+    "message": "FuzeVPN — Opnieuw verbinden"
+  },
+  "actionError": {
+    "message": "FuzeVPN — Actie vereist"
+  },
+  "browserProtection": {
+    "message": "Browserbescherming"
+  },
+  "loginTitle": {
+    "message": "Welkom bij FuzeVPN"
+  },
+  "loginSubtitle": {
+    "message": "Log in om je surfgedrag in deze browser te beschermen."
+  },
+  "email": {
+    "message": "E-mailadres"
+  },
+  "emailPlaceholder": {
+    "message": "jij@voorbeeld.nl"
+  },
+  "password": {
+    "message": "Wachtwoord"
+  },
+  "signIn": {
+    "message": "Aanmelden"
+  },
+  "signingIn": {
+    "message": "Aanmelden…"
+  },
+  "forgotPassword": {
+    "message": "Wachtwoord vergeten?"
+  },
+  "createAccount": {
+    "message": "Account maken"
+  },
+  "settings": {
+    "message": "Instellingen"
+  },
+  "close": {
+    "message": "Sluiten"
+  },
+  "statusDisconnected": {
+    "message": "Verbinding verbroken"
+  },
+  "statusConnecting": {
+    "message": "Verbinden…"
+  },
+  "statusChanging": {
+    "message": "Locatie wijzigen…"
+  },
+  "statusProtected": {
+    "message": "Beschermd in deze browser"
+  },
+  "statusRefreshing": {
+    "message": "Veilig vernieuwen…"
+  },
+  "statusDisconnecting": {
+    "message": "Verbinding verbreken…"
+  },
+  "statusError": {
+    "message": "Bescherming gestopt"
+  },
+  "browserOnlyDetail": {
+    "message": "Bescherming voor deze browser."
+  },
+  "location": {
+    "message": "Locatie"
+  },
+  "change": {
+    "message": "Wijzigen"
+  },
+  "noLocation": {
+    "message": "Geen locatie beschikbaar"
+  },
+  "protectBrowser": {
+    "message": "Browser beschermen"
+  },
+  "disconnect": {
+    "message": "Verbinding verbreken"
+  },
+  "subscription": {
+    "message": "Abonnement"
+  },
+  "refreshSubscription": {
+    "message": "Abonnement vernieuwen"
+  },
+  "refreshingSubscription": {
+    "message": "Abonnement vernieuwen…"
+  },
+  "subscriptionActive": {
+    "message": "Actief"
+  },
+  "subscriptionInactive": {
+    "message": "Inactief"
+  },
+  "expiresOn": {
+    "message": "Verloopt op $1"
+  },
+  "noExpiry": {
+    "message": "Geen vervaldatum"
+  },
+  "browserOnlyNotice": {
+    "message": "Alleen in deze browser. Andere apps en browsers vallen niet onder de bescherming."
+  },
+  "resendVerification": {
+    "message": "E-mail opnieuw verzenden"
+  },
+  "incognitoHelp": {
+    "message": "Privénavigatie gebruikt dezelfde bescherming alleen wanneer de extensie in de browserinstellingen is toegestaan in de privémodus."
+  },
+  "manageAccount": {
+    "message": "Mijn account beheren"
+  },
+  "account": {
+    "message": "Account"
+  },
+  "devices": {
+    "message": "Apparaten"
+  },
+  "manageDevices": {
+    "message": "Apparaten beheren"
+  },
+  "refreshDevices": {
+    "message": "Apparaten vernieuwen"
+  },
+  "deviceCount": {
+    "message": "$1 / $2 apparaten"
+  },
+  "loadingDevices": {
+    "message": "Apparaten laden…"
+  },
+  "noDevices": {
+    "message": "Geen actieve apparaten."
+  },
+  "currentDevice": {
+    "message": "Dit apparaat"
+  },
+  "deviceKindBrowser": {
+    "message": "Browserextensie"
+  },
+  "deviceKindVpn": {
+    "message": "VPN-apparaat"
+  },
+  "profile_browser_proxy": {
+    "message": "Browserproxy"
+  },
+  "profile_wireguard": {
+    "message": "WireGuard"
+  },
+  "profile_openvpn": {
+    "message": "OpenVPN"
+  },
+  "none": {
+    "message": "geen"
+  },
+  "deviceCreatedOn": {
+    "message": "Aangemaakt op $1"
+  },
+  "deleteDevice": {
+    "message": "Apparaat verwijderen"
+  },
+  "confirmDeleteDevice": {
+    "message": "‘$1’ verwijderen? De VPN-verbindingen worden gestopt en de profielen verwijderd."
+  },
+  "resetDevice": {
+    "message": "Apparaat opnieuw instellen"
+  },
+  "confirmResetDevice": {
+    "message": "Deze extensie opnieuw instellen? Bij het volgende gebruik wordt deze als een nieuw apparaat geregistreerd."
+  },
+  "signOutAccount": {
+    "message": "Afmelden bij account"
+  },
+  "chooseLocation": {
+    "message": "Een locatie kiezen"
+  },
+  "error_invalid_credentials": {
+    "message": "Het e-mailadres of wachtwoord is onjuist."
+  },
+  "error_unauthorized": {
+    "message": "Je sessie is verlopen. Meld je opnieuw aan."
+  },
+  "error_email_verification_required": {
+    "message": "Bevestig je e-mailadres voordat je de bescherming inschakelt."
+  },
+  "errorVerificationCooldown": {
+    "message": "Je kunt over $1 seconden een nieuwe e-mail aanvragen."
+  },
+  "error_verification_email_cooldown": {
+    "message": "Wacht even voordat je nog een e-mail aanvraagt."
+  },
+  "error_subscription_required": {
+    "message": "Je hebt een actief abonnement nodig om deze browser te beschermen."
+  },
+  "error_device_limit": {
+    "message": "Apparaatlimiet bereikt. Verwijder een apparaat."
+  },
+  "error_device_identity_revoked": {
+    "message": "Dit apparaat is niet meer geautoriseerd. Probeer opnieuw verbinding te maken."
+  },
+  "error_device_proof_invalid": {
+    "message": "Dit apparaat kon niet worden gecontroleerd. Controleer de datum en tijd van je computer en probeer opnieuw."
+  },
+  "error_device_proof_replayed": {
+    "message": "Dit verzoek is al verwerkt. Probeer opnieuw."
+  },
+  "error_invalid_device": {
+    "message": "Dit apparaat is niet herkend. Probeer opnieuw verbinding te maken."
+  },
+  "error_device_exists": {
+    "message": "Deze apparaatidentiteit is al gekoppeld aan een ander account."
+  },
+  "error_not_found": {
+    "message": "Deze actie is niet meer beschikbaar. Probeer het opnieuw."
+  },
+  "error_invalid_location": {
+    "message": "Deze locatie is niet beschikbaar. Kies een andere."
+  },
+  "error_rate_limited": {
+    "message": "Te veel pogingen. Wacht even en probeer het opnieuw."
+  },
+  "error_proxy_unavailable": {
+    "message": "Deze server is tijdelijk niet beschikbaar. Probeer het zo opnieuw."
+  },
+  "error_api_token_expired": {
+    "message": "Je accountsessie is verlopen. Meld je opnieuw aan."
+  },
+  "error_network_error": {
+    "message": "Het netwerk is niet beschikbaar. Controleer je internetverbinding."
+  },
+  "error_request_timeout": {
+    "message": "De dienst reageerde niet op tijd. Probeer het opnieuw."
+  },
+  "error_invalid_response": {
+    "message": "De dienst heeft een onverwacht antwoord gegeven."
+  },
+  "error_proxy_certificate_invalid": {
+    "message": "De beveiliging van de server kon niet worden gecontroleerd. De verbinding is gestopt."
+  },
+  "error_proxy_controlled_by_extension": {
+    "message": "Een andere extensie beheert momenteel de proxy van de browser."
+  },
+  "error_proxy_controlled_by_policy": {
+    "message": "Een beheerdersbeleid verhindert dat FuzeVPN de proxy wijzigt."
+  },
+  "error_proxy_authentication_failed": {
+    "message": "De server heeft de verbinding niet geaccepteerd. Probeer opnieuw te verbinden."
+  },
+  "error_session_expired": {
+    "message": "Je beveiligde verbinding is verlopen. Verbind opnieuw."
+  },
+  "error_email_delivery_unavailable": {
+    "message": "De e-mail kan momenteel niet worden verzonden."
+  },
+  "error_unknown_error": {
+    "message": "Er is een onverwachte fout opgetreden. Probeer het opnieuw."
+  },
+  "actionBlocked": {
+    "message": "FuzeVPN — Surfen geblokkeerd"
+  },
+  "statusBlockedRetry": {
+    "message": "Browsen gepauzeerd — opnieuw verbinden"
+  },
+  "statusBlockedAction": {
+    "message": "Browsen gepauzeerd — controleer de verbinding"
+  },
+  "statusProtectionUnavailable": {
+    "message": "Bescherming niet beschikbaar — browsen niet geblokkeerd"
+  },
+  "recoveryHelp": {
+    "message": "Probeer opnieuw om de bescherming te hervatten. Verbreken laat je browsen zonder FuzeVPN."
+  },
+  "retryConnection": {
+    "message": "Opnieuw proberen"
+  },
+  "killSwitch": {
+    "message": "Noodstop"
+  },
+  "killSwitchHelp": {
+    "message": "Blokkeert nieuwe webverzoeken als de VPN-verbinding uitvalt. Uitgesloten websites blijven zonder VPN bereikbaar."
+  },
+  "webRtcProtection": {
+    "message": "WebRTC-bescherming"
+  },
+  "webRtcHelp": {
+    "message": "Helpt je IP-adres privé te houden tijdens webgesprekken. Sommige gesprekken werken mogelijk niet. Uitschakelen kan je echte IP-adres zichtbaar maken."
+  },
+  "securityEffectiveState": {
+    "message": "$1 · $2"
+  },
+  "securityBlocked": {
+    "message": "Surfen geblokkeerd"
+  },
+  "securityNotBlocked": {
+    "message": "Surfen niet geblokkeerd"
+  },
+  "securityWebRtcActive": {
+    "message": "WebRTC-beperking actief"
+  },
+  "securityWebRtcInactive": {
+    "message": "WebRTC-beperking inactief"
+  },
+  "localNetworkHelp": {
+    "message": "Lokale IP-adressen en gangbare lokale namen worden tijdens de bescherming geblokkeerd. Een uitgesloten domein kan nog steeds toegang tot het lokale netwerk bieden. De IPv6-instellingen van het systeem blijven ongewijzigd."
+  },
+  "securityLimits": {
+    "message": "Over deze bescherming"
+  },
+  "killSwitchLimits": {
+    "message": "Alleen deze browser: bestaande verbindingen en sommige interne verbindingen van de browser of andere extensies kunnen doorgaan. Een andere extensie of een beleid kan de proxy vervangen voordat FuzeVPN reageert. De extensie uitschakelen verwijdert de bescherming. Geen blokkering voor het hele systeem."
+  },
+  "error_traffic_guard_failed": {
+    "message": "De surfblokkering kon niet worden gecontroleerd. De bescherming is niet gegarandeerd. Controleer de machtigingen van de extensie."
+  },
+  "error_webrtc_control_unavailable": {
+    "message": "De WebRTC-beperking kon niet worden toegepast. Controleer de instellingen, andere extensies of het beheerdersbeleid."
+  },
+  "language": {
+    "message": "Taal"
+  },
+  "languageAutomatic": {
+    "message": "Automatisch — browsertaal"
+  },
+  "languageHelp": {
+    "message": "Wijzigingen gelden meteen. Automatisch volgt de browsertaal, die kan verschillen van de systeemtaal."
+  },
+  "languageSaveError": {
+    "message": "De taal kon niet worden opgeslagen. Je vorige keuze blijft behouden. Probeer opnieuw."
+  },
+  "publicIp": {
+    "message": "Openbaar IP"
+  },
+  "vpnIp": {
+    "message": "VPN-IP"
+  },
+  "ipChecking": {
+    "message": "Controleren…"
+  },
+  "ipUnavailable": {
+    "message": "Niet beschikbaar"
+  },
+  "ipLookupExplanation": {
+    "message": "IP gecontroleerd met ipify via je huidige verbinding. Er wordt geen browsegeschiedenis verzonden."
+  },
+  "automaticLocation": {
+    "message": "Automatisch"
+  },
+  "automaticLocationHelp": {
+    "message": "Beste recente responstijd, anders je laatste locatie."
+  },
+  "automaticLocationName": {
+    "message": "Automatisch · $1"
+  },
+  "searchLocations": {
+    "message": "Zoek land of stad"
+  },
+  "locationFilters": {
+    "message": "Locaties filteren"
+  },
+  "allLocations": {
+    "message": "Alle"
+  },
+  "favoriteLocations": {
+    "message": "Favorieten"
+  },
+  "recentLocations": {
+    "message": "Recent"
+  },
+  "noMatchingLocations": {
+    "message": "Geen locaties gevonden voor je zoekopdracht."
+  },
+  "noFavoriteLocations": {
+    "message": "Markeer locaties met een ster om ze hier te bewaren."
+  },
+  "noRecentLocations": {
+    "message": "Je laatst verbonden locaties verschijnen hier."
+  },
+  "addFavorite": {
+    "message": "$1 aan favorieten toevoegen"
+  },
+  "removeFavorite": {
+    "message": "$1 uit favorieten verwijderen"
+  },
+  "unavailableFavoriteLocation": {
+    "message": "Niet-beschikbare favoriet $1"
+  },
+  "locationSaveError": {
+    "message": "De wijziging kon niet worden voltooid. Sommige instellingen zijn mogelijk opgeslagen. Controleer de getoonde keuze voordat je het opnieuw probeert."
+  },
+  "siteExclusions": {
+    "message": "Uitgesloten websites"
+  },
+  "siteExclusionsHelp": {
+    "message": "Deze websites gebruiken je verbinding zonder FuzeVPN, ook als de VPN uitvalt."
+  },
+  "siteExclusionsEnabled": {
+    "message": "Uitzonderingen inschakelen"
+  },
+  "siteExclusionInput": {
+    "message": "Domein of URL"
+  },
+  "siteExclusionPlaceholder": {
+    "message": "voorbeeld.nl"
+  },
+  "siteExclusionPreview": {
+    "message": "Gekozen domein: $1"
+  },
+  "siteExclusionSubdomains": {
+    "message": "Subdomeinen opnemen"
+  },
+  "siteExclusionAdd": {
+    "message": "Website toevoegen"
+  },
+  "siteExclusionsEmpty": {
+    "message": "Geen uitgesloten websites. Voeg alleen websites toe die je zonder VPN wilt gebruiken."
+  },
+  "siteExclusionsCount": {
+    "message": "$1 / 100 websites"
+  },
+  "siteExclusionScopeSubdomains": {
+    "message": "Domein en subdomeinen"
+  },
+  "siteExclusionScopeExact": {
+    "message": "Alleen het exacte domein"
+  },
+  "siteExclusionRemove": {
+    "message": "$1 verwijderen"
+  },
+  "siteExclusionsDetails": {
+    "message": "Hoe werken uitzonderingen?"
+  },
+  "siteExclusionsResources": {
+    "message": "Inhoud van andere domeinen blijft beschermd. Een pagina uitsluiten sluit niet automatisch de overige inhoud uit."
+  },
+  "siteExclusionsReload": {
+    "message": "Laad de website opnieuw na een wijziging. Bestaande verbindingen kunnen hun eerdere route behouden."
+  },
+  "siteExclusionsWebRtc": {
+    "message": "WebRTC-bescherming blijft een algemene instelling, ook voor uitgesloten websites."
+  },
+  "siteExclusionsLocal": {
+    "message": "Alleen in deze browser opgeslagen en bewaard na afmelden bij je account."
+  },
+  "siteExclusionsOn": {
+    "message": "Uitzonderingen ingeschakeld"
+  },
+  "siteExclusionsOff": {
+    "message": "Uitzonderingen uitgeschakeld"
+  },
+  "siteExclusionsSummary": {
+    "message": "$1 websites buiten de VPN"
+  },
+  "siteExclusionsPending": {
+    "message": "Uitzonderingen toepassen…"
+  },
+  "siteExclusionsInterrupted": {
+    "message": "Wijziging onderbroken. De tijdelijke beveiliging blijft actief."
+  },
+  "siteExclusionsSaveError": {
+    "message": "De wijziging kon niet worden voltooid. Controleer je instellingen en probeer het opnieuw."
+  },
+  "siteExclusionsRetry": {
+    "message": "Opnieuw proberen"
+  },
+  "siteExclusionInvalid": {
+    "message": "Voer een geldig openbaar domein in. IP-adressen, lokale namen, jokertekens, openbare achtervoegsels en gereserveerde domeinen zijn niet toegestaan."
+  },
+  "siteExclusionDuplicate": {
+    "message": "Dit domein staat al op de lijst."
+  },
+  "siteExclusionsLimit": {
+    "message": "De limiet van 100 websites is bereikt. Verwijder een website om een andere toe te voegen."
+  },
+  "statusProtectedExceptions": {
+    "message": "VPN actief · $1 uitzonderingen"
+  },
+  "statusBlockedExceptions": {
+    "message": "Alleen uitgesloten websites blijven bereikbaar"
+  },
+  "securityBlockedExceptions": {
+    "message": "Browsen geblokkeerd behalve uitgesloten websites"
+  },
+  "securityBlockUnverified": {
+    "message": "Blokkering niet geverifieerd"
+  },
+  "logoutLocalComplete": {
+    "message": "Lokaal afmelden voltooid."
+  },
+  "logoutApiSession": {
+    "message": "Huidige accountsessie"
+  },
+  "logoutProxySessions": {
+    "message": "Bekende VPN-sessies"
+  },
+  "logoutRevocationPending": {
+    "message": "Intrekken wordt uitgevoerd…"
+  },
+  "logoutRevocationConfirmed": {
+    "message": "Intrekking bevestigd"
+  },
+  "logoutRevocationUnconfirmed": {
+    "message": "Intrekking niet bevestigd"
+  },
+  "logoutUnconfirmedHelp": {
+    "message": "Sommige externe sessies kunnen actief blijven totdat ze verlopen."
+  },
+  "deviceQuotaLoading": {
+    "message": "Apparaatlimiet laden…"
+  },
+  "deviceQuotaUnknown": {
+    "message": "Apparaatlimiet niet beschikbaar"
+  },
+  "error_proxy_creation_uncertain": {
+    "message": "De server heeft het maken van de nieuwe verbinding niet bevestigd. Automatisch opnieuw verbinden is gepauzeerd."
+  },
+  "siteExclusionsPreferencesReset": {
+    "message": "Je opgeslagen website-uitzonderingen zijn gewist omdat ze niet konden worden gelezen. Voeg de websites die je wilt uitsluiten opnieuw toe."
+  },
+  "siteExclusionsConflict": {
+    "message": "De lijst met uitgesloten sites is gewijzigd. Controleer de lijst en probeer uw wijziging opnieuw."
+  },
+  "unavailableLocation": {
+    "message": "Locatie niet beschikbaar"
+  },
+  "verificationSending": {
+    "message": "Verificatie-e-mail wordt verzonden…"
+  },
+  "verificationSent": {
+    "message": "Verificatie-e-mail verzonden. Controleer uw inbox en spammap."
+  },
+  "error_login_requires_disconnect": {
+    "message": "Verbreek de huidige VPN-verbinding voordat je je bij een ander account aanmeldt."
+  },
+  "error_storage_unavailable": {
+    "message": "De lokale accountinstellingen zijn niet beschikbaar. Probeer het opnieuw zodra de browseropslag beschikbaar is. Je opgeslagen account is behouden."
+  },
+  "diagnosticsAssistance": {
+    "message": "Ondersteuning"
+  },
+  "diagnosticsTitle": {
+    "message": "Diagnose"
+  },
+  "diagnosticsIntro": {
+    "message": "Controleer FuzeVPN en de huidige verbinding zonder uw bescherming te wijzigen."
+  },
+  "diagnosticsPrivacyTitle": {
+    "message": "Uw gegevens"
+  },
+  "diagnosticsPrivacy": {
+    "message": "Rapporten bevatten technische statussen en foutcodes, nooit wachtwoorden, tokens, e-mailadressen, IP-adressen, bezochte URL’s of uitgesloten domeinen."
+  },
+  "diagnosticsAuto": {
+    "message": "Rapporten over belangrijke fouten automatisch verzenden"
+  },
+  "diagnosticsAutoHelp": {
+    "message": "Standaard uit. Voor dit account worden alleen eenvoudige technische rapporten verzonden, zonder browsegeschiedenis. Ondersteuning bewaart ze 30 dagen."
+  },
+  "diagnosticsHistoryHelp": {
+    "message": "De technische geschiedenis blijft lokaal: maximaal 200 gebeurtenissen over 10 minuten, ook zonder automatisch verzenden. Ze bevat geen browsegeschiedenis en wordt gewist als de browser sluit of het account verandert."
+  },
+  "diagnosticsHistoryCount": {
+    "message": "$1 lokale technische gebeurtenissen"
+  },
+  "diagnosticsAccountRequired": {
+    "message": "Meld u aan om verzenden in te schakelen. Zonder account kunt u een rapport bekijken en exporteren."
+  },
+  "diagnosticsRun": {
+    "message": "Diagnose uitvoeren"
+  },
+  "diagnosticsClearHistory": {
+    "message": "Lokale geschiedenis wissen"
+  },
+  "diagnosticsPreparing": {
+    "message": "Rapport voorbereiden…"
+  },
+  "diagnosticsReports": {
+    "message": "Rapporten"
+  },
+  "diagnosticsEmpty": {
+    "message": "Nog geen lokaal rapport."
+  },
+  "diagnosticsChooseReport": {
+    "message": "Een rapport kiezen"
+  },
+  "diagnosticsReportLabel": {
+    "message": "$1 · $2 · $3"
+  },
+  "diagnosticsTypeFull": {
+    "message": "Volledig rapport"
+  },
+  "diagnosticsTypeSimple": {
+    "message": "Foutrapport"
+  },
+  "diagnosticsSummary": {
+    "message": "Verzameld op $1. FuzeVPN-versie $2."
+  },
+  "diagnosticsJson": {
+    "message": "Rapportinhoud bekijken (JSON)"
+  },
+  "diagnosticsExport": {
+    "message": "Rapport exporteren"
+  },
+  "diagnosticsDelete": {
+    "message": "Lokaal rapport verwijderen"
+  },
+  "diagnosticsRetention": {
+    "message": "Verzonden rapporten worden aan uw aangemelde account gekoppeld en 30 dagen door ondersteuning bewaard. Een lokaal rapport verwijderen verwijdert geen rapport dat ondersteuning al heeft ontvangen."
+  },
+  "diagnosticsConsent": {
+    "message": "Dit rapport naar ondersteuning verzenden"
+  },
+  "diagnosticsDataCollectionRequired": {
+    "message": "Firefox moet het verzamelen van technische gegevens toestaan om diagnostiek te versturen. Probeer het opnieuw en geef deze toestemming."
+  },
+  "diagnosticsSendHelp": {
+    "message": "Verzenden is optioneel. Na toestemming kan dit maximaal 24 uur opnieuw worden geprobeerd met een geldige sessie voor hetzelfde account. U kunt verdere pogingen annuleren. Een late annulering garandeert niet dat de server het rapport niet al heeft ontvangen."
+  },
+  "diagnosticsSend": {
+    "message": "Rapport verzenden"
+  },
+  "diagnosticsCancel": {
+    "message": "Verzenden annuleren"
+  },
+  "diagnosticsReload": {
+    "message": "Deze pagina vernieuwen"
+  },
+  "diagnosticsUnavailable": {
+    "message": "Diagnose is niet beschikbaar. Laad FuzeVPN opnieuw via de extensiebeheerder van de browser en open deze pagina opnieuw. Uw VPN blijft ongewijzigd."
+  },
+  "diagnosticsQueueFull": {
+    "message": "De verzendwachtrij is vol. Verwijder een lokaal rapport of wacht tot een wachtend rapport is verzonden."
+  },
+  "diagnosticsContentUnavailable": {
+    "message": "De rapportinhoud is niet beschikbaar. Exporteer het lokale rapport als het beschikbaar is en neem contact op met ondersteuning."
+  },
+  "diagnosticsFailure": {
+    "message": "De diagnoseactie kon niet worden voltooid. Uw VPN blijft ongewijzigd."
+  },
+  "diagnosticsChecks": {
+    "message": "Controles"
+  },
+  "diagnosticsCheckFallback": {
+    "message": "Technische controle: $1"
+  },
+  "diagnosticsCheckLine": {
+    "message": "$1 — $2"
+  },
+  "diagnosticsProxy": {
+    "message": "Browserproxy"
+  },
+  "diagnosticsStorage": {
+    "message": "Lokale opslag"
+  },
+  "diagnosticsNetwork": {
+    "message": "Netwerkverbinding"
+  },
+  "diagnosticsCleanup": {
+    "message": "Sessies opruimen"
+  },
+  "diagnosticsResult_passed": {
+    "message": "Geslaagd"
+  },
+  "diagnosticsResult_failed": {
+    "message": "Mislukt"
+  },
+  "diagnosticsResult_skipped": {
+    "message": "Niet uitgevoerd"
+  },
+  "diagnosticsResult_unknown": {
+    "message": "Onbekend"
+  },
+  "diagnosticsStatus_ready": {
+    "message": "Gereed op dit apparaat"
+  },
+  "diagnosticsStatus_pending": {
+    "message": "Wacht op verzending"
+  },
+  "diagnosticsStatus_sending": {
+    "message": "Bezig met verzenden…"
+  },
+  "diagnosticsStatus_session_required": {
+    "message": "Wacht op een geldige sessie voor hetzelfde account"
+  },
+  "diagnosticsStatus_received": {
+    "message": "Ontvangen door ondersteuning"
+  },
+  "diagnosticsStatus_failed": {
+    "message": "Verzenden mislukt"
+  },
+  "diagnosticsStatus_cancelled": {
+    "message": "Verzenden geannuleerd"
+  },
+  "diagnosticsStatus_expired": {
+    "message": "Verzendtermijn verlopen"
+  },
+  "diagnosticsReceivedAt": {
+    "message": "Ontvangen op $1"
+  },
+  "error_private_browsing_required": {
+    "message": "Firefox heeft deze toestemming nodig om de VPN in te stellen, ook in normale vensters. Open about:addons → FuzeVPN, sta uitvoering in privévensters toe en probeer het opnieuw."
+  },
+  "error_host_permissions_required": {
+    "message": "Open in Firefox about:addons → FuzeVPN → Toestemmingen en sta toegang tot alle websites toe. Probeer het daarna opnieuw."
+  },
+  "cancelAction": {
+    "message": "Annuleren"
+  },
+  "refreshLocations": {
+    "message": "Locaties vernieuwen"
+  },
+  "refreshingLocations": {
+    "message": "Locaties worden vernieuwd…"
+  },
+  "locationsRefreshError": {
+    "message": "De locatielijst kon niet worden vernieuwd. Probeer het opnieuw."
+  },
+  "error_device_revoked_limit": {
+    "message": "De autorisatie van dit apparaat is ingetrokken. Apparaatlimiet bereikt: verwijder een apparaat."
+  },
+  "noAvailableLocations": {
+    "message": "Er zijn momenteel geen locaties beschikbaar. Probeer het over enkele ogenblikken opnieuw."
+  },
+  "noAvailableFavoriteLocations": {
+    "message": "Je favoriete locaties zijn tijdelijk niet beschikbaar."
+  },
+  "error_server_full": {
+    "message": "Deze server is vol. Kies een andere locatie."
+  },
+  "error_capacity_unavailable": {
+    "message": "De beschikbaarheid van deze server kan momenteel niet worden bevestigd. Probeer het over enkele ogenblikken opnieuw."
+  },
+  "locationHierarchyHelp": {
+    "message": "De naam selecteert een server; de pijl toont de details."
+  },
+  "locationCountrySelect": {
+    "message": "Beschikbare server selecteren: $1"
+  },
+  "locationCitySelect": {
+    "message": "Beschikbare server selecteren: $1"
+  },
+  "locationShowCities": {
+    "message": "Steden tonen: $1"
+  },
+  "locationHideCities": {
+    "message": "Steden verbergen: $1"
+  },
+  "locationShowServers": {
+    "message": "Servers tonen: $1"
+  },
+  "locationHideServers": {
+    "message": "Servers verbergen: $1"
+  },
+  "locationAvailableServers": {
+    "message": "Beschikbare servers: $1"
+  },
+  "legalInformation": {
+    "message": "Juridische informatie"
+  },
+  "privacyPolicy": {
+    "message": "Privacybeleid"
+  },
+  "termsAndConditions": {
+    "message": "Gebruiks- en verkoopvoorwaarden"
+  },
+  "legalNotice": {
+    "message": "Juridische kennisgeving"
+  },
+  "contactSupport": {
+    "message": "Contact opnemen met ondersteuning"
+  },
+  "webSignIn": {
+    "message": "Inloggen bij FuzeVPN"
+  },
+  "webSignInDisconnect": {
+    "message": "Verbinding verbreken en inloggen"
+  },
+  "webSignInPending": {
+    "message": "Bezig met inloggen…"
+  },
+  "webSignInHelp": {
+    "message": "Log in of maak een account aan met Google of je e-mailadres in de FuzeVPN-klantomgeving."
+  },
+  "webSignInDisconnectHelp": {
+    "message": "Deze knop stopt de browserbescherming zodat je met Google of je e-mailadres kunt inloggen. Tijdens het inloggen is je surfverkeer niet beschermd."
+  },
+  "webSignInStatus": {
+    "message": "Ga verder in het FuzeVPN-inlogvenster. De extensie wordt automatisch bijgewerkt zodra je klaar bent. Sluit dat venster om te annuleren."
+  },
+  "error_web_login_cancelled": {
+    "message": "Het inloggen is geannuleerd. Probeer opnieuw."
+  },
+  "error_web_login_timeout": {
+    "message": "Het inloggen duurde te lang. Probeer opnieuw."
+  },
+  "error_web_login_unavailable": {
+    "message": "Inloggen via de website is niet beschikbaar. Probeer het later opnieuw."
+  },
+  "error_web_login_invalid_callback": {
+    "message": "Het inloggen kon niet worden gecontroleerd. Begin opnieuw vanuit de extensie."
+  },
+  "error_web_login_denied": {
+    "message": "Het inloggen is niet toegestaan. Probeer opnieuw."
+  },
+  "error_web_login_busy": {
+    "message": "Sluit het inlogvenster dat al open is voordat je het opnieuw probeert."
+  },
+  "deviceKindFirefox": {
+    "message": "Firefox-browser"
+  }
+}

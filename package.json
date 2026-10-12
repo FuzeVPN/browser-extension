@@ -1,0 +1,58 @@
+{
+  "name": "fuzevpn-extensions",
+  "version": "0.9.2",
+  "private": true,
+  "license": "MPL-2.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/FuzeVPN/browser-extension.git"
+  },
+  "homepage": "https://github.com/FuzeVPN/browser-extension#readme",
+  "bugs": {
+    "url": "https://github.com/FuzeVPN/browser-extension/issues"
+  },
+  "type": "module",
+  "engines": {
+    "node": "^20.19.0 || ^22.13.0 || >=24"
+  },
+  "scripts": {
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint .",
+    "test": "vitest run",
+    "build": "node scripts/build.mjs",
+    "build:chrome": "node scripts/build.mjs chrome",
+    "build:edge": "node scripts/build.mjs edge",
+    "build:firefox": "node scripts/build.mjs firefox",
+    "audit:dist": "node scripts/audit-dist.mjs",
+    "audit:publication": "node scripts/audit-publication.mjs --history",
+    "lint:firefox": "addons-linter --output json dist/firefox",
+    "validate": "npm run format:check && npm run typecheck && npm run lint && npm test && npm run build && npm run audit:dist && npm run lint:firefox",
+    "validate:browser": "node scripts/validate-browser.mjs",
+    "validate:tests": "node scripts/validate-tests.mjs",
+    "package": "node scripts/package.mjs && node scripts/package-source.mjs",
+    "verify:sources": "node tests/reconstruction/verify-source-rebuild.mjs",
+    "generate:icons": "node scripts/generate-icons.mjs"
+  },
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "@types/chrome": "^0.1.1",
+    "@types/firefox-webext-browser": "^143.0.0",
+    "@types/node": "^24.3.0",
+    "addons-linter": "10.13.0",
+    "eslint": "^10.9.1",
+    "geckodriver": "^6.1.1",
+    "globals": "^16.3.0",
+    "prettier": "^3.6.2",
+    "selenium-webdriver": "^4.49.0",
+    "sharp": "^0.35.4",
+    "typescript": "^5.9.2",
+    "typescript-eslint": "^8.68.0",
+    "vite": "^7.1.3",
+    "vitest": "4.1.11"
+  },
+  "overrides": {
+    "image-size": "^2.0.3"
+  }
+}

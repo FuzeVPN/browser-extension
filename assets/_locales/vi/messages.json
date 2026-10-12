@@ -1,0 +1,830 @@
+{
+  "extensionName": {
+    "message": "FuzeVPN"
+  },
+  "extensionDescription": {
+    "message": "Giữ gìn quyền riêng tư và tăng cường bảo mật chỉ bằng một cú nhấp chuột."
+  },
+  "siteExclusionsReloadRequired": {
+    "message": "Tải lại FuzeVPN trong trình quản lý tiện ích mở rộng của trình duyệt để hoàn tất cập nhật và dùng tính năng loại trừ trang web."
+  },
+  "extensionCommunicationError": {
+    "message": "Tiện ích mở rộng không phản hồi. Đóng cửa sổ này, rồi tải lại FuzeVPN trong trình quản lý tiện ích mở rộng của trình duyệt."
+  },
+  "actionDisconnected": {
+    "message": "FuzeVPN — Đã ngắt kết nối"
+  },
+  "actionConnected": {
+    "message": "FuzeVPN — Trình duyệt được bảo vệ"
+  },
+  "actionReconnecting": {
+    "message": "FuzeVPN — Đang kết nối lại"
+  },
+  "actionError": {
+    "message": "FuzeVPN — Cần chú ý"
+  },
+  "browserProtection": {
+    "message": "Bảo vệ trình duyệt"
+  },
+  "loginTitle": {
+    "message": "Chào mừng đến với FuzeVPN"
+  },
+  "loginSubtitle": {
+    "message": "Đăng nhập để bảo vệ hoạt động duyệt web trong trình duyệt này."
+  },
+  "email": {
+    "message": "Địa chỉ email"
+  },
+  "emailPlaceholder": {
+    "message": "you@example.com"
+  },
+  "password": {
+    "message": "Mật khẩu"
+  },
+  "signIn": {
+    "message": "Đăng nhập"
+  },
+  "signingIn": {
+    "message": "Đang đăng nhập…"
+  },
+  "forgotPassword": {
+    "message": "Quên mật khẩu?"
+  },
+  "createAccount": {
+    "message": "Tạo một tài khoản"
+  },
+  "settings": {
+    "message": "Cài đặt"
+  },
+  "close": {
+    "message": "Đóng"
+  },
+  "statusDisconnected": {
+    "message": "Đã ngắt kết nối"
+  },
+  "statusConnecting": {
+    "message": "Đang kết nối…"
+  },
+  "statusChanging": {
+    "message": "Đang thay đổi vị trí…"
+  },
+  "statusProtected": {
+    "message": "Trình duyệt được bảo vệ"
+  },
+  "statusRefreshing": {
+    "message": "Gia hạn một cách an toàn…"
+  },
+  "statusDisconnecting": {
+    "message": "Đang ngắt kết nối…"
+  },
+  "statusError": {
+    "message": "Đã ngừng bảo vệ"
+  },
+  "browserOnlyDetail": {
+    "message": "Chỉ bảo vệ trình duyệt này."
+  },
+  "location": {
+    "message": "Vị trí"
+  },
+  "change": {
+    "message": "Thay đổi"
+  },
+  "noLocation": {
+    "message": "Không có vị trí nào"
+  },
+  "protectBrowser": {
+    "message": "Bảo vệ trình duyệt"
+  },
+  "disconnect": {
+    "message": "Ngắt kết nối"
+  },
+  "subscription": {
+    "message": "Đăng ký"
+  },
+  "refreshSubscription": {
+    "message": "Làm mới đăng ký"
+  },
+  "refreshingSubscription": {
+    "message": "Đang làm mới đăng ký…"
+  },
+  "subscriptionActive": {
+    "message": "Đang hoạt động"
+  },
+  "subscriptionInactive": {
+    "message": "Không hoạt động"
+  },
+  "expiresOn": {
+    "message": "Hết hạn vào $1"
+  },
+  "noExpiry": {
+    "message": "Không có ngày hết hạn"
+  },
+  "browserOnlyNotice": {
+    "message": "Chỉ trình duyệt này được bảo vệ. Các trình duyệt và ứng dụng khác không được bảo vệ."
+  },
+  "resendVerification": {
+    "message": "Gửi lại email"
+  },
+  "incognitoHelp": {
+    "message": "Cửa sổ riêng tư chỉ được bảo vệ tương tự khi bạn cho phép tiện ích mở rộng chạy trong cửa sổ riêng tư ở phần cài đặt trình duyệt."
+  },
+  "manageAccount": {
+    "message": "Quản lý tài khoản của tôi"
+  },
+  "account": {
+    "message": "Tài khoản"
+  },
+  "devices": {
+    "message": "Thiết bị"
+  },
+  "manageDevices": {
+    "message": "Quản lý thiết bị"
+  },
+  "refreshDevices": {
+    "message": "Làm mới thiết bị"
+  },
+  "deviceCount": {
+    "message": "thiết bị $1 / $2"
+  },
+  "loadingDevices": {
+    "message": "Đang tải thiết bị…"
+  },
+  "noDevices": {
+    "message": "Không có thiết bị hoạt động."
+  },
+  "currentDevice": {
+    "message": "Thiết bị này"
+  },
+  "deviceKindBrowser": {
+    "message": "Tiện ích mở rộng trình duyệt"
+  },
+  "deviceKindVpn": {
+    "message": "Thiết bị VPN"
+  },
+  "profile_browser_proxy": {
+    "message": "Proxy trình duyệt"
+  },
+  "profile_wireguard": {
+    "message": "WireGuard"
+  },
+  "profile_openvpn": {
+    "message": "OpenVPN"
+  },
+  "none": {
+    "message": "không có"
+  },
+  "deviceCreatedOn": {
+    "message": "Được tạo vào $1"
+  },
+  "deleteDevice": {
+    "message": "Xóa thiết bị"
+  },
+  "confirmDeleteDevice": {
+    "message": "Xóa “$1”? Các kết nối VPN của nó sẽ dừng và hồ sơ của nó sẽ bị xóa."
+  },
+  "resetDevice": {
+    "message": "Đặt lại thiết bị"
+  },
+  "confirmResetDevice": {
+    "message": "Đặt lại tiện ích mở rộng này? Nó sẽ được đăng ký như một thiết bị mới vào lần tiếp theo bạn sử dụng."
+  },
+  "signOutAccount": {
+    "message": "Đăng xuất khỏi tài khoản"
+  },
+  "chooseLocation": {
+    "message": "Chọn một vị trí"
+  },
+  "error_invalid_credentials": {
+    "message": "Địa chỉ email hoặc mật khẩu không chính xác."
+  },
+  "error_unauthorized": {
+    "message": "Phiên của bạn đã hết hạn. Vui lòng đăng nhập lại."
+  },
+  "error_email_verification_required": {
+    "message": "Xác minh địa chỉ email của bạn trước khi kích hoạt bảo vệ."
+  },
+  "errorVerificationCooldown": {
+    "message": "Bạn có thể yêu cầu một email mới sau $1 giây."
+  },
+  "error_verification_email_cooldown": {
+    "message": "Vui lòng đợi trước khi yêu cầu email khác."
+  },
+  "error_subscription_required": {
+    "message": "Cần có gói đăng ký còn hiệu lực để bảo vệ trình duyệt."
+  },
+  "error_device_limit": {
+    "message": "Đã đạt số lượng thiết bị tối đa. Vui lòng xóa một thiết bị."
+  },
+  "error_device_identity_revoked": {
+    "message": "Thiết bị này không còn được cấp quyền. Hãy thử kết nối lại."
+  },
+  "error_device_proof_invalid": {
+    "message": "Chúng tôi không thể xác minh thiết bị này. Hãy kiểm tra ngày giờ trên máy tính của bạn rồi thử lại."
+  },
+  "error_device_proof_replayed": {
+    "message": "Yêu cầu này đã được xử lý. Hãy thử lại."
+  },
+  "error_invalid_device": {
+    "message": "Không nhận dạng được thiết bị này. Hãy thử kết nối lại."
+  },
+  "error_device_exists": {
+    "message": "Danh tính thiết bị này đã được liên kết với một tài khoản khác."
+  },
+  "error_not_found": {
+    "message": "Thao tác này không còn khả dụng. Hãy thử lại."
+  },
+  "error_invalid_location": {
+    "message": "Vị trí này không có sẵn. Chọn một cái khác."
+  },
+  "error_rate_limited": {
+    "message": "Quá nhiều nỗ lực. Hãy đợi một lát và thử lại."
+  },
+  "error_proxy_unavailable": {
+    "message": "Máy chủ này tạm thời không khả dụng. Hãy thử lại sau giây lát."
+  },
+  "error_api_token_expired": {
+    "message": "Phiên tài khoản của bạn đã hết hạn. Vui lòng đăng nhập lại."
+  },
+  "error_network_error": {
+    "message": "Mạng không khả dụng. Kiểm tra kết nối Internet của bạn."
+  },
+  "error_request_timeout": {
+    "message": "Dịch vụ mất quá nhiều thời gian để phản hồi. Hãy thử lại."
+  },
+  "error_invalid_response": {
+    "message": "Dịch vụ đã trả lại một phản hồi bất ngờ."
+  },
+  "error_proxy_certificate_invalid": {
+    "message": "Chúng tôi không thể xác minh tính bảo mật của máy chủ. Kết nối đã bị dừng."
+  },
+  "error_proxy_controlled_by_extension": {
+    "message": "Một tiện ích mở rộng khác hiện đang kiểm soát proxy của trình duyệt."
+  },
+  "error_proxy_controlled_by_policy": {
+    "message": "Chính sách quản trị viên ngăn FuzeVPN thay đổi proxy."
+  },
+  "error_proxy_authentication_failed": {
+    "message": "Máy chủ không chấp nhận kết nối. Hãy thử kết nối lại."
+  },
+  "error_session_expired": {
+    "message": "Kết nối được bảo vệ của bạn đã hết hạn. Kết nối lại."
+  },
+  "error_email_delivery_unavailable": {
+    "message": "Không thể gửi email ngay bây giờ."
+  },
+  "error_unknown_error": {
+    "message": "Đã xảy ra lỗi không mong muốn. Hãy thử lại."
+  },
+  "actionBlocked": {
+    "message": "FuzeVPN — Bị chặn duyệt"
+  },
+  "statusBlockedRetry": {
+    "message": "Đang tạm dừng duyệt - đang kết nối lại"
+  },
+  "statusBlockedAction": {
+    "message": "Đang tạm dừng duyệt - kiểm tra kết nối"
+  },
+  "statusProtectionUnavailable": {
+    "message": "Bảo vệ không khả dụng - duyệt không bị chặn"
+  },
+  "recoveryHelp": {
+    "message": "Hãy thử lại để tiếp tục bảo vệ. Ngắt kết nối cho phép bạn duyệt mà không cần FuzeVPN."
+  },
+  "retryConnection": {
+    "message": "Thử lại"
+  },
+  "killSwitch": {
+    "message": "Công tắc tiêu diệt"
+  },
+  "killSwitchHelp": {
+    "message": "Chặn các yêu cầu web mới nếu kết nối VPN bị rớt. Các trang web bị loại trừ vẫn có thể truy cập được bên ngoài VPN."
+  },
+  "webRtcProtection": {
+    "message": "Bảo vệ WebRTC"
+  },
+  "webRtcHelp": {
+    "message": "Giúp giữ địa chỉ IP của bạn ở chế độ riêng tư trong các cuộc gọi trên web. Một số cuộc gọi có thể không hoạt động. Tắt tính năng này có thể tiết lộ địa chỉ IP thực của bạn."
+  },
+  "securityEffectiveState": {
+    "message": "$1 · $2"
+  },
+  "securityBlocked": {
+    "message": "Duyệt web bị chặn"
+  },
+  "securityNotBlocked": {
+    "message": "Duyệt web không bị chặn"
+  },
+  "securityWebRtcActive": {
+    "message": "Hạn chế WebRTC đang hoạt động"
+  },
+  "securityWebRtcInactive": {
+    "message": "Hạn chế WebRTC không hoạt động"
+  },
+  "localNetworkHelp": {
+    "message": "Địa chỉ IP cục bộ và tên cục bộ phổ biến bị chặn trong quá trình bảo vệ. Một miền bị loại trừ vẫn có thể cung cấp quyền truy cập vào mạng cục bộ. Cài đặt IPv6 hệ thống không thay đổi."
+  },
+  "securityLimits": {
+    "message": "Về sự bảo vệ này"
+  },
+  "killSwitchLimits": {
+    "message": "Chỉ dành cho trình duyệt này: các kết nối hiện có và một số liên lạc nội bộ của trình duyệt hoặc tiện ích mở rộng khác có thể tiếp tục. Một tiện ích mở rộng hoặc chính sách khác có thể thay thế proxy trước khi FuzeVPN phản hồi. Tắt tiện ích mở rộng sẽ ngừng bảo vệ. Không chặn trên toàn hệ thống."
+  },
+  "error_traffic_guard_failed": {
+    "message": "Khối duyệt không thể được xác minh. Bảo vệ không được đảm bảo. Kiểm tra quyền mở rộng."
+  },
+  "error_webrtc_control_unavailable": {
+    "message": "Không thể áp dụng hạn chế WebRTC. Kiểm tra cài đặt của bạn, các tiện ích mở rộng khác hoặc chính sách của quản trị viên."
+  },
+  "language": {
+    "message": "Ngôn ngữ"
+  },
+  "languageAutomatic": {
+    "message": "Tự động — ngôn ngữ trình duyệt"
+  },
+  "languageHelp": {
+    "message": "Các thay đổi có hiệu lực ngay. Chế độ tự động dùng ngôn ngữ của trình duyệt, có thể khác với ngôn ngữ của hệ điều hành."
+  },
+  "languageSaveError": {
+    "message": "Không thể lưu ngôn ngữ. Lựa chọn trước đó của bạn được giữ lại. Hãy thử lại."
+  },
+  "publicIp": {
+    "message": "IP công cộng"
+  },
+  "vpnIp": {
+    "message": "IP VPN"
+  },
+  "ipChecking": {
+    "message": "Đang kiểm tra…"
+  },
+  "ipUnavailable": {
+    "message": "Không có sẵn"
+  },
+  "ipLookupExplanation": {
+    "message": "IP đã được kiểm tra bằng ipify bằng kết nối hiện tại của bạn. Không có lịch sử duyệt web được gửi."
+  },
+  "automaticLocation": {
+    "message": "tự động"
+  },
+  "automaticLocationHelp": {
+    "message": "Thời gian phản hồi gần đây nhất hoặc vị trí cuối cùng của bạn."
+  },
+  "automaticLocationName": {
+    "message": "Tự động · $1"
+  },
+  "searchLocations": {
+    "message": "Tìm kiếm quốc gia hoặc thành phố"
+  },
+  "locationFilters": {
+    "message": "Lọc vị trí"
+  },
+  "allLocations": {
+    "message": "Tất cả"
+  },
+  "favoriteLocations": {
+    "message": "Yêu thích"
+  },
+  "recentLocations": {
+    "message": "Gần đây"
+  },
+  "noMatchingLocations": {
+    "message": "Không có vị trí nào phù hợp với tìm kiếm của bạn."
+  },
+  "noFavoriteLocations": {
+    "message": "Thêm một ngôi sao để giữ các vị trí yêu thích của bạn ở đây."
+  },
+  "noRecentLocations": {
+    "message": "Các vị trí được kết nối gần đây của bạn sẽ xuất hiện ở đây."
+  },
+  "addFavorite": {
+    "message": "Thêm $1 vào mục yêu thích"
+  },
+  "removeFavorite": {
+    "message": "Xóa $1 khỏi mục yêu thích"
+  },
+  "unavailableFavoriteLocation": {
+    "message": "Vị trí yêu thích không khả dụng $1"
+  },
+  "locationSaveError": {
+    "message": "Không thể hoàn tất thay đổi. Một số cài đặt có thể đã được lưu. Kiểm tra lựa chọn được hiển thị trước khi thử lại."
+  },
+  "siteExclusions": {
+    "message": "Trang web bị loại trừ"
+  },
+  "siteExclusionsHelp": {
+    "message": "Các trang web này sử dụng kết nối của bạn mà không cần FuzeVPN, ngay cả khi VPN bị hỏng."
+  },
+  "siteExclusionsEnabled": {
+    "message": "Bật ngoại lệ"
+  },
+  "siteExclusionInput": {
+    "message": "Tên miền hoặc URL"
+  },
+  "siteExclusionPlaceholder": {
+    "message": "ví dụ.com"
+  },
+  "siteExclusionPreview": {
+    "message": "Tên miền đã chọn: $1"
+  },
+  "siteExclusionSubdomains": {
+    "message": "Bao gồm tên miền phụ"
+  },
+  "siteExclusionAdd": {
+    "message": "Thêm trang web"
+  },
+  "siteExclusionsEmpty": {
+    "message": "Không có trang web bị loại trừ. Chỉ thêm các trang web bạn muốn sử dụng mà không cần VPN."
+  },
+  "siteExclusionsCount": {
+    "message": "$1 / 100 trang web"
+  },
+  "siteExclusionScopeSubdomains": {
+    "message": "Tên miền và tên miền phụ"
+  },
+  "siteExclusionScopeExact": {
+    "message": "Chỉ tên miền chính xác"
+  },
+  "siteExclusionRemove": {
+    "message": "Xóa $1"
+  },
+  "siteExclusionsDetails": {
+    "message": "Các trường hợp ngoại lệ hoạt động như thế nào?"
+  },
+  "siteExclusionsResources": {
+    "message": "Tài nguyên từ các miền khác luôn được bảo vệ. Việc loại trừ một trang không tự động loại trừ nội dung khác của nó."
+  },
+  "siteExclusionsReload": {
+    "message": "Tải lại trang web sau khi thay đổi. Các kết nối hiện tại có thể giữ nguyên tuyến đường trước đó của chúng."
+  },
+  "siteExclusionsWebRtc": {
+    "message": "Bảo vệ WebRTC vẫn là cài đặt chung, bao gồm cả các trang web bị loại trừ."
+  },
+  "siteExclusionsLocal": {
+    "message": "Chỉ được lưu trong trình duyệt này và được lưu giữ sau khi đăng xuất khỏi tài khoản của bạn."
+  },
+  "siteExclusionsOn": {
+    "message": "Đã bật ngoại lệ"
+  },
+  "siteExclusionsOff": {
+    "message": "Ngoại lệ bị vô hiệu hóa"
+  },
+  "siteExclusionsSummary": {
+    "message": "$1 trang web bên ngoài VPN"
+  },
+  "siteExclusionsPending": {
+    "message": "Đang áp dụng ngoại lệ…"
+  },
+  "siteExclusionsInterrupted": {
+    "message": "Thay đổi bị gián đoạn. Việc bảo vệ tạm thời vẫn còn tại chỗ."
+  },
+  "siteExclusionsSaveError": {
+    "message": "Không thể hoàn tất thay đổi. Hãy kiểm tra cài đặt của bạn và thử lại."
+  },
+  "siteExclusionsRetry": {
+    "message": "Thử lại"
+  },
+  "siteExclusionInvalid": {
+    "message": "Nhập miền công cộng hợp lệ. IP, tên địa phương, ký tự đại diện, hậu tố công khai và tên miền dành riêng không được chấp nhận."
+  },
+  "siteExclusionDuplicate": {
+    "message": "Tên miền này đã có trong danh sách."
+  },
+  "siteExclusionsLimit": {
+    "message": "Đã đạt đến giới hạn 100 trang web. Xóa một trang web để thêm một trang web khác."
+  },
+  "statusProtectedExceptions": {
+    "message": "VPN đang hoạt động · $1 ngoại lệ"
+  },
+  "statusBlockedExceptions": {
+    "message": "Chỉ các trang web bị loại trừ vẫn có thể truy cập được"
+  },
+  "securityBlockedExceptions": {
+    "message": "Duyệt bị chặn ngoại trừ các trang web bị loại trừ"
+  },
+  "securityBlockUnverified": {
+    "message": "Chặn chưa được xác minh"
+  },
+  "logoutLocalComplete": {
+    "message": "Đăng xuất cục bộ hoàn tất."
+  },
+  "logoutApiSession": {
+    "message": "Phiên tài khoản hiện tại"
+  },
+  "logoutProxySessions": {
+    "message": "Các phiên VPN đã biết"
+  },
+  "logoutRevocationPending": {
+    "message": "Đang thu hồi…"
+  },
+  "logoutRevocationConfirmed": {
+    "message": "Đã xác nhận việc thu hồi"
+  },
+  "logoutRevocationUnconfirmed": {
+    "message": "Việc thu hồi chưa được xác nhận"
+  },
+  "logoutUnconfirmedHelp": {
+    "message": "Một số phiên từ xa có thể vẫn hoạt động cho đến khi hết hạn."
+  },
+  "deviceQuotaLoading": {
+    "message": "Đang tải giới hạn thiết bị…"
+  },
+  "deviceQuotaUnknown": {
+    "message": "Không có giới hạn thiết bị"
+  },
+  "error_proxy_creation_uncertain": {
+    "message": "Máy chủ không xác nhận việc tạo kết nối mới. Tự động kết nối lại bị tạm dừng."
+  },
+  "siteExclusionsPreferencesReset": {
+    "message": "Các ngoại lệ của trang web đã lưu của bạn đã được đặt lại sau khi chúng không thể đọc được. Thêm lại các trang web bạn muốn loại trừ."
+  },
+  "siteExclusionsConflict": {
+    "message": "Danh sách các trang web bị loại trừ đã thay đổi. Hãy xem lại rồi thử lại thay đổi của bạn."
+  },
+  "unavailableLocation": {
+    "message": "Vị trí không có sẵn"
+  },
+  "verificationSending": {
+    "message": "Đang gửi email xác minh…"
+  },
+  "verificationSent": {
+    "message": "Email xác minh đã được gửi. Kiểm tra hộp thư đến và thư mục thư rác của bạn."
+  },
+  "error_login_requires_disconnect": {
+    "message": "Ngắt kết nối VPN hiện tại trước khi đăng nhập vào tài khoản khác."
+  },
+  "error_storage_unavailable": {
+    "message": "Cài đặt tài khoản cục bộ không có sẵn. Thử lại khi có sẵn bộ nhớ trình duyệt; tài khoản đã lưu của bạn đã được giữ nguyên."
+  },
+  "diagnosticsAssistance": {
+    "message": "Hỗ trợ"
+  },
+  "diagnosticsTitle": {
+    "message": "Chẩn đoán"
+  },
+  "diagnosticsIntro": {
+    "message": "Kiểm tra FuzeVPN và kết nối hiện tại mà không thay đổi biện pháp bảo vệ của bạn."
+  },
+  "diagnosticsPrivacyTitle": {
+    "message": "Dữ liệu của bạn"
+  },
+  "diagnosticsPrivacy": {
+    "message": "Báo cáo chứa trạng thái kỹ thuật và mã lỗi, không bao giờ chứa mật khẩu, mã thông báo, địa chỉ email, địa chỉ IP, URL đã truy cập hoặc tên miền bị loại trừ."
+  },
+  "diagnosticsAuto": {
+    "message": "Tự động gửi báo cáo lỗi quan trọng"
+  },
+  "diagnosticsAutoHelp": {
+    "message": "Tắt theo mặc định. Chỉ những báo cáo kỹ thuật đơn giản mới được gửi cho tài khoản này mà không có lịch sử duyệt web. Hỗ trợ giữ chúng trong 30 ngày."
+  },
+  "diagnosticsHistoryHelp": {
+    "message": "Lịch sử kỹ thuật được lưu giữ cục bộ: tối đa 200 sự kiện trong 10 phút, ngay cả khi tính năng gửi tự động bị tắt. Nó không chứa lịch sử duyệt web và bị xóa khi đóng trình duyệt hoặc thay đổi tài khoản."
+  },
+  "diagnosticsHistoryCount": {
+    "message": "$1 sự kiện kỹ thuật địa phương"
+  },
+  "diagnosticsAccountRequired": {
+    "message": "Đăng nhập để cho phép gửi. Bạn vẫn có thể xem và xuất báo cáo mà không cần có tài khoản."
+  },
+  "diagnosticsRun": {
+    "message": "Chạy chẩn đoán"
+  },
+  "diagnosticsClearHistory": {
+    "message": "Xóa lịch sử địa phương"
+  },
+  "diagnosticsPreparing": {
+    "message": "Đang chuẩn bị báo cáo…"
+  },
+  "diagnosticsReports": {
+    "message": "Báo cáo"
+  },
+  "diagnosticsEmpty": {
+    "message": "Chưa có báo cáo địa phương."
+  },
+  "diagnosticsChooseReport": {
+    "message": "Chọn một báo cáo"
+  },
+  "diagnosticsReportLabel": {
+    "message": "$1 · $2 · $3"
+  },
+  "diagnosticsTypeFull": {
+    "message": "Báo cáo đầy đủ"
+  },
+  "diagnosticsTypeSimple": {
+    "message": "Báo cáo lỗi"
+  },
+  "diagnosticsSummary": {
+    "message": "Được sưu tầm vào $1. FuzeVPN phiên bản $2."
+  },
+  "diagnosticsJson": {
+    "message": "Xem nội dung báo cáo (JSON)"
+  },
+  "diagnosticsExport": {
+    "message": "Xuất báo cáo"
+  },
+  "diagnosticsDelete": {
+    "message": "Xóa báo cáo địa phương"
+  },
+  "diagnosticsRetention": {
+    "message": "Các báo cáo đã gửi sẽ được liên kết với tài khoản đã đăng nhập của bạn và được bộ phận hỗ trợ lưu giữ trong 30 ngày. Việc xóa báo cáo cục bộ sẽ không xóa báo cáo mà bộ phận hỗ trợ đã nhận được."
+  },
+  "diagnosticsConsent": {
+    "message": "Gửi báo cáo này để hỗ trợ"
+  },
+  "diagnosticsDataCollectionRequired": {
+    "message": "Firefox cần cho phép thu thập dữ liệu kỹ thuật để gửi chẩn đoán. Hãy thử lại và cấp quyền này."
+  },
+  "diagnosticsSendHelp": {
+    "message": "Gửi là tùy chọn. Sau khi được phê duyệt, nó có thể thử lại trong tối đa 24 giờ với phiên hợp lệ cho cùng một tài khoản. Bạn có thể hủy các lần thử tiếp theo. Việc hủy trễ không đảm bảo rằng máy chủ chưa nhận được báo cáo."
+  },
+  "diagnosticsSend": {
+    "message": "Gửi báo cáo"
+  },
+  "diagnosticsCancel": {
+    "message": "Hủy gửi"
+  },
+  "diagnosticsReload": {
+    "message": "Tải lại trang này"
+  },
+  "diagnosticsUnavailable": {
+    "message": "Không thể dùng tính năng chẩn đoán. Tải lại FuzeVPN trong trình quản lý tiện ích mở rộng của trình duyệt, rồi mở lại trang này. Kết nối VPN của bạn không thay đổi."
+  },
+  "diagnosticsQueueFull": {
+    "message": "Hàng đợi gửi đã đầy. Xóa báo cáo cục bộ hoặc đợi báo cáo đang chờ xử lý hoàn tất."
+  },
+  "diagnosticsContentUnavailable": {
+    "message": "Nội dung báo cáo không có sẵn. Xuất báo cáo cục bộ nếu có và liên hệ với bộ phận hỗ trợ."
+  },
+  "diagnosticsFailure": {
+    "message": "Hành động chẩn đoán không thể hoàn tất. VPN của bạn không thay đổi."
+  },
+  "diagnosticsChecks": {
+    "message": "Séc"
+  },
+  "diagnosticsCheckFallback": {
+    "message": "Kiểm tra kỹ thuật: $1"
+  },
+  "diagnosticsCheckLine": {
+    "message": "$1 — $2"
+  },
+  "diagnosticsProxy": {
+    "message": "Proxy trình duyệt"
+  },
+  "diagnosticsStorage": {
+    "message": "Bộ nhớ cục bộ"
+  },
+  "diagnosticsNetwork": {
+    "message": "Kết nối mạng"
+  },
+  "diagnosticsCleanup": {
+    "message": "Dọn dẹp phiên"
+  },
+  "diagnosticsResult_passed": {
+    "message": "Đã đậu"
+  },
+  "diagnosticsResult_failed": {
+    "message": "thất bại"
+  },
+  "diagnosticsResult_skipped": {
+    "message": "Không được thực hiện"
+  },
+  "diagnosticsResult_unknown": {
+    "message": "Không xác định"
+  },
+  "diagnosticsStatus_ready": {
+    "message": "Sẵn sàng trên thiết bị này"
+  },
+  "diagnosticsStatus_pending": {
+    "message": "Đang chờ gửi"
+  },
+  "diagnosticsStatus_sending": {
+    "message": "Đang gửi…"
+  },
+  "diagnosticsStatus_session_required": {
+    "message": "Đang chờ phiên hợp lệ cho cùng một tài khoản"
+  },
+  "diagnosticsStatus_received": {
+    "message": "Đã nhận được sự hỗ trợ"
+  },
+  "diagnosticsStatus_failed": {
+    "message": "Gửi không thành công"
+  },
+  "diagnosticsStatus_cancelled": {
+    "message": "Đã hủy gửi"
+  },
+  "diagnosticsStatus_expired": {
+    "message": "Đã hết hạn gửi"
+  },
+  "diagnosticsReceivedAt": {
+    "message": "Đã nhận vào $1"
+  },
+  "error_private_browsing_required": {
+    "message": "Firefox cần quyền này để cấu hình VPN, kể cả trong cửa sổ thông thường. Mở about:addons → FuzeVPN, cho phép chạy trong cửa sổ riêng tư rồi thử lại."
+  },
+  "error_host_permissions_required": {
+    "message": "Trong Firefox, mở about:addons → FuzeVPN → Quyền và cho phép truy cập tất cả trang web, rồi thử lại."
+  },
+  "cancelAction": {
+    "message": "Hủy"
+  },
+  "refreshLocations": {
+    "message": "Làm mới vị trí"
+  },
+  "refreshingLocations": {
+    "message": "Đang làm mới vị trí…"
+  },
+  "locationsRefreshError": {
+    "message": "Không thể làm mới danh sách vị trí. Vui lòng thử lại."
+  },
+  "error_device_revoked_limit": {
+    "message": "Quyền sử dụng của thiết bị này đã bị thu hồi. Đã đạt số lượng thiết bị tối đa: vui lòng xóa một thiết bị."
+  },
+  "noAvailableLocations": {
+    "message": "Hiện không có vị trí nào khả dụng. Vui lòng thử lại sau ít phút."
+  },
+  "noAvailableFavoriteLocations": {
+    "message": "Các vị trí yêu thích của bạn tạm thời không khả dụng."
+  },
+  "error_server_full": {
+    "message": "Máy chủ này đã đầy. Hãy chọn vị trí khác."
+  },
+  "error_capacity_unavailable": {
+    "message": "Hiện không thể xác nhận tính khả dụng của máy chủ này. Vui lòng thử lại sau ít phút."
+  },
+  "locationHierarchyHelp": {
+    "message": "Nhấn tên để chọn máy chủ; nhấn mũi tên để xem chi tiết."
+  },
+  "locationCountrySelect": {
+    "message": "Chọn máy chủ khả dụng: $1"
+  },
+  "locationCitySelect": {
+    "message": "Chọn máy chủ khả dụng: $1"
+  },
+  "locationShowCities": {
+    "message": "Hiện thành phố: $1"
+  },
+  "locationHideCities": {
+    "message": "Ẩn thành phố: $1"
+  },
+  "locationShowServers": {
+    "message": "Hiện máy chủ: $1"
+  },
+  "locationHideServers": {
+    "message": "Ẩn máy chủ: $1"
+  },
+  "locationAvailableServers": {
+    "message": "Máy chủ khả dụng: $1"
+  },
+  "legalInformation": {
+    "message": "Thông tin pháp lý"
+  },
+  "privacyPolicy": {
+    "message": "Chính sách quyền riêng tư"
+  },
+  "termsAndConditions": {
+    "message": "Điều khoản sử dụng và bán hàng"
+  },
+  "legalNotice": {
+    "message": "Thông báo pháp lý"
+  },
+  "contactSupport": {
+    "message": "Liên hệ bộ phận hỗ trợ"
+  },
+  "webSignIn": {
+    "message": "Đăng nhập FuzeVPN"
+  },
+  "webSignInDisconnect": {
+    "message": "Ngắt kết nối và đăng nhập"
+  },
+  "webSignInPending": {
+    "message": "Đang đăng nhập…"
+  },
+  "webSignInHelp": {
+    "message": "Đăng nhập hoặc tạo tài khoản bằng Google hoặc email trong khu vực khách hàng FuzeVPN."
+  },
+  "webSignInDisconnectHelp": {
+    "message": "Nút này dừng bảo vệ trình duyệt để bạn đăng nhập bằng Google hoặc email. Hoạt động duyệt web sẽ không được bảo vệ trong khi đăng nhập."
+  },
+  "webSignInStatus": {
+    "message": "Tiếp tục trong cửa sổ đăng nhập FuzeVPN. Tiện ích tự động cập nhật khi hoàn tất. Đóng cửa sổ đó để hủy."
+  },
+  "error_web_login_cancelled": {
+    "message": "Đã hủy đăng nhập. Hãy thử lại."
+  },
+  "error_web_login_timeout": {
+    "message": "Đăng nhập mất quá nhiều thời gian. Hãy thử lại."
+  },
+  "error_web_login_unavailable": {
+    "message": "Đăng nhập qua web không khả dụng. Hãy thử lại sau."
+  },
+  "error_web_login_invalid_callback": {
+    "message": "Không thể xác minh đăng nhập. Hãy bắt đầu lại từ tiện ích."
+  },
+  "error_web_login_denied": {
+    "message": "Đăng nhập chưa được cho phép. Hãy thử lại."
+  },
+  "error_web_login_busy": {
+    "message": "Đóng cửa sổ đăng nhập đang mở trước khi thử lại."
+  },
+  "deviceKindFirefox": {
+    "message": "Trình duyệt Firefox"
+  }
+}

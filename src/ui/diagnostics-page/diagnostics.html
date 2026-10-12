@@ -1,0 +1,196 @@
+<!doctype html>
+<!-- SPDX-License-Identifier: MPL-2.0 -->
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FuzeVPN</title>
+    <link rel="stylesheet" href="./diagnostics.css" />
+  </head>
+  <body>
+    <main>
+      <header class="page-hero">
+        <div class="brand-row">
+          <img src="/brand/fuzevpn-logo.svg" alt="FuzeVPN" />
+          <span class="hero-eyebrow" data-i18n="diagnosticsAssistance"></span>
+        </div>
+        <div class="hero-content">
+          <h1 data-i18n="diagnosticsTitle"></h1>
+          <p class="intro" data-i18n="diagnosticsIntro"></p>
+        </div>
+        <svg class="hero-network" viewBox="0 0 300 220" aria-hidden="true" focusable="false">
+          <path
+            d="M22 74 100 28 207 57 273 128 216 202 104 184 22 74 155 111 207 57M100 28 155 111 104 184M155 111 273 128M155 111 216 202"
+          />
+          <circle cx="22" cy="74" r="5" />
+          <circle cx="100" cy="28" r="5" />
+          <circle cx="207" cy="57" r="5" />
+          <circle cx="273" cy="128" r="5" />
+          <circle cx="216" cy="202" r="5" />
+          <circle cx="104" cy="184" r="5" />
+          <circle cx="155" cy="111" r="10" />
+        </svg>
+      </header>
+
+      <div class="page-feedback">
+        <p id="pageError" class="error" role="alert" hidden></p>
+        <button
+          id="reloadButton"
+          class="secondary"
+          type="button"
+          data-i18n="diagnosticsReload"
+          hidden
+        ></button>
+      </div>
+
+      <div class="workspace">
+        <section class="privacy-panel" aria-labelledby="privacyTitle">
+          <div class="section-heading">
+            <span class="section-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" focusable="false">
+                <path d="m12 3 7 3v5c0 5-4 8-7 10-3-2-7-5-7-10V6l7-3Z" />
+                <path d="m9 12 2 2 4-4" />
+              </svg>
+            </span>
+            <h2 id="privacyTitle" data-i18n="diagnosticsPrivacyTitle"></h2>
+          </div>
+          <p class="privacy-intro" data-i18n="diagnosticsPrivacy"></p>
+          <div class="preference-block">
+            <label class="check auto-check">
+              <input
+                id="autoReporting"
+                type="checkbox"
+                disabled
+                aria-describedby="autoHelp accountRequired"
+              />
+              <span data-i18n="diagnosticsAuto"></span>
+            </label>
+            <p id="autoHelp" class="muted" data-i18n="diagnosticsAutoHelp"></p>
+            <a
+              id="autoPrivacyLink"
+              class="privacy-link"
+              data-legal-link="privacy"
+              target="_blank"
+              rel="noopener noreferrer"
+              data-i18n="privacyPolicy"
+            ></a>
+            <p
+              id="accountRequired"
+              class="account-notice"
+              data-i18n="diagnosticsAccountRequired"
+            ></p>
+          </div>
+          <div class="history-block">
+            <p id="historyCount" class="history-count"></p>
+            <p class="muted" data-i18n="diagnosticsHistoryHelp"></p>
+            <button
+              id="clearHistoryButton"
+              class="secondary quiet-danger"
+              type="button"
+              data-i18n="diagnosticsClearHistory"
+              disabled
+            ></button>
+          </div>
+        </section>
+
+        <section class="reports-panel" aria-labelledby="reportsTitle">
+          <div class="reports-heading">
+            <div class="section-heading">
+              <span class="section-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" focusable="false">
+                  <path d="M14 3H6a1 1 0 0 0-1 1v16a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V8l-5-5Z" />
+                  <path d="M14 3v5h5M9 12h6M9 16h4" />
+                </svg>
+              </span>
+              <h2 id="reportsTitle" data-i18n="diagnosticsReports"></h2>
+            </div>
+            <button id="runButton" type="button" data-i18n="diagnosticsRun" disabled></button>
+          </div>
+          <p
+            id="preparing"
+            class="preparing"
+            role="status"
+            data-i18n="diagnosticsPreparing"
+            hidden
+          ></p>
+          <div class="report-picker">
+            <label
+              id="reportLabel"
+              for="reportSelect"
+              data-i18n="diagnosticsChooseReport"
+              hidden
+            ></label>
+            <select id="reportSelect" hidden disabled></select>
+          </div>
+          <p id="emptyReports" class="empty-state" data-i18n="diagnosticsEmpty"></p>
+          <article id="reportView" hidden>
+            <div class="report-overview">
+              <p id="reportStatus" class="status" role="status"></p>
+              <p id="reportSummary" class="report-summary"></p>
+            </div>
+            <p id="reportFailure" class="error" role="alert" hidden></p>
+            <p id="reportContentError" class="account-notice" hidden></p>
+            <div id="checksSection" class="checks-section" hidden>
+              <h3 data-i18n="diagnosticsChecks"></h3>
+              <ul id="checkList"></ul>
+            </div>
+            <details id="jsonDetails">
+              <summary data-i18n="diagnosticsJson"></summary>
+              <pre id="reportJson" dir="ltr" tabindex="0"></pre>
+            </details>
+            <div class="actions report-actions">
+              <button
+                id="exportButton"
+                class="secondary"
+                type="button"
+                data-i18n="diagnosticsExport"
+                disabled
+              ></button>
+              <button
+                id="deleteButton"
+                class="secondary quiet-danger"
+                type="button"
+                data-i18n="diagnosticsDelete"
+                disabled
+              ></button>
+            </div>
+            <div class="delivery">
+              <p class="retention-note" data-i18n="diagnosticsRetention"></p>
+              <label class="check consent-check">
+                <input
+                  id="sendConsent"
+                  type="checkbox"
+                  autocomplete="off"
+                  disabled
+                  aria-describedby="sendHelp"
+                />
+                <span data-i18n="diagnosticsConsent"></span>
+              </label>
+              <p id="sendHelp" class="muted" data-i18n="diagnosticsSendHelp"></p>
+              <a
+                id="sendPrivacyLink"
+                class="privacy-link"
+                data-legal-link="privacy"
+                target="_blank"
+                rel="noopener noreferrer"
+                data-i18n="privacyPolicy"
+              ></a>
+              <div class="actions delivery-actions">
+                <button id="sendButton" type="button" data-i18n="diagnosticsSend" disabled></button>
+                <button
+                  id="cancelButton"
+                  class="secondary"
+                  type="button"
+                  data-i18n="diagnosticsCancel"
+                  hidden
+                  disabled
+                ></button>
+              </div>
+            </div>
+          </article>
+        </section>
+      </div>
+    </main>
+    <script type="module" src="./diagnostics.ts"></script>
+  </body>
+</html>

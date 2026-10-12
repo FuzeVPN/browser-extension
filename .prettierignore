@@ -1,0 +1,16 @@
+node_modules
+dist
+coverage
+releases
+publication
+reference
+audit
+prive
+private
+doc private
+conserver
+assets/icons
+assets/flags/*.svg
+LICENSE
+*.zip
+*.sha256

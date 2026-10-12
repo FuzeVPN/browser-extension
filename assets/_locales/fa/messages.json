@@ -1,0 +1,830 @@
+{
+  "extensionName": {
+    "message": "FuzeVPN"
+  },
+  "extensionDescription": {
+    "message": "با یک کلیک از حریم خصوصی خود محافظت کنید و امنیت خود را افزایش دهید."
+  },
+  "siteExclusionsReloadRequired": {
+    "message": "برای تکمیل به‌روزرسانی و استفاده از استثناهای سایت، FuzeVPN را از بخش مدیریت افزونه‌های مرورگر دوباره بارگیری کنید."
+  },
+  "extensionCommunicationError": {
+    "message": "افزونه پاسخ نمی‌دهد. این پنجره را ببندید، سپس FuzeVPN را از بخش مدیریت افزونه‌های مرورگر دوباره بارگیری کنید."
+  },
+  "actionDisconnected": {
+    "message": "FuzeVPN - قطع شده است"
+  },
+  "actionConnected": {
+    "message": "FuzeVPN — مرورگر محافظت می‌شود"
+  },
+  "actionReconnecting": {
+    "message": "FuzeVPN - اتصال مجدد"
+  },
+  "actionError": {
+    "message": "FuzeVPN - توجه لازم است"
+  },
+  "browserProtection": {
+    "message": "محافظت از مرورگر"
+  },
+  "loginTitle": {
+    "message": "به FuzeVPN خوش آمدید"
+  },
+  "loginSubtitle": {
+    "message": "برای محافظت از وب‌گردی خود در این مرورگر وارد شوید."
+  },
+  "email": {
+    "message": "آدرس ایمیل"
+  },
+  "emailPlaceholder": {
+    "message": "you@example.com"
+  },
+  "password": {
+    "message": "رمز عبور"
+  },
+  "signIn": {
+    "message": "وارد شوید"
+  },
+  "signingIn": {
+    "message": "ورود به سیستم…"
+  },
+  "forgotPassword": {
+    "message": "رمز عبور را فراموش کرده اید؟"
+  },
+  "createAccount": {
+    "message": "یک حساب کاربری ایجاد کنید"
+  },
+  "settings": {
+    "message": "تنظیمات"
+  },
+  "close": {
+    "message": "بستن"
+  },
+  "statusDisconnected": {
+    "message": "قطع شده است"
+  },
+  "statusConnecting": {
+    "message": "در حال اتصال…"
+  },
+  "statusChanging": {
+    "message": "در حال تغییر مکان…"
+  },
+  "statusProtected": {
+    "message": "مرورگر محافظت می‌شود"
+  },
+  "statusRefreshing": {
+    "message": "در حال تمدید ایمن…"
+  },
+  "statusDisconnecting": {
+    "message": "در حال قطع…"
+  },
+  "statusError": {
+    "message": "حفاظت متوقف شد"
+  },
+  "browserOnlyDetail": {
+    "message": "محافظت فقط از این مرورگر."
+  },
+  "location": {
+    "message": "مکان"
+  },
+  "change": {
+    "message": "تغییر دهید"
+  },
+  "noLocation": {
+    "message": "مکان در دسترس نیست"
+  },
+  "protectBrowser": {
+    "message": "محافظت از مرورگر"
+  },
+  "disconnect": {
+    "message": "قطع کن"
+  },
+  "subscription": {
+    "message": "اشتراک"
+  },
+  "refreshSubscription": {
+    "message": "اشتراک را تازه کنید"
+  },
+  "refreshingSubscription": {
+    "message": "در حال تازه کردن اشتراک…"
+  },
+  "subscriptionActive": {
+    "message": "فعال"
+  },
+  "subscriptionInactive": {
+    "message": "غیر فعال"
+  },
+  "expiresOn": {
+    "message": "منقضی می شود در $1"
+  },
+  "noExpiry": {
+    "message": "بدون تاریخ انقضا"
+  },
+  "browserOnlyNotice": {
+    "message": "محافظت فقط شامل این مرورگر است؛ مرورگرها و برنامه‌های دیگر را پوشش نمی‌دهد."
+  },
+  "resendVerification": {
+    "message": "ارسال مجدد ایمیل"
+  },
+  "incognitoHelp": {
+    "message": "مرور خصوصی تنها زمانی از همین محافظت برخوردار است که در تنظیمات مرورگر، اجرای افزونه در پنجره‌های خصوصی مجاز باشد."
+  },
+  "manageAccount": {
+    "message": "حساب کاربری من را مدیریت کنید"
+  },
+  "account": {
+    "message": "حساب"
+  },
+  "devices": {
+    "message": "دستگاه ها"
+  },
+  "manageDevices": {
+    "message": "دستگاه ها را مدیریت کنید"
+  },
+  "refreshDevices": {
+    "message": "دستگاه ها را به روز کنید"
+  },
+  "deviceCount": {
+    "message": "$1 / $2 دستگاه"
+  },
+  "loadingDevices": {
+    "message": "در حال بارگیری دستگاه‌ها…"
+  },
+  "noDevices": {
+    "message": "دستگاه فعالی وجود ندارد."
+  },
+  "currentDevice": {
+    "message": "این دستگاه"
+  },
+  "deviceKindBrowser": {
+    "message": "پسوند مرورگر"
+  },
+  "deviceKindVpn": {
+    "message": "دستگاه VPN"
+  },
+  "profile_browser_proxy": {
+    "message": "پروکسی مرورگر"
+  },
+  "profile_wireguard": {
+    "message": "WireGuard"
+  },
+  "profile_openvpn": {
+    "message": "OpenVPN"
+  },
+  "none": {
+    "message": "هیچ کدام"
+  },
+  "deviceCreatedOn": {
+    "message": "ایجاد شده در $1"
+  },
+  "deleteDevice": {
+    "message": "دستگاه را حذف کنید"
+  },
+  "confirmDeleteDevice": {
+    "message": "«$1» حذف شود؟ اتصالات VPN آن متوقف می شود و نمایه های آن حذف می شود."
+  },
+  "resetDevice": {
+    "message": "دستگاه را بازنشانی کنید"
+  },
+  "confirmResetDevice": {
+    "message": "این افزونه بازنشانی شود؟ دفعه بعد که از آن استفاده می کنید به عنوان یک دستگاه جدید ثبت می شود."
+  },
+  "signOutAccount": {
+    "message": "از حساب کاربری خارج شوید"
+  },
+  "chooseLocation": {
+    "message": "یک مکان را انتخاب کنید"
+  },
+  "error_invalid_credentials": {
+    "message": "آدرس ایمیل یا رمز عبور نادرست است."
+  },
+  "error_unauthorized": {
+    "message": "جلسه شما تمام شده است. لطفاً دوباره وارد شوید."
+  },
+  "error_email_verification_required": {
+    "message": "قبل از فعال کردن محافظت، آدرس ایمیل خود را تأیید کنید."
+  },
+  "errorVerificationCooldown": {
+    "message": "یک ایمیل جدید را می توان در $1 ثانیه درخواست کرد."
+  },
+  "error_verification_email_cooldown": {
+    "message": "لطفا قبل از درخواست ایمیل دیگر صبر کنید."
+  },
+  "error_subscription_required": {
+    "message": "برای محافظت از مرورگر، اشتراک فعال لازم است."
+  },
+  "error_device_limit": {
+    "message": "حداکثر تعداد دستگاه‌ها پر شده است. لطفاً یک دستگاه را حذف کنید."
+  },
+  "error_device_identity_revoked": {
+    "message": "این دستگاه دیگر مجاز نیست. دوباره برای اتصال تلاش کنید."
+  },
+  "error_device_proof_invalid": {
+    "message": "ما نتوانستیم این دستگاه را تأیید کنیم. تاریخ و زمان رایانه خود را بررسی کنید، سپس دوباره امتحان کنید."
+  },
+  "error_device_proof_replayed": {
+    "message": "این درخواست قبلاً پردازش شده است. دوباره امتحان کنید."
+  },
+  "error_invalid_device": {
+    "message": "این دستگاه شناسایی نشد. دوباره برای اتصال تلاش کنید."
+  },
+  "error_device_exists": {
+    "message": "این هویت دستگاه قبلاً به حساب دیگری پیوند داده شده است."
+  },
+  "error_not_found": {
+    "message": "این عملیات دیگر در دسترس نیست. دوباره تلاش کنید."
+  },
+  "error_invalid_location": {
+    "message": "این مکان در دسترس نیست. یکی دیگر را انتخاب کنید."
+  },
+  "error_rate_limited": {
+    "message": "تلاش های بسیار زیاد یک لحظه صبر کنید و دوباره امتحان کنید."
+  },
+  "error_proxy_unavailable": {
+    "message": "این سرور به طور موقت در دسترس نیست. یک لحظه دیگر دوباره امتحان کنید."
+  },
+  "error_api_token_expired": {
+    "message": "جلسه حساب شما منقضی شده است. لطفاً دوباره وارد شوید."
+  },
+  "error_network_error": {
+    "message": "شبکه در دسترس نیست اتصال اینترنت خود را بررسی کنید."
+  },
+  "error_request_timeout": {
+    "message": "پاسخگویی سرویس خیلی طول کشید. دوباره امتحان کنید."
+  },
+  "error_invalid_response": {
+    "message": "این سرویس یک پاسخ غیرمنتظره داد."
+  },
+  "error_proxy_certificate_invalid": {
+    "message": "ما نتوانستیم امنیت سرور را تأیید کنیم. اتصال قطع شده است."
+  },
+  "error_proxy_controlled_by_extension": {
+    "message": "افزونهٔ دیگری در حال حاضر پراکسی مرورگر را کنترل می‌کند."
+  },
+  "error_proxy_controlled_by_policy": {
+    "message": "یک خط‌مشی سرپرست از تغییر پروکسی FuzeVPN جلوگیری می‌کند."
+  },
+  "error_proxy_authentication_failed": {
+    "message": "سرور اتصال را قبول نکرد. دوباره سعی کنید وصل شوید."
+  },
+  "error_session_expired": {
+    "message": "اتصال محافظت شده شما منقضی شده است. دوباره وصل شوید."
+  },
+  "error_email_delivery_unavailable": {
+    "message": "ایمیل در حال حاضر ارسال نمی شود."
+  },
+  "error_unknown_error": {
+    "message": "یک خطای غیرمنتظره رخ داد. دوباره امتحان کنید."
+  },
+  "actionBlocked": {
+    "message": "FuzeVPN - مرور مسدود شده است"
+  },
+  "statusBlockedRetry": {
+    "message": "مرور متوقف شد - اتصال مجدد"
+  },
+  "statusBlockedAction": {
+    "message": "مرور متوقف شد - اتصال را بررسی کنید"
+  },
+  "statusProtectionUnavailable": {
+    "message": "حفاظت در دسترس نیست - مرور مسدود نشده است"
+  },
+  "recoveryHelp": {
+    "message": "برای از سرگیری حفاظت مجدد تلاش کنید. قطع اتصال به شما امکان می دهد بدون FuzeVPN مرور کنید."
+  },
+  "retryConnection": {
+    "message": "دوباره امتحان کنید"
+  },
+  "killSwitch": {
+    "message": "سوئیچ کشتن"
+  },
+  "killSwitchHelp": {
+    "message": "اگر اتصال VPN قطع شود، درخواست های وب جدید را مسدود می کند. سایت های مستثنی شده خارج از VPN در دسترس باقی می مانند."
+  },
+  "webRtcProtection": {
+    "message": "حفاظت از WebRTC"
+  },
+  "webRtcHelp": {
+    "message": "کمک می کند تا آدرس IP خود را در طول تماس های وب خصوصی نگه دارید. برخی از تماس ها ممکن است کار نکنند. خاموش کردن این ممکن است آدرس IP واقعی شما را نشان دهد."
+  },
+  "securityEffectiveState": {
+    "message": "$1 · $2"
+  },
+  "securityBlocked": {
+    "message": "مرور مسدود شد"
+  },
+  "securityNotBlocked": {
+    "message": "مرور مسدود نشده است"
+  },
+  "securityWebRtcActive": {
+    "message": "محدودیت WebRTC فعال است"
+  },
+  "securityWebRtcInactive": {
+    "message": "محدودیت WebRTC غیر فعال است"
+  },
+  "localNetworkHelp": {
+    "message": "آدرس‌های IP محلی و نام‌های محلی رایج در طول محافظت مسدود می‌شوند. دامنه حذف شده همچنان ممکن است دسترسی به شبکه محلی را فراهم کند. تنظیمات IPv6 سیستم بدون تغییر است."
+  },
+  "securityLimits": {
+    "message": "در مورد این حفاظت"
+  },
+  "killSwitchLimits": {
+    "message": "محافظت فقط از این مرورگر: اتصال‌های موجود و برخی ارتباطات داخلی مرورگر یا افزونه‌های دیگر ممکن است ادامه پیدا کنند. افزونه یا خط‌مشی دیگری ممکن است پیش از واکنش FuzeVPN، پراکسی را تغییر دهد. غیرفعال کردن افزونه، محافظت را متوقف می‌کند. مسدودسازی در سطح کل سیستم انجام نمی‌شود."
+  },
+  "error_traffic_guard_failed": {
+    "message": "بلوک مرور تأیید نشد. حفاظت تضمین نشده است. مجوزهای برنامه افزودنی را بررسی کنید."
+  },
+  "error_webrtc_control_unavailable": {
+    "message": "محدودیت WebRTC نمی تواند اعمال شود. تنظیمات، برنامه‌های افزودنی دیگر یا خط‌مشی سرپرست خود را بررسی کنید."
+  },
+  "language": {
+    "message": "زبان"
+  },
+  "languageAutomatic": {
+    "message": "خودکار — زبان مرورگر"
+  },
+  "languageHelp": {
+    "message": "تغییرات بلافاصله اعمال می‌شوند. گزینهٔ خودکار از زبان مرورگر پیروی می‌کند که ممکن است با زبان سیستم‌عامل متفاوت باشد."
+  },
+  "languageSaveError": {
+    "message": "زبان ذخیره نشد. انتخاب قبلی شما حفظ می شود. دوباره امتحان کنید."
+  },
+  "publicIp": {
+    "message": "IP عمومی"
+  },
+  "vpnIp": {
+    "message": "IP VPN"
+  },
+  "ipChecking": {
+    "message": "در حال بررسی…"
+  },
+  "ipUnavailable": {
+    "message": "در دسترس نیست"
+  },
+  "ipLookupExplanation": {
+    "message": "IP با استفاده از اتصال فعلی شما با ipify بررسی شد. هیچ سابقه مروری ارسال نشده است."
+  },
+  "automaticLocation": {
+    "message": "خودکار"
+  },
+  "automaticLocationHelp": {
+    "message": "بهترین زمان پاسخ اخیر، یا آخرین مکان شما."
+  },
+  "automaticLocationName": {
+    "message": "خودکار · $1"
+  },
+  "searchLocations": {
+    "message": "کشور یا شهر را جستجو کنید"
+  },
+  "locationFilters": {
+    "message": "مکان ها را فیلتر کنید"
+  },
+  "allLocations": {
+    "message": "همه"
+  },
+  "favoriteLocations": {
+    "message": "موارد دلخواه"
+  },
+  "recentLocations": {
+    "message": "اخیر"
+  },
+  "noMatchingLocations": {
+    "message": "هیچ مکانی با جستجوی شما مطابقت ندارد."
+  },
+  "noFavoriteLocations": {
+    "message": "یک ستاره اضافه کنید تا مکان های مورد علاقه خود را در اینجا نگه دارید."
+  },
+  "noRecentLocations": {
+    "message": "مکان‌های اخیراً متصل شما در اینجا ظاهر می‌شوند."
+  },
+  "addFavorite": {
+    "message": "$1 را به موارد دلخواه اضافه کنید"
+  },
+  "removeFavorite": {
+    "message": "$1 را از موارد دلخواه حذف کنید"
+  },
+  "unavailableFavoriteLocation": {
+    "message": "مکان دلخواه ناموجود $1"
+  },
+  "locationSaveError": {
+    "message": "تغییر کامل نشد. ممکن است برخی از تنظیمات ذخیره شده باشند. قبل از تلاش مجدد، گزینه نمایش داده شده را بررسی کنید."
+  },
+  "siteExclusions": {
+    "message": "سایت های حذف شده"
+  },
+  "siteExclusionsHelp": {
+    "message": "این سایت‌ها از اتصال شما بدون FuzeVPN استفاده می‌کنند، حتی اگر VPN قطع شود."
+  },
+  "siteExclusionsEnabled": {
+    "message": "استثناها را فعال کنید"
+  },
+  "siteExclusionInput": {
+    "message": "دامنه یا URL"
+  },
+  "siteExclusionPlaceholder": {
+    "message": "example.com"
+  },
+  "siteExclusionPreview": {
+    "message": "دامنه انتخابی: $1"
+  },
+  "siteExclusionSubdomains": {
+    "message": "شامل زیر دامنه ها"
+  },
+  "siteExclusionAdd": {
+    "message": "سایت اضافه کنید"
+  },
+  "siteExclusionsEmpty": {
+    "message": "هیچ سایتی مستثنی نشده است. فقط سایت هایی را که می خواهید بدون VPN استفاده کنید اضافه کنید."
+  },
+  "siteExclusionsCount": {
+    "message": "$1 / 100 سایت"
+  },
+  "siteExclusionScopeSubdomains": {
+    "message": "دامنه و زیر دامنه"
+  },
+  "siteExclusionScopeExact": {
+    "message": "فقط دامنه دقیق"
+  },
+  "siteExclusionRemove": {
+    "message": "حذف $1"
+  },
+  "siteExclusionsDetails": {
+    "message": "استثناها چگونه کار می کنند؟"
+  },
+  "siteExclusionsResources": {
+    "message": "منابع سایر دامنه ها محافظت می شوند. حذف یک صفحه به طور خودکار محتوای دیگر آن را حذف نمی کند."
+  },
+  "siteExclusionsReload": {
+    "message": "پس از تغییر، سایت را دوباره بارگذاری کنید. اتصالات موجود ممکن است مسیر قبلی خود را حفظ کنند."
+  },
+  "siteExclusionsWebRtc": {
+    "message": "حفاظت از WebRTC یک تنظیم جهانی باقی می ماند، از جمله برای سایت های حذف شده."
+  },
+  "siteExclusionsLocal": {
+    "message": "فقط در این مرورگر ذخیره شده و پس از خروج از حساب شما نگهداری می شود."
+  },
+  "siteExclusionsOn": {
+    "message": "استثناها فعال شد"
+  },
+  "siteExclusionsOff": {
+    "message": "استثناها غیرفعال شدند"
+  },
+  "siteExclusionsSummary": {
+    "message": "$1 سایت های خارج از VPN"
+  },
+  "siteExclusionsPending": {
+    "message": "اعمال استثنائات…"
+  },
+  "siteExclusionsInterrupted": {
+    "message": "تغییر قطع شد نگهبان موقت در جای خود باقی می ماند."
+  },
+  "siteExclusionsSaveError": {
+    "message": "نمی توان تغییر را تمام کرد. تنظیمات خود را بررسی کنید و دوباره امتحان کنید."
+  },
+  "siteExclusionsRetry": {
+    "message": "دوباره امتحان کنید"
+  },
+  "siteExclusionInvalid": {
+    "message": "یک دامنه عمومی معتبر وارد کنید. IP ها، نام های محلی، حروف عام، پسوندهای عمومی و دامنه های رزرو شده پذیرفته نمی شوند."
+  },
+  "siteExclusionDuplicate": {
+    "message": "این دامنه قبلاً در لیست است."
+  },
+  "siteExclusionsLimit": {
+    "message": "به حد مجاز 100 سایت رسیده است. برای افزودن سایت دیگری، یک سایت را حذف کنید."
+  },
+  "statusProtectedExceptions": {
+    "message": "VPN فعال · $1 استثنائات"
+  },
+  "statusBlockedExceptions": {
+    "message": "فقط سایت های حذف شده در دسترس باقی می مانند"
+  },
+  "securityBlockedExceptions": {
+    "message": "مرور به جز سایت های حذف شده مسدود شد"
+  },
+  "securityBlockUnverified": {
+    "message": "مسدود کردن تأیید نشده است"
+  },
+  "logoutLocalComplete": {
+    "message": "خروج از سیستم محلی کامل شد."
+  },
+  "logoutApiSession": {
+    "message": "جلسه حساب جاری"
+  },
+  "logoutProxySessions": {
+    "message": "جلسات VPN شناخته شده"
+  },
+  "logoutRevocationPending": {
+    "message": "ابطال در حال انجام…"
+  },
+  "logoutRevocationConfirmed": {
+    "message": "لغو تایید شد"
+  },
+  "logoutRevocationUnconfirmed": {
+    "message": "لغو تایید نشد"
+  },
+  "logoutUnconfirmedHelp": {
+    "message": "برخی از جلسات راه دور ممکن است تا زمانی که منقضی شوند فعال باقی بمانند."
+  },
+  "deviceQuotaLoading": {
+    "message": "در حال بارگیری محدودیت دستگاه…"
+  },
+  "deviceQuotaUnknown": {
+    "message": "محدودیت دستگاه در دسترس نیست"
+  },
+  "error_proxy_creation_uncertain": {
+    "message": "سرور ایجاد اتصال جدید را تأیید نکرد. اتصال مجدد خودکار متوقف شده است."
+  },
+  "siteExclusionsPreferencesReset": {
+    "message": "استثناهای سایت ذخیره شده شما پس از اینکه خوانده نشدند بازنشانی شدند. سایت هایی را که می خواهید حذف کنید دوباره اضافه کنید."
+  },
+  "siteExclusionsConflict": {
+    "message": "لیست سایت های حذف شده تغییر کرده است. آن را مرور کنید، سپس تغییر خود را دوباره امتحان کنید."
+  },
+  "unavailableLocation": {
+    "message": "مکان در دسترس نیست"
+  },
+  "verificationSending": {
+    "message": "ارسال ایمیل تأیید…"
+  },
+  "verificationSent": {
+    "message": "ایمیل تایید ارسال شد. صندوق ورودی و پوشه اسپم خود را بررسی کنید."
+  },
+  "error_login_requires_disconnect": {
+    "message": "قبل از ورود به حساب دیگر، اتصال VPN فعلی را قطع کنید."
+  },
+  "error_storage_unavailable": {
+    "message": "تنظیمات حساب محلی در دسترس نیست. وقتی فضای ذخیره مرورگر در دسترس است، دوباره امتحان کنید. حساب ذخیره شده شما حفظ شده است."
+  },
+  "diagnosticsAssistance": {
+    "message": "پشتیبانی کنید"
+  },
+  "diagnosticsTitle": {
+    "message": "تشخیص"
+  },
+  "diagnosticsIntro": {
+    "message": "FuzeVPN و اتصال فعلی را بدون تغییر حفاظت خود بررسی کنید."
+  },
+  "diagnosticsPrivacyTitle": {
+    "message": "داده های شما"
+  },
+  "diagnosticsPrivacy": {
+    "message": "گزارش‌ها حاوی وضعیت‌های فنی و کدهای خطا هستند، هرگز رمز عبور، نشانه‌ها، آدرس‌های ایمیل، آدرس‌های IP، نشانی‌های اینترنتی بازدید شده یا دامنه‌های حذف شده را ندارند."
+  },
+  "diagnosticsAuto": {
+    "message": "گزارش خطاهای مهم را به صورت خودکار ارسال کنید"
+  },
+  "diagnosticsAutoHelp": {
+    "message": "به طور پیش فرض خاموش است. فقط گزارش های فنی ساده برای این حساب ارسال می شود، بدون سابقه مرور. پشتیبانی آنها را به مدت 30 روز نگه می دارد."
+  },
+  "diagnosticsHistoryHelp": {
+    "message": "تاریخچه فنی محلی می ماند: تا 200 رویداد در 10 دقیقه، حتی زمانی که ارسال خودکار خاموش است. هیچ سابقه مروری ندارد و با بسته شدن مرورگر یا تغییر حساب پاک می شود."
+  },
+  "diagnosticsHistoryCount": {
+    "message": "$1 رویدادهای فنی محلی"
+  },
+  "diagnosticsAccountRequired": {
+    "message": "برای فعال کردن ارسال وارد شوید. همچنان می‌توانید گزارشی را بدون حساب مشاهده و صادر کنید."
+  },
+  "diagnosticsRun": {
+    "message": "تشخیص را اجرا کنید"
+  },
+  "diagnosticsClearHistory": {
+    "message": "پاک کردن تاریخچه محلی"
+  },
+  "diagnosticsPreparing": {
+    "message": "در حال تهیه گزارش…"
+  },
+  "diagnosticsReports": {
+    "message": "گزارش ها"
+  },
+  "diagnosticsEmpty": {
+    "message": "هنوز گزارش محلی وجود ندارد."
+  },
+  "diagnosticsChooseReport": {
+    "message": "گزارشی را انتخاب کنید"
+  },
+  "diagnosticsReportLabel": {
+    "message": "$1 · $2 · $3"
+  },
+  "diagnosticsTypeFull": {
+    "message": "گزارش کامل"
+  },
+  "diagnosticsTypeSimple": {
+    "message": "گزارش خطا"
+  },
+  "diagnosticsSummary": {
+    "message": "جمع آوری شده در $1. FuzeVPN نسخه $2."
+  },
+  "diagnosticsJson": {
+    "message": "مشاهده محتوای گزارش (JSON)"
+  },
+  "diagnosticsExport": {
+    "message": "گزارش صادرات"
+  },
+  "diagnosticsDelete": {
+    "message": "حذف گزارش محلی"
+  },
+  "diagnosticsRetention": {
+    "message": "گزارش‌های ارسالی به حساب واردشده شما پیوند داده می‌شوند و به مدت 30 روز توسط پشتیبانی نگهداری می‌شوند. حذف یک گزارش محلی، گزارشی را که قبلاً توسط پشتیبانی دریافت شده است حذف نمی کند."
+  },
+  "diagnosticsConsent": {
+    "message": "این گزارش را برای پشتیبانی ارسال کنید"
+  },
+  "diagnosticsDataCollectionRequired": {
+    "message": "برای ارسال گزارش‌های عیب‌یابی، Firefox باید گردآوری داده‌های فنی را مجاز کند. دوباره تلاش کنید و این مجوز را بدهید."
+  },
+  "diagnosticsSendHelp": {
+    "message": "ارسال اختیاری است پس از تأیید، ممکن است تا 24 ساعت با یک جلسه معتبر برای همان حساب دوباره امتحان کند. می توانید تلاش های بیشتر را لغو کنید. لغو دیرهنگام تضمین نمی کند که سرور قبلاً گزارش را دریافت نکرده است."
+  },
+  "diagnosticsSend": {
+    "message": "ارسال گزارش"
+  },
+  "diagnosticsCancel": {
+    "message": "لغو ارسال"
+  },
+  "diagnosticsReload": {
+    "message": "این صفحه را دوباره بارگیری کنید"
+  },
+  "diagnosticsUnavailable": {
+    "message": "عیب‌یابی در دسترس نیست. FuzeVPN را از بخش مدیریت افزونه‌های مرورگر دوباره بارگیری کنید، سپس این صفحه را دوباره باز کنید. اتصال VPN شما تغییری نکرده است."
+  },
+  "diagnosticsQueueFull": {
+    "message": "صف ارسال پر است یک گزارش محلی را حذف کنید یا منتظر بمانید تا یک گزارش معلق تمام شود."
+  },
+  "diagnosticsContentUnavailable": {
+    "message": "محتوای گزارش در دسترس نیست. گزارش محلی را در صورت موجود بودن صادر کنید و با پشتیبانی تماس بگیرید."
+  },
+  "diagnosticsFailure": {
+    "message": "اقدام تشخیصی کامل نشد. VPN شما بدون تغییر است."
+  },
+  "diagnosticsChecks": {
+    "message": "چک ها"
+  },
+  "diagnosticsCheckFallback": {
+    "message": "بررسی فنی: $1"
+  },
+  "diagnosticsCheckLine": {
+    "message": "$1 - $2"
+  },
+  "diagnosticsProxy": {
+    "message": "پروکسی مرورگر"
+  },
+  "diagnosticsStorage": {
+    "message": "ذخیره سازی محلی"
+  },
+  "diagnosticsNetwork": {
+    "message": "اتصال به شبکه"
+  },
+  "diagnosticsCleanup": {
+    "message": "پاکسازی جلسه"
+  },
+  "diagnosticsResult_passed": {
+    "message": "گذشت"
+  },
+  "diagnosticsResult_failed": {
+    "message": "شکست خورد"
+  },
+  "diagnosticsResult_skipped": {
+    "message": "اجرا نشده است"
+  },
+  "diagnosticsResult_unknown": {
+    "message": "ناشناس"
+  },
+  "diagnosticsStatus_ready": {
+    "message": "بر روی این دستگاه آماده است"
+  },
+  "diagnosticsStatus_pending": {
+    "message": "در انتظار ارسال"
+  },
+  "diagnosticsStatus_sending": {
+    "message": "در حال ارسال…"
+  },
+  "diagnosticsStatus_session_required": {
+    "message": "در انتظار یک جلسه معتبر برای همان حساب"
+  },
+  "diagnosticsStatus_received": {
+    "message": "توسط پشتیبانی دریافت شد"
+  },
+  "diagnosticsStatus_failed": {
+    "message": "ارسال نشد"
+  },
+  "diagnosticsStatus_cancelled": {
+    "message": "ارسال لغو شد"
+  },
+  "diagnosticsStatus_expired": {
+    "message": "مهلت ارسال به پایان رسیده است"
+  },
+  "diagnosticsReceivedAt": {
+    "message": "دریافت در $1"
+  },
+  "error_private_browsing_required": {
+    "message": "Firefox برای تنظیم VPN حتی در پنجره‌های عادی به این مجوز نیاز دارد. به about:addons → FuzeVPN بروید، اجرای افزونه در پنجره‌های خصوصی را مجاز کنید و دوباره تلاش کنید."
+  },
+  "error_host_permissions_required": {
+    "message": "در Firefox، مسیر about:addons ← FuzeVPN ← مجوزها را باز کنید و دسترسی به همهٔ وب‌سایت‌ها را مجاز کنید، سپس دوباره تلاش کنید."
+  },
+  "cancelAction": {
+    "message": "لغو"
+  },
+  "refreshLocations": {
+    "message": "تازه‌سازی مکان‌ها"
+  },
+  "refreshingLocations": {
+    "message": "در حال تازه‌سازی مکان‌ها…"
+  },
+  "locationsRefreshError": {
+    "message": "فهرست مکان‌ها تازه‌سازی نشد. دوباره تلاش کنید."
+  },
+  "error_device_revoked_limit": {
+    "message": "مجوز این دستگاه لغو شده است. حداکثر تعداد دستگاه‌ها پر شده است: لطفاً یک دستگاه را حذف کنید."
+  },
+  "noAvailableLocations": {
+    "message": "در حال حاضر هیچ مکانی در دسترس نیست. کمی بعد دوباره تلاش کنید."
+  },
+  "noAvailableFavoriteLocations": {
+    "message": "مکان‌های موردعلاقه شما موقتاً در دسترس نیستند."
+  },
+  "error_server_full": {
+    "message": "ظرفیت این سرور تکمیل است. مکان دیگری انتخاب کنید."
+  },
+  "error_capacity_unavailable": {
+    "message": "در حال حاضر نمی‌توان در دسترس بودن این سرور را تأیید کرد. کمی بعد دوباره تلاش کنید."
+  },
+  "locationHierarchyHelp": {
+    "message": "با انتخاب نام، یک سرور انتخاب می‌شود؛ پیکان جزئیات را نمایش می‌دهد."
+  },
+  "locationCountrySelect": {
+    "message": "انتخاب سرور در دسترس: $1"
+  },
+  "locationCitySelect": {
+    "message": "انتخاب سرور در دسترس: $1"
+  },
+  "locationShowCities": {
+    "message": "نمایش شهرها: $1"
+  },
+  "locationHideCities": {
+    "message": "پنهان کردن شهرها: $1"
+  },
+  "locationShowServers": {
+    "message": "نمایش سرورها: $1"
+  },
+  "locationHideServers": {
+    "message": "پنهان کردن سرورها: $1"
+  },
+  "locationAvailableServers": {
+    "message": "سرورهای در دسترس: $1"
+  },
+  "legalInformation": {
+    "message": "اطلاعات حقوقی"
+  },
+  "privacyPolicy": {
+    "message": "سیاست حفظ حریم خصوصی"
+  },
+  "termsAndConditions": {
+    "message": "شرایط استفاده و فروش"
+  },
+  "legalNotice": {
+    "message": "اطلاعیه حقوقی"
+  },
+  "contactSupport": {
+    "message": "تماس با پشتیبانی"
+  },
+  "webSignIn": {
+    "message": "ورود به FuzeVPN"
+  },
+  "webSignInDisconnect": {
+    "message": "قطع اتصال و ورود"
+  },
+  "webSignInPending": {
+    "message": "در حال ورود…"
+  },
+  "webSignInHelp": {
+    "message": "در بخش مشتریان FuzeVPN با Google یا ایمیل خود وارد شوید یا حساب بسازید."
+  },
+  "webSignInDisconnectHelp": {
+    "message": "این دکمه حفاظت مرورگر را متوقف می‌کند تا با Google یا ایمیل وارد شوید. هنگام ورود، مرور شما بدون حفاظت خواهد بود."
+  },
+  "webSignInStatus": {
+    "message": "در پنجره ورود FuzeVPN ادامه دهید. پس از پایان، افزونه خودکار به‌روز می‌شود. برای لغو، آن پنجره را ببندید."
+  },
+  "error_web_login_cancelled": {
+    "message": "ورود لغو شد. دوباره تلاش کنید."
+  },
+  "error_web_login_timeout": {
+    "message": "ورود بیش از حد طول کشید. دوباره تلاش کنید."
+  },
+  "error_web_login_unavailable": {
+    "message": "ورود از طریق وب در دسترس نیست. بعداً تلاش کنید."
+  },
+  "error_web_login_invalid_callback": {
+    "message": "ورود تأیید نشد. دوباره از افزونه شروع کنید."
+  },
+  "error_web_login_denied": {
+    "message": "ورود مجاز نشد. دوباره تلاش کنید."
+  },
+  "error_web_login_busy": {
+    "message": "پیش از تلاش دوباره، پنجره ورودِ باز را ببندید."
+  },
+  "deviceKindFirefox": {
+    "message": "مرورگر Firefox"
+  }
+}

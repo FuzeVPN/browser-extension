@@ -1,0 +1,26 @@
+{
+  "manifest_version": 3,
+  "name": "__MSG_extensionName__",
+  "short_name": "FuzeVPN",
+  "description": "__MSG_extensionDescription__",
+  "default_locale": "en",
+  "incognito": "spanning",
+  "host_permissions": ["https://api.fuzevpn.com/*", "<all_urls>"],
+  "action": {
+    "default_popup": "popup/popup.html",
+    "default_title": "__MSG_actionDisconnected__",
+    "default_icon": {
+      "16": "icons/disconnected-16.png",
+      "32": "icons/disconnected-32.png"
+    }
+  },
+  "icons": {
+    "16": "icons/disconnected-16.png",
+    "32": "icons/disconnected-32.png",
+    "48": "icons/disconnected-48.png",
+    "128": "icons/disconnected-128.png"
+  },
+  "content_security_policy": {
+    "extension_pages": "script-src 'self'; object-src 'self'"
+  }
+}

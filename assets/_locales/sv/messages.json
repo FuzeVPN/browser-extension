@@ -1,0 +1,830 @@
+{
+  "extensionName": {
+    "message": "FuzeVPN"
+  },
+  "extensionDescription": {
+    "message": "Värna din integritet och stärk din säkerhet med ett klick."
+  },
+  "siteExclusionsReloadRequired": {
+    "message": "Läs in FuzeVPN på nytt via webbläsarens tilläggshanterare för att slutföra uppdateringen och använda webbplatsundantag."
+  },
+  "extensionCommunicationError": {
+    "message": "Tillägget svarar inte. Stäng det här fönstret och läs sedan in FuzeVPN på nytt via webbläsarens tilläggshanterare."
+  },
+  "actionDisconnected": {
+    "message": "FuzeVPN — Frånkopplad"
+  },
+  "actionConnected": {
+    "message": "FuzeVPN — Skyddad i den här webbläsaren"
+  },
+  "actionReconnecting": {
+    "message": "FuzeVPN — Återansluter"
+  },
+  "actionError": {
+    "message": "FuzeVPN — Åtgärd krävs"
+  },
+  "browserProtection": {
+    "message": "Webbläsarskydd"
+  },
+  "loginTitle": {
+    "message": "Välkommen till FuzeVPN"
+  },
+  "loginSubtitle": {
+    "message": "Logga in för att skydda din surfning i den här webbläsaren."
+  },
+  "email": {
+    "message": "E-postadress"
+  },
+  "emailPlaceholder": {
+    "message": "du@exempel.se"
+  },
+  "password": {
+    "message": "Lösenord"
+  },
+  "signIn": {
+    "message": "Logga in"
+  },
+  "signingIn": {
+    "message": "Loggar in…"
+  },
+  "forgotPassword": {
+    "message": "Glömt lösenordet?"
+  },
+  "createAccount": {
+    "message": "Skapa ett konto"
+  },
+  "settings": {
+    "message": "Inställningar"
+  },
+  "close": {
+    "message": "Stäng"
+  },
+  "statusDisconnected": {
+    "message": "Frånkopplad"
+  },
+  "statusConnecting": {
+    "message": "Ansluter…"
+  },
+  "statusChanging": {
+    "message": "Byter plats…"
+  },
+  "statusProtected": {
+    "message": "Skyddad i den här webbläsaren"
+  },
+  "statusRefreshing": {
+    "message": "Förnyar säkert…"
+  },
+  "statusDisconnecting": {
+    "message": "Kopplar från…"
+  },
+  "statusError": {
+    "message": "Skyddet stoppat"
+  },
+  "browserOnlyDetail": {
+    "message": "Skydd för den här webbläsaren."
+  },
+  "location": {
+    "message": "Plats"
+  },
+  "change": {
+    "message": "Ändra"
+  },
+  "noLocation": {
+    "message": "Ingen plats tillgänglig"
+  },
+  "protectBrowser": {
+    "message": "Skydda webbläsaren"
+  },
+  "disconnect": {
+    "message": "Koppla från"
+  },
+  "subscription": {
+    "message": "Prenumeration"
+  },
+  "refreshSubscription": {
+    "message": "Uppdatera prenumeration"
+  },
+  "refreshingSubscription": {
+    "message": "Uppdaterar prenumerationen…"
+  },
+  "subscriptionActive": {
+    "message": "Aktiv"
+  },
+  "subscriptionInactive": {
+    "message": "Inaktiv"
+  },
+  "expiresOn": {
+    "message": "Går ut $1"
+  },
+  "noExpiry": {
+    "message": "Inget utgångsdatum"
+  },
+  "browserOnlyNotice": {
+    "message": "Endast i den här webbläsaren. Andra appar och webbläsare omfattas inte."
+  },
+  "resendVerification": {
+    "message": "Skicka e-post igen"
+  },
+  "incognitoHelp": {
+    "message": "Privat surfning använder samma skydd endast när tillägget tillåts i privat läge i webbläsarens inställningar."
+  },
+  "manageAccount": {
+    "message": "Hantera mitt konto"
+  },
+  "account": {
+    "message": "Konto"
+  },
+  "devices": {
+    "message": "Enheter"
+  },
+  "manageDevices": {
+    "message": "Hantera enheter"
+  },
+  "refreshDevices": {
+    "message": "Uppdatera enheter"
+  },
+  "deviceCount": {
+    "message": "$1 / $2 enheter"
+  },
+  "loadingDevices": {
+    "message": "Läser in enheter…"
+  },
+  "noDevices": {
+    "message": "Inga aktiva enheter."
+  },
+  "currentDevice": {
+    "message": "Den här enheten"
+  },
+  "deviceKindBrowser": {
+    "message": "Webbläsartillägg"
+  },
+  "deviceKindVpn": {
+    "message": "VPN-enhet"
+  },
+  "profile_browser_proxy": {
+    "message": "Webbläsarproxy"
+  },
+  "profile_wireguard": {
+    "message": "WireGuard"
+  },
+  "profile_openvpn": {
+    "message": "OpenVPN"
+  },
+  "none": {
+    "message": "inga"
+  },
+  "deviceCreatedOn": {
+    "message": "Skapad $1"
+  },
+  "deleteDevice": {
+    "message": "Ta bort enhet"
+  },
+  "confirmDeleteDevice": {
+    "message": "Ta bort ”$1”? VPN-anslutningarna avslutas och profilerna tas bort."
+  },
+  "resetDevice": {
+    "message": "Återställ enhet"
+  },
+  "confirmResetDevice": {
+    "message": "Återställa det här tillägget? Det registreras som en ny enhet nästa gång du använder det."
+  },
+  "signOutAccount": {
+    "message": "Logga ut från kontot"
+  },
+  "chooseLocation": {
+    "message": "Välj en plats"
+  },
+  "error_invalid_credentials": {
+    "message": "E-postadressen eller lösenordet är felaktigt."
+  },
+  "error_unauthorized": {
+    "message": "Din session har gått ut. Logga in igen."
+  },
+  "error_email_verification_required": {
+    "message": "Verifiera din e-postadress innan du aktiverar skyddet."
+  },
+  "errorVerificationCooldown": {
+    "message": "Du kan begära ett nytt e-postmeddelande om $1 sekunder."
+  },
+  "error_verification_email_cooldown": {
+    "message": "Vänta innan du begär ett nytt e-postmeddelande."
+  },
+  "error_subscription_required": {
+    "message": "En aktiv prenumeration krävs för att skydda den här webbläsaren."
+  },
+  "error_device_limit": {
+    "message": "Gränsen för antal enheter har nåtts. Ta bort en enhet."
+  },
+  "error_device_identity_revoked": {
+    "message": "Den här enheten är inte längre auktoriserad. Försök ansluta igen."
+  },
+  "error_device_proof_invalid": {
+    "message": "Enheten kunde inte verifieras. Kontrollera datorns datum och tid och försök igen."
+  },
+  "error_device_proof_replayed": {
+    "message": "Den här begäran har redan behandlats. Försök igen."
+  },
+  "error_invalid_device": {
+    "message": "Enheten kunde inte identifieras. Försök ansluta igen."
+  },
+  "error_device_exists": {
+    "message": "Den här enhetsidentiteten är redan kopplad till ett annat konto."
+  },
+  "error_not_found": {
+    "message": "Den här åtgärden är inte längre tillgänglig. Försök igen."
+  },
+  "error_invalid_location": {
+    "message": "Den här platsen är inte tillgänglig. Välj en annan."
+  },
+  "error_rate_limited": {
+    "message": "För många försök. Vänta en stund och försök igen."
+  },
+  "error_proxy_unavailable": {
+    "message": "Servern är tillfälligt otillgänglig. Försök igen om en stund."
+  },
+  "error_api_token_expired": {
+    "message": "Din kontosession har gått ut. Logga in igen."
+  },
+  "error_network_error": {
+    "message": "Nätverket är otillgängligt. Kontrollera din internetanslutning."
+  },
+  "error_request_timeout": {
+    "message": "Tjänsten tog för lång tid på sig att svara. Försök igen."
+  },
+  "error_invalid_response": {
+    "message": "Tjänsten gav ett oväntat svar."
+  },
+  "error_proxy_certificate_invalid": {
+    "message": "Serverns säkerhet kunde inte verifieras. Anslutningen har stoppats."
+  },
+  "error_proxy_controlled_by_extension": {
+    "message": "Ett annat tillägg styr för närvarande webbläsarens proxy."
+  },
+  "error_proxy_controlled_by_policy": {
+    "message": "En administratörspolicy hindrar FuzeVPN från att ändra proxyn."
+  },
+  "error_proxy_authentication_failed": {
+    "message": "Servern accepterade inte anslutningen. Försök ansluta igen."
+  },
+  "error_session_expired": {
+    "message": "Din skyddade anslutning har löpt ut. Anslut igen."
+  },
+  "error_email_delivery_unavailable": {
+    "message": "E-postmeddelandet kan inte skickas just nu."
+  },
+  "error_unknown_error": {
+    "message": "Ett oväntat fel inträffade. Försök igen."
+  },
+  "actionBlocked": {
+    "message": "FuzeVPN — Surfning blockerad"
+  },
+  "statusBlockedRetry": {
+    "message": "Surfning pausad — återansluter"
+  },
+  "statusBlockedAction": {
+    "message": "Surfning pausad — kontrollera anslutningen"
+  },
+  "statusProtectionUnavailable": {
+    "message": "Skydd ej tillgängligt — surfning ej blockerad"
+  },
+  "recoveryHelp": {
+    "message": "Försök igen för att återuppta skyddet. Koppla från låter dig surfa utan FuzeVPN."
+  },
+  "retryConnection": {
+    "message": "Försök igen"
+  },
+  "killSwitch": {
+    "message": "Nödstopp"
+  },
+  "killSwitchHelp": {
+    "message": "Blockerar nya webbförfrågningar om VPN-anslutningen bryts. Undantagna webbplatser förblir tillgängliga utan VPN."
+  },
+  "webRtcProtection": {
+    "message": "WebRTC-skydd"
+  },
+  "webRtcHelp": {
+    "message": "Hjälper till att hålla din IP-adress privat vid webbsamtal. Vissa samtal kanske inte fungerar. Avstängning kan avslöja din riktiga IP-adress."
+  },
+  "securityEffectiveState": {
+    "message": "$1 · $2"
+  },
+  "securityBlocked": {
+    "message": "Surfning blockerad"
+  },
+  "securityNotBlocked": {
+    "message": "Surfning inte blockerad"
+  },
+  "securityWebRtcActive": {
+    "message": "WebRTC-begränsning aktiv"
+  },
+  "securityWebRtcInactive": {
+    "message": "WebRTC-begränsning inaktiv"
+  },
+  "localNetworkHelp": {
+    "message": "Lokala IP-adresser och vanliga lokala namn blockeras under skyddet. En undantagen domän kan ändå ge åtkomst till det lokala nätverket. Systemets IPv6-inställningar ändras inte."
+  },
+  "securityLimits": {
+    "message": "Om skyddet"
+  },
+  "killSwitchLimits": {
+    "message": "Endast den här webbläsaren: befintliga anslutningar och viss intern kommunikation i webbläsaren eller andra tillägg kan fortsätta. Ett annat tillägg eller en policy kan ersätta proxyn innan FuzeVPN reagerar. Om tillägget inaktiveras tas skyddet bort. Ingen systemomfattande blockering."
+  },
+  "error_traffic_guard_failed": {
+    "message": "Blockeringen av surfning kunde inte verifieras. Skyddet kan inte garanteras. Kontrollera tilläggets behörigheter."
+  },
+  "error_webrtc_control_unavailable": {
+    "message": "WebRTC-begränsningen kunde inte tillämpas. Kontrollera inställningarna, andra tillägg eller administratörspolicyn."
+  },
+  "language": {
+    "message": "Språk"
+  },
+  "languageAutomatic": {
+    "message": "Automatiskt — webbläsarens språk"
+  },
+  "languageHelp": {
+    "message": "Ändringar gäller direkt. Automatiskt följer webbläsarens språk, som kan skilja sig från systemspråket."
+  },
+  "languageSaveError": {
+    "message": "Språket kunde inte sparas. Ditt tidigare val behålls. Försök igen."
+  },
+  "publicIp": {
+    "message": "Offentlig IP"
+  },
+  "vpnIp": {
+    "message": "VPN-IP"
+  },
+  "ipChecking": {
+    "message": "Kontrollerar…"
+  },
+  "ipUnavailable": {
+    "message": "Inte tillgänglig"
+  },
+  "ipLookupExplanation": {
+    "message": "IP kontrolleras med ipify via din nuvarande anslutning. Ingen webbhistorik skickas."
+  },
+  "automaticLocation": {
+    "message": "Automatiskt"
+  },
+  "automaticLocationHelp": {
+    "message": "Bästa senaste svarstid eller din senaste plats."
+  },
+  "automaticLocationName": {
+    "message": "Automatiskt · $1"
+  },
+  "searchLocations": {
+    "message": "Sök land eller stad"
+  },
+  "locationFilters": {
+    "message": "Filtrera platser"
+  },
+  "allLocations": {
+    "message": "Alla"
+  },
+  "favoriteLocations": {
+    "message": "Favoriter"
+  },
+  "recentLocations": {
+    "message": "Senaste"
+  },
+  "noMatchingLocations": {
+    "message": "Inga platser matchar din sökning."
+  },
+  "noFavoriteLocations": {
+    "message": "Markera en stjärna för att spara dina favoritplatser här."
+  },
+  "noRecentLocations": {
+    "message": "Dina senaste anslutna platser visas här."
+  },
+  "addFavorite": {
+    "message": "Lägg till $1 som favorit"
+  },
+  "removeFavorite": {
+    "message": "Ta bort $1 från favoriter"
+  },
+  "unavailableFavoriteLocation": {
+    "message": "Otillgänglig favoritplats $1"
+  },
+  "locationSaveError": {
+    "message": "Ändringen kunde inte slutföras. Vissa inställningar kan ha sparats. Kontrollera det visade valet innan du försöker igen."
+  },
+  "siteExclusions": {
+    "message": "Undantagna webbplatser"
+  },
+  "siteExclusionsHelp": {
+    "message": "Dessa webbplatser använder din anslutning utan FuzeVPN, även om VPN slutar fungera."
+  },
+  "siteExclusionsEnabled": {
+    "message": "Aktivera undantag"
+  },
+  "siteExclusionInput": {
+    "message": "Domän eller URL"
+  },
+  "siteExclusionPlaceholder": {
+    "message": "exempel.se"
+  },
+  "siteExclusionPreview": {
+    "message": "Vald domän: $1"
+  },
+  "siteExclusionSubdomains": {
+    "message": "Inkludera underdomäner"
+  },
+  "siteExclusionAdd": {
+    "message": "Lägg till webbplats"
+  },
+  "siteExclusionsEmpty": {
+    "message": "Inga undantagna webbplatser. Lägg bara till webbplatser som du vill använda utan VPN."
+  },
+  "siteExclusionsCount": {
+    "message": "$1 / 100 webbplatser"
+  },
+  "siteExclusionScopeSubdomains": {
+    "message": "Domän och underdomäner"
+  },
+  "siteExclusionScopeExact": {
+    "message": "Endast exakt domän"
+  },
+  "siteExclusionRemove": {
+    "message": "Ta bort $1"
+  },
+  "siteExclusionsDetails": {
+    "message": "Hur fungerar undantag?"
+  },
+  "siteExclusionsResources": {
+    "message": "Resurser från andra domäner förblir skyddade. Att undanta en sida undantar inte automatiskt dess övriga innehåll."
+  },
+  "siteExclusionsReload": {
+    "message": "Ladda om webbplatsen efter en ändring. Befintliga anslutningar kan behålla sin tidigare väg."
+  },
+  "siteExclusionsWebRtc": {
+    "message": "WebRTC-skyddet förblir en global inställning, även för undantagna webbplatser."
+  },
+  "siteExclusionsLocal": {
+    "message": "Sparas bara i den här webbläsaren och behålls när du loggar ut från kontot."
+  },
+  "siteExclusionsOn": {
+    "message": "Undantag aktiverade"
+  },
+  "siteExclusionsOff": {
+    "message": "Undantag inaktiverade"
+  },
+  "siteExclusionsSummary": {
+    "message": "$1 webbplatser utanför VPN"
+  },
+  "siteExclusionsPending": {
+    "message": "Tillämpar undantag…"
+  },
+  "siteExclusionsInterrupted": {
+    "message": "Ändringen avbröts. Det tillfälliga skyddet är kvar."
+  },
+  "siteExclusionsSaveError": {
+    "message": "Det gick inte att slutföra ändringen. Kontrollera inställningarna och försök igen."
+  },
+  "siteExclusionsRetry": {
+    "message": "Försök igen"
+  },
+  "siteExclusionInvalid": {
+    "message": "Ange en giltig offentlig domän. IP-adresser, lokala namn, jokertecken, offentliga suffix och reserverade domäner godtas inte."
+  },
+  "siteExclusionDuplicate": {
+    "message": "Den här domänen finns redan i listan."
+  },
+  "siteExclusionsLimit": {
+    "message": "Gränsen på 100 webbplatser har nåtts. Ta bort en webbplats för att lägga till en annan."
+  },
+  "statusProtectedExceptions": {
+    "message": "VPN aktivt · $1 undantag"
+  },
+  "statusBlockedExceptions": {
+    "message": "Endast undantagna webbplatser är fortfarande tillgängliga"
+  },
+  "securityBlockedExceptions": {
+    "message": "Surfning blockerad utom undantagna webbplatser"
+  },
+  "securityBlockUnverified": {
+    "message": "Blockering inte verifierad"
+  },
+  "logoutLocalComplete": {
+    "message": "Lokal utloggning klar."
+  },
+  "logoutApiSession": {
+    "message": "Aktuell kontosession"
+  },
+  "logoutProxySessions": {
+    "message": "Kända VPN-sessioner"
+  },
+  "logoutRevocationPending": {
+    "message": "Återkallning pågår…"
+  },
+  "logoutRevocationConfirmed": {
+    "message": "Återkallning bekräftad"
+  },
+  "logoutRevocationUnconfirmed": {
+    "message": "Återkallning inte bekräftad"
+  },
+  "logoutUnconfirmedHelp": {
+    "message": "Vissa fjärrsessioner kan förbli aktiva tills de löper ut."
+  },
+  "deviceQuotaLoading": {
+    "message": "Läser in enhetsgräns…"
+  },
+  "deviceQuotaUnknown": {
+    "message": "Enhetsgränsen är inte tillgänglig"
+  },
+  "error_proxy_creation_uncertain": {
+    "message": "Servern bekräftade inte att den nya anslutningen skapades. Automatisk återanslutning är pausad."
+  },
+  "siteExclusionsPreferencesReset": {
+    "message": "Dina sparade webbplatsundantag återställdes eftersom de inte kunde läsas. Lägg till de webbplatser du vill undanta igen."
+  },
+  "siteExclusionsConflict": {
+    "message": "Listan över undantagna webbplatser har ändrats. Granska den och försök ändra igen."
+  },
+  "unavailableLocation": {
+    "message": "Platsen är inte tillgänglig"
+  },
+  "verificationSending": {
+    "message": "Skickar verifieringsmeddelande…"
+  },
+  "verificationSent": {
+    "message": "Verifieringsmeddelandet har skickats. Kontrollera inkorgen och skräppostmappen."
+  },
+  "error_login_requires_disconnect": {
+    "message": "Koppla från den aktuella VPN-anslutningen innan du loggar in på ett annat konto."
+  },
+  "error_storage_unavailable": {
+    "message": "De lokala kontoinställningarna är inte tillgängliga. Försök igen när webbläsarens lagring är tillgänglig. Ditt sparade konto har bevarats."
+  },
+  "diagnosticsAssistance": {
+    "message": "Support"
+  },
+  "diagnosticsTitle": {
+    "message": "Diagnostik"
+  },
+  "diagnosticsIntro": {
+    "message": "Kontrollera FuzeVPN och den aktuella anslutningen utan att ändra ditt skydd."
+  },
+  "diagnosticsPrivacyTitle": {
+    "message": "Dina uppgifter"
+  },
+  "diagnosticsPrivacy": {
+    "message": "Rapporter innehåller tekniska tillstånd och felkoder, aldrig lösenord, token, e-postadresser, IP-adresser, besökta webbadresser eller undantagna domäner."
+  },
+  "diagnosticsAuto": {
+    "message": "Skicka rapporter om viktiga fel automatiskt"
+  },
+  "diagnosticsAutoHelp": {
+    "message": "Av som standard. Endast enkla tekniska rapporter skickas för kontot, utan webbhistorik. Supporten sparar dem i 30 dagar."
+  },
+  "diagnosticsHistoryHelp": {
+    "message": "Den tekniska historiken stannar lokalt: högst 200 händelser under 10 minuter, även utan automatisk sändning. Den innehåller ingen webbhistorik och rensas när webbläsaren stängs eller kontot byts."
+  },
+  "diagnosticsHistoryCount": {
+    "message": "$1 lokala tekniska händelser"
+  },
+  "diagnosticsAccountRequired": {
+    "message": "Logga in för att aktivera sändning. Du kan visa och exportera en rapport utan konto."
+  },
+  "diagnosticsRun": {
+    "message": "Starta diagnostik"
+  },
+  "diagnosticsClearHistory": {
+    "message": "Rensa lokal historik"
+  },
+  "diagnosticsPreparing": {
+    "message": "Förbereder rapporten…"
+  },
+  "diagnosticsReports": {
+    "message": "Rapporter"
+  },
+  "diagnosticsEmpty": {
+    "message": "Ingen lokal rapport ännu."
+  },
+  "diagnosticsChooseReport": {
+    "message": "Välj rapport"
+  },
+  "diagnosticsReportLabel": {
+    "message": "$1 · $2 · $3"
+  },
+  "diagnosticsTypeFull": {
+    "message": "Fullständig rapport"
+  },
+  "diagnosticsTypeSimple": {
+    "message": "Felrapport"
+  },
+  "diagnosticsSummary": {
+    "message": "Insamlad $1. FuzeVPN-version $2."
+  },
+  "diagnosticsJson": {
+    "message": "Visa rapportens innehåll (JSON)"
+  },
+  "diagnosticsExport": {
+    "message": "Exportera rapport"
+  },
+  "diagnosticsDelete": {
+    "message": "Ta bort lokal rapport"
+  },
+  "diagnosticsRetention": {
+    "message": "Skickade rapporter kopplas till ditt inloggade konto och sparas av supporten i 30 dagar. Att ta bort en lokal rapport tar inte bort en rapport som supporten redan har fått."
+  },
+  "diagnosticsConsent": {
+    "message": "Skicka rapporten till supporten"
+  },
+  "diagnosticsDataCollectionRequired": {
+    "message": "Firefox måste tillåta insamling av tekniska data för att skicka diagnostik. Försök igen och ge denna behörighet."
+  },
+  "diagnosticsSendHelp": {
+    "message": "Sändning är frivillig. Efter ditt godkännande kan den försökas igen i upp till 24 timmar med en giltig session för samma konto. Du kan avbryta fler försök. En sen avbrytning garanterar inte att servern inte redan har tagit emot rapporten."
+  },
+  "diagnosticsSend": {
+    "message": "Skicka rapport"
+  },
+  "diagnosticsCancel": {
+    "message": "Avbryt sändning"
+  },
+  "diagnosticsReload": {
+    "message": "Ladda om sidan"
+  },
+  "diagnosticsUnavailable": {
+    "message": "Diagnostik är inte tillgänglig. Läs in FuzeVPN på nytt via webbläsarens tilläggshanterare och öppna sidan igen. Ditt VPN är oförändrat."
+  },
+  "diagnosticsQueueFull": {
+    "message": "Sändningskön är full. Ta bort en lokal rapport eller vänta tills en väntande sändning är klar."
+  },
+  "diagnosticsContentUnavailable": {
+    "message": "Rapportens innehåll är inte tillgängligt. Exportera den lokala rapporten om den är tillgänglig och kontakta supporten."
+  },
+  "diagnosticsFailure": {
+    "message": "Diagnostikåtgärden kunde inte slutföras. Ditt VPN är oförändrat."
+  },
+  "diagnosticsChecks": {
+    "message": "Kontroller"
+  },
+  "diagnosticsCheckFallback": {
+    "message": "Teknisk kontroll: $1"
+  },
+  "diagnosticsCheckLine": {
+    "message": "$1 — $2"
+  },
+  "diagnosticsProxy": {
+    "message": "Webbläsarproxy"
+  },
+  "diagnosticsStorage": {
+    "message": "Lokal lagring"
+  },
+  "diagnosticsNetwork": {
+    "message": "Nätverksanslutning"
+  },
+  "diagnosticsCleanup": {
+    "message": "Sessionsrensning"
+  },
+  "diagnosticsResult_passed": {
+    "message": "Godkänd"
+  },
+  "diagnosticsResult_failed": {
+    "message": "Misslyckad"
+  },
+  "diagnosticsResult_skipped": {
+    "message": "Inte utförd"
+  },
+  "diagnosticsResult_unknown": {
+    "message": "Okänd"
+  },
+  "diagnosticsStatus_ready": {
+    "message": "Klar på den här enheten"
+  },
+  "diagnosticsStatus_pending": {
+    "message": "Väntar på sändning"
+  },
+  "diagnosticsStatus_sending": {
+    "message": "Skickar…"
+  },
+  "diagnosticsStatus_session_required": {
+    "message": "Väntar på en giltig session för samma konto"
+  },
+  "diagnosticsStatus_received": {
+    "message": "Mottagen av supporten"
+  },
+  "diagnosticsStatus_failed": {
+    "message": "Sändningen misslyckades"
+  },
+  "diagnosticsStatus_cancelled": {
+    "message": "Sändningen avbröts"
+  },
+  "diagnosticsStatus_expired": {
+    "message": "Tidsfristen för sändning har gått ut"
+  },
+  "diagnosticsReceivedAt": {
+    "message": "Mottagen $1"
+  },
+  "error_private_browsing_required": {
+    "message": "Firefox kräver denna behörighet för att konfigurera VPN, även i vanliga fönster. Öppna about:addons → FuzeVPN, tillåt körning i privata fönster och försök igen."
+  },
+  "error_host_permissions_required": {
+    "message": "Öppna about:addons → FuzeVPN → Behörigheter i Firefox och tillåt åtkomst till alla webbplatser. Försök sedan igen."
+  },
+  "cancelAction": {
+    "message": "Avbryt"
+  },
+  "refreshLocations": {
+    "message": "Uppdatera platser"
+  },
+  "refreshingLocations": {
+    "message": "Uppdaterar platser…"
+  },
+  "locationsRefreshError": {
+    "message": "Listan över platser kunde inte uppdateras. Försök igen."
+  },
+  "error_device_revoked_limit": {
+    "message": "Behörigheten för den här enheten har återkallats. Gränsen för antal enheter har nåtts: ta bort en enhet."
+  },
+  "noAvailableLocations": {
+    "message": "Inga platser är tillgängliga just nu. Försök igen om en liten stund."
+  },
+  "noAvailableFavoriteLocations": {
+    "message": "Dina favoritplatser är tillfälligt otillgängliga."
+  },
+  "error_server_full": {
+    "message": "Den här servern är full. Välj en annan plats."
+  },
+  "error_capacity_unavailable": {
+    "message": "Den här serverns tillgänglighet kan inte bekräftas just nu. Försök igen om en liten stund."
+  },
+  "locationHierarchyHelp": {
+    "message": "Namnet väljer en server; pilen visar detaljer."
+  },
+  "locationCountrySelect": {
+    "message": "Välj en tillgänglig server: $1"
+  },
+  "locationCitySelect": {
+    "message": "Välj en tillgänglig server: $1"
+  },
+  "locationShowCities": {
+    "message": "Visa städer: $1"
+  },
+  "locationHideCities": {
+    "message": "Dölj städer: $1"
+  },
+  "locationShowServers": {
+    "message": "Visa servrar: $1"
+  },
+  "locationHideServers": {
+    "message": "Dölj servrar: $1"
+  },
+  "locationAvailableServers": {
+    "message": "Tillgängliga servrar: $1"
+  },
+  "legalInformation": {
+    "message": "Juridisk information"
+  },
+  "privacyPolicy": {
+    "message": "Integritetspolicy"
+  },
+  "termsAndConditions": {
+    "message": "Användnings- och försäljningsvillkor"
+  },
+  "legalNotice": {
+    "message": "Juridiskt meddelande"
+  },
+  "contactSupport": {
+    "message": "Kontakta supporten"
+  },
+  "webSignIn": {
+    "message": "Logga in på FuzeVPN"
+  },
+  "webSignInDisconnect": {
+    "message": "Koppla från och logga in"
+  },
+  "webSignInPending": {
+    "message": "Inloggning pågår…"
+  },
+  "webSignInHelp": {
+    "message": "Logga in eller skapa ett konto med Google eller din e-post i FuzeVPN:s kundportal."
+  },
+  "webSignInDisconnectHelp": {
+    "message": "Den här knappen stoppar webbläsarskyddet så att du kan logga in med Google eller e-post. Din surfning är oskyddad under inloggningen."
+  },
+  "webSignInStatus": {
+    "message": "Fortsätt i FuzeVPN:s inloggningsfönster. Tillägget uppdateras automatiskt när du är klar. Stäng det fönstret för att avbryta."
+  },
+  "error_web_login_cancelled": {
+    "message": "Inloggningen avbröts. Försök igen."
+  },
+  "error_web_login_timeout": {
+    "message": "Inloggningen tog för lång tid. Försök igen."
+  },
+  "error_web_login_unavailable": {
+    "message": "Webbinloggning är inte tillgänglig. Försök igen senare."
+  },
+  "error_web_login_invalid_callback": {
+    "message": "Inloggningen kunde inte verifieras. Börja om från tillägget."
+  },
+  "error_web_login_denied": {
+    "message": "Inloggningen godkändes inte. Försök igen."
+  },
+  "error_web_login_busy": {
+    "message": "Stäng inloggningsfönstret som redan är öppet innan du försöker igen."
+  },
+  "deviceKindFirefox": {
+    "message": "Firefox-webbläsare"
+  }
+}

@@ -1,0 +1,830 @@
+{
+  "extensionName": {
+    "message": "FuzeVPN"
+  },
+  "extensionDescription": {
+    "message": "Panatilihin ang iyong privacy at palakasin ang iyong seguridad sa isang click."
+  },
+  "siteExclusionsReloadRequired": {
+    "message": "I-reload ang FuzeVPN sa tagapamahala ng mga extension ng browser upang tapusin ang update at magamit ang mga pagbubukod ng site."
+  },
+  "extensionCommunicationError": {
+    "message": "Hindi tumutugon ang extension. Isara ang window na ito, pagkatapos ay i-reload ang FuzeVPN sa tagapamahala ng mga extension ng browser."
+  },
+  "actionDisconnected": {
+    "message": "FuzeVPN — Nadiskonekta"
+  },
+  "actionConnected": {
+    "message": "FuzeVPN — Protektado ang browser"
+  },
+  "actionReconnecting": {
+    "message": "FuzeVPN — Muling kumokonekta"
+  },
+  "actionError": {
+    "message": "FuzeVPN — Kailangan ng atensyon"
+  },
+  "browserProtection": {
+    "message": "Proteksyon ng browser"
+  },
+  "loginTitle": {
+    "message": "Maligayang pagdating sa FuzeVPN"
+  },
+  "loginSubtitle": {
+    "message": "Mag-sign in upang protektahan ang pagba-browse mo sa browser na ito."
+  },
+  "email": {
+    "message": "Email address"
+  },
+  "emailPlaceholder": {
+    "message": "you@example.com"
+  },
+  "password": {
+    "message": "Password"
+  },
+  "signIn": {
+    "message": "Mag-sign in"
+  },
+  "signingIn": {
+    "message": "Nagsa-sign in…"
+  },
+  "forgotPassword": {
+    "message": "Nakalimutan ang password?"
+  },
+  "createAccount": {
+    "message": "Gumawa ng account"
+  },
+  "settings": {
+    "message": "Mga setting"
+  },
+  "close": {
+    "message": "Isara"
+  },
+  "statusDisconnected": {
+    "message": "Nadiskonekta"
+  },
+  "statusConnecting": {
+    "message": "Kumokonekta…"
+  },
+  "statusChanging": {
+    "message": "Binabago ang lokasyon…"
+  },
+  "statusProtected": {
+    "message": "Protektado ang browser"
+  },
+  "statusRefreshing": {
+    "message": "Ligtas na nire-renew…"
+  },
+  "statusDisconnecting": {
+    "message": "Dinidiskonekta…"
+  },
+  "statusError": {
+    "message": "Huminto ang proteksyon"
+  },
+  "browserOnlyDetail": {
+    "message": "Proteksyon para sa browser na ito lamang."
+  },
+  "location": {
+    "message": "Lokasyon"
+  },
+  "change": {
+    "message": "Baguhin"
+  },
+  "noLocation": {
+    "message": "Walang available na lokasyon"
+  },
+  "protectBrowser": {
+    "message": "Protektahan ang browser"
+  },
+  "disconnect": {
+    "message": "Idiskonekta"
+  },
+  "subscription": {
+    "message": "Subscription"
+  },
+  "refreshSubscription": {
+    "message": "I-refresh ang subscription"
+  },
+  "refreshingSubscription": {
+    "message": "Nire-refresh ang subscription..."
+  },
+  "subscriptionActive": {
+    "message": "Aktibo"
+  },
+  "subscriptionInactive": {
+    "message": "Hindi aktibo"
+  },
+  "expiresOn": {
+    "message": "Mag-e-expire sa $1"
+  },
+  "noExpiry": {
+    "message": "Walang expiration date"
+  },
+  "browserOnlyNotice": {
+    "message": "Browser na ito lamang ang protektado. Hindi sakop ang ibang browser at app."
+  },
+  "resendVerification": {
+    "message": "Muling ipadala ang email"
+  },
+  "incognitoHelp": {
+    "message": "May parehong proteksyon ang mga pribadong window kapag pinayagang tumakbo rito ang extension sa mga setting ng browser."
+  },
+  "manageAccount": {
+    "message": "Pamahalaan ang aking account"
+  },
+  "account": {
+    "message": "Account"
+  },
+  "devices": {
+    "message": "Mga device"
+  },
+  "manageDevices": {
+    "message": "Pamahalaan ang mga device"
+  },
+  "refreshDevices": {
+    "message": "I-refresh ang mga device"
+  },
+  "deviceCount": {
+    "message": "$1 / $2 na mga device"
+  },
+  "loadingDevices": {
+    "message": "Nilo-load ang mga device..."
+  },
+  "noDevices": {
+    "message": "Walang aktibong device."
+  },
+  "currentDevice": {
+    "message": "Ang device na ito"
+  },
+  "deviceKindBrowser": {
+    "message": "Extension ng browser"
+  },
+  "deviceKindVpn": {
+    "message": "VPN device"
+  },
+  "profile_browser_proxy": {
+    "message": "Proxy ng browser"
+  },
+  "profile_wireguard": {
+    "message": "WireGuard"
+  },
+  "profile_openvpn": {
+    "message": "OpenVPN"
+  },
+  "none": {
+    "message": "wala"
+  },
+  "deviceCreatedOn": {
+    "message": "Ginawa noong $1"
+  },
+  "deleteDevice": {
+    "message": "Tanggalin ang device"
+  },
+  "confirmDeleteDevice": {
+    "message": "Alisin ang “$1”? Hihinto ang mga koneksyon nito sa VPN at aalisin ang mga profile nito."
+  },
+  "resetDevice": {
+    "message": "I-reset ang device"
+  },
+  "confirmResetDevice": {
+    "message": "I-reset ang extension na ito? Irerehistro ito bilang bagong device sa susunod na gamitin mo ito."
+  },
+  "signOutAccount": {
+    "message": "Mag-sign out sa account"
+  },
+  "chooseLocation": {
+    "message": "Pumili ng lokasyon"
+  },
+  "error_invalid_credentials": {
+    "message": "Ang email address o password ay hindi tama."
+  },
+  "error_unauthorized": {
+    "message": "Nag-expire na ang iyong session. Mangyaring mag-sign in muli."
+  },
+  "error_email_verification_required": {
+    "message": "I-verify ang iyong email address bago i-enable ang proteksyon."
+  },
+  "errorVerificationCooldown": {
+    "message": "Maaaring humiling ng bagong email sa loob ng $1 segundo."
+  },
+  "error_verification_email_cooldown": {
+    "message": "Mangyaring maghintay bago humiling ng isa pang email."
+  },
+  "error_subscription_required": {
+    "message": "Kailangan ng aktibong subscription upang protektahan ang browser."
+  },
+  "error_device_limit": {
+    "message": "Naabot na ang limitasyon sa bilang ng mga device. Mangyaring mag-alis ng isang device."
+  },
+  "error_device_identity_revoked": {
+    "message": "Hindi na awtorisado ang device na ito. Subukang kumonekta muli."
+  },
+  "error_device_proof_invalid": {
+    "message": "Hindi namin ma-verify ang device na ito. Tingnan ang petsa at oras ng iyong computer, pagkatapos ay subukang muli."
+  },
+  "error_device_proof_replayed": {
+    "message": "Naproseso na ang kahilingang ito. Subukan muli."
+  },
+  "error_invalid_device": {
+    "message": "Hindi nakilala ang device na ito. Subukang kumonekta muli."
+  },
+  "error_device_exists": {
+    "message": "Ang pagkakakilanlan ng device na ito ay naka-link na sa isa pang account."
+  },
+  "error_not_found": {
+    "message": "Hindi na magagamit ang operasyong ito. Subukang muli."
+  },
+  "error_invalid_location": {
+    "message": "Hindi available ang lokasyong ito. Pumili ng isa pa."
+  },
+  "error_rate_limited": {
+    "message": "Masyadong maraming pagtatangka. Maghintay sandali at subukang muli."
+  },
+  "error_proxy_unavailable": {
+    "message": "Pansamantalang hindi available ang server na ito. Subukan muli sa isang sandali."
+  },
+  "error_api_token_expired": {
+    "message": "Nag-expire na ang session ng iyong account. Mangyaring mag-sign in muli."
+  },
+  "error_network_error": {
+    "message": "Hindi available ang network. Suriin ang iyong koneksyon sa Internet."
+  },
+  "error_request_timeout": {
+    "message": "Masyadong matagal bago tumugon ang serbisyo. Subukan muli."
+  },
+  "error_invalid_response": {
+    "message": "Nagbalik ang serbisyo ng hindi inaasahang tugon."
+  },
+  "error_proxy_certificate_invalid": {
+    "message": "Hindi namin ma-verify ang seguridad ng server. Nahinto ang koneksyon."
+  },
+  "error_proxy_controlled_by_extension": {
+    "message": "Kasalukuyang kinokontrol ng ibang extension ang proxy ng browser."
+  },
+  "error_proxy_controlled_by_policy": {
+    "message": "Pinipigilan ng isang patakaran ng administrator ang FuzeVPN na baguhin ang proxy."
+  },
+  "error_proxy_authentication_failed": {
+    "message": "Hindi tinanggap ng server ang koneksyon. Subukang kumonekta muli."
+  },
+  "error_session_expired": {
+    "message": "Ang iyong protektadong koneksyon ay nag-expire na. Kumonekta muli."
+  },
+  "error_email_delivery_unavailable": {
+    "message": "Ang email ay hindi maipadala sa ngayon."
+  },
+  "error_unknown_error": {
+    "message": "May naganap na hindi inaasahang error. Subukan muli."
+  },
+  "actionBlocked": {
+    "message": "FuzeVPN — Na-block ang pagba-browse"
+  },
+  "statusBlockedRetry": {
+    "message": "Naka-pause ang pagba-browse — muling kumonekta"
+  },
+  "statusBlockedAction": {
+    "message": "Naka-pause ang pagba-browse — tingnan ang koneksyon"
+  },
+  "statusProtectionUnavailable": {
+    "message": "Hindi available ang proteksyon — hindi naka-block ang pag-browse"
+  },
+  "recoveryHelp": {
+    "message": "Subukang muli upang ipagpatuloy ang proteksyon. Hinahayaan ka ng Disconnect na mag-browse nang walang FuzeVPN."
+  },
+  "retryConnection": {
+    "message": "Subukan muli"
+  },
+  "killSwitch": {
+    "message": "Patayin ang switch"
+  },
+  "killSwitchHelp": {
+    "message": "Bina-block ang mga bagong kahilingan sa web kung bumaba ang koneksyon sa VPN. Ang mga ibinukod na site ay nananatiling naa-access sa labas ng VPN."
+  },
+  "webRtcProtection": {
+    "message": "Proteksyon ng WebRTC"
+  },
+  "webRtcHelp": {
+    "message": "Tumutulong na panatilihing pribado ang iyong IP address sa mga tawag sa web. Maaaring hindi gumana ang ilang tawag. Ang pag-off nito ay maaaring magbunyag ng iyong tunay na IP address."
+  },
+  "securityEffectiveState": {
+    "message": "$1 · $2"
+  },
+  "securityBlocked": {
+    "message": "Na-block ang pagba-browse"
+  },
+  "securityNotBlocked": {
+    "message": "Hindi naka-block ang pag-browse"
+  },
+  "securityWebRtcActive": {
+    "message": "Aktibo ang paghihigpit sa WebRTC"
+  },
+  "securityWebRtcInactive": {
+    "message": "Hindi aktibo ang paghihigpit sa WebRTC"
+  },
+  "localNetworkHelp": {
+    "message": "Ang mga lokal na IP address at karaniwang lokal na pangalan ay hinaharangan sa panahon ng proteksyon. Ang isang ibinukod na domain ay maaari pa ring magbigay ng access sa lokal na network. Ang mga setting ng IPv6 ng system ay hindi nagbabago."
+  },
+  "securityLimits": {
+    "message": "Tungkol sa proteksyong ito"
+  },
+  "killSwitchLimits": {
+    "message": "Para sa browser na ito lamang: maaaring magpatuloy ang mga kasalukuyang koneksyon at ilang panloob na komunikasyon ng browser o ibang extension. Maaaring palitan ng ibang extension o patakaran ang proxy bago tumugon ang FuzeVPN. Nawawala ang proteksyon kapag na-disable ang extension. Walang pag-block sa buong system."
+  },
+  "error_traffic_guard_failed": {
+    "message": "Hindi ma-verify ang block sa pagba-browse. Ang proteksyon ay hindi ginagarantiyahan. Suriin ang mga pahintulot ng extension."
+  },
+  "error_webrtc_control_unavailable": {
+    "message": "Hindi mailapat ang paghihigpit sa WebRTC. Tingnan ang iyong mga setting, iba pang extension o patakaran ng administrator."
+  },
+  "language": {
+    "message": "Wika"
+  },
+  "languageAutomatic": {
+    "message": "Awtomatiko — wika ng browser"
+  },
+  "languageHelp": {
+    "message": "Agad na nalalapat ang mga pagbabago. Sinusunod ng awtomatikong pagpili ang wika ng browser, na maaaring iba sa wika ng operating system."
+  },
+  "languageSaveError": {
+    "message": "Hindi ma-save ang wika. Ang iyong nakaraang pinili ay pinananatili. Subukan muli."
+  },
+  "publicIp": {
+    "message": "Pampublikong IP"
+  },
+  "vpnIp": {
+    "message": "VPN IP"
+  },
+  "ipChecking": {
+    "message": "Sinusuri…"
+  },
+  "ipUnavailable": {
+    "message": "Hindi magagamit"
+  },
+  "ipLookupExplanation": {
+    "message": "Nasuri ang IP gamit ang ipify gamit ang iyong kasalukuyang koneksyon. Walang naipadalang kasaysayan ng pagba-browse."
+  },
+  "automaticLocation": {
+    "message": "Awtomatiko"
+  },
+  "automaticLocationHelp": {
+    "message": "Pinakamahusay na kamakailang oras ng pagtugon, o ang iyong huling lokasyon."
+  },
+  "automaticLocationName": {
+    "message": "Awtomatiko · $1"
+  },
+  "searchLocations": {
+    "message": "Maghanap sa bansa o lungsod"
+  },
+  "locationFilters": {
+    "message": "I-filter ang mga lokasyon"
+  },
+  "allLocations": {
+    "message": "Lahat"
+  },
+  "favoriteLocations": {
+    "message": "Mga paborito"
+  },
+  "recentLocations": {
+    "message": "Kamakailan"
+  },
+  "noMatchingLocations": {
+    "message": "Walang mga lokasyon na tumutugma sa iyong paghahanap."
+  },
+  "noFavoriteLocations": {
+    "message": "Magdagdag ng bituin upang panatilihin ang iyong mga paboritong lokasyon dito."
+  },
+  "noRecentLocations": {
+    "message": "Lalabas dito ang iyong mga kamakailang konektadong lokasyon."
+  },
+  "addFavorite": {
+    "message": "Idagdag ang $1 sa mga paborito"
+  },
+  "removeFavorite": {
+    "message": "Alisin ang $1 sa mga paborito"
+  },
+  "unavailableFavoriteLocation": {
+    "message": "Hindi available na paboritong lokasyon $1"
+  },
+  "locationSaveError": {
+    "message": "Hindi makumpleto ang pagbabago. Maaaring na-save ang ilang setting. Suriin ang ipinapakitang pagpipilian bago subukang muli."
+  },
+  "siteExclusions": {
+    "message": "Mga ibinukod na site"
+  },
+  "siteExclusionsHelp": {
+    "message": "Ginagamit ng mga site na ito ang iyong koneksyon nang walang FuzeVPN, kahit na bumaba ang VPN."
+  },
+  "siteExclusionsEnabled": {
+    "message": "Paganahin ang mga pagbubukod"
+  },
+  "siteExclusionInput": {
+    "message": "Domain o URL"
+  },
+  "siteExclusionPlaceholder": {
+    "message": "example.com"
+  },
+  "siteExclusionPreview": {
+    "message": "Napiling domain: $1"
+  },
+  "siteExclusionSubdomains": {
+    "message": "Isama ang mga subdomain"
+  },
+  "siteExclusionAdd": {
+    "message": "Magdagdag ng site"
+  },
+  "siteExclusionsEmpty": {
+    "message": "Walang mga ibinukod na site. Magdagdag lamang ng mga site na gusto mong gamitin nang walang VPN."
+  },
+  "siteExclusionsCount": {
+    "message": "$1 / 100 site"
+  },
+  "siteExclusionScopeSubdomains": {
+    "message": "Domain at mga subdomain"
+  },
+  "siteExclusionScopeExact": {
+    "message": "Eksaktong domain lang"
+  },
+  "siteExclusionRemove": {
+    "message": "Alisin ang $1"
+  },
+  "siteExclusionsDetails": {
+    "message": "Paano gumagana ang mga pagbubukod?"
+  },
+  "siteExclusionsResources": {
+    "message": "Ang mga mapagkukunan mula sa iba pang mga domain ay mananatiling protektado. Ang pagbubukod ng isang pahina ay hindi awtomatikong ibinubukod ang iba pang nilalaman nito."
+  },
+  "siteExclusionsReload": {
+    "message": "I-reload ang site pagkatapos ng pagbabago. Maaaring panatilihin ng mga kasalukuyang koneksyon ang kanilang nakaraang ruta."
+  },
+  "siteExclusionsWebRtc": {
+    "message": "Ang proteksyon ng WebRTC ay nananatiling isang pandaigdigang setting, kabilang ang para sa mga ibinukod na site."
+  },
+  "siteExclusionsLocal": {
+    "message": "Nai-save lamang sa browser na ito at itinago pagkatapos mag-sign out sa iyong account."
+  },
+  "siteExclusionsOn": {
+    "message": "Pinagana ang mga pagbubukod"
+  },
+  "siteExclusionsOff": {
+    "message": "Hindi pinagana ang mga pagbubukod"
+  },
+  "siteExclusionsSummary": {
+    "message": "$1 mga site sa labas ng VPN"
+  },
+  "siteExclusionsPending": {
+    "message": "Naglalapat ng mga exception..."
+  },
+  "siteExclusionsInterrupted": {
+    "message": "Nagambala ang pagbabago. Ang pansamantalang bantay ay nananatili sa lugar."
+  },
+  "siteExclusionsSaveError": {
+    "message": "Hindi matapos ang pagbabago. Suriin ang iyong mga setting at subukang muli."
+  },
+  "siteExclusionsRetry": {
+    "message": "Subukan muli"
+  },
+  "siteExclusionInvalid": {
+    "message": "Maglagay ng wastong pampublikong domain. Hindi tinatanggap ang mga IP, lokal na pangalan, wildcard, pampublikong suffix at nakareserbang domain."
+  },
+  "siteExclusionDuplicate": {
+    "message": "Ang domain na ito ay nasa listahan na."
+  },
+  "siteExclusionsLimit": {
+    "message": "Naabot na ang 100-site na limitasyon. Mag-alis ng site para magdagdag ng isa pa."
+  },
+  "statusProtectedExceptions": {
+    "message": "VPN active · $1 exception"
+  },
+  "statusBlockedExceptions": {
+    "message": "Ang mga ibinukod na site lamang ang mananatiling naa-access"
+  },
+  "securityBlockedExceptions": {
+    "message": "Na-block ang pag-browse maliban sa mga ibinukod na site"
+  },
+  "securityBlockUnverified": {
+    "message": "Hindi na-verify ang pagharang"
+  },
+  "logoutLocalComplete": {
+    "message": "Kumpleto na ang lokal na pag-sign out."
+  },
+  "logoutApiSession": {
+    "message": "Kasalukuyang session ng account"
+  },
+  "logoutProxySessions": {
+    "message": "Mga kilalang sesyon ng VPN"
+  },
+  "logoutRevocationPending": {
+    "message": "Kasalukuyang binabawi..."
+  },
+  "logoutRevocationConfirmed": {
+    "message": "Nakumpirma ang pagbawi"
+  },
+  "logoutRevocationUnconfirmed": {
+    "message": "Hindi nakumpirma ang pagbawi"
+  },
+  "logoutUnconfirmedHelp": {
+    "message": "Maaaring manatiling aktibo ang ilang malalayong session hanggang sa mag-expire ang mga ito."
+  },
+  "deviceQuotaLoading": {
+    "message": "Nilo-load ang limitasyon ng device..."
+  },
+  "deviceQuotaUnknown": {
+    "message": "Hindi available ang limitasyon ng device"
+  },
+  "error_proxy_creation_uncertain": {
+    "message": "Hindi kinumpirma ng server ang paglikha ng bagong koneksyon. Naka-pause ang awtomatikong muling pagkonekta."
+  },
+  "siteExclusionsPreferencesReset": {
+    "message": "Na-reset ang iyong mga naka-save na pagbubukod sa site pagkatapos na hindi mabasa ang mga ito. Idagdag muli ang mga site na gusto mong ibukod."
+  },
+  "siteExclusionsConflict": {
+    "message": "Nagbago ang listahan ng mga ibinukod na site. Suriin ito, pagkatapos ay subukang muli ang iyong pagbabago."
+  },
+  "unavailableLocation": {
+    "message": "Hindi available ang lokasyon"
+  },
+  "verificationSending": {
+    "message": "Nagpapadala ng verification email..."
+  },
+  "verificationSent": {
+    "message": "Ipinadala ang email ng pagpapatunay. Suriin ang iyong inbox at spam folder."
+  },
+  "error_login_requires_disconnect": {
+    "message": "Idiskonekta ang kasalukuyang koneksyon sa VPN bago mag-sign in sa isa pang account."
+  },
+  "error_storage_unavailable": {
+    "message": "Hindi available ang mga setting ng lokal na account. Subukang muli kapag available ang imbakan ng browser; ang iyong naka-save na account ay napanatili."
+  },
+  "diagnosticsAssistance": {
+    "message": "Suporta"
+  },
+  "diagnosticsTitle": {
+    "message": "Mga diagnostic"
+  },
+  "diagnosticsIntro": {
+    "message": "Suriin ang FuzeVPN at ang kasalukuyang koneksyon nang hindi binabago ang iyong proteksyon."
+  },
+  "diagnosticsPrivacyTitle": {
+    "message": "Ang iyong data"
+  },
+  "diagnosticsPrivacy": {
+    "message": "Ang mga ulat ay naglalaman ng mga teknikal na estado at error code, hindi kailanman mga password, token, email address, IP address, binisita na mga URL o ibinukod na mga domain."
+  },
+  "diagnosticsAuto": {
+    "message": "Awtomatikong magpadala ng mahahalagang ulat ng error"
+  },
+  "diagnosticsAutoHelp": {
+    "message": "Naka-off bilang default. Mga simpleng teknikal na ulat lamang ang ipinadala para sa account na ito, nang walang kasaysayan ng pagba-browse. Pinapanatili sila ng suporta sa loob ng 30 araw."
+  },
+  "diagnosticsHistoryHelp": {
+    "message": "Nananatiling lokal ang teknikal na kasaysayan: hanggang 200 kaganapan sa loob ng 10 minuto, kahit na naka-off ang awtomatikong pagpapadala. Wala itong kasaysayan ng pagba-browse at na-clear kapag nagsara ang browser o nagbago ang account."
+  },
+  "diagnosticsHistoryCount": {
+    "message": "$1 mga lokal na teknikal na kaganapan"
+  },
+  "diagnosticsAccountRequired": {
+    "message": "Mag-sign in upang paganahin ang pagpapadala. Maaari mo pa ring tingnan at i-export ang isang ulat nang walang account."
+  },
+  "diagnosticsRun": {
+    "message": "Magpatakbo ng mga diagnostic"
+  },
+  "diagnosticsClearHistory": {
+    "message": "I-clear ang lokal na kasaysayan"
+  },
+  "diagnosticsPreparing": {
+    "message": "Inihahanda ang ulat…"
+  },
+  "diagnosticsReports": {
+    "message": "Mga ulat"
+  },
+  "diagnosticsEmpty": {
+    "message": "Wala pang lokal na ulat."
+  },
+  "diagnosticsChooseReport": {
+    "message": "Pumili ng ulat"
+  },
+  "diagnosticsReportLabel": {
+    "message": "$1 · $2 · $3"
+  },
+  "diagnosticsTypeFull": {
+    "message": "Buong ulat"
+  },
+  "diagnosticsTypeSimple": {
+    "message": "Ulat ng error"
+  },
+  "diagnosticsSummary": {
+    "message": "Nakolekta noong $1. FuzeVPN bersyon $2."
+  },
+  "diagnosticsJson": {
+    "message": "Tingnan ang nilalaman ng ulat (JSON)"
+  },
+  "diagnosticsExport": {
+    "message": "I-export ang ulat"
+  },
+  "diagnosticsDelete": {
+    "message": "Tanggalin ang lokal na ulat"
+  },
+  "diagnosticsRetention": {
+    "message": "Ang mga naipadalang ulat ay naka-link sa iyong naka-sign in na account at pinapanatili ng suporta sa loob ng 30 araw. Ang pagtanggal ng lokal na ulat ay hindi nagtatanggal ng ulat na natanggap na ng suporta."
+  },
+  "diagnosticsConsent": {
+    "message": "Ipadala ang ulat na ito upang suportahan"
+  },
+  "diagnosticsDataCollectionRequired": {
+    "message": "Kailangang payagan ng Firefox ang pagkolekta ng teknikal na data upang magpadala ng mga diagnostic. Subukan muli at ibigay ang pahintulot na ito."
+  },
+  "diagnosticsSendHelp": {
+    "message": "Opsyonal ang pagpapadala. Kapag naaprubahan, maaari itong muling subukan nang hanggang 24 na oras na may wastong session para sa parehong account. Maaari mong kanselahin ang mga karagdagang pagsubok. Ang pagkansela ng huli ay hindi ginagarantiya na hindi pa natatanggap ng server ang ulat."
+  },
+  "diagnosticsSend": {
+    "message": "Magpadala ng ulat"
+  },
+  "diagnosticsCancel": {
+    "message": "Kanselahin ang pagpapadala"
+  },
+  "diagnosticsReload": {
+    "message": "I-reload ang page na ito"
+  },
+  "diagnosticsUnavailable": {
+    "message": "Hindi available ang diagnostics. I-reload ang FuzeVPN sa tagapamahala ng mga extension ng browser, pagkatapos ay buksan muli ang pahinang ito. Hindi nagbago ang koneksyon mo sa VPN."
+  },
+  "diagnosticsQueueFull": {
+    "message": "Puno na ang pila sa pagpapadala. Magtanggal ng lokal na ulat o maghintay para matapos ang isang nakabinbing ulat."
+  },
+  "diagnosticsContentUnavailable": {
+    "message": "Ang nilalaman ng ulat ay hindi magagamit. I-export ang lokal na ulat kung ito ay magagamit at makipag-ugnayan sa suporta."
+  },
+  "diagnosticsFailure": {
+    "message": "Hindi makumpleto ang diagnostic action. Ang iyong VPN ay hindi nagbabago."
+  },
+  "diagnosticsChecks": {
+    "message": "Mga tseke"
+  },
+  "diagnosticsCheckFallback": {
+    "message": "Teknikal na pagsusuri: $1"
+  },
+  "diagnosticsCheckLine": {
+    "message": "$1 — $2"
+  },
+  "diagnosticsProxy": {
+    "message": "Proxy ng browser"
+  },
+  "diagnosticsStorage": {
+    "message": "Lokal na imbakan"
+  },
+  "diagnosticsNetwork": {
+    "message": "Koneksyon sa network"
+  },
+  "diagnosticsCleanup": {
+    "message": "Paglilinis ng session"
+  },
+  "diagnosticsResult_passed": {
+    "message": "nakapasa"
+  },
+  "diagnosticsResult_failed": {
+    "message": "Nabigo"
+  },
+  "diagnosticsResult_skipped": {
+    "message": "Hindi ginanap"
+  },
+  "diagnosticsResult_unknown": {
+    "message": "Hindi alam"
+  },
+  "diagnosticsStatus_ready": {
+    "message": "Handa sa device na ito"
+  },
+  "diagnosticsStatus_pending": {
+    "message": "Naghihintay na ipadala"
+  },
+  "diagnosticsStatus_sending": {
+    "message": "Ipinapadala…"
+  },
+  "diagnosticsStatus_session_required": {
+    "message": "Naghihintay ng wastong session para sa parehong account"
+  },
+  "diagnosticsStatus_received": {
+    "message": "Natanggap sa pamamagitan ng suporta"
+  },
+  "diagnosticsStatus_failed": {
+    "message": "Nabigo ang pagpapadala"
+  },
+  "diagnosticsStatus_cancelled": {
+    "message": "Kinansela ang pagpapadala"
+  },
+  "diagnosticsStatus_expired": {
+    "message": "Nag-expire ang deadline ng pagpapadala"
+  },
+  "diagnosticsReceivedAt": {
+    "message": "Natanggap noong $1"
+  },
+  "error_private_browsing_required": {
+    "message": "Kailangan ng Firefox ang pahintulot na ito para i-configure ang VPN, kahit sa mga normal na window. Buksan ang about:addons → FuzeVPN, payagang gumana sa mga pribadong window, at subukang muli."
+  },
+  "error_host_permissions_required": {
+    "message": "Sa Firefox, buksan ang about:addons → FuzeVPN → Mga Pahintulot at payagan ang pag-access sa lahat ng website, pagkatapos ay subukang muli."
+  },
+  "cancelAction": {
+    "message": "Kanselahin"
+  },
+  "refreshLocations": {
+    "message": "I-refresh ang mga lokasyon"
+  },
+  "refreshingLocations": {
+    "message": "Nire-refresh ang mga lokasyon…"
+  },
+  "locationsRefreshError": {
+    "message": "Hindi ma-refresh ang listahan ng mga lokasyon. Pakisubukang muli."
+  },
+  "error_device_revoked_limit": {
+    "message": "Binawi na ang pahintulot para sa device na ito. Naabot na ang limitasyon sa bilang ng mga device: mangyaring mag-alis ng isang device."
+  },
+  "noAvailableLocations": {
+    "message": "Walang available na lokasyon sa ngayon. Pakisubukang muli pagkalipas ng ilang sandali."
+  },
+  "noAvailableFavoriteLocations": {
+    "message": "Pansamantalang hindi available ang iyong mga paboritong lokasyon."
+  },
+  "error_server_full": {
+    "message": "Puno na ang server na ito. Pumili ng ibang lokasyon."
+  },
+  "error_capacity_unavailable": {
+    "message": "Hindi makumpirma ang availability ng server na ito sa ngayon. Pakisubukang muli pagkalipas ng ilang sandali."
+  },
+  "locationHierarchyHelp": {
+    "message": "Pinipili ng pangalan ang isang server; ipinapakita ng arrow ang mga detalye."
+  },
+  "locationCountrySelect": {
+    "message": "Pumili ng available na server: $1"
+  },
+  "locationCitySelect": {
+    "message": "Pumili ng available na server: $1"
+  },
+  "locationShowCities": {
+    "message": "Ipakita ang mga lungsod: $1"
+  },
+  "locationHideCities": {
+    "message": "Itago ang mga lungsod: $1"
+  },
+  "locationShowServers": {
+    "message": "Ipakita ang mga server: $1"
+  },
+  "locationHideServers": {
+    "message": "Itago ang mga server: $1"
+  },
+  "locationAvailableServers": {
+    "message": "Mga available na server: $1"
+  },
+  "legalInformation": {
+    "message": "Impormasyong legal"
+  },
+  "privacyPolicy": {
+    "message": "Patakaran sa privacy"
+  },
+  "termsAndConditions": {
+    "message": "Mga tuntunin ng paggamit at pagbebenta"
+  },
+  "legalNotice": {
+    "message": "Legal na abiso"
+  },
+  "contactSupport": {
+    "message": "Makipag-ugnayan sa suporta"
+  },
+  "webSignIn": {
+    "message": "Mag-sign in sa FuzeVPN"
+  },
+  "webSignInDisconnect": {
+    "message": "Idiskonekta at mag-sign in"
+  },
+  "webSignInPending": {
+    "message": "Nagsa-sign in…"
+  },
+  "webSignInHelp": {
+    "message": "Mag-sign in o gumawa ng account gamit ang Google o email sa customer area ng FuzeVPN."
+  },
+  "webSignInDisconnectHelp": {
+    "message": "Ihihinto ng button na ito ang proteksyon ng browser para makapag-sign in gamit ang Google o email. Walang proteksyon ang pag-browse habang nagsa-sign in."
+  },
+  "webSignInStatus": {
+    "message": "Magpatuloy sa sign-in window ng FuzeVPN. Awtomatikong mag-a-update ang extension kapag tapos na. Isara ang window na iyon para magkansela."
+  },
+  "error_web_login_cancelled": {
+    "message": "Nakansela ang pag-sign in. Subukan muli."
+  },
+  "error_web_login_timeout": {
+    "message": "Masyadong matagal ang pag-sign in. Subukan muli."
+  },
+  "error_web_login_unavailable": {
+    "message": "Hindi available ang pag-sign in sa web. Subukan muli mamaya."
+  },
+  "error_web_login_invalid_callback": {
+    "message": "Hindi ma-verify ang pag-sign in. Magsimula muli mula sa extension."
+  },
+  "error_web_login_denied": {
+    "message": "Hindi pinayagan ang pag-sign in. Subukan muli."
+  },
+  "error_web_login_busy": {
+    "message": "Isara ang sign-in window na nakabukas na bago subukan muli."
+  },
+  "deviceKindFirefox": {
+    "message": "Browser na Firefox"
+  }
+}

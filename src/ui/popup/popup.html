@@ -1,0 +1,762 @@
+<!doctype html>
+<!-- SPDX-License-Identifier: MPL-2.0 -->
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title></title>
+    <link rel="stylesheet" href="./popup.css" />
+  </head>
+  <body>
+    <main class="shell">
+      <header class="topbar">
+        <div class="brand-lockup">
+          <img class="logo" src="/brand/fuzevpn-logo.svg" alt="FuzeVPN" />
+        </div>
+        <button
+          id="settingsButton"
+          class="icon-button"
+          type="button"
+          data-i18n-aria-label="settings"
+          data-i18n-title="settings"
+          aria-haspopup="dialog"
+        >
+          <svg
+            aria-hidden="true"
+            viewBox="0 0 24 24"
+            width="20"
+            height="20"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.7"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path
+              d="m9.5 3-.6 2.4-1.8 1-2.4-.7-2.5 4.3 1.8 1.7v2.1l-1.8 1.7 2.5 4.3 2.4-.7 1.8 1 .6 2.4h5l.6-2.4 1.8-1 2.4.7 2.5-4.3-1.8-1.7v-2.1l1.8-1.7-2.5-4.3-2.4.7-1.8-1L14.5 3z"
+              transform="translate(0 -1) scale(1 .96)"
+            />
+            <circle cx="12" cy="12" r="3" />
+          </svg>
+        </button>
+      </header>
+
+      <section id="recoveryPanel" class="recovery-panel hidden" aria-live="polite">
+        <svg class="recovery-icon" aria-hidden="true" viewBox="0 0 24 24" fill="none">
+          <path d="m12 3 9 4v5c0 5-9 9-9 9s-9-4-9-9V7l9-4Z" />
+          <path d="M12 8v5m0 3h.01" />
+        </svg>
+        <p id="recoveryStatus" class="recovery-status"></p>
+        <p class="muted" data-i18n="recoveryHelp"></p>
+        <div class="recovery-actions">
+          <button
+            id="retryButton"
+            class="primary"
+            type="button"
+            data-i18n="retryConnection"
+          ></button>
+          <button
+            id="recoveryDisconnectButton"
+            class="secondary"
+            type="button"
+            data-i18n="disconnect"
+          ></button>
+        </div>
+      </section>
+
+      <section id="loginView" class="view">
+        <div class="intro login-hero">
+          <div class="login-visual" aria-hidden="true">
+            <svg viewBox="0 0 80 80" fill="none">
+              <circle class="sigil-orbit" cx="40" cy="40" r="35" />
+              <path class="sigil-route" d="M5 40h15m40 0h15M40 5v12m0 47v11" />
+              <path class="sigil-shield" d="m40 19 20 8v13c0 13-20 23-20 23S20 53 20 40V27l20-8Z" />
+              <path class="sigil-rocket" d="m40 29 9 22-9-5-9 5 9-22Zm0 19-3 3 3 6 3-6-3-3Z" />
+            </svg>
+          </div>
+          <div class="intro-copy">
+            <p class="eyebrow" data-i18n="browserProtection"></p>
+            <h1 data-i18n="loginTitle"></h1>
+            <p class="muted" data-i18n="loginSubtitle"></p>
+          </div>
+        </div>
+        <section id="logoutResult" class="logout-result hidden" role="status" aria-live="polite">
+          <p class="logout-result-title" data-i18n="logoutLocalComplete"></p>
+          <dl>
+            <div>
+              <dt data-i18n="logoutApiSession"></dt>
+              <dd id="logoutApiStatus"></dd>
+            </div>
+            <div>
+              <dt data-i18n="logoutProxySessions"></dt>
+              <dd id="logoutProxyStatus"></dd>
+            </div>
+          </dl>
+          <p id="logoutUnconfirmedHelp" class="muted hidden" data-i18n="logoutUnconfirmedHelp"></p>
+        </section>
+        <div id="loginErrorBanner" class="error-banner hidden" role="alert" aria-live="assertive">
+          <p id="loginErrorMessage"></p>
+        </div>
+        <form id="loginForm" class="card form-card web-login-card" novalidate>
+          <div class="web-login-heading">
+            <span class="card-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none">
+                <circle cx="12" cy="8" r="4" />
+                <path d="M4 21v-2a8 8 0 0 1 16 0v2" />
+              </svg>
+            </span>
+            <p class="card-label" data-i18n="account"></p>
+          </div>
+          <p id="webLoginHelp" class="web-login-help" data-i18n="webSignInHelp"></p>
+          <button
+            id="loginButton"
+            class="primary web-login-button"
+            type="submit"
+            disabled
+            aria-describedby="webLoginHelp webLoginStatus"
+          >
+            <span id="webLoginButtonLabel" data-i18n="webSignIn"></span>
+            <svg class="web-login-arrow" aria-hidden="true" viewBox="0 0 24 24" fill="none">
+              <path d="M5 12h14m-6-6 6 6-6 6" />
+            </svg>
+            <span class="web-login-spinner" aria-hidden="true"></span>
+          </button>
+          <p
+            id="webLoginStatus"
+            class="web-login-status hidden"
+            role="status"
+            aria-live="polite"
+          ></p>
+        </form>
+        <p class="login-privacy">
+          <a
+            id="loginPrivacyLink"
+            class="privacy-link"
+            data-legal-link="privacy"
+            target="_blank"
+            rel="noopener noreferrer"
+            data-i18n="privacyPolicy"
+          ></a>
+        </p>
+      </section>
+
+      <section id="mainView" class="view hidden">
+        <div id="errorBanner" class="error-banner hidden" role="alert" aria-live="assertive">
+          <p id="errorMessage"></p>
+          <button
+            id="retryUncertainConnectionButton"
+            class="text-button hidden"
+            type="button"
+            data-i18n="retryConnection"
+          ></button>
+          <button
+            id="errorManageDevicesButton"
+            class="text-button hidden"
+            type="button"
+            data-i18n="manageDevices"
+          ></button>
+        </div>
+
+        <div id="verificationPanel" class="hidden">
+          <p id="verificationStatus" class="muted" role="status"></p>
+          <button
+            id="resendButton"
+            class="text-button"
+            type="button"
+            data-i18n="resendVerification"
+          ></button>
+        </div>
+
+        <section id="statusCard" class="status-card" aria-live="polite">
+          <p class="eyebrow connection-eyebrow" data-i18n="browserProtection"></p>
+          <div class="connection-scene" aria-hidden="true">
+            <svg class="connection-map" viewBox="0 0 284 108" fill="none">
+              <ellipse cx="142" cy="54" rx="108" ry="40" />
+              <ellipse cx="142" cy="54" rx="65" ry="40" />
+              <ellipse cx="142" cy="54" rx="24" ry="40" />
+              <path d="M34 54h216M52 33h180M52 75h180M142 14v80" />
+              <path class="connection-route" d="m49 74 47-42 92 42 47-42" />
+              <circle class="connection-node" cx="49" cy="74" r="3" />
+              <circle class="connection-node" cx="96" cy="32" r="3" />
+              <circle class="connection-node" cx="188" cy="74" r="3" />
+              <circle class="connection-node" cx="235" cy="32" r="3" />
+            </svg>
+            <div id="statusOrb" class="status-orb disconnected">
+              <svg class="status-symbol" viewBox="0 0 32 32" fill="none">
+                <path d="m16 3 11 4.5v7.1c0 7-11 14.4-11 14.4S5 21.6 5 14.6V7.5L16 3Z" />
+                <path d="m16 9 4.5 11-4.5-2.5-4.5 2.5L16 9Zm0 9.5-1.5 1.5 1.5 3 1.5-3-1.5-1.5Z" />
+              </svg>
+              <span></span>
+            </div>
+          </div>
+          <p id="statusLabel" class="status-label"></p>
+          <p id="statusDetail" class="muted centered" data-i18n="browserOnlyDetail"></p>
+          <button id="protectButton" class="primary large" type="button"></button>
+        </section>
+
+        <section id="locationCard" class="card location-card">
+          <div class="location-identity">
+            <span class="card-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none">
+                <path d="M19 10c0 5-7 11-7 11S5 15 5 10a7 7 0 1 1 14 0Z" />
+                <circle cx="12" cy="10" r="2.5" />
+              </svg>
+            </span>
+            <div class="location-copy">
+              <p class="card-label" data-i18n="location"></p>
+              <p id="locationName" class="card-value"></p>
+              <p id="publicIp" class="public-ip" aria-live="polite"></p>
+            </div>
+          </div>
+          <button id="changeLocationButton" class="secondary compact" type="button">
+            <span data-i18n="change"></span>
+            <svg class="action-chevron" aria-hidden="true" viewBox="0 0 16 16" fill="none">
+              <path d="m6 4 4 4-4 4" />
+            </svg>
+          </button>
+        </section>
+
+        <section class="card subscription-card">
+          <span class="card-icon subscription-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none">
+              <rect x="3" y="5" width="18" height="14" rx="3" />
+              <path d="M3 10h18M7 15h4" />
+            </svg>
+          </span>
+          <div class="subscription-copy">
+            <div class="subscription-summary">
+              <div class="subscription-heading">
+                <p class="card-label" data-i18n="subscription"></p>
+                <button
+                  id="refreshSubscriptionButton"
+                  class="refresh-subscription-button"
+                  type="button"
+                  data-i18n-aria-label="refreshSubscription"
+                  data-i18n-title="refreshSubscription"
+                >
+                  <svg aria-hidden="true" viewBox="0 0 24 24" width="16" height="16">
+                    <path
+                      d="M20 6v5h-5M4 18v-5h5M5.7 9A7 7 0 0 1 18.2 7.2L20 11M4 13l1.8 3.8A7 7 0 0 0 18.3 15"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                    />
+                  </svg>
+                </button>
+              </div>
+              <p id="subscriptionStatus" class="card-value small"></p>
+            </div>
+            <p id="subscriptionExpiry" class="muted small-text"></p>
+          </div>
+        </section>
+
+        <p class="privacy-note">
+          <svg aria-hidden="true" viewBox="0 0 24 24" fill="none">
+            <rect x="4" y="4" width="16" height="13" rx="2" />
+            <path d="M8 21h8m-4-4v4M4 8h16" />
+          </svg>
+          <span data-i18n="browserOnlyNotice"></span>
+        </p>
+      </section>
+
+      <dialog id="settingsPanel" class="settings-panel" aria-labelledby="settingsTitle">
+        <div class="settings-head">
+          <div class="dialog-title">
+            <span class="dialog-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none">
+                <path d="M4 7h8m4 0h4M4 17h3m4 0h9" />
+                <circle cx="14" cy="7" r="2" />
+                <circle cx="9" cy="17" r="2" />
+              </svg>
+            </span>
+            <h2 id="settingsTitle" data-i18n="settings"></h2>
+          </div>
+          <button
+            id="closeSettingsButton"
+            class="icon-button"
+            type="button"
+            data-i18n-aria-label="close"
+          >
+            <span aria-hidden="true">×</span>
+          </button>
+        </div>
+        <div class="language-setting">
+          <div class="settings-heading">
+            <svg aria-hidden="true" viewBox="0 0 24 24" fill="none">
+              <circle cx="12" cy="12" r="9" />
+              <ellipse cx="12" cy="12" rx="4" ry="9" />
+              <path d="M3 12h18" />
+            </svg>
+            <label for="languageSelect" data-i18n="language"></label>
+          </div>
+          <select id="languageSelect" aria-describedby="languageHelp languageError">
+            <option value="auto" data-i18n="languageAutomatic"></option>
+          </select>
+          <p id="languageHelp" class="muted" data-i18n="languageHelp"></p>
+          <p id="languageError" class="error-banner hidden" role="alert"></p>
+        </div>
+        <section class="settings-section" aria-labelledby="protectionSettingsTitle">
+          <div class="settings-heading">
+            <svg aria-hidden="true" viewBox="0 0 24 24" fill="none">
+              <path d="m12 3 9 4v5c0 5-9 9-9 9s-9-4-9-9V7l9-4Z" />
+              <path d="m8 12 3 3 5-6" />
+            </svg>
+            <h3
+              id="protectionSettingsTitle"
+              class="settings-section-title"
+              data-i18n="browserProtection"
+            ></h3>
+          </div>
+          <p id="settingsError" class="error-banner hidden" role="alert"></p>
+          <div class="security-setting">
+            <label class="setting-label" for="killSwitchEnabled">
+              <span data-i18n="killSwitch"></span>
+              <input
+                id="killSwitchEnabled"
+                type="checkbox"
+                checked
+                disabled
+                aria-describedby="killSwitchHelp"
+              />
+            </label>
+            <p id="killSwitchHelp" class="muted" data-i18n="killSwitchHelp"></p>
+          </div>
+          <div class="security-setting">
+            <label class="setting-label" for="webRtcProtectionEnabled">
+              <span data-i18n="webRtcProtection"></span>
+              <input
+                id="webRtcProtectionEnabled"
+                type="checkbox"
+                checked
+                disabled
+                aria-describedby="webRtcHelp"
+              />
+            </label>
+            <p id="webRtcHelp" class="muted" data-i18n="webRtcHelp"></p>
+          </div>
+          <button
+            id="manageExclusionsButton"
+            class="secondary full-button"
+            type="button"
+            data-i18n="siteExclusions"
+            aria-haspopup="dialog"
+          ></button>
+          <p id="exclusionsSummary" class="settings-help muted" aria-live="polite"></p>
+          <p
+            id="exclusionsRecoveryNotice"
+            class="settings-help muted hidden"
+            role="status"
+            data-i18n="siteExclusionsPreferencesReset"
+          ></p>
+          <details class="security-limits">
+            <summary data-i18n="securityLimits"></summary>
+            <p id="securityState" class="security-state" aria-live="polite"></p>
+            <p class="settings-help muted" data-i18n="localNetworkHelp"></p>
+            <p class="muted" data-i18n="killSwitchLimits"></p>
+            <p class="muted" data-i18n="incognitoHelp"></p>
+          </details>
+        </section>
+        <section class="settings-section assistance-section" aria-labelledby="assistanceTitle">
+          <div class="settings-heading">
+            <svg aria-hidden="true" viewBox="0 0 24 24" fill="none">
+              <circle cx="12" cy="12" r="9" />
+              <path d="M8 10a4 4 0 0 1 8 0c0 3-4 2-4 5m0 3h.01" />
+            </svg>
+            <h3
+              id="assistanceTitle"
+              class="settings-section-title"
+              data-i18n="diagnosticsAssistance"
+            ></h3>
+          </div>
+          <a
+            id="diagnosticsLink"
+            class="secondary full-link"
+            target="_blank"
+            rel="noreferrer"
+            data-i18n="diagnosticsTitle"
+          ></a>
+          <label class="setting-label" for="diagnosticsAuto">
+            <span data-i18n="diagnosticsAuto"></span>
+            <input
+              id="diagnosticsAuto"
+              type="checkbox"
+              disabled
+              aria-describedby="diagnosticsAutoHelp diagnosticsAccountRequired diagnosticsError"
+            />
+          </label>
+          <p
+            id="diagnosticsAutoHelp"
+            class="settings-help muted"
+            data-i18n="diagnosticsAutoHelp"
+          ></p>
+          <a
+            id="diagnosticsPrivacyLink"
+            class="privacy-link"
+            data-legal-link="privacy"
+            target="_blank"
+            rel="noopener noreferrer"
+            data-i18n="privacyPolicy"
+          ></a>
+          <p
+            id="diagnosticsAccountRequired"
+            class="settings-help muted"
+            data-i18n="diagnosticsAccountRequired"
+          ></p>
+          <p id="diagnosticsError" class="error-banner hidden" role="alert"></p>
+        </section>
+        <section
+          id="accountSettings"
+          class="settings-section account-section"
+          aria-labelledby="accountSettingsTitle"
+        >
+          <div class="settings-heading">
+            <svg aria-hidden="true" viewBox="0 0 24 24" fill="none">
+              <circle cx="12" cy="8" r="4" />
+              <path d="M4 21v-2a8 8 0 0 1 16 0v2" />
+            </svg>
+            <h3 id="accountSettingsTitle" class="settings-section-title" data-i18n="account"></h3>
+          </div>
+          <p id="accountEmail" class="account-email" dir="ltr"></p>
+          <button
+            id="manageDevicesButton"
+            class="secondary full-button"
+            type="button"
+            data-i18n="manageDevices"
+          ></button>
+          <a
+            id="dashboardLink"
+            class="secondary full-link"
+            target="_blank"
+            rel="noreferrer"
+            data-i18n="manageAccount"
+          ></a>
+          <button
+            id="logoutButton"
+            class="danger-button"
+            type="button"
+            data-i18n="signOutAccount"
+          ></button>
+        </section>
+        <section class="settings-section legal-section" aria-labelledby="legalInformationTitle">
+          <div class="settings-heading">
+            <svg aria-hidden="true" viewBox="0 0 24 24" fill="none">
+              <path d="M6 3h8l4 4v14H6V3Zm8 0v5h4M9 12h6m-6 4h6" />
+            </svg>
+            <h3
+              id="legalInformationTitle"
+              class="settings-section-title"
+              data-i18n="legalInformation"
+            ></h3>
+          </div>
+          <nav class="legal-links" aria-labelledby="legalInformationTitle">
+            <a
+              id="legalPrivacyLink"
+              data-legal-link="privacy"
+              target="_blank"
+              rel="noopener noreferrer"
+              data-i18n="privacyPolicy"
+            ></a>
+            <a
+              id="legalTermsLink"
+              data-legal-link="terms"
+              target="_blank"
+              rel="noopener noreferrer"
+              data-i18n="termsAndConditions"
+            ></a>
+            <a
+              id="legalNoticeLink"
+              data-legal-link="legal"
+              target="_blank"
+              rel="noopener noreferrer"
+              data-i18n="legalNotice"
+            ></a>
+            <a
+              id="legalContactLink"
+              data-legal-link="contact"
+              target="_blank"
+              rel="noopener noreferrer"
+              data-i18n="contactSupport"
+            ></a>
+          </nav>
+        </section>
+      </dialog>
+    </main>
+
+    <dialog id="locationDialog" class="location-dialog" aria-labelledby="locationDialogTitle">
+      <div class="dialog-head">
+        <div class="dialog-title">
+          <span class="dialog-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none">
+              <path d="M19 10c0 5-7 11-7 11S5 15 5 10a7 7 0 1 1 14 0Z" />
+              <circle cx="12" cy="10" r="2.5" />
+            </svg>
+          </span>
+          <div>
+            <p class="eyebrow" data-i18n="browserProtection"></p>
+            <h2 id="locationDialogTitle" data-i18n="chooseLocation"></h2>
+          </div>
+        </div>
+        <div class="dialog-actions">
+          <button
+            id="refreshLocationsButton"
+            class="refresh-subscription-button"
+            type="button"
+            data-i18n-aria-label="refreshLocations"
+            data-i18n-title="refreshLocations"
+          >
+            <svg aria-hidden="true" viewBox="0 0 24 24" width="16" height="16">
+              <path
+                d="M20 7v5h-5M4 17v-5h5M6.1 7a7 7 0 0 1 11.55-1.8L20 8M4 16l2.35 2.8A7 7 0 0 0 17.9 17"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.8"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+          </button>
+          <button
+            id="closeLocationButton"
+            class="icon-button"
+            type="button"
+            data-i18n-aria-label="close"
+          >
+            <span aria-hidden="true">×</span>
+          </button>
+        </div>
+      </div>
+      <button
+        id="automaticLocationButton"
+        class="automatic-location"
+        type="button"
+        aria-pressed="false"
+      >
+        <span class="automatic-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none">
+            <path d="m12 3 2.3 6.7L21 12l-6.7 2.3L12 21l-2.3-6.7L3 12l6.7-2.3L12 3Z" />
+            <path d="m19 3 .5 1.5L21 5l-1.5.5L19 7l-.5-1.5L17 5l1.5-.5L19 3Z" />
+          </svg>
+        </span>
+        <span class="automatic-copy">
+          <span class="option-title" data-i18n="automaticLocation"></span>
+          <span class="option-country" data-i18n="automaticLocationHelp"></span>
+        </span>
+      </button>
+      <label for="locationSearch" class="sr-only" data-i18n="searchLocations"></label>
+      <div class="location-search-field">
+        <svg class="search-icon" aria-hidden="true" viewBox="0 0 24 24" fill="none">
+          <circle cx="10.5" cy="10.5" r="6.5" />
+          <path d="m15.5 15.5 5 5" />
+        </svg>
+        <input
+          id="locationSearch"
+          class="location-search"
+          type="search"
+          autocomplete="off"
+          maxlength="100"
+          data-i18n-placeholder="searchLocations"
+        />
+      </div>
+      <div class="location-filters" role="group" data-i18n-aria-label="locationFilters">
+        <button
+          id="allLocationsFilter"
+          type="button"
+          aria-pressed="true"
+          data-i18n="allLocations"
+        ></button>
+        <button
+          id="favoriteLocationsFilter"
+          type="button"
+          aria-pressed="false"
+          data-i18n="favoriteLocations"
+        ></button>
+        <button
+          id="recentLocationsFilter"
+          type="button"
+          aria-pressed="false"
+          data-i18n="recentLocations"
+        ></button>
+      </div>
+      <p id="locationEmpty" class="location-empty hidden" role="status"></p>
+      <p id="locationPreferenceError" class="inline-error hidden" role="alert"></p>
+      <p id="locationLoadStatus" class="location-load-status muted hidden" role="status"></p>
+      <p
+        id="locationHierarchyHelp"
+        class="location-hierarchy-help"
+        data-i18n="locationHierarchyHelp"
+      ></p>
+      <div id="locationList" class="location-list"></div>
+    </dialog>
+
+    <dialog
+      id="devicesDialog"
+      class="location-dialog devices-dialog"
+      aria-labelledby="devicesTitle"
+    >
+      <div class="dialog-head">
+        <div class="dialog-title">
+          <span class="dialog-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none">
+              <rect x="2" y="4" width="14" height="11" rx="2" />
+              <path d="M6 19h7m-4-4v4" />
+              <rect x="17" y="10" width="5" height="11" rx="1" />
+            </svg>
+          </span>
+          <div>
+            <p class="eyebrow" data-i18n="account"></p>
+            <h2 id="devicesTitle" data-i18n="devices"></h2>
+          </div>
+        </div>
+        <button
+          id="closeDevicesButton"
+          class="icon-button"
+          type="button"
+          data-i18n-aria-label="close"
+        >
+          <span aria-hidden="true">×</span>
+        </button>
+      </div>
+      <div class="devices-summary">
+        <p id="deviceCount" class="card-value"></p>
+        <button
+          id="refreshDevicesButton"
+          class="refresh-subscription-button"
+          type="button"
+          data-i18n-aria-label="refreshDevices"
+          data-i18n-title="refreshDevices"
+        >
+          <svg aria-hidden="true" viewBox="0 0 24 24" width="16" height="16">
+            <path
+              d="M20 6v5h-5M4 18v-5h5M5.7 9A7 7 0 0 1 18.2 7.2L20 11M4 13l1.8 3.8A7 7 0 0 0 18.3 15"
+              fill="none"
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+            />
+          </svg>
+        </button>
+      </div>
+      <p id="devicesError" class="error-banner hidden" role="alert"></p>
+      <div id="deviceList" class="device-list" aria-live="polite"></div>
+    </dialog>
+
+    <dialog
+      id="exclusionsDialog"
+      class="location-dialog exclusions-dialog"
+      aria-labelledby="exclusionsTitle"
+    >
+      <div class="dialog-head">
+        <div class="dialog-title">
+          <span class="dialog-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none">
+              <path d="M9 5H5v14h4m7-7H7m6-4 4 4-4 4M19 5h2v14h-2" />
+            </svg>
+          </span>
+          <h2 id="exclusionsTitle" data-i18n="siteExclusions"></h2>
+        </div>
+        <button
+          id="closeExclusionsButton"
+          class="icon-button"
+          type="button"
+          data-i18n-aria-label="close"
+        >
+          <span aria-hidden="true">×</span>
+        </button>
+      </div>
+      <p class="muted exclusion-help" data-i18n="siteExclusionsHelp"></p>
+      <label class="setting-label" for="exclusionsEnabled">
+        <span data-i18n="siteExclusionsEnabled"></span>
+        <input id="exclusionsEnabled" type="checkbox" disabled />
+      </label>
+      <p id="exclusionsState" class="exclusion-state" role="status"></p>
+      <p
+        id="exclusionsDialogRecoveryNotice"
+        class="muted exclusion-help hidden"
+        role="status"
+        data-i18n="siteExclusionsPreferencesReset"
+      ></p>
+      <div id="exclusionsError" class="error-banner hidden" role="alert">
+        <p id="exclusionsErrorMessage"></p>
+        <button
+          id="retryExclusionsButton"
+          class="text-button"
+          type="button"
+          data-i18n="siteExclusionsRetry"
+        ></button>
+      </div>
+      <form id="exclusionForm" class="exclusion-form" novalidate>
+        <label class="field" for="exclusionInput">
+          <span data-i18n="siteExclusionInput"></span>
+          <input
+            id="exclusionInput"
+            type="text"
+            inputmode="url"
+            dir="ltr"
+            autocomplete="off"
+            autocapitalize="none"
+            spellcheck="false"
+            maxlength="2048"
+            data-i18n-placeholder="siteExclusionPlaceholder"
+            aria-describedby="exclusionPreview exclusionInputError"
+          />
+        </label>
+        <p id="exclusionPreview" class="exclusion-preview hidden" role="status"></p>
+        <p id="exclusionInputError" class="exclusion-input-error hidden" role="status"></p>
+        <label class="exclusion-subdomains" for="exclusionSubdomains">
+          <input id="exclusionSubdomains" type="checkbox" checked />
+          <span data-i18n="siteExclusionSubdomains"></span>
+        </label>
+        <button
+          id="addExclusionButton"
+          class="primary"
+          type="submit"
+          disabled
+          data-i18n="siteExclusionAdd"
+        ></button>
+      </form>
+      <p id="exclusionsCount" class="exclusion-count"></p>
+      <p id="exclusionsEmpty" class="muted exclusion-help" data-i18n="siteExclusionsEmpty"></p>
+      <div id="exclusionsList" class="exclusions-list"></div>
+      <details class="security-limits">
+        <summary data-i18n="siteExclusionsDetails"></summary>
+        <p class="muted" data-i18n="siteExclusionsResources"></p>
+        <p class="muted" data-i18n="siteExclusionsReload"></p>
+        <p class="muted" data-i18n="siteExclusionsWebRtc"></p>
+        <p class="muted" data-i18n="siteExclusionsLocal"></p>
+      </details>
+    </dialog>
+
+    <dialog
+      id="confirmationDialog"
+      class="location-dialog confirmation-dialog"
+      aria-labelledby="confirmationTitle"
+      aria-describedby="confirmationMessage"
+    >
+      <form method="dialog">
+        <h2 id="confirmationTitle"></h2>
+        <p id="confirmationMessage"></p>
+        <div class="confirmation-actions">
+          <button
+            id="confirmationCancelButton"
+            class="secondary"
+            type="submit"
+            value="cancel"
+            data-i18n="cancelAction"
+            autofocus
+          ></button>
+          <button
+            id="confirmationAcceptButton"
+            class="danger-button"
+            type="submit"
+            value="confirm"
+          ></button>
+        </div>
+      </form>
+    </dialog>
+
+    <script type="module" src="./popup.ts"></script>
+  </body>
+</html>

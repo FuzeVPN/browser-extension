@@ -1,0 +1,830 @@
+{
+  "extensionName": {
+    "message": "FuzeVPN"
+  },
+  "extensionDescription": {
+    "message": "Păstrați-vă confidențialitatea și sporiți-vă securitatea cu un singur clic."
+  },
+  "siteExclusionsReloadRequired": {
+    "message": "Reîncărcați FuzeVPN din managerul de extensii al browserului pentru a finaliza actualizarea și a utiliza excluderile de site-uri."
+  },
+  "extensionCommunicationError": {
+    "message": "Extensia nu răspunde. Închideți această fereastră, apoi reîncărcați FuzeVPN din managerul de extensii al browserului."
+  },
+  "actionDisconnected": {
+    "message": "FuzeVPN — Deconectat"
+  },
+  "actionConnected": {
+    "message": "FuzeVPN — Protejat în acest browser"
+  },
+  "actionReconnecting": {
+    "message": "FuzeVPN — Reconectare"
+  },
+  "actionError": {
+    "message": "FuzeVPN — Atenție necesară"
+  },
+  "browserProtection": {
+    "message": "Protecția browserului"
+  },
+  "loginTitle": {
+    "message": "Bun venit la FuzeVPN"
+  },
+  "loginSubtitle": {
+    "message": "Conectați-vă pentru a vă proteja navigarea în acest browser."
+  },
+  "email": {
+    "message": "Adresă de e-mail"
+  },
+  "emailPlaceholder": {
+    "message": "you@example.com"
+  },
+  "password": {
+    "message": "Parolă"
+  },
+  "signIn": {
+    "message": "Conectați-vă"
+  },
+  "signingIn": {
+    "message": "Se conectează..."
+  },
+  "forgotPassword": {
+    "message": "Ai uitat parola?"
+  },
+  "createAccount": {
+    "message": "Creați un cont"
+  },
+  "settings": {
+    "message": "Setări"
+  },
+  "close": {
+    "message": "Închide"
+  },
+  "statusDisconnected": {
+    "message": "Deconectat"
+  },
+  "statusConnecting": {
+    "message": "Se conectează…"
+  },
+  "statusChanging": {
+    "message": "Se schimbă locația…"
+  },
+  "statusProtected": {
+    "message": "Protejat în acest browser"
+  },
+  "statusRefreshing": {
+    "message": "Se reînnoiește în siguranță…"
+  },
+  "statusDisconnecting": {
+    "message": "Se deconectează…"
+  },
+  "statusError": {
+    "message": "Protecția sa oprit"
+  },
+  "browserOnlyDetail": {
+    "message": "Protecție pentru acest browser."
+  },
+  "location": {
+    "message": "Locație"
+  },
+  "change": {
+    "message": "Schimbare"
+  },
+  "noLocation": {
+    "message": "Nicio locație disponibilă"
+  },
+  "protectBrowser": {
+    "message": "Protejați browserul"
+  },
+  "disconnect": {
+    "message": "Deconectați-vă"
+  },
+  "subscription": {
+    "message": "Abonament"
+  },
+  "refreshSubscription": {
+    "message": "Actualizează abonamentul"
+  },
+  "refreshingSubscription": {
+    "message": "Se actualizează abonamentul..."
+  },
+  "subscriptionActive": {
+    "message": "Activ"
+  },
+  "subscriptionInactive": {
+    "message": "Inactiv"
+  },
+  "expiresOn": {
+    "message": "Expiră pe $1"
+  },
+  "noExpiry": {
+    "message": "Fără dată de expirare"
+  },
+  "browserOnlyNotice": {
+    "message": "Doar acest browser. Alte aplicații și browsere nu sunt acoperite."
+  },
+  "resendVerification": {
+    "message": "Retrimiteți e-mailul"
+  },
+  "incognitoHelp": {
+    "message": "Navigarea privată folosește aceeași protecție numai când extensia este permisă în modul privat din setările browserului."
+  },
+  "manageAccount": {
+    "message": "Gestionează-mi contul"
+  },
+  "account": {
+    "message": "Cont"
+  },
+  "devices": {
+    "message": "Dispozitive"
+  },
+  "manageDevices": {
+    "message": "Gestionați dispozitivele"
+  },
+  "refreshDevices": {
+    "message": "Actualizează dispozitivele"
+  },
+  "deviceCount": {
+    "message": "$1 / $2 dispozitive"
+  },
+  "loadingDevices": {
+    "message": "Se încarcă dispozitivele..."
+  },
+  "noDevices": {
+    "message": "Nu există dispozitive active."
+  },
+  "currentDevice": {
+    "message": "Acest dispozitiv"
+  },
+  "deviceKindBrowser": {
+    "message": "Extensie browser"
+  },
+  "deviceKindVpn": {
+    "message": "Dispozitiv VPN"
+  },
+  "profile_browser_proxy": {
+    "message": "Proxy de browser"
+  },
+  "profile_wireguard": {
+    "message": "WireGuard"
+  },
+  "profile_openvpn": {
+    "message": "OpenVPN"
+  },
+  "none": {
+    "message": "nici unul"
+  },
+  "deviceCreatedOn": {
+    "message": "Creat pe $1"
+  },
+  "deleteDevice": {
+    "message": "Ștergeți dispozitivul"
+  },
+  "confirmDeleteDevice": {
+    "message": "Eliminați „$1”? Conexiunile sale VPN se vor opri și profilurile sale vor fi eliminate."
+  },
+  "resetDevice": {
+    "message": "Resetați dispozitivul"
+  },
+  "confirmResetDevice": {
+    "message": "Resetați această extensie? Va fi înregistrat ca dispozitiv nou data viitoare când îl utilizați."
+  },
+  "signOutAccount": {
+    "message": "Deconectați-vă de la cont"
+  },
+  "chooseLocation": {
+    "message": "Alegeți o locație"
+  },
+  "error_invalid_credentials": {
+    "message": "Adresa de e-mail sau parola este incorectă."
+  },
+  "error_unauthorized": {
+    "message": "Sesiunea dvs. a expirat. Vă rugăm să vă conectați din nou."
+  },
+  "error_email_verification_required": {
+    "message": "Verificați-vă adresa de e-mail înainte de a activa protecția."
+  },
+  "errorVerificationCooldown": {
+    "message": "Un nou e-mail poate fi solicitat în $1 secunde."
+  },
+  "error_verification_email_cooldown": {
+    "message": "Vă rugăm să așteptați înainte de a solicita un alt e-mail."
+  },
+  "error_subscription_required": {
+    "message": "Este necesar un abonament activ pentru a proteja acest browser."
+  },
+  "error_device_limit": {
+    "message": "A fost atins numărul maxim de dispozitive. Vă rugăm să eliminați un dispozitiv."
+  },
+  "error_device_identity_revoked": {
+    "message": "Acest dispozitiv nu mai este autorizat. Încercați să vă conectați din nou."
+  },
+  "error_device_proof_invalid": {
+    "message": "Nu am putut verifica acest dispozitiv. Verificați data și ora computerului, apoi reîncercați."
+  },
+  "error_device_proof_replayed": {
+    "message": "Această solicitare a fost deja procesată. Încearcă din nou."
+  },
+  "error_invalid_device": {
+    "message": "Acest dispozitiv nu a fost recunoscut. Încercați să vă conectați din nou."
+  },
+  "error_device_exists": {
+    "message": "Identitatea acestui dispozitiv este deja conectată la alt cont."
+  },
+  "error_not_found": {
+    "message": "Această operațiune nu mai este disponibilă. Încercați din nou."
+  },
+  "error_invalid_location": {
+    "message": "Această locație este indisponibilă. Alege altul."
+  },
+  "error_rate_limited": {
+    "message": "Prea multe încercări. Așteptați un moment și încercați din nou."
+  },
+  "error_proxy_unavailable": {
+    "message": "Acest server este temporar indisponibil. Încercați din nou peste un moment."
+  },
+  "error_api_token_expired": {
+    "message": "Sesiunea de cont a expirat. Vă rugăm să vă conectați din nou."
+  },
+  "error_network_error": {
+    "message": "Rețeaua este indisponibilă. Verificați-vă conexiunea la internet."
+  },
+  "error_request_timeout": {
+    "message": "Serviciul a durat prea mult să răspundă. Încearcă din nou."
+  },
+  "error_invalid_response": {
+    "message": "Serviciul a returnat un răspuns neașteptat."
+  },
+  "error_proxy_certificate_invalid": {
+    "message": "Nu am putut verifica securitatea serverului. Conexiunea a fost oprită."
+  },
+  "error_proxy_controlled_by_extension": {
+    "message": "O altă extensie controlează în prezent proxy-ul browserului."
+  },
+  "error_proxy_controlled_by_policy": {
+    "message": "O politică de administrator împiedică FuzeVPN să schimbe proxy-ul."
+  },
+  "error_proxy_authentication_failed": {
+    "message": "Serverul nu a acceptat conexiunea. Încercați să vă conectați din nou."
+  },
+  "error_session_expired": {
+    "message": "Conexiunea dvs. protejată a expirat. Conectați-vă din nou."
+  },
+  "error_email_delivery_unavailable": {
+    "message": "E-mailul nu poate fi trimis acum."
+  },
+  "error_unknown_error": {
+    "message": "A apărut o eroare neașteptată. Încearcă din nou."
+  },
+  "actionBlocked": {
+    "message": "FuzeVPN — Navigare blocată"
+  },
+  "statusBlockedRetry": {
+    "message": "Navigare întreruptă — reconectare"
+  },
+  "statusBlockedAction": {
+    "message": "Navigare întreruptă — verificați conexiunea"
+  },
+  "statusProtectionUnavailable": {
+    "message": "Protecție indisponibilă — navigarea nu este blocată"
+  },
+  "recoveryHelp": {
+    "message": "Reîncercați să reluați protecția. Deconectare vă permite să navigați fără FuzeVPN."
+  },
+  "retryConnection": {
+    "message": "Reîncercați"
+  },
+  "killSwitch": {
+    "message": "Comutator de oprire"
+  },
+  "killSwitchHelp": {
+    "message": "Blochează noi solicitări web dacă conexiunea VPN se întrerupe. Site-urile excluse rămân accesibile în afara VPN."
+  },
+  "webRtcProtection": {
+    "message": "Protecție WebRTC"
+  },
+  "webRtcHelp": {
+    "message": "Vă ajută să vă păstrați adresa IP privată în timpul apelurilor web. Este posibil ca unele apeluri să nu funcționeze. Dezactivarea acestei opțiuni poate dezvălui adresa IP reală."
+  },
+  "securityEffectiveState": {
+    "message": "$1 · $2"
+  },
+  "securityBlocked": {
+    "message": "Navigarea blocată"
+  },
+  "securityNotBlocked": {
+    "message": "Navigarea nu este blocată"
+  },
+  "securityWebRtcActive": {
+    "message": "Restricție WebRTC activă"
+  },
+  "securityWebRtcInactive": {
+    "message": "Restricția WebRTC inactivă"
+  },
+  "localNetworkHelp": {
+    "message": "Adresele IP locale și numele locale comune sunt blocate în timpul protecției. Un domeniu exclus poate oferi în continuare acces la rețeaua locală. Setările de sistem IPv6 sunt neschimbate."
+  },
+  "securityLimits": {
+    "message": "Despre această protecție"
+  },
+  "killSwitchLimits": {
+    "message": "Numai acest browser: conexiunile existente și unele comunicații interne ale browserului sau ale altor extensii pot continua. O altă extensie sau o politică poate înlocui proxy-ul înainte ca FuzeVPN să reacționeze. Dezactivarea extensiei elimină protecția. Fără blocare la nivel de sistem."
+  },
+  "error_traffic_guard_failed": {
+    "message": "Blocarea de navigare nu a putut fi verificată. Protecția nu este garantată. Verificați permisiunile extensiei."
+  },
+  "error_webrtc_control_unavailable": {
+    "message": "Restricția WebRTC nu a putut fi aplicată. Verificați setările, alte extensii sau politica de administrator."
+  },
+  "language": {
+    "message": "Limba"
+  },
+  "languageAutomatic": {
+    "message": "Automat — limba browserului"
+  },
+  "languageHelp": {
+    "message": "Modificările se aplică imediat. Modul automat urmează limba browserului, care poate diferi de limba sistemului."
+  },
+  "languageSaveError": {
+    "message": "Nu s-a putut salva limba. Alegerea dvs. anterioară este păstrată. Încearcă din nou."
+  },
+  "publicIp": {
+    "message": "IP public"
+  },
+  "vpnIp": {
+    "message": "IP VPN"
+  },
+  "ipChecking": {
+    "message": "Se verifică…"
+  },
+  "ipUnavailable": {
+    "message": "Indisponibil"
+  },
+  "ipLookupExplanation": {
+    "message": "IP verificat cu ipify folosind conexiunea curentă. Nu se trimite istoric de navigare."
+  },
+  "automaticLocation": {
+    "message": "automată"
+  },
+  "automaticLocationHelp": {
+    "message": "Cel mai bun timp de răspuns recent sau ultima locație."
+  },
+  "automaticLocationName": {
+    "message": "Automată · $1"
+  },
+  "searchLocations": {
+    "message": "Căutați țara sau orașul"
+  },
+  "locationFilters": {
+    "message": "Filtrați locațiile"
+  },
+  "allLocations": {
+    "message": "Toate"
+  },
+  "favoriteLocations": {
+    "message": "Favorite"
+  },
+  "recentLocations": {
+    "message": "Recent"
+  },
+  "noMatchingLocations": {
+    "message": "Nicio locație nu corespunde căutării dvs."
+  },
+  "noFavoriteLocations": {
+    "message": "Adăugați o stea pentru a vă păstra locațiile preferate aici."
+  },
+  "noRecentLocations": {
+    "message": "Locațiile dvs. conectate recent vor apărea aici."
+  },
+  "addFavorite": {
+    "message": "Adăugați $1 la favorite"
+  },
+  "removeFavorite": {
+    "message": "Eliminați $1 din favorite"
+  },
+  "unavailableFavoriteLocation": {
+    "message": "Locație favorită indisponibilă $1"
+  },
+  "locationSaveError": {
+    "message": "Modificarea nu a putut fi finalizată. Este posibil ca unele setări să fi fost salvate. Verificați opțiunea afișată înainte de a încerca din nou."
+  },
+  "siteExclusions": {
+    "message": "Site-uri excluse"
+  },
+  "siteExclusionsHelp": {
+    "message": "Aceste site-uri vă folosesc conexiunea fără FuzeVPN, chiar dacă VPN-ul se defectează."
+  },
+  "siteExclusionsEnabled": {
+    "message": "Activați excepțiile"
+  },
+  "siteExclusionInput": {
+    "message": "Domeniu sau URL"
+  },
+  "siteExclusionPlaceholder": {
+    "message": "exemplu.com"
+  },
+  "siteExclusionPreview": {
+    "message": "Domeniul selectat: $1"
+  },
+  "siteExclusionSubdomains": {
+    "message": "Includeți subdomenii"
+  },
+  "siteExclusionAdd": {
+    "message": "Adăugați site"
+  },
+  "siteExclusionsEmpty": {
+    "message": "Fără site-uri excluse. Adăugați numai site-urile pe care doriți să le utilizați fără VPN."
+  },
+  "siteExclusionsCount": {
+    "message": "$1 / 100 de site-uri"
+  },
+  "siteExclusionScopeSubdomains": {
+    "message": "Domeniu și subdomenii"
+  },
+  "siteExclusionScopeExact": {
+    "message": "Numai domeniul exact"
+  },
+  "siteExclusionRemove": {
+    "message": "Eliminați $1"
+  },
+  "siteExclusionsDetails": {
+    "message": "Cum funcționează excepțiile?"
+  },
+  "siteExclusionsResources": {
+    "message": "Resursele din alte domenii rămân protejate. Excluderea unei pagini nu exclude automat celălalt conținut al acesteia."
+  },
+  "siteExclusionsReload": {
+    "message": "Reîncărcați site-ul după o modificare. Conexiunile existente își pot păstra ruta anterioară."
+  },
+  "siteExclusionsWebRtc": {
+    "message": "Protecția WebRTC rămâne o setare globală, inclusiv pentru site-urile excluse."
+  },
+  "siteExclusionsLocal": {
+    "message": "Salvat numai în acest browser și păstrat după deconectarea din cont."
+  },
+  "siteExclusionsOn": {
+    "message": "Excepții activate"
+  },
+  "siteExclusionsOff": {
+    "message": "Excepțiile sunt dezactivate"
+  },
+  "siteExclusionsSummary": {
+    "message": "$1 site-uri în afara VPN"
+  },
+  "siteExclusionsPending": {
+    "message": "Se aplică excepții..."
+  },
+  "siteExclusionsInterrupted": {
+    "message": "Schimbarea a fost întreruptă. Garda temporară rămâne pe loc."
+  },
+  "siteExclusionsSaveError": {
+    "message": "Schimbarea nu a putut fi finalizată. Verificați setările și încercați din nou."
+  },
+  "siteExclusionsRetry": {
+    "message": "Reîncercați"
+  },
+  "siteExclusionInvalid": {
+    "message": "Introduceți un domeniu public valid. Nu sunt acceptate IP-urile, numele locale, metacaracterele, sufixele publice și domeniile rezervate."
+  },
+  "siteExclusionDuplicate": {
+    "message": "Acest domeniu este deja pe listă."
+  },
+  "siteExclusionsLimit": {
+    "message": "Limita de 100 de locații a fost atinsă. Eliminați un site pentru a adăuga altul."
+  },
+  "statusProtectedExceptions": {
+    "message": "VPN activă · $1 excepții"
+  },
+  "statusBlockedExceptions": {
+    "message": "Doar site-urile excluse rămân accesibile"
+  },
+  "securityBlockedExceptions": {
+    "message": "Navigarea blocată, cu excepția site-urilor excluse"
+  },
+  "securityBlockUnverified": {
+    "message": "Blocarea nu a fost verificată"
+  },
+  "logoutLocalComplete": {
+    "message": "Deconectare locală finalizată."
+  },
+  "logoutApiSession": {
+    "message": "Sesiune de cont curent"
+  },
+  "logoutProxySessions": {
+    "message": "Sesiuni VPN cunoscute"
+  },
+  "logoutRevocationPending": {
+    "message": "Revocare în curs..."
+  },
+  "logoutRevocationConfirmed": {
+    "message": "Revocarea confirmată"
+  },
+  "logoutRevocationUnconfirmed": {
+    "message": "Revocarea nu a fost confirmată"
+  },
+  "logoutUnconfirmedHelp": {
+    "message": "Unele sesiuni la distanță pot rămâne active până când expiră."
+  },
+  "deviceQuotaLoading": {
+    "message": "Se încarcă limita dispozitivului..."
+  },
+  "deviceQuotaUnknown": {
+    "message": "Limita dispozitivului nu este disponibilă"
+  },
+  "error_proxy_creation_uncertain": {
+    "message": "Serverul nu a confirmat crearea noii conexiuni. Reconectarea automată este întreruptă."
+  },
+  "siteExclusionsPreferencesReset": {
+    "message": "Excepțiile de site salvate au fost resetate după ce nu au putut fi citite. Adăugați din nou site-urile pe care doriți să le excludeți."
+  },
+  "siteExclusionsConflict": {
+    "message": "Lista de site-uri excluse s-a schimbat. Examinați-l, apoi încercați din nou modificarea."
+  },
+  "unavailableLocation": {
+    "message": "Locație indisponibilă"
+  },
+  "verificationSending": {
+    "message": "Se trimite e-mail de verificare..."
+  },
+  "verificationSent": {
+    "message": "E-mail de verificare trimis. Verificați-vă căsuța de e-mail și dosarul de spam."
+  },
+  "error_login_requires_disconnect": {
+    "message": "Deconectați conexiunea VPN curentă înainte de a vă conecta la alt cont."
+  },
+  "error_storage_unavailable": {
+    "message": "Setările contului local nu sunt disponibile. Reîncercați când stocarea browserului este disponibilă; contul dvs. salvat a fost păstrat."
+  },
+  "diagnosticsAssistance": {
+    "message": "Sprijin"
+  },
+  "diagnosticsTitle": {
+    "message": "Diagnosticare"
+  },
+  "diagnosticsIntro": {
+    "message": "Verificați FuzeVPN și conexiunea curentă fără a vă schimba protecția."
+  },
+  "diagnosticsPrivacyTitle": {
+    "message": "Datele dvs"
+  },
+  "diagnosticsPrivacy": {
+    "message": "Rapoartele conțin stări tehnice și coduri de eroare, niciodată parole, simboluri, adrese de e-mail, adrese IP, adrese URL vizitate sau domenii excluse."
+  },
+  "diagnosticsAuto": {
+    "message": "Trimite automat rapoarte de eroare importante"
+  },
+  "diagnosticsAutoHelp": {
+    "message": "Oprit implicit. Pentru acest cont sunt trimise doar rapoarte tehnice simple, fără istoric de navigare. Asistența îi păstrează timp de 30 de zile."
+  },
+  "diagnosticsHistoryHelp": {
+    "message": "Istoricul tehnic rămâne local: până la 200 de evenimente în 10 minute, chiar și atunci când trimiterea automată este dezactivată. Nu conține istoric de navigare și este șters atunci când browserul se închide sau se schimbă contul."
+  },
+  "diagnosticsHistoryCount": {
+    "message": "$1 evenimente tehnice locale"
+  },
+  "diagnosticsAccountRequired": {
+    "message": "Conectați-vă pentru a activa trimiterea. Puteți vedea și exporta în continuare un raport fără un cont."
+  },
+  "diagnosticsRun": {
+    "message": "Rulați diagnosticarea"
+  },
+  "diagnosticsClearHistory": {
+    "message": "Ștergeți istoria locală"
+  },
+  "diagnosticsPreparing": {
+    "message": "Se pregateste raportul..."
+  },
+  "diagnosticsReports": {
+    "message": "Rapoarte"
+  },
+  "diagnosticsEmpty": {
+    "message": "Niciun raport local încă."
+  },
+  "diagnosticsChooseReport": {
+    "message": "Alegeți un raport"
+  },
+  "diagnosticsReportLabel": {
+    "message": "$1 · $2 · $3"
+  },
+  "diagnosticsTypeFull": {
+    "message": "Raport complet"
+  },
+  "diagnosticsTypeSimple": {
+    "message": "Raport de eroare"
+  },
+  "diagnosticsSummary": {
+    "message": "Colectat pe $1. FuzeVPN versiunea $2."
+  },
+  "diagnosticsJson": {
+    "message": "Vizualizați conținutul raportului (JSON)"
+  },
+  "diagnosticsExport": {
+    "message": "Raport de export"
+  },
+  "diagnosticsDelete": {
+    "message": "Ștergeți raportul local"
+  },
+  "diagnosticsRetention": {
+    "message": "Rapoartele trimise sunt conectate la contul dvs. conectat și păstrate de asistență timp de 30 de zile. Ștergerea unui raport local nu șterge un raport deja primit de asistență."
+  },
+  "diagnosticsConsent": {
+    "message": "Trimiteți acest raport la asistență"
+  },
+  "diagnosticsDataCollectionRequired": {
+    "message": "Firefox trebuie să permită colectarea datelor tehnice pentru a trimite diagnostice. Încercați din nou și acordați această permisiune."
+  },
+  "diagnosticsSendHelp": {
+    "message": "Trimiterea este opțională. Odată aprobat, poate reîncerca până la 24 de ore cu o sesiune validă pentru același cont. Puteți anula alte încercări. Anularea cu întârziere nu garantează că serverul nu a primit deja raportul."
+  },
+  "diagnosticsSend": {
+    "message": "Trimite raport"
+  },
+  "diagnosticsCancel": {
+    "message": "Anulează trimiterea"
+  },
+  "diagnosticsReload": {
+    "message": "Reîncărcați această pagină"
+  },
+  "diagnosticsUnavailable": {
+    "message": "Diagnosticarea nu este disponibilă. Reîncărcați FuzeVPN din managerul de extensii al browserului, apoi redeschideți această pagină. VPN-ul dvs. rămâne neschimbat."
+  },
+  "diagnosticsQueueFull": {
+    "message": "Coada de expediere este plină. Ștergeți un raport local sau așteptați ca un raport în așteptare să se termine."
+  },
+  "diagnosticsContentUnavailable": {
+    "message": "Conținutul raportului nu este disponibil. Exportați raportul local dacă este disponibil și contactați asistența."
+  },
+  "diagnosticsFailure": {
+    "message": "Acțiunea de diagnosticare nu a putut fi finalizată. VPN-ul dvs. este neschimbat."
+  },
+  "diagnosticsChecks": {
+    "message": "Cecuri"
+  },
+  "diagnosticsCheckFallback": {
+    "message": "Verificare tehnică: $1"
+  },
+  "diagnosticsCheckLine": {
+    "message": "$1 — $2"
+  },
+  "diagnosticsProxy": {
+    "message": "Proxy de browser"
+  },
+  "diagnosticsStorage": {
+    "message": "Stocare locală"
+  },
+  "diagnosticsNetwork": {
+    "message": "Conexiune la rețea"
+  },
+  "diagnosticsCleanup": {
+    "message": "Curățarea sesiunii"
+  },
+  "diagnosticsResult_passed": {
+    "message": "A trecut"
+  },
+  "diagnosticsResult_failed": {
+    "message": "A eșuat"
+  },
+  "diagnosticsResult_skipped": {
+    "message": "Neefectuat"
+  },
+  "diagnosticsResult_unknown": {
+    "message": "Necunoscut"
+  },
+  "diagnosticsStatus_ready": {
+    "message": "Gata pe acest dispozitiv"
+  },
+  "diagnosticsStatus_pending": {
+    "message": "Astept sa trimita"
+  },
+  "diagnosticsStatus_sending": {
+    "message": "Se trimite…"
+  },
+  "diagnosticsStatus_session_required": {
+    "message": "Se așteaptă o sesiune validă pentru același cont"
+  },
+  "diagnosticsStatus_received": {
+    "message": "Primit de suport"
+  },
+  "diagnosticsStatus_failed": {
+    "message": "Trimiterea a eșuat"
+  },
+  "diagnosticsStatus_cancelled": {
+    "message": "Trimiterea a fost anulată"
+  },
+  "diagnosticsStatus_expired": {
+    "message": "Termenul de trimitere a expirat"
+  },
+  "diagnosticsReceivedAt": {
+    "message": "Primit pe $1"
+  },
+  "error_private_browsing_required": {
+    "message": "Firefox necesită această permisiune pentru a configura VPN-ul, chiar și în ferestrele normale. Deschideți about:addons → FuzeVPN, permiteți rularea în ferestre private și încercați din nou."
+  },
+  "error_host_permissions_required": {
+    "message": "În Firefox, deschide about:addons → FuzeVPN → Permisiuni și permite accesul la toate site-urile, apoi încearcă din nou."
+  },
+  "cancelAction": {
+    "message": "Anulează"
+  },
+  "refreshLocations": {
+    "message": "Actualizează locațiile"
+  },
+  "refreshingLocations": {
+    "message": "Se actualizează locațiile…"
+  },
+  "locationsRefreshError": {
+    "message": "Lista locațiilor nu a putut fi actualizată. Încearcă din nou."
+  },
+  "error_device_revoked_limit": {
+    "message": "Autorizarea acestui dispozitiv a fost revocată. A fost atins numărul maxim de dispozitive: vă rugăm să eliminați un dispozitiv."
+  },
+  "noAvailableLocations": {
+    "message": "Nu există locații disponibile momentan. Încearcă din nou peste câteva clipe."
+  },
+  "noAvailableFavoriteLocations": {
+    "message": "Locațiile tale favorite sunt temporar indisponibile."
+  },
+  "error_server_full": {
+    "message": "Acest server este plin. Alege altă locație."
+  },
+  "error_capacity_unavailable": {
+    "message": "Disponibilitatea acestui server nu poate fi confirmată momentan. Încearcă din nou peste câteva clipe."
+  },
+  "locationHierarchyHelp": {
+    "message": "Numele selectează un server; săgeata afișează detaliile."
+  },
+  "locationCountrySelect": {
+    "message": "Selectează un server disponibil: $1"
+  },
+  "locationCitySelect": {
+    "message": "Selectează un server disponibil: $1"
+  },
+  "locationShowCities": {
+    "message": "Afișează orașele: $1"
+  },
+  "locationHideCities": {
+    "message": "Ascunde orașele: $1"
+  },
+  "locationShowServers": {
+    "message": "Afișează serverele: $1"
+  },
+  "locationHideServers": {
+    "message": "Ascunde serverele: $1"
+  },
+  "locationAvailableServers": {
+    "message": "Servere disponibile: $1"
+  },
+  "legalInformation": {
+    "message": "Informații juridice"
+  },
+  "privacyPolicy": {
+    "message": "Politica de confidențialitate"
+  },
+  "termsAndConditions": {
+    "message": "Condiții de utilizare și vânzare"
+  },
+  "legalNotice": {
+    "message": "Mențiuni legale"
+  },
+  "contactSupport": {
+    "message": "Contactează asistența"
+  },
+  "webSignIn": {
+    "message": "Autentificare în FuzeVPN"
+  },
+  "webSignInDisconnect": {
+    "message": "Deconectare și autentificare"
+  },
+  "webSignInPending": {
+    "message": "Autentificare în curs…"
+  },
+  "webSignInHelp": {
+    "message": "Autentifică-te sau creează un cont cu Google ori e-mailul tău în zona de clienți FuzeVPN."
+  },
+  "webSignInDisconnectHelp": {
+    "message": "Acest buton oprește protecția browserului pentru autentificarea cu Google ori e-mail. Navigarea nu va fi protejată în timpul autentificării."
+  },
+  "webSignInStatus": {
+    "message": "Continuă în fereastra de autentificare FuzeVPN. Extensia se actualizează automat la final. Închide acea fereastră pentru anulare."
+  },
+  "error_web_login_cancelled": {
+    "message": "Autentificarea a fost anulată. Încearcă din nou."
+  },
+  "error_web_login_timeout": {
+    "message": "Autentificarea a durat prea mult. Încearcă din nou."
+  },
+  "error_web_login_unavailable": {
+    "message": "Autentificarea web nu este disponibilă. Încearcă mai târziu."
+  },
+  "error_web_login_invalid_callback": {
+    "message": "Autentificarea nu a putut fi verificată. Reîncepe din extensie."
+  },
+  "error_web_login_denied": {
+    "message": "Autentificarea nu a fost autorizată. Încearcă din nou."
+  },
+  "error_web_login_busy": {
+    "message": "Închide fereastra de autentificare deja deschisă înainte de a încerca din nou."
+  },
+  "deviceKindFirefox": {
+    "message": "Browser Firefox"
+  }
+}

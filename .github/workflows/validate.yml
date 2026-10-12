@@ -1,0 +1,53 @@
+# SPDX-License-Identifier: MPL-2.0
+name: Validate extensions
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: extensions-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  validate:
+    name: Validate and package all browsers
+    runs-on: windows-latest
+    timeout-minutes: 20
+    steps:
+      - name: Check out sources
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - name: Set up Node.js
+        uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: "24.16.0"
+          cache: npm
+      - name: Install the lockfile
+        run: npm ci
+      - name: Audit public Git inputs and history
+        run: npm run audit:publication
+      - name: Validate and build Chrome, Edge and Firefox
+        run: npm run validate
+      - name: Audit development dependencies
+        run: npm audit --audit-level=high
+      - name: Package all targets and sources
+        run: npm run package
+      - name: Reconstruct from the source archive
+        run: npm run verify:sources
+      - name: Save validated packages
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: fuzevpn-extensions-${{ github.sha }}
+          path: |
+            releases/*.zip
+            releases/*.sha256
+          if-no-files-found: error
+          retention-days: 14

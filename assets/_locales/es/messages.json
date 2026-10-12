@@ -1,0 +1,830 @@
+{
+  "extensionName": {
+    "message": "FuzeVPN"
+  },
+  "extensionDescription": {
+    "message": "Preserva tu privacidad y refuerza tu seguridad con un clic."
+  },
+  "siteExclusionsReloadRequired": {
+    "message": "Recarga FuzeVPN desde el gestor de extensiones del navegador para completar la actualización y usar las exclusiones de sitios."
+  },
+  "extensionCommunicationError": {
+    "message": "La extensión no responde. Cierra esta ventana y recarga FuzeVPN desde el gestor de extensiones del navegador."
+  },
+  "actionDisconnected": {
+    "message": "FuzeVPN — Desconectado"
+  },
+  "actionConnected": {
+    "message": "FuzeVPN — Protegido en este navegador"
+  },
+  "actionReconnecting": {
+    "message": "FuzeVPN — Reconectando"
+  },
+  "actionError": {
+    "message": "FuzeVPN — Se requiere atención"
+  },
+  "browserProtection": {
+    "message": "Protección del navegador"
+  },
+  "loginTitle": {
+    "message": "Te damos la bienvenida a FuzeVPN"
+  },
+  "loginSubtitle": {
+    "message": "Inicia sesión para proteger tu navegación en este navegador."
+  },
+  "email": {
+    "message": "Correo electrónico"
+  },
+  "emailPlaceholder": {
+    "message": "tu@ejemplo.com"
+  },
+  "password": {
+    "message": "Contraseña"
+  },
+  "signIn": {
+    "message": "Iniciar sesión"
+  },
+  "signingIn": {
+    "message": "Iniciando sesión…"
+  },
+  "forgotPassword": {
+    "message": "¿Olvidaste tu contraseña?"
+  },
+  "createAccount": {
+    "message": "Crear una cuenta"
+  },
+  "settings": {
+    "message": "Ajustes"
+  },
+  "close": {
+    "message": "Cerrar"
+  },
+  "statusDisconnected": {
+    "message": "Desconectado"
+  },
+  "statusConnecting": {
+    "message": "Conectando…"
+  },
+  "statusChanging": {
+    "message": "Cambiando de ubicación…"
+  },
+  "statusProtected": {
+    "message": "Protegido en este navegador"
+  },
+  "statusRefreshing": {
+    "message": "Renovando de forma segura…"
+  },
+  "statusDisconnecting": {
+    "message": "Desconectando…"
+  },
+  "statusError": {
+    "message": "Protección detenida"
+  },
+  "browserOnlyDetail": {
+    "message": "Protección para este navegador."
+  },
+  "location": {
+    "message": "Ubicación"
+  },
+  "change": {
+    "message": "Cambiar"
+  },
+  "noLocation": {
+    "message": "No hay ubicaciones disponibles"
+  },
+  "protectBrowser": {
+    "message": "Proteger el navegador"
+  },
+  "disconnect": {
+    "message": "Desconectar"
+  },
+  "subscription": {
+    "message": "Suscripción"
+  },
+  "refreshSubscription": {
+    "message": "Actualizar suscripción"
+  },
+  "refreshingSubscription": {
+    "message": "Actualizando suscripción…"
+  },
+  "subscriptionActive": {
+    "message": "Activa"
+  },
+  "subscriptionInactive": {
+    "message": "Inactiva"
+  },
+  "expiresOn": {
+    "message": "Caduca el $1"
+  },
+  "noExpiry": {
+    "message": "Sin fecha de caducidad"
+  },
+  "browserOnlyNotice": {
+    "message": "Solo en este navegador. Las demás aplicaciones y navegadores no están cubiertos."
+  },
+  "resendVerification": {
+    "message": "Reenviar correo"
+  },
+  "incognitoHelp": {
+    "message": "La navegación privada utiliza la misma protección solo si se permite la extensión en el modo privado desde los ajustes del navegador."
+  },
+  "manageAccount": {
+    "message": "Gestionar mi cuenta"
+  },
+  "account": {
+    "message": "Cuenta"
+  },
+  "devices": {
+    "message": "Dispositivos"
+  },
+  "manageDevices": {
+    "message": "Gestionar dispositivos"
+  },
+  "refreshDevices": {
+    "message": "Actualizar dispositivos"
+  },
+  "deviceCount": {
+    "message": "$1 / $2 dispositivos"
+  },
+  "loadingDevices": {
+    "message": "Cargando dispositivos…"
+  },
+  "noDevices": {
+    "message": "No hay dispositivos activos."
+  },
+  "currentDevice": {
+    "message": "Este dispositivo"
+  },
+  "deviceKindBrowser": {
+    "message": "Extensión del navegador"
+  },
+  "deviceKindVpn": {
+    "message": "Dispositivo VPN"
+  },
+  "profile_browser_proxy": {
+    "message": "Proxy del navegador"
+  },
+  "profile_wireguard": {
+    "message": "WireGuard"
+  },
+  "profile_openvpn": {
+    "message": "OpenVPN"
+  },
+  "none": {
+    "message": "ninguno"
+  },
+  "deviceCreatedOn": {
+    "message": "Creado el $1"
+  },
+  "deleteDevice": {
+    "message": "Eliminar dispositivo"
+  },
+  "confirmDeleteDevice": {
+    "message": "¿Eliminar «$1»? Sus conexiones VPN se detendrán y sus perfiles se eliminarán."
+  },
+  "resetDevice": {
+    "message": "Restablecer dispositivo"
+  },
+  "confirmResetDevice": {
+    "message": "¿Restablecer esta extensión? Se registrará como un dispositivo nuevo la próxima vez que la uses."
+  },
+  "signOutAccount": {
+    "message": "Cerrar sesión de la cuenta"
+  },
+  "chooseLocation": {
+    "message": "Elegir una ubicación"
+  },
+  "error_invalid_credentials": {
+    "message": "El correo electrónico o la contraseña son incorrectos."
+  },
+  "error_unauthorized": {
+    "message": "Tu sesión ha caducado. Vuelve a iniciar sesión."
+  },
+  "error_email_verification_required": {
+    "message": "Verifica tu correo electrónico antes de activar la protección."
+  },
+  "errorVerificationCooldown": {
+    "message": "Podrás solicitar otro correo dentro de $1 segundos."
+  },
+  "error_verification_email_cooldown": {
+    "message": "Espera antes de solicitar otro correo."
+  },
+  "error_subscription_required": {
+    "message": "Se necesita una suscripción activa para proteger este navegador."
+  },
+  "error_device_limit": {
+    "message": "Se ha alcanzado el límite de dispositivos. Elimina uno, por favor."
+  },
+  "error_device_identity_revoked": {
+    "message": "Este dispositivo ya no está autorizado. Vuelve a intentar conectarte."
+  },
+  "error_device_proof_invalid": {
+    "message": "No pudimos verificar este dispositivo. Comprueba la fecha y la hora del equipo y vuelve a intentarlo."
+  },
+  "error_device_proof_replayed": {
+    "message": "Esta solicitud ya se ha procesado. Vuelve a intentarlo."
+  },
+  "error_invalid_device": {
+    "message": "No se ha reconocido este dispositivo. Vuelve a intentar conectarte."
+  },
+  "error_device_exists": {
+    "message": "Esta identidad de dispositivo ya está vinculada a otra cuenta."
+  },
+  "error_not_found": {
+    "message": "Esta operación ya no está disponible. Vuelve a intentarlo."
+  },
+  "error_invalid_location": {
+    "message": "Esta ubicación no está disponible. Elige otra."
+  },
+  "error_rate_limited": {
+    "message": "Demasiados intentos. Espera un momento e inténtalo de nuevo."
+  },
+  "error_proxy_unavailable": {
+    "message": "Este servidor no está disponible temporalmente. Vuelve a intentarlo en un momento."
+  },
+  "error_api_token_expired": {
+    "message": "La sesión de tu cuenta ha caducado. Vuelve a iniciar sesión."
+  },
+  "error_network_error": {
+    "message": "La red no está disponible. Comprueba tu conexión a Internet."
+  },
+  "error_request_timeout": {
+    "message": "El servicio ha tardado demasiado en responder. Inténtalo de nuevo."
+  },
+  "error_invalid_response": {
+    "message": "El servicio ha devuelto una respuesta inesperada."
+  },
+  "error_proxy_certificate_invalid": {
+    "message": "No pudimos verificar la seguridad del servidor. Se ha interrumpido la conexión."
+  },
+  "error_proxy_controlled_by_extension": {
+    "message": "Otra extensión controla actualmente el proxy del navegador."
+  },
+  "error_proxy_controlled_by_policy": {
+    "message": "Una política del administrador impide que FuzeVPN cambie el proxy."
+  },
+  "error_proxy_authentication_failed": {
+    "message": "El servidor no ha aceptado la conexión. Intenta conectarte de nuevo."
+  },
+  "error_session_expired": {
+    "message": "Tu conexión protegida ha caducado. Conéctate de nuevo."
+  },
+  "error_email_delivery_unavailable": {
+    "message": "No se puede enviar el correo en este momento."
+  },
+  "error_unknown_error": {
+    "message": "Se ha producido un error inesperado. Inténtalo de nuevo."
+  },
+  "actionBlocked": {
+    "message": "FuzeVPN — Navegación bloqueada"
+  },
+  "statusBlockedRetry": {
+    "message": "Navegación en pausa — reconectando"
+  },
+  "statusBlockedAction": {
+    "message": "Navegación en pausa — revisa la conexión"
+  },
+  "statusProtectionUnavailable": {
+    "message": "Protección no disponible — navegación sin bloquear"
+  },
+  "recoveryHelp": {
+    "message": "Reintenta para reanudar la protección. Desconectar permite navegar sin FuzeVPN."
+  },
+  "retryConnection": {
+    "message": "Reintentar"
+  },
+  "killSwitch": {
+    "message": "Bloqueo de emergencia"
+  },
+  "killSwitchHelp": {
+    "message": "Bloquea nuevas solicitudes web si falla la conexión VPN. Los sitios excluidos siguen accesibles fuera del VPN."
+  },
+  "webRtcProtection": {
+    "message": "Protección WebRTC"
+  },
+  "webRtcHelp": {
+    "message": "Ayuda a mantener tu IP privada durante las llamadas web. Algunas llamadas pueden fallar. Desactivarlo puede revelar tu IP real."
+  },
+  "securityEffectiveState": {
+    "message": "$1 · $2"
+  },
+  "securityBlocked": {
+    "message": "Navegación bloqueada"
+  },
+  "securityNotBlocked": {
+    "message": "Navegación sin bloquear"
+  },
+  "securityWebRtcActive": {
+    "message": "Restricción WebRTC activa"
+  },
+  "securityWebRtcInactive": {
+    "message": "Restricción WebRTC inactiva"
+  },
+  "localNetworkHelp": {
+    "message": "Las direcciones IP locales y los nombres locales habituales se bloquean durante la protección. Un dominio excluido puede permitir el acceso a la red local. La configuración IPv6 del sistema no se modifica."
+  },
+  "securityLimits": {
+    "message": "Acerca de la protección"
+  },
+  "killSwitchLimits": {
+    "message": "Solo este navegador: las conexiones existentes y algunas comunicaciones internas del navegador o de otras extensiones pueden continuar. Otra extensión o política puede sustituir el proxy antes de que FuzeVPN reaccione. Desactivar la extensión elimina la protección. No hay bloqueo de todo el sistema."
+  },
+  "error_traffic_guard_failed": {
+    "message": "No se ha podido verificar el bloqueo de navegación. La protección no está garantizada. Comprueba los permisos de la extensión."
+  },
+  "error_webrtc_control_unavailable": {
+    "message": "No se ha podido aplicar la restricción WebRTC. Comprueba los ajustes, otras extensiones o la política del administrador."
+  },
+  "language": {
+    "message": "Idioma"
+  },
+  "languageAutomatic": {
+    "message": "Automático — idioma del navegador"
+  },
+  "languageHelp": {
+    "message": "Los cambios son inmediatos. Automático sigue el idioma del navegador, que puede diferir del idioma del sistema."
+  },
+  "languageSaveError": {
+    "message": "No se pudo guardar el idioma. Se mantiene tu elección anterior. Vuelve a intentarlo."
+  },
+  "publicIp": {
+    "message": "IP pública"
+  },
+  "vpnIp": {
+    "message": "IP de la VPN"
+  },
+  "ipChecking": {
+    "message": "Comprobando…"
+  },
+  "ipUnavailable": {
+    "message": "No disponible"
+  },
+  "ipLookupExplanation": {
+    "message": "IP comprobada con ipify mediante tu conexión actual. No se envía el historial de navegación."
+  },
+  "automaticLocation": {
+    "message": "Automático"
+  },
+  "automaticLocationHelp": {
+    "message": "Mejor respuesta reciente o tu última ubicación."
+  },
+  "automaticLocationName": {
+    "message": "Automático · $1"
+  },
+  "searchLocations": {
+    "message": "Buscar país o ciudad"
+  },
+  "locationFilters": {
+    "message": "Filtrar ubicaciones"
+  },
+  "allLocations": {
+    "message": "Todos"
+  },
+  "favoriteLocations": {
+    "message": "Favoritos"
+  },
+  "recentLocations": {
+    "message": "Recientes"
+  },
+  "noMatchingLocations": {
+    "message": "Ninguna ubicación coincide con tu búsqueda."
+  },
+  "noFavoriteLocations": {
+    "message": "Marca una estrella para guardar tus ubicaciones favoritas aquí."
+  },
+  "noRecentLocations": {
+    "message": "Tus conexiones recientes aparecerán aquí."
+  },
+  "addFavorite": {
+    "message": "Añadir $1 a favoritos"
+  },
+  "removeFavorite": {
+    "message": "Quitar $1 de favoritos"
+  },
+  "unavailableFavoriteLocation": {
+    "message": "Ubicación favorita no disponible $1"
+  },
+  "locationSaveError": {
+    "message": "No se pudo completar el cambio. Es posible que se hayan guardado algunos ajustes. Revisa la selección mostrada antes de volver a intentarlo."
+  },
+  "siteExclusions": {
+    "message": "Sitios excluidos"
+  },
+  "siteExclusionsHelp": {
+    "message": "Estos sitios usan tu conexión sin FuzeVPN, incluso si el VPN falla."
+  },
+  "siteExclusionsEnabled": {
+    "message": "Activar excepciones"
+  },
+  "siteExclusionInput": {
+    "message": "Dominio o URL"
+  },
+  "siteExclusionPlaceholder": {
+    "message": "ejemplo.com"
+  },
+  "siteExclusionPreview": {
+    "message": "Dominio seleccionado: $1"
+  },
+  "siteExclusionSubdomains": {
+    "message": "Incluir subdominios"
+  },
+  "siteExclusionAdd": {
+    "message": "Añadir sitio"
+  },
+  "siteExclusionsEmpty": {
+    "message": "No hay sitios excluidos. Añade solo los sitios que quieras usar sin VPN."
+  },
+  "siteExclusionsCount": {
+    "message": "$1 / 100 sitios"
+  },
+  "siteExclusionScopeSubdomains": {
+    "message": "Dominio y subdominios"
+  },
+  "siteExclusionScopeExact": {
+    "message": "Solo el dominio exacto"
+  },
+  "siteExclusionRemove": {
+    "message": "Eliminar $1"
+  },
+  "siteExclusionsDetails": {
+    "message": "¿Cómo funcionan las excepciones?"
+  },
+  "siteExclusionsResources": {
+    "message": "Los recursos de otros dominios siguen protegidos. Excluir una página no excluye automáticamente sus demás contenidos."
+  },
+  "siteExclusionsReload": {
+    "message": "Recarga el sitio después de un cambio. Las conexiones ya abiertas pueden conservar su ruta anterior."
+  },
+  "siteExclusionsWebRtc": {
+    "message": "La protección WebRTC sigue siendo un ajuste global, también para los sitios excluidos."
+  },
+  "siteExclusionsLocal": {
+    "message": "Se guarda solo en este navegador y se conserva al cerrar sesión."
+  },
+  "siteExclusionsOn": {
+    "message": "Excepciones activadas"
+  },
+  "siteExclusionsOff": {
+    "message": "Excepciones desactivadas"
+  },
+  "siteExclusionsSummary": {
+    "message": "$1 sitios fuera del VPN"
+  },
+  "siteExclusionsPending": {
+    "message": "Aplicando excepciones…"
+  },
+  "siteExclusionsInterrupted": {
+    "message": "Cambio interrumpido. La protección temporal sigue activa."
+  },
+  "siteExclusionsSaveError": {
+    "message": "No se pudo completar el cambio. Revisa los ajustes e inténtalo de nuevo."
+  },
+  "siteExclusionsRetry": {
+    "message": "Reintentar"
+  },
+  "siteExclusionInvalid": {
+    "message": "Introduce un dominio público válido. No se aceptan IP, nombres locales, comodines, sufijos públicos ni dominios reservados."
+  },
+  "siteExclusionDuplicate": {
+    "message": "Este dominio ya está en la lista."
+  },
+  "siteExclusionsLimit": {
+    "message": "Se ha alcanzado el límite de 100 sitios. Elimina uno para añadir otro."
+  },
+  "statusProtectedExceptions": {
+    "message": "VPN activo · $1 excepciones"
+  },
+  "statusBlockedExceptions": {
+    "message": "Solo los sitios excluidos siguen accesibles"
+  },
+  "securityBlockedExceptions": {
+    "message": "Navegación bloqueada salvo sitios excluidos"
+  },
+  "securityBlockUnverified": {
+    "message": "Bloqueo sin verificar"
+  },
+  "logoutLocalComplete": {
+    "message": "Sesión local cerrada."
+  },
+  "logoutApiSession": {
+    "message": "Sesión actual de la cuenta"
+  },
+  "logoutProxySessions": {
+    "message": "Sesiones VPN conocidas"
+  },
+  "logoutRevocationPending": {
+    "message": "Revocación en curso…"
+  },
+  "logoutRevocationConfirmed": {
+    "message": "Revocación confirmada"
+  },
+  "logoutRevocationUnconfirmed": {
+    "message": "Revocación no confirmada"
+  },
+  "logoutUnconfirmedHelp": {
+    "message": "Algunas sesiones remotas pueden seguir activas hasta que caduquen."
+  },
+  "deviceQuotaLoading": {
+    "message": "Cargando el límite de dispositivos…"
+  },
+  "deviceQuotaUnknown": {
+    "message": "Límite de dispositivos no disponible"
+  },
+  "error_proxy_creation_uncertain": {
+    "message": "El servidor no confirmó la creación de la nueva conexión. La reconexión automática está en pausa."
+  },
+  "siteExclusionsPreferencesReset": {
+    "message": "Tus exclusiones de sitios guardadas se restablecieron porque no se pudieron leer. Añade de nuevo los sitios que quieras excluir."
+  },
+  "siteExclusionsConflict": {
+    "message": "La lista de sitios excluidos ha cambiado. Revísala y vuelve a realizar el cambio."
+  },
+  "unavailableLocation": {
+    "message": "Ubicación no disponible"
+  },
+  "verificationSending": {
+    "message": "Enviando correo de verificación…"
+  },
+  "verificationSent": {
+    "message": "Correo de verificación enviado. Revisa tu bandeja de entrada y la carpeta de spam."
+  },
+  "error_login_requires_disconnect": {
+    "message": "Desconecta la conexión VPN actual antes de iniciar sesión en otra cuenta."
+  },
+  "error_storage_unavailable": {
+    "message": "Los ajustes locales de la cuenta no están disponibles. Reinténtalo cuando el almacenamiento del navegador esté disponible. Tu cuenta guardada se ha conservado."
+  },
+  "diagnosticsAssistance": {
+    "message": "Asistencia"
+  },
+  "diagnosticsTitle": {
+    "message": "Diagnóstico"
+  },
+  "diagnosticsIntro": {
+    "message": "Comprueba FuzeVPN y la conexión actual sin cambiar tu protección."
+  },
+  "diagnosticsPrivacyTitle": {
+    "message": "Tus datos"
+  },
+  "diagnosticsPrivacy": {
+    "message": "Los informes contienen estados técnicos y códigos de error, nunca contraseñas, tokens, correos electrónicos, direcciones IP, URL visitadas ni dominios excluidos."
+  },
+  "diagnosticsAuto": {
+    "message": "Enviar automáticamente informes de errores importantes"
+  },
+  "diagnosticsAutoHelp": {
+    "message": "Desactivado por defecto. Solo se envían informes técnicos simples para esta cuenta, sin historial de navegación. Asistencia los conserva durante 30 días."
+  },
+  "diagnosticsHistoryHelp": {
+    "message": "El historial técnico permanece local: hasta 200 eventos durante 10 minutos, incluso sin envío automático. No incluye el historial de navegación y se borra al cerrar el navegador o cambiar de cuenta."
+  },
+  "diagnosticsHistoryCount": {
+    "message": "$1 eventos técnicos locales"
+  },
+  "diagnosticsAccountRequired": {
+    "message": "Inicia sesión para habilitar el envío. Puedes consultar y exportar un informe sin cuenta."
+  },
+  "diagnosticsRun": {
+    "message": "Iniciar diagnóstico"
+  },
+  "diagnosticsClearHistory": {
+    "message": "Borrar historial local"
+  },
+  "diagnosticsPreparing": {
+    "message": "Preparando el informe…"
+  },
+  "diagnosticsReports": {
+    "message": "Informes"
+  },
+  "diagnosticsEmpty": {
+    "message": "Aún no hay informes locales."
+  },
+  "diagnosticsChooseReport": {
+    "message": "Elegir un informe"
+  },
+  "diagnosticsReportLabel": {
+    "message": "$1 · $2 · $3"
+  },
+  "diagnosticsTypeFull": {
+    "message": "Informe completo"
+  },
+  "diagnosticsTypeSimple": {
+    "message": "Informe de error"
+  },
+  "diagnosticsSummary": {
+    "message": "Recopilado el $1. FuzeVPN versión $2."
+  },
+  "diagnosticsJson": {
+    "message": "Ver el contenido del informe (JSON)"
+  },
+  "diagnosticsExport": {
+    "message": "Exportar informe"
+  },
+  "diagnosticsDelete": {
+    "message": "Eliminar informe local"
+  },
+  "diagnosticsRetention": {
+    "message": "Los informes enviados se vinculan a la cuenta conectada y asistencia los conserva durante 30 días. Eliminar un informe local no elimina uno ya recibido por asistencia."
+  },
+  "diagnosticsConsent": {
+    "message": "Enviar este informe a asistencia"
+  },
+  "diagnosticsDataCollectionRequired": {
+    "message": "Firefox debe permitir la recopilación de datos técnicos para enviar diagnósticos. Vuelve a intentarlo y concede este permiso."
+  },
+  "diagnosticsSendHelp": {
+    "message": "El envío es opcional. Una vez autorizado, se puede reintentar durante 24 horas con una sesión válida de la misma cuenta. Puedes cancelar los siguientes intentos. Una cancelación tardía no garantiza que el servidor no haya recibido ya el informe."
+  },
+  "diagnosticsSend": {
+    "message": "Enviar informe"
+  },
+  "diagnosticsCancel": {
+    "message": "Cancelar envío"
+  },
+  "diagnosticsReload": {
+    "message": "Recargar esta página"
+  },
+  "diagnosticsUnavailable": {
+    "message": "El diagnóstico no está disponible. Recarga FuzeVPN desde el gestor de extensiones del navegador y vuelve a abrir esta página. Tu VPN no cambia."
+  },
+  "diagnosticsQueueFull": {
+    "message": "La cola de envío está llena. Elimina un informe local o espera a que termine un envío pendiente."
+  },
+  "diagnosticsContentUnavailable": {
+    "message": "El contenido del informe no está disponible. Exporta el informe local si está disponible y contacta con soporte."
+  },
+  "diagnosticsFailure": {
+    "message": "No se pudo completar la acción de diagnóstico. Tu VPN no cambia."
+  },
+  "diagnosticsChecks": {
+    "message": "Comprobaciones"
+  },
+  "diagnosticsCheckFallback": {
+    "message": "Comprobación técnica: $1"
+  },
+  "diagnosticsCheckLine": {
+    "message": "$1 — $2"
+  },
+  "diagnosticsProxy": {
+    "message": "Proxy del navegador"
+  },
+  "diagnosticsStorage": {
+    "message": "Almacenamiento local"
+  },
+  "diagnosticsNetwork": {
+    "message": "Conexión de red"
+  },
+  "diagnosticsCleanup": {
+    "message": "Limpieza de sesiones"
+  },
+  "diagnosticsResult_passed": {
+    "message": "Correcta"
+  },
+  "diagnosticsResult_failed": {
+    "message": "Fallida"
+  },
+  "diagnosticsResult_skipped": {
+    "message": "No realizada"
+  },
+  "diagnosticsResult_unknown": {
+    "message": "Desconocida"
+  },
+  "diagnosticsStatus_ready": {
+    "message": "Listo en este dispositivo"
+  },
+  "diagnosticsStatus_pending": {
+    "message": "Pendiente de envío"
+  },
+  "diagnosticsStatus_sending": {
+    "message": "Enviando…"
+  },
+  "diagnosticsStatus_session_required": {
+    "message": "En espera de una sesión válida de la misma cuenta"
+  },
+  "diagnosticsStatus_received": {
+    "message": "Recibido por asistencia"
+  },
+  "diagnosticsStatus_failed": {
+    "message": "Error de envío"
+  },
+  "diagnosticsStatus_cancelled": {
+    "message": "Envío cancelado"
+  },
+  "diagnosticsStatus_expired": {
+    "message": "Plazo de envío agotado"
+  },
+  "diagnosticsReceivedAt": {
+    "message": "Recibido el $1"
+  },
+  "error_private_browsing_required": {
+    "message": "Firefox necesita este permiso para configurar la VPN, incluso en ventanas normales. Abre about:addons → FuzeVPN, permite su ejecución en ventanas privadas y vuelve a intentarlo."
+  },
+  "error_host_permissions_required": {
+    "message": "En Firefox, abre about:addons → FuzeVPN → Permisos y permite el acceso a todos los sitios. Después, inténtalo de nuevo."
+  },
+  "cancelAction": {
+    "message": "Cancelar"
+  },
+  "refreshLocations": {
+    "message": "Actualizar ubicaciones"
+  },
+  "refreshingLocations": {
+    "message": "Actualizando ubicaciones…"
+  },
+  "locationsRefreshError": {
+    "message": "No se pudo actualizar la lista de ubicaciones. Inténtalo de nuevo."
+  },
+  "error_device_revoked_limit": {
+    "message": "Se ha revocado este dispositivo. Se ha alcanzado el límite de dispositivos: elimina uno, por favor."
+  },
+  "noAvailableLocations": {
+    "message": "No hay ubicaciones disponibles por el momento. Inténtalo de nuevo en unos instantes."
+  },
+  "noAvailableFavoriteLocations": {
+    "message": "Tus ubicaciones favoritas no están disponibles temporalmente."
+  },
+  "error_server_full": {
+    "message": "Este servidor está lleno. Elige otra ubicación."
+  },
+  "error_capacity_unavailable": {
+    "message": "No se puede confirmar la disponibilidad de este servidor por el momento. Inténtalo de nuevo en unos instantes."
+  },
+  "locationHierarchyHelp": {
+    "message": "El nombre selecciona un servidor; la flecha muestra los detalles."
+  },
+  "locationCountrySelect": {
+    "message": "Seleccionar un servidor disponible: $1"
+  },
+  "locationCitySelect": {
+    "message": "Seleccionar un servidor disponible: $1"
+  },
+  "locationShowCities": {
+    "message": "Mostrar ciudades: $1"
+  },
+  "locationHideCities": {
+    "message": "Ocultar ciudades: $1"
+  },
+  "locationShowServers": {
+    "message": "Mostrar servidores: $1"
+  },
+  "locationHideServers": {
+    "message": "Ocultar servidores: $1"
+  },
+  "locationAvailableServers": {
+    "message": "Servidores disponibles: $1"
+  },
+  "legalInformation": {
+    "message": "Información legal"
+  },
+  "privacyPolicy": {
+    "message": "Política de privacidad"
+  },
+  "termsAndConditions": {
+    "message": "Condiciones de uso y venta"
+  },
+  "legalNotice": {
+    "message": "Aviso legal"
+  },
+  "contactSupport": {
+    "message": "Contactar con el soporte"
+  },
+  "webSignIn": {
+    "message": "Iniciar sesión en FuzeVPN"
+  },
+  "webSignInDisconnect": {
+    "message": "Desconectar e iniciar sesión"
+  },
+  "webSignInPending": {
+    "message": "Iniciando sesión…"
+  },
+  "webSignInHelp": {
+    "message": "Inicia sesión o crea una cuenta con Google o tu correo en el área de clientes de FuzeVPN."
+  },
+  "webSignInDisconnectHelp": {
+    "message": "Este botón detiene la protección del navegador para iniciar sesión con Google o tu correo. Tu navegación quedará sin protección durante el inicio de sesión."
+  },
+  "webSignInStatus": {
+    "message": "Continúa en la ventana de inicio de sesión de FuzeVPN. La extensión se actualiza automáticamente al terminar. Cierra esa ventana para cancelar."
+  },
+  "error_web_login_cancelled": {
+    "message": "Se canceló el inicio de sesión. Inténtalo de nuevo."
+  },
+  "error_web_login_timeout": {
+    "message": "El inicio de sesión tardó demasiado. Inténtalo de nuevo."
+  },
+  "error_web_login_unavailable": {
+    "message": "El inicio de sesión web no está disponible. Inténtalo más tarde."
+  },
+  "error_web_login_invalid_callback": {
+    "message": "No se pudo verificar el inicio de sesión. Vuelve a empezar desde la extensión."
+  },
+  "error_web_login_denied": {
+    "message": "No se autorizó el inicio de sesión. Inténtalo de nuevo."
+  },
+  "error_web_login_busy": {
+    "message": "Cierra la ventana de inicio de sesión que ya está abierta antes de volver a intentarlo."
+  },
+  "deviceKindFirefox": {
+    "message": "Navegador Firefox"
+  }
+}

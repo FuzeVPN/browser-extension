@@ -1,0 +1,830 @@
+{
+  "extensionName": {
+    "message": "FuzeVPN"
+  },
+  "extensionDescription": {
+    "message": "Preserve your privacy and strengthen your security in one click."
+  },
+  "siteExclusionsReloadRequired": {
+    "message": "Reload FuzeVPN from the browser’s extension manager to finish the update and use site exclusions."
+  },
+  "extensionCommunicationError": {
+    "message": "The extension is not responding. Close this window, then reload FuzeVPN from the browser’s extension manager."
+  },
+  "actionDisconnected": {
+    "message": "FuzeVPN — Disconnected"
+  },
+  "actionConnected": {
+    "message": "FuzeVPN — Protected in this browser"
+  },
+  "actionReconnecting": {
+    "message": "FuzeVPN — Reconnecting"
+  },
+  "actionError": {
+    "message": "FuzeVPN — Attention required"
+  },
+  "browserProtection": {
+    "message": "Browser protection"
+  },
+  "loginTitle": {
+    "message": "Welcome to FuzeVPN"
+  },
+  "loginSubtitle": {
+    "message": "Sign in to protect your browsing in this browser."
+  },
+  "email": {
+    "message": "Email address"
+  },
+  "emailPlaceholder": {
+    "message": "you@example.com"
+  },
+  "password": {
+    "message": "Password"
+  },
+  "signIn": {
+    "message": "Sign in"
+  },
+  "signingIn": {
+    "message": "Signing in…"
+  },
+  "forgotPassword": {
+    "message": "Forgot password?"
+  },
+  "createAccount": {
+    "message": "Create an account"
+  },
+  "settings": {
+    "message": "Settings"
+  },
+  "close": {
+    "message": "Close"
+  },
+  "statusDisconnected": {
+    "message": "Disconnected"
+  },
+  "statusConnecting": {
+    "message": "Connecting…"
+  },
+  "statusChanging": {
+    "message": "Changing location…"
+  },
+  "statusProtected": {
+    "message": "Protected in this browser"
+  },
+  "statusRefreshing": {
+    "message": "Securely renewing…"
+  },
+  "statusDisconnecting": {
+    "message": "Disconnecting…"
+  },
+  "statusError": {
+    "message": "Protection stopped"
+  },
+  "browserOnlyDetail": {
+    "message": "Protection for this browser."
+  },
+  "location": {
+    "message": "Location"
+  },
+  "change": {
+    "message": "Change"
+  },
+  "noLocation": {
+    "message": "No location available"
+  },
+  "protectBrowser": {
+    "message": "Protect the browser"
+  },
+  "disconnect": {
+    "message": "Disconnect"
+  },
+  "subscription": {
+    "message": "Subscription"
+  },
+  "refreshSubscription": {
+    "message": "Refresh subscription"
+  },
+  "refreshingSubscription": {
+    "message": "Refreshing subscription…"
+  },
+  "subscriptionActive": {
+    "message": "Active"
+  },
+  "subscriptionInactive": {
+    "message": "Inactive"
+  },
+  "expiresOn": {
+    "message": "Expires on $1"
+  },
+  "noExpiry": {
+    "message": "No expiration date"
+  },
+  "browserOnlyNotice": {
+    "message": "This browser only. Other apps and browsers are not covered."
+  },
+  "resendVerification": {
+    "message": "Resend email"
+  },
+  "incognitoHelp": {
+    "message": "Private browsing uses the same protection only when the extension is allowed in private mode in the browser’s settings."
+  },
+  "manageAccount": {
+    "message": "Manage my account"
+  },
+  "account": {
+    "message": "Account"
+  },
+  "devices": {
+    "message": "Devices"
+  },
+  "manageDevices": {
+    "message": "Manage devices"
+  },
+  "refreshDevices": {
+    "message": "Refresh devices"
+  },
+  "deviceCount": {
+    "message": "$1 / $2 devices"
+  },
+  "loadingDevices": {
+    "message": "Loading devices…"
+  },
+  "noDevices": {
+    "message": "No active devices."
+  },
+  "currentDevice": {
+    "message": "This device"
+  },
+  "deviceKindBrowser": {
+    "message": "Browser extension"
+  },
+  "deviceKindVpn": {
+    "message": "VPN device"
+  },
+  "profile_browser_proxy": {
+    "message": "Browser proxy"
+  },
+  "profile_wireguard": {
+    "message": "WireGuard"
+  },
+  "profile_openvpn": {
+    "message": "OpenVPN"
+  },
+  "none": {
+    "message": "none"
+  },
+  "deviceCreatedOn": {
+    "message": "Created on $1"
+  },
+  "deleteDevice": {
+    "message": "Delete device"
+  },
+  "confirmDeleteDevice": {
+    "message": "Remove “$1”? Its VPN connections will stop and its profiles will be removed."
+  },
+  "resetDevice": {
+    "message": "Reset device"
+  },
+  "confirmResetDevice": {
+    "message": "Reset this extension? It will be registered as a new device the next time you use it."
+  },
+  "signOutAccount": {
+    "message": "Sign out of account"
+  },
+  "chooseLocation": {
+    "message": "Choose a location"
+  },
+  "error_invalid_credentials": {
+    "message": "The email address or password is incorrect."
+  },
+  "error_unauthorized": {
+    "message": "Your session has expired. Please sign in again."
+  },
+  "error_email_verification_required": {
+    "message": "Verify your email address before enabling protection."
+  },
+  "errorVerificationCooldown": {
+    "message": "A new email can be requested in $1 seconds."
+  },
+  "error_verification_email_cooldown": {
+    "message": "Please wait before requesting another email."
+  },
+  "error_subscription_required": {
+    "message": "An active subscription is required to protect this browser."
+  },
+  "error_device_limit": {
+    "message": "Device limit reached. Please remove a device."
+  },
+  "error_device_identity_revoked": {
+    "message": "This device is no longer authorized. Try connecting again."
+  },
+  "error_device_proof_invalid": {
+    "message": "We could not verify this device. Check your computer’s date and time, then retry."
+  },
+  "error_device_proof_replayed": {
+    "message": "This request has already been processed. Try again."
+  },
+  "error_invalid_device": {
+    "message": "This device was not recognized. Try connecting again."
+  },
+  "error_device_exists": {
+    "message": "This device identity is already linked to another account."
+  },
+  "error_not_found": {
+    "message": "This operation is no longer available. Try again."
+  },
+  "error_invalid_location": {
+    "message": "This location is unavailable. Choose another one."
+  },
+  "error_rate_limited": {
+    "message": "Too many attempts. Wait a moment and try again."
+  },
+  "error_proxy_unavailable": {
+    "message": "This server is temporarily unavailable. Try again in a moment."
+  },
+  "error_api_token_expired": {
+    "message": "Your account session has expired. Please sign in again."
+  },
+  "error_network_error": {
+    "message": "The network is unavailable. Check your Internet connection."
+  },
+  "error_request_timeout": {
+    "message": "The service took too long to respond. Try again."
+  },
+  "error_invalid_response": {
+    "message": "The service returned an unexpected response."
+  },
+  "error_proxy_certificate_invalid": {
+    "message": "We could not verify the server’s security. The connection has been stopped."
+  },
+  "error_proxy_controlled_by_extension": {
+    "message": "Another extension currently controls the browser’s proxy."
+  },
+  "error_proxy_controlled_by_policy": {
+    "message": "An administrator policy prevents FuzeVPN from changing the proxy."
+  },
+  "error_proxy_authentication_failed": {
+    "message": "The server did not accept the connection. Try connecting again."
+  },
+  "error_session_expired": {
+    "message": "Your protected connection has expired. Connect again."
+  },
+  "error_email_delivery_unavailable": {
+    "message": "The email cannot be sent right now."
+  },
+  "error_unknown_error": {
+    "message": "An unexpected error occurred. Try again."
+  },
+  "actionBlocked": {
+    "message": "FuzeVPN — Browsing blocked"
+  },
+  "statusBlockedRetry": {
+    "message": "Browsing paused — reconnecting"
+  },
+  "statusBlockedAction": {
+    "message": "Browsing paused — check connection"
+  },
+  "statusProtectionUnavailable": {
+    "message": "Protection unavailable — browsing not blocked"
+  },
+  "recoveryHelp": {
+    "message": "Retry to resume protection. Disconnect lets you browse without FuzeVPN."
+  },
+  "retryConnection": {
+    "message": "Retry"
+  },
+  "killSwitch": {
+    "message": "Kill switch"
+  },
+  "killSwitchHelp": {
+    "message": "Blocks new web requests if the VPN connection drops. Excluded sites remain accessible outside the VPN."
+  },
+  "webRtcProtection": {
+    "message": "WebRTC protection"
+  },
+  "webRtcHelp": {
+    "message": "Helps keep your IP address private during web calls. Some calls may not work. Turning this off may reveal your real IP address."
+  },
+  "securityEffectiveState": {
+    "message": "$1 · $2"
+  },
+  "securityBlocked": {
+    "message": "Browsing blocked"
+  },
+  "securityNotBlocked": {
+    "message": "Browsing not blocked"
+  },
+  "securityWebRtcActive": {
+    "message": "WebRTC restriction active"
+  },
+  "securityWebRtcInactive": {
+    "message": "WebRTC restriction inactive"
+  },
+  "localNetworkHelp": {
+    "message": "Local IP addresses and common local names are blocked during protection. An excluded domain may still provide access to the local network. System IPv6 settings are unchanged."
+  },
+  "securityLimits": {
+    "message": "About this protection"
+  },
+  "killSwitchLimits": {
+    "message": "This browser only: existing connections and some internal browser or other extension communications may continue. Another extension or a policy may replace the proxy before FuzeVPN reacts. Disabling the extension removes protection. No system-wide blocking."
+  },
+  "error_traffic_guard_failed": {
+    "message": "The browsing block could not be verified. Protection is not guaranteed. Check the extension permissions."
+  },
+  "error_webrtc_control_unavailable": {
+    "message": "The WebRTC restriction could not be applied. Check your settings, other extensions or administrator policy."
+  },
+  "language": {
+    "message": "Language"
+  },
+  "languageAutomatic": {
+    "message": "Automatic — browser language"
+  },
+  "languageHelp": {
+    "message": "Changes apply immediately. Automatic follows the browser’s language, which may differ from the system language."
+  },
+  "languageSaveError": {
+    "message": "Could not save the language. Your previous choice is kept. Try again."
+  },
+  "publicIp": {
+    "message": "Public IP"
+  },
+  "vpnIp": {
+    "message": "VPN IP"
+  },
+  "ipChecking": {
+    "message": "Checking…"
+  },
+  "ipUnavailable": {
+    "message": "Unavailable"
+  },
+  "ipLookupExplanation": {
+    "message": "IP checked with ipify using your current connection. No browsing history is sent."
+  },
+  "automaticLocation": {
+    "message": "Automatic"
+  },
+  "automaticLocationHelp": {
+    "message": "Best recent response time, or your last location."
+  },
+  "automaticLocationName": {
+    "message": "Automatic · $1"
+  },
+  "searchLocations": {
+    "message": "Search country or city"
+  },
+  "locationFilters": {
+    "message": "Filter locations"
+  },
+  "allLocations": {
+    "message": "All"
+  },
+  "favoriteLocations": {
+    "message": "Favorites"
+  },
+  "recentLocations": {
+    "message": "Recent"
+  },
+  "noMatchingLocations": {
+    "message": "No locations match your search."
+  },
+  "noFavoriteLocations": {
+    "message": "Add a star to keep your favorite locations here."
+  },
+  "noRecentLocations": {
+    "message": "Your recently connected locations will appear here."
+  },
+  "addFavorite": {
+    "message": "Add $1 to favorites"
+  },
+  "removeFavorite": {
+    "message": "Remove $1 from favorites"
+  },
+  "unavailableFavoriteLocation": {
+    "message": "Unavailable favorite $1"
+  },
+  "locationSaveError": {
+    "message": "The change could not be completed. Some settings may have been saved. Check the displayed choice before trying again."
+  },
+  "siteExclusions": {
+    "message": "Excluded sites"
+  },
+  "siteExclusionsHelp": {
+    "message": "These sites use your connection without FuzeVPN, even if the VPN goes down."
+  },
+  "siteExclusionsEnabled": {
+    "message": "Enable exceptions"
+  },
+  "siteExclusionInput": {
+    "message": "Domain or URL"
+  },
+  "siteExclusionPlaceholder": {
+    "message": "example.com"
+  },
+  "siteExclusionPreview": {
+    "message": "Selected domain: $1"
+  },
+  "siteExclusionSubdomains": {
+    "message": "Include subdomains"
+  },
+  "siteExclusionAdd": {
+    "message": "Add site"
+  },
+  "siteExclusionsEmpty": {
+    "message": "No excluded sites. Add only sites you want to use without the VPN."
+  },
+  "siteExclusionsCount": {
+    "message": "$1 / 100 sites"
+  },
+  "siteExclusionScopeSubdomains": {
+    "message": "Domain and subdomains"
+  },
+  "siteExclusionScopeExact": {
+    "message": "Exact domain only"
+  },
+  "siteExclusionRemove": {
+    "message": "Remove $1"
+  },
+  "siteExclusionsDetails": {
+    "message": "How do exceptions work?"
+  },
+  "siteExclusionsResources": {
+    "message": "Resources from other domains stay protected. Excluding a page does not automatically exclude its other content."
+  },
+  "siteExclusionsReload": {
+    "message": "Reload the site after a change. Existing connections may keep their previous route."
+  },
+  "siteExclusionsWebRtc": {
+    "message": "WebRTC protection remains a global setting, including for excluded sites."
+  },
+  "siteExclusionsLocal": {
+    "message": "Saved only in this browser and kept after signing out of your account."
+  },
+  "siteExclusionsOn": {
+    "message": "Exceptions enabled"
+  },
+  "siteExclusionsOff": {
+    "message": "Exceptions disabled"
+  },
+  "siteExclusionsSummary": {
+    "message": "$1 sites outside VPN"
+  },
+  "siteExclusionsPending": {
+    "message": "Applying exceptions…"
+  },
+  "siteExclusionsInterrupted": {
+    "message": "Change interrupted. The temporary guard remains in place."
+  },
+  "siteExclusionsSaveError": {
+    "message": "Could not finish the change. Check your settings and try again."
+  },
+  "siteExclusionsRetry": {
+    "message": "Retry"
+  },
+  "siteExclusionInvalid": {
+    "message": "Enter a valid public domain. IPs, local names, wildcards, public suffixes and reserved domains are not accepted."
+  },
+  "siteExclusionDuplicate": {
+    "message": "This domain is already on the list."
+  },
+  "siteExclusionsLimit": {
+    "message": "The 100-site limit has been reached. Remove a site to add another."
+  },
+  "statusProtectedExceptions": {
+    "message": "VPN active · $1 exceptions"
+  },
+  "statusBlockedExceptions": {
+    "message": "Only excluded sites remain accessible"
+  },
+  "securityBlockedExceptions": {
+    "message": "Browsing blocked except excluded sites"
+  },
+  "securityBlockUnverified": {
+    "message": "Blocking not verified"
+  },
+  "logoutLocalComplete": {
+    "message": "Local sign-out complete."
+  },
+  "logoutApiSession": {
+    "message": "Current account session"
+  },
+  "logoutProxySessions": {
+    "message": "Known VPN sessions"
+  },
+  "logoutRevocationPending": {
+    "message": "Revocation in progress…"
+  },
+  "logoutRevocationConfirmed": {
+    "message": "Revocation confirmed"
+  },
+  "logoutRevocationUnconfirmed": {
+    "message": "Revocation not confirmed"
+  },
+  "logoutUnconfirmedHelp": {
+    "message": "Some remote sessions may remain active until they expire."
+  },
+  "deviceQuotaLoading": {
+    "message": "Loading device limit…"
+  },
+  "deviceQuotaUnknown": {
+    "message": "Device limit unavailable"
+  },
+  "error_proxy_creation_uncertain": {
+    "message": "The server did not confirm creation of the new connection. Automatic reconnection is paused."
+  },
+  "siteExclusionsPreferencesReset": {
+    "message": "Your saved site exceptions were reset after they could not be read. Add the sites you want to exclude again."
+  },
+  "siteExclusionsConflict": {
+    "message": "The excluded sites list has changed. Review it, then try your change again."
+  },
+  "unavailableLocation": {
+    "message": "Location unavailable"
+  },
+  "verificationSending": {
+    "message": "Sending verification email…"
+  },
+  "verificationSent": {
+    "message": "Verification email sent. Check your inbox and spam folder."
+  },
+  "error_login_requires_disconnect": {
+    "message": "Disconnect the current VPN connection before signing in to another account."
+  },
+  "error_storage_unavailable": {
+    "message": "Local account settings are unavailable. Retry when browser storage is available; your saved account has been preserved."
+  },
+  "diagnosticsAssistance": {
+    "message": "Support"
+  },
+  "diagnosticsTitle": {
+    "message": "Diagnostics"
+  },
+  "diagnosticsIntro": {
+    "message": "Check FuzeVPN and the current connection without changing your protection."
+  },
+  "diagnosticsPrivacyTitle": {
+    "message": "Your data"
+  },
+  "diagnosticsPrivacy": {
+    "message": "Reports contain technical states and error codes, never passwords, tokens, email addresses, IP addresses, visited URLs or excluded domains."
+  },
+  "diagnosticsAuto": {
+    "message": "Send important error reports automatically"
+  },
+  "diagnosticsAutoHelp": {
+    "message": "Off by default. Only simple technical reports are sent for this account, without browsing history. Support keeps them for 30 days."
+  },
+  "diagnosticsHistoryHelp": {
+    "message": "Technical history stays local: up to 200 events over 10 minutes, even when automatic sending is off. It contains no browsing history and is cleared when the browser closes or the account changes."
+  },
+  "diagnosticsHistoryCount": {
+    "message": "$1 local technical events"
+  },
+  "diagnosticsAccountRequired": {
+    "message": "Sign in to enable sending. You can still view and export a report without an account."
+  },
+  "diagnosticsRun": {
+    "message": "Run diagnostics"
+  },
+  "diagnosticsClearHistory": {
+    "message": "Clear local history"
+  },
+  "diagnosticsPreparing": {
+    "message": "Preparing the report…"
+  },
+  "diagnosticsReports": {
+    "message": "Reports"
+  },
+  "diagnosticsEmpty": {
+    "message": "No local report yet."
+  },
+  "diagnosticsChooseReport": {
+    "message": "Choose a report"
+  },
+  "diagnosticsReportLabel": {
+    "message": "$1 · $2 · $3"
+  },
+  "diagnosticsTypeFull": {
+    "message": "Full report"
+  },
+  "diagnosticsTypeSimple": {
+    "message": "Error report"
+  },
+  "diagnosticsSummary": {
+    "message": "Collected on $1. FuzeVPN version $2."
+  },
+  "diagnosticsJson": {
+    "message": "View the report content (JSON)"
+  },
+  "diagnosticsExport": {
+    "message": "Export report"
+  },
+  "diagnosticsDelete": {
+    "message": "Delete local report"
+  },
+  "diagnosticsRetention": {
+    "message": "Sent reports are linked to your signed-in account and kept by support for 30 days. Deleting a local report does not delete a report already received by support."
+  },
+  "diagnosticsConsent": {
+    "message": "Send this report to support"
+  },
+  "diagnosticsDataCollectionRequired": {
+    "message": "Firefox must allow technical data collection to send diagnostics. Try again and grant this permission."
+  },
+  "diagnosticsSendHelp": {
+    "message": "Sending is optional. Once approved, it may retry for up to 24 hours with a valid session for the same account. You can cancel further attempts. Cancelling late does not guarantee that the server has not already received the report."
+  },
+  "diagnosticsSend": {
+    "message": "Send report"
+  },
+  "diagnosticsCancel": {
+    "message": "Cancel sending"
+  },
+  "diagnosticsReload": {
+    "message": "Reload this page"
+  },
+  "diagnosticsUnavailable": {
+    "message": "Diagnostics are unavailable. Reload FuzeVPN from the browser’s extension manager, then reopen this page. Your VPN is unchanged."
+  },
+  "diagnosticsQueueFull": {
+    "message": "The sending queue is full. Delete a local report or wait for a pending report to finish."
+  },
+  "diagnosticsContentUnavailable": {
+    "message": "The report content is unavailable. Export the local report if it is available and contact support."
+  },
+  "diagnosticsFailure": {
+    "message": "The diagnostic action could not be completed. Your VPN is unchanged."
+  },
+  "diagnosticsChecks": {
+    "message": "Checks"
+  },
+  "diagnosticsCheckFallback": {
+    "message": "Technical check: $1"
+  },
+  "diagnosticsCheckLine": {
+    "message": "$1 — $2"
+  },
+  "diagnosticsProxy": {
+    "message": "Browser proxy"
+  },
+  "diagnosticsStorage": {
+    "message": "Local storage"
+  },
+  "diagnosticsNetwork": {
+    "message": "Network connection"
+  },
+  "diagnosticsCleanup": {
+    "message": "Session cleanup"
+  },
+  "diagnosticsResult_passed": {
+    "message": "Passed"
+  },
+  "diagnosticsResult_failed": {
+    "message": "Failed"
+  },
+  "diagnosticsResult_skipped": {
+    "message": "Not performed"
+  },
+  "diagnosticsResult_unknown": {
+    "message": "Unknown"
+  },
+  "diagnosticsStatus_ready": {
+    "message": "Ready on this device"
+  },
+  "diagnosticsStatus_pending": {
+    "message": "Waiting to send"
+  },
+  "diagnosticsStatus_sending": {
+    "message": "Sending…"
+  },
+  "diagnosticsStatus_session_required": {
+    "message": "Waiting for a valid session for the same account"
+  },
+  "diagnosticsStatus_received": {
+    "message": "Received by support"
+  },
+  "diagnosticsStatus_failed": {
+    "message": "Sending failed"
+  },
+  "diagnosticsStatus_cancelled": {
+    "message": "Sending cancelled"
+  },
+  "diagnosticsStatus_expired": {
+    "message": "Sending deadline expired"
+  },
+  "diagnosticsReceivedAt": {
+    "message": "Received on $1"
+  },
+  "error_private_browsing_required": {
+    "message": "Firefox requires this permission to configure the VPN, even in normal windows. Open about:addons → FuzeVPN, allow it to run in private windows, then retry."
+  },
+  "error_host_permissions_required": {
+    "message": "In Firefox, open about:addons → FuzeVPN → Permissions and allow access to all websites, then retry."
+  },
+  "cancelAction": {
+    "message": "Cancel"
+  },
+  "refreshLocations": {
+    "message": "Refresh locations"
+  },
+  "refreshingLocations": {
+    "message": "Refreshing locations…"
+  },
+  "locationsRefreshError": {
+    "message": "The location list could not be refreshed. Please try again."
+  },
+  "error_device_revoked_limit": {
+    "message": "This device has been revoked. Device limit reached: please remove a device."
+  },
+  "noAvailableLocations": {
+    "message": "No locations are currently available. Please try again shortly."
+  },
+  "noAvailableFavoriteLocations": {
+    "message": "Your favorite locations are temporarily unavailable."
+  },
+  "error_server_full": {
+    "message": "This server is full. Choose another location."
+  },
+  "error_capacity_unavailable": {
+    "message": "This server’s availability cannot be confirmed right now. Please try again shortly."
+  },
+  "locationHierarchyHelp": {
+    "message": "The name selects a server; the arrow shows details."
+  },
+  "locationCountrySelect": {
+    "message": "Select an available server: $1"
+  },
+  "locationCitySelect": {
+    "message": "Select an available server: $1"
+  },
+  "locationShowCities": {
+    "message": "Show cities: $1"
+  },
+  "locationHideCities": {
+    "message": "Hide cities: $1"
+  },
+  "locationShowServers": {
+    "message": "Show servers: $1"
+  },
+  "locationHideServers": {
+    "message": "Hide servers: $1"
+  },
+  "locationAvailableServers": {
+    "message": "Available servers: $1"
+  },
+  "legalInformation": {
+    "message": "Legal information"
+  },
+  "privacyPolicy": {
+    "message": "Privacy policy"
+  },
+  "termsAndConditions": {
+    "message": "Terms of use and sale"
+  },
+  "legalNotice": {
+    "message": "Legal notice"
+  },
+  "contactSupport": {
+    "message": "Contact support"
+  },
+  "webSignIn": {
+    "message": "Sign in to FuzeVPN"
+  },
+  "webSignInDisconnect": {
+    "message": "Disconnect and sign in"
+  },
+  "webSignInPending": {
+    "message": "Sign-in in progress…"
+  },
+  "webSignInHelp": {
+    "message": "Sign in or create an account with Google or email in the FuzeVPN client area."
+  },
+  "webSignInDisconnectHelp": {
+    "message": "This button stops browser protection so you can sign in with Google or email. Your browsing will be unprotected during sign-in."
+  },
+  "webSignInStatus": {
+    "message": "Continue in the FuzeVPN sign-in window. The extension updates automatically when you finish. Close that window to cancel."
+  },
+  "error_web_login_cancelled": {
+    "message": "Sign-in was cancelled. Try again."
+  },
+  "error_web_login_timeout": {
+    "message": "Sign-in took too long. Try again."
+  },
+  "error_web_login_unavailable": {
+    "message": "Web sign-in is unavailable. Try again later."
+  },
+  "error_web_login_invalid_callback": {
+    "message": "Sign-in could not be verified. Start again from the extension."
+  },
+  "error_web_login_denied": {
+    "message": "Sign-in was not authorized. Try again."
+  },
+  "error_web_login_busy": {
+    "message": "Close the sign-in window already open before trying again."
+  },
+  "deviceKindFirefox": {
+    "message": "Firefox browser"
+  }
+}

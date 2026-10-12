@@ -1,0 +1,31 @@
+{
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "fuzevpn-firefox@vpn1euro.com",
+      "strict_min_version": "140.0",
+      "data_collection_permissions": {
+        "required": [
+          "authenticationInfo",
+          "personallyIdentifyingInfo",
+          "browsingActivity",
+          "websiteContent"
+        ],
+        "optional": ["technicalAndInteraction"]
+      }
+    }
+  },
+  "permissions": [
+    "identity",
+    "proxy",
+    "storage",
+    "alarms",
+    "webRequest",
+    "webRequestBlocking",
+    "privacy",
+    "declarativeNetRequest"
+  ],
+  "background": {
+    "scripts": ["background/service-worker.js"],
+    "type": "module"
+  }
+}

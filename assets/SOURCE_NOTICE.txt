@@ -1,0 +1,9 @@
+FuzeVPN Extensions 0.9.2
+
+This extension contains code licensed under the Mozilla Public License 2.0.
+The full license is included in LICENSE.txt.
+
+Corresponding source is supplied with this release as the common source archive
+fuzevpn-extensions-v0.9.2-sources.zip. Its English BUILDING.md describes how to
+reproduce the Firefox, Chrome and Edge distributions. Third-party resources retain
+their notices and licenses alongside the bundled font, flags and Public Suffix List.

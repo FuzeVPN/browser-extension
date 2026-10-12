@@ -1,0 +1,830 @@
+{
+  "extensionName": {
+    "message": "FuzeVPN"
+  },
+  "extensionDescription": {
+    "message": "Збережіть конфіденційність і посильте безпеку одним натисканням."
+  },
+  "siteExclusionsReloadRequired": {
+    "message": "Перезавантажте FuzeVPN у менеджері розширень браузера, щоб завершити оновлення та використовувати виключення сайтів."
+  },
+  "extensionCommunicationError": {
+    "message": "Розширення не відповідає. Закрийте це вікно, а потім перезавантажте FuzeVPN у менеджері розширень браузера."
+  },
+  "actionDisconnected": {
+    "message": "FuzeVPN — Відключено"
+  },
+  "actionConnected": {
+    "message": "FuzeVPN — Браузер захищено"
+  },
+  "actionReconnecting": {
+    "message": "FuzeVPN — Повторне підключення"
+  },
+  "actionError": {
+    "message": "FuzeVPN — Потрібна увага"
+  },
+  "browserProtection": {
+    "message": "Захист браузера"
+  },
+  "loginTitle": {
+    "message": "Ласкаво просимо до FuzeVPN"
+  },
+  "loginSubtitle": {
+    "message": "Увійдіть, щоб захистити перегляд сайтів у цьому браузері."
+  },
+  "email": {
+    "message": "Адреса електронної пошти"
+  },
+  "emailPlaceholder": {
+    "message": "you@example.com"
+  },
+  "password": {
+    "message": "Пароль"
+  },
+  "signIn": {
+    "message": "Увійдіть"
+  },
+  "signingIn": {
+    "message": "Вхід…"
+  },
+  "forgotPassword": {
+    "message": "Забули пароль?"
+  },
+  "createAccount": {
+    "message": "Створіть обліковий запис"
+  },
+  "settings": {
+    "message": "Налаштування"
+  },
+  "close": {
+    "message": "Закрити"
+  },
+  "statusDisconnected": {
+    "message": "Відключено"
+  },
+  "statusConnecting": {
+    "message": "Підключення…"
+  },
+  "statusChanging": {
+    "message": "Зміна місцезнаходження…"
+  },
+  "statusProtected": {
+    "message": "Браузер захищено"
+  },
+  "statusRefreshing": {
+    "message": "Безпечне поновлення…"
+  },
+  "statusDisconnecting": {
+    "message": "Відключення…"
+  },
+  "statusError": {
+    "message": "Захист зупинено"
+  },
+  "browserOnlyDetail": {
+    "message": "Захист лише цього браузера."
+  },
+  "location": {
+    "message": "Розташування"
+  },
+  "change": {
+    "message": "Зміна"
+  },
+  "noLocation": {
+    "message": "Місцезнаходження недоступне"
+  },
+  "protectBrowser": {
+    "message": "Захистити браузер"
+  },
+  "disconnect": {
+    "message": "Відключити"
+  },
+  "subscription": {
+    "message": "Підписка"
+  },
+  "refreshSubscription": {
+    "message": "Оновити підписку"
+  },
+  "refreshingSubscription": {
+    "message": "Оновлення підписки…"
+  },
+  "subscriptionActive": {
+    "message": "Активний"
+  },
+  "subscriptionInactive": {
+    "message": "Неактивний"
+  },
+  "expiresOn": {
+    "message": "Термін дії закінчується $1"
+  },
+  "noExpiry": {
+    "message": "Без терміну придатності"
+  },
+  "browserOnlyNotice": {
+    "message": "Захищено лише цей браузер. Інші браузери та програми не захищено."
+  },
+  "resendVerification": {
+    "message": "Повторно надіслати електронний лист"
+  },
+  "incognitoHelp": {
+    "message": "Захист у приватних вікнах працює лише тоді, коли в налаштуваннях браузера дозволено запуск розширення в них."
+  },
+  "manageAccount": {
+    "message": "Керувати моїм обліковим записом"
+  },
+  "account": {
+    "message": "Обліковий запис"
+  },
+  "devices": {
+    "message": "Пристрої"
+  },
+  "manageDevices": {
+    "message": "Керуйте пристроями"
+  },
+  "refreshDevices": {
+    "message": "Оновити пристрої"
+  },
+  "deviceCount": {
+    "message": "$1 / $2 пристроїв"
+  },
+  "loadingDevices": {
+    "message": "Завантаження пристроїв…"
+  },
+  "noDevices": {
+    "message": "Немає активних пристроїв."
+  },
+  "currentDevice": {
+    "message": "Цей пристрій"
+  },
+  "deviceKindBrowser": {
+    "message": "Розширення для браузера"
+  },
+  "deviceKindVpn": {
+    "message": "пристрій VPN"
+  },
+  "profile_browser_proxy": {
+    "message": "Проксі браузера"
+  },
+  "profile_wireguard": {
+    "message": "WireGuard"
+  },
+  "profile_openvpn": {
+    "message": "OpenVPN"
+  },
+  "none": {
+    "message": "немає"
+  },
+  "deviceCreatedOn": {
+    "message": "Створено $1"
+  },
+  "deleteDevice": {
+    "message": "Видалити пристрій"
+  },
+  "confirmDeleteDevice": {
+    "message": "Видалити «$1»? Його VPN-з’єднання буде припинено, а його профілі буде видалено."
+  },
+  "resetDevice": {
+    "message": "Скинути пристрій"
+  },
+  "confirmResetDevice": {
+    "message": "Скинути це розширення? Його буде зареєстровано як новий пристрій під час наступного використання."
+  },
+  "signOutAccount": {
+    "message": "Вийти з облікового запису"
+  },
+  "chooseLocation": {
+    "message": "Виберіть локацію"
+  },
+  "error_invalid_credentials": {
+    "message": "Адреса електронної пошти або пароль неправильні."
+  },
+  "error_unauthorized": {
+    "message": "Ваш сеанс закінчився. Увійдіть знову."
+  },
+  "error_email_verification_required": {
+    "message": "Перш ніж увімкнути захист, перевірте свою електронну адресу."
+  },
+  "errorVerificationCooldown": {
+    "message": "Запит на новий електронний лист можна отримати за $1 секунд."
+  },
+  "error_verification_email_cooldown": {
+    "message": "Зачекайте, перш ніж запитувати інший електронний лист."
+  },
+  "error_subscription_required": {
+    "message": "Для захисту браузера потрібна активна підписка."
+  },
+  "error_device_limit": {
+    "message": "Досягнуто ліміту пристроїв. Видаліть один пристрій."
+  },
+  "error_device_identity_revoked": {
+    "message": "Цей пристрій більше не авторизовано. Спробуйте підключитися знову."
+  },
+  "error_device_proof_invalid": {
+    "message": "Нам не вдалося перевірити цей пристрій. Перевірте дату й час свого комп’ютера, а потім повторіть спробу."
+  },
+  "error_device_proof_replayed": {
+    "message": "Цей запит уже оброблено. Спробуйте знову."
+  },
+  "error_invalid_device": {
+    "message": "Пристрій не розпізнано. Спробуйте підключитися знову."
+  },
+  "error_device_exists": {
+    "message": "Цей ідентифікатор пристрою вже пов’язано з іншим обліковим записом."
+  },
+  "error_not_found": {
+    "message": "Ця операція більше недоступна. Спробуйте знову."
+  },
+  "error_invalid_location": {
+    "message": "Це місце недоступне. Виберіть інший."
+  },
+  "error_rate_limited": {
+    "message": "Забагато спроб. Зачекайте хвилинку та повторіть спробу."
+  },
+  "error_proxy_unavailable": {
+    "message": "Цей сервер тимчасово недоступний. Повторіть спробу за мить."
+  },
+  "error_api_token_expired": {
+    "message": "Сеанс вашого облікового запису закінчився. Увійдіть знову."
+  },
+  "error_network_error": {
+    "message": "Мережа недоступна. Перевірте підключення до Інтернету."
+  },
+  "error_request_timeout": {
+    "message": "Служба довго не відповідала. Спробуйте знову."
+  },
+  "error_invalid_response": {
+    "message": "Служба повернула неочікувану відповідь."
+  },
+  "error_proxy_certificate_invalid": {
+    "message": "Нам не вдалося перевірити безпеку сервера. З’єднання припинено."
+  },
+  "error_proxy_controlled_by_extension": {
+    "message": "Зараз проксі браузера контролює інше розширення."
+  },
+  "error_proxy_controlled_by_policy": {
+    "message": "Політика адміністратора забороняє FuzeVPN змінювати проксі."
+  },
+  "error_proxy_authentication_failed": {
+    "message": "Сервер не прийняв підключення. Спробуйте підключитися знову."
+  },
+  "error_session_expired": {
+    "message": "Термін дії вашого захищеного з’єднання минув. Підключіться знову."
+  },
+  "error_email_delivery_unavailable": {
+    "message": "Електронний лист зараз неможливо надіслати."
+  },
+  "error_unknown_error": {
+    "message": "Сталася неочікувана помилка. Спробуйте знову."
+  },
+  "actionBlocked": {
+    "message": "FuzeVPN — Перегляд заблоковано"
+  },
+  "statusBlockedRetry": {
+    "message": "Перегляд призупинено — повторне підключення"
+  },
+  "statusBlockedAction": {
+    "message": "Перегляд призупинено — перевірте з’єднання"
+  },
+  "statusProtectionUnavailable": {
+    "message": "Захист недоступний — перегляд не заблоковано"
+  },
+  "recoveryHelp": {
+    "message": "Повторіть спробу відновити захист. Відключення дає змогу переглядати без FuzeVPN."
+  },
+  "retryConnection": {
+    "message": "Повторіть спробу"
+  },
+  "killSwitch": {
+    "message": "Вимкнути перемикач"
+  },
+  "killSwitchHelp": {
+    "message": "Блокує нові веб-запити, якщо VPN-з’єднання розривається. Виключені сайти залишаються доступними за межами VPN."
+  },
+  "webRtcProtection": {
+    "message": "Захист WebRTC"
+  },
+  "webRtcHelp": {
+    "message": "Допомагає зберегти конфіденційність вашої IP-адреси під час веб-дзвінків. Деякі дзвінки можуть не працювати. Вимкнення цієї функції може виявити вашу справжню IP-адресу."
+  },
+  "securityEffectiveState": {
+    "message": "$1 · $2"
+  },
+  "securityBlocked": {
+    "message": "Перегляд заблоковано"
+  },
+  "securityNotBlocked": {
+    "message": "Перегляд не заблоковано"
+  },
+  "securityWebRtcActive": {
+    "message": "Обмеження WebRTC активні"
+  },
+  "securityWebRtcInactive": {
+    "message": "Обмеження WebRTC неактивне"
+  },
+  "localNetworkHelp": {
+    "message": "Під час захисту локальні IP-адреси та загальні локальні імена блокуються. Виключений домен все ще може надавати доступ до локальної мережі. Системні налаштування IPv6 не змінено."
+  },
+  "securityLimits": {
+    "message": "Про цей захист"
+  },
+  "killSwitchLimits": {
+    "message": "Лише для цього браузера: наявні з’єднання та деякі внутрішні з’єднання браузера чи інших розширень можуть тривати. Інше розширення або політика можуть замінити проксі, перш ніж FuzeVPN відреагує. Вимкнення розширення знімає захист. Блокування на рівні всієї системи не виконується."
+  },
+  "error_traffic_guard_failed": {
+    "message": "Не вдалося перевірити блок перегляду. Захист не гарантується. Перевірте дозволи розширення."
+  },
+  "error_webrtc_control_unavailable": {
+    "message": "Не вдалося застосувати обмеження WebRTC. Перевірте свої налаштування, інші розширення або політику адміністратора."
+  },
+  "language": {
+    "message": "Мова"
+  },
+  "languageAutomatic": {
+    "message": "Автоматично — мова браузера"
+  },
+  "languageHelp": {
+    "message": "Зміни застосовуються одразу. В автоматичному режимі використовується мова браузера, яка може відрізнятися від мови операційної системи."
+  },
+  "languageSaveError": {
+    "message": "Не вдалося зберегти мову. Ваш попередній вибір зберігається. Спробуйте знову."
+  },
+  "publicIp": {
+    "message": "Публічний IP"
+  },
+  "vpnIp": {
+    "message": "VPN IP"
+  },
+  "ipChecking": {
+    "message": "Перевірка…"
+  },
+  "ipUnavailable": {
+    "message": "Недоступний"
+  },
+  "ipLookupExplanation": {
+    "message": "IP перевірено за допомогою ipify за вашим поточним з’єднанням. Історія веб-перегляду не надсилається."
+  },
+  "automaticLocation": {
+    "message": "Автоматичний"
+  },
+  "automaticLocationHelp": {
+    "message": "Найкращий останній час відповіді або ваше останнє місцезнаходження."
+  },
+  "automaticLocationName": {
+    "message": "Автоматичний · $1"
+  },
+  "searchLocations": {
+    "message": "Пошук країни або міста"
+  },
+  "locationFilters": {
+    "message": "Розташування фільтрів"
+  },
+  "allLocations": {
+    "message": "всі"
+  },
+  "favoriteLocations": {
+    "message": "Вибране"
+  },
+  "recentLocations": {
+    "message": "Останні"
+  },
+  "noMatchingLocations": {
+    "message": "Немає місць, які відповідають вашому пошуку."
+  },
+  "noFavoriteLocations": {
+    "message": "Додайте зірочку, щоб зберегти тут ваші улюблені місця."
+  },
+  "noRecentLocations": {
+    "message": "Тут відображатимуться ваші нещодавно підключені місця."
+  },
+  "addFavorite": {
+    "message": "Додати $1 до вибраного"
+  },
+  "removeFavorite": {
+    "message": "Видалити $1 з вибраного"
+  },
+  "unavailableFavoriteLocation": {
+    "message": "Недоступне вибране розташування $1"
+  },
+  "locationSaveError": {
+    "message": "Не вдалося завершити зміну. Можливо, деякі налаштування були збережені. Перш ніж повторити спробу, перевірте відображений вибір."
+  },
+  "siteExclusions": {
+    "message": "Виключені сайти"
+  },
+  "siteExclusionsHelp": {
+    "message": "Ці сайти використовують ваше з’єднання без FuzeVPN, навіть якщо VPN вимикається."
+  },
+  "siteExclusionsEnabled": {
+    "message": "Увімкнути винятки"
+  },
+  "siteExclusionInput": {
+    "message": "Домен або URL"
+  },
+  "siteExclusionPlaceholder": {
+    "message": "example.com"
+  },
+  "siteExclusionPreview": {
+    "message": "Вибраний домен: $1"
+  },
+  "siteExclusionSubdomains": {
+    "message": "Включати субдомени"
+  },
+  "siteExclusionAdd": {
+    "message": "Додати сайт"
+  },
+  "siteExclusionsEmpty": {
+    "message": "Немає виключених сайтів. Додайте лише ті сайти, якими ви хочете користуватися без VPN."
+  },
+  "siteExclusionsCount": {
+    "message": "$1 / 100 сайтів"
+  },
+  "siteExclusionScopeSubdomains": {
+    "message": "Домен і субдомени"
+  },
+  "siteExclusionScopeExact": {
+    "message": "Лише точний домен"
+  },
+  "siteExclusionRemove": {
+    "message": "Видалити $1"
+  },
+  "siteExclusionsDetails": {
+    "message": "Як працюють винятки?"
+  },
+  "siteExclusionsResources": {
+    "message": "Ресурси з інших доменів залишаються захищеними. Виключення сторінки не означає автоматичного виключення іншого її вмісту."
+  },
+  "siteExclusionsReload": {
+    "message": "Перезавантажте сайт після зміни. Існуючі сполучення можуть зберегти попередній маршрут."
+  },
+  "siteExclusionsWebRtc": {
+    "message": "Захист WebRTC залишається глобальним налаштуванням, зокрема для виключених сайтів."
+  },
+  "siteExclusionsLocal": {
+    "message": "Зберігається лише в цьому браузері та зберігається після виходу з облікового запису."
+  },
+  "siteExclusionsOn": {
+    "message": "Увімкнено винятки"
+  },
+  "siteExclusionsOff": {
+    "message": "Винятки вимкнено"
+  },
+  "siteExclusionsSummary": {
+    "message": "$1 сайти за межами VPN"
+  },
+  "siteExclusionsPending": {
+    "message": "Застосування винятків…"
+  },
+  "siteExclusionsInterrupted": {
+    "message": "Зміну перервано. Тимчасовий охоронець залишається на місці."
+  },
+  "siteExclusionsSaveError": {
+    "message": "Не вдалося завершити зміну. Перевірте налаштування та повторіть спробу."
+  },
+  "siteExclusionsRetry": {
+    "message": "Повторіть спробу"
+  },
+  "siteExclusionInvalid": {
+    "message": "Введіть дійсний публічний домен. IP-адреси, локальні імена, символи підстановки, загальнодоступні суфікси та зарезервовані домени не приймаються."
+  },
+  "siteExclusionDuplicate": {
+    "message": "Цей домен уже є в списку."
+  },
+  "siteExclusionsLimit": {
+    "message": "Ліміт у 100 сайтів досягнуто. Видаліть сайт, щоб додати інший."
+  },
+  "statusProtectedExceptions": {
+    "message": "VPN активний · $1 винятки"
+  },
+  "statusBlockedExceptions": {
+    "message": "Лише виключені сайти залишаються доступними"
+  },
+  "securityBlockedExceptions": {
+    "message": "Перегляд заблоковано, крім виключених сайтів"
+  },
+  "securityBlockUnverified": {
+    "message": "Блокування не перевірено"
+  },
+  "logoutLocalComplete": {
+    "message": "Локальний вихід завершено."
+  },
+  "logoutApiSession": {
+    "message": "Поточний сеанс облікового запису"
+  },
+  "logoutProxySessions": {
+    "message": "Відомі сеанси VPN"
+  },
+  "logoutRevocationPending": {
+    "message": "Виконується відкликання…"
+  },
+  "logoutRevocationConfirmed": {
+    "message": "Відкликання підтверджено"
+  },
+  "logoutRevocationUnconfirmed": {
+    "message": "Відкликання не підтверджено"
+  },
+  "logoutUnconfirmedHelp": {
+    "message": "Деякі віддалені сесії можуть залишатися активними, доки не закінчиться термін дії."
+  },
+  "deviceQuotaLoading": {
+    "message": "Завантаження ліміту пристрою…"
+  },
+  "deviceQuotaUnknown": {
+    "message": "Ліміт пристроїв недоступний"
+  },
+  "error_proxy_creation_uncertain": {
+    "message": "Сервер не підтвердив створення нового підключення. Автоматичне повторне підключення призупинено."
+  },
+  "siteExclusionsPreferencesReset": {
+    "message": "Ваші збережені винятки сайтів було скинуто, оскільки їх не вдалося прочитати. Знову додайте сайти, які потрібно виключити."
+  },
+  "siteExclusionsConflict": {
+    "message": "Список виключених сайтів змінився. Перегляньте його, а потім спробуйте змінити ще раз."
+  },
+  "unavailableLocation": {
+    "message": "Місцезнаходження недоступне"
+  },
+  "verificationSending": {
+    "message": "Надсилання електронного листа для підтвердження…"
+  },
+  "verificationSent": {
+    "message": "Електронний лист для підтвердження надіслано. Перевірте папку \"Вхідні\" та спам."
+  },
+  "error_login_requires_disconnect": {
+    "message": "Від’єднайте поточне VPN-з’єднання перед входом в інший обліковий запис."
+  },
+  "error_storage_unavailable": {
+    "message": "Налаштування локального облікового запису недоступні. Повторіть спробу, коли буде доступна пам’ять браузера; ваш збережений обліковий запис збережено."
+  },
+  "diagnosticsAssistance": {
+    "message": "Підтримка"
+  },
+  "diagnosticsTitle": {
+    "message": "діагностика"
+  },
+  "diagnosticsIntro": {
+    "message": "Перевірте FuzeVPN і поточне підключення, не змінюючи захист."
+  },
+  "diagnosticsPrivacyTitle": {
+    "message": "Ваші дані"
+  },
+  "diagnosticsPrivacy": {
+    "message": "Звіти містять технічні стани та коди помилок, а не паролі, маркери, адреси електронної пошти, IP-адреси, відвідані URL-адреси чи виключені домени."
+  },
+  "diagnosticsAuto": {
+    "message": "Автоматично надсилайте важливі звіти про помилки"
+  },
+  "diagnosticsAutoHelp": {
+    "message": "За замовчуванням вимкнено. Для цього облікового запису надсилаються лише прості технічні звіти без історії веб-перегляду. Підтримка зберігає їх 30 днів."
+  },
+  "diagnosticsHistoryHelp": {
+    "message": "Технічна історія залишається локальною: до 200 подій протягом 10 хвилин, навіть якщо автоматичне надсилання вимкнено. Він не містить історії веб-перегляду та очищається, коли браузер закривається або обліковий запис змінюється."
+  },
+  "diagnosticsHistoryCount": {
+    "message": "$1 місцеві технічні події"
+  },
+  "diagnosticsAccountRequired": {
+    "message": "Увійдіть, щоб увімкнути надсилання. Ви можете переглядати та експортувати звіт без облікового запису."
+  },
+  "diagnosticsRun": {
+    "message": "Запустіть діагностику"
+  },
+  "diagnosticsClearHistory": {
+    "message": "Очистити локальну історію"
+  },
+  "diagnosticsPreparing": {
+    "message": "Підготовка звіту…"
+  },
+  "diagnosticsReports": {
+    "message": "Звіти"
+  },
+  "diagnosticsEmpty": {
+    "message": "Ще немає місцевого звіту."
+  },
+  "diagnosticsChooseReport": {
+    "message": "Виберіть звіт"
+  },
+  "diagnosticsReportLabel": {
+    "message": "$1 · $2 · $3"
+  },
+  "diagnosticsTypeFull": {
+    "message": "Повний звіт"
+  },
+  "diagnosticsTypeSimple": {
+    "message": "Звіт про помилку"
+  },
+  "diagnosticsSummary": {
+    "message": "Зібрано $1. FuzeVPN версія $2."
+  },
+  "diagnosticsJson": {
+    "message": "Переглянути вміст звіту (JSON)"
+  },
+  "diagnosticsExport": {
+    "message": "Звіт про експорт"
+  },
+  "diagnosticsDelete": {
+    "message": "Видалити локальний звіт"
+  },
+  "diagnosticsRetention": {
+    "message": "Надіслані звіти пов’язуються з обліковим записом, у який ви ввійшли, і зберігаються службою підтримки протягом 30 днів. Видалення локального звіту не видаляє звіт, уже отриманий службою підтримки."
+  },
+  "diagnosticsConsent": {
+    "message": "Надішліть цей звіт до служби підтримки"
+  },
+  "diagnosticsDataCollectionRequired": {
+    "message": "Для надсилання діагностики Firefox має дозволити збір технічних даних. Спробуйте ще раз і надайте цей дозвіл."
+  },
+  "diagnosticsSendHelp": {
+    "message": "Відправка необов'язкова. Після схвалення можна повторити спробу протягом 24 годин із дійсним сеансом для того самого облікового запису. Ви можете скасувати подальші спроби. Пізнє скасування не гарантує, що сервер ще не отримав звіт."
+  },
+  "diagnosticsSend": {
+    "message": "Відправити звіт"
+  },
+  "diagnosticsCancel": {
+    "message": "Скасувати відправку"
+  },
+  "diagnosticsReload": {
+    "message": "Перезавантажте цю сторінку"
+  },
+  "diagnosticsUnavailable": {
+    "message": "Діагностика недоступна. Перезавантажте FuzeVPN у менеджері розширень браузера, а потім знову відкрийте цю сторінку. З’єднання VPN не змінилося."
+  },
+  "diagnosticsQueueFull": {
+    "message": "Черга відправки заповнена. Видаліть локальний звіт або дочекайтеся завершення звіту, що очікує на розгляд."
+  },
+  "diagnosticsContentUnavailable": {
+    "message": "Зміст звіту недоступний. Експортуйте локальний звіт, якщо він доступний, і зверніться до служби підтримки."
+  },
+  "diagnosticsFailure": {
+    "message": "Не вдалося завершити діагностичну дію. Ваш VPN не змінився."
+  },
+  "diagnosticsChecks": {
+    "message": "Чеки"
+  },
+  "diagnosticsCheckFallback": {
+    "message": "Технічна перевірка: $1"
+  },
+  "diagnosticsCheckLine": {
+    "message": "$1 — $2"
+  },
+  "diagnosticsProxy": {
+    "message": "Проксі браузера"
+  },
+  "diagnosticsStorage": {
+    "message": "Локальне сховище"
+  },
+  "diagnosticsNetwork": {
+    "message": "Підключення до мережі"
+  },
+  "diagnosticsCleanup": {
+    "message": "Очищення сеансу"
+  },
+  "diagnosticsResult_passed": {
+    "message": "Пройшов"
+  },
+  "diagnosticsResult_failed": {
+    "message": "Не вдалося"
+  },
+  "diagnosticsResult_skipped": {
+    "message": "Не виконується"
+  },
+  "diagnosticsResult_unknown": {
+    "message": "Невідомий"
+  },
+  "diagnosticsStatus_ready": {
+    "message": "Готовий на цьому пристрої"
+  },
+  "diagnosticsStatus_pending": {
+    "message": "Очікування надсилання"
+  },
+  "diagnosticsStatus_sending": {
+    "message": "Надсилання…"
+  },
+  "diagnosticsStatus_session_required": {
+    "message": "Очікування дійсного сеансу для того самого облікового запису"
+  },
+  "diagnosticsStatus_received": {
+    "message": "Отримано службою підтримки"
+  },
+  "diagnosticsStatus_failed": {
+    "message": "Не вдалося відправити"
+  },
+  "diagnosticsStatus_cancelled": {
+    "message": "Надсилання скасовано"
+  },
+  "diagnosticsStatus_expired": {
+    "message": "Закінчився термін відправки"
+  },
+  "diagnosticsReceivedAt": {
+    "message": "Отримано $1"
+  },
+  "error_private_browsing_required": {
+    "message": "Firefox потребує цього дозволу для налаштування VPN навіть у звичайних вікнах. Відкрийте about:addons → FuzeVPN, дозвольте роботу в приватних вікнах і повторіть спробу."
+  },
+  "error_host_permissions_required": {
+    "message": "У Firefox відкрийте about:addons → FuzeVPN → Дозволи та дозвольте доступ до всіх сайтів, а потім повторіть спробу."
+  },
+  "cancelAction": {
+    "message": "Скасувати"
+  },
+  "refreshLocations": {
+    "message": "Оновити розташування"
+  },
+  "refreshingLocations": {
+    "message": "Оновлення розташувань…"
+  },
+  "locationsRefreshError": {
+    "message": "Не вдалося оновити список розташувань. Спробуйте ще раз."
+  },
+  "error_device_revoked_limit": {
+    "message": "Авторизацію цього пристрою відкликано. Досягнуто ліміту пристроїв: видаліть один пристрій."
+  },
+  "noAvailableLocations": {
+    "message": "Наразі немає доступних розташувань. Спробуйте за мить."
+  },
+  "noAvailableFavoriteLocations": {
+    "message": "Ваші улюблені розташування тимчасово недоступні."
+  },
+  "error_server_full": {
+    "message": "Цей сервер заповнений. Виберіть інше розташування."
+  },
+  "error_capacity_unavailable": {
+    "message": "Наразі неможливо підтвердити доступність цього сервера. Спробуйте за мить."
+  },
+  "locationHierarchyHelp": {
+    "message": "Натискання на назву вибирає сервер, а на стрілку — показує подробиці."
+  },
+  "locationCountrySelect": {
+    "message": "Вибрати доступний сервер: $1"
+  },
+  "locationCitySelect": {
+    "message": "Вибрати доступний сервер: $1"
+  },
+  "locationShowCities": {
+    "message": "Показати міста: $1"
+  },
+  "locationHideCities": {
+    "message": "Приховати міста: $1"
+  },
+  "locationShowServers": {
+    "message": "Показати сервери: $1"
+  },
+  "locationHideServers": {
+    "message": "Приховати сервери: $1"
+  },
+  "locationAvailableServers": {
+    "message": "Доступні сервери: $1"
+  },
+  "legalInformation": {
+    "message": "Правова інформація"
+  },
+  "privacyPolicy": {
+    "message": "Політика конфіденційності"
+  },
+  "termsAndConditions": {
+    "message": "Умови використання та продажу"
+  },
+  "legalNotice": {
+    "message": "Юридична інформація про видавця"
+  },
+  "contactSupport": {
+    "message": "Зв’язатися з підтримкою"
+  },
+  "webSignIn": {
+    "message": "Увійти до FuzeVPN"
+  },
+  "webSignInDisconnect": {
+    "message": "Від’єднатися й увійти"
+  },
+  "webSignInPending": {
+    "message": "Вхід триває…"
+  },
+  "webSignInHelp": {
+    "message": "Увійдіть або створіть обліковий запис через Google чи електронну пошту в кабінеті клієнта FuzeVPN."
+  },
+  "webSignInDisconnectHelp": {
+    "message": "Ця кнопка зупиняє захист браузера, щоб увійти через Google чи електронну пошту. Під час входу ваш перегляд не буде захищений."
+  },
+  "webSignInStatus": {
+    "message": "Продовжуйте у вікні входу FuzeVPN. Після завершення розширення оновиться автоматично. Закрийте це вікно, щоб скасувати."
+  },
+  "error_web_login_cancelled": {
+    "message": "Вхід скасовано. Спробуйте ще раз."
+  },
+  "error_web_login_timeout": {
+    "message": "Вхід тривав надто довго. Спробуйте ще раз."
+  },
+  "error_web_login_unavailable": {
+    "message": "Вхід через сайт недоступний. Спробуйте пізніше."
+  },
+  "error_web_login_invalid_callback": {
+    "message": "Не вдалося перевірити вхід. Почніть знову з розширення."
+  },
+  "error_web_login_denied": {
+    "message": "Вхід не було дозволено. Спробуйте ще раз."
+  },
+  "error_web_login_busy": {
+    "message": "Закрийте вже відкрите вікно входу, перш ніж спробувати знову."
+  },
+  "deviceKindFirefox": {
+    "message": "Браузер Firefox"
+  }
+}

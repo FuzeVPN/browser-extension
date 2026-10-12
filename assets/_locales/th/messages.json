@@ -1,0 +1,830 @@
+{
+  "extensionName": {
+    "message": "FuzeVPN"
+  },
+  "extensionDescription": {
+    "message": "รักษาความเป็นส่วนตัวและเพิ่มความปลอดภัยของคุณได้ในคลิกเดียว"
+  },
+  "siteExclusionsReloadRequired": {
+    "message": "โหลด FuzeVPN ใหม่จากหน้าจัดการส่วนขยายของเบราว์เซอร์ เพื่ออัปเดตให้เสร็จและใช้ข้อยกเว้นเว็บไซต์"
+  },
+  "extensionCommunicationError": {
+    "message": "ส่วนขยายไม่ตอบสนอง ปิดหน้าต่างนี้ แล้วโหลด FuzeVPN ใหม่จากหน้าจัดการส่วนขยายของเบราว์เซอร์"
+  },
+  "actionDisconnected": {
+    "message": "FuzeVPN — ตัดการเชื่อมต่อแล้ว"
+  },
+  "actionConnected": {
+    "message": "FuzeVPN — เบราว์เซอร์ได้รับการปกป้อง"
+  },
+  "actionReconnecting": {
+    "message": "FuzeVPN — กำลังเชื่อมต่อใหม่"
+  },
+  "actionError": {
+    "message": "FuzeVPN — ต้องให้ความสนใจ"
+  },
+  "browserProtection": {
+    "message": "การป้องกันเบราว์เซอร์"
+  },
+  "loginTitle": {
+    "message": "ยินดีต้อนรับสู่ FuzeVPN"
+  },
+  "loginSubtitle": {
+    "message": "ลงชื่อเข้าใช้เพื่อปกป้องการท่องเว็บในเบราว์เซอร์นี้"
+  },
+  "email": {
+    "message": "ที่อยู่อีเมล"
+  },
+  "emailPlaceholder": {
+    "message": "you@example.com"
+  },
+  "password": {
+    "message": "รหัสผ่าน"
+  },
+  "signIn": {
+    "message": "เข้าสู่ระบบ"
+  },
+  "signingIn": {
+    "message": "กำลังลงชื่อเข้าใช้..."
+  },
+  "forgotPassword": {
+    "message": "ลืมรหัสผ่าน?"
+  },
+  "createAccount": {
+    "message": "สร้างบัญชี"
+  },
+  "settings": {
+    "message": "การตั้งค่า"
+  },
+  "close": {
+    "message": "ปิด"
+  },
+  "statusDisconnected": {
+    "message": "ตัดการเชื่อมต่อแล้ว"
+  },
+  "statusConnecting": {
+    "message": "กำลังเชื่อมต่อ..."
+  },
+  "statusChanging": {
+    "message": "กำลังเปลี่ยนสถานที่..."
+  },
+  "statusProtected": {
+    "message": "เบราว์เซอร์ได้รับการปกป้อง"
+  },
+  "statusRefreshing": {
+    "message": "ต่ออายุอย่างปลอดภัย..."
+  },
+  "statusDisconnecting": {
+    "message": "กำลังยกเลิกการเชื่อมต่อ..."
+  },
+  "statusError": {
+    "message": "การป้องกันหยุดลง"
+  },
+  "browserOnlyDetail": {
+    "message": "ปกป้องเฉพาะเบราว์เซอร์นี้"
+  },
+  "location": {
+    "message": "ที่ตั้ง"
+  },
+  "change": {
+    "message": "เปลี่ยน"
+  },
+  "noLocation": {
+    "message": "ไม่มีสถานที่ให้บริการ"
+  },
+  "protectBrowser": {
+    "message": "ปกป้องเบราว์เซอร์"
+  },
+  "disconnect": {
+    "message": "ตัดการเชื่อมต่อ"
+  },
+  "subscription": {
+    "message": "สมัครสมาชิก"
+  },
+  "refreshSubscription": {
+    "message": "รีเฟรชการสมัครรับข้อมูล"
+  },
+  "refreshingSubscription": {
+    "message": "กำลังรีเฟรชการสมัครรับข้อมูล..."
+  },
+  "subscriptionActive": {
+    "message": "ใช้งานอยู่"
+  },
+  "subscriptionInactive": {
+    "message": "ไม่ได้ใช้งาน"
+  },
+  "expiresOn": {
+    "message": "หมดอายุวันที่ $1"
+  },
+  "noExpiry": {
+    "message": "ไม่มีวันหมดอายุ"
+  },
+  "browserOnlyNotice": {
+    "message": "ปกป้องเฉพาะเบราว์เซอร์นี้ ไม่ครอบคลุมเบราว์เซอร์หรือแอปอื่น"
+  },
+  "resendVerification": {
+    "message": "ส่งอีเมลอีกครั้ง"
+  },
+  "incognitoHelp": {
+    "message": "หน้าต่างส่วนตัวจะได้รับการปกป้องแบบเดียวกัน เมื่ออนุญาตให้ส่วนขยายทำงานในหน้าต่างส่วนตัวในการตั้งค่าเบราว์เซอร์เท่านั้น"
+  },
+  "manageAccount": {
+    "message": "จัดการบัญชีของฉัน"
+  },
+  "account": {
+    "message": "บัญชี"
+  },
+  "devices": {
+    "message": "อุปกรณ์"
+  },
+  "manageDevices": {
+    "message": "จัดการอุปกรณ์"
+  },
+  "refreshDevices": {
+    "message": "รีเฟรชอุปกรณ์"
+  },
+  "deviceCount": {
+    "message": "อุปกรณ์ $1 / $2"
+  },
+  "loadingDevices": {
+    "message": "กำลังโหลดอุปกรณ์..."
+  },
+  "noDevices": {
+    "message": "ไม่มีอุปกรณ์ที่ใช้งานอยู่"
+  },
+  "currentDevice": {
+    "message": "อุปกรณ์นี้"
+  },
+  "deviceKindBrowser": {
+    "message": "ส่วนขยายเบราว์เซอร์"
+  },
+  "deviceKindVpn": {
+    "message": "อุปกรณ์วีพีเอ็น"
+  },
+  "profile_browser_proxy": {
+    "message": "พร็อกซีเบราว์เซอร์"
+  },
+  "profile_wireguard": {
+    "message": "WireGuard"
+  },
+  "profile_openvpn": {
+    "message": "โอเพ่น VPN"
+  },
+  "none": {
+    "message": "ไม่มี"
+  },
+  "deviceCreatedOn": {
+    "message": "สร้างเมื่อ $1"
+  },
+  "deleteDevice": {
+    "message": "ลบอุปกรณ์"
+  },
+  "confirmDeleteDevice": {
+    "message": "ลบ \"$1\" ออกหรือไม่ การเชื่อมต่อ VPN จะหยุดลงและโปรไฟล์จะถูกลบออก"
+  },
+  "resetDevice": {
+    "message": "รีเซ็ตอุปกรณ์"
+  },
+  "confirmResetDevice": {
+    "message": "รีเซ็ตส่วนขยายนี้ไหม มันจะถูกลงทะเบียนเป็นอุปกรณ์ใหม่ในครั้งต่อไปที่คุณใช้มัน"
+  },
+  "signOutAccount": {
+    "message": "ออกจากระบบบัญชี"
+  },
+  "chooseLocation": {
+    "message": "เลือกสถานที่"
+  },
+  "error_invalid_credentials": {
+    "message": "ที่อยู่อีเมลหรือรหัสผ่านไม่ถูกต้อง"
+  },
+  "error_unauthorized": {
+    "message": "เซสชันของคุณหมดอายุแล้ว กรุณาเข้าสู่ระบบอีกครั้ง"
+  },
+  "error_email_verification_required": {
+    "message": "ยืนยันที่อยู่อีเมลของคุณก่อนที่จะเปิดใช้งานการป้องกัน"
+  },
+  "errorVerificationCooldown": {
+    "message": "สามารถขออีเมลใหม่ได้ภายใน $1 วินาที"
+  },
+  "error_verification_email_cooldown": {
+    "message": "กรุณารอก่อนที่จะขออีเมล์อื่น"
+  },
+  "error_subscription_required": {
+    "message": "ต้องมีการสมัครสมาชิกที่ใช้งานอยู่เพื่อปกป้องเบราว์เซอร์"
+  },
+  "error_device_limit": {
+    "message": "ครบจำนวนอุปกรณ์สูงสุดแล้ว โปรดลบอุปกรณ์หนึ่งเครื่อง"
+  },
+  "error_device_identity_revoked": {
+    "message": "อุปกรณ์นี้ไม่ได้รับอนุญาตแล้ว ลองเชื่อมต่ออีกครั้ง"
+  },
+  "error_device_proof_invalid": {
+    "message": "เราไม่สามารถยืนยันอุปกรณ์นี้ได้ ตรวจสอบวันที่และเวลาของคอมพิวเตอร์ของคุณ จากนั้นลองอีกครั้ง"
+  },
+  "error_device_proof_replayed": {
+    "message": "คำขอนี้ได้รับการประมวลผลแล้ว ลองอีกครั้ง"
+  },
+  "error_invalid_device": {
+    "message": "ไม่รู้จักอุปกรณ์นี้ ลองเชื่อมต่ออีกครั้ง"
+  },
+  "error_device_exists": {
+    "message": "ข้อมูลระบุตัวตนของอุปกรณ์นี้เชื่อมโยงกับบัญชีอื่นแล้ว"
+  },
+  "error_not_found": {
+    "message": "ไม่สามารถดำเนินการนี้ได้แล้ว ลองอีกครั้ง"
+  },
+  "error_invalid_location": {
+    "message": "ตำแหน่งนี้ไม่พร้อมใช้งาน เลือกอันอื่น"
+  },
+  "error_rate_limited": {
+    "message": "มีความพยายามมากเกินไป รอสักครู่แล้วลองอีกครั้ง"
+  },
+  "error_proxy_unavailable": {
+    "message": "เซิร์ฟเวอร์นี้ไม่สามารถใช้งานได้ชั่วคราว โปรดลองอีกครั้งในอีกสักครู่"
+  },
+  "error_api_token_expired": {
+    "message": "เซสชันบัญชีของคุณหมดอายุแล้ว กรุณาเข้าสู่ระบบอีกครั้ง"
+  },
+  "error_network_error": {
+    "message": "เครือข่ายไม่พร้อมใช้งาน ตรวจสอบการเชื่อมต่ออินเทอร์เน็ตของคุณ"
+  },
+  "error_request_timeout": {
+    "message": "บริการใช้เวลานานเกินไปในการตอบสนอง ลองอีกครั้ง"
+  },
+  "error_invalid_response": {
+    "message": "บริการส่งคืนการตอบสนองที่ไม่คาดคิด"
+  },
+  "error_proxy_certificate_invalid": {
+    "message": "เราไม่สามารถตรวจสอบความปลอดภัยของเซิร์ฟเวอร์ได้ การเชื่อมต่อถูกหยุดแล้ว"
+  },
+  "error_proxy_controlled_by_extension": {
+    "message": "ส่วนขยายอื่นกำลังควบคุมพร็อกซีของเบราว์เซอร์"
+  },
+  "error_proxy_controlled_by_policy": {
+    "message": "นโยบายผู้ดูแลระบบป้องกันไม่ให้ FuzeVPN เปลี่ยนพร็อกซี"
+  },
+  "error_proxy_authentication_failed": {
+    "message": "เซิร์ฟเวอร์ไม่ยอมรับการเชื่อมต่อ ลองเชื่อมต่ออีกครั้ง"
+  },
+  "error_session_expired": {
+    "message": "การเชื่อมต่อที่ได้รับการป้องกันของคุณหมดอายุแล้ว เชื่อมต่ออีกครั้ง"
+  },
+  "error_email_delivery_unavailable": {
+    "message": "ไม่สามารถส่งอีเมลได้ในขณะนี้"
+  },
+  "error_unknown_error": {
+    "message": "เกิดข้อผิดพลาดที่ไม่คาดคิด ลองอีกครั้ง"
+  },
+  "actionBlocked": {
+    "message": "FuzeVPN — การเรียกดูถูกบล็อก"
+  },
+  "statusBlockedRetry": {
+    "message": "การเรียกดูหยุดชั่วคราว — กำลังเชื่อมต่อใหม่"
+  },
+  "statusBlockedAction": {
+    "message": "การเรียกดูหยุดชั่วคราว — ตรวจสอบการเชื่อมต่อ"
+  },
+  "statusProtectionUnavailable": {
+    "message": "การป้องกันไม่พร้อมใช้งาน — การท่องเว็บไม่ถูกบล็อก"
+  },
+  "recoveryHelp": {
+    "message": "ลองดำเนินการป้องกันอีกครั้ง ยกเลิกการเชื่อมต่อช่วยให้คุณเรียกดูโดยไม่ต้อง FuzeVPN"
+  },
+  "retryConnection": {
+    "message": "ลองอีกครั้ง"
+  },
+  "killSwitch": {
+    "message": "สวิตช์ฆ่า"
+  },
+  "killSwitchHelp": {
+    "message": "บล็อกคำขอเว็บใหม่หากการเชื่อมต่อ VPN ลดลง ไซต์ที่ยกเว้นยังคงสามารถเข้าถึงได้ภายนอก VPN"
+  },
+  "webRtcProtection": {
+    "message": "การป้องกัน WebRTC"
+  },
+  "webRtcHelp": {
+    "message": "ช่วยรักษาที่อยู่ IP ของคุณให้เป็นส่วนตัวระหว่างการโทรทางเว็บ การโทรบางสายอาจไม่ทำงาน การปิดสิ่งนี้อาจเปิดเผยที่อยู่ IP จริงของคุณ"
+  },
+  "securityEffectiveState": {
+    "message": "$1 · $2"
+  },
+  "securityBlocked": {
+    "message": "การเรียกดูถูกบล็อก"
+  },
+  "securityNotBlocked": {
+    "message": "การเรียกดูไม่ถูกบล็อก"
+  },
+  "securityWebRtcActive": {
+    "message": "ข้อจำกัดของ WebRTC ทำงานอยู่"
+  },
+  "securityWebRtcInactive": {
+    "message": "ข้อจำกัดของ WebRTC ไม่ทำงาน"
+  },
+  "localNetworkHelp": {
+    "message": "ที่อยู่ IP ในเครื่องและชื่อท้องถิ่นทั่วไปจะถูกบล็อกระหว่างการป้องกัน โดเมนที่ถูกแยกออกอาจยังคงให้การเข้าถึงเครือข่ายท้องถิ่น การตั้งค่าระบบ IPv6 ไม่มีการเปลี่ยนแปลง"
+  },
+  "securityLimits": {
+    "message": "เกี่ยวกับการคุ้มครองนี้"
+  },
+  "killSwitchLimits": {
+    "message": "เฉพาะเบราว์เซอร์นี้: การเชื่อมต่อที่มีอยู่และการสื่อสารภายในบางส่วนของเบราว์เซอร์หรือส่วนขยายอื่นอาจดำเนินต่อไป ส่วนขยายหรือนโยบายอื่นอาจเปลี่ยนพร็อกซีก่อนที่ FuzeVPN จะตอบสนอง การปิดใช้งานส่วนขยายจะยกเลิกการปกป้อง ไม่มีการบล็อกทั้งระบบ"
+  },
+  "error_traffic_guard_failed": {
+    "message": "ไม่สามารถตรวจสอบบล็อกการสืบค้นได้ ไม่รับประกันการป้องกัน ตรวจสอบการอนุญาตส่วนขยาย"
+  },
+  "error_webrtc_control_unavailable": {
+    "message": "ไม่สามารถใช้ข้อจำกัด WebRTC ได้ ตรวจสอบการตั้งค่า ส่วนขยายอื่นๆ หรือนโยบายผู้ดูแลระบบ"
+  },
+  "language": {
+    "message": "ภาษา"
+  },
+  "languageAutomatic": {
+    "message": "อัตโนมัติ — ภาษาของเบราว์เซอร์"
+  },
+  "languageHelp": {
+    "message": "การเปลี่ยนแปลงมีผลทันที ตัวเลือกอัตโนมัติจะใช้ภาษาของเบราว์เซอร์ ซึ่งอาจต่างจากภาษาของระบบปฏิบัติการ"
+  },
+  "languageSaveError": {
+    "message": "ไม่สามารถบันทึกภาษาได้ ตัวเลือกก่อนหน้าของคุณจะถูกเก็บไว้ ลองอีกครั้ง"
+  },
+  "publicIp": {
+    "message": "ไอพีสาธารณะ"
+  },
+  "vpnIp": {
+    "message": "วีพีพีเอ็น ไอพี"
+  },
+  "ipChecking": {
+    "message": "กำลังตรวจสอบ..."
+  },
+  "ipUnavailable": {
+    "message": "ไม่พร้อมใช้งาน"
+  },
+  "ipLookupExplanation": {
+    "message": "ตรวจสอบ IP ด้วย ipify โดยใช้การเชื่อมต่อปัจจุบันของคุณ ไม่มีการส่งประวัติการเข้าชม"
+  },
+  "automaticLocation": {
+    "message": "อัตโนมัติ"
+  },
+  "automaticLocationHelp": {
+    "message": "เวลาตอบกลับล่าสุดที่ดีที่สุด หรือตำแหน่งสุดท้ายของคุณ"
+  },
+  "automaticLocationName": {
+    "message": "อัตโนมัติ · $1"
+  },
+  "searchLocations": {
+    "message": "ค้นหาประเทศหรือเมือง"
+  },
+  "locationFilters": {
+    "message": "กรองสถานที่"
+  },
+  "allLocations": {
+    "message": "ทั้งหมด"
+  },
+  "favoriteLocations": {
+    "message": "รายการโปรด"
+  },
+  "recentLocations": {
+    "message": "ล่าสุด"
+  },
+  "noMatchingLocations": {
+    "message": "ไม่มีสถานที่ที่ตรงกับการค้นหาของคุณ"
+  },
+  "noFavoriteLocations": {
+    "message": "เพิ่มดาวเพื่อเก็บสถานที่โปรดของคุณไว้ที่นี่"
+  },
+  "noRecentLocations": {
+    "message": "ตำแหน่งที่เชื่อมต่อล่าสุดของคุณจะปรากฏที่นี่"
+  },
+  "addFavorite": {
+    "message": "เพิ่ม $1 ลงในรายการโปรด"
+  },
+  "removeFavorite": {
+    "message": "ลบ $1 ออกจากรายการโปรด"
+  },
+  "unavailableFavoriteLocation": {
+    "message": "ตำแหน่งโปรดที่ไม่พร้อมใช้งาน $1"
+  },
+  "locationSaveError": {
+    "message": "ไม่สามารถดำเนินการเปลี่ยนแปลงให้เสร็จสิ้นได้ การตั้งค่าบางอย่างอาจถูกบันทึกไว้แล้ว ตรวจสอบตัวเลือกที่แสดงก่อนลองอีกครั้ง"
+  },
+  "siteExclusions": {
+    "message": "ไซต์ที่ยกเว้น"
+  },
+  "siteExclusionsHelp": {
+    "message": "ไซต์เหล่านี้ใช้การเชื่อมต่อของคุณโดยไม่มี FuzeVPN แม้ว่า VPN จะหยุดทำงานก็ตาม"
+  },
+  "siteExclusionsEnabled": {
+    "message": "เปิดใช้งานข้อยกเว้น"
+  },
+  "siteExclusionInput": {
+    "message": "โดเมนหรือ URL"
+  },
+  "siteExclusionPlaceholder": {
+    "message": "ตัวอย่าง.com"
+  },
+  "siteExclusionPreview": {
+    "message": "โดเมนที่เลือก: $1"
+  },
+  "siteExclusionSubdomains": {
+    "message": "รวมโดเมนย่อย"
+  },
+  "siteExclusionAdd": {
+    "message": "เพิ่มไซต์"
+  },
+  "siteExclusionsEmpty": {
+    "message": "ไม่มีไซต์ที่ยกเว้น เพิ่มเฉพาะไซต์ที่คุณต้องการใช้โดยไม่มี VPN"
+  },
+  "siteExclusionsCount": {
+    "message": "$1 / 100 แห่ง"
+  },
+  "siteExclusionScopeSubdomains": {
+    "message": "โดเมนและโดเมนย่อย"
+  },
+  "siteExclusionScopeExact": {
+    "message": "โดเมนที่แน่นอนเท่านั้น"
+  },
+  "siteExclusionRemove": {
+    "message": "ลบ $1"
+  },
+  "siteExclusionsDetails": {
+    "message": "ข้อยกเว้นทำงานอย่างไร?"
+  },
+  "siteExclusionsResources": {
+    "message": "ทรัพยากรจากโดเมนอื่นจะได้รับการคุ้มครอง การยกเว้นเพจไม่ได้ยกเว้นเนื้อหาอื่นๆ ในหน้านั้นโดยอัตโนมัติ"
+  },
+  "siteExclusionsReload": {
+    "message": "โหลดไซต์ซ้ำหลังการเปลี่ยนแปลง การเชื่อมต่อที่มีอยู่อาจคงเส้นทางเดิมไว้"
+  },
+  "siteExclusionsWebRtc": {
+    "message": "การป้องกัน WebRTC ยังคงเป็นการตั้งค่าส่วนกลาง รวมถึงไซต์ที่ถูกยกเว้น"
+  },
+  "siteExclusionsLocal": {
+    "message": "บันทึกเฉพาะในเบราว์เซอร์นี้และเก็บไว้หลังจากออกจากระบบบัญชีของคุณ"
+  },
+  "siteExclusionsOn": {
+    "message": "เปิดใช้งานข้อยกเว้นแล้ว"
+  },
+  "siteExclusionsOff": {
+    "message": "ข้อยกเว้นถูกปิดใช้งาน"
+  },
+  "siteExclusionsSummary": {
+    "message": "$1 ไซต์ภายนอก VPN"
+  },
+  "siteExclusionsPending": {
+    "message": "กำลังใช้ข้อยกเว้น..."
+  },
+  "siteExclusionsInterrupted": {
+    "message": "การเปลี่ยนแปลงถูกขัดจังหวะ ยามชั่วคราวยังคงอยู่ที่เดิม"
+  },
+  "siteExclusionsSaveError": {
+    "message": "ไม่สามารถดำเนินการเปลี่ยนแปลงให้เสร็จสิ้นได้ ตรวจสอบการตั้งค่าของคุณแล้วลองอีกครั้ง"
+  },
+  "siteExclusionsRetry": {
+    "message": "ลองอีกครั้ง"
+  },
+  "siteExclusionInvalid": {
+    "message": "ป้อนโดเมนสาธารณะที่ถูกต้อง ไม่ยอมรับ IP ชื่อท้องถิ่น ไวด์การ์ด คำต่อท้ายสาธารณะ และโดเมนที่สงวนไว้"
+  },
+  "siteExclusionDuplicate": {
+    "message": "โดเมนนี้มีอยู่แล้วในรายการ"
+  },
+  "siteExclusionsLimit": {
+    "message": "ถึงขีดจำกัด 100 ไซต์แล้ว ลบไซต์เพื่อเพิ่มไซต์อื่น"
+  },
+  "statusProtectedExceptions": {
+    "message": "VPN ใช้งานอยู่ · ข้อยกเว้น $1"
+  },
+  "statusBlockedExceptions": {
+    "message": "เฉพาะไซต์ที่ยกเว้นเท่านั้นที่สามารถเข้าถึงได้"
+  },
+  "securityBlockedExceptions": {
+    "message": "การเรียกดูถูกบล็อกยกเว้นไซต์ที่ถูกแยกออก"
+  },
+  "securityBlockUnverified": {
+    "message": "การบล็อกไม่ได้รับการยืนยัน"
+  },
+  "logoutLocalComplete": {
+    "message": "การออกจากระบบในพื้นที่เสร็จสมบูรณ์"
+  },
+  "logoutApiSession": {
+    "message": "เซสชันบัญชีปัจจุบัน"
+  },
+  "logoutProxySessions": {
+    "message": "เซสชัน VPN ที่รู้จัก"
+  },
+  "logoutRevocationPending": {
+    "message": "อยู่ระหว่างการเพิกถอน..."
+  },
+  "logoutRevocationConfirmed": {
+    "message": "ยืนยันการเพิกถอนแล้ว"
+  },
+  "logoutRevocationUnconfirmed": {
+    "message": "ไม่ได้รับการยืนยันการเพิกถอน"
+  },
+  "logoutUnconfirmedHelp": {
+    "message": "เซสชันระยะไกลบางเซสชันอาจยังคงทำงานอยู่จนกว่าจะหมดอายุ"
+  },
+  "deviceQuotaLoading": {
+    "message": "กำลังโหลดขีดจำกัดอุปกรณ์..."
+  },
+  "deviceQuotaUnknown": {
+    "message": "ขีดจำกัดอุปกรณ์ไม่พร้อมใช้งาน"
+  },
+  "error_proxy_creation_uncertain": {
+    "message": "เซิร์ฟเวอร์ไม่ได้ยืนยันการสร้างการเชื่อมต่อใหม่ การเชื่อมต่อใหม่อัตโนมัติถูกหยุดชั่วคราว"
+  },
+  "siteExclusionsPreferencesReset": {
+    "message": "ข้อยกเว้นไซต์ที่บันทึกไว้ของคุณถูกรีเซ็ตหลังจากไม่สามารถอ่านได้ เพิ่มไซต์ที่คุณต้องการยกเว้นอีกครั้ง"
+  },
+  "siteExclusionsConflict": {
+    "message": "รายการไซต์ที่ยกเว้นมีการเปลี่ยนแปลง ตรวจสอบแล้วลองเปลี่ยนแปลงอีกครั้ง"
+  },
+  "unavailableLocation": {
+    "message": "ตำแหน่งไม่พร้อมใช้งาน"
+  },
+  "verificationSending": {
+    "message": "กำลังส่งอีเมลยืนยัน..."
+  },
+  "verificationSent": {
+    "message": "ส่งอีเมลยืนยันแล้ว ตรวจสอบกล่องจดหมายและโฟลเดอร์สแปมของคุณ"
+  },
+  "error_login_requires_disconnect": {
+    "message": "ตัดการเชื่อมต่อ VPN ปัจจุบันก่อนลงชื่อเข้าใช้บัญชีอื่น"
+  },
+  "error_storage_unavailable": {
+    "message": "การตั้งค่าบัญชีท้องถิ่นไม่พร้อมใช้งาน ลองอีกครั้งเมื่อมีที่เก็บข้อมูลเบราว์เซอร์ บัญชีที่บันทึกไว้ของคุณได้รับการเก็บรักษาไว้"
+  },
+  "diagnosticsAssistance": {
+    "message": "สนับสนุน"
+  },
+  "diagnosticsTitle": {
+    "message": "การวินิจฉัย"
+  },
+  "diagnosticsIntro": {
+    "message": "ตรวจสอบ FuzeVPN และการเชื่อมต่อปัจจุบันโดยไม่เปลี่ยนการป้องกันของคุณ"
+  },
+  "diagnosticsPrivacyTitle": {
+    "message": "ข้อมูลของคุณ"
+  },
+  "diagnosticsPrivacy": {
+    "message": "รายงานประกอบด้วยสถานะทางเทคนิคและรหัสข้อผิดพลาด ไม่ใช้รหัสผ่าน โทเค็น ที่อยู่อีเมล ที่อยู่ IP URL ที่เยี่ยมชม หรือโดเมนที่ยกเว้น"
+  },
+  "diagnosticsAuto": {
+    "message": "ส่งรายงานข้อผิดพลาดที่สำคัญโดยอัตโนมัติ"
+  },
+  "diagnosticsAutoHelp": {
+    "message": "ปิดโดยค่าเริ่มต้น เฉพาะรายงานทางเทคนิคง่ายๆ เท่านั้นที่จะถูกส่งสำหรับบัญชีนี้ โดยไม่มีประวัติการเข้าชม การสนับสนุนจะคงไว้เป็นเวลา 30 วัน"
+  },
+  "diagnosticsHistoryHelp": {
+    "message": "ประวัติทางเทคนิคจะยังคงอยู่ในเครื่อง: มากถึง 200 เหตุการณ์ใน 10 นาที แม้ว่าจะปิดการส่งอัตโนมัติก็ตาม ไม่มีประวัติการเข้าชมและจะถูกล้างเมื่อเบราว์เซอร์ปิดหรือบัญชีมีการเปลี่ยนแปลง"
+  },
+  "diagnosticsHistoryCount": {
+    "message": "$1 กิจกรรมทางเทคนิคในท้องถิ่น"
+  },
+  "diagnosticsAccountRequired": {
+    "message": "ลงชื่อเข้าใช้เพื่อเปิดใช้งานการส่ง คุณยังคงดูและส่งออกรายงานได้โดยไม่ต้องใช้บัญชี"
+  },
+  "diagnosticsRun": {
+    "message": "เรียกใช้การวินิจฉัย"
+  },
+  "diagnosticsClearHistory": {
+    "message": "ล้างประวัติศาสตร์ท้องถิ่น"
+  },
+  "diagnosticsPreparing": {
+    "message": "กำลังเตรียมรายงาน..."
+  },
+  "diagnosticsReports": {
+    "message": "รายงาน"
+  },
+  "diagnosticsEmpty": {
+    "message": "ยังไม่มีรายงานท้องถิ่น"
+  },
+  "diagnosticsChooseReport": {
+    "message": "เลือกรายงาน"
+  },
+  "diagnosticsReportLabel": {
+    "message": "$1 · $2 · $3"
+  },
+  "diagnosticsTypeFull": {
+    "message": "รายงานฉบับเต็ม"
+  },
+  "diagnosticsTypeSimple": {
+    "message": "รายงานข้อผิดพลาด"
+  },
+  "diagnosticsSummary": {
+    "message": "รวบรวมเมื่อ $1 FuzeVPN เวอร์ชัน $2"
+  },
+  "diagnosticsJson": {
+    "message": "ดูเนื้อหารายงาน (JSON)"
+  },
+  "diagnosticsExport": {
+    "message": "รายงานการส่งออก"
+  },
+  "diagnosticsDelete": {
+    "message": "ลบรายงานท้องถิ่น"
+  },
+  "diagnosticsRetention": {
+    "message": "รายงานที่ส่งจะเชื่อมโยงกับบัญชีที่คุณลงชื่อเข้าใช้และเก็บไว้โดยฝ่ายสนับสนุนเป็นเวลา 30 วัน การลบรายงานในเครื่องจะไม่ลบรายงานที่ได้รับจากฝ่ายสนับสนุนแล้ว"
+  },
+  "diagnosticsConsent": {
+    "message": "ส่งรายงานนี้เพื่อสนับสนุน"
+  },
+  "diagnosticsDataCollectionRequired": {
+    "message": "Firefox ต้องอนุญาตให้เก็บรวบรวมข้อมูลทางเทคนิคเพื่อส่งข้อมูลวินิจฉัย โปรดลองอีกครั้งและให้สิทธิ์นี้"
+  },
+  "diagnosticsSendHelp": {
+    "message": "การส่งเป็นทางเลือก เมื่อได้รับการอนุมัติแล้ว อาจลองอีกครั้งได้สูงสุด 24 ชั่วโมงด้วยเซสชันที่ถูกต้องสำหรับบัญชีเดียวกัน คุณสามารถยกเลิกความพยายามเพิ่มเติมได้ การยกเลิกล่าช้าไม่ได้รับประกันว่าเซิร์ฟเวอร์จะยังไม่ได้รับรายงาน"
+  },
+  "diagnosticsSend": {
+    "message": "ส่งรายงาน"
+  },
+  "diagnosticsCancel": {
+    "message": "ยกเลิกการส่ง"
+  },
+  "diagnosticsReload": {
+    "message": "โหลดหน้านี้ซ้ำ"
+  },
+  "diagnosticsUnavailable": {
+    "message": "ไม่สามารถใช้การวินิจฉัยได้ โหลด FuzeVPN ใหม่จากหน้าจัดการส่วนขยายของเบราว์เซอร์ แล้วเปิดหน้านี้อีกครั้ง การเชื่อมต่อ VPN ของคุณไม่เปลี่ยนแปลง"
+  },
+  "diagnosticsQueueFull": {
+    "message": "คิวส่งเต็มแล้ว ลบรายงานในพื้นที่หรือรอให้รายงานที่รอดำเนินการเสร็จสิ้น"
+  },
+  "diagnosticsContentUnavailable": {
+    "message": "เนื้อหารายงานไม่พร้อมใช้งาน ส่งออกรายงานในเครื่องหากมีและติดต่อฝ่ายสนับสนุน"
+  },
+  "diagnosticsFailure": {
+    "message": "ไม่สามารถดำเนินการวินิจฉัยให้เสร็จสิ้นได้ VPN ของคุณไม่เปลี่ยนแปลง"
+  },
+  "diagnosticsChecks": {
+    "message": "เช็ค"
+  },
+  "diagnosticsCheckFallback": {
+    "message": "การตรวจสอบทางเทคนิค: $1"
+  },
+  "diagnosticsCheckLine": {
+    "message": "$1 — $2"
+  },
+  "diagnosticsProxy": {
+    "message": "พร็อกซีเบราว์เซอร์"
+  },
+  "diagnosticsStorage": {
+    "message": "ที่จัดเก็บในตัวเครื่อง"
+  },
+  "diagnosticsNetwork": {
+    "message": "การเชื่อมต่อเครือข่าย"
+  },
+  "diagnosticsCleanup": {
+    "message": "การล้างข้อมูลเซสชัน"
+  },
+  "diagnosticsResult_passed": {
+    "message": "ผ่านไป"
+  },
+  "diagnosticsResult_failed": {
+    "message": "ล้มเหลว"
+  },
+  "diagnosticsResult_skipped": {
+    "message": "ไม่ได้ดำเนินการ"
+  },
+  "diagnosticsResult_unknown": {
+    "message": "ไม่ทราบ"
+  },
+  "diagnosticsStatus_ready": {
+    "message": "พร้อมบนอุปกรณ์นี้"
+  },
+  "diagnosticsStatus_pending": {
+    "message": "รอส่งครับ"
+  },
+  "diagnosticsStatus_sending": {
+    "message": "กำลังส่ง..."
+  },
+  "diagnosticsStatus_session_required": {
+    "message": "กำลังรอเซสชันที่ถูกต้องสำหรับบัญชีเดียวกัน"
+  },
+  "diagnosticsStatus_received": {
+    "message": "ได้รับการสนับสนุน"
+  },
+  "diagnosticsStatus_failed": {
+    "message": "การส่งล้มเหลว"
+  },
+  "diagnosticsStatus_cancelled": {
+    "message": "ยกเลิกการส่งแล้ว"
+  },
+  "diagnosticsStatus_expired": {
+    "message": "กำหนดเวลาการส่งหมดอายุแล้ว"
+  },
+  "diagnosticsReceivedAt": {
+    "message": "ได้รับเมื่อ $1"
+  },
+  "error_private_browsing_required": {
+    "message": "Firefox ต้องใช้สิทธิ์นี้เพื่อตั้งค่า VPN แม้ในหน้าต่างปกติ เปิด about:addons → FuzeVPN อนุญาตให้ทำงานในหน้าต่างส่วนตัว แล้วลองอีกครั้ง"
+  },
+  "error_host_permissions_required": {
+    "message": "ใน Firefox เปิด about:addons → FuzeVPN → สิทธิอนุญาต และอนุญาตให้เข้าถึงทุกเว็บไซต์ แล้วลองอีกครั้ง"
+  },
+  "cancelAction": {
+    "message": "ยกเลิก"
+  },
+  "refreshLocations": {
+    "message": "รีเฟรชตำแหน่ง"
+  },
+  "refreshingLocations": {
+    "message": "กำลังรีเฟรชตำแหน่ง…"
+  },
+  "locationsRefreshError": {
+    "message": "ไม่สามารถรีเฟรชรายการตำแหน่งได้ โปรดลองอีกครั้ง"
+  },
+  "error_device_revoked_limit": {
+    "message": "อุปกรณ์นี้ถูกเพิกถอนสิทธิ์แล้ว ครบจำนวนอุปกรณ์สูงสุดแล้ว: โปรดลบอุปกรณ์หนึ่งเครื่อง"
+  },
+  "noAvailableLocations": {
+    "message": "ไม่มีตำแหน่งที่พร้อมใช้งานในขณะนี้ โปรดลองอีกครั้งในอีกสักครู่"
+  },
+  "noAvailableFavoriteLocations": {
+    "message": "ตำแหน่งโปรดของคุณไม่พร้อมใช้งานชั่วคราว"
+  },
+  "error_server_full": {
+    "message": "เซิร์ฟเวอร์นี้เต็มแล้ว เลือกตำแหน่งอื่น"
+  },
+  "error_capacity_unavailable": {
+    "message": "ไม่สามารถยืนยันความพร้อมใช้งานของเซิร์ฟเวอร์นี้ได้ในขณะนี้ โปรดลองอีกครั้งในอีกสักครู่"
+  },
+  "locationHierarchyHelp": {
+    "message": "กดชื่อเพื่อเลือกเซิร์ฟเวอร์ กดลูกศรเพื่อดูรายละเอียด"
+  },
+  "locationCountrySelect": {
+    "message": "เลือกเซิร์ฟเวอร์ที่พร้อมใช้งาน: $1"
+  },
+  "locationCitySelect": {
+    "message": "เลือกเซิร์ฟเวอร์ที่พร้อมใช้งาน: $1"
+  },
+  "locationShowCities": {
+    "message": "แสดงเมือง: $1"
+  },
+  "locationHideCities": {
+    "message": "ซ่อนเมือง: $1"
+  },
+  "locationShowServers": {
+    "message": "แสดงเซิร์ฟเวอร์: $1"
+  },
+  "locationHideServers": {
+    "message": "ซ่อนเซิร์ฟเวอร์: $1"
+  },
+  "locationAvailableServers": {
+    "message": "เซิร์ฟเวอร์ที่พร้อมใช้งาน: $1"
+  },
+  "legalInformation": {
+    "message": "ข้อมูลทางกฎหมาย"
+  },
+  "privacyPolicy": {
+    "message": "นโยบายความเป็นส่วนตัว"
+  },
+  "termsAndConditions": {
+    "message": "เงื่อนไขการใช้งานและการขาย"
+  },
+  "legalNotice": {
+    "message": "ประกาศทางกฎหมาย"
+  },
+  "contactSupport": {
+    "message": "ติดต่อฝ่ายสนับสนุน"
+  },
+  "webSignIn": {
+    "message": "เข้าสู่ระบบ FuzeVPN"
+  },
+  "webSignInDisconnect": {
+    "message": "ยกเลิกการเชื่อมต่อและเข้าสู่ระบบ"
+  },
+  "webSignInPending": {
+    "message": "กำลังเข้าสู่ระบบ…"
+  },
+  "webSignInHelp": {
+    "message": "เข้าสู่ระบบหรือสร้างบัญชีด้วย Google หรืออีเมลในพื้นที่ลูกค้า FuzeVPN"
+  },
+  "webSignInDisconnectHelp": {
+    "message": "ปุ่มนี้หยุดการป้องกันเบราว์เซอร์เพื่อให้เข้าสู่ระบบด้วย Google หรืออีเมลได้ การท่องเว็บจะไม่มีการป้องกันระหว่างเข้าสู่ระบบ"
+  },
+  "webSignInStatus": {
+    "message": "ดำเนินการต่อในหน้าต่างเข้าสู่ระบบ FuzeVPN ส่วนขยายจะอัปเดตโดยอัตโนมัติเมื่อเสร็จสิ้น ปิดหน้าต่างนั้นเพื่อยกเลิก"
+  },
+  "error_web_login_cancelled": {
+    "message": "ยกเลิกการเข้าสู่ระบบแล้ว ลองอีกครั้ง"
+  },
+  "error_web_login_timeout": {
+    "message": "การเข้าสู่ระบบใช้เวลานานเกินไป ลองอีกครั้ง"
+  },
+  "error_web_login_unavailable": {
+    "message": "การเข้าสู่ระบบผ่านเว็บไม่พร้อมใช้งาน ลองอีกครั้งภายหลัง"
+  },
+  "error_web_login_invalid_callback": {
+    "message": "ไม่สามารถยืนยันการเข้าสู่ระบบได้ เริ่มใหม่จากส่วนขยาย"
+  },
+  "error_web_login_denied": {
+    "message": "การเข้าสู่ระบบไม่ได้รับอนุญาต ลองอีกครั้ง"
+  },
+  "error_web_login_busy": {
+    "message": "ปิดหน้าต่างเข้าสู่ระบบที่เปิดอยู่ก่อนลองอีกครั้ง"
+  },
+  "deviceKindFirefox": {
+    "message": "เบราว์เซอร์ Firefox"
+  }
+}

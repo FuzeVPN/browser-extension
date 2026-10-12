@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Account and billing support
+    url: https://fuzevpn.com/en/contact.html
+    about: Contact FuzeVPN for account, subscription and billing questions.
+  - name: Report a security vulnerability
+    url: https://github.com/FuzeVPN/browser-extension/blob/main/SECURITY.md
+    about: Read the private reporting instructions before sharing any details.

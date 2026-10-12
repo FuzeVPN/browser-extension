@@ -1,0 +1,830 @@
+{
+  "extensionName": {
+    "message": "FuzeVPN"
+  },
+  "extensionDescription": {
+    "message": "Διατηρήστε το απόρρητό σας και ενισχύστε την ασφάλειά σας με ένα κλικ."
+  },
+  "siteExclusionsReloadRequired": {
+    "message": "Φορτώστε ξανά το FuzeVPN από τη διαχείριση επεκτάσεων του προγράμματος περιήγησης για να ολοκληρώσετε την ενημέρωση και να χρησιμοποιήσετε εξαιρέσεις ιστοτόπων."
+  },
+  "extensionCommunicationError": {
+    "message": "Η επέκταση δεν ανταποκρίνεται. Κλείστε αυτό το παράθυρο και φορτώστε ξανά το FuzeVPN από τη διαχείριση επεκτάσεων του προγράμματος περιήγησης."
+  },
+  "actionDisconnected": {
+    "message": "FuzeVPN — Αποσυνδέθηκε"
+  },
+  "actionConnected": {
+    "message": "FuzeVPN — Προστασία σε αυτό το πρόγραμμα περιήγησης"
+  },
+  "actionReconnecting": {
+    "message": "FuzeVPN — Επανασύνδεση"
+  },
+  "actionError": {
+    "message": "FuzeVPN — Απαιτείται προσοχή"
+  },
+  "browserProtection": {
+    "message": "Προστασία προγράμματος περιήγησης"
+  },
+  "loginTitle": {
+    "message": "Καλώς ήρθατε στο FuzeVPN"
+  },
+  "loginSubtitle": {
+    "message": "Συνδεθείτε για να προστατεύσετε την περιήγησή σας σε αυτό το πρόγραμμα περιήγησης."
+  },
+  "email": {
+    "message": "Διεύθυνση ηλεκτρονικού ταχυδρομείου"
+  },
+  "emailPlaceholder": {
+    "message": "you@example.com"
+  },
+  "password": {
+    "message": "Κωδικός πρόσβασης"
+  },
+  "signIn": {
+    "message": "Συνδεθείτε"
+  },
+  "signingIn": {
+    "message": "Σύνδεση…"
+  },
+  "forgotPassword": {
+    "message": "Ξεχάσατε τον κωδικό πρόσβασης;"
+  },
+  "createAccount": {
+    "message": "Δημιουργήστε έναν λογαριασμό"
+  },
+  "settings": {
+    "message": "Ρυθμίσεις"
+  },
+  "close": {
+    "message": "Κλείσιμο"
+  },
+  "statusDisconnected": {
+    "message": "Αποσυνδέθηκε"
+  },
+  "statusConnecting": {
+    "message": "Σύνδεση…"
+  },
+  "statusChanging": {
+    "message": "Αλλαγή τοποθεσίας…"
+  },
+  "statusProtected": {
+    "message": "Προστασία σε αυτό το πρόγραμμα περιήγησης"
+  },
+  "statusRefreshing": {
+    "message": "Ασφαλής ανανέωση…"
+  },
+  "statusDisconnecting": {
+    "message": "Αποσύνδεση…"
+  },
+  "statusError": {
+    "message": "Η προστασία σταμάτησε"
+  },
+  "browserOnlyDetail": {
+    "message": "Προστασία για αυτό το πρόγραμμα περιήγησης."
+  },
+  "location": {
+    "message": "Τοποθεσία"
+  },
+  "change": {
+    "message": "Αλλαγή"
+  },
+  "noLocation": {
+    "message": "Δεν υπάρχει διαθέσιμη τοποθεσία"
+  },
+  "protectBrowser": {
+    "message": "Προστατέψτε την περιήγηση"
+  },
+  "disconnect": {
+    "message": "Αποσύνδεση"
+  },
+  "subscription": {
+    "message": "Συνδρομή"
+  },
+  "refreshSubscription": {
+    "message": "Ανανέωση συνδρομής"
+  },
+  "refreshingSubscription": {
+    "message": "Ανανέωση συνδρομής…"
+  },
+  "subscriptionActive": {
+    "message": "Ενεργός"
+  },
+  "subscriptionInactive": {
+    "message": "Ανενεργό"
+  },
+  "expiresOn": {
+    "message": "Λήγει στις $1"
+  },
+  "noExpiry": {
+    "message": "Χωρίς ημερομηνία λήξης"
+  },
+  "browserOnlyNotice": {
+    "message": "Μόνο σε αυτό το πρόγραμμα περιήγησης. Άλλες εφαρμογές και προγράμματα περιήγησης δεν καλύπτονται."
+  },
+  "resendVerification": {
+    "message": "Αποστολή εκ νέου email"
+  },
+  "incognitoHelp": {
+    "message": "Η ιδιωτική περιήγηση χρησιμοποιεί την ίδια προστασία μόνο όταν η επέκταση επιτρέπεται στην ιδιωτική λειτουργία από τις ρυθμίσεις του προγράμματος περιήγησης."
+  },
+  "manageAccount": {
+    "message": "Διαχείριση του λογαριασμού μου"
+  },
+  "account": {
+    "message": "Λογαριασμός"
+  },
+  "devices": {
+    "message": "Συσκευές"
+  },
+  "manageDevices": {
+    "message": "Διαχείριση συσκευών"
+  },
+  "refreshDevices": {
+    "message": "Ανανέωση συσκευών"
+  },
+  "deviceCount": {
+    "message": "$1 / $2 συσκευές"
+  },
+  "loadingDevices": {
+    "message": "Φόρτωση συσκευών…"
+  },
+  "noDevices": {
+    "message": "Δεν υπάρχουν ενεργές συσκευές."
+  },
+  "currentDevice": {
+    "message": "Αυτή η συσκευή"
+  },
+  "deviceKindBrowser": {
+    "message": "Επέκταση προγράμματος περιήγησης"
+  },
+  "deviceKindVpn": {
+    "message": "Συσκευή VPN"
+  },
+  "profile_browser_proxy": {
+    "message": "Διακομιστής μεσολάβησης προγράμματος περιήγησης"
+  },
+  "profile_wireguard": {
+    "message": "WireGuard"
+  },
+  "profile_openvpn": {
+    "message": "OpenVPN"
+  },
+  "none": {
+    "message": "κανένα"
+  },
+  "deviceCreatedOn": {
+    "message": "Δημιουργήθηκε στις $1"
+  },
+  "deleteDevice": {
+    "message": "Διαγραφή συσκευής"
+  },
+  "confirmDeleteDevice": {
+    "message": "Κατάργηση \"$1\"; Οι συνδέσεις VPN του θα σταματήσουν και τα προφίλ του θα αφαιρεθούν."
+  },
+  "resetDevice": {
+    "message": "Επαναφορά συσκευής"
+  },
+  "confirmResetDevice": {
+    "message": "Επαναφορά αυτής της επέκτασης; Θα καταχωρηθεί ως νέα συσκευή την επόμενη φορά που θα τη χρησιμοποιήσετε."
+  },
+  "signOutAccount": {
+    "message": "Αποσύνδεση από λογαριασμό"
+  },
+  "chooseLocation": {
+    "message": "Επιλέξτε μια τοποθεσία"
+  },
+  "error_invalid_credentials": {
+    "message": "Η διεύθυνση email ή ο κωδικός πρόσβασης είναι λάθος."
+  },
+  "error_unauthorized": {
+    "message": "Η συνεδρία σας έχει λήξει. Παρακαλούμε συνδεθείτε ξανά."
+  },
+  "error_email_verification_required": {
+    "message": "Επαληθεύστε τη διεύθυνση email σας πριν ενεργοποιήσετε την προστασία."
+  },
+  "errorVerificationCooldown": {
+    "message": "Ένα νέο email μπορεί να ζητηθεί σε $1 δευτερόλεπτα."
+  },
+  "error_verification_email_cooldown": {
+    "message": "Περιμένετε πριν ζητήσετε άλλο email."
+  },
+  "error_subscription_required": {
+    "message": "Απαιτείται ενεργή συνδρομή για την προστασία αυτού του προγράμματος περιήγησης."
+  },
+  "error_device_limit": {
+    "message": "Συμπληρώθηκε ο μέγιστος αριθμός συσκευών. Αφαιρέστε μια συσκευή."
+  },
+  "error_device_identity_revoked": {
+    "message": "Αυτή η συσκευή δεν είναι πλέον εξουσιοδοτημένη. Δοκιμάστε να συνδεθείτε ξανά."
+  },
+  "error_device_proof_invalid": {
+    "message": "Δεν ήταν δυνατή η επαλήθευση αυτής της συσκευής. Ελέγξτε την ημερομηνία και την ώρα του υπολογιστή σας και, στη συνέχεια, δοκιμάστε ξανά."
+  },
+  "error_device_proof_replayed": {
+    "message": "Αυτό το αίτημα έχει ήδη διεκπεραιωθεί. Προσπαθήστε ξανά."
+  },
+  "error_invalid_device": {
+    "message": "Αυτή η συσκευή δεν αναγνωρίστηκε. Δοκιμάστε να συνδεθείτε ξανά."
+  },
+  "error_device_exists": {
+    "message": "Αυτή η ταυτότητα συσκευής είναι ήδη συνδεδεμένη με άλλον λογαριασμό."
+  },
+  "error_not_found": {
+    "message": "Αυτή η ενέργεια δεν είναι πλέον διαθέσιμη. Δοκιμάστε ξανά."
+  },
+  "error_invalid_location": {
+    "message": "Αυτή η τοποθεσία δεν είναι διαθέσιμη. Επιλέξτε ένα άλλο."
+  },
+  "error_rate_limited": {
+    "message": "Πάρα πολλές προσπάθειες. Περιμένετε λίγο και δοκιμάστε ξανά."
+  },
+  "error_proxy_unavailable": {
+    "message": "Αυτός ο διακομιστής δεν είναι διαθέσιμος προσωρινά. Δοκιμάστε ξανά σε λίγο."
+  },
+  "error_api_token_expired": {
+    "message": "Η περίοδος λειτουργίας του λογαριασμού σας έχει λήξει. Παρακαλούμε συνδεθείτε ξανά."
+  },
+  "error_network_error": {
+    "message": "Το δίκτυο δεν είναι διαθέσιμο. Ελέγξτε τη σύνδεσή σας στο Διαδίκτυο."
+  },
+  "error_request_timeout": {
+    "message": "Η υπηρεσία άργησε να ανταποκριθεί. Προσπαθήστε ξανά."
+  },
+  "error_invalid_response": {
+    "message": "Η υπηρεσία επέστρεψε μια απροσδόκητη απάντηση."
+  },
+  "error_proxy_certificate_invalid": {
+    "message": "Δεν μπορέσαμε να επαληθεύσουμε την ασφάλεια του διακομιστή. Η σύνδεση έχει διακοπεί."
+  },
+  "error_proxy_controlled_by_extension": {
+    "message": "Μια άλλη επέκταση ελέγχει αυτήν τη στιγμή τον διακομιστή μεσολάβησης του προγράμματος περιήγησης."
+  },
+  "error_proxy_controlled_by_policy": {
+    "message": "Μια πολιτική διαχειριστή αποτρέπει τον FuzeVPN από την αλλαγή του διακομιστή μεσολάβησης."
+  },
+  "error_proxy_authentication_failed": {
+    "message": "Ο διακομιστής δεν αποδέχτηκε τη σύνδεση. Δοκιμάστε να συνδεθείτε ξανά."
+  },
+  "error_session_expired": {
+    "message": "Η προστατευμένη σύνδεσή σας έχει λήξει. Συνδεθείτε ξανά."
+  },
+  "error_email_delivery_unavailable": {
+    "message": "Το email δεν μπορεί να σταλεί αυτήν τη στιγμή."
+  },
+  "error_unknown_error": {
+    "message": "Παρουσιάστηκε απροσδόκητο σφάλμα. Προσπαθήστε ξανά."
+  },
+  "actionBlocked": {
+    "message": "FuzeVPN — Αποκλείστηκε η περιήγηση"
+  },
+  "statusBlockedRetry": {
+    "message": "Η περιήγηση σε παύση — επανασύνδεση"
+  },
+  "statusBlockedAction": {
+    "message": "Η περιήγηση σε παύση — ελέγξτε τη σύνδεση"
+  },
+  "statusProtectionUnavailable": {
+    "message": "Η προστασία δεν είναι διαθέσιμη — η περιήγηση δεν έχει αποκλειστεί"
+  },
+  "recoveryHelp": {
+    "message": "Προσπαθήστε ξανά να συνεχίσετε την προστασία. Η Αποσύνδεση σάς επιτρέπει να κάνετε περιήγηση χωρίς FuzeVPN."
+  },
+  "retryConnection": {
+    "message": "Επανάληψη"
+  },
+  "killSwitch": {
+    "message": "Διακόπτης Kill"
+  },
+  "killSwitchHelp": {
+    "message": "Αποκλείει νέα αιτήματα ιστού εάν διακοπεί η σύνδεση VPN. Οι εξαιρούμενοι ιστότοποι παραμένουν προσβάσιμοι εκτός του VPN."
+  },
+  "webRtcProtection": {
+    "message": "Προστασία WebRTC"
+  },
+  "webRtcHelp": {
+    "message": "Βοηθά να διατηρήσετε τη διεύθυνση IP σας ιδιωτική κατά τις κλήσεις Ιστού. Ορισμένες κλήσεις ενδέχεται να μην λειτουργούν. Η απενεργοποίηση μπορεί να αποκαλύψει την πραγματική σας διεύθυνση IP."
+  },
+  "securityEffectiveState": {
+    "message": "$1 · $2"
+  },
+  "securityBlocked": {
+    "message": "Η περιήγηση αποκλείστηκε"
+  },
+  "securityNotBlocked": {
+    "message": "Η περιήγηση δεν έχει αποκλειστεί"
+  },
+  "securityWebRtcActive": {
+    "message": "Ο περιορισμός WebRTC είναι ενεργός"
+  },
+  "securityWebRtcInactive": {
+    "message": "Ο περιορισμός WebRTC είναι ανενεργός"
+  },
+  "localNetworkHelp": {
+    "message": "Οι τοπικές διευθύνσεις IP και τα κοινά τοπικά ονόματα αποκλείονται κατά την προστασία. Ένας αποκλεισμένος τομέας μπορεί να εξακολουθεί να παρέχει πρόσβαση στο τοπικό δίκτυο. Οι ρυθμίσεις IPv6 συστήματος παραμένουν αμετάβλητες."
+  },
+  "securityLimits": {
+    "message": "Σχετικά με αυτή την προστασία"
+  },
+  "killSwitchLimits": {
+    "message": "Μόνο αυτό το πρόγραμμα περιήγησης: οι υπάρχουσες συνδέσεις και ορισμένες εσωτερικές επικοινωνίες του προγράμματος περιήγησης ή άλλων επεκτάσεων ενδέχεται να συνεχιστούν. Μια άλλη επέκταση ή μια πολιτική μπορεί να αντικαταστήσει τον διακομιστή μεσολάβησης πριν αντιδράσει το FuzeVPN. Η απενεργοποίηση της επέκτασης καταργεί την προστασία. Χωρίς αποκλεισμό σε όλο το σύστημα."
+  },
+  "error_traffic_guard_failed": {
+    "message": "Δεν ήταν δυνατή η επαλήθευση του μπλοκ περιήγησης. Η προστασία δεν είναι εγγυημένη. Ελέγξτε τα δικαιώματα επέκτασης."
+  },
+  "error_webrtc_control_unavailable": {
+    "message": "Δεν ήταν δυνατή η εφαρμογή του περιορισμού WebRTC. Ελέγξτε τις ρυθμίσεις σας, άλλες επεκτάσεις ή την πολιτική διαχειριστή."
+  },
+  "language": {
+    "message": "Γλώσσα"
+  },
+  "languageAutomatic": {
+    "message": "Αυτόματη — γλώσσα προγράμματος περιήγησης"
+  },
+  "languageHelp": {
+    "message": "Οι αλλαγές ισχύουν άμεσα. Η αυτόματη επιλογή ακολουθεί τη γλώσσα του προγράμματος περιήγησης, η οποία μπορεί να διαφέρει από τη γλώσσα του συστήματος."
+  },
+  "languageSaveError": {
+    "message": "Δεν ήταν δυνατή η αποθήκευση της γλώσσας. Η προηγούμενη επιλογή σας διατηρείται. Προσπαθήστε ξανά."
+  },
+  "publicIp": {
+    "message": "Δημόσια IP"
+  },
+  "vpnIp": {
+    "message": "VPN IP"
+  },
+  "ipChecking": {
+    "message": "Έλεγχος…"
+  },
+  "ipUnavailable": {
+    "message": "Μη διαθέσιμο"
+  },
+  "ipLookupExplanation": {
+    "message": "Η IP ελέγχθηκε με το ipify χρησιμοποιώντας την τρέχουσα σύνδεσή σας. Δεν αποστέλλεται ιστορικό περιήγησης."
+  },
+  "automaticLocation": {
+    "message": "Αυτόματο"
+  },
+  "automaticLocationHelp": {
+    "message": "Ο καλύτερος πρόσφατος χρόνος απόκρισης ή η τελευταία τοποθεσία σας."
+  },
+  "automaticLocationName": {
+    "message": "Αυτόματο · $1"
+  },
+  "searchLocations": {
+    "message": "Αναζήτηση χώρας ή πόλης"
+  },
+  "locationFilters": {
+    "message": "Φιλτράρετε τοποθεσίες"
+  },
+  "allLocations": {
+    "message": "Όλα"
+  },
+  "favoriteLocations": {
+    "message": "Αγαπημένα"
+  },
+  "recentLocations": {
+    "message": "Πρόσφατα"
+  },
+  "noMatchingLocations": {
+    "message": "Καμία τοποθεσία δεν αντιστοιχεί στην αναζήτησή σας."
+  },
+  "noFavoriteLocations": {
+    "message": "Προσθέστε ένα αστέρι για να διατηρήσετε τις αγαπημένες σας τοποθεσίες εδώ."
+  },
+  "noRecentLocations": {
+    "message": "Οι τοποθεσίες που έχετε συνδέσει πρόσφατα θα εμφανιστούν εδώ."
+  },
+  "addFavorite": {
+    "message": "Προσθήκη $1 στα αγαπημένα"
+  },
+  "removeFavorite": {
+    "message": "Αφαιρέστε το $1 από τα αγαπημένα"
+  },
+  "unavailableFavoriteLocation": {
+    "message": "Μη διαθέσιμη αγαπημένη τοποθεσία $1"
+  },
+  "locationSaveError": {
+    "message": "Δεν ήταν δυνατή η ολοκλήρωση της αλλαγής. Ορισμένες ρυθμίσεις ενδέχεται να έχουν αποθηκευτεί. Ελέγξτε την επιλογή που εμφανίζεται πριν προσπαθήσετε ξανά."
+  },
+  "siteExclusions": {
+    "message": "Εξαιρούμενες τοποθεσίες"
+  },
+  "siteExclusionsHelp": {
+    "message": "Αυτοί οι ιστότοποι χρησιμοποιούν τη σύνδεσή σας χωρίς FuzeVPN, ακόμα κι αν το VPN διακοπεί."
+  },
+  "siteExclusionsEnabled": {
+    "message": "Ενεργοποίηση εξαιρέσεων"
+  },
+  "siteExclusionInput": {
+    "message": "Τομέας ή διεύθυνση URL"
+  },
+  "siteExclusionPlaceholder": {
+    "message": "example.com"
+  },
+  "siteExclusionPreview": {
+    "message": "Επιλεγμένος τομέας: $1"
+  },
+  "siteExclusionSubdomains": {
+    "message": "Συμπεριλάβετε υποτομείς"
+  },
+  "siteExclusionAdd": {
+    "message": "Προσθήκη ιστότοπου"
+  },
+  "siteExclusionsEmpty": {
+    "message": "Δεν υπάρχουν αποκλεισμένοι ιστότοποι. Προσθέστε μόνο τοποθεσίες που θέλετε να χρησιμοποιήσετε χωρίς το VPN."
+  },
+  "siteExclusionsCount": {
+    "message": "$1 / 100 ιστότοποι"
+  },
+  "siteExclusionScopeSubdomains": {
+    "message": "Τομέας και υποτομείς"
+  },
+  "siteExclusionScopeExact": {
+    "message": "Μόνο ακριβής τομέας"
+  },
+  "siteExclusionRemove": {
+    "message": "Κατάργηση $1"
+  },
+  "siteExclusionsDetails": {
+    "message": "Πώς λειτουργούν οι εξαιρέσεις;"
+  },
+  "siteExclusionsResources": {
+    "message": "Οι πόροι από άλλους τομείς παραμένουν προστατευμένοι. Η εξαίρεση μιας σελίδας δεν αποκλείει αυτόματα το άλλο περιεχόμενό της."
+  },
+  "siteExclusionsReload": {
+    "message": "Επαναλάβετε τη φόρτωση του ιστότοπου μετά από μια αλλαγή. Οι υπάρχουσες συνδέσεις ενδέχεται να διατηρήσουν την προηγούμενη διαδρομή τους."
+  },
+  "siteExclusionsWebRtc": {
+    "message": "Η προστασία WebRTC παραμένει μια παγκόσμια ρύθμιση, συμπεριλαμβανομένων των εξαιρούμενων τοποθεσιών."
+  },
+  "siteExclusionsLocal": {
+    "message": "Αποθηκεύτηκε μόνο σε αυτό το πρόγραμμα περιήγησης και διατηρήθηκε μετά την αποσύνδεση από τον λογαριασμό σας."
+  },
+  "siteExclusionsOn": {
+    "message": "Οι εξαιρέσεις ενεργοποιήθηκαν"
+  },
+  "siteExclusionsOff": {
+    "message": "Οι εξαιρέσεις απενεργοποιήθηκαν"
+  },
+  "siteExclusionsSummary": {
+    "message": "$1 ιστότοποι εκτός VPN"
+  },
+  "siteExclusionsPending": {
+    "message": "Εφαρμογή εξαιρέσεων…"
+  },
+  "siteExclusionsInterrupted": {
+    "message": "Η αλλαγή διακόπηκε. Ο προσωρινός φρουρός παραμένει στη θέση του."
+  },
+  "siteExclusionsSaveError": {
+    "message": "Δεν ήταν δυνατή η ολοκλήρωση της αλλαγής. Ελέγξτε τις ρυθμίσεις σας και δοκιμάστε ξανά."
+  },
+  "siteExclusionsRetry": {
+    "message": "Επανάληψη"
+  },
+  "siteExclusionInvalid": {
+    "message": "Εισαγάγετε έναν έγκυρο δημόσιο τομέα. IP, τοπικά ονόματα, χαρακτήρες μπαλαντέρ, δημόσια επιθήματα και δεσμευμένοι τομείς δεν γίνονται δεκτά."
+  },
+  "siteExclusionDuplicate": {
+    "message": "Αυτός ο τομέας είναι ήδη στη λίστα."
+  },
+  "siteExclusionsLimit": {
+    "message": "Το όριο των 100 θέσεων έχει συμπληρωθεί. Καταργήστε έναν ιστότοπο για να προσθέσετε έναν άλλο."
+  },
+  "statusProtectedExceptions": {
+    "message": "VPN ενεργό · $1 εξαιρέσεις"
+  },
+  "statusBlockedExceptions": {
+    "message": "Μόνο οι εξαιρούμενοι ιστότοποι παραμένουν προσβάσιμοι"
+  },
+  "securityBlockedExceptions": {
+    "message": "Η περιήγηση αποκλείστηκε εκτός από εξαιρούμενες τοποθεσίες"
+  },
+  "securityBlockUnverified": {
+    "message": "Ο αποκλεισμός δεν επαληθεύτηκε"
+  },
+  "logoutLocalComplete": {
+    "message": "Η τοπική αποσύνδεση ολοκληρώθηκε."
+  },
+  "logoutApiSession": {
+    "message": "Συνεδρία τρέχοντος λογαριασμού"
+  },
+  "logoutProxySessions": {
+    "message": "Γνωστές συνεδρίες VPN"
+  },
+  "logoutRevocationPending": {
+    "message": "Ανάκληση σε εξέλιξη…"
+  },
+  "logoutRevocationConfirmed": {
+    "message": "Η ανάκληση επιβεβαιώθηκε"
+  },
+  "logoutRevocationUnconfirmed": {
+    "message": "Η ανάκληση δεν επιβεβαιώθηκε"
+  },
+  "logoutUnconfirmedHelp": {
+    "message": "Ορισμένες απομακρυσμένες συνεδρίες ενδέχεται να παραμείνουν ενεργές μέχρι τη λήξη τους."
+  },
+  "deviceQuotaLoading": {
+    "message": "Φόρτωση ορίου συσκευής…"
+  },
+  "deviceQuotaUnknown": {
+    "message": "Το όριο συσκευής δεν είναι διαθέσιμο"
+  },
+  "error_proxy_creation_uncertain": {
+    "message": "Ο διακομιστής δεν επιβεβαίωσε τη δημιουργία της νέας σύνδεσης. Η αυτόματη επανασύνδεση έχει τεθεί σε παύση."
+  },
+  "siteExclusionsPreferencesReset": {
+    "message": "Οι αποθηκευμένες εξαιρέσεις του ιστότοπού σας επαναφέρθηκαν αφού δεν ήταν δυνατή η ανάγνωσή τους. Προσθέστε ξανά τους ιστότοπους που θέλετε να εξαιρέσετε."
+  },
+  "siteExclusionsConflict": {
+    "message": "Η λίστα εξαιρούμενων τοποθεσιών άλλαξε. Ελέγξτε το και δοκιμάστε ξανά την αλλαγή σας."
+  },
+  "unavailableLocation": {
+    "message": "Η τοποθεσία δεν είναι διαθέσιμη"
+  },
+  "verificationSending": {
+    "message": "Αποστολή email επαλήθευσης…"
+  },
+  "verificationSent": {
+    "message": "Το email επαλήθευσης στάλθηκε. Ελέγξτε τα εισερχόμενά σας και το φάκελο ανεπιθύμητης αλληλογραφίας."
+  },
+  "error_login_requires_disconnect": {
+    "message": "Αποσυνδέστε την τρέχουσα σύνδεση VPN πριν συνδεθείτε σε άλλο λογαριασμό."
+  },
+  "error_storage_unavailable": {
+    "message": "Οι ρυθμίσεις τοπικού λογαριασμού δεν είναι διαθέσιμες. Δοκιμάστε ξανά όταν ο χώρος αποθήκευσης του προγράμματος περιήγησης είναι διαθέσιμος. Ο αποθηκευμένος λογαριασμός σας έχει διατηρηθεί."
+  },
+  "diagnosticsAssistance": {
+    "message": "Υποστήριξη"
+  },
+  "diagnosticsTitle": {
+    "message": "Διαγνωστικά"
+  },
+  "diagnosticsIntro": {
+    "message": "Ελέγξτε το FuzeVPN και την τρέχουσα σύνδεση χωρίς να αλλάξετε την προστασία σας."
+  },
+  "diagnosticsPrivacyTitle": {
+    "message": "Τα δεδομένα σας"
+  },
+  "diagnosticsPrivacy": {
+    "message": "Οι αναφορές περιέχουν τεχνικές καταστάσεις και κωδικούς σφάλματος, ποτέ κωδικούς πρόσβασης, διακριτικά, διευθύνσεις email, διευθύνσεις IP, διευθύνσεις URL επίσκεψης ή αποκλεισμένους τομείς."
+  },
+  "diagnosticsAuto": {
+    "message": "Αποστολή σημαντικών αναφορών σφαλμάτων αυτόματα"
+  },
+  "diagnosticsAutoHelp": {
+    "message": "Απενεργοποίηση από προεπιλογή. Μόνο απλές τεχνικές αναφορές αποστέλλονται για αυτόν τον λογαριασμό, χωρίς ιστορικό περιήγησης. Η υποστήριξη τα διατηρεί για 30 ημέρες."
+  },
+  "diagnosticsHistoryHelp": {
+    "message": "Το τεχνικό ιστορικό παραμένει τοπικό: έως και 200 συμβάντα σε 10 λεπτά, ακόμη και όταν η αυτόματη αποστολή είναι απενεργοποιημένη. Δεν περιέχει ιστορικό περιήγησης και διαγράφεται όταν το πρόγραμμα περιήγησης κλείνει ή ο λογαριασμός αλλάζει."
+  },
+  "diagnosticsHistoryCount": {
+    "message": "$1 τοπικές τεχνικές εκδηλώσεις"
+  },
+  "diagnosticsAccountRequired": {
+    "message": "Συνδεθείτε για να ενεργοποιήσετε την αποστολή. Μπορείτε ακόμα να προβάλετε και να εξαγάγετε μια αναφορά χωρίς λογαριασμό."
+  },
+  "diagnosticsRun": {
+    "message": "Εκτελέστε διαγνωστικά"
+  },
+  "diagnosticsClearHistory": {
+    "message": "Καθαρίστε την τοπική ιστορία"
+  },
+  "diagnosticsPreparing": {
+    "message": "Προετοιμασία της έκθεσης…"
+  },
+  "diagnosticsReports": {
+    "message": "Αναφορές"
+  },
+  "diagnosticsEmpty": {
+    "message": "Δεν υπάρχει ακόμη τοπική αναφορά."
+  },
+  "diagnosticsChooseReport": {
+    "message": "Επιλέξτε μια αναφορά"
+  },
+  "diagnosticsReportLabel": {
+    "message": "$1 · $2 · $3"
+  },
+  "diagnosticsTypeFull": {
+    "message": "Πλήρης αναφορά"
+  },
+  "diagnosticsTypeSimple": {
+    "message": "Αναφορά σφάλματος"
+  },
+  "diagnosticsSummary": {
+    "message": "Συλλογή στις $1. FuzeVPN έκδοση $2."
+  },
+  "diagnosticsJson": {
+    "message": "Προβολή του περιεχομένου της αναφοράς (JSON)"
+  },
+  "diagnosticsExport": {
+    "message": "Έκθεση εξαγωγής"
+  },
+  "diagnosticsDelete": {
+    "message": "Διαγραφή τοπικής αναφοράς"
+  },
+  "diagnosticsRetention": {
+    "message": "Οι απεσταλμένες αναφορές συνδέονται με τον συνδεδεμένο λογαριασμό σας και διατηρούνται από την υποστήριξη για 30 ημέρες. Η διαγραφή μιας τοπικής αναφοράς δεν διαγράφει μια αναφορά που έχει ήδη ληφθεί από την υποστήριξη."
+  },
+  "diagnosticsConsent": {
+    "message": "Στείλτε αυτήν την αναφορά στην υποστήριξη"
+  },
+  "diagnosticsDataCollectionRequired": {
+    "message": "Το Firefox πρέπει να επιτρέπει τη συλλογή τεχνικών δεδομένων για την αποστολή διαγνωστικών. Δοκιμάστε ξανά και δώστε αυτή την άδεια."
+  },
+  "diagnosticsSendHelp": {
+    "message": "Η αποστολή είναι προαιρετική. Αφού εγκριθεί, μπορεί να προσπαθήσει ξανά για έως και 24 ώρες με μια έγκυρη περίοδο λειτουργίας για τον ίδιο λογαριασμό. Μπορείτε να ακυρώσετε περαιτέρω προσπάθειες. Η καθυστερημένη ακύρωση δεν εγγυάται ότι ο διακομιστής δεν έχει ήδη λάβει την αναφορά."
+  },
+  "diagnosticsSend": {
+    "message": "Αποστολή αναφοράς"
+  },
+  "diagnosticsCancel": {
+    "message": "Ακύρωση αποστολής"
+  },
+  "diagnosticsReload": {
+    "message": "Επαναφόρτωση αυτής της σελίδας"
+  },
+  "diagnosticsUnavailable": {
+    "message": "Τα διαγνωστικά δεν είναι διαθέσιμα. Φορτώστε ξανά το FuzeVPN από τη διαχείριση επεκτάσεων του προγράμματος περιήγησης και ανοίξτε ξανά αυτήν τη σελίδα. Το VPN σας παραμένει αμετάβλητο."
+  },
+  "diagnosticsQueueFull": {
+    "message": "Η ουρά αποστολής είναι γεμάτη. Διαγράψτε μια τοπική αναφορά ή περιμένετε να ολοκληρωθεί μια αναφορά σε εκκρεμότητα."
+  },
+  "diagnosticsContentUnavailable": {
+    "message": "Το περιεχόμενο της αναφοράς δεν είναι διαθέσιμο. Εξαγάγετε την τοπική αναφορά εάν είναι διαθέσιμη και επικοινωνήστε με την υποστήριξη."
+  },
+  "diagnosticsFailure": {
+    "message": "Δεν ήταν δυνατή η ολοκλήρωση της διαγνωστικής ενέργειας. Το VPN σας δεν έχει αλλάξει."
+  },
+  "diagnosticsChecks": {
+    "message": "Έλεγχοι"
+  },
+  "diagnosticsCheckFallback": {
+    "message": "Τεχνικός έλεγχος: $1"
+  },
+  "diagnosticsCheckLine": {
+    "message": "$1 — $2"
+  },
+  "diagnosticsProxy": {
+    "message": "Διακομιστής μεσολάβησης προγράμματος περιήγησης"
+  },
+  "diagnosticsStorage": {
+    "message": "Τοπική αποθήκευση"
+  },
+  "diagnosticsNetwork": {
+    "message": "Σύνδεση δικτύου"
+  },
+  "diagnosticsCleanup": {
+    "message": "Εκκαθάριση συνεδρίας"
+  },
+  "diagnosticsResult_passed": {
+    "message": "Πέρασε"
+  },
+  "diagnosticsResult_failed": {
+    "message": "Απέτυχε"
+  },
+  "diagnosticsResult_skipped": {
+    "message": "Δεν εκτελείται"
+  },
+  "diagnosticsResult_unknown": {
+    "message": "Άγνωστο"
+  },
+  "diagnosticsStatus_ready": {
+    "message": "Έτοιμο σε αυτήν τη συσκευή"
+  },
+  "diagnosticsStatus_pending": {
+    "message": "Αναμονή αποστολής"
+  },
+  "diagnosticsStatus_sending": {
+    "message": "Αποστολή…"
+  },
+  "diagnosticsStatus_session_required": {
+    "message": "Αναμονή για έγκυρη περίοδο λειτουργίας για τον ίδιο λογαριασμό"
+  },
+  "diagnosticsStatus_received": {
+    "message": "Παραλήφθηκε από την υποστήριξη"
+  },
+  "diagnosticsStatus_failed": {
+    "message": "Η αποστολή απέτυχε"
+  },
+  "diagnosticsStatus_cancelled": {
+    "message": "Η αποστολή ακυρώθηκε"
+  },
+  "diagnosticsStatus_expired": {
+    "message": "Η προθεσμία αποστολής έληξε"
+  },
+  "diagnosticsReceivedAt": {
+    "message": "Λήφθηκε στις $1"
+  },
+  "error_private_browsing_required": {
+    "message": "Ο Firefox απαιτεί αυτή την άδεια για τη ρύθμιση του VPN, ακόμη και σε κανονικά παράθυρα. Ανοίξτε about:addons → FuzeVPN, επιτρέψτε την εκτέλεση σε ιδιωτικά παράθυρα και δοκιμάστε ξανά."
+  },
+  "error_host_permissions_required": {
+    "message": "Στο Firefox, ανοίξτε about:addons → FuzeVPN → Δικαιώματα και επιτρέψτε την πρόσβαση σε όλους τους ιστοτόπους. Έπειτα δοκιμάστε ξανά."
+  },
+  "cancelAction": {
+    "message": "Ακύρωση"
+  },
+  "refreshLocations": {
+    "message": "Ανανέωση τοποθεσιών"
+  },
+  "refreshingLocations": {
+    "message": "Ανανέωση τοποθεσιών…"
+  },
+  "locationsRefreshError": {
+    "message": "Δεν ήταν δυνατή η ανανέωση της λίστας τοποθεσιών. Δοκιμάστε ξανά."
+  },
+  "error_device_revoked_limit": {
+    "message": "Η εξουσιοδότηση αυτής της συσκευής ανακλήθηκε. Συμπληρώθηκε ο μέγιστος αριθμός συσκευών: αφαιρέστε μια συσκευή."
+  },
+  "noAvailableLocations": {
+    "message": "Δεν υπάρχουν διαθέσιμες τοποθεσίες αυτή τη στιγμή. Δοκιμάστε ξανά σε λίγο."
+  },
+  "noAvailableFavoriteLocations": {
+    "message": "Οι αγαπημένες σας τοποθεσίες είναι προσωρινά μη διαθέσιμες."
+  },
+  "error_server_full": {
+    "message": "Αυτός ο διακομιστής είναι πλήρης. Επιλέξτε άλλη τοποθεσία."
+  },
+  "error_capacity_unavailable": {
+    "message": "Η διαθεσιμότητα αυτού του διακομιστή δεν μπορεί να επιβεβαιωθεί αυτή τη στιγμή. Δοκιμάστε ξανά σε λίγο."
+  },
+  "locationHierarchyHelp": {
+    "message": "Το όνομα επιλέγει έναν διακομιστή· το βέλος εμφανίζει τις λεπτομέρειες."
+  },
+  "locationCountrySelect": {
+    "message": "Επιλογή διαθέσιμου διακομιστή: $1"
+  },
+  "locationCitySelect": {
+    "message": "Επιλογή διαθέσιμου διακομιστή: $1"
+  },
+  "locationShowCities": {
+    "message": "Εμφάνιση πόλεων: $1"
+  },
+  "locationHideCities": {
+    "message": "Απόκρυψη πόλεων: $1"
+  },
+  "locationShowServers": {
+    "message": "Εμφάνιση διακομιστών: $1"
+  },
+  "locationHideServers": {
+    "message": "Απόκρυψη διακομιστών: $1"
+  },
+  "locationAvailableServers": {
+    "message": "Διαθέσιμοι διακομιστές: $1"
+  },
+  "legalInformation": {
+    "message": "Νομικές πληροφορίες"
+  },
+  "privacyPolicy": {
+    "message": "Πολιτική απορρήτου"
+  },
+  "termsAndConditions": {
+    "message": "Όροι χρήσης και πώλησης"
+  },
+  "legalNotice": {
+    "message": "Νομική σημείωση"
+  },
+  "contactSupport": {
+    "message": "Επικοινωνία με την υποστήριξη"
+  },
+  "webSignIn": {
+    "message": "Σύνδεση στο FuzeVPN"
+  },
+  "webSignInDisconnect": {
+    "message": "Αποσύνδεση και σύνδεση"
+  },
+  "webSignInPending": {
+    "message": "Σύνδεση σε εξέλιξη…"
+  },
+  "webSignInHelp": {
+    "message": "Συνδεθείτε ή δημιουργήστε λογαριασμό με Google ή το email σας στην περιοχή πελατών FuzeVPN."
+  },
+  "webSignInDisconnectHelp": {
+    "message": "Αυτό το κουμπί σταματά την προστασία του προγράμματος περιήγησης για να συνδεθείτε με Google ή email. Η περιήγησή σας δεν θα προστατεύεται κατά τη σύνδεση."
+  },
+  "webSignInStatus": {
+    "message": "Συνεχίστε στο παράθυρο σύνδεσης FuzeVPN. Η επέκταση ενημερώνεται αυτόματα όταν τελειώσετε. Κλείστε εκείνο το παράθυρο για ακύρωση."
+  },
+  "error_web_login_cancelled": {
+    "message": "Η σύνδεση ακυρώθηκε. Δοκιμάστε ξανά."
+  },
+  "error_web_login_timeout": {
+    "message": "Η σύνδεση άργησε υπερβολικά. Δοκιμάστε ξανά."
+  },
+  "error_web_login_unavailable": {
+    "message": "Η σύνδεση μέσω ιστού δεν είναι διαθέσιμη. Δοκιμάστε αργότερα."
+  },
+  "error_web_login_invalid_callback": {
+    "message": "Δεν ήταν δυνατή η επαλήθευση της σύνδεσης. Ξεκινήστε ξανά από την επέκταση."
+  },
+  "error_web_login_denied": {
+    "message": "Η σύνδεση δεν εγκρίθηκε. Δοκιμάστε ξανά."
+  },
+  "error_web_login_busy": {
+    "message": "Κλείστε το παράθυρο σύνδεσης που είναι ήδη ανοιχτό πριν δοκιμάσετε ξανά."
+  },
+  "deviceKindFirefox": {
+    "message": "Πρόγραμμα περιήγησης Firefox"
+  }
+}

@@ -1,0 +1,830 @@
+{
+  "extensionName": {
+    "message": "FuzeVPN"
+  },
+  "extensionDescription": {
+    "message": "클릭 한 번으로 개인정보를 보호하고 보안을 강화하세요."
+  },
+  "siteExclusionsReloadRequired": {
+    "message": "업데이트를 완료하고 사이트 제외 기능을 사용하려면 브라우저의 확장 프로그램 관리자에서 FuzeVPN을 다시 로드하세요."
+  },
+  "extensionCommunicationError": {
+    "message": "확장 프로그램이 응답하지 않습니다. 이 창을 닫은 후 브라우저의 확장 프로그램 관리자에서 FuzeVPN을 다시 로드하세요."
+  },
+  "actionDisconnected": {
+    "message": "FuzeVPN — 연결이 끊어졌습니다."
+  },
+  "actionConnected": {
+    "message": "FuzeVPN — 브라우저 보호됨"
+  },
+  "actionReconnecting": {
+    "message": "FuzeVPN — 다시 연결 중"
+  },
+  "actionError": {
+    "message": "FuzeVPN — 주의가 필요합니다"
+  },
+  "browserProtection": {
+    "message": "브라우저 보호"
+  },
+  "loginTitle": {
+    "message": "FuzeVPN에 오신 것을 환영합니다."
+  },
+  "loginSubtitle": {
+    "message": "이 브라우저의 웹 탐색을 보호하려면 로그인하세요."
+  },
+  "email": {
+    "message": "이메일 주소"
+  },
+  "emailPlaceholder": {
+    "message": "you@example.com"
+  },
+  "password": {
+    "message": "비밀번호"
+  },
+  "signIn": {
+    "message": "로그인"
+  },
+  "signingIn": {
+    "message": "로그인 중…"
+  },
+  "forgotPassword": {
+    "message": "비밀번호를 잊으셨나요?"
+  },
+  "createAccount": {
+    "message": "계정 만들기"
+  },
+  "settings": {
+    "message": "설정"
+  },
+  "close": {
+    "message": "닫기"
+  },
+  "statusDisconnected": {
+    "message": "연결이 끊김"
+  },
+  "statusConnecting": {
+    "message": "연결 중…"
+  },
+  "statusChanging": {
+    "message": "위치 변경 중…"
+  },
+  "statusProtected": {
+    "message": "브라우저 보호됨"
+  },
+  "statusRefreshing": {
+    "message": "안전하게 갱신 중…"
+  },
+  "statusDisconnecting": {
+    "message": "연결 해제 중…"
+  },
+  "statusError": {
+    "message": "보호가 중지되었습니다."
+  },
+  "browserOnlyDetail": {
+    "message": "이 브라우저만 보호합니다."
+  },
+  "location": {
+    "message": "위치"
+  },
+  "change": {
+    "message": "변경"
+  },
+  "noLocation": {
+    "message": "사용 가능한 위치가 없습니다."
+  },
+  "protectBrowser": {
+    "message": "브라우저 보호"
+  },
+  "disconnect": {
+    "message": "연결 끊기"
+  },
+  "subscription": {
+    "message": "구독"
+  },
+  "refreshSubscription": {
+    "message": "구독 새로고침"
+  },
+  "refreshingSubscription": {
+    "message": "구독 새로고침 중…"
+  },
+  "subscriptionActive": {
+    "message": "활성"
+  },
+  "subscriptionInactive": {
+    "message": "비활성"
+  },
+  "expiresOn": {
+    "message": "$1에 만료됨"
+  },
+  "noExpiry": {
+    "message": "만료일 없음"
+  },
+  "browserOnlyNotice": {
+    "message": "이 브라우저만 보호합니다. 다른 브라우저와 앱은 보호되지 않습니다."
+  },
+  "resendVerification": {
+    "message": "이메일 재전송"
+  },
+  "incognitoHelp": {
+    "message": "비공개 창에서도 동일한 보호를 받으려면 브라우저 설정에서 확장 프로그램이 비공개 창에서 실행되도록 허용해야 합니다."
+  },
+  "manageAccount": {
+    "message": "내 계정 관리"
+  },
+  "account": {
+    "message": "계정"
+  },
+  "devices": {
+    "message": "장치"
+  },
+  "manageDevices": {
+    "message": "장치 관리"
+  },
+  "refreshDevices": {
+    "message": "장치 새로 고침"
+  },
+  "deviceCount": {
+    "message": "$1 / $2 장치"
+  },
+  "loadingDevices": {
+    "message": "기기 로드 중…"
+  },
+  "noDevices": {
+    "message": "활성 장치가 없습니다."
+  },
+  "currentDevice": {
+    "message": "이 장치"
+  },
+  "deviceKindBrowser": {
+    "message": "브라우저 확장"
+  },
+  "deviceKindVpn": {
+    "message": "VPN 장치"
+  },
+  "profile_browser_proxy": {
+    "message": "브라우저 프록시"
+  },
+  "profile_wireguard": {
+    "message": "와이어가드"
+  },
+  "profile_openvpn": {
+    "message": "오픈VPN"
+  },
+  "none": {
+    "message": "없음"
+  },
+  "deviceCreatedOn": {
+    "message": "$1에 생성됨"
+  },
+  "deleteDevice": {
+    "message": "기기 삭제"
+  },
+  "confirmDeleteDevice": {
+    "message": "\"$1\"를 제거하시겠습니까? VPN 연결이 중지되고 프로필이 제거됩니다."
+  },
+  "resetDevice": {
+    "message": "기기 재설정"
+  },
+  "confirmResetDevice": {
+    "message": "이 확장 프로그램을 재설정하시겠습니까? 다음번 사용시에는 새로운 기기로 등록됩니다."
+  },
+  "signOutAccount": {
+    "message": "계정에서 로그아웃"
+  },
+  "chooseLocation": {
+    "message": "위치를 선택하세요"
+  },
+  "error_invalid_credentials": {
+    "message": "이메일 주소나 비밀번호가 올바르지 않습니다."
+  },
+  "error_unauthorized": {
+    "message": "세션이 만료되었습니다. 다시 로그인해 주세요."
+  },
+  "error_email_verification_required": {
+    "message": "보호를 활성화하기 전에 이메일 주소를 확인하세요."
+  },
+  "errorVerificationCooldown": {
+    "message": "$1초 안에 새 이메일을 요청할 수 있습니다."
+  },
+  "error_verification_email_cooldown": {
+    "message": "다른 이메일을 요청하기 전에 잠시 기다려 주세요."
+  },
+  "error_subscription_required": {
+    "message": "브라우저를 보호하려면 활성 구독이 필요합니다."
+  },
+  "error_device_limit": {
+    "message": "최대 기기 수에 도달했습니다. 기기 하나를 삭제해 주세요."
+  },
+  "error_device_identity_revoked": {
+    "message": "이 기기는 더 이상 승인되지 않습니다. 다시 연결해 보세요."
+  },
+  "error_device_proof_invalid": {
+    "message": "이 장치를 확인할 수 없습니다. 컴퓨터의 날짜와 시간을 확인한 후 다시 시도하세요."
+  },
+  "error_device_proof_replayed": {
+    "message": "이 요청은 이미 처리되었습니다. 다시 시도해 보세요."
+  },
+  "error_invalid_device": {
+    "message": "이 기기를 인식할 수 없습니다. 다시 연결해 보세요."
+  },
+  "error_device_exists": {
+    "message": "이 장치 ID는 이미 다른 계정에 연결되어 있습니다."
+  },
+  "error_not_found": {
+    "message": "이 작업은 더 이상 사용할 수 없습니다. 다시 시도하세요."
+  },
+  "error_invalid_location": {
+    "message": "이 위치는 사용할 수 없습니다. 다른 것을 선택하세요."
+  },
+  "error_rate_limited": {
+    "message": "시도 횟수가 너무 많습니다. 잠시 기다렸다가 다시 시도해 보세요."
+  },
+  "error_proxy_unavailable": {
+    "message": "이 서버를 일시적으로 사용할 수 없습니다. 잠시 후에 다시 시도해 보세요."
+  },
+  "error_api_token_expired": {
+    "message": "귀하의 계정 세션이 만료되었습니다. 다시 로그인해 주세요."
+  },
+  "error_network_error": {
+    "message": "네트워크를 사용할 수 없습니다. 인터넷 연결을 확인하세요."
+  },
+  "error_request_timeout": {
+    "message": "서비스가 응답하는 데 너무 오랜 시간이 걸렸습니다. 다시 시도해 보세요."
+  },
+  "error_invalid_response": {
+    "message": "서비스가 예상치 못한 응답을 반환했습니다."
+  },
+  "error_proxy_certificate_invalid": {
+    "message": "서버의 보안을 확인할 수 없습니다. 연결이 중지되었습니다."
+  },
+  "error_proxy_controlled_by_extension": {
+    "message": "현재 다른 확장 프로그램이 브라우저의 프록시를 제어하고 있습니다."
+  },
+  "error_proxy_controlled_by_policy": {
+    "message": "관리자 정책으로 인해 FuzeVPN이(가) 프록시를 변경하지 못합니다."
+  },
+  "error_proxy_authentication_failed": {
+    "message": "서버가 연결을 수락하지 않았습니다. 다시 연결해 보세요."
+  },
+  "error_session_expired": {
+    "message": "보호된 연결이 만료되었습니다. 다시 연결하세요."
+  },
+  "error_email_delivery_unavailable": {
+    "message": "지금은 이메일을 보낼 수 없습니다."
+  },
+  "error_unknown_error": {
+    "message": "예상치 못한 오류가 발생했습니다. 다시 시도해 보세요."
+  },
+  "actionBlocked": {
+    "message": "FuzeVPN — 탐색이 차단되었습니다."
+  },
+  "statusBlockedRetry": {
+    "message": "탐색이 일시 중지되었습니다. 다시 연결하는 중입니다."
+  },
+  "statusBlockedAction": {
+    "message": "탐색이 일시 중지되었습니다. 연결을 확인하세요."
+  },
+  "statusProtectionUnavailable": {
+    "message": "보호 불가 - 탐색이 차단되지 않음"
+  },
+  "recoveryHelp": {
+    "message": "보호를 재개해 보세요. 연결 끊기를 사용하면 FuzeVPN 없이 탐색할 수 있습니다."
+  },
+  "retryConnection": {
+    "message": "재시도"
+  },
+  "killSwitch": {
+    "message": "킬 스위치"
+  },
+  "killSwitchHelp": {
+    "message": "VPN 연결이 끊어지면 새로운 웹 요청을 차단합니다. 제외된 사이트는 VPN 외부에서도 계속 액세스할 수 있습니다."
+  },
+  "webRtcProtection": {
+    "message": "WebRTC 보호"
+  },
+  "webRtcHelp": {
+    "message": "웹 통화 중에 IP 주소를 비공개로 유지하는 데 도움이 됩니다. 일부 통화는 작동하지 않을 수 있습니다. 이 기능을 끄면 실제 IP 주소가 공개될 수 있습니다."
+  },
+  "securityEffectiveState": {
+    "message": "$1 · $2"
+  },
+  "securityBlocked": {
+    "message": "탐색이 차단되었습니다."
+  },
+  "securityNotBlocked": {
+    "message": "탐색이 차단되지 않음"
+  },
+  "securityWebRtcActive": {
+    "message": "WebRTC 제한 활성화"
+  },
+  "securityWebRtcInactive": {
+    "message": "WebRTC 제한이 비활성화되었습니다."
+  },
+  "localNetworkHelp": {
+    "message": "보호 중에는 로컬 IP 주소와 일반 로컬 이름이 차단됩니다. 제외된 도메인은 여전히 ​​로컬 네트워크에 대한 액세스를 제공할 수 있습니다. 시스템 IPv6 설정은 변경되지 않습니다."
+  },
+  "securityLimits": {
+    "message": "이 보호 정보"
+  },
+  "killSwitchLimits": {
+    "message": "이 브라우저만 해당합니다. 기존 연결과 브라우저 내부 또는 다른 확장 프로그램의 일부 통신은 계속될 수 있습니다. FuzeVPN이 반응하기 전에 다른 확장 프로그램이나 정책이 프록시를 변경할 수 있습니다. 확장 프로그램을 비활성화하면 보호가 해제됩니다. 시스템 전체의 통신을 차단하지는 않습니다."
+  },
+  "error_traffic_guard_failed": {
+    "message": "탐색 블록을 확인할 수 없습니다. 보호가 보장되지 않습니다. 확장 권한을 확인하세요."
+  },
+  "error_webrtc_control_unavailable": {
+    "message": "WebRTC 제한을 적용할 수 없습니다. 설정, 기타 확장 프로그램 또는 관리자 정책을 확인하세요."
+  },
+  "language": {
+    "message": "언어"
+  },
+  "languageAutomatic": {
+    "message": "자동 — 브라우저 언어"
+  },
+  "languageHelp": {
+    "message": "변경 사항은 즉시 적용됩니다. 자동을 선택하면 브라우저 언어를 사용하며, 운영 체제의 언어와 다를 수 있습니다."
+  },
+  "languageSaveError": {
+    "message": "언어를 저장할 수 없습니다. 이전 선택이 유지됩니다. 다시 시도해 보세요."
+  },
+  "publicIp": {
+    "message": "공개 IP"
+  },
+  "vpnIp": {
+    "message": "VPN IP"
+  },
+  "ipChecking": {
+    "message": "확인 중…"
+  },
+  "ipUnavailable": {
+    "message": "이용 불가"
+  },
+  "ipLookupExplanation": {
+    "message": "현재 연결을 사용하여 ipify로 IP를 확인했습니다. 검색 기록이 전송되지 않습니다."
+  },
+  "automaticLocation": {
+    "message": "자동"
+  },
+  "automaticLocationHelp": {
+    "message": "가장 최근 응답 시간 또는 마지막 위치."
+  },
+  "automaticLocationName": {
+    "message": "자동 · $1"
+  },
+  "searchLocations": {
+    "message": "국가 또는 도시 검색"
+  },
+  "locationFilters": {
+    "message": "위치 필터링"
+  },
+  "allLocations": {
+    "message": "모두"
+  },
+  "favoriteLocations": {
+    "message": "즐겨찾기"
+  },
+  "recentLocations": {
+    "message": "최근"
+  },
+  "noMatchingLocations": {
+    "message": "검색어와 일치하는 위치가 없습니다."
+  },
+  "noFavoriteLocations": {
+    "message": "여기에 즐겨찾는 위치를 유지하려면 별표를 추가하세요."
+  },
+  "noRecentLocations": {
+    "message": "최근에 연결한 위치가 여기에 표시됩니다."
+  },
+  "addFavorite": {
+    "message": "즐겨찾기에 $1 추가"
+  },
+  "removeFavorite": {
+    "message": "즐겨찾기에서 $1 제거"
+  },
+  "unavailableFavoriteLocation": {
+    "message": "사용할 수 없는 즐겨찾기 $1"
+  },
+  "locationSaveError": {
+    "message": "변경을 완료할 수 없습니다. 일부 설정이 저장되었을 수 있습니다. 다시 시도하기 전에 표시된 선택 사항을 확인하세요."
+  },
+  "siteExclusions": {
+    "message": "제외된 사이트"
+  },
+  "siteExclusionsHelp": {
+    "message": "이러한 사이트는 VPN이 다운되더라도 FuzeVPN 없이 연결을 사용합니다."
+  },
+  "siteExclusionsEnabled": {
+    "message": "예외 활성화"
+  },
+  "siteExclusionInput": {
+    "message": "도메인 또는 URL"
+  },
+  "siteExclusionPlaceholder": {
+    "message": "example.com"
+  },
+  "siteExclusionPreview": {
+    "message": "선택한 도메인: $1"
+  },
+  "siteExclusionSubdomains": {
+    "message": "하위 도메인 포함"
+  },
+  "siteExclusionAdd": {
+    "message": "사이트 추가"
+  },
+  "siteExclusionsEmpty": {
+    "message": "제외된 사이트가 없습니다. VPN 없이 사용하고 싶은 사이트만 추가하세요."
+  },
+  "siteExclusionsCount": {
+    "message": "$1 / 사이트 100개"
+  },
+  "siteExclusionScopeSubdomains": {
+    "message": "도메인 및 하위 도메인"
+  },
+  "siteExclusionScopeExact": {
+    "message": "정확한 도메인만"
+  },
+  "siteExclusionRemove": {
+    "message": "$1 제거"
+  },
+  "siteExclusionsDetails": {
+    "message": "예외는 어떻게 작동하나요?"
+  },
+  "siteExclusionsResources": {
+    "message": "다른 도메인의 리소스는 보호된 상태로 유지됩니다. 페이지를 제외해도 다른 콘텐츠는 자동으로 제외되지 않습니다."
+  },
+  "siteExclusionsReload": {
+    "message": "변경 후 사이트를 다시 로드하세요. 기존 연결은 이전 경로를 유지할 수 있습니다."
+  },
+  "siteExclusionsWebRtc": {
+    "message": "WebRTC 보호는 제외된 사이트를 포함하여 전역 설정으로 유지됩니다."
+  },
+  "siteExclusionsLocal": {
+    "message": "이 브라우저에만 저장되며 계정에서 로그아웃한 후에도 보관됩니다."
+  },
+  "siteExclusionsOn": {
+    "message": "예외가 활성화되었습니다."
+  },
+  "siteExclusionsOff": {
+    "message": "예외가 비활성화되었습니다."
+  },
+  "siteExclusionsSummary": {
+    "message": "$1 VPN 외부 사이트"
+  },
+  "siteExclusionsPending": {
+    "message": "예외 적용 중…"
+  },
+  "siteExclusionsInterrupted": {
+    "message": "변경이 중단되었습니다. 임시경비원은 그대로 유지됩니다."
+  },
+  "siteExclusionsSaveError": {
+    "message": "변경을 완료할 수 없습니다. 설정을 확인하고 다시 시도하세요."
+  },
+  "siteExclusionsRetry": {
+    "message": "재시도"
+  },
+  "siteExclusionInvalid": {
+    "message": "유효한 공개 도메인을 입력하세요. IP, 로컬 이름, 와일드카드, 공개 접미사 및 예약된 도메인은 허용되지 않습니다."
+  },
+  "siteExclusionDuplicate": {
+    "message": "이 도메인은 이미 목록에 있습니다."
+  },
+  "siteExclusionsLimit": {
+    "message": "100개 사이트 한도에 도달했습니다. 다른 사이트를 추가하려면 사이트를 제거하세요."
+  },
+  "statusProtectedExceptions": {
+    "message": "VPN 활성 · $1 예외"
+  },
+  "statusBlockedExceptions": {
+    "message": "제외된 사이트만 계속 액세스할 수 있습니다."
+  },
+  "securityBlockedExceptions": {
+    "message": "제외된 사이트를 제외한 탐색이 차단되었습니다."
+  },
+  "securityBlockUnverified": {
+    "message": "차단이 확인되지 않았습니다."
+  },
+  "logoutLocalComplete": {
+    "message": "로컬 로그아웃이 완료되었습니다."
+  },
+  "logoutApiSession": {
+    "message": "현재 계정 세션"
+  },
+  "logoutProxySessions": {
+    "message": "알려진 VPN 세션"
+  },
+  "logoutRevocationPending": {
+    "message": "취소 진행 중…"
+  },
+  "logoutRevocationConfirmed": {
+    "message": "해지 확인됨"
+  },
+  "logoutRevocationUnconfirmed": {
+    "message": "철회가 확인되지 않았습니다."
+  },
+  "logoutUnconfirmedHelp": {
+    "message": "일부 원격 세션은 만료될 때까지 활성 상태로 유지될 수 있습니다."
+  },
+  "deviceQuotaLoading": {
+    "message": "기기 한도 로드 중…"
+  },
+  "deviceQuotaUnknown": {
+    "message": "기기 한도를 사용할 수 없습니다."
+  },
+  "error_proxy_creation_uncertain": {
+    "message": "서버가 새 연결 생성을 확인하지 않았습니다. 자동 재연결이 일시 중지되었습니다."
+  },
+  "siteExclusionsPreferencesReset": {
+    "message": "저장된 사이트 예외를 읽을 수 없어 재설정되었습니다. 제외하려는 사이트를 다시 추가하세요."
+  },
+  "siteExclusionsConflict": {
+    "message": "제외 사이트 목록이 변경되었습니다. 검토한 후 다시 변경해 보세요."
+  },
+  "unavailableLocation": {
+    "message": "위치를 알 수 없음"
+  },
+  "verificationSending": {
+    "message": "확인 이메일을 보내는 중…"
+  },
+  "verificationSent": {
+    "message": "확인 이메일이 전송되었습니다. 받은 편지함과 스팸 폴더를 확인하세요."
+  },
+  "error_login_requires_disconnect": {
+    "message": "다른 계정에 로그인하기 전에 현재 VPN 연결을 끊으세요."
+  },
+  "error_storage_unavailable": {
+    "message": "로컬 계정 설정을 사용할 수 없습니다. 브라우저 저장 공간을 사용할 수 있을 때 다시 시도하세요. 저장된 계정은 보존되었습니다."
+  },
+  "diagnosticsAssistance": {
+    "message": "지원"
+  },
+  "diagnosticsTitle": {
+    "message": "진단"
+  },
+  "diagnosticsIntro": {
+    "message": "보호를 변경하지 않고 FuzeVPN과 현재 연결을 확인하세요."
+  },
+  "diagnosticsPrivacyTitle": {
+    "message": "귀하의 데이터"
+  },
+  "diagnosticsPrivacy": {
+    "message": "보고서에는 기술 상태 및 오류 코드가 포함되며 비밀번호, 토큰, 이메일 주소, IP 주소, 방문한 URL 또는 제외된 도메인은 포함되지 않습니다."
+  },
+  "diagnosticsAuto": {
+    "message": "중요한 오류 보고서를 자동으로 보내기"
+  },
+  "diagnosticsAutoHelp": {
+    "message": "기본적으로 꺼져 있습니다. 이 계정에는 검색 기록 없이 간단한 기술 보고서만 전송됩니다. 지원에서는 30일 동안 보관합니다."
+  },
+  "diagnosticsHistoryHelp": {
+    "message": "기술 기록은 로컬로 유지됩니다. 자동 전송이 꺼진 경우에도 10분 동안 최대 200개의 이벤트가 발생합니다. 검색 기록은 포함되지 않으며 브라우저가 닫히거나 계정이 변경되면 지워집니다."
+  },
+  "diagnosticsHistoryCount": {
+    "message": "$1 지역 기술 이벤트"
+  },
+  "diagnosticsAccountRequired": {
+    "message": "보내기를 활성화하려면 로그인하세요. 계정 없이도 보고서를 보고 내보낼 수 있습니다."
+  },
+  "diagnosticsRun": {
+    "message": "진단 실행"
+  },
+  "diagnosticsClearHistory": {
+    "message": "지역 기록 지우기"
+  },
+  "diagnosticsPreparing": {
+    "message": "보고서 준비 중…"
+  },
+  "diagnosticsReports": {
+    "message": "보고서"
+  },
+  "diagnosticsEmpty": {
+    "message": "아직 현지 보고가 없습니다."
+  },
+  "diagnosticsChooseReport": {
+    "message": "보고서를 선택하세요"
+  },
+  "diagnosticsReportLabel": {
+    "message": "$1 · $2 · $3"
+  },
+  "diagnosticsTypeFull": {
+    "message": "전체 보고서"
+  },
+  "diagnosticsTypeSimple": {
+    "message": "오류 보고"
+  },
+  "diagnosticsSummary": {
+    "message": "$1에서 수집되었습니다. FuzeVPN 버전 $2."
+  },
+  "diagnosticsJson": {
+    "message": "보고서 내용 보기(JSON)"
+  },
+  "diagnosticsExport": {
+    "message": "보고서 내보내기"
+  },
+  "diagnosticsDelete": {
+    "message": "지역 보고서 삭제"
+  },
+  "diagnosticsRetention": {
+    "message": "전송된 보고서는 로그인한 계정에 연결되며 지원팀에서 30일 동안 보관합니다. 로컬 보고서를 삭제해도 지원팀에서 이미 받은 보고서는 삭제되지 않습니다."
+  },
+  "diagnosticsConsent": {
+    "message": "지원팀에 이 보고서 보내기"
+  },
+  "diagnosticsDataCollectionRequired": {
+    "message": "진단을 보내려면 Firefox에서 기술 데이터 수집을 허용해야 합니다. 다시 시도하고 이 권한을 허용하세요."
+  },
+  "diagnosticsSendHelp": {
+    "message": "보내는 것은 선택 사항입니다. 승인되면 동일한 계정에 대한 유효한 세션으로 최대 24시간 동안 재시도할 수 있습니다. 추가 시도를 취소할 수 있습니다. 늦게 취소한다고 해서 서버가 아직 보고서를 받지 못했다는 의미는 아닙니다."
+  },
+  "diagnosticsSend": {
+    "message": "보고서 보내기"
+  },
+  "diagnosticsCancel": {
+    "message": "보내기 취소"
+  },
+  "diagnosticsReload": {
+    "message": "이 페이지를 새로고침하세요"
+  },
+  "diagnosticsUnavailable": {
+    "message": "진단을 사용할 수 없습니다. 브라우저의 확장 프로그램 관리자에서 FuzeVPN을 다시 로드한 다음 이 페이지를 다시 여세요. VPN 연결은 변경되지 않았습니다."
+  },
+  "diagnosticsQueueFull": {
+    "message": "전송 대기열이 가득 찼습니다. 로컬 보고서를 삭제하거나 보류 중인 보고서가 완료될 때까지 기다리세요."
+  },
+  "diagnosticsContentUnavailable": {
+    "message": "신고 내용을 확인할 수 없습니다. 사용 가능한 경우 로컬 보고서를 내보내고 지원팀에 문의하세요."
+  },
+  "diagnosticsFailure": {
+    "message": "진단 작업을 완료할 수 없습니다. 귀하의 VPN은 변경되지 않았습니다."
+  },
+  "diagnosticsChecks": {
+    "message": "수표"
+  },
+  "diagnosticsCheckFallback": {
+    "message": "기술 점검: $1"
+  },
+  "diagnosticsCheckLine": {
+    "message": "$1 — $2"
+  },
+  "diagnosticsProxy": {
+    "message": "브라우저 프록시"
+  },
+  "diagnosticsStorage": {
+    "message": "로컬 저장소"
+  },
+  "diagnosticsNetwork": {
+    "message": "네트워크 연결"
+  },
+  "diagnosticsCleanup": {
+    "message": "세션 정리"
+  },
+  "diagnosticsResult_passed": {
+    "message": "합격"
+  },
+  "diagnosticsResult_failed": {
+    "message": "실패"
+  },
+  "diagnosticsResult_skipped": {
+    "message": "수행되지 않음"
+  },
+  "diagnosticsResult_unknown": {
+    "message": "알 수 없음"
+  },
+  "diagnosticsStatus_ready": {
+    "message": "이 기기에서 준비됨"
+  },
+  "diagnosticsStatus_pending": {
+    "message": "전송 대기 중"
+  },
+  "diagnosticsStatus_sending": {
+    "message": "보내는 중…"
+  },
+  "diagnosticsStatus_session_required": {
+    "message": "동일한 계정에 대한 유효한 세션을 기다리는 중"
+  },
+  "diagnosticsStatus_received": {
+    "message": "지원으로 받음"
+  },
+  "diagnosticsStatus_failed": {
+    "message": "전송 실패"
+  },
+  "diagnosticsStatus_cancelled": {
+    "message": "전송이 취소되었습니다."
+  },
+  "diagnosticsStatus_expired": {
+    "message": "전송 기한이 만료되었습니다."
+  },
+  "diagnosticsReceivedAt": {
+    "message": "$1에 수신됨"
+  },
+  "error_private_browsing_required": {
+    "message": "Firefox는 일반 창에서도 VPN을 설정하려면 이 권한이 필요합니다. about:addons → FuzeVPN을 열고 사생활 보호 창에서 실행을 허용한 후 다시 시도하세요."
+  },
+  "error_host_permissions_required": {
+    "message": "Firefox에서 about:addons → FuzeVPN → 권한을 열고 모든 웹사이트에 대한 접근을 허용한 다음 다시 시도하세요."
+  },
+  "cancelAction": {
+    "message": "취소"
+  },
+  "refreshLocations": {
+    "message": "위치 새로고침"
+  },
+  "refreshingLocations": {
+    "message": "위치를 새로고침하는 중…"
+  },
+  "locationsRefreshError": {
+    "message": "위치 목록을 새로고침하지 못했습니다. 다시 시도해 주세요."
+  },
+  "error_device_revoked_limit": {
+    "message": "이 기기의 승인이 취소되었습니다. 최대 기기 수에 도달했으니 기기 하나를 삭제해 주세요."
+  },
+  "noAvailableLocations": {
+    "message": "현재 사용 가능한 위치가 없습니다. 잠시 후 다시 시도해 주세요."
+  },
+  "noAvailableFavoriteLocations": {
+    "message": "즐겨찾는 위치를 일시적으로 사용할 수 없습니다."
+  },
+  "error_server_full": {
+    "message": "이 서버는 정원이 찼습니다. 다른 위치를 선택해 주세요."
+  },
+  "error_capacity_unavailable": {
+    "message": "현재 이 서버의 사용 가능 여부를 확인할 수 없습니다. 잠시 후 다시 시도해 주세요."
+  },
+  "locationHierarchyHelp": {
+    "message": "이름을 누르면 서버를 선택하고, 화살표를 누르면 세부 정보를 표시합니다."
+  },
+  "locationCountrySelect": {
+    "message": "사용 가능한 서버 선택: $1"
+  },
+  "locationCitySelect": {
+    "message": "사용 가능한 서버 선택: $1"
+  },
+  "locationShowCities": {
+    "message": "도시 표시: $1"
+  },
+  "locationHideCities": {
+    "message": "도시 숨기기: $1"
+  },
+  "locationShowServers": {
+    "message": "서버 표시: $1"
+  },
+  "locationHideServers": {
+    "message": "서버 숨기기: $1"
+  },
+  "locationAvailableServers": {
+    "message": "사용 가능한 서버: $1"
+  },
+  "legalInformation": {
+    "message": "법률 정보"
+  },
+  "privacyPolicy": {
+    "message": "개인정보 처리방침"
+  },
+  "termsAndConditions": {
+    "message": "이용 및 판매 약관"
+  },
+  "legalNotice": {
+    "message": "법적 고지"
+  },
+  "contactSupport": {
+    "message": "고객 지원에 문의"
+  },
+  "webSignIn": {
+    "message": "FuzeVPN에 로그인"
+  },
+  "webSignInDisconnect": {
+    "message": "연결 해제 후 로그인"
+  },
+  "webSignInPending": {
+    "message": "로그인 중…"
+  },
+  "webSignInHelp": {
+    "message": "FuzeVPN 고객 페이지에서 Google 또는 이메일로 로그인하거나 계정을 만드세요."
+  },
+  "webSignInDisconnectHelp": {
+    "message": "이 버튼은 Google 또는 이메일로 로그인할 수 있도록 브라우저 보호를 중지합니다. 로그인하는 동안 탐색이 보호되지 않습니다."
+  },
+  "webSignInStatus": {
+    "message": "FuzeVPN 로그인 창에서 계속 진행하세요. 완료하면 확장 프로그램이 자동으로 업데이트됩니다. 취소하려면 해당 창을 닫으세요."
+  },
+  "error_web_login_cancelled": {
+    "message": "로그인이 취소되었습니다. 다시 시도하세요."
+  },
+  "error_web_login_timeout": {
+    "message": "로그인 시간이 초과되었습니다. 다시 시도하세요."
+  },
+  "error_web_login_unavailable": {
+    "message": "웹 로그인을 사용할 수 없습니다. 나중에 다시 시도하세요."
+  },
+  "error_web_login_invalid_callback": {
+    "message": "로그인을 확인할 수 없습니다. 확장 프로그램에서 다시 시작하세요."
+  },
+  "error_web_login_denied": {
+    "message": "로그인이 승인되지 않았습니다. 다시 시도하세요."
+  },
+  "error_web_login_busy": {
+    "message": "다시 시도하기 전에 이미 열려 있는 로그인 창을 닫으세요."
+  },
+  "deviceKindFirefox": {
+    "message": "Firefox 브라우저"
+  }
+}
