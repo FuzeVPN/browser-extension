@@ -83,10 +83,35 @@ describe("connection state machine", () => {
       protected: true,
       activeLocationId: "frankfurt-01",
       autoConnect: true,
+      vpnNodeAddress: session.host,
     });
     expect(harness.proxy.active?.id).toBe(session.id);
     expect(harness.storage.transient.proxySession?.password).toBe(session.password);
     expect(JSON.stringify(harness.storage.persisted)).not.toContain(session.password);
+  });
+
+  it("publishes the current node immediately and replaces it on renewal and location change", async () => {
+    const harness = createHarness({ persisted: authenticatedState() });
+    const first = { ...proxySession("first-node"), host: "185.159.157.10" };
+    const renewed = { ...proxySession("renewed-node"), host: "185.159.157.11" };
+    const changed = {
+      ...proxySession("changed-node", "frankfurt-02"),
+      host: "paris.proxy.vpn1euro.com",
+    };
+    harness.api.sessions = [first, renewed, changed];
+    await harness.controller.initialize();
+    expect(harness.controller.getSnapshot().vpnNodeAddress).toBeNull();
+    expect((await harness.controller.connect("frankfurt-01")).ok).toBe(true);
+    expect(harness.controller.getSnapshot().vpnNodeAddress).toBe(first.host);
+    expect((await harness.controller.retryConnection()).ok).toBe(true);
+    expect(harness.controller.getSnapshot().vpnNodeAddress).toBe(renewed.host);
+    expect((await harness.controller.changeLocation("frankfurt-02")).ok).toBe(true);
+    expect(harness.controller.getSnapshot().vpnNodeAddress).toBe(changed.host);
+    const published = JSON.stringify(harness.controller.getSnapshot());
+    expect(published).not.toContain(changed.password);
+    expect(published).not.toContain(changed.username);
+    await harness.controller.disconnect();
+    expect(harness.controller.getSnapshot().vpnNodeAddress).toBeNull();
   });
 
   it("enrolls one browser device on first use and reuses it for later sessions", async () => {
@@ -197,6 +222,7 @@ describe("connection state machine", () => {
       status: "connected",
       protected: true,
       activeLocationId: "frankfurt-01",
+      vpnNodeAddress: session.host,
     });
     expect(harness.alarms.session?.id).toBe(session.id);
     expect(harness.api.revoked).not.toContain("retired-session");

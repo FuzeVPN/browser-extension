@@ -29,6 +29,22 @@ describe("popup compatibility during extension updates", () => {
     expect(legacy.siteExclusions).toBeUndefined();
   });
 
+  it("keeps the active node when an IP measurement fails and discards stale or IPv6 endpoints", () => {
+    const value = {
+      ...connected,
+      vpnNodeAddress: "185.159.157.10",
+      network: { ...connected.network, status: "unavailable", mode: "vpn" },
+    };
+    expect(popupSnapshot(value).vpnNodeAddress).toBe(value.vpnNodeAddress);
+    expect(popupSnapshot({ ...value, protected: false }).vpnNodeAddress).toBeNull();
+    for (const vpnNodeAddress of [undefined, null, "", "2001:4860::1", "<invalid>", "bad host"]) {
+      expect(popupSnapshot({ ...value, vpnNodeAddress }).vpnNodeAddress).toBeNull();
+    }
+    expect(
+      popupSnapshot({ ...value, vpnNodeAddress: "fr.proxy.example.com" }).vpnNodeAddress,
+    ).toBeNull();
+  });
+
   it("keeps legacy capability unavailable across repeated renders and preserves errors/devices", () => {
     const device = {
       deviceId: "legacy-device",

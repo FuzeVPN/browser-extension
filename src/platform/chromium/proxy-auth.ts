@@ -66,9 +66,24 @@ export class ProxyAuthHandler {
     chrome.webRequest.onCompleted.addListener((details) => this.cleanup(details.requestId), {
       urls: ["<all_urls>"],
     });
-    chrome.webRequest.onErrorOccurred.addListener((details) => this.cleanup(details.requestId), {
-      urls: ["<all_urls>"],
-    });
+    chrome.webRequest.onErrorOccurred.addListener(
+      (details) => {
+        if (
+          this.dependencies.onIpError &&
+          typeof details.url === "string" &&
+          details.url.startsWith("https://api.ipify.org/") &&
+          /^net::ERR_[A-Z0-9_]{1,64}$/.test(details.error)
+        ) {
+          try {
+            this.dependencies.onIpError(details.error);
+          } catch {
+            /* Logging cannot affect authentication. */
+          }
+        }
+        this.cleanup(details.requestId);
+      },
+      { urls: ["<all_urls>"] },
+    );
   }
 
   async handle(

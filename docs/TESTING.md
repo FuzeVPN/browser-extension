@@ -68,13 +68,44 @@ The IP observer retries one transient transport failure or HTTP 408/5xx response
 Proxy ownership and protection are verified again before that request. Invalid
 addresses, HTTP 429, redirects and a refused route do not authorize a retry.
 
-The visible popup asks for an observation every five seconds. Successful measurements
-remain cached for thirty seconds, so normal IP-service traffic does not increase.
-A failed measurement is cached for five seconds and then measured again without
-reconnecting. The observer never changes the connection state, never exempts ipify
-from the VPN and never substitutes an earlier IP after a failure or route change.
-HTTP 429 keeps a minimum thirty-second cooldown and respects a longer `Retry-After`.
-Manual diagnostics retain their single bounded probe.
+While connected, the popup displays only the node's IPv4 under "VPN IP". Literal
+IPv4 endpoints need no lookup; DNS endpoints are resolved as A records through
+[Google DNS JSON](https://developers.google.com/speed/public-dns/docs/doh/json),
+with [Cloudflare DNS JSON](https://developers.cloudflare.com/1.1.1.1/encryption/dns-over-https/make-api-requests/dns-json/)
+as fallback. The request uses the current connection, sends no credentials or referrer,
+and does not bypass VPN routing. Each resolver has a three-second deadline. Answers
+are cached in memory within their DNS TTL (at most five minutes). A CNAME may lead
+to an A record; AAAA and unrelated answers are rejected. Neither DNS names nor IPv6
+are displayed. This is the node IPv4, not a measured public egress address.
+
+Renewal, location changes, disconnect and worker restoration update the displayed
+IPv4; stale DNS replies cannot overwrite the current node. Connected popup polling
+reads the worker state and never calls ipify. A failed DNS lookup may retry after
+five seconds. IP echo-service availability does not affect the node's IPv4.
+
+While disconnected, the visible popup asks for a public IPv4 observation every five
+seconds. Successful measurements remain cached for thirty seconds; failures for
+five seconds. HTTP 429 respects its cooldown. Manual diagnostics still probe the
+current route independently and reject IPv6 replies.
+
+The IP journal is local-only, limited to eighty events and ten minutes in session
+storage. It retains duration, HTTP status, sanitized failure codes and Chromium
+`net::ERR_*` errors without IP values, URLs or credentials. The Assistance page's
+`IP` export button downloads `fuzevpn-journal-ip.json`. The journal is never added
+to diagnostic uploads.
+
+`node tests/browser/chromium/browser-ip-worker-transport-check.mjs` tests the built
+Chrome worker with a real toolbar popup (`POPUP`, tab ID -1), authenticated local
+TLS/CONNECT traffic, reconnects, credential renewal and a worker restart. It also
+verifies a literal IPv4 needs no lookup and connected polling makes no IP echo
+requests. With `NATIVE_NODE_HOST=gravelines-03.fuzevpn.com`, the API fixture returns
+that actual DNS name, the local authenticated TLS proxy tunnels real DoH traffic,
+and the popup must display the IPv4 independently resolved by the system DNS.
+Two injected HTTP 503 IP echo responses must not alter that IPv4.
+Manual diagnostics remain independent. IP requests are not intercepted.
+The test uses an isolated headless profile with the installed Chrome executable
+(`CHROME_EXECUTABLE` can override its path) and records its actual version and the
+worker hash under `audit/local/native154`. The account API alone is synthetic.
 
 Unit regressions cover retry deduplication, route changes, verification refusal,
 bounded responses and the unchanged deadline. The Chromium experience suite checks

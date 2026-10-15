@@ -3,6 +3,7 @@
 import { afterEach, describe, expect, it, vi } from "vitest";
 import { NetworkObserver } from "../../src/core/background/network-observer";
 import { EMPTY_SNAPSHOT, type AppSnapshot } from "../../src/core/shared/state";
+import { networkRouteKey } from "../../src/core/shared/network";
 
 function setup(initial: Partial<AppSnapshot> = {}, retryTransientFailures = false) {
   let snapshot: AppSnapshot = { ...EMPTY_SNAPSHOT, status: "disconnected", ...initial };
@@ -55,6 +56,49 @@ const VPN: Partial<AppSnapshot> = {
 afterEach(() => vi.useRealTimers());
 
 describe("network observation", () => {
+  it("replaces a cached popup failure with a fresh successful diagnostic on the same route", async () => {
+    const f = setup(VPN);
+    f.fetcher.mockRejectedValueOnce(new TypeError("Request failed"));
+    await f.observer.refresh();
+    expect(f.observer.getState().status).toBe("unavailable");
+    const route = networkRouteKey({ ...EMPTY_SNAPSHOT, ...VPN });
+    expect(
+      f.observer.acceptObservation(
+        {
+          status: "ready",
+          mode: "vpn",
+          ip: "8.8.4.4",
+          checkedAt: 1_000,
+          latencyMs: 371,
+          locationId: "fr-paris",
+        },
+        route,
+      ),
+    ).toBe(true);
+    expect(f.observer.getState()).toMatchObject({ status: "ready", ip: "8.8.4.4", latencyMs: 371 });
+    await f.observer.refresh();
+    expect(f.fetcher).toHaveBeenCalledOnce();
+  });
+
+  it("never adopts a diagnostic from another route or an IPv6 value", () => {
+    const f = setup(VPN);
+    const route = networkRouteKey({ ...EMPTY_SNAPSHOT, ...VPN });
+    const result = {
+      status: "ready",
+      mode: "vpn",
+      ip: "8.8.4.4",
+      checkedAt: 1_000,
+      latencyMs: 371,
+      locationId: "fr-paris",
+    } as const;
+    expect(f.observer.acceptObservation(result, "obsolete-route")).toBe(false);
+    expect(f.observer.acceptObservation({ ...result, ip: "2606:4700:4700::1111" }, route)).toBe(
+      false,
+    );
+    f.setSnapshot({ activeLocationId: "gb-london" });
+    expect(f.observer.acceptObservation(result, route)).toBe(false);
+    expect(f.observer.getState().ip).toBeNull();
+  });
   it("reads the public IP without credentials, cache, redirects or a referrer", async () => {
     const f = setup();
     f.fetcher.mockImplementation(async () => {
@@ -62,7 +106,7 @@ describe("network observation", () => {
       return ipResponse("8.8.8.8");
     });
     await f.observer.refresh();
-    expect(f.fetcher).toHaveBeenCalledWith("https://api64.ipify.org?format=json", {
+    expect(f.fetcher).toHaveBeenCalledWith("https://api.ipify.org?format=json", {
       method: "GET",
       credentials: "omit",
       cache: "no-store",
@@ -319,21 +363,18 @@ describe("network observation", () => {
     expect(f.observer.getState()).toMatchObject({ status: "unavailable", ip: null });
   });
 
-  it.each(["8.8.8.8", "1.1.1.1", "2606:4700:4700::1111", "2001:4860:4860:0:0:0:0:8888"])(
-    "accepts and canonicalizes a direct public IPv4 or IPv6 address: %s",
-    async (ip) => {
-      const f = setup();
-      f.fetcher.mockResolvedValue(ipResponse(ip));
-      await f.observer.refresh();
-      expect(f.observer.getState().status).toBe("ready");
-      expect(f.observer.getState().ip).toBe(
-        ip.includes(":") ? new URL(`https://[${ip}]/`).hostname.slice(1, -1) : ip,
-      );
-    },
-  );
+  it.each(["8.8.8.8", "1.1.1.1"])("accepts a measured public IPv4 address: %s", async (ip) => {
+    const f = setup();
+    f.fetcher.mockResolvedValue(ipResponse(ip));
+    await f.observer.refresh();
+    expect(f.observer.getState().status).toBe("ready");
+    expect(f.observer.getState().ip).toBe(
+      ip.includes(":") ? new URL(`https://[${ip}]/`).hostname.slice(1, -1) : ip,
+    );
+  });
 
   it.each(["2606:4700:4700::1111", "2001:4860:4860:0:0:0:0:8888"])(
-    "rejects a VPN IPv6 result without retrying through the direct endpoint: %s",
+    "rejects an IPv6 result in both VPN and direct mode: %s",
     async (ip) => {
       const f = setup(VPN);
       f.fetcher.mockResolvedValue(ipResponse(ip));

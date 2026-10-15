@@ -11,4 +11,5 @@ export interface ProxyAuthDependencies {
   onAuthenticationFailure?(session: ProxySession): Promise<void>;
   now(): number;
   restoreTimeoutMs?: number;
+  onIpError?(netError: string): void;
 }

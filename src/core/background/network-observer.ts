@@ -7,8 +7,9 @@ import {
   type NetworkObservation,
 } from "../shared/network";
 import type { AppSnapshot } from "../shared/state";
+import { isPublicIpv4 } from "../shared/ip-address";
 
-const DIRECT_IP_ENDPOINT = "https://api64.ipify.org?format=json";
+const DIRECT_IP_ENDPOINT = "https://api.ipify.org?format=json";
 const VPN_IP_ENDPOINT = "https://api.ipify.org?format=json";
 const CACHE_MS = 30_000;
 const TIMEOUT_MS = 8_000;
@@ -24,9 +25,34 @@ interface NetworkObserverOptions {
   fetch?: typeof fetch;
   now?: () => number;
   retryTransientFailures?: boolean;
+  onFailure?(failure: {
+    code:
+      | "transport"
+      | "http_error"
+      | "timeout"
+      | "route_unverified"
+      | "invalid_response"
+      | "rate_limited";
+    httpStatus: number | null;
+    mode: RouteMode;
+    durationMs: number;
+  }): void;
 }
 
-class TransientObservationError extends Error {}
+class TransientObservationError extends Error {
+  constructor(
+    message: string,
+    readonly httpStatus: number | null = null,
+  ) {
+    super(message);
+  }
+}
+
+class HttpObservationError extends Error {
+  constructor(readonly httpStatus: number) {
+    super("network_observation_failed");
+  }
+}
 
 class RateLimitedObservationError extends Error {
   constructor(readonly cacheMs: number) {
@@ -59,6 +85,32 @@ export class NetworkObserver {
 
   getState(): NetworkObservation {
     return { ...this.state };
+  }
+
+  /** Publish a fresh, verified worker probe instead of retaining an older popup failure. */
+  acceptObservation(observation: NetworkObservation, observedRouteKey: string): boolean {
+    const snapshot = this.options.getSnapshot();
+    this.observe(snapshot);
+    const mode = eligibleMode(snapshot);
+    if (
+      observedRouteKey !== this.routeKey ||
+      !mode ||
+      observation.status !== "ready" ||
+      observation.mode !== mode ||
+      !observation.ip ||
+      !isPublicIpv4(observation.ip) ||
+      observation.locationId !== (mode === "vpn" ? snapshot.activeLocationId : null) ||
+      observation.checkedAt === null ||
+      observation.checkedAt > this.now() ||
+      this.now() - observation.checkedAt > CACHE_MS
+    )
+      return false;
+    this.revision += 1;
+    this.pending?.abort.abort();
+    this.pending = null;
+    this.failureCacheMs = NETWORK_OBSERVATION_POLL_MS;
+    this.replace({ ...observation });
+    return true;
   }
 
   observe(snapshot: AppSnapshot): void {
@@ -105,6 +157,7 @@ export class NetworkObserver {
   }
 
   private async probe(mode: RouteMode, revision: number, abort: AbortController): Promise<void> {
+    const started = this.elapsedNow();
     let timer: ReturnType<typeof setTimeout> | undefined;
     try {
       const deadline = new Promise<never>((_, reject) => {
@@ -127,6 +180,35 @@ export class NetworkObserver {
       });
     } catch (error) {
       if (!this.isCurrent(revision)) return;
+      const message = error instanceof Error ? error.message : "";
+      const code =
+        error instanceof RateLimitedObservationError
+          ? "rate_limited"
+          : message === "network_observation_timeout"
+            ? "timeout"
+            : message === "network_route_unverified"
+              ? "route_unverified"
+              : error instanceof HttpObservationError ||
+                  message === "network_observation_service_unavailable"
+                ? "http_error"
+                : message === "network_observation_transport_failed"
+                  ? "transport"
+                  : "invalid_response";
+      try {
+        this.options.onFailure?.({
+          code,
+          mode,
+          durationMs: Math.max(0, Math.round(this.elapsedNow() - started)),
+          httpStatus:
+            error instanceof RateLimitedObservationError
+              ? 429
+              : error instanceof HttpObservationError || error instanceof TransientObservationError
+                ? error.httpStatus
+                : null,
+        });
+      } catch {
+        /* Local logging must not affect the observation. */
+      }
       this.failureCacheMs =
         error instanceof RateLimitedObservationError ? error.cacheMs : NETWORK_OBSERVATION_POLL_MS;
       this.replace({
@@ -200,13 +282,16 @@ export class NetworkObserver {
     }
     if (!response.redirected && (response.status === 408 || response.status >= 500)) {
       void response.body?.cancel().catch(() => undefined);
-      throw new TransientObservationError("network_observation_service_unavailable");
+      throw new TransientObservationError(
+        "network_observation_service_unavailable",
+        response.status,
+      );
     }
-    if (!response.ok || response.redirected) throw new Error("network_observation_failed");
+    if (!response.ok || response.redirected) throw new HttpObservationError(response.status);
     const raw = await readBoundedBody(response, signal);
     this.assertCurrent(revision, signal);
     const value: unknown = JSON.parse(raw);
-    const ip = parsePublicIp(value, mode);
+    const ip = parsePublicIp(value);
     if (!ip) throw new Error("network_observation_invalid_ip");
     const latencyMs = Math.max(0, Math.round(this.elapsedNow() - startedAt));
     if (!(await this.options.verifyRoute(mode))) throw new Error("network_route_unverified");
@@ -295,54 +380,8 @@ async function readBoundedBody(response: Response, signal: AbortSignal): Promise
   }
 }
 
-function parsePublicIp(value: unknown, mode: RouteMode): string | null {
+function parsePublicIp(value: unknown): string | null {
   if (!value || typeof value !== "object" || Array.isArray(value)) return null;
   const ip = (value as Record<string, unknown>).ip;
-  if (typeof ip !== "string" || ip.length > 45) return null;
-  if (isPublicIpv4(ip)) return ip;
-  if (mode === "vpn") return null;
-  if (!ip.includes(":") || !/^[0-9a-f:]+$/i.test(ip)) return null;
-  try {
-    // URL supplies the browser's IPv6 parser and canonical compression.
-    const normalized = new URL(`https://[${ip}]/`).hostname.slice(1, -1);
-    const halves = normalized.split("::");
-    const head = halves[0] ? halves[0].split(":") : [];
-    const tail = halves[1] ? halves[1].split(":") : [];
-    const words =
-      halves.length === 1
-        ? head
-        : [...head, ...Array<string>(8 - head.length - tail.length).fill("0"), ...tail];
-    const first = Number.parseInt(words[0] ?? "", 16);
-    const second = Number.parseInt(words[1] ?? "", 16);
-    // Conservatively accept global unicast, excluding documentation and special-use blocks.
-    if (first < 0x2000 || first > 0x3fff) return null;
-    if (first === 0x2001 && (second < 0x0200 || second === 0x0db8)) return null;
-    if (first === 0x3fff && second <= 0x0fff) return null;
-    return normalized;
-  } catch {
-    return null;
-  }
-}
-
-function isPublicIpv4(ip: string): boolean {
-  if (!/^(?:0|[1-9]\d{0,2})(?:\.(?:0|[1-9]\d{0,2})){3}$/.test(ip)) return false;
-  const octets = ip.split(".").map(Number);
-  if (octets.some((part) => part > 255)) return false;
-  const [first, second, third] = octets;
-  if (first === undefined || second === undefined || third === undefined) return false;
-  return !(
-    first === 0 ||
-    first === 10 ||
-    first === 127 ||
-    first >= 224 ||
-    (first === 100 && second >= 64 && second <= 127) ||
-    (first === 169 && second === 254) ||
-    (first === 172 && second >= 16 && second <= 31) ||
-    (first === 192 &&
-      ((second === 0 && (third === 0 || third === 2)) ||
-        second === 168 ||
-        (second === 88 && third === 99))) ||
-    (first === 198 && (second === 18 || second === 19 || (second === 51 && third === 100))) ||
-    (first === 203 && second === 0 && third === 113)
-  );
+  return typeof ip === "string" && isPublicIpv4(ip) ? ip : null;
 }

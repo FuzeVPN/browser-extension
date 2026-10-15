@@ -86,6 +86,8 @@ export interface AppSnapshot extends LanguageState {
   selectedLocationId: string | null;
   activeLocationId: string | null;
   activeLocation?: Location | null;
+  vpnNodeAddress?: string | null;
+  vpnNodeAddressStatus?: "idle" | "checking" | "ready" | "unavailable";
   autoConnect: boolean;
   error: AppErrorCode | null;
   retryAfterSeconds: number | null;
@@ -118,6 +120,7 @@ export const EMPTY_SNAPSHOT: AppSnapshot = {
   selectedLocationId: null,
   activeLocationId: null,
   activeLocation: null,
+  vpnNodeAddress: null,
   autoConnect: false,
   error: null,
   retryAfterSeconds: null,

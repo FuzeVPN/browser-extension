@@ -47,6 +47,7 @@ import { SiteExclusionController } from "./site-exclusion-controller";
 import { ProxyCleanupLedger } from "./proxy-cleanup-ledger";
 import type { ProxyCleanupStorage } from "../storage/proxy-cleanup-storage";
 import type { CommandResult } from "../shared/messages";
+import { isVpnNodeAddress } from "../shared/ip-address";
 
 import { browserDeviceName, detectBrowserEnvironment } from "../shared/browser-environment";
 
@@ -252,7 +253,17 @@ export class AppController {
   }
 
   getSnapshot(): AppSnapshot {
-    return structuredClone(this.snapshot);
+    const session = this.activeSession;
+    return structuredClone({
+      ...this.snapshot,
+      vpnNodeAddress:
+        this.snapshot.protected &&
+        session?.locationId === this.snapshot.activeLocationId &&
+        !this.isProxyExpired(session) &&
+        isVpnNodeAddress(session.host)
+          ? session.host
+          : null,
+    });
   }
 
   isSessionCurrentForProxyAuth(session: ProxySession): boolean {

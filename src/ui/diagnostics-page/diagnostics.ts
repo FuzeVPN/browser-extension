@@ -30,6 +30,7 @@ const elements = {
   cancel: element<HTMLButtonElement>("cancelButton"),
   delete: element<HTMLButtonElement>("deleteButton"),
   export: element<HTMLButtonElement>("exportButton"),
+  ipJournal: element<HTMLButtonElement>("exportIpJournalButton"),
 };
 const translator = new Translator();
 let language: Language = resolveLanguage("auto", extensionApi.i18n.getUILanguage());
@@ -46,6 +47,31 @@ let contentFailure = false;
 let poll: ReturnType<typeof setTimeout> | undefined;
 const urls = new Set<string>();
 const client = new DiagnosticConnection(changed);
+
+elements.ipJournal.addEventListener("click", () => {
+  void extensionApi.runtime
+    .sendMessage({ type: "get_ip_journal" })
+    .then((journal) => {
+      const url = URL.createObjectURL(
+        new Blob([JSON.stringify(journal, null, 2)], { type: "application/json;charset=utf-8" }),
+      );
+      urls.add(url);
+      const link = document.createElement("a");
+      link.href = url;
+      link.download = "fuzevpn-journal-ip.json";
+      document.body.append(link);
+      link.click();
+      link.remove();
+      setTimeout(() => {
+        URL.revokeObjectURL(url);
+        urls.delete(url);
+      }, 60_000);
+    })
+    .catch(() => {
+      localFailure = "diagnosticsFailure";
+      render();
+    });
+});
 
 extensionApi.runtime.onMessage.addListener((value: unknown) => client.receive(value));
 elements.reload.addEventListener("click", () => location.reload());
@@ -232,6 +258,7 @@ function render(): void {
   banner.textContent = error ? message(error) : "";
   elements.reload.hidden = client.error !== "unavailable";
   elements.auto.checked = state?.signedIn === true && state.autoReporting;
+  elements.ipJournal.textContent = `IP · ${message("diagnosticsExport")}`;
   elements.auto.disabled = unavailable || busy || !state?.signedIn;
   elements.run.disabled = unavailable || busy || state?.preparing === true;
   elements.clear.disabled = unavailable || busy || !state?.historyCount;

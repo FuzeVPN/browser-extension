@@ -12,6 +12,7 @@ import { homedir, tmpdir } from "node:os";
 import { join, resolve } from "node:path";
 import { pathToFileURL } from "node:url";
 import { SUPPORTED_LANGUAGES, localeDirectory } from "../../../scripts/supported-locales.mjs";
+import { waitForRead } from "../../../scripts/browser-wait.mjs";
 import { expandAllLocations } from "./browser-location-ui.mjs";
 
 const root = resolve(import.meta.dirname, "../../..");
@@ -164,29 +165,28 @@ async function withTimeout(promise, message) {
 }
 
 async function networkState(page, expected) {
-  await page.waitForFunction(
-    async (values) => {
-      const { snapshot } = await chrome.runtime.sendMessage({ type: "get_snapshot" });
-      return Object.entries(values).every(([key, value]) => snapshot.network?.[key] === value);
+  const snapshot = await waitForRead(
+    () => command(page, { type: "refresh_network" }),
+    (snapshot) =>
+      Object.entries(expected).every(([key, value]) => snapshot.network?.[key] === value),
+    {
+      timeoutMs: 15000,
+      intervalMs: 250,
+      message: "Diagnostic measurement did not match its expected route",
     },
-    expected,
-    { timeout: 15000 },
   );
-  if (expected.status === "ready" && expected.ip) {
-    await page.waitForFunction(
-      (ip) => document.querySelector("#publicIp bdi")?.textContent === ip,
-      expected.ip,
-      { timeout: 15000 },
-    );
-  } else if (expected.status === "unavailable") {
-    await page.waitForFunction(
-      () => document.querySelector("#publicIp")?.textContent.endsWith(" · Unavailable"),
-      undefined,
-      { timeout: 15000 },
-    );
-  }
+  await waitForRead(
+    () => page.locator("#publicIp").textContent(),
+    (text) =>
+      snapshot.protected
+        ? text === "VPN IP · 146.59.151.151"
+        : expected.status === "ready"
+          ? text === "Public IP · " + expected.ip
+          : text === "Public IP · Unavailable",
+    { timeoutMs: 5000, message: "Popup did not display the current node or public IP" },
+  );
   await rendered(page);
-  return command(page, { type: "get_snapshot" });
+  return snapshot;
 }
 
 async function snapshotState(page, expected) {
@@ -273,13 +273,25 @@ try {
     const request = route.request();
     const url = new URL(request.url());
     if (url.protocol === "chrome-extension:") return route.continue();
+    if (["dns.google", "cloudflare-dns.com"].includes(url.hostname)) {
+      return route.fulfill({
+        status: 200,
+        contentType: "application/dns-json",
+        body: JSON.stringify({
+          Status: 0,
+          Answer: [
+            { name: url.searchParams.get("name"), type: 1, TTL: 300, data: "146.59.151.151" },
+          ],
+        }),
+      });
+    }
     if (
       ["https://api.ipify.org", "https://api64.ipify.org"].includes(url.origin) &&
       url.search === "?format=json"
     ) {
       assert.equal(
         url.origin,
-        expectedRoute === "vpn" ? "https://api.ipify.org" : "https://api64.ipify.org",
+        "https://api.ipify.org",
         `Unexpected IP endpoint for the ${expectedRoute} route`,
       );
       const responseIp = expectedIp;
@@ -452,10 +464,10 @@ try {
   });
   assert.equal(connected.status, "connected");
   assert.equal(connected.protected, true);
-  assert.equal(await page.locator("#publicIp").textContent(), `VPN IP · ${vpnIp}`);
+  assert.equal(await page.locator("#publicIp").textContent(), "VPN IP · 146.59.151.151");
   await assertOrb(page, "connected");
   await screenshot(page, "experience-connected.png");
-  record("Connection changes the indicator to green and replaces the public IP with the VPN IP");
+  record("Connection changes the indicator to green and displays the active VPN node");
   assert.equal(ipRequests.length, beforeTransientFailure + 2);
   record(
     "A temporary IP-service failure recovers through the same VPN endpoint without reconnecting",
@@ -475,23 +487,21 @@ try {
   assert.equal(unavailable.status, "connected");
   assert.equal(unavailable.protected, true);
   assert.equal(unavailable.trafficBlocked, false);
-  assert.equal(await page.locator("#publicIp").textContent(), "VPN IP · Unavailable");
+  assert.equal(await page.locator("#publicIp").textContent(), "VPN IP · 146.59.151.151");
   await assertOrb(page, "connected");
   await screenshot(page, "experience-ip-unavailable.png");
-  record("An unavailable IP service shows an explicit fallback without disconnecting the VPN");
+  record("An unavailable diagnostic IP service leaves the VPN node displayed");
 
   failIp = false;
   const recoveredIp = await networkState(page, { status: "ready", mode: "vpn", ip: vpnIp });
   assert.equal(recoveredIp.status, "connected");
   assert.equal(recoveredIp.protected, true);
-  assert.equal(await page.locator("#publicIp").textContent(), `VPN IP · ${vpnIp}`);
-  record(
-    "The open popup rechecks a failed IP observation and recovers automatically on the same session",
-  );
+  assert.equal(await page.locator("#publicIp").textContent(), "VPN IP · 146.59.151.151");
+  record("A diagnostic recheck does not change the displayed VPN node");
   expectIp("direct", publicIpv6);
   await command(page, { type: "disconnect" });
-  await networkState(page, { status: "ready", mode: "direct", ip: publicIpv6 });
-  assert.equal(await page.locator("#publicIp").textContent(), `Public IP · ${publicIpv6}`);
+  await networkState(page, { status: "unavailable", mode: "direct", ip: null });
+  assert.equal(await page.locator("#publicIp").textContent(), "Public IP · Unavailable");
   const layout = await page.evaluate(() => {
     const ip = document.getElementById("publicIp");
     const card = document.getElementById("locationCard");
@@ -510,7 +520,7 @@ try {
   assert(layout.ipRight <= layout.cardRight, "IPv6 extends outside the location card");
   assert(layout.documentWidth <= layout.viewportWidth, "IPv6 creates horizontal page scrolling");
   await screenshot(page, "experience-disconnected-ipv6.png");
-  record("A full-length direct public IPv6 address stays readable within the 360 px popup");
+  record("A rejected direct IPv6 reply keeps the popup within its 360 px width");
 
   expectIp("vpn", publicIpv6);
   const beforeRejectedIpv6 = ipRequests.length;
@@ -519,17 +529,15 @@ try {
   assert.equal(rejectedIpv6.status, "connected");
   assert.equal(rejectedIpv6.protected, true);
   assert.equal(ipRequests.length, beforeRejectedIpv6 + 1, "IPv6 rejection caused another lookup");
-  assert.equal(await page.locator("#publicIp").textContent(), "VPN IP · Unavailable");
+  assert.equal(await page.locator("#publicIp").textContent(), "VPN IP · 146.59.151.151");
   expectIp("direct", directIp);
   await command(page, { type: "disconnect" });
   await networkState(page, { status: "ready", mode: "direct", ip: directIp });
   expectIp("vpn", vpnIp);
   await command(page, { type: "connect", locationId });
   await networkState(page, { status: "ready", mode: "vpn", ip: vpnIp });
-  assert.equal(await page.locator("#publicIp").textContent(), `VPN IP · ${vpnIp}`);
-  record(
-    "VPN lookups request IPv4, reject an IPv6 reply without fallback, and recover on reconnection",
-  );
+  assert.equal(await page.locator("#publicIp").textContent(), "VPN IP · 146.59.151.151");
+  record("Diagnostics reject IPv6 without replacing the displayed VPN node");
 
   expectIp("direct", directIp);
   const delayed = holdNextIp();
@@ -544,8 +552,8 @@ try {
   const afterLate = await command(page, { type: "get_snapshot" });
   assert.equal(afterLate.network.mode, "vpn");
   assert.equal(afterLate.network.ip, vpnIp);
-  assert.equal(await page.locator("#publicIp").textContent(), `VPN IP · ${vpnIp}`);
-  record("A delayed direct IP reply cannot replace the VPN IP after reconnection");
+  assert.equal(await page.locator("#publicIp").textContent(), "VPN IP · 146.59.151.151");
+  record("A delayed direct IP reply cannot replace the VPN node after reconnection");
 
   await openLocations(page);
   await page.locator("#allLocationsFilter").click();
@@ -966,10 +974,7 @@ try {
 
   assert(ipRequests.length >= 6);
   for (const request of ipRequests) {
-    assert.equal(
-      request.origin,
-      request.mode === "vpn" ? "https://api.ipify.org" : "https://api64.ipify.org",
-    );
+    assert.equal(request.origin, "https://api.ipify.org");
     assert.equal(request.method, "GET");
     assert.equal(request.headers.authorization, undefined);
     assert.equal(request.headers.cookie, undefined);

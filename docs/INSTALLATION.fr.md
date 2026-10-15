@@ -1,4 +1,4 @@
-# Installer FuzeVPN 0.9.2 localement
+# Installer FuzeVPN 0.9.8 localement
 
 Construire les trois versions avec `npm ci`, puis `npm run build`, ou extraire le ZIP du
 navigateur choisi. Les ressources et le manifeste doivent se trouver à la racine du
@@ -41,7 +41,7 @@ proxy et les exclusions choisis ; elle ne protège pas les autres applications.
 Pour vérifier les empreintes sous PowerShell :
 
 ```powershell
-Get-FileHash -Algorithm SHA256 .\releases\fuzevpn-firefox-v0.9.2.zip
+Get-FileHash -Algorithm SHA256 .\releases\fuzevpn-firefox-v0.9.8.zip
 ```
 
 Références : [chargement temporaire Mozilla](https://extensionworkshop.com/documentation/develop/temporary-installation-in-firefox/)

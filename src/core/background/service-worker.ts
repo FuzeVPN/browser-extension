@@ -25,6 +25,9 @@ import { ExtensionSecurityStorage } from "../storage/security-storage";
 import { LanguageController } from "./language-controller";
 import { ExtensionLanguageStorage } from "../storage/language-storage";
 import { NetworkObserver } from "./network-observer";
+import { VpnNodeIpv4 } from "./vpn-node-ipv4";
+import { networkRouteKey } from "../shared/network";
+import { IpJournal } from "./ip-journal";
 import { LocationPreferences } from "./location-preferences";
 import { ExtensionSiteExclusionStorage } from "../storage/site-exclusion-storage";
 import { ExtensionProxyCleanupStorage } from "../storage/proxy-cleanup-storage";
@@ -54,6 +57,16 @@ let signalDiagnosticReady: () => void = () => undefined;
 const diagnosticReady = new Promise<void>((resolve) => {
   signalDiagnosticReady = resolve;
 });
+const IP_JOURNAL_KEY = "fuzevpnIpJournal";
+const ipJournal = new IpJournal({
+  async read() {
+    return (await extensionApi.storage.session.get(IP_JOURNAL_KEY))[IP_JOURNAL_KEY];
+  },
+  async write(entries) {
+    await extensionApi.storage.session.set({ [IP_JOURNAL_KEY]: entries });
+  },
+  now: Date.now,
+});
 let webAuthService: ExtensionWebAuthService | null = null;
 const controller = new AppController({
   webAuth: {
@@ -80,16 +93,25 @@ const controller = new AppController({
     return preferences.automatic ? preferences.recommendedLocationId : undefined;
   },
 });
+const nodeIpv4 = new VpnNodeIpv4(queuePublication);
 new PlatformRouteGuard({
   readState: readRouteGuardState,
   extensionRoot: () => extensionApi.runtime.getURL(""),
 }).register();
 const network = new NetworkObserver({
   getSnapshot: () => controller.getSnapshot(),
-  verifyRoute: verifyObservationRoute,
+  verifyRoute: verifyDiagnosticRoute,
   retryTransientFailures: true,
+  onFailure: (failure) => ipJournal.record({ event: "failure", ...failure }),
   onChanged: () => {
     locations.recordObservation(network.getState());
+    const observation = network.getState();
+    if (observation.status === "ready")
+      ipJournal.record({
+        event: "ready",
+        mode: observation.mode ?? undefined,
+        durationMs: observation.latencyMs ?? undefined,
+      });
     queuePublication();
   },
 });
@@ -120,11 +142,15 @@ const diagnostics = new DiagnosticService({
   inspectWebRtc,
   getProxyControl: () => proxy.getControlLevel(),
   verifyProxy: () => diagnosticController.verifyDiagnosticProxy?.() ?? Promise.resolve(null),
-  probe: () =>
-    readDiagnosticProbe({
+  probe: async () => {
+    const route = networkRouteKey(controller.getSnapshot());
+    const observation = await readDiagnosticProbe({
       getSnapshot: () => controller.getSnapshot(),
       verifyRoute: verifyDiagnosticRoute,
-    }),
+    });
+    network.acceptObservation(observation, route);
+    return observation;
+  },
   language: () => language.getState().effectiveLanguage,
   version: () => extensionApi.runtime.getManifest().version,
   now: Date.now,
@@ -158,6 +184,7 @@ new ProxyAuthHandler({
   },
   now: Date.now,
   restoreTimeoutMs: PROXY_AUTH_RESTORE_TIMEOUT_MS,
+  onIpError: (netError) => ipJournal.record({ event: "browser_error", netError }),
 }).register();
 
 extensionApi.runtime.onMessage.addListener((message: unknown, sender, sendResponse) => {
@@ -166,6 +193,16 @@ extensionApi.runtime.onMessage.addListener((message: unknown, sender, sendRespon
     !sender.url?.startsWith(extensionApi.runtime.getURL(""))
   )
     return false;
+  if (
+    message &&
+    typeof message === "object" &&
+    "type" in message &&
+    message.type === "get_ip_journal" &&
+    Object.keys(message).length === 1
+  ) {
+    void ipJournal.snapshot().then(sendResponse);
+    return true;
+  }
   if (isDiagnosticRequest(message)) {
     void diagnostics
       .handle(message)
@@ -440,8 +477,10 @@ function assertAvailableLocation(id: string): void {
 
 function localizedSnapshot(): AppSnapshot {
   const snapshot = controller.getSnapshot();
+  nodeIpv4.observe(snapshot);
   return {
     ...snapshot,
+    ...nodeIpv4.getState(snapshot),
     ...language.getState(),
     snapshotVersion: { workerId: snapshotWorkerId, revision: ++snapshotRevision },
     network: network.getState(),
@@ -457,6 +496,7 @@ function publishSnapshot(snapshot: AppSnapshot): void {
     /* Diagnostics cannot interrupt state publication. */
   }
   network.observe(snapshot);
+  nodeIpv4.observe(snapshot);
   if (snapshot.protected && snapshot.activeLocationId && snapshot.status === "connected") {
     void locations.recordConnected(snapshot.activeLocationId).catch(() => undefined);
   }
@@ -575,30 +615,6 @@ async function verifyDiagnosticRoute(mode: "direct" | "vpn"): Promise<boolean> {
   if (!snapshot.protected || !status.filterActive) return false;
   return (
     (await diagnosticController.verifyDiagnosticProxy?.()) === true &&
-    (!snapshot.securityPreferences.webRtcProtectionEnabled || status.webRtcProtected)
-  );
-}
-
-async function verifyObservationRoute(mode: "direct" | "vpn"): Promise<boolean> {
-  const snapshot = controller.getSnapshot();
-  if (snapshot.siteExclusions.pending || snapshot.siteExclusions.error) return false;
-  if (mode === "direct") {
-    if (snapshot.protectionRequested || snapshot.protected || snapshot.trafficBlocked) return false;
-    const [level, status] = await Promise.all([proxy.getControlLevel(), safety.inspect()]);
-    return level !== "controlled_by_this_extension" && !status.trafficBlocked;
-  }
-  if (!snapshot.protected || snapshot.trafficBlocked) return false;
-  const session = await controller.getActiveSession();
-  if (session?.locationId !== snapshot.activeLocationId) return false;
-  const [configured, status] = await Promise.all([
-    proxy.isActiveConfiguration(session),
-    safety.inspect(),
-  ]);
-  return (
-    configured &&
-    controller.isSessionCurrentForProxyAuth(session) &&
-    status.filterActive &&
-    !status.trafficBlocked &&
     (!snapshot.securityPreferences.webRtcProtectionEnabled || status.webRtcProtected)
   );
 }

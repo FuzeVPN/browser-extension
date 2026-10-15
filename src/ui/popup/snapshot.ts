@@ -11,6 +11,7 @@ import {
 } from "../../core/shared/location-preferences";
 import { isLanguagePreference } from "../../core/shared/language";
 import { normalizeSubscription } from "../../core/shared/subscription";
+import { isIpv4 } from "../../core/shared/ip-address";
 import type { AppSnapshot, LogoutOutcome } from "../../core/shared/state";
 
 export interface PopupSnapshot extends AppSnapshot {
@@ -105,6 +106,9 @@ export function popupSnapshot(value: unknown): PopupSnapshot {
           ? "ready"
           : "idle",
     locationsError: typeof source.locationsError === "string" ? source.locationsError : null,
+    vpnNodeAddress:
+      source.protected && isIpv4(source.vpnNodeAddress) ? source.vpnNodeAddress : null,
+    vpnNodeAddressStatus: source.vpnNodeAddressStatus ?? "idle",
     activeLocation:
       source.protected &&
       isLocation(source.activeLocation) &&

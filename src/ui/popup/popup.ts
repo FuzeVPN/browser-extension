@@ -36,6 +36,7 @@ import { PopupSnapshotOrder, popupSnapshot, type PopupSnapshot } from "./snapsho
 import { exclusionRetry, type ExclusionIntent } from "./exclusion-retry";
 import { DiagnosticConnection, diagnosticErrorKey } from "../diagnostics-page/client";
 import { requestDiagnosticsConsent } from "../../core/shared/data-consent";
+import { isPublicIpv4 } from "../../core/shared/ip-address";
 
 interface PopupResponse extends ExtensionResponse {
   snapshot: PopupSnapshot;
@@ -1099,18 +1100,30 @@ async function signInOnWeb(): Promise<void> {
 }
 
 function refreshNetwork(): void {
-  void request({ type: "refresh_network" });
+  void request({ type: snapshot?.protected ? "get_snapshot" : "refresh_network" });
 }
 
 function renderNetwork(next: AppSnapshot): void {
+  if (next.protected) {
+    const address = communicationFailed ? null : next.vpnNodeAddress;
+    elements.publicIp.replaceChildren(
+      `${message("vpnIp")} · `,
+      address
+        ? isolatedText(address, "ltr")
+        : message(next.vpnNodeAddressStatus === "checking" ? "ipChecking" : "ipUnavailable"),
+    );
+    elements.publicIp.title = address ?? "";
+    return;
+  }
   const observation = next.network;
-  const isVpn = next.protected;
   const matchesRoute =
     observation.status === "ready" &&
-    (isVpn
-      ? observation.mode === "vpn" && observation.locationId === next.activeLocationId
-      : observation.mode === "direct" && !next.protectionRequested && !next.trafficBlocked);
-  const label = message(isVpn ? "vpnIp" : "publicIp");
+    typeof observation.ip === "string" &&
+    isPublicIpv4(observation.ip) &&
+    observation.mode === "direct" &&
+    !next.protectionRequested &&
+    !next.trafficBlocked;
+  const label = message("publicIp");
   const value = communicationFailed
     ? message("ipUnavailable")
     : matchesRoute
