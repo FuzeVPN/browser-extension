@@ -9,6 +9,7 @@ import type {
   ProxySession,
 } from "../api/types";
 import { normalizeSubscription } from "../shared/subscription";
+import { selectedLocationMetadata } from "../shared/location-metadata";
 
 const LOCAL_KEY = "fuzevpnState";
 const SESSION_KEY = "fuzevpnProxySession";
@@ -18,6 +19,7 @@ export interface PersistedState {
   profile: Profile | null;
   subscription: BillingSubscription | null;
   selectedLocationId: string | null;
+  selectedLocation?: Location | null;
   autoConnect: boolean;
 }
 
@@ -39,6 +41,7 @@ export const EMPTY_PERSISTED_STATE: PersistedState = {
   profile: null,
   subscription: null,
   selectedLocationId: null,
+  selectedLocation: null,
   autoConnect: false,
 };
 
@@ -99,6 +102,13 @@ function sanitizePersisted(value: unknown): PersistedState {
     subscription: normalizeSubscription(value.subscription),
     selectedLocationId:
       typeof value.selectedLocationId === "string" ? value.selectedLocationId : null,
+    selectedLocation:
+      isAuth(value.auth) && isProfile(value.profile)
+        ? selectedLocationMetadata(
+            value.selectedLocation,
+            typeof value.selectedLocationId === "string" ? value.selectedLocationId : null,
+          )
+        : null,
     autoConnect: value.autoConnect === true,
   };
 }

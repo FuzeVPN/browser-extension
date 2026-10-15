@@ -605,6 +605,7 @@ export function authenticatedState(overrides?: Partial<PersistedState>): Persist
     profile: PROFILE,
     subscription: ACTIVE_SUBSCRIPTION,
     selectedLocationId: "frankfurt-01",
+    selectedLocation: null,
     autoConnect: false,
     ...overrides,
   };

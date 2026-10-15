@@ -48,6 +48,7 @@ import { ProxyCleanupLedger } from "./proxy-cleanup-ledger";
 import type { ProxyCleanupStorage } from "../storage/proxy-cleanup-storage";
 import type { CommandResult } from "../shared/messages";
 import { isVpnNodeAddress } from "../shared/ip-address";
+import { selectedLocationMetadata } from "../shared/location-metadata";
 
 import { browserDeviceName, detectBrowserEnvironment } from "../shared/browser-environment";
 
@@ -256,6 +257,9 @@ export class AppController {
     const session = this.activeSession;
     return structuredClone({
       ...this.snapshot,
+      selectedLocation: this.snapshot.profile
+        ? this.selectedMetadata(this.snapshot.selectedLocationId)
+        : null,
       vpnNodeAddress:
         this.snapshot.protected &&
         session?.locationId === this.snapshot.activeLocationId &&
@@ -528,12 +532,13 @@ export class AppController {
       this.assertCurrent(operation.id);
       const locationId =
         automatic !== undefined
-          ? automatic
+          ? (automatic ??
+            (manual ? this.selectedMetadata(this.snapshot.selectedLocationId)?.id : null))
           : (requestedLocationId ??
             this.security.selectedLocationId ??
             this.persisted.selectedLocationId);
       if (!locationId) throw new ApiError("invalid_location", 400);
-      this.assertCanConnect(locationId);
+      this.assertCanConnect(locationId, manual);
       await this.dependencies.proxy.assertControllable();
       created = await this.createSignedProxySession(locationId, operation.signal);
       this.assertCurrent(operation.id);
@@ -553,7 +558,12 @@ export class AppController {
         this.credentialsAllowed = true;
         await this.dependencies.proxy.apply(sessionToApply);
         this.assertCurrent(operation.id);
-        this.persisted = { ...this.persisted, selectedLocationId: locationId, autoConnect: true };
+        this.persisted = {
+          ...this.persisted,
+          selectedLocationId: locationId,
+          selectedLocation: this.locationMetadata(sessionToApply),
+          autoConnect: true,
+        };
         await this.dependencies.storage.writePersisted(this.persisted);
         this.assertCurrent(operation.id);
         await this.dependencies.alarms.scheduleSession(sessionToApply);
@@ -598,7 +608,11 @@ export class AppController {
     const signal = this.accountAbort.signal;
     await this.withStateMutation(async () => {
       assertNotAborted(signal);
-      this.persisted = { ...this.persisted, selectedLocationId: locationId };
+      this.persisted = {
+        ...this.persisted,
+        selectedLocationId: locationId,
+        selectedLocation: this.selectedMetadata(locationId),
+      };
       await this.dependencies.storage.writePersisted(this.persisted);
       assertNotAborted(signal);
       this.security = {
@@ -653,7 +667,7 @@ export class AppController {
         await this.selectRetainedLocation(previous, operation.id, renewalScheduled);
         return { ok: true };
       }
-      this.assertCanConnect(locationId);
+      this.assertCanConnect(locationId, true);
       await this.dependencies.proxy.assertControllable();
       replacement = await this.createSignedProxySession(locationId, operation.signal);
       this.assertCurrent(operation.id);
@@ -674,7 +688,12 @@ export class AppController {
         this.credentialsAllowed = true;
         await this.dependencies.proxy.apply(sessionToApply);
         this.assertCurrent(operation.id);
-        this.persisted = { ...this.persisted, selectedLocationId: locationId, autoConnect: true };
+        this.persisted = {
+          ...this.persisted,
+          selectedLocationId: locationId,
+          selectedLocation: this.locationMetadata(sessionToApply),
+          autoConnect: true,
+        };
         await this.dependencies.storage.writePersisted(this.persisted);
         this.assertCurrent(operation.id);
         await this.dependencies.alarms.scheduleSession(sessionToApply);
@@ -770,6 +789,12 @@ export class AppController {
 
   private async disconnectInitialized(): Promise<CommandResult> {
     const operation = this.startOperation();
+    const selectedId = this.persisted.selectedLocationId ?? this.activeSession?.locationId ?? null;
+    this.persisted = {
+      ...this.persisted,
+      selectedLocationId: selectedId,
+      selectedLocation: this.selectedMetadata(selectedId),
+    };
     const token = this.persisted.auth?.accessToken;
     const revoke = [
       ...(this.activeSession ? [this.activeSession.id] : []),
@@ -808,7 +833,20 @@ export class AppController {
         result = failedCommand(error);
       } else result = supersededCommand();
     }
-    void this.safeRevokeMany(revoke, token);
+    void this.safeRevokeMany(revoke, token).then(async () => {
+      // A full node can disappear while our own session occupies its last slot.
+      // Refresh after revocation, without delaying the local disconnect or applying
+      // a catalog from an older account/intent over a newer connection command.
+      if (
+        !result.ok ||
+        !token ||
+        !this.isCurrent(operation.id) ||
+        this.persisted.auth?.accessToken !== token ||
+        this.security.protectionRequested
+      )
+        return;
+      await this.loadLocations(true).catch(() => undefined);
+    });
     return result;
   }
 
@@ -1085,10 +1123,20 @@ export class AppController {
     await this.initialize();
     if (!this.startupSecondaryStorageLoaded)
       return failedCommand(new LocalError("storage_unavailable"));
+    if (this.snapshot.status === "disconnecting") return supersededCommand();
+    const expectedId = this.operationId;
     if (!this.security.protectionRequested) return { ok: true };
     if (automatic && this.security.capacityBlockedLocationId)
       return { ok: false, commandError: "server_full" };
-    if (!automatic) await this.clearCapacityBlock();
+    if (!automatic) {
+      try {
+        await this.clearCapacityBlock(expectedId);
+      } catch (error) {
+        if (!this.isCurrent(expectedId)) return supersededCommand();
+        throw error;
+      }
+      if (!this.isCurrent(expectedId)) return supersededCommand();
+    }
     if (!this.hasValidApiSession()) {
       await this.clearInvalidAccount("unauthorized");
       return { ok: false, commandError: "unauthorized" };
@@ -1715,6 +1763,7 @@ export class AppController {
           profile,
           subscription,
           selectedLocationId: selected,
+          selectedLocation: this.selectedMetadata(selected),
         };
         await this.dependencies.storage.writePersisted(persisted);
         assertNotAborted(signal);
@@ -1805,6 +1854,7 @@ export class AppController {
           const mayChooseFallback =
             !this.activeSession &&
             !this.security.protectionRequested &&
+            !this.selectedMetadata(this.snapshot.selectedLocationId) &&
             (initialCatalog || previousSelection === null) &&
             this.snapshot.selectedLocationId === previousSelection;
           this.publish({
@@ -1855,7 +1905,11 @@ export class AppController {
         this.isProxyExpired(session)
       )
         throw new LocalError("session_expired");
-      this.persisted = { ...this.persisted, selectedLocationId: session.locationId };
+      this.persisted = {
+        ...this.persisted,
+        selectedLocationId: session.locationId,
+        selectedLocation: this.locationMetadata(session),
+      };
       await this.dependencies.storage.writePersisted(this.persisted);
       this.assertCurrent(expectedId);
       this.security = { ...this.security, selectedLocationId: session.locationId };
@@ -1951,7 +2005,11 @@ export class AppController {
         };
         await this.writeSecurity();
         this.assertCurrent(expectedId);
-        this.persisted = { ...this.persisted, selectedLocationId: locationId };
+        this.persisted = {
+          ...this.persisted,
+          selectedLocationId: locationId,
+          selectedLocation: this.selectedMetadata(locationId),
+        };
         await this.dependencies.storage.writePersisted(this.persisted);
         this.assertCurrent(expectedId);
         await this.dependencies.alarms.clearReconnect();
@@ -2413,6 +2471,20 @@ export class AppController {
     return location;
   }
 
+  private selectedMetadata(id: string | null): Location | null {
+    if (!id) return null;
+    const current = this.snapshot.locations.find((location) => location.id === id);
+    if (current) return selectedLocationMetadata(current, id);
+    const owner = this.persisted.profile?.userId;
+    if (!owner || owner !== this.snapshot.profile?.userId) return null;
+    return (
+      selectedLocationMetadata(this.persisted.selectedLocation, id) ??
+      (this.activeSession?.locationId === id
+        ? selectedLocationMetadata(this.locationMetadata(this.activeSession), id)
+        : null)
+    );
+  }
+
   private async writeTransient(state: TransientState): Promise<void> {
     await this.dependencies.storage.writeTransient({
       ...state,
@@ -2553,6 +2625,7 @@ export class AppController {
     // The successful POST can itself fill the server and remove it from a concurrent GET.
     const location =
       this.snapshot.locations.find((candidate) => candidate.id === locationId) ??
+      this.selectedMetadata(locationId) ??
       (this.activeSession?.locationId === locationId
         ? this.locationMetadata(this.activeSession)
         : null);
@@ -2970,9 +3043,16 @@ export class AppController {
     });
   }
 
-  private assertCanConnect(locationId: string): void {
+  private assertCanConnect(locationId: string, allowSelected = false): void {
     if (!this.persisted.subscription?.hasAccess) throw new LocalError("subscription_required");
-    if (!this.snapshot.locations.some((location) => location.id === locationId))
+    if (
+      !this.snapshot.locations.some((location) => location.id === locationId) &&
+      !(
+        allowSelected &&
+        this.persisted.selectedLocationId === locationId &&
+        this.selectedMetadata(locationId)
+      )
+    )
       throw new LocalError("invalid_location");
   }
 

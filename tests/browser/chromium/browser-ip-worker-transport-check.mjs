@@ -12,6 +12,11 @@ import { homedir } from "node:os";
 import { join, resolve } from "node:path";
 import { pathToFileURL } from "node:url";
 import { waitForRead } from "../../../scripts/browser-wait.mjs";
+import {
+  evaluateDisconnectWorker,
+  installDisconnectFixture,
+  runDisconnectSeries,
+} from "./disconnect-stress.mjs";
 
 const root = resolve(import.meta.dirname, "../../..");
 const output = resolve(process.env.NATIVE_IP_OUTPUT || join(root, "audit/local/native154"));
@@ -103,6 +108,7 @@ function installAccountFixture(slotPorts, fixtureConfig) {
   globalThis.nativeIpEpoch = 1;
   globalThis.nativeIpEvents = [];
   globalThis.nativeIpLookupCount = 0;
+  globalThis.nativeCatalogExcluded = null;
   const isIp = (url) => ["api.ipify.org", "ipv4.icanhazip.com"].includes(new URL(url).hostname);
   chrome.webRequest.onAuthRequired.addListener(
     (details) => {
@@ -188,13 +194,15 @@ function installAccountFixture(slotPorts, fixtureConfig) {
       };
     } else if (url.pathname === "/v1/locations") {
       body = {
-        locations: slotPorts.map((_port, index) => ({
-          id: "native-ip-" + index,
-          city: "Local " + index,
-          country_code: "FR",
-          display_name: "Native fixture " + index,
-          supported_protocols: ["browser_proxy"],
-        })),
+        locations: slotPorts
+          .map((_port, index) => ({
+            id: "native-ip-" + index,
+            city: "Local " + index,
+            country_code: "FR",
+            display_name: "Native fixture " + index,
+            supported_protocols: ["browser_proxy"],
+          }))
+          .filter((location) => location.id !== globalThis.nativeCatalogExcluded),
       };
     } else if (url.pathname === "/v1/devices/browser") {
       status = 201;
@@ -223,6 +231,7 @@ function installAccountFixture(slotPorts, fixtureConfig) {
         refresh_after_seconds: 900,
       };
     } else if (method === "DELETE" || url.pathname === "/v1/auth/logout") {
+      globalThis.nativeCatalogExcluded = null;
       status = 204;
     } else {
       status = 404;
@@ -478,7 +487,10 @@ async function verify() {
     JSON.stringify(slots.map(({ port }) => port)) +
     "," +
     JSON.stringify(fixtureConfig) +
-    ");\n";
+    ");\n" +
+    (process.env.NATIVE_DISCONNECT_SCENARIO
+      ? "(" + installDisconnectFixture.toString() + ")();\n"
+      : "");
   await writeFile(join(extension, "background/service-worker.js"), fixture + originalWorker);
   context = await chromium.launchPersistentContext(join(runRoot, "profile"), {
     executablePath:
@@ -537,6 +549,25 @@ async function verify() {
   await message({ type: "web_login", disconnectFirst: false });
   await message({ type: "set_language_preference", preference: "en" });
   await message({ type: "connect", locationId: "native-ip-0" });
+  if (process.env.NATIVE_DISCONNECT_SCENARIO) {
+    report.stress = await runDisconnectSeries({
+      context,
+      loader,
+      worker,
+      popup,
+      extensionId,
+      runRoot,
+      scenario: process.env.NATIVE_DISCONNECT_SCENARIO,
+      count: Number(process.env.NATIVE_DISCONNECT_COUNT ?? 91),
+      closeTunnels,
+      async onBeforeConnect(epoch) {
+        expectedEpoch = epoch;
+        await evaluateDisconnectWorker(loader, extensionId, "globalThis.nativeIpEpoch=" + epoch);
+      },
+    });
+    report.passed = true;
+    return;
+  }
   const firstConnected = await message({ type: "get_snapshot" });
   assert(
     firstConnected.vpnNodeAddress === null || firstConnected.vpnNodeAddress === expectedNodeIpv4,
@@ -792,6 +823,42 @@ async function verify() {
     privateFieldsAbsent: true,
   };
 
+  const previousNode = await popupRead(
+    'chrome.runtime.sendMessage({type:"get_snapshot"}).then(r=>r.snapshot.activeLocationId)',
+  );
+  await worker.evaluate((id) => {
+    globalThis.nativeCatalogExcluded = id;
+  }, previousNode);
+  await popupRead('chrome.runtime.sendMessage({type:"refresh_locations"})');
+  assert.equal(
+    await popupRead(
+      `chrome.runtime.sendMessage({type:"get_snapshot"}).then(r=>r.snapshot.locations.some(l=>l.id===${JSON.stringify(previousNode)}))`,
+    ),
+    false,
+  );
+  await popupRead('document.querySelector("#protectButton").click()');
+  const stopped = await waitForRead(
+    () => popupRead('chrome.runtime.sendMessage({type:"get_snapshot"}).then(r=>r.snapshot)'),
+    (state) =>
+      state.status === "disconnected" &&
+      !state.protectionRequested &&
+      state.locations.some((location) => location.id === previousNode),
+    { timeoutMs: 3000, message: "Disconnect did not restore the available node catalog" },
+  );
+  assert.equal(stopped.error, null);
+  assert.equal(stopped.selectedLocationId, previousNode);
+  const nodeLabel = await waitForRead(
+    () => popupRead('document.querySelector("#locationName")?.textContent'),
+    (value) => value?.includes("Native fixture " + previousNode.split("-").at(-1)),
+    { timeoutMs: 3000, message: "Disconnect lost the selected location label" },
+  );
+  report.disconnectRestoredLocation = {
+    previousNode,
+    selectedNode: stopped.selectedLocationId,
+    displayed: nodeLabel,
+    protected: stopped.protected,
+    trafficBlocked: stopped.trafficBlocked,
+  };
   report.passed = true;
 }
 

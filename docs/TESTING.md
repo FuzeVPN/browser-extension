@@ -117,3 +117,39 @@ network suite checks retry through its authenticated TLS proxy.
 The project invokes Mozilla's `addons-linter` directly for Firefox validation.
 Run `npm audit` to check the current lockfile, including development dependencies.
 Dependency audit results apply to the versions checked at the time of execution.
+
+## Disconnect and location recovery
+
+Disconnect regressions pause local cleanup and deliver a due reconnect alarm: the
+explicit stop must complete without reconnecting or replacing its result with an
+invalid-location error. After remote session revocation, the selectable catalog is
+refreshed without holding up the local disconnect. A node omitted while its lease
+occupied the final slot must reappear when the server lists it again. Stale catalog
+responses and logout during delayed cleanup must not overwrite the current state.
+The native Chrome toolbar-popup fixture also excludes the active node until
+revocation and verifies that disconnect restores its selected label and catalog.
+
+## Selected location retention qualification
+
+The selected location has account-owned public metadata separate from the active
+proxy session and the current selectable catalog. Disconnect removes the active
+session, not the user's selected node. Missing, empty, failed and stale catalog
+responses cannot replace that name with a blank selection. Manual connection to
+the known selected node still checks subscription access; the session POST, not
+absence from a capacity-filtered catalog, establishes an authoritative refusal.
+Legacy accounts without metadata remain readable; logout/new login clears it.
+
+Run `npm run validate:disconnect` after building to qualify 1,001 real toolbar-popup
+cycles: eleven scenarios, 91 cycles each, eleven fresh isolated Chrome profiles,
+seed 20261015. The suite records every label/status change and checks newly opened
+popups from document startup. It covers normal/delayed/failed revocation, repeatedly
+omitted/empty/failed catalogs (including a real bounded timeout), stale replies,
+popup reopen, worker restart, concurrent retry, and authoritative server refusals.
+It records the browser version, exact distribution hashes, harness hashes, counters,
+transition samples and screenshots under ignored `audit/local/disconnect-stress`.
+No production account or personal Chrome profile is used. A shorter exploratory run
+can set `DISCONNECT_STRESS_COUNT`; it does not qualify the 1,001-cycle release gate.
+
+For 0.9.10, packaging is performed only after the complete 1,001-cycle report passes,
+general validation passes and the tested distribution inventory remains identical.
+Then `npm run verify:sources` must reconstruct all three packages byte for byte.

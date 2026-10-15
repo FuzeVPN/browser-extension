@@ -4,16 +4,20 @@ import type { AppSnapshot } from "../../core/shared/state";
 import type { Location } from "../../core/api/types";
 
 export function displayedLocation(snapshot: AppSnapshot): Location | null {
-  const selectedId = snapshot.protected
-    ? snapshot.activeLocationId
-    : snapshot.locationPreferences.automatic
-      ? snapshot.locationPreferences.recommendedLocationId
-      : snapshot.selectedLocationId;
+  const selectedId = snapshot.protected ? snapshot.activeLocationId : snapshot.selectedLocationId;
+  if (!snapshot.protected && snapshot.locationPreferences.automatic) {
+    const recommendation = snapshot.locations.find(
+      ({ id }) => id === snapshot.locationPreferences.recommendedLocationId,
+    );
+    if (recommendation) return recommendation;
+  }
   return (
     snapshot.locations.find(({ id }) => id === selectedId) ??
     (snapshot.protected && snapshot.activeLocation?.id === selectedId
       ? snapshot.activeLocation
-      : null)
+      : !snapshot.protected && snapshot.selectedLocation?.id === selectedId
+        ? snapshot.selectedLocation
+        : null)
   );
 }
 

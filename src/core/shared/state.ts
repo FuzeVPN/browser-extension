@@ -84,6 +84,7 @@ export interface AppSnapshot extends LanguageState {
   deviceLimit: number | null;
   currentDeviceId: string | null;
   selectedLocationId: string | null;
+  selectedLocation?: Location | null;
   activeLocationId: string | null;
   activeLocation?: Location | null;
   vpnNodeAddress?: string | null;
@@ -118,6 +119,7 @@ export const EMPTY_SNAPSHOT: AppSnapshot = {
   deviceLimit: null,
   currentDeviceId: null,
   selectedLocationId: null,
+  selectedLocation: null,
   activeLocationId: null,
   activeLocation: null,
   vpnNodeAddress: null,
