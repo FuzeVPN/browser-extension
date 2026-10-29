@@ -1624,9 +1624,9 @@ div.location-option {
   position: sticky;
   top: -20px;
   z-index: 1;
-  padding: 16px 0;
-  margin-top: -14px;
-  margin-bottom: 14px;
+  /* Span the panel padding so focus rings scrolled beneath stay covered. */
+  padding: 16px 20px;
+  margin: -14px -20px 14px;
   background: var(--surface);
   border-bottom: 1px solid var(--wash);
 }
