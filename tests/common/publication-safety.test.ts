@@ -57,6 +57,8 @@ describe("public Git publication safety", () => {
     "docs/PUBLICATION_CHROMIUM.md",
     "docs/PRODUCTION-TESTS.fr.md",
     ".env",
+    "assets/.env.production",
+    ".env.example",
     ".npmrc",
     "key.pem",
     "../escape",
@@ -70,7 +72,6 @@ describe("public Git publication safety", () => {
     "docs/ARCHITECTURE.md",
     "assets/flags/LICENSE.txt",
     "manifests/chrome.json",
-    ".env.example",
   ])("allows public source and notices: %s", (name) => expect(inspectPublicPath(name)).toEqual([]));
 
   it("detects identifiable secrets without returning their values", () => {

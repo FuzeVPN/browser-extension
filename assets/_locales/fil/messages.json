@@ -179,6 +179,9 @@
   "deleteDevice": {
     "message": "Tanggalin ang device"
   },
+  "deleteDeviceNamed": {
+    "message": "Tanggalin ang device na $1"
+  },
   "confirmDeleteDevice": {
     "message": "Alisin ang “$1”? Hihinto ang mga koneksyon nito sa VPN at aalisin ang mga profile nito."
   },
@@ -360,7 +363,7 @@
     "message": "Hindi magagamit"
   },
   "ipLookupExplanation": {
-    "message": "Nasuri ang IP gamit ang ipify gamit ang iyong kasalukuyang koneksyon. Walang naipadalang kasaysayan ng pagba-browse."
+    "message": "Sinusuri ang IP gamit ang ipify, o icanhazip bilang pamalit, sa kasalukuyan mong koneksyon. Walang ipinapadalang kasaysayan ng pag-browse."
   },
   "automaticLocation": {
     "message": "Awtomatiko"
@@ -567,19 +570,22 @@
     "message": "Ang iyong data"
   },
   "diagnosticsPrivacy": {
-    "message": "Ang mga ulat ay naglalaman ng mga teknikal na estado at error code, hindi kailanman mga password, token, email address, IP address, binisita na mga URL o ibinukod na mga domain."
+    "message": "Naglalaman ang JSON ng ulat ng mga teknikal na estado at error code, ngunit walang password, token, email address, IP address, binisitang URL o ibinukod na domain. May pagpapatunay ang pagpapadala at iniuugnay nito ang ulat sa iyong account. Tingnan ang abiso para sa impormasyon tungkol sa data ng network."
   },
   "diagnosticsAuto": {
     "message": "Awtomatikong magpadala ng mahahalagang ulat ng error"
   },
   "diagnosticsAutoHelp": {
-    "message": "Naka-off bilang default. Mga simpleng teknikal na ulat lamang ang ipinadala para sa account na ito, nang walang kasaysayan ng pagba-browse. Pinapanatili sila ng suporta sa loob ng 30 araw."
+    "message": "Naka-off bilang default. Kapag pinagana ito, magpapadala ng mga simpleng teknikal na ulat para sa account na ito, nang walang kasaysayan ng pag-browse. I-off ito rito para ihinto ang awtomatikong pagpapadala at alisin ang mga nakabinbing awtomatikong ulat."
   },
   "diagnosticsHistoryHelp": {
-    "message": "Nananatiling lokal ang teknikal na kasaysayan: hanggang 200 kaganapan sa loob ng 10 minuto, kahit na naka-off ang awtomatikong pagpapadala. Wala itong kasaysayan ng pagba-browse at na-clear kapag nagsara ang browser o nagbago ang account."
+    "message": "Nananatiling lokal ang teknikal na kasaysayan: hanggang 200 kaganapan sa bawat tala sa loob ng 10 minuto, kahit naka-off ang awtomatikong pagpapadala. Wala itong kasaysayan ng pag-browse at nabubura nang mano-mano, kapag isinara ang browser o kapag nagpalit ng account."
   },
   "diagnosticsHistoryCount": {
     "message": "$1 mga lokal na teknikal na kaganapan"
+  },
+  "diagnosticsConnectionLog": {
+    "message": "I-export ang tala ng koneksyon"
   },
   "diagnosticsAccountRequired": {
     "message": "Mag-sign in upang paganahin ang pagpapadala. Maaari mo pa ring tingnan at i-export ang isang ulat nang walang account."
@@ -624,10 +630,10 @@
     "message": "Tanggalin ang lokal na ulat"
   },
   "diagnosticsRetention": {
-    "message": "Ang mga naipadalang ulat ay naka-link sa iyong naka-sign in na account at pinapanatili ng suporta sa loob ng 30 araw. Ang pagtanggal ng lokal na ulat ay hindi nagtatanggal ng ulat na natanggap na ng suporta."
+    "message": "Nag-e-expire ang mga lokal na ulat pagkalipas ng 24 na oras. Ang pagtanggal dito ay hindi nagtatanggal ng ulat na natanggap na ng serbisyo. Tingnan ang abiso para sa pagpapanatili sa server at mga kahilingan sa pagtanggal."
   },
   "diagnosticsConsent": {
-    "message": "Ipadala ang ulat na ito upang suportahan"
+    "message": "Ipadala ang diagnostic report na ito sa FuzeVPN"
   },
   "diagnosticsDataCollectionRequired": {
     "message": "Kailangang payagan ng Firefox ang pagkolekta ng teknikal na data upang magpadala ng mga diagnostic. Subukan muli at ibigay ang pahintulot na ito."
@@ -702,7 +708,7 @@
     "message": "Naghihintay ng wastong session para sa parehong account"
   },
   "diagnosticsStatus_received": {
-    "message": "Natanggap sa pamamagitan ng suporta"
+    "message": "Natanggap ng serbisyo"
   },
   "diagnosticsStatus_failed": {
     "message": "Nabigo ang pagpapadala"
@@ -743,6 +749,9 @@
   "noAvailableFavoriteLocations": {
     "message": "Pansamantalang hindi available ang iyong mga paboritong lokasyon."
   },
+  "error_location_favorites_limit": {
+    "message": "Naabot na ang limitasyong 100 paborito. Mag-alis ng isang paborito para makapagdagdag ng iba."
+  },
   "error_server_full": {
     "message": "Puno na ang server na ito. Pumili ng ibang lokasyon."
   },
@@ -777,7 +786,7 @@
     "message": "Impormasyong legal"
   },
   "privacyPolicy": {
-    "message": "Patakaran sa privacy"
+    "message": "Abiso sa privacy ng extension"
   },
   "termsAndConditions": {
     "message": "Mga tuntunin ng paggamit at pagbebenta"
@@ -826,5 +835,77 @@
   },
   "deviceKindFirefox": {
     "message": "Browser na Firefox"
+  },
+  "generalPrivacyPolicy": {
+    "message": "Pangkalahatang patakaran sa privacy"
+  },
+  "privacyNoticeTitle": {
+    "message": "Privacy sa extension ng FuzeVPN"
+  },
+  "privacyNoticeIntro": {
+    "message": "Inilalarawan ng abisong ito ang data na ginagamit ng extension na ito. Karagdagan ito sa pangkalahatang patakaran sa privacy ng FuzeVPN na naka-link sa ibaba. Opsyonal ang pagpapadala ng mga diagnostic at hiwalay ito sa data na kailangan para mag-sign in at gamitin ang VPN."
+  },
+  "privacyNoticeUpdated": {
+    "message": "Na-update ang abiso noong 19 Oktubre 2026"
+  },
+  "privacyNoticeServiceTitle": {
+    "message": "Account at serbisyo ng VPN"
+  },
+  "privacyNoticeService": {
+    "message": "Nakikipagpalitan ang extension ng data ng pagpapatunay, account, subscription, device at proxy session sa api.fuzevpn.com. Dinadala ng VPN proxy ang trapikong idinadaan dito. Ibinubunyag ng mga koneksiyong ito ang metadata ng network sa tumatanggap na serbisyo; walang hiwalay na pangako ang abisong ito tungkol sa pag-log sa server."
+  },
+  "privacyNoticeLocalTitle": {
+    "message": "Data na nakaimbak sa iyong browser"
+  },
+  "privacyNoticeLocal": {
+    "message": "Iniimbak ng browser ang iyong session, mga detalye ng account, kagustuhan, pagbubukod ng mga site at pagkakakilanlan ng device. Pinananatili nang lokal ang mga teknikal na log nang hanggang 10 minuto, kahit naka-off ang awtomatikong pag-uulat. Nag-e-expire nang lokal ang mga draft ng diagnostic at nakapilang ulat pagkalipas ng 24 na oras; isinasagawa ang paglilinis kapag makakatakbo ang extension."
+  },
+  "privacyNoticeIpTitle": {
+    "message": "Mga pagsusuri ng pampublikong IP at mga third party"
+  },
+  "privacyNoticeIp": {
+    "message": "Kumokontak sa api.ipify.org ang pagpapakita ng IP at mga diagnostic ng network. Maaaring gamitin ng pagpapakita ng IP ang ipv4.icanhazip.com bilang reserba. Natatanggap ng provider ang IP ng koneksiyon at karaniwang metadata ng kahilingan: ang iyong pampublikong IP sa direktang mode, o ang exit IP ng VPN kapag dumaraan sa proxy. Hindi nagsasama ng cookie o referrer ang mga kahilingang ito at hindi nagpapadala ng token ng account o kasaysayan ng pag-browse."
+  },
+  "privacyNoticeReportsTitle": {
+    "message": "Nilalaman ng mga diagnostic report"
+  },
+  "privacyNoticeReports": {
+    "message": "Maaaring maglaman ang mga ulat ng random na pagkakakilanlan ng ulat, mga timestamp, bersiyon ng extension at browser, uri at arkitektura ng operating system, mga estado ng koneksiyon at proteksiyon, error code, bilang, tagal at mga resulta ng pagsusuri. Maaaring magsama ng mga kamakailang teknikal na pangyayari ang mga buong ulat. Hindi kasama sa JSON ang mga password, token sa pagpapatunay, email address, IP address, binisitang URL at ibinukod na domain. Maaari mong suriin at i-export ang isang buong ulat bago ito ipadala."
+  },
+  "privacyNoticeAccountTitle": {
+    "message": "Tatanggap at pag-uugnay sa account"
+  },
+  "privacyNoticeAccount": {
+    "message": "Ipinapadala ang mga ulat sa FuzeVPN sa api.fuzevpn.com/v1/diagnostics sa pamamagitan ng koneksiyong may pagpapatunay. Hindi dumaraan sa VPN proxy ang koneksiyong ito sa API: natatanggap ng FuzeVPN ang iyong direktang pampublikong IP kahit aktibo ang VPN. Naka-ugnay ang mga ulat sa account na naka-sign in at hindi anonymous. Hiwalay sa JSON ng ulat ang header ng pagpapatunay at IP. Kinukumpirma ng matagumpay na pagtanggap na tinanggap ito ng endpoint na iyon, hindi na nabasa na ng isang ahente ng suporta ang ulat."
+  },
+  "privacyNoticeChoiceTitle": {
+    "message": "Opsyonal na pagpapadala at pagbawi ng pahintulot"
+  },
+  "privacyNoticeChoice": {
+    "message": "Naka-off bilang default ang awtomatikong pagpapadala. Kapag pinagana ito, pinapayagan ang mga simpleng ulat ng error para sa account na iyon. Kailangang lagyan ng tsek ang kahon ng pagpapadala para manu-manong magpadala ng buong ulat. Kailangan din ng Firefox ang opsyonal nitong pahintulot para sa teknikal na data. I-off ang awtomatikong pagpapadala para ihinto ito at alisin ang mga nakabinbing awtomatikong ulat; kanselahin nang hiwalay ang iba pang nakabinbing pagpapadala. Hindi nakahahadlang sa paggamit ng VPN ang pagtanggi sa pagpapadala ng mga diagnostic."
+  },
+  "privacyNoticeDeleteTitle": {
+    "message": "Lokal na pagtanggal at mga na-download na file"
+  },
+  "privacyNoticeDelete": {
+    "message": "Sa Diagnostics, burahin ang teknikal na kasaysayan o tanggalin ang isang lokal na ulat. Hindi binubura ng pag-clear ng kasaysayan ang mga umiiral nang kopya ng ulat. Hindi mababawi ng lokal na pagkansela o pagtanggal ang data na natanggap na ng serbisyo, kabilang ang upload na dumating bago ang pagkansela. Hiwalay na mga file ang mga na-download na export na kailangan mong tanggalin mismo."
+  },
+  "privacyNoticeServerTitle": {
+    "message": "Pagpapanatili sa server at mga kahilingan"
+  },
+  "privacyNoticeServer": {
+    "message": "Hindi kinokontrol o bineberipika ng extension na ito ang pagpapanatili o pagtanggal sa server. Para sa tagal ng pagpapanatili na ipinapatupad ng FuzeVPN at mga kahilingan tungkol sa mga ulat na naipadala na, basahin ang pangkalahatang patakaran sa privacy o kontakin ang FuzeVPN. Walang nakapirming tagal ng pagpapanatili sa server na ginagarantiyahan ng abisong ito."
+  },
+  "privacyNoticeSupportTitle": {
+    "message": "Magkahiwalay ang diagnostics at suporta"
+  },
+  "privacyNoticeSupport": {
+    "message": "Ang pagpapadala ng diagnostic report ay hindi kusang nagpapadala ng mensahe sa suporta mula sa extension. Para ipaliwanag ang problema o hilinging tanggalin ang isang natanggap na ulat, gamitin ang paraan ng pakikipag-ugnayan sa FuzeVPN sa ibaba. Kung pipiliin mong magbahagi ng na-export na file sa ibang paraan, suriin muna ang nilalaman nito."
+  },
+  "privacyNoticeManage": {
+    "message": "Buksan ang Diagnostics"
+  },
+  "privacyNoticeLinksTitle": {
+    "message": "Patakaran ng serbisyo at pakikipag-ugnayan"
   }
 }

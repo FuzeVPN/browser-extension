@@ -26,6 +26,7 @@ import { LanguageController } from "./language-controller";
 import { ExtensionLanguageStorage } from "../storage/language-storage";
 import { NetworkObserver } from "./network-observer";
 import { LocationPreferences } from "./location-preferences";
+import { ConnectionJournal, type ConnectionTrace } from "./connection-journal";
 import { ExtensionSiteExclusionStorage } from "../storage/site-exclusion-storage";
 import { ExtensionProxyCleanupStorage } from "../storage/proxy-cleanup-storage";
 import {
@@ -49,6 +50,23 @@ let snapshotRevision = 0;
 let routingRevision = 0;
 const proxy = new PlatformProxyService();
 const safety = new PlatformNetworkSafetyService();
+const CONNECTION_JOURNAL_KEY = "fuzevpnConnectionJournal";
+const connectionJournal = new ConnectionJournal({
+  storage: {
+    async read() {
+      return (await extensionApi.storage.session.get(CONNECTION_JOURNAL_KEY))[
+        CONNECTION_JOURNAL_KEY
+      ];
+    },
+    async write(events) {
+      await extensionApi.storage.session.set({ [CONNECTION_JOURNAL_KEY]: events });
+    },
+  },
+  now: Date.now,
+  onChanged: () => diagnosticObserver.current?.connectionHistoryChanged(),
+});
+let lastConnectionState = "";
+let connectionHistoryOwnerEstablished = false;
 const diagnosticObserver: { current: DiagnosticService | null } = { current: null };
 let signalDiagnosticReady: () => void = () => undefined;
 const diagnosticReady = new Promise<void>((resolve) => {
@@ -73,7 +91,13 @@ const controller = new AppController({
   cleanupStorage: new ExtensionProxyCleanupStorage(),
   now: Date.now,
   onStateChanged: publishSnapshot,
-  onDiagnosticAccountChanged: () => diagnosticObserver.current?.syncAccount(true),
+  onConnectionEvent: recordConnectionEvent,
+  captureConnectionEvents: () => connectionJournal.capture(),
+  onDiagnosticAccountChanged: () => {
+    lastConnectionState = "";
+    if (diagnosticObserver.current) diagnosticObserver.current.syncAccount(true);
+    else connectionJournal.clear();
+  },
   resolveAutomaticLocation: async (catalog) => {
     await locations.initialize();
     const preferences = locations.getState(catalog);
@@ -87,7 +111,7 @@ new PlatformRouteGuard({
 const network = new NetworkObserver({
   getSnapshot: () => controller.getSnapshot(),
   verifyRoute: verifyObservationRoute,
-  retryTransientFailures: true,
+  useFallback: true,
   onChanged: () => {
     locations.recordObservation(network.getState());
     queuePublication();
@@ -113,6 +137,17 @@ const diagnosticController: Partial<
 > = controller;
 const diagnostics = new DiagnosticService({
   whenReady: () => diagnosticReady,
+  connectionHistory: {
+    initialize: () => connectionJournal.initialize(),
+    clear: () => connectionJournal.clear(),
+    // A restored journal has no trusted owner until account restoration and purge finish.
+    count: () =>
+      connectionHistoryOwnerEstablished && controller.hasRestoredAccount()
+        ? connectionJournal.count()
+        : 0,
+    pruneExpired: () => connectionJournal.pruneExpired(),
+    nextExpiry: () => connectionJournal.nextExpiry(),
+  },
   read: diagnosticReadState,
   getAccount: () => diagnosticController.getDiagnosticAccount?.() ?? null,
   canSendDiagnostics,
@@ -166,6 +201,16 @@ extensionApi.runtime.onMessage.addListener((message: unknown, sender, sendRespon
     !sender.url?.startsWith(extensionApi.runtime.getURL(""))
   )
     return false;
+  if (
+    message &&
+    typeof message === "object" &&
+    "type" in message &&
+    message.type === "get_connection_journal" &&
+    Object.keys(message).length === 1
+  ) {
+    void readConnectionJournal().then(sendResponse);
+    return true;
+  }
   if (isDiagnosticRequest(message)) {
     void diagnostics
       .handle(message)
@@ -174,16 +219,21 @@ extensionApi.runtime.onMessage.addListener((message: unknown, sender, sendRespon
     return true;
   }
   if (!isExtensionRequest(message)) return false;
+  if (message.type === "logout") diagnostics.syncAccount(true);
+  const recordConnection = connectionJournal.capture();
+  traceConnectionCommand(message, "start", recordConnection);
   const diagnosticStarted = Date.now();
   const recordDiagnostic = diagnostics.capture(message.type);
-  void handleMessage(message)
+  void handleMessage(message, recordConnection)
     .then((result) => {
+      traceConnectionCommand(message, "end", recordConnection, result);
       if (message.type !== "get_snapshot" && message.type !== "set_language_preference")
         recordDiagnostic(result, Date.now() - diagnosticStarted);
       sendResponse({ ...result, snapshot: localizedSnapshot() } satisfies ExtensionResponse);
     })
     .catch((error: unknown) => {
       const result = messageFailure(error);
+      traceConnectionCommand(message, "end", recordConnection, result);
       if (message.type !== "get_snapshot" && message.type !== "set_language_preference")
         recordDiagnostic(result, Date.now() - diagnosticStarted);
       sendResponse({
@@ -219,8 +269,11 @@ registerPlatformEvents({
       controller.handleProxyControlLost(await proxy.getControlLevel()),
     );
   },
-  proxyError(message) {
-    runBackgroundEvent("proxy.error", () => controller.handleProxyError(message, false));
+  proxyError(message, provenance) {
+    const handling = provenance
+      ? controller.handleProxyError(message, false, provenance)
+      : controller.handleProxyError(message, false);
+    runBackgroundEvent("proxy.error", () => handling);
   },
   permissionsChanged() {
     routingRevision++;
@@ -241,12 +294,45 @@ registerPlatformEvents({
 runBackgroundEvent("initialize", async () => {
   try {
     await controller.initialize();
+    establishConnectionHistoryOwner();
   } finally {
     // Diagnostics wait for the existing startup to establish the local owner.
     // Restoring history before this point would mistake a sleeping worker for logout.
     signalDiagnosticReady();
   }
 });
+
+function establishConnectionHistoryOwner(): boolean {
+  if (!controller.hasRestoredAccount()) return false;
+  if (!connectionHistoryOwnerEstablished) {
+    // Restored arrays have no owner. Start a known account/guest boundary before
+    // publishing or exporting them, including after an unread-storage recovery.
+    if (diagnosticObserver.current) diagnosticObserver.current.syncAccount(true);
+    else connectionJournal.clear();
+    connectionHistoryOwnerEstablished = true;
+    lastConnectionState = "";
+  }
+  return true;
+}
+
+async function readConnectionJournal() {
+  try {
+    await diagnosticReady;
+    await controller.initialize();
+    if (!establishConnectionHistoryOwner()) return { ok: false, error: "storage_unavailable" };
+    diagnostics.syncAccount();
+    return {
+      ok: true,
+      journal: {
+        schemaVersion: 1,
+        extensionVersion: extensionApi.runtime.getManifest().version,
+        events: await connectionJournal.snapshot(),
+      },
+    };
+  } catch {
+    return { ok: false, error: "storage_unavailable" };
+  }
+}
 
 function runBackgroundEvent(event: string, operation: () => Promise<unknown>): void {
   const started = Date.now();
@@ -296,7 +382,10 @@ function runBackgroundEvent(event: string, operation: () => Promise<unknown>): v
     });
 }
 
-async function handleMessage(message: ExtensionRequest): Promise<CommandResult> {
+async function handleMessage(
+  message: ExtensionRequest,
+  recordConnection: (event: ConnectionTrace) => void,
+): Promise<CommandResult> {
   const changesConnection = [
     "web_login",
     "logout",
@@ -334,7 +423,8 @@ async function handleMessage(message: ExtensionRequest): Promise<CommandResult> 
     case "refresh_network":
       await controller.initialize();
       network.observe(controller.getSnapshot());
-      await network.refresh();
+      // Publish the IP later without holding the command response open.
+      void network.refresh().catch(() => undefined);
       break;
     case "set_language_preference":
       await language.setPreference(message.preference);
@@ -345,46 +435,57 @@ async function handleMessage(message: ExtensionRequest): Promise<CommandResult> 
       assertLocationIntent(intent);
       return controller.webLogin(message.disconnectFirst, language.getState().effectiveLanguage);
     case "set_location_favorite":
-      await controller.initialize();
+      await controller.initialize(recordConnection);
       if (!controller.getSnapshot().profile) throw new Error("unauthorized");
-      if (message.favorite) assertAvailableLocation(message.locationId);
+      if (message.favorite) assertAvailableLocation(message.locationId, recordConnection);
       await locations.setFavorite(message.locationId, message.favorite);
       break;
     case "select_automatic_location": {
-      await prepareLocationAction(intent);
+      await prepareLocationAction(intent, recordConnection);
       await locations.setAutomatic(true);
       assertLocationIntent(intent);
       const snapshot = controller.getSnapshot();
       const recommended = locations.getState(snapshot.locations).recommendedLocationId;
-      if (snapshot.protected) return controller.connect(null);
-      if (!recommended) throw new Error("invalid_location");
-      return controller.selectLocation(recommended);
+      if (snapshot.protected) return controller.connect(null, recordConnection);
+      if (!recommended) {
+        recordConnection({
+          event: "failure",
+          source: "local",
+          reason: "automatic_empty",
+          error: "invalid_location",
+          count: snapshot.locations.length,
+          requestedPresent: false,
+        });
+        throw new Error("invalid_location");
+      }
+      return controller.selectLocation(recommended, recordConnection);
     }
     case "select_location":
-      await prepareLocationAction(intent);
-      assertAvailableLocation(message.locationId);
+      await prepareLocationAction(intent, recordConnection);
+      assertAvailableLocation(message.locationId, recordConnection);
       await locations.setAutomatic(false);
       assertLocationIntent(intent);
-      return controller.selectLocation(message.locationId);
+      return controller.selectLocation(message.locationId, recordConnection);
     case "connect": {
-      await prepareLocationAction(intent);
+      await prepareLocationAction(intent, recordConnection);
       const state = locations.getState(controller.getSnapshot().locations);
-      return controller.connect(state.automatic ? null : message.locationId);
+      return controller.connect(state.automatic ? null : message.locationId, recordConnection);
     }
     case "change_location":
-      await prepareLocationAction(intent);
-      assertAvailableLocation(message.locationId);
+      await prepareLocationAction(intent, recordConnection);
+      assertAvailableLocation(message.locationId, recordConnection);
       await locations.setAutomatic(false);
       assertLocationIntent(intent);
-      return controller.changeLocation(message.locationId);
+      return controller.changeLocation(message.locationId, recordConnection);
     case "disconnect":
       return controller.disconnect();
     case "retry_connection":
-      return controller.retryConnection();
+      return controller.retryConnection(false, recordConnection);
     case "update_security_preferences":
       return controller.updateSecurityPreferences(
         message.killSwitchEnabled,
         message.webRtcProtectionEnabled,
+        recordConnection,
       );
     case "logout":
       return controller.logout();
@@ -397,7 +498,7 @@ async function handleMessage(message: ExtensionRequest): Promise<CommandResult> 
     case "refresh_devices":
       return controller.refreshDevices();
     case "delete_device":
-      return controller.deleteDevice(message.deviceId);
+      return controller.deleteDevice(message.deviceId, recordConnection);
     case "reset_device_identity":
       return controller.resetDeviceIdentity();
   }
@@ -422,8 +523,12 @@ async function initializeLanguageForPublication(): Promise<void> {
   }
 }
 
-async function prepareLocationAction(intent: number): Promise<void> {
-  await Promise.all([controller.initialize(), locations.initialize()]);
+async function prepareLocationAction(
+  intent: number,
+  recordConnection: (event: ConnectionTrace) => void,
+): Promise<void> {
+  // A restoration retried here belongs to the command, like the one it would retry itself.
+  await Promise.all([controller.initialize(recordConnection), locations.initialize()]);
   assertLocationIntent(intent);
   if (!controller.getSnapshot().profile) throw new Error("unauthorized");
 }
@@ -432,10 +537,69 @@ function assertLocationIntent(intent: number): void {
   if (intent !== locationIntent) throw new Error("location_selection_superseded");
 }
 
-function assertAvailableLocation(id: string): void {
+function assertAvailableLocation(
+  id: string,
+  recordConnection: (event: ConnectionTrace) => void,
+): void {
   const snapshot = controller.getSnapshot();
-  if (!snapshot.profile || !snapshot.locations.some((location) => location.id === id))
+  if (!snapshot.profile || !snapshot.locations.some((location) => location.id === id)) {
+    recordConnection({
+      event: "failure",
+      source: "local",
+      reason: "select_missing",
+      error: "invalid_location",
+      count: snapshot.locations.length,
+      requestedPresent: false,
+    });
     throw new Error("invalid_location");
+  }
+}
+
+function recordConnectionEvent(event: ConnectionTrace): void {
+  try {
+    connectionJournal.record(event);
+  } catch {
+    /* Local tracing must never affect a VPN command or publication. */
+  }
+}
+
+function traceConnectionCommand(
+  message: ExtensionRequest,
+  phase: "start" | "end",
+  recordConnection: (event: ConnectionTrace) => void,
+  result?: CommandResult,
+): void {
+  const action = message.type;
+  if (
+    action !== "connect" &&
+    action !== "disconnect" &&
+    action !== "retry_connection" &&
+    action !== "change_location" &&
+    action !== "select_location" &&
+    action !== "select_automatic_location" &&
+    action !== "refresh_account" &&
+    action !== "refresh_locations"
+  )
+    return;
+  const snapshot = controller.getSnapshot();
+  recordConnection({
+    event: "command",
+    phase,
+    action,
+    status: snapshot.status,
+    error: result?.commandError ?? null,
+    count: snapshot.locations.length,
+    selectedPresent: snapshot.locations.some(
+      (location) => location.id === snapshot.selectedLocationId,
+    ),
+    ...("locationId" in message
+      ? {
+          requestedPresent: snapshot.locations.some(
+            (location) => location.id === message.locationId,
+          ),
+        }
+      : {}),
+  });
 }
 
 function localizedSnapshot(): AppSnapshot {
@@ -450,6 +614,28 @@ function localizedSnapshot(): AppSnapshot {
 }
 
 function publishSnapshot(snapshot: AppSnapshot): void {
+  try {
+    establishConnectionHistoryOwner();
+  } catch {
+    /* A failing history observer cannot interrupt state publication. */
+  }
+  const connectionState: ConnectionTrace = {
+    event: "state",
+    status: snapshot.status,
+    error: snapshot.error,
+    protected: snapshot.protected,
+    protectionRequested: snapshot.protectionRequested,
+    trafficBlocked: snapshot.trafficBlocked,
+    count: snapshot.locations.length,
+    selectedPresent: snapshot.locations.some(
+      (location) => location.id === snapshot.selectedLocationId,
+    ),
+  };
+  const stateKey = JSON.stringify(connectionState);
+  if (stateKey !== lastConnectionState) {
+    lastConnectionState = stateKey;
+    recordConnectionEvent(connectionState);
+  }
   try {
     diagnosticObserver.current?.syncAccount();
     diagnosticObserver.current?.observeRecovery();

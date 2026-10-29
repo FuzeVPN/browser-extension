@@ -561,9 +561,9 @@ select {
   position: relative;
   width: 34px;
   height: 20px;
-  border: 1px solid #aea497;
+  border: 1px solid var(--muted);
   border-radius: 20px;
-  background: #d7cfc2;
+  background: var(--muted);
   cursor: pointer;
 }
 
@@ -679,10 +679,6 @@ pre {
   font-family: ui-monospace, Consolas, monospace;
   font-size: 11px;
   line-height: 1.7;
-}
-
-pre:focus-visible {
-  outline-color: var(--gold);
 }
 
 [hidden] {

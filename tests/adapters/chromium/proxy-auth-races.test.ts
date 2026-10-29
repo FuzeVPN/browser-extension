@@ -6,6 +6,7 @@ import {
   type ProxyAuthDependencies,
 } from "../../../src/platform/chromium/proxy-auth";
 import { NOW, authenticatedState, createHarness, proxySession } from "./helpers";
+import { captureProxyAuthRequest } from "./proxy-auth-fixture";
 
 function deferred<T>() {
   let resolve!: (value: T) => void;
@@ -140,6 +141,7 @@ describe("late proxy authentication", () => {
         isSessionCurrent: () => current,
       }),
     );
+    await captureProxyAuthRequest(handler, "late-proxy-request");
 
     const response = handler.handle(authDetails());
     await checking.promise;
@@ -166,6 +168,7 @@ describe("late proxy authentication", () => {
         now: () => now,
       }),
     );
+    await captureProxyAuthRequest(handler, "late-proxy-request", session);
 
     const response = handler.handle(authDetails());
     await checking.promise;
@@ -175,10 +178,33 @@ describe("late proxy authentication", () => {
     await expect(response).resolves.toEqual({ cancel: true });
   });
 
+  it("rejects credentials when the route generation changes during the final ownership check", async () => {
+    const checking = deferred<undefined>();
+    const ownership = deferred<boolean>();
+    let checks = 0;
+    const handler = new ProxyAuthHandler(
+      dependencies({
+        isConfiguredProxyChallenge: async () => {
+          if (++checks === 1) return true;
+          checking.resolve(undefined);
+          return ownership.promise;
+        },
+      }),
+    );
+    const captured = await captureProxyAuthRequest(handler, "late-proxy-request");
+    const response = handler.handle(authDetails());
+    await checking.promise;
+    captured.change();
+    ownership.resolve(true);
+
+    await expect(response).resolves.toEqual({ cancel: true });
+  });
+
   it("rejects a malformed expiration date", async () => {
     const handler = new ProxyAuthHandler(
       dependencies({ getSession: async () => ({ ...proxySession(), expiresAt: "invalid" }) }),
     );
+    await captureProxyAuthRequest(handler, "late-proxy-request");
 
     await expect(handler.handle(authDetails())).resolves.toEqual({ cancel: true });
   });
@@ -186,39 +212,16 @@ describe("late proxy authentication", () => {
   it("still supplies credentials for a verified current session", async () => {
     const session = proxySession();
     const handler = new ProxyAuthHandler(dependencies({ getSession: async () => session }));
+    await captureProxyAuthRequest(handler, "late-proxy-request", session);
 
     await expect(handler.handle(authDetails())).resolves.toEqual({
       authCredentials: { username: session.username, password: session.password },
     });
   });
 
-  it.each(["disconnect", "expiration"] as const)(
+  it.each(["disconnect", "expiration", "route-change"] as const)(
     "revalidates credentials before Chrome receives the callback after %s",
     async (event) => {
-      type AuthListener = Parameters<typeof chrome.webRequest.onAuthRequired.addListener>[0];
-      let listener: AuthListener | undefined;
-      vi.stubGlobal("chrome", {
-        extension: { isAllowedIncognitoAccess: async () => false },
-        proxy: {
-          settings: {
-            get: async () => ({
-              value: { mode: "direct" },
-              levelOfControl: "controllable_by_this_extension",
-            }),
-            onChange: { addListener: () => undefined },
-          },
-        },
-        webRequest: {
-          onBeforeRequest: { addListener: () => undefined },
-          onAuthRequired: {
-            addListener: (registered: AuthListener) => {
-              listener = registered;
-            },
-          },
-          onCompleted: { addListener: () => undefined },
-          onErrorOccurred: { addListener: () => undefined },
-        },
-      });
       const session = proxySession();
       let current = true;
       let now = NOW;
@@ -229,15 +232,17 @@ describe("late proxy authentication", () => {
           now: () => now,
         }),
       );
+      const captured = await captureProxyAuthRequest(handler, "late-proxy-request", session);
       const handle = handler.handle.bind(handler);
       vi.spyOn(handler, "handle").mockImplementation(async (details) => {
         const result = await handle(details);
         expect(result.authCredentials).toBeDefined();
         if (event === "disconnect") current = false;
-        else now = Date.parse(session.expiresAt);
+        else if (event === "expiration") now = Date.parse(session.expiresAt);
+        else captured.change();
         return result;
       });
-      handler.register();
+      const listener = captured.authListener;
       if (!listener) throw new Error("authentication listener not registered");
       const response = deferred<chrome.webRequest.BlockingResponse>();
       listener(authDetails(), response.resolve);
@@ -248,6 +253,7 @@ describe("late proxy authentication", () => {
 });
 
 describe("controller proxy authentication validity", () => {
+  afterEach(() => vi.unstubAllGlobals());
   it("invalidates captured credentials before an asynchronous proxy clear completes", async () => {
     const harness = createHarness({ persisted: authenticatedState() });
     await harness.controller.initialize();
@@ -336,6 +342,7 @@ describe("controller proxy authentication validity", () => {
             harness.proxy.isConfiguredProxyChallenge(challenger),
         }),
       );
+      await captureProxyAuthRequest(handler, "late-proxy-request", session);
       await expect(handler.handle(authDetails())).resolves.toEqual({
         authCredentials: { username: session.username, password: session.password },
       });

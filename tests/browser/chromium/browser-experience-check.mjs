@@ -12,6 +12,7 @@ import { homedir, tmpdir } from "node:os";
 import { join, resolve } from "node:path";
 import { pathToFileURL } from "node:url";
 import { SUPPORTED_LANGUAGES, localeDirectory } from "../../../scripts/supported-locales.mjs";
+import { waitForRead } from "../../../scripts/browser-wait.mjs";
 import { expandAllLocations } from "./browser-location-ui.mjs";
 
 const root = resolve(import.meta.dirname, "../../..");
@@ -164,13 +165,11 @@ async function withTimeout(promise, message) {
 }
 
 async function networkState(page, expected) {
-  await page.waitForFunction(
-    async (values) => {
-      const { snapshot } = await chrome.runtime.sendMessage({ type: "get_snapshot" });
-      return Object.entries(values).every(([key, value]) => snapshot.network?.[key] === value);
-    },
-    expected,
-    { timeout: 15000 },
+  const matched = await waitForRead(
+    () => command(page, { type: "get_snapshot" }),
+    (snapshot) =>
+      Object.entries(expected).every(([key, value]) => snapshot.network?.[key] === value),
+    { timeoutMs: 15000, message: `Network state did not match ${JSON.stringify(expected)}` },
   );
   if (expected.status === "ready" && expected.ip) {
     await page.waitForFunction(
@@ -186,23 +185,21 @@ async function networkState(page, expected) {
     );
   }
   await rendered(page);
-  return command(page, { type: "get_snapshot" });
+  return matched;
 }
 
 async function snapshotState(page, expected) {
-  await page.waitForFunction(
-    async (values) => {
-      const { snapshot } = await chrome.runtime.sendMessage({ type: "get_snapshot" });
-      return Object.entries(values).every(([path, value]) => {
+  const matched = await waitForRead(
+    () => command(page, { type: "get_snapshot" }),
+    (snapshot) =>
+      Object.entries(expected).every(([path, value]) => {
         const actual = path.split(".").reduce((object, key) => object?.[key], snapshot);
         return JSON.stringify(actual) === JSON.stringify(value);
-      });
-    },
-    expected,
-    { timeout: 15000 },
+      }),
+    { timeoutMs: 15000, message: `Snapshot did not match ${JSON.stringify(expected)}` },
   );
   await rendered(page);
-  return command(page, { type: "get_snapshot" });
+  return matched;
 }
 
 async function visibleLocationIds(page) {
@@ -274,14 +271,10 @@ try {
     const url = new URL(request.url());
     if (url.protocol === "chrome-extension:") return route.continue();
     if (
-      ["https://api.ipify.org", "https://api64.ipify.org"].includes(url.origin) &&
-      url.search === "?format=json"
+      (url.origin === "https://api.ipify.org" && url.search === "?format=json") ||
+      url.origin === "https://ipv4.icanhazip.com"
     ) {
-      assert.equal(
-        url.origin,
-        expectedRoute === "vpn" ? "https://api.ipify.org" : "https://api64.ipify.org",
-        `Unexpected IP endpoint for the ${expectedRoute} route`,
-      );
+      const plaintext = url.origin === "https://ipv4.icanhazip.com";
       const responseIp = expectedIp;
       const failure = failIp || transientIpFailures > 0;
       if (transientIpFailures > 0) transientIpFailures--;
@@ -300,9 +293,13 @@ try {
       try {
         await route.fulfill({
           status: failure ? 503 : 200,
-          contentType: "application/json",
+          contentType: plaintext ? "text/plain" : "application/json",
           headers: { "Cache-Control": "no-store" },
-          body: JSON.stringify(failure ? { error: "synthetic_unavailable" } : { ip: responseIp }),
+          body: plaintext
+            ? failure
+              ? "synthetic_unavailable"
+              : `${responseIp}\n`
+            : JSON.stringify(failure ? { error: "synthetic_unavailable" } : { ip: responseIp }),
         });
       } catch (error) {
         // A route change intentionally aborts the delayed browser request.
@@ -457,9 +454,7 @@ try {
   await screenshot(page, "experience-connected.png");
   record("Connection changes the indicator to green and replaces the public IP with the VPN IP");
   assert.equal(ipRequests.length, beforeTransientFailure + 2);
-  record(
-    "A temporary IP-service failure recovers through the same VPN endpoint without reconnecting",
-  );
+  record("A temporary IP-service failure recovers through the IPv4 fallback without reconnecting");
 
   expectIp("direct", directIp);
   await command(page, { type: "disconnect" });
@@ -490,8 +485,8 @@ try {
   );
   expectIp("direct", publicIpv6);
   await command(page, { type: "disconnect" });
-  await networkState(page, { status: "ready", mode: "direct", ip: publicIpv6 });
-  assert.equal(await page.locator("#publicIp").textContent(), `Public IP · ${publicIpv6}`);
+  await networkState(page, { status: "unavailable", mode: "direct", ip: null });
+  assert.equal(await page.locator("#publicIp").textContent(), "Public IP · Unavailable");
   const layout = await page.evaluate(() => {
     const ip = document.getElementById("publicIp");
     const card = document.getElementById("locationCard");
@@ -506,11 +501,14 @@ try {
       viewportWidth: innerWidth,
     };
   });
-  assert(layout.ipScrollWidth <= layout.ipWidth + 1, "IPv6 overflows its text container");
-  assert(layout.ipRight <= layout.cardRight, "IPv6 extends outside the location card");
-  assert(layout.documentWidth <= layout.viewportWidth, "IPv6 creates horizontal page scrolling");
+  assert(layout.ipScrollWidth <= layout.ipWidth + 1, "IP status overflows its text container");
+  assert(layout.ipRight <= layout.cardRight, "IP status extends outside the location card");
+  assert(
+    layout.documentWidth <= layout.viewportWidth,
+    "IP status creates horizontal page scrolling",
+  );
   await screenshot(page, "experience-disconnected-ipv6.png");
-  record("A full-length direct public IPv6 address stays readable within the 360 px popup");
+  record("Direct IPv6 replies from both providers are rejected and never displayed");
 
   expectIp("vpn", publicIpv6);
   const beforeRejectedIpv6 = ipRequests.length;
@@ -518,7 +516,7 @@ try {
   const rejectedIpv6 = await networkState(page, { status: "unavailable", mode: "vpn", ip: null });
   assert.equal(rejectedIpv6.status, "connected");
   assert.equal(rejectedIpv6.protected, true);
-  assert.equal(ipRequests.length, beforeRejectedIpv6 + 1, "IPv6 rejection caused another lookup");
+  assert.equal(ipRequests.length, beforeRejectedIpv6 + 2, "Both IPv4 providers must be attempted");
   assert.equal(await page.locator("#publicIp").textContent(), "VPN IP · Unavailable");
   expectIp("direct", directIp);
   await command(page, { type: "disconnect" });
@@ -527,9 +525,7 @@ try {
   await command(page, { type: "connect", locationId });
   await networkState(page, { status: "ready", mode: "vpn", ip: vpnIp });
   assert.equal(await page.locator("#publicIp").textContent(), `VPN IP · ${vpnIp}`);
-  record(
-    "VPN lookups request IPv4, reject an IPv6 reply without fallback, and recover on reconnection",
-  );
+  record("VPN lookups reject IPv6 from both providers and recover on reconnection");
 
   expectIp("direct", directIp);
   const delayed = holdNextIp();
@@ -719,6 +715,8 @@ try {
   const automatic = await snapshotState(page, {
     "locationPreferences.automatic": true,
     status: "connected",
+    selectedLocationId: recommendation,
+    activeLocationId: recommendation,
   });
   assert.equal(automatic.selectedLocationId, recommendation);
   assert.equal(automatic.activeLocationId, recommendation);
@@ -966,10 +964,7 @@ try {
 
   assert(ipRequests.length >= 6);
   for (const request of ipRequests) {
-    assert.equal(
-      request.origin,
-      request.mode === "vpn" ? "https://api.ipify.org" : "https://api64.ipify.org",
-    );
+    assert(["https://api.ipify.org", "https://ipv4.icanhazip.com"].includes(request.origin));
     assert.equal(request.method, "GET");
     assert.equal(request.headers.authorization, undefined);
     assert.equal(request.headers.cookie, undefined);
@@ -978,9 +973,7 @@ try {
     assert(!JSON.stringify(request.headers).includes("synthetic-proxy-password"));
   }
   report.ipRequests = ipRequests.length;
-  record(
-    "Every VPN observation uses the IPv4 endpoint and every direct observation uses the dual-stack endpoint",
-  );
+  record("Direct and VPN observations use only the primary IPv4 endpoint or its IPv4 fallback");
   record("IP lookup requests carry no account token, proxy password, cookies, or referrer");
   assert.deepEqual(report.pageErrors, []);
   record("All experience scenarios complete without uncaught popup exceptions");

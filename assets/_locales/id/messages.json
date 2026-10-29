@@ -179,6 +179,9 @@
   "deleteDevice": {
     "message": "Hapus perangkat"
   },
+  "deleteDeviceNamed": {
+    "message": "Hapus perangkat $1"
+  },
   "confirmDeleteDevice": {
     "message": "Hapus “$1”? Koneksi VPN-nya akan berhenti dan profilnya akan dihapus."
   },
@@ -360,7 +363,7 @@
     "message": "Tidak tersedia"
   },
   "ipLookupExplanation": {
-    "message": "IP diperiksa dengan ipify menggunakan koneksi Anda saat ini. Tidak ada riwayat penelusuran yang dikirim."
+    "message": "IP diperiksa dengan ipify, atau icanhazip sebagai cadangan, melalui koneksi Anda saat ini. Riwayat penjelajahan tidak dikirim."
   },
   "automaticLocation": {
     "message": "Otomatis"
@@ -567,19 +570,22 @@
     "message": "Data Anda"
   },
   "diagnosticsPrivacy": {
-    "message": "Laporan berisi status teknis dan kode kesalahan, tidak pernah berisi kata sandi, token, alamat email, alamat IP, URL yang dikunjungi, atau domain yang dikecualikan."
+    "message": "JSON laporan berisi status teknis dan kode kesalahan, tanpa kata sandi, token, alamat email, alamat IP, URL yang dikunjungi, atau domain yang dikecualikan. Pengiriman diautentikasi dan mengaitkan laporan dengan akun Anda. Lihat pemberitahuan untuk informasi tentang data jaringan."
   },
   "diagnosticsAuto": {
     "message": "Kirim laporan kesalahan penting secara otomatis"
   },
   "diagnosticsAutoHelp": {
-    "message": "Mati secara default. Hanya laporan teknis sederhana yang dikirim untuk akun ini, tanpa riwayat penelusuran. Dukungan menyimpannya selama 30 hari."
+    "message": "Nonaktif secara default. Mengaktifkannya akan mengirim laporan teknis sederhana untuk akun ini, tanpa riwayat penjelajahan. Nonaktifkan di sini untuk menghentikan pengiriman otomatis dan menghapus laporan otomatis yang masih menunggu."
   },
   "diagnosticsHistoryHelp": {
-    "message": "Riwayat teknis tetap bersifat lokal: hingga 200 peristiwa selama 10 menit, meskipun pengiriman otomatis nonaktif. Ini tidak berisi riwayat penelusuran dan dihapus ketika browser ditutup atau akun diubah."
+    "message": "Riwayat teknis tetap lokal: hingga 200 peristiwa per log selama 10 menit, meskipun pengiriman otomatis dinonaktifkan. Tidak berisi riwayat penjelajahan dan dihapus secara manual, saat peramban ditutup, atau saat akun berubah."
   },
   "diagnosticsHistoryCount": {
     "message": "$1 acara teknis lokal"
+  },
+  "diagnosticsConnectionLog": {
+    "message": "Ekspor log koneksi"
   },
   "diagnosticsAccountRequired": {
     "message": "Masuk untuk mengaktifkan pengiriman. Anda masih dapat melihat dan mengekspor laporan tanpa akun."
@@ -624,10 +630,10 @@
     "message": "Hapus laporan lokal"
   },
   "diagnosticsRetention": {
-    "message": "Laporan yang terkirim ditautkan ke akun masuk Anda dan disimpan oleh dukungan selama 30 hari. Menghapus laporan lokal tidak menghapus laporan yang sudah diterima oleh dukungan."
+    "message": "Laporan lokal kedaluwarsa setelah 24 jam. Menghapusnya di sini tidak menghapus laporan yang sudah diterima oleh layanan. Lihat pemberitahuan untuk informasi tentang penyimpanan di server dan permintaan penghapusan."
   },
   "diagnosticsConsent": {
-    "message": "Kirim laporan ini ke dukungan"
+    "message": "Kirim laporan diagnostik ini ke FuzeVPN"
   },
   "diagnosticsDataCollectionRequired": {
     "message": "Firefox harus mengizinkan pengumpulan data teknis untuk mengirim diagnostik. Coba lagi dan berikan izin ini."
@@ -702,7 +708,7 @@
     "message": "Menunggu sesi yang valid untuk akun yang sama"
   },
   "diagnosticsStatus_received": {
-    "message": "Diterima oleh dukungan"
+    "message": "Diterima oleh layanan"
   },
   "diagnosticsStatus_failed": {
     "message": "Pengiriman gagal"
@@ -743,6 +749,9 @@
   "noAvailableFavoriteLocations": {
     "message": "Lokasi favorit Anda tidak tersedia untuk sementara."
   },
+  "error_location_favorites_limit": {
+    "message": "Batas 100 favorit telah tercapai. Hapus satu favorit untuk menambahkan yang lain."
+  },
   "error_server_full": {
     "message": "Server ini penuh. Pilih lokasi lain."
   },
@@ -777,7 +786,7 @@
     "message": "Informasi hukum"
   },
   "privacyPolicy": {
-    "message": "Kebijakan privasi"
+    "message": "Pemberitahuan privasi ekstensi"
   },
   "termsAndConditions": {
     "message": "Ketentuan penggunaan dan penjualan"
@@ -826,5 +835,77 @@
   },
   "deviceKindFirefox": {
     "message": "Browser Firefox"
+  },
+  "generalPrivacyPolicy": {
+    "message": "Kebijakan privasi umum"
+  },
+  "privacyNoticeTitle": {
+    "message": "Privasi dalam ekstensi FuzeVPN"
+  },
+  "privacyNoticeIntro": {
+    "message": "Pemberitahuan ini menjelaskan data yang digunakan oleh ekstensi ini. Pemberitahuan ini melengkapi kebijakan privasi umum FuzeVPN yang ditautkan di bawah. Pengiriman diagnostik bersifat opsional dan terpisah dari data yang diperlukan untuk masuk ke akun dan menggunakan VPN."
+  },
+  "privacyNoticeUpdated": {
+    "message": "Pemberitahuan diperbarui pada 19 Oktober 2026"
+  },
+  "privacyNoticeServiceTitle": {
+    "message": "Akun dan layanan VPN"
+  },
+  "privacyNoticeService": {
+    "message": "Ekstensi bertukar data autentikasi, akun, langganan, perangkat, dan sesi proxy dengan api.fuzevpn.com. Proxy VPN meneruskan lalu lintas yang dirutekan melaluinya. Koneksi ini mengungkap metadata jaringan kepada layanan penerima; pemberitahuan ini tidak memberikan janji terpisah tentang pencatatan di server."
+  },
+  "privacyNoticeLocalTitle": {
+    "message": "Data yang disimpan di peramban Anda"
+  },
+  "privacyNoticeLocal": {
+    "message": "Penyimpanan peramban menyimpan sesi, detail akun, preferensi, pengecualian situs, dan identitas perangkat Anda. Log teknis disimpan secara lokal selama paling lama 10 menit, meskipun pelaporan otomatis dinonaktifkan. Draf diagnostik dan laporan dalam antrean kedaluwarsa secara lokal setelah 24 jam; pembersihan dijalankan saat ekstensi dapat beroperasi."
+  },
+  "privacyNoticeIpTitle": {
+    "message": "Pemeriksaan IP publik dan pihak ketiga"
+  },
+  "privacyNoticeIp": {
+    "message": "Tampilan IP dan diagnostik jaringan menghubungi api.ipify.org. Tampilan IP dapat menggunakan ipv4.icanhazip.com sebagai cadangan. Penyedia menerima IP koneksi dan metadata permintaan yang biasa: IP publik Anda dalam mode langsung, atau IP keluar VPN saat menggunakan proxy. Permintaan ini tidak menyertakan cookie maupun referrer dan tidak mengirim token akun atau riwayat penjelajahan."
+  },
+  "privacyNoticeReportsTitle": {
+    "message": "Isi laporan diagnostik"
+  },
+  "privacyNoticeReports": {
+    "message": "Laporan dapat berisi pengenal laporan acak, cap waktu, versi ekstensi dan peramban, keluarga serta arsitektur sistem operasi, status koneksi dan perlindungan, kode kesalahan, jumlah, durasi, dan hasil pemeriksaan. Laporan lengkap dapat menyertakan peristiwa teknis terkini. JSON laporan tidak memuat kata sandi, token autentikasi, alamat email, alamat IP, URL yang dikunjungi, atau domain yang dikecualikan. Anda dapat memeriksa dan mengekspor laporan lengkap sebelum mengirimkannya."
+  },
+  "privacyNoticeAccountTitle": {
+    "message": "Penerima dan pengaitan dengan akun"
+  },
+  "privacyNoticeAccount": {
+    "message": "Laporan dikirim ke FuzeVPN di api.fuzevpn.com/v1/diagnostics melalui koneksi yang diautentikasi. Koneksi API ini tidak melalui proxy VPN: FuzeVPN menerima IP publik koneksi langsung Anda meskipun VPN sedang aktif. Laporan dikaitkan dengan akun yang sedang masuk, sehingga tidak anonim. Header autentikasi dan IP terpisah dari JSON laporan. Tanda terima yang berhasil mengonfirmasi penerimaan oleh endpoint tersebut, bukan bahwa petugas dukungan telah membaca laporan."
+  },
+  "privacyNoticeChoiceTitle": {
+    "message": "Pengiriman opsional dan penarikan persetujuan"
+  },
+  "privacyNoticeChoice": {
+    "message": "Pengiriman otomatis nonaktif secara default. Mengaktifkannya mengizinkan laporan kesalahan sederhana untuk akun tersebut. Pengiriman laporan lengkap secara manual mengharuskan Anda mencentang kotak pengiriman. Firefox juga memerlukan izin data teknis opsionalnya. Nonaktifkan pengiriman otomatis untuk menghentikannya dan menghapus laporan otomatis yang masih menunggu; batalkan pengiriman lain yang masih menunggu satu per satu. Menolak pengiriman diagnostik tidak menghalangi penggunaan VPN."
+  },
+  "privacyNoticeDeleteTitle": {
+    "message": "Penghapusan lokal dan file yang diunduh"
+  },
+  "privacyNoticeDelete": {
+    "message": "Di Diagnostik, hapus riwayat teknis atau satu laporan lokal. Menghapus riwayat tidak menghapus salinan laporan yang sudah ada. Pembatalan atau penghapusan secara lokal tidak dapat menarik kembali data yang sudah diterima oleh layanan, termasuk unggahan yang tiba sebelum pembatalan. Hasil ekspor yang diunduh merupakan file terpisah yang harus Anda hapus sendiri."
+  },
+  "privacyNoticeServerTitle": {
+    "message": "Penyimpanan di server dan permintaan"
+  },
+  "privacyNoticeServer": {
+    "message": "Ekstensi ini tidak mengendalikan atau memverifikasi penyimpanan maupun penghapusan di server. Untuk mengetahui jangka waktu penyimpanan yang diterapkan FuzeVPN dan mengajukan permintaan terkait laporan yang sudah dikirim, baca kebijakan privasi umum atau hubungi FuzeVPN. Pemberitahuan ini tidak menjamin jangka waktu penyimpanan server tertentu."
+  },
+  "privacyNoticeSupportTitle": {
+    "message": "Diagnostik dan dukungan merupakan hal terpisah"
+  },
+  "privacyNoticeSupport": {
+    "message": "Mengirim laporan diagnostik tidak dengan sendirinya mengirim pesan dukungan dari ekstensi. Untuk menjelaskan masalah atau meminta penghapusan laporan yang sudah diterima, gunakan saluran kontak FuzeVPN di bawah. Jika Anda memilih membagikan file ekspor melalui saluran lain, periksa isinya terlebih dahulu."
+  },
+  "privacyNoticeManage": {
+    "message": "Buka Diagnostik"
+  },
+  "privacyNoticeLinksTitle": {
+    "message": "Kebijakan layanan dan kontak"
   }
 }

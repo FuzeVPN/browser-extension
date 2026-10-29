@@ -183,7 +183,12 @@ try {
       value: "default",
     });
   });
-  const conflicted = await awaitState(ws.app, (state) => !state.protected && state.trafficBlocked);
+  const conflicted = await awaitState(
+    ws.app,
+    (state) => !state.protected && state.blockingScope === "unverified" && !state.webRtcProtected,
+  );
+  assert.equal(conflicted.trafficBlocked, false);
+  assert.equal(conflicted.blockingScope, "unverified");
   const effective = await ws.app.evaluate(async () => ({
     regular: await chrome.proxy.settings.get({ incognito: false }),
     private: await chrome.proxy.settings.get({ incognito: true }),
@@ -210,10 +215,11 @@ try {
     "Private traffic reached loopback after a detected private-only takeover",
   );
   record(
-    "Private-only proxy/WebRTC takeover removes authorization and blocks real private navigation",
+    "Private-only proxy/WebRTC takeover reports unverified protection and blocks private HTTP navigation",
     {
       protected: conflicted.protected,
       trafficBlocked: conflicted.trafficBlocked,
+      blockingScope: conflicted.blockingScope,
       receivedPaths,
       effective,
     },

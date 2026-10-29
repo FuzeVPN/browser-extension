@@ -1,9 +1,16 @@
 // SPDX-License-Identifier: MPL-2.0
 
 import type { ProxySession } from "../../core/api/types";
-import { validateSiteExclusionPolicy, type SiteExclusion } from "../../core/shared/site-exclusions";
+import {
+  MAX_SITE_EXCLUSIONS,
+  validateSiteExclusionPolicy,
+  type SiteExclusion,
+} from "../../core/shared/site-exclusions";
 
 export const PROXY_BYPASS_LIST = ["https://api.fuzevpn.com:443", "<-loopback>"] as const;
+// A TLS proxy on the loopback discard port cannot route a browser request directly
+// to its destination. Keep the normal exact API exception so recovery can proceed.
+export const BLOCKING_PROXY_ENDPOINT = { host: "127.0.0.1", port: 9 } as const;
 
 import {
   ProxyControlError,
@@ -126,6 +133,37 @@ export class PlatformProxyService implements ProxyService {
     }
   }
 
+  async ensureBlockingConfiguration(): Promise<void> {
+    await this.assertControllable();
+    // Refresh and failure handling may retain a real HTTPS proxy. Replacing it
+    // would destroy a valid session fallback without strengthening confinement.
+    if (await this.isGuardedConfiguration()) return;
+    const current = await chrome.proxy.settings.get({ incognito: false });
+    // An exclusion recovery may change only the bypass policy. Rebuild that
+    // policy without discarding an otherwise usable, already owned TLS node.
+    const endpoint =
+      current.levelOfControl === "controlled_by_this_extension"
+        ? (httpsEndpoint(current.value) ?? BLOCKING_PROXY_ENDPOINT)
+        : BLOCKING_PROXY_ENDPOINT;
+    this.usedEndpoints.set(endpointKey(endpoint), endpoint);
+    await chrome.proxy.settings.set({
+      scope: "regular",
+      value: proxyConfig(endpoint, this.exclusions),
+    });
+    await this.verifyExclusions(endpoint, this.exclusions);
+  }
+
+  async isGuardedConfiguration(): Promise<boolean> {
+    const settings = await this.readSettings();
+    const endpoint = settings[0] && httpsEndpoint(settings[0].value);
+    if (!endpoint) return false;
+    return settings.every(
+      (current) =>
+        current.levelOfControl === "controlled_by_this_extension" &&
+        matches(current.value, endpoint, this.exclusions),
+    );
+  }
+
   async clear(): Promise<void> {
     const current = await chrome.proxy.settings.get({ incognito: false }).catch(() => null);
     const endpoint = current?.value.rules?.singleProxy;
@@ -245,10 +283,28 @@ function endpointKey(endpoint: ProxyChallenger): string {
   return JSON.stringify([endpoint.host.toLowerCase(), endpoint.port]);
 }
 
+function httpsEndpoint(value: chrome.proxy.ProxyConfig): ProxyChallenger | null {
+  const endpoint = value.rules?.singleProxy;
+  if (
+    value.mode !== "fixed_servers" ||
+    endpoint?.scheme !== "https" ||
+    typeof endpoint.host !== "string" ||
+    !endpoint.host ||
+    typeof endpoint.port !== "number" ||
+    !Number.isInteger(endpoint.port) ||
+    endpoint.port < 1 ||
+    endpoint.port > 65535
+  ) {
+    return null;
+  }
+  return { host: endpoint.host, port: endpoint.port };
+}
+
 export function proxyConfig(
   session: ProxyChallenger,
   exclusions: SiteExclusion[] = [],
 ): chrome.proxy.ProxyConfig {
+  assertExclusions(exclusions);
   return {
     mode: "fixed_servers",
     rules: {
@@ -285,7 +341,23 @@ function matches(
 }
 
 function assertExclusions(entries: SiteExclusion[]): void {
-  if (!validateSiteExclusionPolicy({ revision: 0, enabled: true, entries })) {
+  // A transaction can intersect two 100-entry user policies into 198 routes.
+  // Reuse the user validator per bounded segment, then enforce global uniqueness.
+  if (
+    !Array.isArray(entries) ||
+    entries.length > MAX_SITE_EXCLUSIONS * 2 ||
+    !validateSiteExclusionPolicy({
+      revision: 0,
+      enabled: true,
+      entries: entries.slice(0, MAX_SITE_EXCLUSIONS),
+    }) ||
+    !validateSiteExclusionPolicy({
+      revision: 0,
+      enabled: true,
+      entries: entries.slice(MAX_SITE_EXCLUSIONS),
+    }) ||
+    new Set(entries.map((entry) => entry.domain)).size !== entries.length
+  ) {
     throw new ProxyControlError("configuration_rejected");
   }
 }

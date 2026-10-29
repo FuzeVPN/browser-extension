@@ -16,6 +16,8 @@ const worker = vi.hoisted<{
   controller: Record<string, unknown>;
   publish: ControllerDependencies["onStateChanged"] | undefined;
   apiFailure: (() => Error) | undefined;
+  accountChanged?: ControllerDependencies["onDiagnosticAccountChanged"];
+  captureConnectionEvents?: ControllerDependencies["captureConnectionEvents"];
 }>(() => ({
   controller: {},
   publish: undefined,
@@ -32,6 +34,8 @@ vi.mock("../../src/core/background/state-machine", async (importOriginal) => {
     AppController: vi.fn(function (this: Record<string, unknown>, deps: ControllerDependencies) {
       Object.assign(this, worker.controller);
       worker.publish = deps.onStateChanged;
+      worker.accountChanged = deps.onDiagnosticAccountChanged;
+      worker.captureConnectionEvents = deps.captureConnectionEvents;
     }),
   };
 });
@@ -76,6 +80,7 @@ async function fixture(
     favorites?: string[];
     initializationFailure?: Error;
     diagnosticRecorder?: boolean;
+    diagnosticMaintenance?: boolean;
   } = {},
 ) {
   vi.resetModules();
@@ -131,8 +136,10 @@ async function fixture(
   const getActiveSession = vi.fn<() => Promise<ProxySession | null>>(async () => null);
   const isSessionCurrentForProxyAuth = vi.fn(() => true);
   const retries = { attempts: 0 };
+  const diagnosticAlarms = new Map<string, number>();
   worker.controller = {
     initialize,
+    hasRestoredAccount: () => true,
     getSnapshot,
     getActiveSession,
     isSessionCurrentForProxyAuth,
@@ -180,6 +187,7 @@ async function fixture(
   vi.stubGlobal("browser", {
     runtime: {
       id: EXTENSION_ID,
+      getManifest: () => ({ version: "0.9.2" }),
       getURL: (path: string) => `moz-extension://${EXTENSION_HOST}/${path}`,
       onMessage: {
         addListener: vi.fn((registered: MessageListener) => {
@@ -191,7 +199,22 @@ async function fixture(
       sendMessage,
     },
     i18n: { getUILanguage: () => "fr", getMessage: (key: string) => `native:${key}` },
-    alarms: { onAlarm: event("alarms.onAlarm") },
+    alarms: {
+      onAlarm: event("alarms.onAlarm"),
+      ...(options.diagnosticMaintenance
+        ? {
+            create: vi.fn(async (name: string, details: { when: number }) => {
+              diagnosticAlarms.set(name, details.when);
+            }),
+            get: vi.fn(async (name: string) =>
+              diagnosticAlarms.has(name)
+                ? { name, scheduledTime: diagnosticAlarms.get(name) }
+                : undefined,
+            ),
+            clear: vi.fn(async (name: string) => diagnosticAlarms.delete(name)),
+          }
+        : {}),
+    },
     proxy: {
       settings: {
         get: proxyGet,
@@ -218,6 +241,12 @@ async function fixture(
       onErrorOccurred: event("webRequest.onErrorOccurred"),
     },
     storage: {
+      session: {
+        get: async (key: string) => ({ [key]: structuredClone(stored[key]) }),
+        set: async (value: Record<string, unknown>) => {
+          Object.assign(stored, structuredClone(value));
+        },
+      },
       local: {
         get: async (key: string) => ({ [key]: structuredClone(stored[key]) }),
         set: storageWrite,
@@ -278,6 +307,7 @@ async function fixture(
     diagnosticPermissionsRemoved,
     diagnosticPermissionsChanged,
     retries,
+    diagnosticAlarms,
   };
 }
 
@@ -290,6 +320,138 @@ describe("worker command responses and fallback publication", () => {
     vi.unstubAllGlobals();
   });
 
+  it("exports a separate local connection trace and refuses foreign or expanded requests", async () => {
+    const f = await fixture();
+    await f.send({ type: "connect", locationId: LOCATION_ID });
+    const response = await new Promise<unknown>((resolve) => {
+      expect(f.dispatch({ type: "get_connection_journal" }, f.sender, resolve)).toBe(true);
+    });
+    expect(response).toMatchObject({
+      ok: true,
+      journal: {
+        schemaVersion: 1,
+        extensionVersion: "0.9.2",
+        events: expect.arrayContaining([
+          expect.objectContaining({ event: "command", phase: "start", action: "connect" }),
+          expect.objectContaining({ event: "command", phase: "end", action: "connect" }),
+        ]) as unknown,
+      },
+    });
+    expect(JSON.stringify(response)).not.toMatch(
+      /user@example|frankfurt-01|https?:|password|token/i,
+    );
+    const ignored = vi.fn();
+    expect(f.dispatch({ type: "get_connection_journal", extra: true }, f.sender, ignored)).toBe(
+      false,
+    );
+    expect(
+      f.dispatch({ type: "get_connection_journal" }, { id: "foreign", url: f.sender.url }, ignored),
+    ).toBe(false);
+    expect(ignored).not.toHaveBeenCalled();
+    expect(f.business).toHaveBeenCalledExactlyOnceWith(
+      "connect",
+      LOCATION_ID,
+      expect.any(Function),
+    );
+  });
+
+  it("keeps connection commands and state publications usable if local tracing fails", async () => {
+    const f = await fixture();
+    const { ConnectionJournal } = await import("../../src/core/background/connection-journal");
+    vi.spyOn(ConnectionJournal.prototype, "record").mockImplementation(() => {
+      throw new Error("Local trace unavailable");
+    });
+    await expect(f.send({ type: "connect", locationId: LOCATION_ID })).resolves.toMatchObject({
+      ok: true,
+    });
+    worker.publish?.(f.snapshot);
+    await vi.waitFor(() => expect(f.sendMessage).toHaveBeenCalled());
+    await expect(f.send({ type: "disconnect" })).resolves.toMatchObject({ ok: true });
+  });
+
+  it("clears both histories and ignores a connection that completes after the clear", async () => {
+    const f = await fixture({ diagnosticMaintenance: true });
+    const sendDiagnostic = (type: string) =>
+      new Promise<unknown>((resolve) => {
+        f.dispatch({ type }, f.sender, resolve);
+      });
+    const pending = deferred();
+    f.business.mockImplementationOnce(async () => {
+      await pending.promise;
+      return { ok: true };
+    });
+    const connecting = f.send({ type: "connect", locationId: LOCATION_ID });
+    await vi.waitFor(() =>
+      expect(f.business).toHaveBeenCalledWith("connect", LOCATION_ID, expect.any(Function)),
+    );
+    const recordOperation = worker.captureConnectionEvents?.();
+    recordOperation?.({ event: "target", operation: 7, source: "requested" });
+    const state = await sendDiagnostic("diagnostics_state");
+    expect(state).toMatchObject({ ok: true, state: { connectionHistoryCount: 2 } });
+    expect(await sendDiagnostic("diagnostics_clear_history")).toMatchObject({
+      ok: true,
+      state: { historyCount: 0, connectionHistoryCount: 0 },
+    });
+    pending.resolve();
+    await connecting;
+    recordOperation?.({ event: "failure", operation: 7, error: "network_error" });
+    expect(await sendDiagnostic("get_connection_journal")).toMatchObject({
+      journal: { events: [] },
+    });
+    await vi.waitFor(() => expect(f.stored.fuzevpnConnectionJournal).toEqual([]));
+    await f.send({ type: "disconnect" });
+    const current = await sendDiagnostic("get_connection_journal");
+    expect(current).toMatchObject({
+      journal: {
+        events: [
+          expect.objectContaining({ action: "disconnect", phase: "start" }),
+          expect.objectContaining({ action: "disconnect", phase: "end" }),
+        ],
+      },
+    });
+  });
+
+  it.each(["account", "logout"] as const)(
+    "purges the connection journal on %s and ignores an old command completion",
+    async (boundary) => {
+      const f = await fixture({ diagnosticMaintenance: true });
+      const pending = deferred();
+      f.business.mockImplementationOnce(async () => {
+        await pending.promise;
+        return { ok: true };
+      });
+      const connecting = f.send({ type: "connect", locationId: LOCATION_ID });
+      await vi.waitFor(() =>
+        expect(f.business).toHaveBeenCalledWith("connect", LOCATION_ID, expect.any(Function)),
+      );
+      if (boundary === "account") {
+        f.snapshot.profile = { ...f.snapshot.profile!, userId: "other-account" };
+        worker.accountChanged?.();
+      } else await f.send({ type: "logout" });
+      pending.resolve();
+      await connecting;
+      const response = await new Promise<unknown>((resolve) => {
+        f.dispatch({ type: "get_connection_journal" }, f.sender, resolve);
+      });
+      expect(response).toMatchObject({ journal: { events: [] } });
+      await vi.waitFor(() => expect(f.stored.fuzevpnConnectionJournal).toEqual([]));
+    },
+  );
+
+  it("expires journal storage through the maintenance alarm without another command or export", async () => {
+    const now = Date.now();
+    const clock = vi.spyOn(Date, "now").mockReturnValue(now);
+    const f = await fixture({ diagnosticMaintenance: true });
+    await f.send({ type: "connect", locationId: LOCATION_ID });
+    await vi.waitFor(() => expect(f.stored.fuzevpnConnectionJournal).toHaveLength(2));
+    await vi.waitFor(() =>
+      expect(f.diagnosticAlarms.has("fuzevpn-diagnostics-history")).toBe(true),
+    );
+    clock.mockReturnValue(now + 600_001);
+    f.emitEvent("alarms.onAlarm", { name: "fuzevpn-diagnostics-history" });
+    await vi.waitFor(() => expect(f.stored.fuzevpnConnectionJournal).toEqual([]));
+  });
+
   const commands: { request: ExtensionRequest; method: string; args: unknown[] }[] = [
     {
       request: { type: "web_login", disconnectFirst: false },
@@ -299,25 +461,29 @@ describe("worker command responses and fallback publication", () => {
     {
       request: { type: "select_automatic_location" },
       method: "selectLocation",
-      args: [LOCATION_ID],
+      args: [LOCATION_ID, expect.any(Function)],
     },
     {
       request: { type: "select_location", locationId: LOCATION_ID },
       method: "selectLocation",
-      args: [LOCATION_ID],
+      args: [LOCATION_ID, expect.any(Function)],
     },
     {
       request: { type: "connect", locationId: LOCATION_ID },
       method: "connect",
-      args: [LOCATION_ID],
+      args: [LOCATION_ID, expect.any(Function)],
     },
     {
       request: { type: "change_location", locationId: LOCATION_ID },
       method: "changeLocation",
-      args: [LOCATION_ID],
+      args: [LOCATION_ID, expect.any(Function)],
     },
     { request: { type: "disconnect" }, method: "disconnect", args: [] },
-    { request: { type: "retry_connection" }, method: "retryConnection", args: [] },
+    {
+      request: { type: "retry_connection" },
+      method: "retryConnection",
+      args: [false, expect.any(Function)],
+    },
     {
       request: {
         type: "update_security_preferences",
@@ -325,7 +491,7 @@ describe("worker command responses and fallback publication", () => {
         webRtcProtectionEnabled: false,
       },
       method: "updateSecurityPreferences",
-      args: [true, false],
+      args: [true, false, expect.any(Function)],
     },
     { request: { type: "logout" }, method: "logout", args: [] },
     { request: { type: "resend_verification" }, method: "resendVerification", args: [] },
@@ -335,7 +501,7 @@ describe("worker command responses and fallback publication", () => {
     {
       request: { type: "delete_device", deviceId: "old-device" },
       method: "deleteDevice",
-      args: ["old-device"],
+      args: ["old-device", expect.any(Function)],
     },
     { request: { type: "reset_device_identity" }, method: "resetDeviceIdentity", args: [] },
   ];
@@ -367,6 +533,38 @@ describe("worker command responses and fallback publication", () => {
     });
   });
 
+  it("answers an optional IP refresh before its lookup settles and absorbs a late failure", async () => {
+    const f = await fixture();
+    const { NetworkObserver } = await import("../../src/core/background/network-observer");
+    let rejectLookup!: (error: Error) => void;
+    const lookup = new Promise<void>((_resolve, reject) => {
+      rejectLookup = reject;
+    });
+    vi.spyOn(NetworkObserver.prototype, "refresh").mockReturnValue(lookup);
+    let response: ExtensionResponse | undefined;
+    const answered = f.send({ type: "refresh_network" }).then((value) => {
+      response = value;
+    });
+    try {
+      await vi.waitFor(() => expect(response?.ok).toBe(true));
+      expect(response?.snapshot).toMatchObject({
+        status: "disconnected",
+        protected: false,
+        trafficBlocked: false,
+        error: null,
+      });
+      await expect(f.send({ type: "disconnect" })).resolves.toMatchObject({ ok: true });
+      expect(f.business).toHaveBeenCalledExactlyOnceWith("disconnect");
+    } finally {
+      rejectLookup(new Error("IP lookup failed after the response"));
+      await answered;
+    }
+    await expect(f.send({ type: "get_snapshot" })).resolves.toMatchObject({
+      ok: true,
+      snapshot: { status: "disconnected", error: null },
+    });
+  });
+
   it("leaves automatic selection to the refreshed catalog while already protected", async () => {
     const f = await fixture();
     f.snapshot.protected = true;
@@ -374,7 +572,7 @@ describe("worker command responses and fallback publication", () => {
     await expect(f.send({ type: "select_automatic_location" })).resolves.toMatchObject({
       ok: true,
     });
-    expect(f.business).toHaveBeenCalledExactlyOnceWith("connect", null);
+    expect(f.business).toHaveBeenCalledExactlyOnceWith("connect", null, expect.any(Function));
   });
 
   it("preserves a capacity refusal through a catalog refresh response", async () => {
@@ -846,7 +1044,7 @@ describe("worker command responses and fallback publication", () => {
     {
       event: "proxy.onError",
       args: [{ message: "sensitive-proxy-detail" }],
-      controllerArgs: ["handleProxyError", "sensitive-proxy-detail", false],
+      controllerArgs: ["handleProxyError", "proxy_configuration_error", false],
     },
     {
       event: "privacy.webRTCIPHandlingPolicy.onChange",

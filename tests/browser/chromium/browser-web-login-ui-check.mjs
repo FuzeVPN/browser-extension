@@ -161,16 +161,19 @@ async function open(language = "fr", patch = {}) {
             f.requests.push(structuredClone(request));
             if (request.type === "diagnostics_state")
               return {
+                diagnosticsVersion: 1,
                 ok: true,
                 state: {
                   version: 1,
                   workerId: "diagnostics-fixture",
+                  accountEpoch: 0,
                   revision: 1,
                   language,
                   signedIn: false,
                   autoReporting: false,
                   preparing: false,
                   historyCount: 0,
+                  connectionHistoryCount: 0,
                   reports: [],
                 },
               };

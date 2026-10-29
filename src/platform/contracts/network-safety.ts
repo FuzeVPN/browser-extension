@@ -18,6 +18,7 @@ export interface NetworkSafetyService {
   /** Persist a stricter transaction guard until the definitive policy is committed. */
   setExclusionGuard?(entries: SiteExclusion[] | null): Promise<void>;
   suspend(): Promise<void>;
+  /** Request rules only; a blocking claim also requires ProxyService's verified route. */
   block(killSwitchEnabled: boolean): Promise<void>;
   allow(): Promise<void>;
   release(): Promise<void>;

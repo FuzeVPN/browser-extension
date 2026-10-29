@@ -3,18 +3,18 @@
 // Real Firefox integration: the unchanged dist is loaded into a fresh temporary profile.
 // The API certificate and forced DNS mapping exist only in that profile. No production login.
 import assert from "node:assert/strict";
-import { spawnSync } from "node:child_process";
+import { spawn, spawnSync } from "node:child_process";
 import { randomUUID } from "node:crypto";
 import { createServer as httpServer } from "node:http";
 import { createServer as httpsServer } from "node:https";
-import { mkdir, readFile, rm, writeFile } from "node:fs/promises";
-import { join } from "node:path";
+import { access, mkdir, mkdtemp, readFile, rm, writeFile } from "node:fs/promises";
+import { join, resolve } from "node:path";
 import { homedir } from "node:os";
 import { connect as connectTcp } from "node:net";
 import { Builder, By, Key } from "selenium-webdriver";
 import sharp from "sharp";
 import firefox from "selenium-webdriver/firefox.js";
-import { download } from "geckodriver";
+import { existingFirefoxToolchain } from "./toolchain.mjs";
 import { firefoxDesignReview } from "./browser-firefox-design-review.mjs";
 import { firefoxConsentCheck } from "./browser-firefox-consent-check.mjs";
 import {
@@ -28,16 +28,19 @@ import {
   fileHashes,
   projectRoot,
   runDirectory,
+  scopedEnvironment,
   sha256,
   writeJson,
 } from "../../../scripts/validation-common.mjs";
 
+const environment = scopedEnvironment();
+const toolchain = existingFirefoxToolchain(environment);
+Object.assign(process.env, environment, toolchain.environment);
 const output = runDirectory("firefox", "runtime");
-const cache = join(projectRoot, "node_modules/.cache/firefox-validation");
+const cache = assertInsideProject(join(projectRoot, "node_modules/.cache/firefox-validation"));
 await mkdir(cache, { recursive: true });
-const profile = join(output, "profile");
-await mkdir(profile);
-const executable = process.env.FIREFOX_EXECUTABLE || "C:/Program Files/Mozilla Firefox/firefox.exe";
+const profile = await mkdtemp(join(cache, "f-"));
+const executable = toolchain.environment.FIREFOX_EXECUTABLE;
 const extensionId = "fuzevpn-firefox@vpn1euro.com";
 const uuid = "6fba7d51-b5ea-46e2-b92b-cdb7e5dca602";
 const extensionOrigin = `moz-extension://${uuid}`;
@@ -60,6 +63,8 @@ const report = {
   distSha256: sha256(JSON.stringify(before)),
   workerSha256: before["background/service-worker.js"],
   checks: [],
+  toolchain: toolchain.evidence,
+  headless: true,
   limitations: [
     "Legal destinations are synthetic local HTTPS fixtures; public policy content and availability are not checked.",
     "No production account, VPN service, public IPv6, STUN/TURN server or minimum Firefox 140 runtime tested.",
@@ -74,6 +79,8 @@ const received = {
   deviceEnrollments: [],
   sessionAttempts: [],
   diagnostics: [],
+  ip: [],
+  ipTunnelRejections: [],
 };
 let diagnosticResponseMode = "success";
 const legalFixtureRequests = [];
@@ -128,13 +135,17 @@ let failNextDeviceList = false;
 const sockets = new Set();
 let directConnections = 0;
 let driver;
+let geckoProcess;
 let api;
 let proxy;
 let target;
 let tlsTarget;
 let proxyAvailable = true;
-let vpnIpUnavailable = false;
-let vpnIpRequests = 0;
+const primaryIpHost = "api.ipify.org";
+const fallbackIpHost = "ipv4.icanhazip.com";
+const vpnIpModes = { primary: "success", fallback: "success" };
+let vpnTunnelReadyDelayMs = 0;
+let vpnTunnelReadyAt = 0;
 let sessions = 0;
 let pendingChallenge;
 let proxyPort;
@@ -173,6 +184,27 @@ function listen(server, port = 0) {
     server.once("error", reject);
     server.listen(port, "127.0.0.1", () => done(server.address().port));
   });
+}
+function ipFixture(request, response, route) {
+  const hostname = (request.headers.host || "").replace(/:443$/, "");
+  const provider =
+    hostname === primaryIpHost ? "primary" : hostname === fallbackIpHost ? "fallback" : null;
+  if (!provider) return false;
+  const mode = route === "vpn" ? vpnIpModes[provider] : "success";
+  received.ip.push({ hostname, provider, route, mode, at: Date.now() });
+  if (mode === "hang") return true;
+  if (mode === "unavailable") {
+    response.writeHead(503, { "Content-Type": "text/plain", "Cache-Control": "no-store" });
+    response.end("synthetic_unavailable");
+    return true;
+  }
+  const ip = mode === "ipv6" ? "2606:4700:4700::1111" : route === "vpn" ? "9.9.9.9" : "8.8.8.8";
+  response.writeHead(200, {
+    "Content-Type": provider === "primary" ? "application/json" : "text/plain",
+    "Cache-Control": "no-store",
+  });
+  response.end(provider === "primary" ? JSON.stringify({ ip }) : `${ip}\n`);
+  return true;
 }
 async function waitFor(read, predicate, label, timeout = 15000) {
   const start = Date.now();
@@ -275,6 +307,7 @@ function apiReply(path, method, payload = {}) {
         unavailableLocations.set(payload.location_id, rejection.code);
       return [rejection.status, { error: rejection.code }];
     }
+    if (vpnTunnelReadyDelayMs) vpnTunnelReadyAt = Date.now() + vpnTunnelReadyDelayMs;
     return [
       201,
       {
@@ -314,7 +347,7 @@ n = x509.Name([x509.NameAttribute(NameOID.COMMON_NAME, "FuzeVPN isolated Firefox
 t = datetime.now(timezone.utc)
 ca = (x509.CertificateBuilder().subject_name(n).issuer_name(n).public_key(k.public_key()).serial_number(x509.random_serial_number()).not_valid_before(t-timedelta(minutes=5)).not_valid_after(t+timedelta(days=1)).add_extension(x509.BasicConstraints(ca=True,path_length=None),critical=True).sign(k,hashes.SHA256()))
 leafname = x509.Name([x509.NameAttribute(NameOID.COMMON_NAME, "api.fuzevpn.com")])
-c = (x509.CertificateBuilder().subject_name(leafname).issuer_name(n).public_key(k.public_key()).serial_number(x509.random_serial_number()).not_valid_before(t-timedelta(minutes=5)).not_valid_after(t+timedelta(days=1)).add_extension(x509.BasicConstraints(ca=False,path_length=None),critical=True).add_extension(x509.SubjectAlternativeName([x509.DNSName("api.fuzevpn.com"),x509.DNSName("app.fuzevpn.com"),x509.DNSName("fuzevpn.com"),x509.DNSName("api.ipify.org"),x509.DNSName("api64.ipify.org"),x509.DNSName("*.example.com"),x509.DNSName("example.com"),x509.IPAddress(ipaddress.ip_address("127.0.0.1"))]),critical=False).sign(k,hashes.SHA256()))
+c = (x509.CertificateBuilder().subject_name(leafname).issuer_name(n).public_key(k.public_key()).serial_number(x509.random_serial_number()).not_valid_before(t-timedelta(minutes=5)).not_valid_after(t+timedelta(days=1)).add_extension(x509.BasicConstraints(ca=False,path_length=None),critical=True).add_extension(x509.SubjectAlternativeName([x509.DNSName("api.fuzevpn.com"),x509.DNSName("app.fuzevpn.com"),x509.DNSName("fuzevpn.com"),x509.DNSName("api.ipify.org"),x509.DNSName("ipv4.icanhazip.com"),x509.DNSName("*.example.com"),x509.DNSName("example.com"),x509.IPAddress(ipaddress.ip_address("127.0.0.1"))]),critical=False).sign(k,hashes.SHA256()))
 Path(sys.argv[1], "key.pem").write_bytes(k.private_bytes(serialization.Encoding.PEM,serialization.PrivateFormat.PKCS8,serialization.NoEncryption()))
 Path(sys.argv[1], "cert.pem").write_bytes(c.public_bytes(serialization.Encoding.PEM))
 Path(sys.argv[1], "ca.pem").write_bytes(ca.public_bytes(serialization.Encoding.PEM))
@@ -1558,8 +1591,13 @@ async function assertLegalLinks(language, expectedCount) {
       link.kind === "contact"
         ? ({ es: "contacto", de: "kontakt" }[websiteLanguage] ?? "contact")
         : link.kind;
-    assert.equal(link.href, `https://fuzevpn.com/${websiteLanguage}/${page}.html`);
-    assert.equal(link.hreflang, websiteLanguage);
+    assert.equal(
+      link.href,
+      link.kind === "privacy"
+        ? `${extensionOrigin}/privacy-page/privacy.html?lang=${language}`
+        : `https://fuzevpn.com/${websiteLanguage}/${page}.html`,
+    );
+    assert.equal(link.hreflang, link.kind === "privacy" ? language : websiteLanguage);
     assert.equal(link.label, catalog[link.key].message);
     assert.equal(link.target, "_blank");
     assert.deepEqual(link.rel.split(/\s+/).sort(), ["noopener", "noreferrer"]);
@@ -1571,8 +1609,22 @@ async function openLegalFixture(selector, keyboard = false) {
   const original = await driver.getWindowHandle();
   const handles = await driver.getAllWindowHandles();
   const requestStart = legalFixtureRequests.length;
-  const destination = new URL(await driver.findElement(By.css(selector)).getAttribute("href"))
-    .pathname;
+  const destinationUrl = new URL(await driver.findElement(By.css(selector)).getAttribute("href"));
+  const destination = destinationUrl.pathname;
+  const localPrivacy = destination === "/privacy-page/privacy.html";
+  const privacyCatalog = localPrivacy
+    ? JSON.parse(
+        await readFile(
+          join(
+            dist,
+            "_locales",
+            localeDirectory(destinationUrl.searchParams.get("lang")),
+            "messages.json",
+          ),
+          "utf8",
+        ),
+      )
+    : null;
   if (keyboard) {
     const link = await driver.findElement(By.css(selector));
     await driver.executeScript("arguments[0].focus()", link);
@@ -1586,8 +1638,9 @@ async function openLegalFixture(selector, keyboard = false) {
   await driver.switchTo().window(opened.find((handle) => !handles.includes(handle)));
   await waitFor(
     () => driver.getTitle(),
-    (value) => value === "Local legal fixture",
-    "Synthetic legal page loaded",
+    (value) =>
+      value === (localPrivacy ? privacyCatalog.privacyNoticeTitle.message : "Local legal fixture"),
+    "Legal information loaded",
   );
   assert.equal(await driver.executeScript("return window.opener === null"), true);
   assert.equal(await driver.executeScript("return document.referrer"), "");
@@ -1598,7 +1651,9 @@ async function openLegalFixture(selector, keyboard = false) {
   const navigations = legalFixtureRequests
     .slice(requestStart)
     .filter((entry) => entry.path === destination);
-  assert(navigations.length > 0);
+  if (localPrivacy)
+    assert.equal(navigations.length, 0, "Privacy notice stays inside the extension");
+  else assert(navigations.length > 0);
   assert(navigations.every((entry) => entry.referer === null));
 }
 async function verifyLegalInformation() {
@@ -1677,7 +1732,7 @@ async function verifyLegalInformation() {
   await openLegalFixture("#loginPrivacyLink", true);
   assert.equal((await snapshot()).status, "logged_out");
   record("Logged-out privacy link opens by keyboard without opener or referrer", {
-    destination: "local HTTPS fixture only",
+    destination: "bundled extension privacy notice",
   });
 }
 async function verifyLegalConsentLinks() {
@@ -1743,6 +1798,146 @@ async function verifyLegalConsentLinks() {
   await send({ type: "set_language_preference", preference: "fr" });
 }
 
+async function assertIpDoesNotBlockVpn() {
+  const current = await snapshot();
+  assert.equal(current.status, "connected");
+  assert.equal(current.protected, true);
+  assert.equal(current.trafficBlocked, false);
+  await waitFor(
+    () =>
+      driver.executeScript(`return {
+        disconnect:document.querySelector('#protectButton').disabled,
+        location:document.querySelector('#changeLocationButton').disabled
+      }`),
+    (value) => !value.disconnect && !value.location,
+    "VPN controls stay usable during IP observation",
+  );
+  return current;
+}
+
+async function verifyIpObservationRecovery() {
+  const sessionsBeforeWarmup = sessions;
+  const attemptsBeforeWarmup = received.sessionAttempts.length;
+  const ipBeforeWarmup = received.ip.length;
+  const rejectionsBeforeWarmup = received.ipTunnelRejections.length;
+  vpnTunnelReadyDelayMs = 1200;
+  const warming = await send({ type: "connect", locationId: "local-audit" });
+  assert.equal(warming.ok, true, JSON.stringify(warming));
+  assert.equal(warming.snapshot.status, "connected");
+  const sessionCreatedAt = vpnTunnelReadyAt - vpnTunnelReadyDelayMs;
+  assert.equal((await send({ type: "refresh_network" })).ok, true);
+  await assertIpDoesNotBlockVpn();
+  const warmed = await waitFor(
+    snapshot,
+    (value) => value.network.status === "ready" && value.network.mode === "vpn",
+    "Firefox retries refused CONNECT tunnels after VPN startup",
+    5000,
+  );
+  const warmupElapsedMs = Date.now() - sessionCreatedAt;
+  assert.equal(warmed.network.ip, "9.9.9.9");
+  assert(warmupElapsedMs >= 1200 && warmupElapsedMs < 4000, `${warmupElapsedMs} ms`);
+  const tunnelRejections = received.ipTunnelRejections.slice(rejectionsBeforeWarmup);
+  assert(tunnelRejections.length >= 2, "Both IP providers encounter startup CONNECT refusals");
+  assert(tunnelRejections.every((entry) => entry.at < vpnTunnelReadyAt));
+  assert.equal(sessions, sessionsBeforeWarmup + 1);
+  assert.equal(received.sessionAttempts.length, attemptsBeforeWarmup + 1);
+  assert.equal(
+    received.ip.slice(ipBeforeWarmup).filter((entry) => entry.route === "vpn").length,
+    1,
+  );
+  await assertIpDoesNotBlockVpn();
+  record("Firefox retries startup CONNECT failures without reconnecting the VPN", {
+    elapsedMs: warmupElapsedMs,
+    tunnelRejections: tunnelRejections.map((entry) => ({
+      connect: entry.connect,
+      elapsedMs: entry.at - sessionCreatedAt,
+    })),
+    sessionsCreated: sessions - sessionsBeforeWarmup,
+    ip: warmed.network.ip,
+    simulated: true,
+  });
+  vpnTunnelReadyDelayMs = 0;
+  vpnTunnelReadyAt = 0;
+  assert.equal((await send({ type: "disconnect" })).ok, true);
+
+  for (const [index, mode] of ["unavailable", "hang", "ipv6"].entries()) {
+    if (index > 0) assert.equal((await send({ type: "disconnect" })).ok, true);
+    vpnIpModes.primary = mode;
+    vpnIpModes.fallback = "success";
+    const ipStart = received.ip.length;
+    const connected = await send({ type: "connect", locationId: "local-audit" });
+    assert.equal(connected.ok, true, JSON.stringify(connected));
+    assert.equal(connected.snapshot.status, "connected");
+    assert.equal((await send({ type: "refresh_network" })).ok, true);
+    await assertIpDoesNotBlockVpn();
+    const observed = await waitFor(
+      snapshot,
+      (value) => value.network.status === "ready" && value.network.mode === "vpn",
+      `Firefox fallback after primary ${mode}`,
+    );
+    assert.equal(observed.network.ip, "9.9.9.9");
+    const displayed = await waitFor(
+      () => driver.findElement(By.id("publicIp")).getText(),
+      (value) => value.includes("9.9.9.9"),
+      "Only the observed IPv4 is displayed",
+    );
+    assert(!displayed.includes("2606:4700:4700::1111"));
+    const requests = received.ip.slice(ipStart);
+    assert.equal(requests.filter((request) => request.provider === "primary").length, 1);
+    assert.equal(requests.filter((request) => request.provider === "fallback").length, 1);
+    assert(requests.every((request) => request.route === "vpn"));
+    await assertIpDoesNotBlockVpn();
+    record(`Firefox IPv4 fallback recovers from primary ${mode} on the VPN route`, {
+      requests,
+      ip: observed.network.ip,
+      simulated: true,
+    });
+  }
+  for (const hostname of [primaryIpHost, fallbackIpHost])
+    assert(
+      received.proxy.some((entry) => entry.connect === `${hostname}:443` && entry.authenticated),
+      `${hostname} uses an authenticated CONNECT tunnel`,
+    );
+
+  assert.equal((await send({ type: "disconnect" })).ok, true);
+  vpnIpModes.primary = "unavailable";
+  vpnIpModes.fallback = "unavailable";
+  const connected = await send({ type: "connect", locationId: "local-audit" });
+  assert.equal(connected.ok, true, JSON.stringify(connected));
+  assert.equal((await send({ type: "refresh_network" })).ok, true);
+  const failed = await waitFor(
+    snapshot,
+    (value) => value.network.status === "unavailable",
+    "Both Firefox IP providers fail independently of the VPN",
+  );
+  assert.equal(failed.network.ip, null);
+  await waitFor(
+    () => driver.findElement(By.id("publicIp")).getText(),
+    (value) => value.includes("Indisponible") && !value.includes("9.9.9.9"),
+    "Failed IP observation clears the address",
+  );
+  await assertIpDoesNotBlockVpn();
+  await click("#changeLocationButton");
+  await waitFor(locationsUi, (value) => value.open, "Location selector works with no public IP");
+  await click("#closeLocationButton");
+  await assertIpDoesNotBlockVpn();
+  record("Firefox keeps VPN protection and location controls usable when both IP providers fail");
+
+  vpnIpModes.primary = "success";
+  vpnIpModes.fallback = "success";
+  const recovered = await waitFor(
+    snapshot,
+    (value) => value.network.status === "ready" && value.network.ip === "9.9.9.9",
+    "Firefox popup automatically recovers after the IP service returns",
+  );
+  await assertIpDoesNotBlockVpn();
+  record("Firefox popup automatically recovers the IPv4 without reconnecting", {
+    ip: recovered.network.ip,
+    simulated: true,
+  });
+  return send({ type: "get_snapshot" });
+}
+
 try {
   runtimeValidation: {
     const tls = await certificate();
@@ -1761,14 +1956,7 @@ try {
           return;
         }
         received.api.push({ method: request.method, path: request.url, at: Date.now() });
-        if (/^api(?:64)?\.ipify\.org(?::443)?$/.test(request.headers.host || "")) {
-          response.writeHead(200, {
-            "Content-Type": "application/json",
-            "Cache-Control": "no-store",
-          });
-          response.end(JSON.stringify({ ip: "8.8.8.8" }));
-          return;
-        }
+        if (ipFixture(request, response, "direct")) return;
         const path = new URL(request.url, "https://api.fuzevpn.com").pathname;
         let payload = "";
         for await (const chunk of request) {
@@ -1827,18 +2015,10 @@ try {
       directConnections++;
     });
     tlsTarget = track(
-      httpsServer(tls, (_request, response) => {
-        vpnIpRequests++;
-        if (vpnIpUnavailable) {
-          response.writeHead(503, { "Content-Type": "application/json" });
-          response.end(JSON.stringify({ error: "synthetic_unavailable" }));
-          return;
-        }
-        response.writeHead(200, {
-          "Content-Type": "application/json",
-          "Cache-Control": "no-store",
-        });
-        response.end(JSON.stringify({ ip: "9.9.9.9" }));
+      httpsServer(tls, (request, response) => {
+        if (ipFixture(request, response, "vpn")) return;
+        response.writeHead(404);
+        response.end();
       }),
     );
     const tlsTargetPort = await listen(tlsTarget);
@@ -1877,13 +2057,23 @@ try {
         connect: request.url,
         authenticated,
       });
-      if (!proxyAvailable || !/^api(?:64)?\.ipify\.org:443$/.test(request.url)) {
+      if (
+        !proxyAvailable ||
+        ![`${primaryIpHost}:443`, `${fallbackIpHost}:443`].includes(request.url)
+      ) {
         socket.destroy();
         return;
       }
       if (!authenticated) {
         socket.end(
           'HTTP/1.1 407 Proxy Authentication Required\r\nProxy-Authenticate: Basic realm="firefox-test"\r\nContent-Length: 0\r\n\r\n',
+        );
+        return;
+      }
+      if (vpnTunnelReadyDelayMs && Date.now() < vpnTunnelReadyAt) {
+        received.ipTunnelRejections.push({ connect: request.url, at: Date.now() });
+        socket.end(
+          "HTTP/1.1 503 Service Unavailable\r\nContent-Length: 0\r\nConnection: close\r\n\r\n",
         );
         return;
       }
@@ -1898,11 +2088,26 @@ try {
       socket.on("error", () => upstream.destroy());
     });
     proxyPort = await listen(proxy);
-    const gecko = await download(process.env.GECKODRIVER_VERSION, cache);
-    report.geckodriver = spawnSync(gecko, ["--version"], {
+    const geckoVersion = "0.37.1";
+    const gecko = resolve(
+      process.env.GECKODRIVER_EXECUTABLE || join(cache, `geckodriver-${geckoVersion}.exe`),
+    );
+    await access(gecko).catch(() => {
+      throw new Error(
+        "Existing geckodriver missing. Set GECKODRIVER_EXECUTABLE; native validation never downloads a driver.",
+      );
+    });
+    const geckoProbe = spawnSync(gecko, ["--version"], {
       encoding: "utf8",
       windowsHide: true,
-    }).stdout.trim();
+      timeout: 30000,
+    });
+    assert.equal(geckoProbe.status, 0, geckoProbe.stderr || String(geckoProbe.error));
+    report.geckodriver = geckoProbe.stdout.trim();
+    assert.match(report.geckodriver, /^geckodriver 0\.37\.1\b/);
+    report.geckodriverExecutable = gecko;
+    report.geckodriverSha256 = sha256(await readFile(gecko));
+    report.profileRoot = profile;
     const options = new firefox.Options()
       .setBinary(executable)
       .addArguments("-headless", "-no-remote", "--allow-system-access", "-profile", profile);
@@ -1933,21 +2138,58 @@ try {
         : {}),
     }))
       options.setPreference(key, value);
+    // Selenium's local DriverService does not hide the Windows console. Start only
+    // the explicitly selected existing driver here, then use its loopback endpoint.
+    const reservation = httpServer();
+    const geckoPort = await listen(reservation);
+    await new Promise((done, reject) =>
+      reservation.close((error) => (error ? reject(error) : done())),
+    );
+    let geckoFailure;
+    let geckoLog = "";
+    geckoProcess = spawn(
+      gecko,
+      [
+        "--host",
+        "127.0.0.1",
+        "--port",
+        String(geckoPort),
+        "--allow-system-access",
+        "--profile-root",
+        cache,
+      ],
+      { cwd: projectRoot, env: process.env, stdio: ["ignore", "pipe", "pipe"], windowsHide: true },
+    );
+    geckoProcess.once("error", (error) => {
+      geckoFailure = error;
+    });
+    geckoProcess.once("exit", (code, signal) => {
+      geckoFailure = new Error(`Geckodriver exited (${code ?? signal}): ${geckoLog}`);
+    });
+    for (const stream of [geckoProcess.stdout, geckoProcess.stderr])
+      stream.on("data", (chunk) => {
+        geckoLog = `${geckoLog}${chunk}`.slice(-8000);
+      });
+    const geckoUrl = `http://127.0.0.1:${geckoPort}`;
+    await waitFor(
+      async () => {
+        if (geckoFailure) throw geckoFailure;
+        return fetch(`${geckoUrl}/status`, { signal: AbortSignal.timeout(1000) })
+          .then((response) => response.json())
+          .catch(() => null);
+      },
+      (value) => value?.value?.ready === true,
+      "Explicit local geckodriver ready",
+    );
     driver = await new Builder()
+      .usingServer(geckoUrl)
       .forBrowser("firefox")
       .setFirefoxOptions(options)
-      .setFirefoxService(
-        new firefox.ServiceBuilder(gecko).addArguments(
-          "--allow-system-access",
-          "--profile-root",
-          cache,
-        ),
-      )
       .build();
     await driver.manage().setTimeouts({ script: 20000, pageLoad: 10000 });
     await driver.manage().window().setRect({ width: 520, height: 900 });
     report.firefox = (await driver.getCapabilities()).get("browserVersion");
-    assert(Number.parseInt(report.firefox, 10) >= 140);
+    assert.equal(report.firefox, toolchain.evidence.expected.firefox);
     const certificateBody = (await readFile(join(output, "ca.pem"), "utf8")).replace(
       /-----[^-]+-----|\s/g,
       "",
@@ -2047,37 +2289,7 @@ try {
     record("Private-permission message explains the requirement in normal Firefox windows");
     assert.equal(await permissions(true), true);
     await openPopup();
-    vpnIpUnavailable = true;
-    const beforeTransientVpnIpFailure = vpnIpRequests;
-    let connected = await send({ type: "connect", locationId: "local-audit" });
-    assert.equal(connected.ok, true, JSON.stringify(connected));
-    assert.equal(connected.snapshot.status, "connected");
-    record("Synthetic authenticated account connects", { protected: connected.snapshot.protected });
-    const failedVpnIp = await send({ type: "refresh_network" });
-    assert.equal(failedVpnIp.snapshot.network.status, "unavailable");
-    assert.equal(failedVpnIp.snapshot.status, "connected");
-    assert.equal(failedVpnIp.snapshot.protected, true);
-    assert.equal(failedVpnIp.snapshot.trafficBlocked, false);
-    assert.equal(vpnIpRequests, beforeTransientVpnIpFailure + 2);
-    record("Firefox keeps the VPN connected and limits failed IP-service lookups to two attempts");
-    vpnIpUnavailable = false;
-    const vpnObservation = await waitFor(
-      snapshot,
-      (value) => value.network.status === "ready" && value.network.mode === "vpn",
-      "VPN synthetic IP observation",
-    );
-    assert.equal(vpnObservation.network.ip, "9.9.9.9");
-    assert(
-      received.proxy.some((entry) => entry.connect === "api.ipify.org:443" && entry.authenticated),
-    );
-    record("VPN IP probe uses authenticated CONNECT and displays synthetic address", {
-      ip: vpnObservation.network.ip,
-      simulated: true,
-    });
-    assert.equal(vpnIpRequests, beforeTransientVpnIpFailure + 3);
-    assert.equal(vpnObservation.status, "connected");
-    assert.equal(vpnObservation.protected, true);
-    record("Firefox popup automatically recovers IP measurement on the authenticated VPN route");
+    let connected = await verifyIpObservationRecovery();
     const protectedUrl = `http://protected.example.com:${targetPort}`;
     assert.equal((await navigate(`${protectedUrl}/active-auth`)).title, "Proxied fixture");
     assert(
@@ -2125,7 +2337,7 @@ try {
     const webRtc = await extension(
       "browser.privacy.network.webRTCIPHandlingPolicy.get({}).then(arguments[arguments.length-1]);",
     );
-    assert.equal(webRtc.value, "disable_non_proxied_udp");
+    assert.equal(webRtc.value, "proxy_only");
     record("Firefox WebRTC policy is enabled", webRtc);
     const prediction = await extension(
       "browser.privacy.network.networkPredictionEnabled.get({}).then(arguments[arguments.length-1]);",
@@ -2292,6 +2504,17 @@ try {
   process.exitCode = 1;
 } finally {
   await driver?.quit().catch(() => undefined);
+  if (geckoProcess?.pid && geckoProcess.exitCode === null && geckoProcess.signalCode === null) {
+    const stopped = new Promise((done) => geckoProcess.once("exit", done));
+    if (process.platform === "win32")
+      spawnSync("taskkill", ["/PID", String(geckoProcess.pid), "/T", "/F"], {
+        windowsHide: true,
+        stdio: "ignore",
+        timeout: 15000,
+      });
+    else geckoProcess.kill();
+    await stopped;
+  }
   for (const socket of sockets) socket.destroy();
   for (const server of [api, proxy, target, tlsTarget]) server?.close();
   // Only this finished run's verified local temporary profile and test key material.

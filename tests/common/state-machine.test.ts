@@ -564,11 +564,13 @@ describe("connection state machine", () => {
     await harness.controller.initialize();
     await harness.controller.connect("frankfurt-01");
     expect(harness.controller.getSnapshot()).toMatchObject({
-      status: "blocked",
+      status: "error",
       protected: false,
-      trafficBlocked: true,
+      trafficBlocked: false,
+      blockingScope: "unverified",
       error: "proxy_controlled_by_extension",
     });
+    expect(harness.safety.status.filterActive).toBe(true);
   });
 
   it("keeps the active proxy after an isolated fatal request error", async () => {

@@ -1,0 +1,155 @@
+<!doctype html>
+<!-- SPDX-License-Identifier: MPL-2.0 -->
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Privacy in the FuzeVPN extension</title>
+    <link rel="stylesheet" href="./privacy.css" />
+  </head>
+  <body>
+    <main>
+      <header>
+        <img src="/brand/fuzevpn-logo.svg" alt="FuzeVPN" width="160" height="40" />
+        <h1 data-i18n="privacyNoticeTitle">Privacy in the FuzeVPN extension</h1>
+        <p class="intro" data-i18n="privacyNoticeIntro">
+          This notice describes the data used by this extension. It supplements the general FuzeVPN
+          privacy policy, linked below. Optional diagnostic sending is separate from the data needed
+          to sign in and use the VPN.
+        </p>
+        <p class="updated" data-i18n="privacyNoticeUpdated">Notice updated on 19 October 2026</p>
+      </header>
+
+      <section aria-labelledby="serviceTitle">
+        <h2 id="serviceTitle" data-i18n="privacyNoticeServiceTitle">Account and VPN service</h2>
+        <p data-i18n="privacyNoticeService">
+          The extension exchanges authentication, account, subscription, device and proxy-session
+          data with api.fuzevpn.com. The VPN proxy carries the traffic routed through it. These
+          connections expose network metadata to the receiving service; this notice makes no
+          separate promise about server logging.
+        </p>
+      </section>
+
+      <section aria-labelledby="localTitle">
+        <h2 id="localTitle" data-i18n="privacyNoticeLocalTitle">Data stored in your browser</h2>
+        <p data-i18n="privacyNoticeLocal">
+          Browser storage holds your session, account details, preferences, site exclusions and
+          device identity. Technical journals are kept locally for up to 10 minutes, even when
+          automatic reporting is off. Diagnostic drafts and queued reports expire locally after 24
+          hours; cleanup runs when the extension can execute.
+        </p>
+      </section>
+
+      <section aria-labelledby="ipTitle">
+        <h2 id="ipTitle" data-i18n="privacyNoticeIpTitle">Public IP checks and third parties</h2>
+        <p data-i18n="privacyNoticeIp">
+          IP display and network diagnostics contact api.ipify.org. IP display may use
+          ipv4.icanhazip.com as a fallback. The provider receives the connection IP and ordinary
+          request metadata: your public IP in direct mode, or the VPN exit IP when proxied. These
+          requests omit cookies and referrers and send no account token or browsing history.
+        </p>
+      </section>
+
+      <section aria-labelledby="reportsTitle">
+        <h2 id="reportsTitle" data-i18n="privacyNoticeReportsTitle">
+          What diagnostic reports contain
+        </h2>
+        <p data-i18n="privacyNoticeReports">
+          Reports can include a random report identifier, timestamps, extension and browser
+          versions, operating-system family and architecture, connection and protection states,
+          error codes, counts, durations and check results. Full reports can include recent
+          technical events. Their JSON excludes passwords, authentication tokens, email addresses,
+          IP addresses, visited URLs and excluded domains. You can inspect and export a full report
+          before sending it.
+        </p>
+      </section>
+
+      <section aria-labelledby="accountTitle">
+        <h2 id="accountTitle" data-i18n="privacyNoticeAccountTitle">
+          Recipient and account attribution
+        </h2>
+        <p data-i18n="privacyNoticeAccount">
+          Reports are sent to FuzeVPN at api.fuzevpn.com/v1/diagnostics over an authenticated
+          connection. This API connection bypasses the VPN proxy: FuzeVPN receives your direct
+          public IP even while the VPN is active. Reports are linked to the signed-in account, not
+          anonymous. The authentication header and IP are separate from the report JSON. A
+          successful receipt confirms acceptance by that endpoint, not that a support agent has read
+          the report.
+        </p>
+      </section>
+
+      <section aria-labelledby="choiceTitle">
+        <h2 id="choiceTitle" data-i18n="privacyNoticeChoiceTitle">
+          Optional sending and withdrawal
+        </h2>
+        <p data-i18n="privacyNoticeChoice">
+          Automatic sending is off by default. Enabling it permits simple error reports for that
+          account. Manual full-report sending requires the send checkbox. Firefox also requires its
+          optional technical-data permission. Disable automatic sending to stop it and remove
+          pending automatic reports; cancel individual pending sends separately. Refusing diagnostic
+          sending does not prevent VPN use.
+        </p>
+      </section>
+
+      <section aria-labelledby="deleteTitle">
+        <h2 id="deleteTitle" data-i18n="privacyNoticeDeleteTitle">
+          Local deletion and downloaded files
+        </h2>
+        <p data-i18n="privacyNoticeDelete">
+          In Diagnostics, clear technical history or delete an individual local report. Clearing
+          history does not erase existing report copies. Cancelling or deleting locally cannot
+          recall data already received by the service, including an upload that arrived before
+          cancellation. Downloaded exports are separate files that you must delete yourself.
+        </p>
+      </section>
+
+      <section aria-labelledby="serverTitle">
+        <h2 id="serverTitle" data-i18n="privacyNoticeServerTitle">Server retention and requests</h2>
+        <p data-i18n="privacyNoticeServer">
+          This extension does not control or verify server retention or server-side deletion. For
+          the retention period applied by FuzeVPN and requests concerning reports already sent,
+          consult the general privacy policy or contact FuzeVPN. No fixed server-retention period is
+          guaranteed by this notice.
+        </p>
+      </section>
+
+      <section aria-labelledby="supportTitle">
+        <h2 id="supportTitle" data-i18n="privacyNoticeSupportTitle">
+          Diagnostics and support are separate
+        </h2>
+        <p data-i18n="privacyNoticeSupport">
+          Sending a diagnostic report does not itself send a support message from the extension. To
+          explain a problem or request deletion of a received report, use the FuzeVPN contact
+          channel below. If you choose to share an exported file through another channel, check its
+          contents first.
+        </p>
+      </section>
+
+      <footer aria-labelledby="linksTitle">
+        <h2 id="linksTitle" data-i18n="privacyNoticeLinksTitle">Service policy and contact</h2>
+        <nav>
+          <a href="../diagnostics-page/diagnostics.html" data-i18n="privacyNoticeManage">
+            Open Diagnostics
+          </a>
+          <a
+            href="https://fuzevpn.com/en/privacy.html"
+            data-legal-link="general-privacy"
+            target="_blank"
+            rel="noopener noreferrer"
+            data-i18n="generalPrivacyPolicy"
+            >General privacy policy</a
+          >
+          <a
+            href="https://fuzevpn.com/en/contact.html"
+            data-legal-link="contact"
+            target="_blank"
+            rel="noopener noreferrer"
+            data-i18n="contactSupport"
+            >Contact support</a
+          >
+        </nav>
+      </footer>
+    </main>
+    <script type="module" src="./privacy.ts"></script>
+  </body>
+</html>

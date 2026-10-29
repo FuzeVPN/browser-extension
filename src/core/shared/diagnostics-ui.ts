@@ -57,6 +57,7 @@ export interface DiagnosticUiState {
   autoReporting: boolean;
   preparing: boolean;
   historyCount: number;
+  connectionHistoryCount?: number;
   reports: DiagnosticReportSummary[];
 }
 
@@ -69,6 +70,17 @@ export type DiagnosticRequest =
   | { type: "diagnostics_cancel"; reportId: string }
   | { type: "diagnostics_delete"; reportId: string }
   | { type: "diagnostics_clear_history" };
+
+/** Origin of an account-sensitive consent action, checked by the worker at commit. */
+export interface DiagnosticConsentContext {
+  workerId: string;
+  accountEpoch: number;
+}
+
+export type DiagnosticWorkerRequest =
+  | Exclude<DiagnosticRequest, { type: "diagnostics_set_auto" | "diagnostics_send" }>
+  | (Extract<DiagnosticRequest, { type: "diagnostics_set_auto" | "diagnostics_send" }> &
+      DiagnosticConsentContext);
 
 export interface DiagnosticResponse {
   diagnosticsVersion: 1;
@@ -84,20 +96,32 @@ export interface DiagnosticsChangedMessage {
   state: DiagnosticUiState;
 }
 
-export function isDiagnosticRequest(value: unknown): value is DiagnosticRequest {
+export function isDiagnosticRequest(value: unknown): value is DiagnosticWorkerRequest {
   if (!value || typeof value !== "object" || Array.isArray(value)) return false;
   const candidate = value as Record<string, unknown>;
   const noExtra = (...keys: string[]) => Object.keys(candidate).every((key) => keys.includes(key));
+  const hasConsentContext = () =>
+    typeof candidate.workerId === "string" &&
+    candidate.workerId.length > 0 &&
+    candidate.workerId.length <= 200 &&
+    typeof candidate.accountEpoch === "number" &&
+    Number.isSafeInteger(candidate.accountEpoch) &&
+    candidate.accountEpoch >= 0;
   switch (candidate.type) {
     case "diagnostics_state":
     case "diagnostics_run":
     case "diagnostics_clear_history":
       return noExtra("type");
     case "diagnostics_set_auto":
-      return noExtra("type", "enabled") && typeof candidate.enabled === "boolean";
+      return (
+        noExtra("type", "enabled", "workerId", "accountEpoch") &&
+        typeof candidate.enabled === "boolean" &&
+        hasConsentContext()
+      );
     case "diagnostics_send":
       if (
-        !noExtra("type", "reportId", "consent", "noticeVersion") ||
+        !noExtra("type", "reportId", "consent", "noticeVersion", "workerId", "accountEpoch") ||
+        !hasConsentContext() ||
         candidate.consent !== true ||
         candidate.noticeVersion !== 1
       )

@@ -179,6 +179,9 @@
   "deleteDevice": {
     "message": "Usuń urządzenie"
   },
+  "deleteDeviceNamed": {
+    "message": "Usuń urządzenie $1"
+  },
   "confirmDeleteDevice": {
     "message": "Usunąć „$1”? Połączenia VPN zostaną zakończone, a profile usunięte."
   },
@@ -360,7 +363,7 @@
     "message": "Niedostępny"
   },
   "ipLookupExplanation": {
-    "message": "Adres IP sprawdzany przez ipify przy użyciu bieżącego połączenia. Historia przeglądania nie jest wysyłana."
+    "message": "Adres IP jest sprawdzany przez bieżące połączenie za pomocą ipify lub zapasowo icanhazip. Historia przeglądania nie jest wysyłana."
   },
   "automaticLocation": {
     "message": "Automatycznie"
@@ -567,19 +570,22 @@
     "message": "Twoje dane"
   },
   "diagnosticsPrivacy": {
-    "message": "Raporty zawierają stany techniczne i kody błędów, nigdy hasła, tokeny, adresy e-mail, adresy IP, odwiedzane adresy URL ani wykluczone domeny."
+    "message": "JSON raportu zawiera stany techniczne i kody błędów, bez haseł, tokenów, adresów e-mail, adresów IP, odwiedzonych adresów URL ani wykluczonych domen. Wysyłanie jest uwierzytelniane i wiąże raport z Twoim kontem. Informacje o danych sieciowych znajdziesz w informacji o prywatności."
   },
   "diagnosticsAuto": {
     "message": "Automatycznie wysyłaj raporty o ważnych błędach"
   },
   "diagnosticsAutoHelp": {
-    "message": "Domyślnie wyłączone. Dla tego konta wysyłane są tylko proste raporty techniczne, bez historii przeglądania. Pomoc przechowuje je przez 30 dni."
+    "message": "Domyślnie wyłączone. Włączenie tej opcji powoduje wysyłanie prostych raportów technicznych dla tego konta, bez historii przeglądania. Wyłącz ją tutaj, aby zatrzymać automatyczne wysyłanie i usunąć oczekujące raporty automatyczne."
   },
   "diagnosticsHistoryHelp": {
-    "message": "Historia techniczna pozostaje lokalna: do 200 zdarzeń z 10 minut, także bez automatycznego wysyłania. Nie zawiera historii przeglądania i jest usuwana po zamknięciu przeglądarki lub zmianie konta."
+    "message": "Historia techniczna pozostaje lokalna: do 200 zdarzeń w każdym dzienniku z ostatnich 10 minut, nawet bez automatycznego wysyłania. Nie zawiera historii przeglądania i jest usuwana ręcznie, po zamknięciu przeglądarki lub zmianie konta."
   },
   "diagnosticsHistoryCount": {
     "message": "Lokalne zdarzenia techniczne: $1"
+  },
+  "diagnosticsConnectionLog": {
+    "message": "Eksportuj dziennik połączenia"
   },
   "diagnosticsAccountRequired": {
     "message": "Zaloguj się, aby włączyć wysyłanie. Raport można przeglądać i eksportować bez konta."
@@ -624,10 +630,10 @@
     "message": "Usuń raport lokalny"
   },
   "diagnosticsRetention": {
-    "message": "Wysłane raporty są przypisane do zalogowanego konta i przechowywane przez pomoc przez 30 dni. Usunięcie raportu lokalnego nie usuwa raportu już odebranego przez pomoc."
+    "message": "Lokalne raporty wygasają po 24 godzinach. Usunięcie raportu tutaj nie usuwa raportu już odebranego przez usługę. Szczegóły przechowywania na serwerze i składania wniosków o usunięcie znajdziesz w informacji o prywatności."
   },
   "diagnosticsConsent": {
-    "message": "Wyślij ten raport do pomocy"
+    "message": "Wyślij ten raport diagnostyczny do FuzeVPN"
   },
   "diagnosticsDataCollectionRequired": {
     "message": "Firefox musi zezwolić na zbieranie danych technicznych, aby wysłać diagnostykę. Spróbuj ponownie i udziel tego uprawnienia."
@@ -702,7 +708,7 @@
     "message": "Oczekuje na ważną sesję tego samego konta"
   },
   "diagnosticsStatus_received": {
-    "message": "Odebrany przez pomoc"
+    "message": "Odebrano przez usługę"
   },
   "diagnosticsStatus_failed": {
     "message": "Wysyłanie nie powiodło się"
@@ -743,6 +749,9 @@
   "noAvailableFavoriteLocations": {
     "message": "Twoje ulubione lokalizacje są tymczasowo niedostępne."
   },
+  "error_location_favorites_limit": {
+    "message": "Osiągnięto limit 100 ulubionych lokalizacji. Usuń jedną, aby dodać kolejną."
+  },
   "error_server_full": {
     "message": "Ten serwer jest pełny. Wybierz inną lokalizację."
   },
@@ -777,7 +786,7 @@
     "message": "Informacje prawne"
   },
   "privacyPolicy": {
-    "message": "Polityka prywatności"
+    "message": "Informacja o prywatności rozszerzenia"
   },
   "termsAndConditions": {
     "message": "Warunki korzystania i sprzedaży"
@@ -826,5 +835,77 @@
   },
   "deviceKindFirefox": {
     "message": "Przeglądarka Firefox"
+  },
+  "generalPrivacyPolicy": {
+    "message": "Ogólna polityka prywatności"
+  },
+  "privacyNoticeTitle": {
+    "message": "Prywatność w rozszerzeniu FuzeVPN"
+  },
+  "privacyNoticeIntro": {
+    "message": "Ta informacja opisuje dane wykorzystywane przez to rozszerzenie. Uzupełnia ogólną politykę prywatności FuzeVPN, do której link znajduje się poniżej. Opcjonalne wysyłanie diagnostyki jest niezależne od danych potrzebnych do logowania i korzystania z VPN."
+  },
+  "privacyNoticeUpdated": {
+    "message": "Informację zaktualizowano 19 października 2026 r."
+  },
+  "privacyNoticeServiceTitle": {
+    "message": "Konto i usługa VPN"
+  },
+  "privacyNoticeService": {
+    "message": "Rozszerzenie wymienia z api.fuzevpn.com dane uwierzytelniania, konta, subskrypcji, urządzenia i sesji proxy. Serwer proxy VPN przenosi kierowany przez niego ruch. Takie połączenia ujawniają metadane sieciowe usłudze odbierającej; ta informacja nie zawiera odrębnych zapewnień dotyczących rejestrowania danych na serwerach."
+  },
+  "privacyNoticeLocalTitle": {
+    "message": "Dane przechowywane w przeglądarce"
+  },
+  "privacyNoticeLocal": {
+    "message": "Pamięć przeglądarki przechowuje Twoją sesję, dane konta, preferencje, wykluczenia witryn i tożsamość urządzenia. Dzienniki techniczne są przechowywane lokalnie przez maksymalnie 10 minut, także gdy automatyczne wysyłanie jest wyłączone. Szkice diagnostyczne i raporty w kolejce wygasają lokalnie po 24 godzinach; czyszczenie następuje, gdy rozszerzenie ma możliwość działania."
+  },
+  "privacyNoticeIpTitle": {
+    "message": "Sprawdzanie publicznego IP i usługi zewnętrzne"
+  },
+  "privacyNoticeIp": {
+    "message": "Wyświetlanie IP i diagnostyka sieci łączą się z api.ipify.org. Wyświetlanie IP może korzystać z ipv4.icanhazip.com jako usługi zapasowej. Dostawca otrzymuje adres IP połączenia i zwykłe metadane żądania: Twój publiczny adres IP w trybie bezpośrednim lub adres wyjściowy VPN, gdy żądanie przechodzi przez proxy. Te żądania nie zawierają plików cookie ani nagłówków Referer i nie przesyłają tokena konta ani historii przeglądania."
+  },
+  "privacyNoticeReportsTitle": {
+    "message": "Co zawierają raporty diagnostyczne"
+  },
+  "privacyNoticeReports": {
+    "message": "Raporty mogą zawierać losowy identyfikator raportu, znaczniki czasu, wersje rozszerzenia i przeglądarki, rodzinę i architekturę systemu operacyjnego, stany połączenia i ochrony, kody błędów, liczniki, czasy trwania i wyniki sprawdzeń. Pełne raporty mogą zawierać niedawne zdarzenia techniczne. Ich JSON nie zawiera haseł, tokenów uwierzytelniania, adresów e-mail, adresów IP, odwiedzonych adresów URL ani wykluczonych domen. Przed wysłaniem możesz przejrzeć i wyeksportować pełny raport."
+  },
+  "privacyNoticeAccountTitle": {
+    "message": "Odbiorca i powiązanie z kontem"
+  },
+  "privacyNoticeAccount": {
+    "message": "Raporty są wysyłane do FuzeVPN pod adres api.fuzevpn.com/v1/diagnostics przez uwierzytelnione połączenie. To połączenie z API omija serwer proxy VPN: FuzeVPN otrzymuje publiczny adres IP Twojego połączenia bezpośredniego także wtedy, gdy VPN jest aktywny. Raporty są powiązane z zalogowanym kontem i nie są anonimowe. Nagłówek uwierzytelniania i adres IP są przekazywane poza JSON raportu. Potwierdzenie odbioru oznacza przyjęcie raportu przez usługę pod tym adresem, a nie przeczytanie go przez pracownika pomocy technicznej."
+  },
+  "privacyNoticeChoiceTitle": {
+    "message": "Opcjonalne wysyłanie i wycofanie zgody"
+  },
+  "privacyNoticeChoice": {
+    "message": "Automatyczne wysyłanie jest domyślnie wyłączone. Włączenie go zezwala na proste raporty o błędach dla tego konta. Ręczne wysłanie pełnego raportu wymaga zaznaczenia pola wysyłania. Firefox wymaga także opcjonalnego uprawnienia dotyczącego danych technicznych. Wyłącz automatyczne wysyłanie, aby je zatrzymać i usunąć oczekujące raporty automatyczne; poszczególne oczekujące wysyłki anuluj osobno. Odmowa wysyłania diagnostyki nie uniemożliwia korzystania z VPN."
+  },
+  "privacyNoticeDeleteTitle": {
+    "message": "Usuwanie lokalne i pobrane pliki"
+  },
+  "privacyNoticeDelete": {
+    "message": "W Diagnostyce możesz wyczyścić historię techniczną lub usunąć pojedynczy lokalny raport. Wyczyszczenie historii nie usuwa istniejących kopii raportów. Lokalne anulowanie lub usunięcie nie pozwala wycofać danych już odebranych przez usługę, także jeśli wysyłanie zakończyło się przed anulowaniem. Pobrane eksporty są oddzielnymi plikami, które musisz usunąć samodzielnie."
+  },
+  "privacyNoticeServerTitle": {
+    "message": "Przechowywanie na serwerze i wnioski"
+  },
+  "privacyNoticeServer": {
+    "message": "To rozszerzenie nie kontroluje ani nie weryfikuje przechowywania danych na serwerze ani ich usuwania po stronie serwera. Aby poznać okres przechowywania stosowany przez FuzeVPN lub złożyć wniosek dotyczący już wysłanych raportów, zapoznaj się z ogólną polityką prywatności lub skontaktuj się z FuzeVPN. Ta informacja nie gwarantuje żadnego stałego okresu przechowywania na serwerze."
+  },
+  "privacyNoticeSupportTitle": {
+    "message": "Diagnostyka i pomoc techniczna są oddzielne"
+  },
+  "privacyNoticeSupport": {
+    "message": "Wysłanie raportu diagnostycznego samo w sobie nie wysyła z rozszerzenia wiadomości do pomocy technicznej. Aby opisać problem lub poprosić o usunięcie odebranego raportu, skorzystaj z podanego poniżej kanału kontaktu z FuzeVPN. Jeśli zdecydujesz się udostępnić wyeksportowany plik innym kanałem, najpierw sprawdź jego zawartość."
+  },
+  "privacyNoticeManage": {
+    "message": "Otwórz Diagnostykę"
+  },
+  "privacyNoticeLinksTitle": {
+    "message": "Polityka usługi i kontakt"
   }
 }

@@ -47,6 +47,9 @@ import { SiteExclusionController } from "./site-exclusion-controller";
 import { ProxyCleanupLedger } from "./proxy-cleanup-ledger";
 import type { ProxyCleanupStorage } from "../storage/proxy-cleanup-storage";
 import type { CommandResult } from "../shared/messages";
+import type { ConnectionTrace } from "./connection-journal";
+import { LocationPreferenceError } from "./location-preferences";
+import type { ProxyErrorProvenance } from "../../platform/contracts/extension-api";
 
 import { browserDeviceName, detectBrowserEnvironment } from "../shared/browser-environment";
 
@@ -63,6 +66,9 @@ export interface ControllerDependencies {
   cleanupStorage?: ProxyCleanupStorage;
   now(): number;
   onStateChanged(snapshot: AppSnapshot): void;
+  onConnectionEvent?(event: ConnectionTrace): void;
+  /** Capture the journal generation before asynchronous work starts. */
+  captureConnectionEvents?(): (event: ConnectionTrace) => void;
   /** Optional observer; diagnostic failures must never affect account/VPN operations. */
   onDiagnosticAccountChanged?(): void;
   /** Per-stage network deadline; production uses the API request deadline. */
@@ -74,6 +80,7 @@ export interface ControllerDependencies {
 }
 
 type RemoteResult = "confirmed" | "unconfirmed";
+type ConnectionRecorder = (event: ConnectionTrace) => void;
 
 interface PendingProxyCreation {
   token: string;
@@ -88,20 +95,63 @@ interface KnownRemoteSession {
   userId?: string;
   revocation?: Promise<RemoteResult>;
   revocationSettled?: boolean;
+  expiredBy?: number;
+}
+
+/** What a committed credential replaced, until its own account is published. */
+interface ReplacedAccount {
+  auth: AuthSession;
+  persisted: PersistedState;
+  snapshot: AppSnapshot;
+  logoutSequence: number;
 }
 
 export class AppController {
   private snapshot: AppSnapshot = { ...EMPTY_SNAPSHOT };
   private persisted: PersistedState = { ...EMPTY_PERSISTED_STATE };
   private activeSession: ProxySession | null = null;
+  private readonly sessionActivatedAt = new WeakMap<ProxySession, number>();
+  /** Current native TLS refusals; a refused session can never be authorized again. */
+  private readonly sessionProxyRefusals = new WeakMap<ProxySession, AppErrorCode>();
   private readonly sessionLocations = new WeakMap<ProxySession, Location>();
+  private readonly sessionRenewals = new WeakMap<
+    ProxySession,
+    Pick<TransientState, "refreshAttempts" | "refreshRetryAt">
+  >();
   private authorizedSessionId: string | null = null;
   private initialization: Promise<void> | null = null;
   private startupStorageLoaded = false;
   private startupSecondaryStorageLoaded = false;
+  private startupGuardFailure: AppErrorCode | null = null;
+  private startupGeneration = 0;
+  private startupInProgress = false;
+  private readonly startupProxyFailures: {
+    generation: number;
+    error: AppErrorCode;
+    host: string;
+    port: number;
+  }[] = [];
+  private startupProxyFailureOverflow = false;
   private readonly startupRecoveryCommands = new Set<Promise<CommandResult>>();
+  private startupStopRequests = 0;
+  // Permission/control events bump this on reaching the controller, before
+  // awaiting startup: an authorization re-verifies control until none arrived
+  // during its final check.
+  private proxyControlRevision = 0;
   private startupStorageRecovery: "none" | "temporary_guard" | "preserve_guard" = "none";
   private operationId = 0;
+  // The operation current when a status was last published (see ownsBusyStatus).
+  private statusOperation = 0;
+  // Internal recovery operations may change operationId without replacing user intent.
+  private connectionIntentRevision = 0;
+  // Bumped by each accepted selection: an older connection attempt must not
+  // replace it with another target.
+  private selectionRevision = 0;
+  private deviceQuotaRecovery: {
+    intentRevision: number;
+    accountGeneration: number;
+    promise: Promise<CommandResult>;
+  } | null = null;
   private operationAbort: AbortController | null = null;
   private webLoginAttempt: symbol | null = null;
   private accountAbort = new AbortController();
@@ -111,6 +161,10 @@ export class AppController {
   private locationsRequest: { revision: number; promise: Promise<Location[]> } | null = null;
   private deviceListRevision = 0;
   private deviceSessionRevision = 0;
+  private deviceQuotaError: "device_limit" | "device_revoked_limit" | null = null;
+  // The error a guard route takeover replaced, with the operation then current: a later
+  // operation publishes its own outcome instead (see reverifyGuardRoute).
+  private takeoverDisplacedError: { operation: number; error: AppErrorCode | null } | null = null;
   private readonly deviceDeletions = new Map<string, Promise<void>>();
   private readonly deviceDeletionCommands = new Map<string, Promise<CommandResult>>();
   private readonly pendingSessions = new Map<ProxySession, string>();
@@ -122,9 +176,23 @@ export class AppController {
   private historicalCleanupUncertain = false;
   private creationSequence = 0;
   private creationMarkerOwner = 0;
+  /**
+   * A failure since the last creation marker suspended automatic retries for a cause of
+   * its own, not only for that marker: settling the creation must not resume them.
+   */
+  private failureSuspendedRetries = false;
   private logoutSequence = 0;
   private logoutInProgress: Promise<CommandResult> | null = null;
   private logoutLocalCleanupPending = false;
+  private logoutUnmigratedAccount: { token: string; userId: string } | null = null;
+  // API tokens issued to authentications which have not published their account yet,
+  // by operation.
+  private readonly unpublishedAuthentications = new Map<number, string>();
+  // Revocations of issued API tokens which no account owns any more.
+  private readonly abandonedApiRevocations = new Set<Promise<RemoteResult>>();
+  // Abandoned API tokens whose revocation failed, retried by the next logout.
+  // Like revocations in flight, they are kept in memory only.
+  private readonly unconfirmedApiTokens = new Set<string>();
   private accountGeneration = 0;
   private diagnosticAccountChanging = false;
   private diagnosticAccountGeneration = 0;
@@ -149,6 +217,10 @@ export class AppController {
       dependencies.siteExclusionStorage,
       dependencies.proxy,
       dependencies.safety,
+      async (allowed) => {
+        this.dependencies.proxy.configureExclusions?.(allowed);
+        await this.blockSafety(true);
+      },
     );
   }
 
@@ -205,6 +277,8 @@ export class AppController {
           });
         }
       } else if (this.isCurrent(operationId)) {
+        await this.dependencies.proxy.clear();
+        await this.dependencies.safety.setWebRtc(false);
         await this.dependencies.safety.release();
       }
       await this.inspectSafety();
@@ -233,17 +307,30 @@ export class AppController {
     }
   }
 
-  initialize(): Promise<void> {
+  initialize(observer?: ConnectionRecorder): Promise<void> {
+    // An explicit logout disabled credentials, but its only legacy cleanup
+    // metadata is not yet durable. Only the local-stop retry may consume it.
+    if (this.logoutUnmigratedAccount && this.logoutLocalCleanupPending) return Promise.resolve();
     if (this.startupRecoveryCommands.size) {
       // Native change events and popup reads can arrive while an explicit stop
       // repairs unread stores. Finish that intent before startup can restore one.
-      return Promise.allSettled([...this.startupRecoveryCommands]).then(() => this.initialize());
+      return Promise.allSettled([...this.startupRecoveryCommands]).then(() =>
+        this.initialize(observer),
+      );
     }
     if (!this.initialization) {
-      const pending = this.doInitialize();
+      // Commands and events that capture a connection observer pass it, so a
+      // restoration they retry records into the history they started in; a caller
+      // joining a restoration in progress keeps that restoration's binding. Startup
+      // and passive reads bind each trace late: the first publication establishes
+      // the account boundary that purges restored history.
+      const pending = this.doInitialize(observer);
       this.initialization = pending;
       const resetUnreadInitialization = () => {
-        if (!this.startupSecondaryStorageLoaded && this.initialization === pending)
+        if (
+          (!this.startupSecondaryStorageLoaded || this.startupGuardFailure !== null) &&
+          this.initialization === pending
+        )
           this.initialization = null;
       };
       void pending.then(resetUnreadInitialization, resetUnreadInitialization);
@@ -255,11 +342,16 @@ export class AppController {
     return structuredClone(this.snapshot);
   }
 
+  hasRestoredAccount(): boolean {
+    return this.startupStorageLoaded;
+  }
+
   isSessionCurrentForProxyAuth(session: ProxySession): boolean {
     if (!this.canUseCredentials() || this.isProxyExpired(session)) return false;
     // A transient session can service startup authentication before full account
     // restoration. Terminal transitions disable credentials synchronously.
     const active = this.activeSession;
+    if (this.hasProxyRefusal(session) || (active && this.hasProxyRefusal(active))) return false;
     return (
       !active ||
       (!this.isProxyExpired(active) &&
@@ -272,14 +364,21 @@ export class AppController {
     );
   }
 
+  /** Only a candidate, possibly refused since: callers guard it by isSessionCurrentForProxyAuth. */
   async getActiveSession(): Promise<ProxySession | null> {
     const operationId = this.operationId;
     if (!this.canUseCredentials()) return null;
-    if (this.activeSession && !this.isProxyExpired(this.activeSession)) return this.activeSession;
+    if (
+      this.activeSession &&
+      !this.isProxyExpired(this.activeSession) &&
+      !this.startupProxyErrorCode(this.activeSession)
+    )
+      return this.activeSession;
     const transient = await this.dependencies.storage.readTransient().catch(() => null);
     if (
       this.canUseCredentials() &&
       transient?.proxySession &&
+      !this.startupProxyErrorCode(transient.proxySession) &&
       !this.isProxyExpired(transient.proxySession)
     ) {
       const owner = this.persisted.profile?.userId;
@@ -352,9 +451,12 @@ export class AppController {
             throw new WebAuthError("web_login_unavailable");
           throw error;
         }
-        assertNotAborted(signal);
-        if (Date.parse(auth.expiresAt) <= this.dependencies.now())
+        // An issued token is never dropped: the authentication revokes it when
+        // superseded, and a locally expired one may be clock skew, not dead.
+        if (Date.parse(auth.expiresAt) <= this.dependencies.now()) {
+          this.abandonApiSession(auth.accessToken);
           throw new NetworkError("invalid_response");
+        }
         return auth;
       }, this.operationId);
     } catch (error) {
@@ -372,6 +474,11 @@ export class AppController {
     expectedOperation?: number,
   ): Promise<CommandResult> {
     await this.initialize();
+    if (this.logoutUnmigratedAccount) {
+      const cleanup = await this.retryLocalLogoutCleanup();
+      if (!cleanup.ok) return cleanup;
+      await this.initialize();
+    }
     if (expectedOperation !== undefined && !this.isCurrent(expectedOperation))
       return supersededCommand();
     if (!this.startupSecondaryStorageLoaded)
@@ -396,30 +503,56 @@ export class AppController {
       retryAfterSeconds: null,
       logoutOutcome: null,
     });
+    const commit: { replaced: ReplacedAccount | null } = { replaced: null };
     try {
       const auth = await authenticate(operation.signal);
+      // This transaction owns the issued token until its account is published,
+      // unless a logout claims it first. Neither may drop it without revocation.
+      this.unpublishedAuthentications.set(operation.id, auth.accessToken);
       this.assertCurrent(operation.id);
       await this.withStateMutation(async () => {
         this.assertCurrent(operation.id);
         const persisted = { ...EMPTY_PERSISTED_STATE, auth };
-        await this.dependencies.storage.writePersisted(persisted);
-        this.assertCurrent(operation.id);
+        try {
+          await this.dependencies.storage.writePersisted(persisted);
+          this.assertCurrent(operation.id);
+        } catch (error) {
+          // Still under the mutation lock: an abandoned credential must not be
+          // restorable by a later worker or startup retry.
+          await this.dependencies.storage.writePersisted(this.persisted).catch(() => undefined);
+          throw error;
+        }
+        // A superseded authentication still owning the credential it committed
+        // abandons it, so that credential is no account to restore.
+        const abandoning = [...this.unpublishedAuthentications].some(
+          ([id, token]) => id !== operation.id && token === this.persisted.auth?.accessToken,
+        );
+        commit.replaced = {
+          auth,
+          persisted: abandoning ? { ...EMPTY_PERSISTED_STATE } : this.persisted,
+          snapshot: this.snapshot,
+          logoutSequence: this.logoutSequence,
+        };
         this.persisted = persisted;
+        this.deviceQuotaError = null;
         this.logoutLocalCleanupPending = false;
         // Once the account credential changes, no old account fields may be
         // published while hydration of the new account is pending or failing.
         this.snapshot = { ...EMPTY_SNAPSHOT, status: "connecting" };
         this.emit();
-        this.historicalCleanupUncertain = false;
         this.security = {
           ...this.security,
-          proxyCleanupUncertain: false,
           capacityBlockedLocationId: null,
         };
         await this.writeSecurity();
         this.assertCurrent(operation.id);
       });
-      await this.hydrateAccount(operation.signal);
+      await this.hydrateAccount(operation.signal, operation.trace);
+      // The published account owns the credential from here on, and an
+      // unpublished credential it replaced is gone for good.
+      if (commit.replaced) this.abandonReplacedCredential(commit.replaced);
+      commit.replaced = null;
+      this.unpublishedAuthentications.delete(operation.id);
       this.assertCurrent(operation.id);
       const currentDeviceId = await this.dependencies.identity.getDeviceId(this.requireUserId());
       this.assertCurrent(operation.id);
@@ -433,6 +566,21 @@ export class AppController {
         return await this.connectInitialized(this.security.selectedLocationId);
       return { ok: true };
     } catch (error) {
+      if (commit.replaced) {
+        // A cancelled authentication must not stay restorable once superseded.
+        const restored =
+          !this.isCurrent(operation.id) && (await this.restoreReplacedAccount(commit.replaced));
+        // Otherwise the replaced credential is gone for good: a current failure
+        // keeps the committed one, or another operation took over the account.
+        if (!restored) this.abandonReplacedCredential(commit.replaced);
+      }
+      const abandoned = this.unpublishedAuthentications.get(operation.id);
+      if (abandoned !== undefined) {
+        this.unpublishedAuthentications.delete(operation.id);
+        // A current failure keeps its committed credential, and another operation
+        // may have published its account. Otherwise no account owns this token.
+        if (this.persisted.auth?.accessToken !== abandoned) this.abandonApiSession(abandoned);
+      }
       if (!this.isCurrent(operation.id)) return supersededCommand();
       if (error instanceof ApiError && error.code === "invalid_credentials")
         this.publish({ status: "error", protected: false, error: "invalid_credentials" });
@@ -446,24 +594,86 @@ export class AppController {
     }
   }
 
-  async connect(locationId: string | null): Promise<CommandResult> {
-    await this.initialize();
+  /**
+   * Rolls back a superseded authentication whose credential no account has
+   * published, and tells whether the replaced account is current again. A
+   * stale connection still hydrating that credential then fails as
+   * unauthorized and keeps its guard: it never adopts a cancelled authentication.
+   */
+  private async restoreReplacedAccount(replaced: ReplacedAccount): Promise<boolean> {
+    const { persisted, snapshot } = replaced;
+    let restored = false;
+    await this.withStateMutation(async () => {
+      // Logout, an account reset or a newer login may already own the account,
+      // and a newer operation may have published this credential's account.
+      // Logout claims what it found even before its first mutation.
+      if (
+        this.persisted.auth !== replaced.auth ||
+        this.persisted.profile ||
+        this.logoutSequence !== replaced.logoutSequence
+      )
+        return;
+      // Memory first: logout and account resets replace it outside this lock.
+      this.persisted = persisted;
+      restored = true;
+      this.cancelAccountRefreshes();
+      // Only an idle status depends on the account; a newer operation owns the others.
+      const idle = this.snapshot.status === "disconnected" || this.snapshot.status === "logged_out";
+      this.publish({
+        status: !idle ? this.snapshot.status : persisted.auth ? "disconnected" : "logged_out",
+        profile: snapshot.profile,
+        subscription: snapshot.subscription,
+        selectedLocationId: snapshot.selectedLocationId,
+        currentDeviceId: snapshot.currentDeviceId,
+        devices: snapshot.devices,
+        deviceLimit: snapshot.deviceLimit,
+        locations: snapshot.locations,
+        locationsStatus: snapshot.locationsStatus,
+        locationsError: snapshot.locationsError,
+      });
+      // A failed write leaves only a credential which is being revoked.
+      await this.dependencies.storage.writePersisted(persisted).catch(() => undefined);
+    }).catch(() => undefined);
+    return restored;
+  }
+
+  /** Revokes the unpublished credential which a committed one replaced for good. */
+  private abandonReplacedCredential({ auth, persisted }: ReplacedAccount): void {
+    const replaced = persisted.auth?.accessToken;
+    // A published account's token may still own proxy cleanups; it keeps its lifecycle.
+    if (replaced && !persisted.profile && replaced !== auth.accessToken)
+      this.abandonApiSession(replaced);
+  }
+
+  async connect(
+    locationId: string | null,
+    observer = this.captureConnectionObserver(),
+  ): Promise<CommandResult> {
+    this.connectionIntentRevision += 1;
+    await this.initialize(observer);
     if (!this.startupSecondaryStorageLoaded)
       return failedCommand(new LocalError("storage_unavailable"));
+    if (this.startupGuardFailure) return { ok: false, commandError: this.startupGuardFailure };
     if (
       this.activeSession?.id === this.authorizedSessionId &&
       !this.isProxyExpired(this.activeSession)
     ) {
-      return this.changeLocation(locationId ?? this.activeSession.locationId);
+      return this.changeLocation(locationId ?? this.activeSession.locationId, observer);
     }
-    return this.connectInitialized(locationId, true);
+    return this.connectInitialized(locationId, true, observer);
   }
 
   private async connectInitialized(
     requestedLocationId: string | null,
     manual = false,
+    observer = this.captureConnectionObserver(),
   ): Promise<CommandResult> {
+    const requestedLocation = manual
+      ? this.snapshot.locations.find((location) => location.id === requestedLocationId)
+      : undefined;
     const waitingId = this.operationId;
+    // A selection accepted while this attempt waits below also replaces its target.
+    const selectionRevision = this.selectionRevision;
     const userId = this.persisted.profile?.userId;
     const deletingDevice = userId ? this.deviceDeletions.get(userId) : undefined;
     if (deletingDevice) {
@@ -473,13 +683,14 @@ export class AppController {
     const token = this.persisted.auth?.accessToken;
     if (!manual && this.security.capacityBlockedLocationId)
       return { ok: false, commandError: "server_full" };
-    const operation = this.startOperation();
+    const operation = this.startOperation(observer);
     this.publish({ status: "connecting", protected: false, error: null, retryAfterSeconds: null });
     let created: ProxySession | null = null;
     try {
       if (manual && !(await this.allowExplicitDeviceRecovery())) return supersededCommand();
       await this.withStateMutation(async () => {
         this.assertCurrent(operation.id);
+        this.assertSelectionOwner(selectionRevision, requestedLocationId);
         this.security = {
           ...this.security,
           protectionRequested: true,
@@ -491,7 +702,6 @@ export class AppController {
         await this.blockSafety(this.security.killSwitchEnabled);
         this.assertCurrent(operation.id);
         await this.writeSecurity();
-        await this.dependencies.safety.setWebRtc(this.security.webRtcProtectionEnabled);
         this.assertCurrent(operation.id);
         await this.inspectSafety();
       });
@@ -511,7 +721,7 @@ export class AppController {
       }
       await this.dependencies.proxy.assertControllable();
       this.assertCurrent(operation.id);
-      await this.hydrateAccount(operation.signal);
+      await this.hydrateAccount(operation.signal, operation.trace);
       this.assertCurrent(operation.id);
       const automatic = await this.dependencies.resolveAutomaticLocation?.(this.snapshot.locations);
       this.assertCurrent(operation.id);
@@ -521,15 +731,50 @@ export class AppController {
           : (requestedLocationId ??
             this.security.selectedLocationId ??
             this.persisted.selectedLocationId);
-      if (!locationId) throw new ApiError("invalid_location", 400);
-      this.assertCanConnect(locationId);
+      this.traceConnection(
+        {
+          event: "target",
+          source:
+            automatic !== undefined
+              ? "automatic"
+              : requestedLocationId !== null
+                ? "requested"
+                : this.security.selectedLocationId !== null
+                  ? "security"
+                  : "persisted",
+          count: this.snapshot.locations.length,
+          requestedPresent: this.snapshot.locations.some((location) => location.id === locationId),
+        },
+        operation.trace,
+      );
+      if (!locationId) {
+        this.traceConnection(
+          {
+            event: "failure",
+            source: "local",
+            reason: automatic === null ? "automatic_empty" : "no_target",
+            error: "invalid_location",
+          },
+          operation.trace,
+        );
+        throw new LocalError("invalid_location");
+      }
+      const retainedLocation = automatic === undefined ? requestedLocation : undefined;
+      this.assertCanConnect(locationId, retainedLocation, operation.trace);
       await this.dependencies.proxy.assertControllable();
-      created = await this.createSignedProxySession(locationId, operation.signal);
+      created = await this.createSignedProxySession(
+        locationId,
+        operation.signal,
+        retainedLocation,
+        operation.trace,
+        selectionRevision,
+      );
       this.assertCurrent(operation.id);
       this.assertSessionLocation(created, locationId);
       const sessionToApply = created;
       await this.withStateMutation(async () => {
         this.assertCurrent(operation.id);
+        this.assertSelectionOwner(selectionRevision, locationId);
         await this.writeTransient({
           proxySession: sessionToApply,
           refreshAttempts: 0,
@@ -539,6 +784,7 @@ export class AppController {
         await this.commitCreationMarker(sessionToApply);
         this.assertCurrent(operation.id);
         this.activeSession = sessionToApply;
+        this.sessionActivatedAt.set(sessionToApply, performance.now());
         this.credentialsAllowed = true;
         await this.dependencies.proxy.apply(sessionToApply);
         this.assertCurrent(operation.id);
@@ -559,14 +805,31 @@ export class AppController {
       });
       return { ok: true };
     } catch (error) {
-      if (!this.isCurrent(operation.id)) {
+      if (!this.isCurrent(operation.id) || error instanceof SelectionSupersededError) {
         if (created) {
-          void this.safeRevoke(created.id, token);
+          if (!this.isRetainedAuthorizedSession(created, token))
+            void this.safeRevoke(created.id, token);
           await this.settleDiscardedCreation(created, token);
-        }
+        } else if (error instanceof SelectionSupersededError)
+          await this.resumeSelection(operation.id);
         return supersededCommand();
       }
-      if (created) void this.safeRevoke(created.id, token);
+      this.traceConnection(
+        {
+          event: "failure",
+          error: mapError(error),
+          ...(error instanceof ApiError
+            ? { source: "api", httpStatus: error.status }
+            : error instanceof LocalError
+              ? { source: "local" }
+              : {}),
+        },
+        operation.trace,
+      );
+      if (created) {
+        void this.safeRevoke(created.id, token);
+        await this.settleFailedCreation(created);
+      }
       if (isUnauthorized(error)) await this.handleOperationError(error, false);
       else await this.enterFailure(error, operation.id);
       return failedCommand(error);
@@ -576,11 +839,27 @@ export class AppController {
     }
   }
 
-  async selectLocation(locationId: string): Promise<CommandResult> {
-    await this.initialize();
+  async selectLocation(
+    locationId: string,
+    observer = this.captureConnectionObserver(),
+  ): Promise<CommandResult> {
+    this.connectionIntentRevision += 1;
+    const trace = this.captureConnectionTrace(this.operationId, observer);
+    await this.initialize(observer);
     if (!this.startupSecondaryStorageLoaded)
       return failedCommand(new LocalError("storage_unavailable"));
     if (!this.snapshot.locations.some((location) => location.id === locationId)) {
+      this.traceConnection(
+        {
+          event: "failure",
+          source: "local",
+          reason: "select_missing",
+          error: "invalid_location",
+          count: this.snapshot.locations.length,
+          requestedPresent: false,
+        },
+        trace,
+      );
       this.publish({ status: "error", error: "invalid_location" });
       return { ok: false, commandError: "invalid_location" };
     }
@@ -597,6 +876,8 @@ export class AppController {
       };
       await this.writeSecurity();
       assertNotAborted(signal);
+      // A pending connection attempt must not commit another target over this choice.
+      this.selectionRevision += 1;
       this.publish({
         status: this.activeSession ? "connected" : "disconnected",
         selectedLocationId: locationId,
@@ -606,51 +887,104 @@ export class AppController {
     return { ok: true };
   }
 
-  async changeLocation(locationId: string): Promise<CommandResult> {
-    await this.initialize();
+  async changeLocation(
+    locationId: string,
+    observer = this.captureConnectionObserver(),
+  ): Promise<CommandResult> {
+    this.connectionIntentRevision += 1;
+    await this.initialize(observer);
     if (!this.startupSecondaryStorageLoaded)
       return failedCommand(new LocalError("storage_unavailable"));
     const previous = this.activeSession;
     if (previous?.id !== this.authorizedSessionId || this.isProxyExpired(previous)) {
-      return this.connect(locationId);
+      return this.connect(locationId, observer);
     }
+    const requestedLocation = this.snapshot.locations.find(
+      (location) => location.id === locationId,
+    );
     const keepRequestedSession =
       previous.locationId === locationId && !this.dependencies.resolveAutomaticLocation;
     const token = this.persisted.auth?.accessToken;
     const deviceSessionRevision = this.deviceSessionRevision;
-    const operation = this.startOperation();
+    const operation = this.startOperation(observer);
+    const selectionRevision = this.selectionRevision;
     if (!keepRequestedSession)
-      this.publish({ status: "connecting", protected: true, error: null, retryAfterSeconds: null });
+      this.publish({
+        status: "connecting",
+        protected: !this.hasProxyRefusal(previous),
+        error: null,
+        retryAfterSeconds: null,
+      });
     let replacement: ProxySession | null = null;
     try {
       if (keepRequestedSession) {
         const renewalScheduled = await this.clearCapacityBlock(operation.id);
-        await this.selectRetainedLocation(previous, operation.id, renewalScheduled);
+        await this.selectRetainedLocation(
+          previous,
+          operation.id,
+          renewalScheduled,
+          selectionRevision,
+        );
         return { ok: true };
       }
       if (!(await this.allowExplicitDeviceRecovery())) return supersededCommand();
       const renewalScheduled = await this.clearCapacityBlock(operation.id);
       await this.dependencies.proxy.assertControllable();
       this.assertCurrent(operation.id);
-      await this.refreshEntitlement(operation.signal);
+      await this.refreshEntitlement(operation.signal, operation.trace);
       this.assertCurrent(operation.id);
       const automatic = await this.dependencies.resolveAutomaticLocation?.(this.snapshot.locations);
       this.assertCurrent(operation.id);
-      if (automatic === null) throw new ApiError("invalid_location", 400);
+      this.traceConnection(
+        {
+          event: "target",
+          source: automatic !== undefined ? "automatic" : "requested",
+          count: this.snapshot.locations.length,
+          requestedPresent: this.snapshot.locations.some(
+            (location) => location.id === (automatic !== undefined ? automatic : locationId),
+          ),
+        },
+        operation.trace,
+      );
+      if (automatic === null) {
+        this.traceConnection(
+          {
+            event: "failure",
+            source: "local",
+            reason: "automatic_empty",
+            error: "invalid_location",
+          },
+          operation.trace,
+        );
+        throw new LocalError("invalid_location");
+      }
       if (automatic !== undefined) locationId = automatic;
       if (previous.locationId === locationId) {
-        await this.selectRetainedLocation(previous, operation.id, renewalScheduled);
+        await this.selectRetainedLocation(
+          previous,
+          operation.id,
+          renewalScheduled,
+          selectionRevision,
+        );
         return { ok: true };
       }
-      this.assertCanConnect(locationId);
+      const retainedLocation = automatic === undefined ? requestedLocation : undefined;
+      this.assertCanConnect(locationId, retainedLocation, operation.trace);
       await this.dependencies.proxy.assertControllable();
-      replacement = await this.createSignedProxySession(locationId, operation.signal);
+      replacement = await this.createSignedProxySession(
+        locationId,
+        operation.signal,
+        retainedLocation,
+        operation.trace,
+        selectionRevision,
+      );
       this.assertCurrent(operation.id);
       this.assertSessionLocation(replacement, locationId);
       const sessionToApply = replacement;
       let immediatelyRevoked: string[] = [];
       await this.withStateMutation(async () => {
         this.assertCurrent(operation.id);
+        this.assertSelectionOwner(selectionRevision, locationId);
         await this.writeTransient({
           proxySession: sessionToApply,
           refreshAttempts: 0,
@@ -660,6 +994,7 @@ export class AppController {
         await this.commitCreationMarker(sessionToApply);
         this.assertCurrent(operation.id);
         this.activeSession = sessionToApply;
+        this.sessionActivatedAt.set(sessionToApply, performance.now());
         this.credentialsAllowed = true;
         await this.dependencies.proxy.apply(sessionToApply);
         this.assertCurrent(operation.id);
@@ -688,11 +1023,27 @@ export class AppController {
       void this.safeRevokeMany(immediatelyRevoked, token);
       return { ok: true };
     } catch (error) {
-      if (replacement) void this.safeRevoke(replacement.id, token);
-      if (!this.isCurrent(operation.id)) {
+      if (replacement && !this.isRetainedAuthorizedSession(replacement, token))
+        void this.safeRevoke(replacement.id, token);
+      if (!this.isCurrent(operation.id) || error instanceof SelectionSupersededError) {
         if (replacement) await this.settleDiscardedCreation(replacement, token);
+        else if (error instanceof SelectionSupersededError)
+          await this.resumeSelection(operation.id);
         return supersededCommand();
       }
+      if (replacement) await this.settleFailedCreation(replacement);
+      this.traceConnection(
+        {
+          event: "failure",
+          error: mapError(error),
+          ...(error instanceof ApiError
+            ? { source: "api", httpStatus: error.status }
+            : error instanceof LocalError
+              ? { source: "local" }
+              : {}),
+        },
+        operation.trace,
+      );
       if (isUnauthorized(error)) {
         await this.handleOperationError(error, false);
         return failedCommand(error);
@@ -706,11 +1057,14 @@ export class AppController {
             replacement.id,
             replacement.expiresAt,
           );
-        if (this.isProxyExpired(previous)) return false;
+        if (this.isProxyExpired(previous) || this.hasProxyRefusal(previous, replacement))
+          return false;
+        const renewal = this.sessionRenewals.get(previous);
+        if (!renewal) return false;
         this.activeSession = previous;
         await this.writeTransient({
           proxySession: previous,
-          refreshAttempts: 0,
+          ...renewal,
           retiredSessions: this.retiredSessions,
         });
         this.assertCurrent(operation.id);
@@ -718,15 +1072,7 @@ export class AppController {
           if (!(await this.dependencies.proxy.isActiveConfiguration(previous)))
             await this.dependencies.proxy.apply(previous);
           this.assertCurrent(operation.id);
-          await this.dependencies.alarms.scheduleSession(
-            previous,
-            this.security.capacityBlockedLocationId === previous.locationId
-              ? null
-              : Math.max(
-                  computeRefreshAt(previous, this.dependencies.now()),
-                  this.security.retryNotBefore ?? 0,
-                ),
-          );
+          await this.scheduleRetainedSession(previous, operation.id);
           this.assertCurrent(operation.id);
           await this.authorizeSession(previous, operation.id);
           this.publish({
@@ -752,7 +1098,14 @@ export class AppController {
   }
 
   async disconnect(): Promise<CommandResult> {
-    await this.initialize();
+    this.connectionIntentRevision += 1;
+    this.startupStopRequests += 1;
+    this.credentialsAllowed = false;
+    try {
+      await this.initialize();
+    } finally {
+      this.startupStopRequests -= 1;
+    }
     if (!this.startupStorageLoaded) return failedCommand(new LocalError("storage_unavailable"));
     return this.trackStartupRecoveryCommand(this.disconnectInitialized());
   }
@@ -766,6 +1119,9 @@ export class AppController {
       ...[...this.pendingSessions]
         .filter(([, creatingToken]) => creatingToken === token)
         .map(([session]) => session.id),
+      ...[...(token ? (this.remoteSessions.get(token)?.entries() ?? []) : [])]
+        .filter(([, session]) => session.userId === this.persisted.profile?.userId)
+        .map(([sessionId]) => sessionId),
     ];
     this.credentialsAllowed = false;
     this.activeSession = null;
@@ -776,24 +1132,40 @@ export class AppController {
       retryAfterSeconds: null,
     });
     let result: CommandResult = { ok: true };
+    const cleanupState = { preserveUnknownCredentials: false };
     try {
       await this.withStateMutation(async () => {
         this.assertCurrent(operation.id);
-        await this.releaseProtection(operation.id);
+        const cleanupDurable = await this.prepareCleanupBeforeStop(operation.id);
+        cleanupState.preserveUnknownCredentials = !cleanupDurable;
+        this.assertCurrent(operation.id);
+        if (token)
+          revoke.push(
+            ...[...(this.remoteSessions.get(token)?.entries() ?? [])]
+              .filter(([, session]) => session.userId === this.persisted.profile?.userId)
+              .map(([sessionId]) => sessionId),
+          );
+        await this.releaseProtection(operation.id, cleanupDurable);
         this.persisted = { ...this.persisted, autoConnect: false };
         await this.dependencies.storage.writePersisted(this.persisted);
         this.assertCurrent(operation.id);
+        if (!cleanupDurable) result = failedCommand(new SafetyError("traffic_guard_failed"));
         this.publish({
           status: this.persisted.auth ? "disconnected" : "logged_out",
           protected: false,
           activeLocationId: null,
           autoConnect: false,
-          error: null,
+          error: cleanupDurable ? null : "traffic_guard_failed",
         });
       });
     } catch (error) {
       if (this.isCurrent(operation.id)) {
-        await this.enterFailure(error, operation.id, false);
+        if (cleanupState.preserveUnknownCredentials) {
+          // Failure to record cleanup uncertainty must not erase the only
+          // remaining legacy IDs through enterFailure's terminal cleanup.
+          await this.inspectSafety();
+          this.publish({ protected: false, error: mapError(error) });
+        } else await this.enterFailure(error, operation.id, false);
         result = failedCommand(error);
       } else result = supersededCommand();
     }
@@ -802,7 +1174,7 @@ export class AppController {
   }
 
   private trackStartupRecoveryCommand(command: Promise<CommandResult>): Promise<CommandResult> {
-    if (this.startupSecondaryStorageLoaded) return command;
+    if (this.startupSecondaryStorageLoaded && this.startupGuardFailure === null) return command;
     this.startupRecoveryCommands.add(command);
     const finished = () => {
       this.startupRecoveryCommands.delete(command);
@@ -812,6 +1184,7 @@ export class AppController {
   }
 
   logout(): Promise<CommandResult> {
+    this.connectionIntentRevision += 1;
     if (this.logoutInProgress && this.accountGeneration === this.logoutGeneration)
       return this.logoutInProgress;
     this.logoutGeneration = this.accountGeneration;
@@ -827,7 +1200,13 @@ export class AppController {
   }
 
   private async performLogout(): Promise<CommandResult> {
-    await this.initialize();
+    this.startupStopRequests += 1;
+    this.credentialsAllowed = false;
+    try {
+      await this.initialize();
+    } finally {
+      this.startupStopRequests -= 1;
+    }
     if (!this.startupStorageLoaded) return failedCommand(new LocalError("storage_unavailable"));
     return this.trackStartupRecoveryCommand(this.logoutInitialized());
   }
@@ -841,9 +1220,50 @@ export class AppController {
         : { ok: true };
     const operation = this.startOperation();
     this.cancelAccountRefreshes();
+    this.credentialsAllowed = false;
     const accountSignal = this.accountAbort.signal;
     const logoutSequence = ++this.logoutSequence;
     const token = this.persisted.auth?.accessToken;
+    let unreadStartupCleanup = !this.startupSecondaryStorageLoaded;
+    const logoutAccount =
+      token && this.persisted.profile ? { token, userId: this.persisted.profile.userId } : null;
+    if (unreadStartupCleanup) {
+      try {
+        await this.withStateMutation(async () => {
+          this.assertCurrent(operation.id);
+          const transient = await this.dependencies.storage.readTransient();
+          this.assertCurrent(operation.id);
+          if (transient.cleanupUncertain) await this.recordCleanupUncertainty();
+          await this.cleanup.initialize();
+          this.assertCurrent(operation.id);
+          const owner = this.persisted.profile?.userId;
+          const sessions = [
+            ...(transient.proxySession ? [transient.proxySession] : []),
+            ...transient.retiredSessions.map((session) => ({
+              id: session.sessionId,
+              expiresAt: session.expiresAt,
+            })),
+          ];
+          for (const session of sessions) {
+            if (!token || !owner) throw new LocalError("storage_unavailable");
+            await this.cleanup.add(owner, session);
+            this.assertCurrent(operation.id);
+            this.rememberRemoteSession(token, session, 0, owner);
+          }
+          this.restoreCleanupForAccount();
+          unreadStartupCleanup = false;
+        });
+      } catch {
+        // Explicit logout still removes local credentials, while reporting unknown cleanup.
+      }
+      if (!this.isCurrent(operation.id)) return supersededCommand();
+    }
+    // A superseded authentication may already hold an issued token which no
+    // account published. From here on, this logout owns its revocation.
+    const abandonedTokens = [...new Set(this.unpublishedAuthentications.values())].filter(
+      (abandoned) => abandoned !== token,
+    );
+    this.unpublishedAuthentications.clear();
     const creationCutoff = this.creationSequence;
     if (token)
       this.activeRemoteCleanups.set(token, (this.activeRemoteCleanups.get(token) ?? 0) + 1);
@@ -863,7 +1283,8 @@ export class AppController {
         );
       if (this.security.proxyCreationUncertain && creations.length === 0 && !knownMarker)
         this.uncertainCreationTokens.add(token);
-      if (this.historicalCleanupUncertain) this.uncertainCreationTokens.add(token);
+      if (this.historicalCleanupUncertain || unreadStartupCleanup)
+        this.uncertainCreationTokens.add(token);
     }
     const logoutOutcome: LogoutOutcome = { apiSession: "pending", proxySessions: "pending" };
     this.credentialsAllowed = false;
@@ -872,19 +1293,40 @@ export class AppController {
     this.logoutLocalCleanupPending = true;
     this.publish({ status: "disconnecting", protected: false, error: null, logoutOutcome });
     let releaseError: unknown = null;
+    const cleanupState = { preserveUnknown: false };
     await this.withStateMutation(async () => {
       this.assertCurrent(operation.id);
-      try {
-        await this.releaseProtection(operation.id);
-      } catch (error) {
-        releaseError = error;
+      let cleanupDurable = !unreadStartupCleanup;
+      if (unreadStartupCleanup) {
+        this.historicalCleanupUncertain = true;
+        this.security = { ...this.security, proxyCleanupUncertain: true };
+        try {
+          // Unknown legacy credentials may be erased by the explicit local stop below.
+          // Record their unresolved remote cleanup before removing the only local copy.
+          await this.writeSecurity();
+          cleanupDurable = true;
+        } catch (error) {
+          releaseError = error;
+        }
+        this.assertCurrent(operation.id);
       }
-      await this.clearLocalLogout(operation.id, logoutOutcome);
+      cleanupState.preserveUnknown = !cleanupDurable;
+      if (!cleanupDurable) this.logoutUnmigratedAccount = logoutAccount;
+      try {
+        await this.releaseProtection(operation.id, cleanupDurable);
+      } catch (error) {
+        releaseError ??= error;
+      }
+      if (cleanupDurable) await this.clearLocalLogout(operation.id, logoutOutcome);
     }).catch((error: unknown) => {
       releaseError = error;
     });
-    if (releaseError && this.isCurrent(operation.id))
+    if (releaseError && this.isCurrent(operation.id) && !cleanupState.preserveUnknown)
       await this.enterFailure(releaseError, operation.id, false);
+    else if (releaseError && this.isCurrent(operation.id)) {
+      await this.inspectSafety();
+      this.publish({ protected: false, error: mapError(releaseError) });
+    }
     // A pending POST must be allowed to return its ID before this token is
     // invalidated. These bounded waits never hold the state mutation lock.
     const timeoutMs = this.dependencies.remoteCleanupTimeoutMs ?? API_TIMEOUT_MS;
@@ -894,6 +1336,7 @@ export class AppController {
     );
     let proxySessions: RemoteResult =
       settled.completed &&
+      !unreadStartupCleanup &&
       !this.historicalCleanupUncertain &&
       creations.every((creation) => creation.outcome !== "uncertain") &&
       (!token || !this.uncertainCreationTokens.has(token))
@@ -910,33 +1353,40 @@ export class AppController {
       if (!revoked.completed || revoked.value.some((result) => result !== "confirmed"))
         proxySessions = "unconfirmed";
     }
-    if (this.cleanup.hasOutstanding()) proxySessions = "unconfirmed";
+    // Settled creations of this token have left proxyCreations: any remaining
+    // POST, such as one an earlier logout timed out on, may still return an ID.
+    if (this.cleanup.hasOutstanding() || this.proxyCreations.size > 0)
+      proxySessions = "unconfirmed";
     this.publishLogoutOutcome(logoutSequence, accountSignal, { proxySessions });
-    let apiSession: RemoteResult = "confirmed";
-    if (token) {
-      // An authenticator may reuse a token. Never invalidate a newer login
-      // which is currently using exactly this credential.
-      if (this.persisted.auth?.accessToken === token) apiSession = "unconfirmed";
-      else {
-        const result = await beforeDeadline(
-          this.dependencies.api.logout(token).then(
-            () => "confirmed" as const,
-            () => "unconfirmed" as const,
-          ),
-          timeoutMs,
-        );
-        apiSession = result.completed ? result.value : "unconfirmed";
-      }
-    }
+    // Tokens abandoned until now are reported too: this logout awaits those
+    // still being revoked, and retries those whose revocation failed.
+    const unconfirmedTokens = [...this.unconfirmedApiTokens];
+    this.unconfirmedApiTokens.clear();
+    const apiTokens = new Set([
+      ...(token ? [token] : []),
+      ...abandonedTokens,
+      ...unconfirmedTokens,
+    ]);
+    const apiResults = await Promise.all([
+      ...[...apiTokens].map((apiToken) => this.revokeApiSession(apiToken)),
+      ...this.abandonedApiRevocations,
+    ]);
+    // A token abandoned meanwhile cannot be confirmed revoked either.
+    const apiSession: RemoteResult =
+      apiResults.every((result) => result === "confirmed") && this.unconfirmedApiTokens.size === 0
+        ? "confirmed"
+        : "unconfirmed";
     this.publishLogoutOutcome(logoutSequence, accountSignal, { apiSession });
     if (!accountSignal.aborted && logoutSequence === this.logoutSequence) {
       await this.withStateMutation(async () => {
         if (accountSignal.aborted || logoutSequence !== this.logoutSequence) return;
-        this.security = {
-          ...this.security,
-          proxyCleanupUncertain: proxySessions !== "confirmed",
-        };
-        this.historicalCleanupUncertain = proxySessions !== "confirmed";
+        // Known failed revocations remain in the ledger. Only missing IDs or
+        // unresolved creations require the separate durable unknown marker.
+        this.historicalCleanupUncertain ||=
+          unreadStartupCleanup ||
+          creations.some((creation) => creation.outcome === "uncertain") ||
+          (!!token && this.uncertainCreationTokens.has(token));
+        this.security = { ...this.security, proxyCleanupUncertain: this.cleanupUncertain() };
         await this.writeSecurity();
       }).catch(() => undefined);
     }
@@ -959,6 +1409,7 @@ export class AppController {
     }
     this.assertCurrent(id);
     this.logoutLocalCleanupPending = false;
+    this.logoutUnmigratedAccount = null;
     this.snapshot = { ...EMPTY_SNAPSHOT, logoutOutcome };
     this.emit();
   }
@@ -970,21 +1421,65 @@ export class AppController {
     const generation = this.accountGeneration;
     this.cancelAccountRefreshes();
     let failure: unknown = null;
+    const cleanupState = { preserveUnknown: false };
     await this.withStateMutation(async () => {
       this.assertCurrent(operation.id);
       try {
-        await this.releaseProtection(operation.id);
+        const cleanupDurable = await this.prepareCleanupBeforeStop(operation.id);
+        cleanupState.preserveUnknown = !cleanupDurable;
+        await this.releaseProtection(operation.id, cleanupDurable);
+        if (!cleanupDurable) throw new SafetyError("traffic_guard_failed");
       } catch (error) {
         failure = error;
       }
-      await this.clearLocalLogout(operation.id, outcome);
+      if (!cleanupState.preserveUnknown) await this.clearLocalLogout(operation.id, outcome);
     }).catch((error: unknown) => {
       failure = error;
     });
     if (!this.isCurrent(operation.id)) return supersededCommand();
-    if (failure) await this.enterFailure(failure, operation.id, false);
+    if (failure && !cleanupState.preserveUnknown)
+      await this.enterFailure(failure, operation.id, false);
     if (generation !== this.accountGeneration) return supersededCommand();
     return failure ? failedCommand(failure) : { ok: true };
+  }
+
+  /** Bounded API logout; an unsent or unanswered revocation is never confirmed. */
+  private async revokeApiSession(token: string): Promise<RemoteResult> {
+    // An authenticator may reuse a token. Never invalidate a newer login
+    // which is committing or currently using exactly this credential.
+    if (this.isApiTokenInUse(token)) return "unconfirmed";
+    const result = await beforeDeadline(
+      this.dependencies.api.logout(token).then(
+        () => "confirmed" as const,
+        () => "unconfirmed" as const,
+      ),
+      this.dependencies.remoteCleanupTimeoutMs ?? API_TIMEOUT_MS,
+    );
+    return result.completed ? result.value : "unconfirmed";
+  }
+
+  private isApiTokenInUse(token: string): boolean {
+    return (
+      this.persisted.auth?.accessToken === token ||
+      [...this.unpublishedAuthentications.values()].includes(token)
+    );
+  }
+
+  /** Revokes a token no account owns without delaying its command; logout reports it. */
+  private abandonApiSession(token: string): void {
+    const revocation = this.revokeApiSession(token);
+    const settle = (result: RemoteResult) => {
+      this.abandonedApiRevocations.delete(revocation);
+      // A reused token is revoked by its new owner.
+      if (result === "confirmed" || this.isApiTokenInUse(token)) return;
+      this.unconfirmedApiTokens.add(token);
+      // A logout outcome already shown cannot have confirmed this token.
+      const outcome = this.snapshot.logoutOutcome;
+      if (outcome?.apiSession === "confirmed" && !this.persisted.auth)
+        this.publish({ logoutOutcome: { ...outcome, apiSession: "unconfirmed" } });
+    };
+    this.abandonedApiRevocations.add(revocation);
+    void revocation.then(settle, () => settle("unconfirmed"));
   }
 
   private publishLogoutOutcome(
@@ -1006,11 +1501,32 @@ export class AppController {
   async updateSecurityPreferences(
     killSwitchEnabled: boolean,
     webRtcProtectionEnabled: boolean,
+    observer = this.captureConnectionObserver(),
   ): Promise<CommandResult> {
-    await this.initialize();
+    await this.initialize(observer);
     if (!this.startupSecondaryStorageLoaded)
       return failedCommand(new LocalError("storage_unavailable"));
-    const operation = this.startOperation();
+    const operation = this.startOperation(observer);
+    if (this.startupGuardFailure) {
+      // A refused startup guard owns a durable, still usable session. Persist
+      // preferences and retry restoration instead of entering terminal cleanup.
+      try {
+        await this.withStateMutation(async () => {
+          this.assertCurrent(operation.id);
+          this.security = { ...this.security, killSwitchEnabled, webRtcProtectionEnabled };
+          await this.writeSecurity();
+          this.assertCurrent(operation.id);
+        });
+        this.assertCurrent(operation.id);
+        this.initialization = null;
+        await this.initialize(observer);
+        return this.startupRecoveryResult();
+      } catch (error) {
+        if (!this.isCurrent(operation.id)) return supersededCommand();
+        this.publish({ protected: false, error: mapError(error) });
+        return failedCommand(error);
+      }
+    }
     try {
       await this.withStateMutation(async () => {
         this.assertCurrent(operation.id);
@@ -1020,8 +1536,6 @@ export class AppController {
         this.assertCurrent(operation.id);
         if (this.security.protectionRequested) {
           await this.blockSafety(killSwitchEnabled);
-          this.assertCurrent(operation.id);
-          await this.dependencies.safety.setWebRtc(webRtcProtectionEnabled);
           this.assertCurrent(operation.id);
           if (
             this.activeSession?.id === this.authorizedSessionId &&
@@ -1033,16 +1547,20 @@ export class AppController {
           } else {
             this.activeSession = null;
             this.credentialsAllowed = false;
-            if (!killSwitchEnabled) await this.dependencies.proxy.clear();
+            if (!this.requiresBlockingGuard()) await this.dependencies.proxy.clear();
           }
         } else {
-          await this.dependencies.safety.setWebRtc(false);
           if (this.exclusions.pending || this.exclusions.getState().error)
             await this.blockSafety(true);
-          else await this.dependencies.safety.release();
+          else {
+            await this.dependencies.safety.setWebRtc(false);
+            await this.dependencies.safety.release();
+          }
         }
         this.assertCurrent(operation.id);
         await this.inspectSafety();
+        // A TLS refusal received after authorization still forbids protection.
+        if (this.activeSession) this.assertNoProxyRefusal(this.activeSession);
         this.publish({
           status: this.activeSession
             ? "connected"
@@ -1061,7 +1579,8 @@ export class AppController {
         !this.security.proxyCreationUncertain &&
         !this.security.retrySuspended
       )
-        return await this.connectInitialized(this.security.selectedLocationId);
+        // The reconnection stays bound to the history this command started in.
+        return await this.connectInitialized(this.security.selectedLocationId, false, observer);
       return { ok: true };
     } catch (error) {
       if (!this.isCurrent(operation.id)) return supersededCommand();
@@ -1070,10 +1589,15 @@ export class AppController {
     }
   }
 
-  async retryConnection(automatic = false): Promise<CommandResult> {
-    await this.initialize();
+  async retryConnection(
+    automatic = false,
+    observer = this.captureConnectionObserver(),
+  ): Promise<CommandResult> {
+    if (!automatic) this.connectionIntentRevision += 1;
+    await this.initialize(observer);
     if (!this.startupSecondaryStorageLoaded)
       return failedCommand(new LocalError("storage_unavailable"));
+    if (this.startupGuardFailure) return { ok: false, commandError: this.startupGuardFailure };
     if (!this.security.protectionRequested) return { ok: true };
     if (automatic && this.security.capacityBlockedLocationId)
       return { ok: false, commandError: "server_full" };
@@ -1105,23 +1629,46 @@ export class AppController {
       this.activeSession?.id === this.authorizedSessionId &&
       !this.isProxyExpired(this.activeSession)
     )
-      return this.refreshProxySession(!automatic);
-    return await this.connectInitialized(this.security.selectedLocationId, !automatic);
+      return this.refreshProxySession(!automatic, observer);
+    return await this.connectInitialized(this.security.selectedLocationId, !automatic, observer);
   }
 
   async handlePrivacyChange(): Promise<void> {
     await this.initialize();
     if (!this.startupSecondaryStorageLoaded) return;
+    if (this.startupGuardFailure) return;
     const id = this.operationId;
+    const inspection: {
+      failure: "traffic_guard_failed" | "webrtc_control_unavailable" | null;
+    } = { failure: null };
     await this.withStateMutation(async () => {
+      this.assertCurrent(id);
       await this.inspectSafety();
+      this.assertCurrent(id);
+      const guardRequired =
+        this.security.protectionRequested ||
+        this.exclusions.pending ||
+        this.exclusions.getState().error;
+      const webRtcRequired =
+        (this.security.protectionRequested && this.security.webRtcProtectionEnabled) ||
+        this.requiresTemporaryWebRtcProtection();
+      if (webRtcRequired && !this.safetyStatus.webRtcProtected) {
+        // A temporary blocked route needs RTC confinement even when the user's
+        // optional setting for an authorized session is disabled.
+        await this.dependencies.safety.setWebRtc(true).catch(() => undefined);
+        this.assertCurrent(id);
+        await this.inspectSafety();
+        this.assertCurrent(id);
+      }
+      if (guardRequired) {
+        if (!this.safetyStatus.filterActive) inspection.failure = "traffic_guard_failed";
+        else if (webRtcRequired && !this.safetyStatus.webRtcProtected)
+          inspection.failure = "webrtc_control_unavailable";
+      }
+      this.publish(inspection.failure ? { protected: false, error: inspection.failure } : {});
     });
     if (!this.isCurrent(id) || !this.security.protectionRequested) return;
-    if (!this.safetyStatus.filterActive) {
-      await this.enterFailure(new SafetyError("traffic_guard_failed"), id);
-    } else if (this.security.webRtcProtectionEnabled && !this.safetyStatus.webRtcProtected) {
-      await this.enterFailure(new SafetyError("webrtc_control_unavailable"), id);
-    }
+    if (inspection.failure) await this.enterFailure(new SafetyError(inspection.failure), id);
   }
 
   async resendVerification(): Promise<CommandResult> {
@@ -1147,17 +1694,21 @@ export class AppController {
   }
 
   async refreshAccount(): Promise<CommandResult> {
-    await this.initialize();
+    const observer = this.captureConnectionObserver();
+    const trace = this.captureConnectionTrace(this.operationId, observer);
+    await this.initialize(observer);
     if (!this.startupSecondaryStorageLoaded)
       return failedCommand(new LocalError("storage_unavailable"));
     const operation = { id: this.operationId, signal: this.accountAbort.signal };
     try {
-      if (!(await this.hydrateAccount(operation.signal))) return supersededCommand();
+      if (!(await this.hydrateAccount(operation.signal, trace))) return supersededCommand();
       this.assertCurrent(operation.id);
       this.publish({
         status: this.snapshot.status,
         protected: this.snapshot.protected,
-        error: isCapacityErrorCode(this.snapshot.error) ? this.snapshot.error : null,
+        error:
+          this.deviceQuotaError ??
+          (isCapacityErrorCode(this.snapshot.error) ? this.snapshot.error : null),
       });
       return { ok: true };
     } catch (error) {
@@ -1169,12 +1720,14 @@ export class AppController {
 
   /** Refresh only the selectable catalog, without disturbing a connection error or intent. */
   async refreshLocations(): Promise<CommandResult> {
-    await this.initialize();
+    const observer = this.captureConnectionObserver();
+    const trace = this.captureConnectionTrace(this.operationId, observer);
+    await this.initialize(observer);
     if (!this.startupSecondaryStorageLoaded)
       return failedCommand(new LocalError("storage_unavailable"));
     const signal = this.accountAbort.signal;
     try {
-      await this.loadLocations();
+      await this.loadLocations(false, undefined, trace);
       assertNotAborted(signal);
       return { ok: true };
     } catch (error) {
@@ -1209,7 +1762,9 @@ export class AppController {
         devices: result.devices,
         deviceLimit: result.limit,
         currentDeviceId,
-        error: isDeviceQuota(this.snapshot.error) ? this.snapshot.error : null,
+        error:
+          this.deviceQuotaError ??
+          (isDeviceQuota(this.snapshot.error) ? this.snapshot.error : null),
       });
       return { ok: true };
     } catch (error) {
@@ -1224,14 +1779,17 @@ export class AppController {
     }
   }
 
-  async deleteDevice(deviceId: string): Promise<CommandResult> {
-    await this.initialize();
+  async deleteDevice(
+    deviceId: string,
+    observer = this.captureConnectionObserver(),
+  ): Promise<CommandResult> {
+    await this.initialize(observer);
     if (!this.startupSecondaryStorageLoaded)
       return failedCommand(new LocalError("storage_unavailable"));
     const key = JSON.stringify([this.requireUserId(), this.accountGeneration, deviceId]);
     const pending = this.deviceDeletionCommands.get(key);
     if (pending) return pending;
-    const command = this.performDeleteDevice(deviceId);
+    const command = this.performDeleteDevice(deviceId, observer);
     this.deviceDeletionCommands.set(key, command);
     try {
       return await command;
@@ -1240,17 +1798,30 @@ export class AppController {
     }
   }
 
-  private async performDeleteDevice(deviceId: string): Promise<CommandResult> {
+  private async performDeleteDevice(
+    deviceId: string,
+    observer: ConnectionRecorder,
+  ): Promise<CommandResult> {
     const accountSignal = this.accountAbort.signal;
     const accountGeneration = this.accountGeneration;
     const token = this.requireToken();
     const userId = this.requireUserId();
     const initialId = this.operationId;
+    let intentRevision = this.connectionIntentRevision;
     const resumeAfterQuota =
       this.security.protectionRequested &&
-      (this.snapshot.error === "device_limit" || this.snapshot.error === "device_revoked_limit");
-    const currentDeviceId = await this.findBrowserDevice(userId, token, accountSignal);
-    if (accountSignal.aborted || !this.isCurrent(initialId)) return supersededCommand();
+      (this.deviceQuotaError !== null || isDeviceQuota(this.snapshot.error));
+    let currentDeviceId: string | null;
+    try {
+      currentDeviceId = await this.findBrowserDevice(userId, token, accountSignal);
+    } catch (error) {
+      if (accountSignal.aborted || this.connectionIntentRevision !== intentRevision)
+        return supersededCommand();
+      await this.handleOperationError(error, this.snapshot.protected);
+      return failedCommand(error);
+    }
+    if (accountSignal.aborted || this.connectionIntentRevision !== intentRevision)
+      return supersededCommand();
     const deletingCurrent = currentDeviceId === deviceId;
     let finishDeletion: (() => void) | undefined;
     let deletion: Promise<void> | undefined;
@@ -1270,14 +1841,35 @@ export class AppController {
         const disconnected = await this.disconnect();
         if (!disconnected.ok) return disconnected;
         if (!this.isCurrent(initialId + 1)) return supersededCommand();
+        intentRevision = this.connectionIntentRevision;
       }
       const operation = { id: this.operationId, signal: accountSignal };
+      // A sibling deletion's quota recovery advances the operation id without
+      // replacing this account or intent, so it supersedes no reply to this DELETE.
+      const ownsDeletion = () =>
+        this.connectionIntentRevision === intentRevision &&
+        !accountSignal.aborted &&
+        this.accountGeneration === accountGeneration &&
+        this.persisted.profile?.userId === userId &&
+        this.persisted.auth?.accessToken === token &&
+        (this.isCurrent(operation.id) ||
+          (resumeAfterQuota && !this.activeSession && this.security.protectionRequested));
       ++this.deviceListRevision;
       try {
         await this.dependencies.api.deleteDevice(token, deviceId, operation.signal);
       } catch (error) {
-        if (!this.isCurrent(operation.id)) return supersededCommand();
+        // An idempotent 404 confirms the absence like 204 and keeps its slot credit.
         if (!(error instanceof ApiError && error.status === 404 && error.code === "not_found")) {
+          // Only an account rejection preempts a sibling's pending quota recovery;
+          // a remote-device failure reports after it rather than overwriting it.
+          let sibling: Promise<CommandResult> | null;
+          while (
+            !deletingCurrent &&
+            !isUnauthorized(error) &&
+            (sibling = this.siblingQuotaRecovery(intentRevision, accountGeneration)) !== null
+          )
+            await sibling;
+          if (!ownsDeletion()) return supersededCommand();
           await this.handleOperationError(error, this.snapshot.protected);
           return failedCommand(error);
         }
@@ -1304,32 +1896,79 @@ export class AppController {
           });
         }
       });
-      if (!this.isCurrent(operation.id)) return supersededCommand();
+      if (!ownsDeletion()) return supersededCommand();
       const revision = ++this.deviceListRevision;
+      let presentationError: unknown = null;
       try {
         const result = await this.dependencies.api.getDevices(token, operation.signal);
-        this.assertCurrent(operation.id);
-        if (revision !== this.deviceListRevision) return supersededCommand();
-        this.publish({
-          devices: result.devices,
-          deviceLimit: result.limit,
-          currentDeviceId: deletingCurrent ? null : currentDeviceId,
-          error: null,
-        });
-        if (resumeAfterQuota && !deletingCurrent && this.security.protectionRequested)
-          return await this.connectInitialized(this.security.selectedLocationId);
-        return { ok: true };
+        if (!ownsDeletion()) return supersededCommand();
+        if (revision === this.deviceListRevision)
+          this.publish({
+            devices: result.devices,
+            deviceLimit: result.limit,
+            currentDeviceId: deletingCurrent ? null : currentDeviceId,
+            error: null,
+          });
       } catch (error) {
-        if (!this.isCurrent(operation.id) || revision !== this.deviceListRevision)
-          return supersededCommand();
-        await this.handleOperationError(error, this.snapshot.protected);
-        return failedCommand(error);
+        if (!ownsDeletion()) return supersededCommand();
+        if (isUnauthorized(error)) {
+          await this.handleOperationError(error, this.snapshot.protected);
+          return failedCommand(error);
+        }
+        presentationError = error;
       }
+      // The DELETE business action is confirmed. A presentation-only GET (or
+      // its replacement by Refresh) cannot cancel using the freed device slot.
+      if (
+        ownsDeletion() &&
+        resumeAfterQuota &&
+        !deletingCurrent &&
+        this.security.protectionRequested
+      ) {
+        // Every confirmed DELETE owns one newly freed slot. Serialize their
+        // recoveries; a failed quota retry cannot invalidate another deletion.
+        let sibling: Promise<CommandResult> | null;
+        while ((sibling = this.siblingQuotaRecovery(intentRevision, accountGeneration)) !== null)
+          await sibling;
+        if (!ownsDeletion() || this.activeSession) return supersededCommand();
+        const recovery = {
+          intentRevision,
+          accountGeneration,
+          promise: this.connectInitialized(this.security.selectedLocationId, false, observer),
+        };
+        this.deviceQuotaRecovery = recovery;
+        try {
+          return await recovery.promise;
+        } finally {
+          if (this.deviceQuotaRecovery === recovery) this.deviceQuotaRecovery = null;
+        }
+      }
+      if (presentationError && revision === this.deviceListRevision) {
+        await this.handleOperationError(presentationError, this.snapshot.protected);
+        return failedCommand(presentationError);
+      }
+      return { ok: true };
     } finally {
       if (deletion && this.deviceDeletions.get(userId) === deletion)
         this.deviceDeletions.delete(userId);
       finishDeletion?.();
     }
+  }
+
+  /**
+   * The pending quota recovery of a sibling deletion within this intent and account.
+   * Callers loop on it in their own frame: an async wait would yield between finding
+   * none and their next step, letting a sibling start a concurrent recovery.
+   */
+  private siblingQuotaRecovery(
+    intentRevision: number,
+    accountGeneration: number,
+  ): Promise<CommandResult> | null {
+    const recovery = this.deviceQuotaRecovery;
+    return recovery?.intentRevision === intentRevision &&
+      recovery.accountGeneration === accountGeneration
+      ? recovery.promise
+      : null;
   }
 
   async resetDeviceIdentity(): Promise<CommandResult> {
@@ -1353,8 +1992,8 @@ export class AppController {
     return { ok: true };
   }
 
-  async handleAlarm(name: string): Promise<void> {
-    await this.initialize();
+  async handleAlarm(name: string, observer = this.captureConnectionObserver()): Promise<void> {
+    await this.initialize(observer);
     if (!this.startupSecondaryStorageLoaded) return;
     if (name === ALARM_RECONNECT) {
       if (this.security.proxyCreationUncertain) return;
@@ -1363,7 +2002,7 @@ export class AppController {
         await this.dependencies.alarms.scheduleReconnect(this.security.nextRetryAt);
         return;
       }
-      await this.retryConnection(true);
+      await this.retryConnection(true, observer);
       return;
     }
     if (name === ALARM_EXPIRY) {
@@ -1392,15 +2031,20 @@ export class AppController {
       }
       return;
     }
-    await this.refreshProxySession();
+    await this.refreshProxySession(false, observer);
   }
 
   async handleProxyControlLost(level: ProxyControlLevel): Promise<void> {
+    this.proxyControlRevision += 1;
     await this.initialize();
     if (!this.startupSecondaryStorageLoaded) return;
     const id = this.operationId;
     const previous = this.activeSession;
-    if (!previous || !this.security.protectionRequested) return;
+    if (!previous) {
+      await this.reverifyGuardRoute(id);
+      return;
+    }
+    if (!this.security.protectionRequested) return;
     // Queue behind our own setting changes, then confirm the complete effective configuration.
     const valid = await this.withStateMutation(async () => {
       if (!this.isCurrent(id) || this.activeSession?.id !== previous.id) return true;
@@ -1424,8 +2068,7 @@ export class AppController {
         if (this.isProxyExpired(previous)) throw new LocalError("session_expired");
         await this.dependencies.proxy.apply(previous);
         this.assertCurrent(operation.id);
-        await this.authorizeSession(previous, operation.id);
-        await this.scheduleRetainedSession(previous, operation.id);
+        await this.reauthorizeRetainedSession(previous, operation.id);
         this.publish({ status: "connected", protected: true, error: null });
       });
     } catch (error) {
@@ -1433,19 +2076,179 @@ export class AppController {
     }
   }
 
-  async handleProxyError(error: string, _fatal: boolean): Promise<void> {
+  /** Without a session to restore, a blocking claim still depends on our guard route. */
+  private async reverifyGuardRoute(id: number): Promise<void> {
+    // Startup repair already re-inspected every guard while initializing this event.
+    if (this.startupGuardFailure) return;
+    const inspection: { failure: Error | null } = { failure: null };
+    await this.withStateMutation(async () => {
+      if (!this.isCurrent(id) || this.activeSession) return;
+      if (
+        !this.requiresBlockingGuard(
+          this.security.protectionRequested && this.security.killSwitchEnabled,
+        )
+      )
+        return;
+      if (!(await this.dependencies.proxy.isGuardedConfiguration().catch(() => false))) {
+        // Restore our own route when control permits. Another extension's route
+        // never counts as the fallback that confines the remaining traffic.
+        await this.dependencies.proxy.ensureBlockingConfiguration().catch((error: unknown) => {
+          inspection.failure =
+            error instanceof Error ? error : new SafetyError("traffic_guard_failed");
+        });
+        if (!this.isCurrent(id)) return;
+      }
+      await this.inspectSafety();
+      // A takeover only withdraws the confinement claim: the request and WebRTC guards
+      // stay closed and a scheduled reconnect keeps its deadline. If control is still
+      // missing then, that attempt fails and suspends the automatic retries itself. An
+      // attempt in progress keeps its status for the same reason: it checks control again.
+      const attempt = this.ownsBusyStatus();
+      const displaced =
+        this.takeoverDisplacedError?.operation === id ? this.takeoverDisplacedError : null;
+      if (inspection.failure) {
+        // Keep what the takeover displaced, also when it moves from an extension to a policy.
+        if (!displaced || !isProxyControlError(this.snapshot.error))
+          this.takeoverDisplacedError = { operation: id, error: this.snapshot.error };
+        this.publish({
+          ...(attempt ? {} : { status: "error" as const }),
+          protected: false,
+          error: mapError(inspection.failure),
+        });
+      } else if (isProxyControlError(this.snapshot.error)) {
+        // Our route is effective again: the takeover no longer explains the blocking state.
+        // The error it displaced comes back for an attempt in progress (its own error) and
+        // for a block that neither a scheduled reconnect nor a capacity block explains, even
+        // one recorded during the takeover, which deferred its report. Otherwise a device
+        // quota is shown again, or emit() rebuilds a capacity or uncertain-creation block.
+        const restored =
+          displaced && !isProxyControlError(displaced.error) ? displaced.error : null;
+        this.takeoverDisplacedError = null;
+        this.publish({
+          error:
+            attempt ||
+            (restored !== null &&
+              this.security.nextRetryAt === null &&
+              !this.security.capacityBlockedLocationId)
+              ? restored
+              : this.deviceQuotaError,
+        });
+      } else this.publish({});
+    });
+  }
+
+  /**
+   * A busy status published by the current operation belongs to a sign-in, connection,
+   * renewal or stop still in progress, which publishes its own outcome.
+   */
+  private ownsBusyStatus(): boolean {
+    return (
+      this.statusOperation === this.operationId &&
+      (this.snapshot.status === "connecting" ||
+        this.snapshot.status === "refreshing" ||
+        this.snapshot.status === "disconnecting")
+    );
+  }
+
+  async handleProxyError(
+    error: string,
+    _fatal: boolean,
+    provenance?: ProxyErrorProvenance,
+  ): Promise<void> {
+    const observedSession = this.activeSession;
+    const observedOperation = this.operationId;
+    if (observedSession && provenance && this.isHistoricalProxyError(observedSession, provenance))
+      return;
+    if (
+      provenance &&
+      observedSession &&
+      (error === "proxy_tls_error" || isProxyCertificateError(error)) &&
+      provenance.host.toLowerCase() === observedSession.host.toLowerCase() &&
+      provenance.port === observedSession.port
+    ) {
+      // Refuse before any await: an operation installing or retaining this
+      // session must neither authorize it nor publish protection after delivery.
+      this.sessionProxyRefusals.set(
+        observedSession,
+        isProxyCertificateError(error) ? "proxy_certificate_invalid" : "proxy_unavailable",
+      );
+      // The refused session is active: stop displaying it as protected even if
+      // its termination below waits for, or cannot obtain, route verification.
+      if (this.snapshot.protected) this.publish({ protected: false });
+    }
+    // A session kept for the startup repairing a refusal is not active either: its endpoint's
+    // failures wait for that startup too.
+    if (
+      provenance &&
+      ((!observedSession && !this.startupSecondaryStorageLoaded) ||
+        this.startupInProgress ||
+        this.startupGuardFailure !== null) &&
+      (error === "proxy_tls_error" || isProxyCertificateError(error))
+    ) {
+      const host = provenance.host.toLowerCase();
+      if (
+        !this.startupProxyFailures.some(
+          (failure) => failure.host === host && failure.port === provenance.port,
+        )
+      ) {
+        if (this.startupProxyFailures.length < 128)
+          this.startupProxyFailures.push({
+            generation: this.startupGeneration || 1,
+            error: isProxyCertificateError(error)
+              ? "proxy_certificate_invalid"
+              : "proxy_unavailable",
+            host,
+            port: provenance.port,
+          });
+        else this.startupProxyFailureOverflow = true;
+      }
+    }
     await this.initialize();
     if (!this.startupSecondaryStorageLoaded) return;
+    if (provenance) {
+      if (error !== "proxy_tls_error" && !isProxyCertificateError(error)) return;
+      if (
+        !observedSession ||
+        !this.isCurrent(observedOperation) ||
+        this.activeSession !== observedSession ||
+        this.isHistoricalProxyError(observedSession, provenance) ||
+        provenance.host.toLowerCase() !== observedSession.host.toLowerCase() ||
+        provenance.port !== observedSession.port
+      )
+        return;
+      const current = await this.withStateMutation(async () => {
+        if (
+          !this.isCurrent(observedOperation) ||
+          this.activeSession !== observedSession ||
+          this.isHistoricalProxyError(observedSession, provenance)
+        )
+          return false;
+        return this.dependencies.proxy.isActiveConfiguration(observedSession).catch(() => false);
+      });
+      if (
+        !current ||
+        !this.isCurrent(observedOperation) ||
+        this.activeSession !== observedSession ||
+        this.isHistoricalProxyError(observedSession, provenance)
+      )
+        return;
+      await this.failActiveSession(
+        isProxyCertificateError(error) ? "proxy_certificate_invalid" : "proxy_unavailable",
+      );
+      return;
+    }
     if (this.activeSession && isProxyCertificateError(error))
       await this.failActiveSession("proxy_certificate_invalid");
     // A generic failed transaction is not evidence of a failed whole session.
   }
 
-  async handleProxyPermissionsChanged(): Promise<void> {
-    await this.initialize();
+  async handleProxyPermissionsChanged(observer = this.captureConnectionObserver()): Promise<void> {
+    this.proxyControlRevision += 1;
+    await this.initialize(observer);
     if (!this.startupSecondaryStorageLoaded) return;
+    if (this.startupGuardFailure) return;
     if (!this.security.protectionRequested) return;
-    const operation = this.startOperation();
+    const operation = this.startOperation(observer);
     try {
       // Remove the session-wide allowance before checking permissions that can
       // otherwise make Firefox stop delivering blocking webRequest events.
@@ -1454,13 +2257,28 @@ export class AppController {
         this.assertCurrent(operation.id);
         await this.dependencies.proxy.assertControllable();
         this.assertCurrent(operation.id);
-        if (this.activeSession) {
-          const session = this.activeSession;
-          await this.authorizeSession(session, operation.id);
-          await this.scheduleRetainedSession(session, operation.id);
+        if (
+          this.activeSession?.id === this.authorizedSessionId &&
+          !this.isProxyExpired(this.activeSession) &&
+          (await this.dependencies.proxy.isActiveConfiguration(this.activeSession))
+        ) {
+          await this.reauthorizeRetainedSession(this.activeSession, operation.id);
           this.publish({ status: "connected", protected: true });
+        } else {
+          this.activeSession = null;
+          this.credentialsAllowed = false;
+          this.publish({ status: "disconnected", protected: false, activeLocationId: null });
         }
       });
+      if (
+        this.isCurrent(operation.id) &&
+        !this.activeSession &&
+        this.hasValidApiSession() &&
+        !this.security.nextRetryAt &&
+        !this.security.proxyCreationUncertain &&
+        !this.security.retrySuspended
+      )
+        await this.connectInitialized(this.security.selectedLocationId, false, observer);
     } catch (error) {
       if (this.isCurrent(operation.id)) await this.enterFailure(error, operation.id, false);
     }
@@ -1484,10 +2302,23 @@ export class AppController {
     void this.safeRevoke(session.id, token);
   }
 
-  private async doInitialize(): Promise<void> {
+  private async doInitialize(observer?: ConnectionRecorder): Promise<void> {
+    const startupGeneration = ++this.startupGeneration;
+    this.startupInProgress = true;
+    for (const failure of this.startupProxyFailures) failure.generation = startupGeneration;
     const recoveringUnreadStorage = this.startupStorageRecovery;
+    const repairingGuardFailure = this.startupGuardFailure;
+    let restoringStoredSession: ProxySession | null = null;
+    // Readability belongs to this restoration attempt, including guard-repair retries.
+    this.startupSecondaryStorageLoaded = false;
+    this.startupGuardFailure = null;
+    let guardFailure: Error | undefined;
+    const noteGuardFailure = (error: unknown) => {
+      this.credentialsAllowed = false;
+      guardFailure ??= error instanceof Error ? error : new SafetyError("traffic_guard_failed");
+    };
     try {
-      await this.dependencies.safety.suspend();
+      await this.dependencies.safety.suspend().catch(noteGuardFailure);
       if (!this.startupStorageLoaded) {
         await this.dependencies.storage.configureTrustedContexts();
         this.persisted = await this.dependencies.storage.readPersisted();
@@ -1503,8 +2334,6 @@ export class AppController {
       await this.cleanup.initialize();
       this.restoreCleanupForAccount();
       await this.exclusions.initialize();
-      this.startupSecondaryStorageLoaded = true;
-      this.startupStorageRecovery = "none";
       // Finish restoring the saved intent before a pending exclusion journal can
       // release its temporary guard. A guard that preceded the failed read (or
       // could not be inspected) remains protection requested across that recovery.
@@ -1513,8 +2342,12 @@ export class AppController {
         await this.writeSecurity();
       }
       if (this.exclusions.pending) {
-        await this.exclusions.apply();
-        if (!this.security.protectionRequested) await this.dependencies.safety.release();
+        await this.exclusions.apply().catch(noteGuardFailure);
+        if (!guardFailure && !this.security.protectionRequested) {
+          await this.dependencies.proxy.clear();
+          await this.dependencies.safety.setWebRtc(false);
+          await this.dependencies.safety.release();
+        }
       }
       await this.inspectSafety();
       // An interrupted first write or failed release may have left a durable guard.
@@ -1526,7 +2359,7 @@ export class AppController {
         this.security = { ...this.security, protectionRequested: true };
         await this.writeSecurity();
       }
-      const operation = this.startOperation();
+      const operation = this.startOperation(observer);
       const currentDeviceId = this.persisted.profile
         ? await this.dependencies.identity
             .getDeviceId(this.persisted.profile.userId)
@@ -1542,23 +2375,66 @@ export class AppController {
       };
       if (this.security.protectionRequested) {
         await this.withStateMutation(async () => {
-          await this.blockSafety(this.security.killSwitchEnabled);
-          await this.dependencies.safety.setWebRtc(this.security.webRtcProtectionEnabled);
+          await this.dependencies.proxy.assertControllable().catch(noteGuardFailure);
+          await this.blockSafety(this.security.killSwitchEnabled).catch(noteGuardFailure);
           await this.inspectSafety();
           this.publish({ protected: false });
         });
       }
       const transient = await this.dependencies.storage.readTransient();
+      if (transient.cleanupUncertain) await this.recordCleanupUncertainty();
+      if (transient.proxySession)
+        this.sessionRenewals.set(transient.proxySession, {
+          refreshAttempts: transient.refreshAttempts,
+          ...(transient.refreshRetryAt === undefined
+            ? {}
+            : { refreshRetryAt: transient.refreshRetryAt }),
+        });
       // Migrate sessions created before the durable ledger was introduced.
       // Do this before clearing expired-account or browser-session credentials.
       const owner = this.persisted.profile?.userId;
       const deviceRecovery = owner ? await this.dependencies.identity.getRecovery(owner) : null;
+      if (
+        !owner &&
+        [
+          ...(transient.proxySession ? [transient.proxySession] : []),
+          ...transient.retiredSessions,
+        ].some((session) => Date.parse(session.expiresAt) > this.dependencies.now())
+      )
+        // A sanitized account cannot supply ownership for surviving legacy IDs.
+        // Preserve their unresolved cleanup without assigning them to a new login.
+        await this.recordCleanupUncertainty();
       if (owner) {
         if (transient.proxySession) await this.cleanup.add(owner, transient.proxySession);
         for (const session of transient.retiredSessions)
           await this.cleanup.add(owner, { id: session.sessionId, expiresAt: session.expiresAt });
         this.restoreCleanupForAccount();
       }
+      this.startupSecondaryStorageLoaded = true;
+      this.startupStorageRecovery = "none";
+      this.retiredSessions = transient.retiredSessions.filter(
+        ({ expiresAt }) => Date.parse(expiresAt) > this.dependencies.now(),
+      );
+      if (guardFailure) {
+        // A refused guard does not make readable account/session stores unknown.
+        // Keep their credentials durable, but never expose or renew them until repair.
+        this.credentialsAllowed = false;
+        this.activeSession = null;
+        this.authorizedSessionId = null;
+        this.startupGuardFailure = mapError(guardFailure);
+        await this.dependencies.alarms.clearAll().catch(() => undefined);
+        await this.inspectSafety();
+        this.publish({
+          protected: false,
+          activeLocationId: null,
+          status: "error",
+          error: this.startupGuardFailure,
+        });
+        return;
+      }
+      // An explicit stop may need these stores, but must never restore their
+      // credentials or start a replacement connection while it awaits startup.
+      if (this.startupStopRequests > 0) return;
       if (!this.hasValidApiSession()) {
         const logoutOutcome = this.persisted.auth ? null : this.snapshot.logoutOutcome;
         await this.clearInvalidAccount(this.persisted.auth ? "api_token_expired" : null);
@@ -1568,21 +2444,69 @@ export class AppController {
       if (this.security.proxyCreationUncertain)
         this.uncertainCreationTokens.add(this.requireToken());
       if (this.historicalCleanupUncertain) this.uncertainCreationTokens.add(this.requireToken());
-      this.retiredSessions = transient.retiredSessions.filter(
-        ({ expiresAt }) => Date.parse(expiresAt) > this.dependencies.now(),
-      );
+      const restoredConfiguration =
+        transient.proxySession &&
+        (await this.dependencies.proxy.isActiveConfiguration(transient.proxySession));
       if (
         this.security.protectionRequested &&
         !deviceRecovery?.pending &&
         transient.proxySession &&
         !this.isProxyExpired(transient.proxySession) &&
-        (await this.dependencies.proxy.isActiveConfiguration(transient.proxySession))
+        !restoredConfiguration
+      )
+        // Control lost since the initial guard also unconfigures this session. Refuse
+        // before consuming TLS failures: like the guard's refusal, a control refusal keeps
+        // the session, its budget and its endpoint's failures for the startup repairing it.
+        // An inconclusive check proves no loss: the restoration below checks control again
+        // with the session marked as restoring, which a repair then preserves.
+        await this.dependencies.proxy.assertControllable().catch((error: unknown) => {
+          if (error instanceof ProxyControlError) throw error;
+        });
+      const restoredSessionForFailure = transient.proxySession;
+      const startupProxyFailure =
+        (restoredConfiguration === true || repairingGuardFailure !== null) &&
+        restoredSessionForFailure &&
+        this.startupProxyFailures.find(
+          (failure) =>
+            failure.generation === startupGeneration &&
+            failure.host === restoredSessionForFailure.host.toLowerCase() &&
+            failure.port === restoredSessionForFailure.port,
+        );
+      // Consume only an endpoint actually restored in this startup generation or, when this
+      // startup repairs a refusal, the saved one: that refusal kept the session with the
+      // failures recorded since, including during this startup.
+      // Never authorize credentials already known to have failed TLS.
+      if (
+        (startupProxyFailure || this.startupProxyFailureOverflow) &&
+        this.security.protectionRequested
+      ) {
+        this.startupProxyFailures.splice(0, this.startupProxyFailures.length);
+        this.startupProxyFailureOverflow = false;
+        await this.enterFailure(
+          new LocalError(startupProxyFailure ? startupProxyFailure.error : "proxy_unavailable"),
+          operation.id,
+        );
+        return;
+      }
+      this.startupProxyFailures.splice(0, this.startupProxyFailures.length);
+      this.startupProxyFailureOverflow = false;
+      if (
+        this.security.protectionRequested &&
+        !deviceRecovery?.pending &&
+        transient.proxySession &&
+        !this.isProxyExpired(transient.proxySession) &&
+        (restoredConfiguration || (await this.dependencies.proxy.isGuardedConfiguration()))
       ) {
         const restoredSession = transient.proxySession;
+        restoringStoredSession = restoredSession;
         await this.withStateMutation(async () => {
           this.activeSession = restoredSession;
           this.snapshot.activeLocation = transient.activeLocation ?? null;
           this.credentialsAllowed = true;
+          if (!restoredConfiguration) {
+            await this.dependencies.proxy.apply(restoredSession);
+            this.assertCurrent(operation.id);
+          }
           if (transient.refreshAttempts > 0 && transient.refreshRetryAt === undefined) {
             transient.refreshRetryAt = this.dependencies.now() + REFRESH_RETRY_MS;
             await this.writeTransient(transient);
@@ -1595,6 +2519,10 @@ export class AppController {
               : Math.max(computeRefreshAt(restoredSession, this.dependencies.now()), resumeAt),
           );
           await this.authorizeSession(restoredSession, operation.id);
+          // A stop arriving as authorization resolves must neither see a protected
+          // restore nor keep the traffic allowance just granted for it.
+          if (this.startupStopRequests > 0) await this.blockSafety(this.security.killSwitchEnabled);
+          this.assertNoStartupStop();
           this.publish({
             status:
               !this.security.proxyCreationUncertain &&
@@ -1612,10 +2540,28 @@ export class AppController {
                 : null,
           });
         });
-        void this.hydrateAccountBestEffort();
+        void this.hydrateAccountBestEffort(observer);
         return;
       }
+      // Refuse credentials before the control check below: both its outcomes withdraw them.
       this.credentialsAllowed = false;
+      const unrestoredSession = transient.proxySession;
+      if (
+        this.security.protectionRequested &&
+        !deviceRecovery?.pending &&
+        unrestoredSession &&
+        !this.isProxyExpired(unrestoredSession)
+      )
+        // Control lost after the early check also makes our guard route ineffective, which
+        // the guarded test above reports only as an unguarded route. Refuse before clearing:
+        // like the early check's refusal, this keeps the session and its budget for the
+        // startup repairing it. An inconclusive check proves no loss: the clearing proceeds.
+        // So does a TLS failure of its endpoint recorded after the earlier ones were consumed
+        // or dropped, also during this check: the guarded restoration would have refused it.
+        await this.dependencies.proxy.assertControllable().catch((error: unknown) => {
+          if (error instanceof ProxyControlError && !this.hasProxyRefusal(unrestoredSession))
+            throw error;
+        });
       await this.clearTransientCredentials();
       await this.dependencies.alarms.clearAll();
       if (this.security.protectionRequested) {
@@ -1634,7 +2580,7 @@ export class AppController {
         if (this.security.nextRetryAt && this.security.nextRetryAt > this.dependencies.now()) {
           await this.dependencies.alarms.scheduleReconnect(this.security.nextRetryAt);
           this.publish({ protected: false, status: "error", error: "proxy_unavailable" });
-        } else await this.connectInitialized(this.security.selectedLocationId);
+        } else await this.connectInitialized(this.security.selectedLocationId, false, observer);
         return;
       }
       await this.withStateMutation(() => this.releaseProtection(operation.id));
@@ -1645,8 +2591,65 @@ export class AppController {
       });
       // Local policy restoration must not wait for remote account reads: the
       // Firefox request guard also awaits initialization when VPN is disconnected.
-      void this.hydrateAccountBestEffort();
+      void this.hydrateAccountBestEffort(observer);
     } catch (error) {
+      if (
+        this.startupStopRequests > 0 &&
+        error instanceof DOMException &&
+        error.name === "AbortError"
+      ) {
+        this.credentialsAllowed = false;
+        this.activeSession = null;
+        this.authorizedSessionId = null;
+        return;
+      }
+      let errorCode = mapError(error);
+      // Lost control also unconfigures a restoring session, which its configuration
+      // checks and proxy write report as unavailable. Unless TLS refused the session
+      // itself, report the control refusal instead: it stays repairable.
+      if (
+        restoringStoredSession &&
+        errorCode === "proxy_unavailable" &&
+        !this.hasProxyRefusal(restoringStoredSession)
+      ) {
+        // Every exit below refuses credentials: never lend them during this check.
+        this.credentialsAllowed = false;
+        errorCode = await this.dependencies.proxy
+          .assertControllable()
+          .then(() => errorCode, mapError);
+      }
+      if (
+        this.startupSecondaryStorageLoaded &&
+        (this.startupGuardFailure ||
+          (repairingGuardFailure &&
+            restoringStoredSession &&
+            this.security.protectionRequested &&
+            !this.isProxyExpired(restoringStoredSession) &&
+            !isUnauthorized(error) &&
+            !this.hasProxyRefusal(restoringStoredSession)) ||
+          errorCode === "host_permissions_required" ||
+          errorCode === "private_browsing_required" ||
+          errorCode === "proxy_controlled_by_extension" ||
+          errorCode === "proxy_controlled_by_policy")
+      ) {
+        // Permissions or proxy control may disappear at any awaited restoration
+        // boundary; such refusals stay repairable, like the initial guard's.
+        // Secondary alarm failures cannot turn a repairable refusal into cleanup.
+        this.credentialsAllowed = false;
+        this.activeSession = null;
+        this.authorizedSessionId = null;
+        this.startupGuardFailure ??= errorCode;
+        await this.dependencies.safety.suspend().catch(() => undefined);
+        await this.dependencies.alarms.clearAll().catch(() => undefined);
+        await this.inspectSafety();
+        this.publish({
+          protected: false,
+          activeLocationId: null,
+          status: "error",
+          error: this.startupGuardFailure,
+        });
+        return;
+      }
       if (!this.startupSecondaryStorageLoaded) {
         // Unknown account/security data is not an empty account. Preserve both
         // stores and transient credentials until a later read can recover them.
@@ -1669,7 +2672,7 @@ export class AppController {
         try {
           // A policy not yet read cannot permit exclusions in the recovery guard.
           this.dependencies.safety.configureExclusions?.([]);
-          await this.dependencies.safety.block(true);
+          await this.blockSafety(true);
         } catch {
           reported = "traffic_guard_failed";
         }
@@ -1680,10 +2683,19 @@ export class AppController {
       // Even corrupt/unreadable account storage must not remove an existing persistent guard.
       this.security = { ...this.security, protectionRequested: true };
       await this.enterFailure(error, this.operationId, false);
+    } finally {
+      this.startupInProgress = false;
+      if (this.startupSecondaryStorageLoaded && !this.startupGuardFailure) {
+        this.startupProxyFailures.splice(0, this.startupProxyFailures.length);
+        this.startupProxyFailureOverflow = false;
+      }
     }
   }
 
-  private async hydrateAccount(signal: AbortSignal): Promise<boolean> {
+  private async hydrateAccount(
+    signal: AbortSignal,
+    trace = this.captureConnectionTrace(),
+  ): Promise<boolean> {
     const revision = ++this.accountRevision;
     try {
       assertNotAborted(signal);
@@ -1691,11 +2703,15 @@ export class AppController {
       const [profile, subscription] = await Promise.all([
         this.dependencies.api.getProfile(token, signal),
         this.dependencies.api.getSubscription(token, signal),
-        this.loadLocations(),
+        this.loadLocations(false, undefined, trace),
       ]);
       return await this.withStateMutation(async () => {
         assertNotAborted(signal);
         if (revision < this.committedAccountRevision) return false;
+        // A superseded authentication may have rolled back the credential this
+        // profile was fetched for. It must never be attached to another one.
+        if (!this.persisted.auth) throw new LocalError("unauthorized");
+        if (this.persisted.auth.accessToken !== token) return false;
         const selected =
           this.snapshot.selectedLocationId ??
           selectLocation(this.persisted.selectedLocationId, this.snapshot.locations);
@@ -1717,27 +2733,34 @@ export class AppController {
       // Late failures from an old account must not invalidate the current account.
       assertNotAborted(signal);
       if (revision < this.committedAccountRevision) return false;
+      // A rolled-back credential fails like a missing one, whichever request it aborted.
+      if (!this.persisted.auth) throw new LocalError("unauthorized");
       throw error;
     }
   }
 
-  private async hydrateAccountBestEffort(): Promise<void> {
+  private async hydrateAccountBestEffort(
+    observer = this.captureConnectionObserver(),
+  ): Promise<void> {
     const signal = this.accountAbort.signal;
     try {
-      await this.hydrateAccount(signal);
+      await this.hydrateAccount(signal, this.captureConnectionTrace(this.operationId, observer));
     } catch (error) {
       if (!signal.aborted && isUnauthorized(error)) await this.clearInvalidAccount("unauthorized");
     }
   }
 
-  private async refreshEntitlement(signal: AbortSignal): Promise<void> {
+  private async refreshEntitlement(
+    signal: AbortSignal,
+    trace = this.captureConnectionTrace(),
+  ): Promise<void> {
     const revision = ++this.accountRevision;
     try {
       assertNotAborted(signal);
       const token = this.requireToken();
       const [subscription] = await Promise.all([
         this.dependencies.api.getSubscription(token, signal),
-        this.loadLocations(),
+        this.loadLocations(false, undefined, trace),
       ]);
       await this.withStateMutation(async () => {
         assertNotAborted(signal);
@@ -1756,7 +2779,11 @@ export class AppController {
     }
   }
 
-  private loadLocations(force = false, rejectedLocationId?: string): Promise<Location[]> {
+  private loadLocations(
+    force = false,
+    rejectedLocationId?: string,
+    trace = this.captureConnectionTrace(),
+  ): Promise<Location[]> {
     if (!force && this.locationsRequest?.revision === this.locationsRevision)
       return this.locationsRequest.promise;
     const token = this.requireToken();
@@ -1806,6 +2833,16 @@ export class AppController {
               ? { selectedLocationId: selectLocation(this.snapshot.selectedLocationId, locations) }
               : {}),
           });
+          this.traceConnection(
+            {
+              event: "catalog",
+              count: locations.length,
+              selectedPresent: locations.some(
+                (location) => location.id === this.snapshot.selectedLocationId,
+              ),
+            },
+            trace,
+          );
         });
         assertOwner();
         return revision === this.locationsRevision ? locations : await latestCatalog();
@@ -1834,9 +2871,14 @@ export class AppController {
     session: ProxySession,
     expectedId: number,
     renewalScheduled = false,
+    selectionRevision?: number,
   ): Promise<void> {
     await this.withStateMutation(async () => {
       this.assertCurrent(expectedId);
+      // Reselecting the same session is not a repair: keep any current TLS refusal,
+      // even once a newer selection supersedes the reselection.
+      this.assertNoProxyRefusal(session);
+      this.assertSelectionOwner(selectionRevision, session.locationId);
       if (
         this.activeSession?.id !== session.id ||
         this.authorizedSessionId !== session.id ||
@@ -1852,6 +2894,7 @@ export class AppController {
       this.assertCurrent(expectedId);
       if (this.isProxyExpired(session)) throw new LocalError("session_expired");
       if (!renewalScheduled) await this.scheduleRetainedSession(session, expectedId);
+      this.assertNoProxyRefusal(session);
       this.publish({
         status: "connected",
         protected: true,
@@ -1861,6 +2904,14 @@ export class AppController {
         retryAfterSeconds: null,
       });
     });
+  }
+
+  /** Caller holds stateMutation: authorizes the active session again with its renewal. */
+  private async reauthorizeRetainedSession(session: ProxySession, id: number): Promise<void> {
+    await this.authorizeSession(session, id);
+    await this.scheduleRetainedSession(session, id);
+    // A TLS refusal received after authorization still forbids protection.
+    this.assertNoProxyRefusal(session);
   }
 
   /** Caller holds stateMutation; retaining credentials also retains their renewal budget. */
@@ -1878,13 +2929,19 @@ export class AppController {
       this.isProxyExpired(session)
     )
       return;
-    const transient = await this.dependencies.storage.readTransient();
+    let transient = await this.dependencies.storage.readTransient();
     this.assertCurrent(expectedId);
     if (this.activeSession !== session || !this.canUseCredentials() || this.isProxyExpired(session))
       return;
-    // A discarded creation reconciles its own credentials and alarms after its
-    // in-flight storage write settles. Do not reset that session's retry budget.
-    if (transient.proxySession?.id !== session.id) return;
+    if (transient.proxySession?.id !== session.id) {
+      // The mutation queue has settled any superseded write. Commit the retained
+      // session and its own budget before confirming selection or scheduling it.
+      const renewal = this.sessionRenewals.get(session);
+      if (!renewal) throw new SafetyError("traffic_guard_failed");
+      transient = { proxySession: session, ...renewal, retiredSessions: this.retiredSessions };
+      await this.writeTransient(transient);
+      this.assertCurrent(expectedId);
+    }
     const resumeAt = this.refreshResumeAt(session, transient);
     await this.dependencies.alarms.scheduleSession(
       session,
@@ -1919,18 +2976,27 @@ export class AppController {
     });
   }
 
+  /** Returns whether a newer selection superseded the refused target. */
   private async handleCapacityRejection(
     error: ApiError,
     locationId: string,
     expectedId: number,
-  ): Promise<void> {
-    await this.withStateMutation(async () => {
+    trace = this.captureConnectionTrace(expectedId),
+    selectionRevision?: number,
+  ): Promise<boolean> {
+    const replaced = await this.withStateMutation(async () => {
       this.assertCurrent(expectedId);
+      // A refusal of a target replaced by a newer selection still updates the catalog, and
+      // capacity_unavailable still records its Retry-After, but must not select, block or
+      // report that target again. server_full never records a delay here: its block is per
+      // location, which a replaced target does not receive. Only an unreplaced refusal then
+      // fails its direct attempt, whose failure may record that Retry-After.
+      const superseded = this.isSelectionSuperseded(selectionRevision, locationId);
       // Invalidate every earlier catalog response before publishing the immediate removal.
       this.locationsRevision += 1;
       this.locationsRequest = null;
       const activeLocation = this.locationMetadata(this.activeSession);
-      if (error.code === "server_full") {
+      if (error.code === "server_full" && !superseded) {
         this.security = {
           ...this.security,
           capacityBlockedLocationId: locationId,
@@ -1947,7 +3013,7 @@ export class AppController {
         if (this.activeSession?.locationId === locationId)
           await this.dependencies.alarms.clearRefresh();
         this.assertCurrent(expectedId);
-      } else if (error.retryAfterSeconds) {
+      } else if (error.code !== "server_full" && error.retryAfterSeconds) {
         this.security = {
           ...this.security,
           retryNotBefore: Math.max(
@@ -1962,31 +3028,45 @@ export class AppController {
         ...(error.code === "server_full"
           ? {
               locations: this.snapshot.locations.filter((location) => location.id !== locationId),
-              selectedLocationId: locationId,
+              ...(superseded ? {} : { selectedLocationId: locationId }),
             }
           : {}),
         activeLocation,
-        error: mapError(error),
+        // A takeover still in progress keeps explaining the unconfined route.
+        ...(superseded || isProxyControlError(this.snapshot.error)
+          ? {}
+          : { error: mapError(error) }),
       });
+      return superseded;
     });
     this.assertCurrent(expectedId);
     // A failed GET must leave the original refusal visible and the other locations usable.
-    await this.loadLocations(false, error.code === "server_full" ? locationId : undefined).catch(
-      () => undefined,
-    );
+    await this.loadLocations(
+      false,
+      error.code === "server_full" ? locationId : undefined,
+      trace,
+    ).catch(() => undefined);
     this.assertCurrent(expectedId);
+    return replaced;
   }
 
-  private async refreshProxySession(manual = false): Promise<CommandResult> {
+  private async refreshProxySession(
+    manual = false,
+    observer = this.captureConnectionObserver(),
+  ): Promise<CommandResult> {
     const previous = this.activeSession;
     const deviceSessionRevision = this.deviceSessionRevision;
     const token = this.persisted.auth?.accessToken;
-    if (!previous) return supersededCommand();
+    if (previous?.id !== this.authorizedSessionId || !this.credentialsAllowed)
+      return supersededCommand();
     if (this.isProxyExpired(previous)) {
       await this.expireSession();
       return { ok: false, commandError: "session_expired" };
     }
-    let operation: { id: number; signal?: AbortSignal } = { id: this.operationId };
+    let operation: { id: number; signal?: AbortSignal; trace: ConnectionRecorder } = {
+      id: this.operationId,
+      trace: this.captureConnectionTrace(this.operationId, observer),
+    };
     const retiredBefore = this.retiredSessions.filter(
       ({ expiresAt }) => Date.parse(expiresAt) > this.dependencies.now(),
     );
@@ -2014,11 +3094,20 @@ export class AppController {
       }
       // A deferred or exhausted retry only maintains its alarm. It must not
       // supersede an exclusion transaction that will restore this live session.
-      operation = this.startOperation();
-      this.publish({ status: "refreshing", protected: true, error: null });
+      operation = this.startOperation(observer);
+      this.publish({
+        status: "refreshing",
+        protected: !this.hasProxyRefusal(previous),
+        error: null,
+      });
       if (manual && !(await this.allowExplicitDeviceRecovery())) return supersededCommand();
       if (manual) await this.clearCapacityBlock(operation.id);
-      replacement = await this.createSignedProxySession(previous.locationId, operation.signal);
+      replacement = await this.createSignedProxySession(
+        previous.locationId,
+        operation.signal,
+        undefined,
+        operation.trace,
+      );
       this.assertCurrent(operation.id);
       this.assertSessionLocation(replacement, previous.locationId);
       const session = replacement;
@@ -2034,6 +3123,7 @@ export class AppController {
         await this.commitCreationMarker(session);
         this.assertCurrent(operation.id);
         this.activeSession = session;
+        this.sessionActivatedAt.set(session, performance.now());
         this.credentialsAllowed = true;
         await this.dependencies.proxy.apply(session);
         this.assertCurrent(operation.id);
@@ -2050,12 +3140,17 @@ export class AppController {
     } catch (error) {
       if (!this.isCurrent(operation.id)) {
         if (replacement) {
-          void this.safeRevoke(replacement.id, token);
+          if (!this.isRetainedAuthorizedSession(replacement, token))
+            void this.safeRevoke(replacement.id, token);
           await this.settleDiscardedCreation(replacement, token);
         }
         return supersededCommand();
       }
-      if (replacement) void this.safeRevoke(replacement.id, token);
+      if (replacement) {
+        void this.safeRevoke(replacement.id, token);
+        // Before the fallback reads the marker to suspend the predecessor's renewal.
+        await this.settleFailedCreation(replacement);
+      }
       if (isUnauthorized(error)) {
         await this.handleOperationError(error, false);
         return failedCommand(error);
@@ -2069,9 +3164,13 @@ export class AppController {
             this.deviceSessionRevision !== deviceSessionRevision ||
             this.isProxyExpired(previous) ||
             !(await this.dependencies.proxy.isActiveConfiguration(previous)) ||
+            // After the last await: a later refusal reaches the predecessor itself.
+            this.hasProxyRefusal(previous, replacement) ||
             (!canAutomaticallyRetry(mapError(error)) &&
               mapError(error) !== "server_full" &&
-              !(error instanceof ProxyCreationUncertainError))
+              !(error instanceof ProxyCreationUncertainError) &&
+              // A settled replacement leaves no unknown: keep the live predecessor.
+              !(error instanceof SettledCreationStorageError))
           )
             return;
           this.assertCurrent(operation.id);
@@ -2163,8 +3262,7 @@ export class AppController {
           // Automatic account expiry is not an explicit request to stop protection.
           await this.blockSafety(this.security.killSwitchEnabled);
           this.assertCurrent(operation.id);
-          if (!this.security.killSwitchEnabled) await this.dependencies.proxy.clear();
-          await this.dependencies.safety.setWebRtc(this.security.webRtcProtectionEnabled);
+          if (!this.requiresBlockingGuard()) await this.dependencies.proxy.clear();
           this.security = {
             ...this.security,
             nextRetryAt: null,
@@ -2191,15 +3289,17 @@ export class AppController {
   }
 
   /** Caller holds stateMutation. Explicit release restores Chrome's underlying settings. */
-  private async releaseProtection(id: number): Promise<void> {
+  private async releaseProtection(id: number, clearStoredCredentials = true): Promise<void> {
     await this.dependencies.alarms.clearAll();
     this.assertCurrent(id);
-    await this.dependencies.storage.clearTransient();
+    if (clearStoredCredentials) await this.dependencies.storage.clearTransient();
     this.assertCurrent(id);
     await this.dependencies.proxy.clear();
     this.assertCurrent(id);
-    if (this.exclusions.pending || this.exclusions.getState().error)
+    if (this.exclusions.pending || this.exclusions.getState().error) {
       await this.exclusions.rollback();
+      await this.dependencies.proxy.clear();
+    }
     this.assertCurrent(id);
     await this.dependencies.safety.setWebRtc(false);
     this.assertCurrent(id);
@@ -2216,16 +3316,22 @@ export class AppController {
       capacityBlockedLocationId: null,
     };
     this.creationMarkerOwner = 0;
+    this.deviceQuotaError = null;
     await this.writeSecurity();
     this.assertCurrent(id);
     this.retiredSessions = [];
     await this.inspectSafety();
     this.startupStorageRecovery = "none";
+    this.startupGuardFailure = null;
+    this.startupProxyFailures.splice(0, this.startupProxyFailures.length);
+    this.startupProxyFailureOverflow = false;
   }
 
   /** Only called under stateMutation, after transient credentials have been installed. */
   private async authorizeSession(session: ProxySession, id: number): Promise<void> {
     this.assertCurrent(id);
+    this.assertNoStartupStop();
+    this.assertNoProxyRefusal(session);
     if (this.exclusions.pending || this.exclusions.getState().error)
       throw new SafetyError("traffic_guard_failed");
     this.requireToken();
@@ -2245,8 +3351,7 @@ export class AppController {
       ...this.security,
       reconnectAttempts: 0,
       nextRetryAt: null,
-      retrySuspended:
-        this.security.proxyCreationUncertain || !!this.security.capacityBlockedLocationId,
+      retrySuspended: this.retriesSuspended(),
       selectedLocationId: this.security.capacityBlockedLocationId
         ? this.security.selectedLocationId
         : session.locationId,
@@ -2257,9 +3362,12 @@ export class AppController {
     this.assertCurrent(id);
     await this.dependencies.proxy.assertControllable();
     this.assertCurrent(id);
+    this.assertNoProxyRefusal(session);
+    this.assertNoStartupStop();
     await this.dependencies.safety.allow();
     try {
       this.assertCurrent(id);
+      this.assertNoStartupStop();
       this.requireToken();
       if (this.isProxyExpired(session)) throw new LocalError("session_expired");
       if (!(await this.dependencies.proxy.isActiveConfiguration(session)))
@@ -2270,12 +3378,31 @@ export class AppController {
       if (this.security.webRtcProtectionEnabled && !this.safetyStatus.webRtcProtected)
         throw new SafetyError("webrtc_control_unavailable");
       this.assertCurrent(id);
-      this.authorizedSessionId = session.id;
       const userId = this.requireUserId();
       const deviceId = await this.dependencies.identity.getDeviceId(userId);
       this.assertCurrent(id);
       if (deviceId) await this.dependencies.identity.completeRecovery(userId, deviceId);
       this.assertCurrent(id);
+      await this.dependencies.safety.setWebRtc(this.security.webRtcProtectionEnabled);
+      this.assertCurrent(id);
+      await this.inspectSafety();
+      if (this.security.webRtcProtectionEnabled && !this.safetyStatus.webRtcProtected)
+        throw new SafetyError("webrtc_control_unavailable");
+      this.assertCurrent(id);
+      // Control may be lost during the awaits above before its native event can
+      // reach this controller. Re-verify it, again whenever a permission or
+      // control event arrives during that check, before confirming the session.
+      let controlRevision: number;
+      do {
+        controlRevision = this.proxyControlRevision;
+        await this.dependencies.proxy.assertControllable();
+        this.assertCurrent(id);
+      } while (controlRevision !== this.proxyControlRevision);
+      // An explicit stop received during the final awaits still forbids authorization.
+      this.assertNoStartupStop();
+      this.assertNoProxyRefusal(session);
+      this.authorizedSessionId = session.id;
+      this.deviceQuotaError = null;
     } catch (error) {
       await this.blockSafety(this.security.killSwitchEnabled);
       throw error;
@@ -2287,6 +3414,11 @@ export class AppController {
     const operation = this.startOperation();
     this.credentialsAllowed = false;
     this.activeSession = null;
+    const connectionError = mapError(error);
+    this.deviceQuotaError =
+      connectionError === "device_limit" || connectionError === "device_revoked_limit"
+        ? connectionError
+        : null;
     this.publish({ protected: false, activeLocationId: null });
     await this.withStateMutation(async () => {
       if (!this.isCurrent(operation.id)) return;
@@ -2296,8 +3428,7 @@ export class AppController {
           // Revoke the temporary allowance BEFORE credentials/alarms are cleared.
           await this.blockSafety(this.security.killSwitchEnabled);
           this.assertCurrent(operation.id);
-          if (!this.security.killSwitchEnabled) await this.dependencies.proxy.clear();
-          await this.dependencies.safety.setWebRtc(this.security.webRtcProtectionEnabled);
+          if (!this.requiresBlockingGuard()) await this.dependencies.proxy.clear();
         }
       } catch (caught) {
         reported = mapError(caught);
@@ -2319,14 +3450,17 @@ export class AppController {
           this.security.retryNotBefore ?? 0,
           retryAfter ? this.dependencies.now() + retryAfter * 1000 : 0,
         ) || null;
-      const shouldRetry =
+      // Unlike retriesSuspended(), the creation marker only defers a retryable failure:
+      // settling that creation resumes it (see settleDiscardedCreation).
+      const retryable =
         retry &&
         !(error instanceof DeviceRecoveryExhaustedError) &&
         this.security.protectionRequested &&
         this.hasValidApiSession() &&
-        !this.security.proxyCreationUncertain &&
         !this.security.capacityBlockedLocationId &&
         canAutomaticallyRetry(reported);
+      const shouldRetry = retryable && !this.security.proxyCreationUncertain;
+      this.failureSuspendedRetries = !retryable;
       this.security = {
         ...this.security,
         reconnectAttempts: shouldRetry
@@ -2345,6 +3479,7 @@ export class AppController {
           await this.dependencies.alarms.scheduleReconnect(this.security.nextRetryAt);
       } catch {
         reported = "traffic_guard_failed";
+        this.failureSuspendedRetries = true;
         this.security = { ...this.security, nextRetryAt: null };
       }
       this.assertCurrent(operation.id);
@@ -2369,9 +3504,144 @@ export class AppController {
   }
 
   private async blockSafety(killSwitchEnabled: boolean): Promise<void> {
-    await this.dependencies.safety.block(
-      killSwitchEnabled || this.exclusions.pending || this.exclusions.getState().error,
+    const blocking = this.requiresBlockingGuard(killSwitchEnabled);
+    let failure: Error | undefined;
+    const attempt = async (operation: () => Promise<void>) => {
+      try {
+        await operation();
+      } catch (error) {
+        failure ??= error instanceof Error ? error : new SafetyError("traffic_guard_failed");
+      }
+    };
+    await attempt(() => this.dependencies.safety.suspend());
+    await attempt(() =>
+      this.dependencies.safety.setWebRtc(blocking || this.security.webRtcProtectionEnabled),
     );
+    if (blocking) await attempt(() => this.dependencies.proxy.ensureBlockingConfiguration());
+    // Every independent guard is attempted even if another mechanism is unavailable.
+    await attempt(() => this.dependencies.safety.block(blocking));
+    if (failure !== undefined) throw failure;
+  }
+
+  private requiresBlockingGuard(killSwitchEnabled = this.security.killSwitchEnabled): boolean {
+    return killSwitchEnabled || this.exclusions.pending || this.exclusions.getState().error;
+  }
+
+  private requiresTemporaryWebRtcProtection(): boolean {
+    return (
+      this.exclusions.pending ||
+      this.exclusions.getState().error ||
+      (this.security.protectionRequested &&
+        this.security.killSwitchEnabled &&
+        (this.activeSession?.id !== this.authorizedSessionId ||
+          !this.credentialsAllowed ||
+          !this.isTrafficAllowed()))
+    );
+  }
+
+  /**
+   * A startup failure of its endpoint or a current TLS refusal of the session itself
+   * forbids reuse of a session. A refused successor at the same endpoint failed after
+   * its predecessor's activation too.
+   */
+  private proxyRefusal(
+    session: ProxySession,
+    successor?: ProxySession | null,
+  ): AppErrorCode | null {
+    const refusal = this.startupProxyErrorCode(session) ?? this.sessionProxyRefusals.get(session);
+    if (refusal) return refusal;
+    return successor?.host.toLowerCase() === session.host.toLowerCase() &&
+      successor.port === session.port
+      ? (this.sessionProxyRefusals.get(successor) ?? null)
+      : null;
+  }
+
+  private hasProxyRefusal(session: ProxySession, successor?: ProxySession | null): boolean {
+    return this.proxyRefusal(session, successor) !== null;
+  }
+
+  private assertNoProxyRefusal(session: ProxySession): void {
+    const refusal = this.proxyRefusal(session);
+    if (refusal) throw new LocalError(refusal);
+  }
+
+  private startupRecoveryResult(): CommandResult {
+    if (!this.startupSecondaryStorageLoaded)
+      return failedCommand(new LocalError("storage_unavailable"));
+    return this.startupGuardFailure
+      ? { ok: false, commandError: this.startupGuardFailure }
+      : { ok: true };
+  }
+
+  private startupProxyErrorCode(session: ProxySession): AppErrorCode | null {
+    if (this.startupProxyFailureOverflow) return "proxy_unavailable";
+    return (
+      this.startupProxyFailures.find(
+        (failure) =>
+          failure.generation === (this.startupGeneration || 1) &&
+          failure.host === session.host.toLowerCase() &&
+          failure.port === session.port,
+      )?.error ?? null
+    );
+  }
+
+  private isHistoricalProxyError(session: ProxySession, provenance: ProxyErrorProvenance): boolean {
+    const activatedAt = this.sessionActivatedAt.get(session);
+    if (activatedAt === undefined) return false;
+    // Wall-clock timestamps can move backwards. Only a request observed by the
+    // current worker before activation proves that its failure is historical.
+    const observedAt = provenance.requestObservedAt;
+    return (
+      typeof observedAt === "number" &&
+      Number.isFinite(observedAt) &&
+      observedAt >= 0 &&
+      observedAt < activatedAt
+    );
+  }
+
+  private async recordCleanupUncertainty(): Promise<void> {
+    this.historicalCleanupUncertain = true;
+    this.security = { ...this.security, proxyCleanupUncertain: true };
+    await this.writeSecurity();
+  }
+
+  /** Caller holds stateMutation. Preserve unknown legacy IDs unless uncertainty is durable. */
+  private async prepareCleanupBeforeStop(id: number): Promise<boolean> {
+    if (this.startupSecondaryStorageLoaded) return true;
+    try {
+      const transient = await this.dependencies.storage.readTransient();
+      this.assertCurrent(id);
+      await this.cleanup.initialize();
+      this.assertCurrent(id);
+      if (transient.cleanupUncertain) await this.recordCleanupUncertainty();
+      const token = this.persisted.auth?.accessToken ?? this.logoutUnmigratedAccount?.token;
+      const owner = this.persisted.profile?.userId ?? this.logoutUnmigratedAccount?.userId;
+      const sessions = [
+        ...(transient.proxySession ? [transient.proxySession] : []),
+        ...transient.retiredSessions.map(({ sessionId, expiresAt }) => ({
+          id: sessionId,
+          expiresAt,
+        })),
+      ];
+      for (const session of sessions) {
+        if (!token || !owner) throw new LocalError("storage_unavailable");
+        await this.cleanup.add(owner, session);
+        this.assertCurrent(id);
+        this.rememberRemoteSession(token, session, 0, owner);
+      }
+      this.restoreCleanupForAccount();
+      return true;
+    } catch {
+      this.assertCurrent(id);
+      try {
+        await this.recordCleanupUncertainty();
+        this.assertCurrent(id);
+        return true;
+      } catch {
+        this.assertCurrent(id);
+        return false;
+      }
+    }
   }
 
   private async clearTransientCredentials(): Promise<void> {
@@ -2409,6 +3679,49 @@ export class AppController {
         ? (state.activeLocation ?? this.locationMetadata(state.proxySession))
         : null,
     });
+    if (state.proxySession)
+      this.sessionRenewals.set(state.proxySession, {
+        refreshAttempts: state.refreshAttempts,
+        ...(state.refreshRetryAt === undefined ? {} : { refreshRetryAt: state.refreshRetryAt }),
+      });
+  }
+
+  private isRetainedAuthorizedSession(session: ProxySession, token: string | undefined): boolean {
+    return (
+      this.persisted.auth?.accessToken === token &&
+      this.security.protectionRequested &&
+      this.isRetainedSession(session)
+    );
+  }
+
+  /**
+   * An operation ending without a replacement retains the live active session which
+   * keeps its authorization, unless a current refusal forbids it (see assertNoRetainedRefusal).
+   */
+  private isRetainedSession(session: ProxySession | null): boolean {
+    return (
+      !!session &&
+      this.activeSession === session &&
+      this.authorizedSessionId === session.id &&
+      this.credentialsAllowed &&
+      !this.isProxyExpired(session) &&
+      !this.hasProxyRefusal(session)
+    );
+  }
+
+  /** Once an attempt ended, only an unsettled creation or a capacity block suspends retries. */
+  private retriesSuspended(): boolean {
+    return this.security.proxyCreationUncertain || !!this.security.capacityBlockedLocationId;
+  }
+
+  /**
+   * Caller holds stateMutation and ends an operation without a replacement. Retaining is
+   * not a repair: an authorized session refused since its authorization fails instead.
+   */
+  private assertNoRetainedRefusal(): void {
+    const session = this.activeSession;
+    if (session?.id === this.authorizedSessionId && this.credentialsAllowed)
+      this.assertNoProxyRefusal(session);
   }
 
   private async writeSecurity(): Promise<void> {
@@ -2423,6 +3736,14 @@ export class AppController {
     this.safetyStatus = await this.dependencies.safety
       .inspect()
       .catch(() => ({ trafficBlocked: false, webRtcProtected: false, filterActive: false }));
+    if (
+      this.safetyStatus.trafficBlocked &&
+      (!this.safetyStatus.webRtcProtected ||
+        !(await this.dependencies.proxy.isGuardedConfiguration().catch(() => false)))
+    ) {
+      this.safetyStatus.trafficBlocked = false;
+      this.safetyStatus.blockingScope = "unverified";
+    }
     if (
       this.safetyStatus.blockingScope === "except_excluded" &&
       (this.exclusions.pending ||
@@ -2452,8 +3773,20 @@ export class AppController {
       known = new Map();
       this.remoteSessions.set(token, known);
     }
-    if (!known.has(session.id))
-      known.set(session.id, { expiresAt: session.expiresAt, sequence, userId });
+    const previous = known.get(session.id);
+    if (!previous) known.set(session.id, { expiresAt: session.expiresAt, sequence, userId });
+    else if (
+      Number.isFinite(Date.parse(session.expiresAt)) &&
+      (!Number.isFinite(Date.parse(previous.expiresAt)) ||
+        Date.parse(session.expiresAt) > Date.parse(previous.expiresAt))
+    ) {
+      previous.expiresAt = session.expiresAt;
+      if (previous.expiredBy !== undefined && Date.parse(session.expiresAt) > previous.expiredBy) {
+        // A prior expiration shortcut does not revoke a newly extended lifetime.
+        delete previous.revocation;
+        delete previous.expiredBy;
+      }
+    }
   }
 
   private restoreCleanupForAccount(): void {
@@ -2476,8 +3809,20 @@ export class AppController {
     if (session.revocation) return session.revocation;
     const revocation = Promise.resolve()
       .then(async () => {
-        if (!(Date.parse(session.expiresAt) <= this.dependencies.now()))
-          await this.dependencies.api.revokeProxySession(token, sessionId);
+        // As for a ledger record, a wall clock jump alone never proves that an ID
+        // without one, such as a creation whose record failed, expired remotely.
+        const expiredBy = this.cleanup.provenExpiry();
+        if (Date.parse(session.expiresAt) <= expiredBy) {
+          const completed = session.userId
+            ? await this.cleanup.complete(session.userId, sessionId, expiredBy)
+            : true;
+          if (completed && Date.parse(session.expiresAt) <= expiredBy) {
+            session.expiredBy = expiredBy;
+            return;
+          }
+        }
+        await this.dependencies.api.revokeProxySession(token, sessionId);
+        delete session.expiredBy;
         if (session.userId) await this.cleanup.complete(session.userId, sessionId);
       })
       .then(
@@ -2487,6 +3832,7 @@ export class AppController {
     session.revocation = revocation;
     session.revocationSettled = false;
     void revocation.then((result) => {
+      if (session.revocation !== revocation) return;
       session.revocationSettled = true;
       // Share in-flight calls and confirmed success. A subsequent explicit
       // cleanup may retry an earlier failure; concurrent calls never duplicate.
@@ -2536,12 +3882,16 @@ export class AppController {
   private async createSignedProxySession(
     locationId: string,
     signal?: AbortSignal,
+    retainedLocation?: Location,
+    trace = this.captureConnectionTrace(),
+    selectionRevision?: number,
   ): Promise<ProxySession> {
     const token = this.requireToken();
     const userId = this.requireUserId();
     // The successful POST can itself fill the server and remove it from a concurrent GET.
     const location =
       this.snapshot.locations.find((candidate) => candidate.id === locationId) ??
+      (retainedLocation?.id === locationId ? retainedLocation : null) ??
       (this.activeSession?.locationId === locationId
         ? this.locationMetadata(this.activeSession)
         : null);
@@ -2562,13 +3912,21 @@ export class AppController {
       try {
         deviceId = await this.ensureBrowserDevice(userId, token, signal);
         assertOwner();
-        const session = await this.createSignedProxySessionAttempt(locationId, deviceId, signal);
+        this.assertSelectionOwner(selectionRevision, locationId);
+        const session = await this.createSignedProxySessionAttempt(
+          locationId,
+          deviceId,
+          signal,
+          trace,
+          selectionRevision,
+        );
         if (location) this.sessionLocations.set(session, location);
         return session;
       } catch (error) {
         assertOwner();
         if (isCapacityApiError(error)) {
-          await this.handleCapacityRejection(error, locationId, id);
+          if (await this.handleCapacityRejection(error, locationId, id, trace, selectionRevision))
+            throw new SelectionSupersededError();
           throw error;
         }
         if (
@@ -2612,7 +3970,7 @@ export class AppController {
           this.publish({ protected: false, activeLocationId: null });
           await this.blockSafety(this.security.killSwitchEnabled);
           assertOwner();
-          if (!this.security.killSwitchEnabled) await this.dependencies.proxy.clear();
+          if (!this.requiresBlockingGuard()) await this.dependencies.proxy.clear();
           await this.clearTransientCredentials();
           await this.dependencies.alarms.clearAll();
           assertOwner();
@@ -2642,6 +4000,8 @@ export class AppController {
     locationId: string,
     deviceId: string,
     signal?: AbortSignal,
+    trace = this.captureConnectionTrace(),
+    selectionRevision?: number,
   ): Promise<ProxySession> {
     const token = this.requireToken();
     const userId = this.requireUserId();
@@ -2668,6 +4028,8 @@ export class AppController {
       await this.withStateMutation(async () => {
         if (signal) assertNotAborted(signal);
         this.creationMarkerOwner = sequence;
+        // Until a failure says otherwise, only this marker suspends automatic retries.
+        this.failureSuspendedRetries = false;
         this.security = {
           ...this.security,
           proxyCreationUncertain: true,
@@ -2687,13 +4049,30 @@ export class AppController {
       this.pendingSessions.set(session, token);
       try {
         await this.cleanup.add(userId, session);
-      } catch (error) {
+      } catch {
         this.pendingSessions.delete(session);
-        void this.safeRevoke(session.id, token);
-        throw error;
+        // The ID is known: its proven revocation, or a retried durable record,
+        // settles this creation instead of leaving an unknown without identity.
+        // The revocation is bounded by the API timeout and holds no state lock.
+        if (
+          (await this.revokeRemoteSession(token, session.id)) === "confirmed" ||
+          (await this.cleanup.add(userId, session).then(
+            () => true,
+            () => false,
+          ))
+        ) {
+          await this.clearCreationMarker(sequence, token);
+          throw new SettledCreationStorageError();
+        }
+        // Only this worker's memory holds the ID: it stays a durable unknown,
+        // even if a later logout of this worker revokes it.
+        await this.recordUnknownCreation(creation);
+        throw new ProxyCreationUncertainError();
       }
       return session;
     } catch (error) {
+      // A creation which returned its ID has already been settled above.
+      if (creation.outcome !== "pending") throw error;
       if (!sent || isDefinitiveProxyCreationRejection(error)) {
         creation.outcome = "rejected";
         if (
@@ -2708,18 +4087,13 @@ export class AppController {
             retryAfterSeconds: error.retryAfterSeconds,
             code: isCapacityApiError(error) ? error.code : "rate_limited",
             locationId,
+            trace,
+            selectionRevision,
           });
         } else await this.clearCreationMarker(sequence, token);
         throw error;
       }
-      creation.outcome = "uncertain";
-      this.uncertainCreationTokens.add(token);
-      await this.withStateMutation(async () => {
-        if (this.persisted.auth?.accessToken !== token) return;
-        this.historicalCleanupUncertain = true;
-        this.security = { ...this.security, proxyCleanupUncertain: true };
-        await this.writeSecurity();
-      }).catch(() => undefined);
+      await this.recordUnknownCreation(creation);
       throw new ProxyCreationUncertainError();
     } finally {
       this.proxyCreations.delete(creation);
@@ -2728,21 +4102,75 @@ export class AppController {
     }
   }
 
+  /** The POST may have created an ID which no ledger record or revocation settles. */
+  private async recordUnknownCreation(creation: PendingProxyCreation): Promise<void> {
+    creation.outcome = "uncertain";
+    this.uncertainCreationTokens.add(creation.token);
+    // The marker is global: an unknown ID created before a logout or an
+    // account change still needs cleanup, and nothing else will record it.
+    await this.withStateMutation(() => this.recordCleanupUncertainty()).catch(() => undefined);
+  }
+
+  /**
+   * The only rule for the durable unknown cleanup marker. A POST still in flight
+   * stays resolvable by its later ID or refusal. A creation leaves proxyCreations
+   * only once its ID is recorded in the ledger, revoked or historical, or with the
+   * write resolving its refusal: pendingSessions adds no unknown.
+   */
+  private cleanupUncertain(): boolean {
+    return this.historicalCleanupUncertain || this.proxyCreations.size > 0;
+  }
+
   private async clearCreationMarker(sequence: number, token: string): Promise<void> {
     await this.withStateMutation(async () => {
+      this.forgetCreation(sequence);
       if (this.creationMarkerOwner !== sequence || this.persisted.auth?.accessToken !== token)
-        return;
+        return this.resolveCleanupMarker(token).catch(() => undefined);
       this.security = {
         ...this.security,
         proxyCreationUncertain: this.uncertainCreationTokens.has(token),
-        proxyCleanupUncertain:
-          this.historicalCleanupUncertain ||
-          [...this.proxyCreations].some((creation) => creation.sequence !== sequence) ||
-          this.pendingSessions.size > 0,
+        proxyCleanupUncertain: this.cleanupUncertain(),
       };
       this.creationMarkerOwner = 0;
       await this.writeSecurity();
     });
+  }
+
+  /**
+   * An attempt failed before committing a creation whose ID the ledger recorded: that
+   * record, or the revocation completing it, is known cleanup. As on the settle paths,
+   * the cleanup marker follows cleanupUncertain(), and the creation marker, which
+   * suspends automatic retries, stays set only for an unknown creation of that token.
+   */
+  private async settleFailedCreation(session: ProxySession): Promise<void> {
+    const token = this.pendingSessions.get(session);
+    const sequence = token ? this.remoteSessions.get(token)?.get(session.id)?.sequence : undefined;
+    // Once committed, or owned by a newer attempt, the marker is not this creation's to settle.
+    if (!token || !sequence || this.creationMarkerOwner !== sequence) return;
+    // A failed write keeps the recomputed marker in memory for the next security write.
+    await this.clearCreationMarker(sequence, token).catch(() => undefined);
+  }
+
+  /**
+   * Caller holds stateMutation. A resolved creation leaves proxyCreations with the
+   * marker update it causes: a write queued behind it never counts it in flight.
+   */
+  private forgetCreation(sequence: number): void {
+    for (const creation of this.proxyCreations)
+      if (creation.sequence === sequence) this.proxyCreations.delete(creation);
+  }
+
+  /**
+   * Caller holds stateMutation. A creation settled outside its account or marker
+   * owner resumes nothing, but its unknown cleanup ends with its last cause.
+   * A late result never writes another connected account's state: that account's
+   * next security write persists the resolved marker.
+   */
+  private async resolveCleanupMarker(token: string | undefined): Promise<void> {
+    if (!this.security.proxyCleanupUncertain || this.cleanupUncertain()) return;
+    this.security = { ...this.security, proxyCleanupUncertain: false };
+    if (this.persisted.auth && this.persisted.auth.accessToken !== token) return;
+    await this.writeSecurity();
   }
 
   /** A superseded POST returned a durable ID or a retryable refusal, resolving its marker. */
@@ -2755,48 +4183,68 @@ export class AppController {
       retryAfterSeconds: number | undefined;
       code: "rate_limited" | "server_full" | "capacity_unavailable";
       locationId: string;
+      trace: ConnectionRecorder;
+      selectionRevision?: number;
     },
   ): Promise<void> {
-    const recovery: { id: number | null; refreshCapacity: boolean } = {
+    const recovery: { id: number | null; refreshCapacity: boolean; reconnecting: boolean } = {
       id: null,
       refreshCapacity: false,
+      reconnecting: false,
     };
     try {
       await this.withStateMutation(async () => {
         const known =
           throttled ??
           (token && session ? this.remoteSessions.get(token)?.get(session.id) : undefined);
+        // A refused creation leaves with this update; one which returned its ID
+        // already left when its attempt ended.
+        if (throttled) this.forgetCreation(throttled.sequence);
         if (
           !token ||
           this.persisted.auth?.accessToken !== token ||
           known?.userId !== this.persisted.profile?.userId ||
           this.creationMarkerOwner !== known?.sequence
         )
-          return;
+          return this.resolveCleanupMarker(token);
         const id = this.operationId;
         recovery.id = id;
         const uncertain = this.uncertainCreationTokens.has(token);
         const current = this.activeSession;
+        // A live authorized session proves no failure ended the connection: a
+        // displayed account or capacity error must not cost it this renewal.
+        const retained = this.isRetainedSession(current);
+        const operationInProgress = ["connecting", "refreshing", "disconnecting"].includes(
+          this.snapshot.status,
+        );
         const resume =
           !uncertain &&
           this.security.protectionRequested &&
           this.hasValidApiSession() &&
-          !["connecting", "refreshing", "disconnecting"].includes(this.snapshot.status) &&
-          (this.snapshot.error === null || this.snapshot.error === "proxy_creation_uncertain") &&
-          (!current ||
-            (current.id === this.authorizedSessionId &&
-              this.credentialsAllowed &&
-              !this.isProxyExpired(current)));
+          !operationInProgress &&
+          (retained ||
+            // Without a session, retries resume unless a failure suspended them for a
+            // cause of its own. The displayed error does not decide: unless it ends the
+            // account, a failed account, device or catalog read, or a rejected command, only
+            // reports itself, whatever its code. So does a takeover of the guard route, which
+            // suspends nothing: the resumed reconnect checks control again at its deadline
+            // (see reverifyGuardRoute).
+            (!current && !this.failureSuspendedRetries));
         recovery.refreshCapacity =
           resume &&
           (throttled?.code === "server_full" || throttled?.code === "capacity_unavailable");
+        // As in handleCapacityRejection, a capacity refusal of a target replaced by a
+        // newer selection neither blocks nor reports that target. Replaced or not, only
+        // rate_limited and capacity_unavailable record a delay below; server_full records none.
+        const replaced =
+          !!throttled &&
+          throttled.code !== "rate_limited" &&
+          this.isSelectionSuperseded(throttled.selectionRevision, throttled.locationId);
+        const full = throttled?.code === "server_full" && !replaced;
         this.security = {
           ...this.security,
           proxyCreationUncertain: uncertain,
-          proxyCleanupUncertain:
-            this.historicalCleanupUncertain ||
-            [...this.proxyCreations].some((creation) => creation.sequence !== known.sequence) ||
-            [...this.pendingSessions.keys()].some((pending) => pending !== session),
+          proxyCleanupUncertain: this.cleanupUncertain(),
           ...(throttled && throttled.code !== "server_full"
             ? {
                 retryNotBefore: Math.max(
@@ -2806,14 +4254,17 @@ export class AppController {
                 ),
               }
             : {}),
-          ...(resume ? { retrySuspended: throttled?.code === "server_full" } : {}),
-          ...(resume && throttled?.code === "server_full"
+          ...(resume && full
             ? { capacityBlockedLocationId: throttled.locationId, nextRetryAt: null }
             : {}),
         };
+        // The settled marker no longer suspends retries; a capacity block still does.
+        if (resume) this.security = { ...this.security, retrySuspended: this.retriesSuspended() };
         this.creationMarkerOwner = 0;
         await this.writeSecurity();
         this.assertCurrent(id);
+        // An operation in progress owns a session refused since: it replaces or fails it.
+        if (!operationInProgress) this.assertNoRetainedRefusal();
         if (resume && current) {
           const stored = await this.dependencies.storage.readTransient();
           this.assertCurrent(id);
@@ -2824,7 +4275,9 @@ export class AppController {
               ? stored
               : {
                   proxySession: current,
-                  refreshAttempts: 0,
+                  ...this.sessionRenewals.get(current),
+                  refreshAttempts:
+                    this.sessionRenewals.get(current)?.refreshAttempts ?? MAX_REFRESH_ATTEMPTS,
                   retiredSessions: this.retiredSessions,
                 };
           if (stored.proxySession?.id !== current.id) {
@@ -2839,22 +4292,11 @@ export class AppController {
               : Math.max(computeRefreshAt(current, this.dependencies.now()), resumeAt),
           );
           this.assertCurrent(id);
-        } else if (resume && throttled?.code !== "server_full") {
-          const nextRetryAt = Math.max(
-            this.dependencies.now() + 1_000,
-            this.security.retryNotBefore ?? 0,
-          );
-          this.security = {
-            ...this.security,
-            nextRetryAt,
-          };
-          await this.writeSecurity();
-          this.assertCurrent(id);
-          await this.dependencies.alarms.scheduleReconnect(nextRetryAt);
-          this.assertCurrent(id);
-        }
+        } else if (resume) recovery.reconnecting = await this.resumeReconnection(id);
+        // A takeover still in progress explains the blocking state until our route is
+        // effective again; the refusal's delay already defers the resumed reconnect.
         this.publish({
-          ...(resume && throttled
+          ...(resume && throttled && !replaced && !isProxyControlError(this.snapshot.error)
             ? { error: throttled.code, retryAfterSeconds: throttled.retryAfterSeconds ?? null }
             : resume && this.snapshot.error === "proxy_creation_uncertain"
               ? { error: null }
@@ -2862,15 +4304,21 @@ export class AppController {
         });
       });
       if (recovery.refreshCapacity && recovery.id !== null && throttled) {
-        await this.handleCapacityRejection(
+        const id = recovery.id;
+        const superseded = await this.handleCapacityRejection(
           new ApiError(
             throttled.code,
             throttled.code === "server_full" ? 409 : 503,
             throttled.retryAfterSeconds,
           ),
           throttled.locationId,
-          recovery.id,
+          id,
+          throttled.trace,
+          throttled.selectionRevision,
         );
+        // The refused target is no longer selected: requested protection follows the
+        // selection, unless this settlement already scheduled that reconnection.
+        if (superseded && !recovery.reconnecting) await this.resumeSelection(id);
       }
     } catch (error) {
       if (recovery.id !== null && this.isCurrent(recovery.id))
@@ -2887,10 +4335,7 @@ export class AppController {
       ...this.security,
       proxyCreationUncertain: false,
       retrySuspended: false,
-      proxyCleanupUncertain:
-        this.historicalCleanupUncertain ||
-        this.proxyCreations.size > 0 ||
-        [...this.pendingSessions.keys()].some((pending) => pending !== session),
+      proxyCleanupUncertain: this.cleanupUncertain(),
     };
     this.creationMarkerOwner = 0;
     await this.writeSecurity();
@@ -2959,10 +4404,29 @@ export class AppController {
     });
   }
 
-  private assertCanConnect(locationId: string): void {
+  private assertCanConnect(
+    locationId: string,
+    retainedLocation: Location | undefined,
+    trace: ConnectionRecorder,
+  ): void {
     if (!this.persisted.subscription?.hasAccess) throw new LocalError("subscription_required");
-    if (!this.snapshot.locations.some((location) => location.id === locationId))
+    if (
+      !this.snapshot.locations.some((location) => location.id === locationId) &&
+      retainedLocation?.id !== locationId
+    ) {
+      this.traceConnection(
+        {
+          event: "failure",
+          source: "local",
+          reason: "catalog_missing",
+          error: "invalid_location",
+          count: this.snapshot.locations.length,
+          requestedPresent: false,
+        },
+        trace,
+      );
       throw new LocalError("invalid_location");
+    }
   }
 
   private assertSessionLocation(session: ProxySession, locationId: string): void {
@@ -3069,7 +4533,12 @@ export class AppController {
   }
 
   private canUseCredentials(): boolean {
-    return this.credentialsAllowed;
+    return this.credentialsAllowed && this.startupStopRequests === 0;
+  }
+
+  private assertNoStartupStop(): void {
+    if (this.startupStopRequests > 0)
+      throw new DOMException("Explicit stop requested", "AbortError");
   }
 
   private cancelAccountRefreshes(): void {
@@ -3079,15 +4548,99 @@ export class AppController {
     this.accountAbort = new AbortController();
   }
 
-  private startOperation(): { id: number; signal: AbortSignal } {
+  private startOperation(observer = this.captureConnectionObserver()): {
+    id: number;
+    signal: AbortSignal;
+    trace: ConnectionRecorder;
+  } {
     this.operationAbort?.abort();
     this.operationAbort = new AbortController();
     this.operationId += 1;
-    return { id: this.operationId, signal: this.operationAbort.signal };
+    return {
+      id: this.operationId,
+      signal: this.operationAbort.signal,
+      trace: this.captureConnectionTrace(this.operationId, observer),
+    };
   }
 
   private assertCurrent(id: number): void {
     if (id !== this.operationId) throw new DOMException("Operation superseded", "AbortError");
+  }
+
+  /**
+   * A selection accepted after `revision` supersedes another target of the attempt that
+   * captured it. Callers without a revision (renewals) or a target follow the selection.
+   */
+  private isSelectionSuperseded(revision: number | undefined, locationId: string | null): boolean {
+    return (
+      revision !== undefined &&
+      revision !== this.selectionRevision &&
+      locationId !== null &&
+      locationId !== this.security.selectedLocationId
+    );
+  }
+
+  private assertSelectionOwner(revision: number | undefined, locationId: string | null): void {
+    if (this.isSelectionSuperseded(revision, locationId)) throw new SelectionSupersededError();
+  }
+
+  /**
+   * A newer selection superseded an attempt before it created a session. Its creation
+   * marker or capacity refusal no longer suspends retries, and requested protection
+   * without a retained session reconnects to that selection, as after a discarded creation.
+   */
+  private async resumeSelection(expectedId: number): Promise<void> {
+    try {
+      await this.withStateMutation(async () => {
+        if (!this.isCurrent(expectedId)) return;
+        this.assertNoRetainedRefusal();
+        const current = this.activeSession;
+        const retained = this.isRetainedSession(current);
+        const suspended = this.retriesSuspended();
+        if (!current) {
+          // The attempt may have been superseded before its guard, after a superseded
+          // stop released the guards: requested protection without a session is guarded again.
+          if (this.security.protectionRequested) {
+            await this.blockSafety(this.security.killSwitchEnabled);
+            this.assertCurrent(expectedId);
+          }
+          await this.resumeReconnection(expectedId);
+        } else if (retained && this.security.retrySuspended !== suspended) {
+          this.security = { ...this.security, retrySuspended: suspended };
+          await this.writeSecurity();
+          this.assertCurrent(expectedId);
+        }
+        if (!retained) {
+          // The attempt may have announced itself after the selection was published, and
+          // the guards may have changed since the last inspection: publish their real state.
+          await this.inspectSafety();
+          this.assertCurrent(expectedId);
+          this.publish({ status: "disconnected" });
+        }
+      });
+    } catch (error) {
+      if (this.isCurrent(expectedId)) await this.enterFailure(error, expectedId);
+    }
+  }
+
+  /**
+   * Caller holds stateMutation after a discarded attempt left no session. Requested
+   * protection reconnects promptly once nothing suspends automatic retries; returns
+   * whether that reconnection was scheduled.
+   */
+  private async resumeReconnection(expectedId: number): Promise<boolean> {
+    if (!this.security.protectionRequested || !this.hasValidApiSession() || this.retriesSuspended())
+      return false;
+    const nextRetryAt = Math.max(
+      this.dependencies.now() + 1_000,
+      this.security.retryNotBefore ?? 0,
+    );
+    this.security = { ...this.security, retrySuspended: false, nextRetryAt };
+    await this.writeSecurity();
+    this.assertCurrent(expectedId);
+    await this.dependencies.alarms.scheduleReconnect(nextRetryAt);
+    this.assertCurrent(expectedId);
+    return true;
   }
 
   private isCurrent(id: number): boolean {
@@ -3127,13 +4680,45 @@ export class AppController {
     });
   }
 
+  private captureConnectionObserver(): ConnectionRecorder {
+    let record: ConnectionRecorder | undefined;
+    try {
+      record =
+        this.dependencies.captureConnectionEvents?.() ??
+        ((event) => this.dependencies.onConnectionEvent?.(event));
+    } catch {
+      /* Local observation cannot affect connection behavior. */
+    }
+    return (event) => {
+      try {
+        record?.(event);
+      } catch {
+        /* Local observation cannot affect connection behavior. */
+      }
+    };
+  }
+
+  private captureConnectionTrace(
+    operation = this.operationId,
+    observer = this.captureConnectionObserver(),
+  ): ConnectionRecorder {
+    return (event) => observer({ ...event, operation });
+  }
+
+  private traceConnection(event: ConnectionTrace, trace: ConnectionRecorder): void {
+    trace(event);
+  }
+
   private publish(changes: Partial<AppSnapshot>): void {
+    if (changes.status !== undefined) this.statusOperation = this.operationId;
     this.snapshot = { ...this.snapshot, ...changes };
     this.snapshot.activeLocation = this.locationMetadata(this.activeSession);
     this.emit();
   }
 
   private emit(): void {
+    if (this.startupGuardFailure && this.snapshot.error === null)
+      this.snapshot.error = this.startupGuardFailure;
     if (this.security.capacityBlockedLocationId && this.snapshot.error === null)
       this.snapshot.error = "server_full";
     if (
@@ -3178,6 +4763,8 @@ export class AppController {
     if (
       this.safetyStatus.trafficBlocked &&
       !this.snapshot.protected &&
+      this.snapshot.status !== "connecting" &&
+      this.snapshot.status !== "refreshing" &&
       this.snapshot.status !== "disconnecting"
     )
       this.snapshot.status = "blocked";
@@ -3216,6 +4803,20 @@ class LocalError extends Error {
 class DeviceRecoveryExhaustedError extends LocalError {
   constructor() {
     super("proxy_unavailable");
+  }
+}
+
+/** A created ID missed its ledger record, then was revoked or recorded: no unknown remains. */
+class SettledCreationStorageError extends LocalError {
+  constructor() {
+    super("storage_unavailable");
+  }
+}
+
+/** An older connection attempt lost its target to a newer accepted selection. */
+class SelectionSupersededError extends DOMException {
+  constructor() {
+    super("Selection superseded", "AbortError");
   }
 }
 
@@ -3259,6 +4860,7 @@ function isUnauthorized(error: unknown): boolean {
 }
 
 export function mapError(error: unknown): AppErrorCode {
+  if (error instanceof LocationPreferenceError) return error.code;
   if (error instanceof WebAuthError) return error.code;
   if (error instanceof ProxyCreationUncertainError) return "proxy_creation_uncertain";
   if (error instanceof LocalError || error instanceof SafetyError) return error.code;
@@ -3331,6 +4933,10 @@ function canAutomaticallyRetry(error: AppErrorCode): boolean {
     "session_expired",
     "rate_limited",
   ].includes(error);
+}
+
+function isProxyControlError(error: AppErrorCode | null): boolean {
+  return error === "proxy_controlled_by_extension" || error === "proxy_controlled_by_policy";
 }
 
 function isDeviceQuota(error: AppErrorCode | null): boolean {

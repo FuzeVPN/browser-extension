@@ -195,7 +195,12 @@ export class DiagnosticDelivery {
     );
   }
 
-  async setAuto(ownerId: string, enabled: boolean): Promise<void> {
+  async setAuto(
+    ownerId: string,
+    enabled: boolean,
+    assertContext: () => void = () => undefined,
+  ): Promise<void> {
+    assertContext();
     if (!enabled) {
       this.automaticDisabled.add(ownerId);
       for (const entry of this.state.reports) {
@@ -204,24 +209,32 @@ export class DiagnosticDelivery {
       }
     }
     await this.initialize();
+    assertContext();
     this.requireOwner(ownerId);
     if (enabled) await this.requireNativeConsent();
     await this.change(async (next) => {
+      assertContext();
       this.requireOwner(ownerId);
       if (enabled) await this.requireNativeConsent();
+      assertContext();
       this.requireOwner(ownerId);
       settings(next, ownerId).automatic = enabled;
       if (!enabled)
         next.reports = next.reports.filter(
           (entry) => !(entry.ownerId === ownerId && isQueued(entry) && isAutomatic(entry)),
         );
-    });
+    }, assertContext);
     if (enabled) this.automaticDisabled.delete(ownerId);
     await this.reschedule();
     this.kick();
   }
 
-  async enqueue(report: DiagnosticReport, ownerId: string): Promise<void> {
+  async enqueue(
+    report: DiagnosticReport,
+    ownerId: string,
+    assertContext: () => void = () => undefined,
+  ): Promise<void> {
+    assertContext();
     let body: string;
     try {
       body = serializeDiagnosticReport(report);
@@ -230,11 +243,14 @@ export class DiagnosticDelivery {
     }
     const prepared = parseDiagnosticReport(body);
     await this.initialize();
+    assertContext();
     this.requireOwner(ownerId);
     await this.requireNativeConsent();
     await this.change(async (next) => {
+      assertContext();
       this.requireOwner(ownerId);
       await this.requireNativeConsent();
+      assertContext();
       this.requireOwner(ownerId);
       const existing = next.reports.find(
         (entry) => entry.ownerId === ownerId && entry.id === prepared.report_id,
@@ -264,7 +280,7 @@ export class DiagnosticDelivery {
         nextAttemptAt: now,
       });
       if (automatic) account.automaticReports.push(now);
-    });
+    }, assertContext);
     // Once committed, enqueue has succeeded. Dispatch does not depend on the alarm API.
     this.kick();
     await this.reschedule();
@@ -444,6 +460,8 @@ export class DiagnosticDelivery {
         return;
       const limits = settings(next, account.ownerId);
       const now = this.options.now();
+      // Retention can lapse while native consent is awaited: purge, never claim, expired reports.
+      next.reports = next.reports.filter((candidate) => candidate.expiresAt > now);
       const entry = next.reports.find(
         (candidate) =>
           candidate.ownerId === account.ownerId &&
@@ -496,7 +514,13 @@ export class DiagnosticDelivery {
   private async deliver(entry: Entry, active: ActiveDelivery): Promise<void> {
     let outcome: Outcome = { kind: "retry" };
     try {
-      if ((await this.hasNativeConsent()) && this.isCurrent(active)) {
+      // Retention is checked after the last await, in the turn that invokes fetch: the
+      // claim write or a consent read may outlast the 24-hour window.
+      if (
+        (await this.hasNativeConsent()) &&
+        this.isCurrent(active) &&
+        entry.expiresAt > this.options.now()
+      ) {
         active.attempted = true;
         outcome = await sendReport(
           this.fetcher,
@@ -517,14 +541,17 @@ export class DiagnosticDelivery {
       }
       await this.change((next) => {
         const saved = next.reports.find((candidate) => entryKey(candidate) === active.key);
-        if (saved?.status !== "sending" || this.cancelled.has(active.key)) return;
         if (!active.attempted) {
-          // No request left the extension. Permission loss while persisting a
-          // claim must not consume an HTTP attempt or the hourly upload quota.
-          saved.attempts = Math.max(0, saved.attempts - 1);
+          // No request left the extension: the claim must not consume the hourly upload
+          // quota, even when its report was cancelled or purged on expiry meanwhile.
           const limits = settings(next, entry.ownerId);
           const reserved = limits.attempts.lastIndexOf(active.attemptAt);
           if (reserved >= 0) limits.attempts.splice(reserved, 1);
+        }
+        if (saved?.status !== "sending" || this.cancelled.has(active.key)) return;
+        if (!active.attempted) {
+          // Nor an HTTP attempt, e.g. after permission loss while persisting the claim.
+          saved.attempts = Math.max(0, saved.attempts - 1);
           saved.status = "pending";
           saved.nextAttemptAt = this.options.now();
           return;
@@ -622,7 +649,10 @@ export class DiagnosticDelivery {
     this.notify();
   }
 
-  private change(update: (state: StoredDelivery) => void | Promise<void>): Promise<void> {
+  private change(
+    update: (state: StoredDelivery) => void | Promise<void>,
+    assertContext?: () => void,
+  ): Promise<void> {
     const operation = this.changes.then(async () => {
       const next = structuredClone(this.state);
       const now = this.options.now();
@@ -636,6 +666,9 @@ export class DiagnosticDelivery {
       const receiptReserve = next.reports.filter((entry) => !entry.receipt).length * 512;
       if (byteLength(JSON.stringify(next)) + receiptReserve > MAX_STORAGE_BYTES)
         throw new DiagnosticDeliveryError("queue_full");
+      // The guard and durable-write invocation share one turn: a consent action
+      // cannot commit after its originating worker/account context was replaced.
+      assertContext?.();
       if (JSON.stringify(next) === JSON.stringify(this.state)) return;
       try {
         await this.options.write(next);

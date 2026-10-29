@@ -58,9 +58,23 @@ export interface ExtensionApi {
   };
 }
 
+/** Native request route; the controller must also revalidate its current session. */
+export interface ProxyErrorProvenance {
+  host: string;
+  port: number;
+  /** Native opaque identity, retained in memory only; not a session identity. */
+  requestId?: string;
+  /** Epoch milliseconds from the latest onBeforeRequest (redirect leg) of this requestId. */
+  requestStartedAt?: number;
+  /** Same-worker monotonic receipt time of that native onBeforeRequest event. */
+  requestObservedAt?: number;
+  /** Native error event date; this does not establish when the request began. */
+  errorOccurredAt?: number;
+}
+
 export interface PlatformEventHandlers {
   proxyChanged(): void;
-  proxyError(message: string): void;
+  proxyError(message: string, provenance?: ProxyErrorProvenance): void;
   permissionsChanged(): void;
   diagnosticsConsentRemoved(): void;
   diagnosticsConsentAdded(): void;

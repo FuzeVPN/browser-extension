@@ -2,6 +2,7 @@
 
 import { extensionApi } from "@platform/bridge";
 import { DiagnosticConnection, diagnosticErrorKey } from "./client";
+import { DiagnosticLanguageLoader } from "./language-loader";
 import type { DiagnosticRequest, DiagnosticReportSummary } from "../../core/shared/diagnostics-ui";
 import {
   parseDiagnosticReport,
@@ -23,6 +24,7 @@ const elements = {
   auto: element<HTMLInputElement>("autoReporting"),
   run: element<HTMLButtonElement>("runButton"),
   clear: element<HTMLButtonElement>("clearHistoryButton"),
+  connectionLog: element<HTMLButtonElement>("connectionLogButton"),
   reload: element<HTMLButtonElement>("reloadButton"),
   select: element<HTMLSelectElement>("reportSelect"),
   consent: element<HTMLInputElement>("sendConsent"),
@@ -33,19 +35,32 @@ const elements = {
 };
 const translator = new Translator();
 let language: Language = resolveLanguage("auto", extensionApi.i18n.getUILanguage());
-let requestedLanguage: Language | null = null;
-let languageSequence = 0;
+let languageCatalogFailed = false;
 let message = (key: string, substitutions?: string[]): string =>
   extensionApi.i18n.getMessage(key, substitutions) || key;
 let selectedId: string | null = null;
 let content: DiagnosticReport | null = null;
 let selectionRevision = 0;
 let busy = false;
+let exportingConnectionLog = false;
 let localFailure: string | null = null;
 let contentFailure = false;
 let poll: ReturnType<typeof setTimeout> | undefined;
 const urls = new Set<string>();
 const client = new DiagnosticConnection(changed);
+const languageLoader = new DiagnosticLanguageLoader({
+  translator,
+  loaded(next, translated) {
+    message = translated;
+    language = next;
+    languageCatalogFailed = false;
+    render();
+  },
+  failed() {
+    languageCatalogFailed = true;
+    render();
+  },
+});
 
 extensionApi.runtime.onMessage.addListener((value: unknown) => client.receive(value));
 elements.reload.addEventListener("click", () => location.reload());
@@ -54,6 +69,7 @@ elements.auto.addEventListener(
   () => void command({ type: "diagnostics_set_auto", enabled: elements.auto.checked }),
 );
 elements.clear.addEventListener("click", () => void command({ type: "diagnostics_clear_history" }));
+elements.connectionLog.addEventListener("click", () => void exportConnectionLog());
 elements.run.addEventListener("click", () => {
   elements.consent.checked = false;
   void command({ type: "diagnostics_run" });
@@ -75,22 +91,7 @@ elements.delete.addEventListener("click", () => {
 elements.export.addEventListener("click", () => {
   if (!content || !selectedId || !client.available) return;
   try {
-    const blob = new Blob([serializeDiagnosticReport(content)], {
-      type: "application/json;charset=utf-8",
-    });
-    const url = URL.createObjectURL(blob);
-    urls.add(url);
-    const link = document.createElement("a");
-    link.href = url;
-    link.download = `fuzevpn-diagnostic-${selectedId}.json`;
-    document.body.append(link);
-    link.click();
-    link.remove();
-    // Keep the object alive while Chrome starts the download.
-    setTimeout(() => {
-      URL.revokeObjectURL(url);
-      urls.delete(url);
-    }, 60_000);
+    downloadJson(serializeDiagnosticReport(content), `fuzevpn-diagnostic-${selectedId}.json`);
   } catch {
     localFailure = "diagnosticsFailure";
     render();
@@ -98,39 +99,72 @@ elements.export.addEventListener("click", () => {
 });
 window.addEventListener("pagehide", () => {
   clearTimeout(poll);
+  languageLoader.dispose();
   for (const url of urls) URL.revokeObjectURL(url);
   urls.clear();
 });
 document.addEventListener("visibilitychange", schedulePoll);
 
-void loadLanguage(language);
+languageLoader.request(language);
 render();
 void client.request({ type: "diagnostics_state" });
 
+function downloadJson(content: string, filename: string): void {
+  const blob = new Blob([content], { type: "application/json;charset=utf-8" });
+  const url = URL.createObjectURL(blob);
+  urls.add(url);
+  const link = document.createElement("a");
+  link.href = url;
+  link.download = filename;
+  document.body.append(link);
+  link.click();
+  link.remove();
+  // Keep the object alive while Chrome starts the download.
+  setTimeout(() => {
+    URL.revokeObjectURL(url);
+    urls.delete(url);
+  }, 60_000);
+}
+
+async function exportConnectionLog(): Promise<void> {
+  if (exportingConnectionLog) return;
+  exportingConnectionLog = true;
+  localFailure = null;
+  render();
+  try {
+    const response = (await extensionApi.runtime.sendMessage({
+      type: "get_connection_journal",
+    })) as
+      | {
+          ok?: boolean;
+          journal?: { schemaVersion?: number; extensionVersion?: string; events?: unknown[] };
+        }
+      | undefined;
+    if (
+      response?.ok !== true ||
+      response.journal?.schemaVersion !== 1 ||
+      typeof response.journal.extensionVersion !== "string" ||
+      !Array.isArray(response.journal.events) ||
+      response.journal.events.length > 200
+    )
+      throw new Error("connection_journal_unavailable");
+    downloadJson(JSON.stringify(response.journal, null, 2), "fuzevpn-connection-journal.json");
+  } catch {
+    localFailure = "diagnosticsFailure";
+  } finally {
+    exportingConnectionLog = false;
+    render();
+  }
+}
+
 function changed(): void {
   const state = client.state;
-  if (state && requestedLanguage !== state.language) void loadLanguage(state.language);
+  if (state) languageLoader.request(state.language);
   if (selectedId && !state?.reports.some((item) => item.id === selectedId)) resetSelection();
   if (!state?.signedIn || !selected()?.canSend) elements.consent.checked = false;
   if (!selectedId && state?.reports[0] && client.available) selectReport(state.reports[0].id);
   render();
   schedulePoll();
-}
-
-async function loadLanguage(next: Language): Promise<void> {
-  requestedLanguage = next;
-  const sequence = ++languageSequence;
-  try {
-    const translated = await translator.forLanguage(next);
-    if (sequence !== languageSequence) return;
-    message = translated;
-    language = next;
-    render();
-  } catch {
-    if (sequence !== languageSequence) return;
-    localFailure = "diagnosticsFailure";
-    render();
-  }
 }
 
 function selected(): DiagnosticReportSummary | undefined {
@@ -226,7 +260,14 @@ function render(): void {
   });
   const state = client.state;
   const unavailable = !client.available;
-  const error = localFailure ?? (client.error ? diagnosticErrorKey(client.error) : null);
+  const historyCount = (state?.historyCount ?? 0) + (state?.connectionHistoryCount ?? 0);
+  const error =
+    localFailure ??
+    (languageCatalogFailed
+      ? "diagnosticsFailure"
+      : client.error
+        ? diagnosticErrorKey(client.error)
+        : null);
   const banner = element("pageError");
   banner.hidden = error === null;
   banner.textContent = error ? message(error) : "";
@@ -234,10 +275,11 @@ function render(): void {
   elements.auto.checked = state?.signedIn === true && state.autoReporting;
   elements.auto.disabled = unavailable || busy || !state?.signedIn;
   elements.run.disabled = unavailable || busy || state?.preparing === true;
-  elements.clear.disabled = unavailable || busy || !state?.historyCount;
+  elements.clear.disabled = unavailable || busy || historyCount === 0;
+  elements.connectionLog.disabled = exportingConnectionLog;
   element("accountRequired").hidden = state?.signedIn === true;
   element("historyCount").textContent = state
-    ? message("diagnosticsHistoryCount", [String(state.historyCount)])
+    ? message("diagnosticsHistoryCount", [String(historyCount)])
     : "";
   element("preparing").hidden = state?.preparing !== true;
   const reports = state?.reports ?? [];

@@ -179,6 +179,9 @@
   "deleteDevice": {
     "message": "Eliminar dispositivo"
   },
+  "deleteDeviceNamed": {
+    "message": "Eliminar el dispositivo $1"
+  },
   "confirmDeleteDevice": {
     "message": "¿Eliminar «$1»? Sus conexiones VPN se detendrán y sus perfiles se eliminarán."
   },
@@ -360,7 +363,7 @@
     "message": "No disponible"
   },
   "ipLookupExplanation": {
-    "message": "IP comprobada con ipify mediante tu conexión actual. No se envía el historial de navegación."
+    "message": "IP comprobada con ipify, o con icanhazip como alternativa, mediante tu conexión actual. No se envía el historial de navegación."
   },
   "automaticLocation": {
     "message": "Automático"
@@ -567,19 +570,22 @@
     "message": "Tus datos"
   },
   "diagnosticsPrivacy": {
-    "message": "Los informes contienen estados técnicos y códigos de error, nunca contraseñas, tokens, correos electrónicos, direcciones IP, URL visitadas ni dominios excluidos."
+    "message": "El JSON del informe contiene estados técnicos y códigos de error, sin contraseñas, tokens, direcciones de correo electrónico, direcciones IP, URL visitadas ni dominios excluidos. El envío se autentica y vincula el informe a su cuenta. Consulte el aviso para conocer los datos de red."
   },
   "diagnosticsAuto": {
     "message": "Enviar automáticamente informes de errores importantes"
   },
   "diagnosticsAutoHelp": {
-    "message": "Desactivado por defecto. Solo se envían informes técnicos simples para esta cuenta, sin historial de navegación. Asistencia los conserva durante 30 días."
+    "message": "Desactivado de forma predeterminada. Al activarlo, se envían informes técnicos sencillos para esta cuenta, sin historial de navegación. Desactívelo aquí para detener los envíos automáticos y eliminar los informes automáticos pendientes."
   },
   "diagnosticsHistoryHelp": {
-    "message": "El historial técnico permanece local: hasta 200 eventos durante 10 minutos, incluso sin envío automático. No incluye el historial de navegación y se borra al cerrar el navegador o cambiar de cuenta."
+    "message": "El historial técnico permanece local: hasta 200 eventos por registro durante 10 minutos, incluso sin envío automático. No contiene el historial de navegación y se borra manualmente, al cerrar el navegador o al cambiar de cuenta."
   },
   "diagnosticsHistoryCount": {
     "message": "$1 eventos técnicos locales"
+  },
+  "diagnosticsConnectionLog": {
+    "message": "Exportar el registro de conexión"
   },
   "diagnosticsAccountRequired": {
     "message": "Inicia sesión para habilitar el envío. Puedes consultar y exportar un informe sin cuenta."
@@ -624,10 +630,10 @@
     "message": "Eliminar informe local"
   },
   "diagnosticsRetention": {
-    "message": "Los informes enviados se vinculan a la cuenta conectada y asistencia los conserva durante 30 días. Eliminar un informe local no elimina uno ya recibido por asistencia."
+    "message": "Los informes locales caducan después de 24 horas. Eliminarlos aquí no elimina un informe ya recibido por el servicio. Consulte el aviso sobre la conservación en el servidor y las solicitudes de eliminación."
   },
   "diagnosticsConsent": {
-    "message": "Enviar este informe a asistencia"
+    "message": "Enviar este informe de diagnóstico a FuzeVPN"
   },
   "diagnosticsDataCollectionRequired": {
     "message": "Firefox debe permitir la recopilación de datos técnicos para enviar diagnósticos. Vuelve a intentarlo y concede este permiso."
@@ -702,7 +708,7 @@
     "message": "En espera de una sesión válida de la misma cuenta"
   },
   "diagnosticsStatus_received": {
-    "message": "Recibido por asistencia"
+    "message": "Recibido por el servicio"
   },
   "diagnosticsStatus_failed": {
     "message": "Error de envío"
@@ -743,6 +749,9 @@
   "noAvailableFavoriteLocations": {
     "message": "Tus ubicaciones favoritas no están disponibles temporalmente."
   },
+  "error_location_favorites_limit": {
+    "message": "Se ha alcanzado el límite de 100 favoritos. Elimina un favorito para añadir otro."
+  },
   "error_server_full": {
     "message": "Este servidor está lleno. Elige otra ubicación."
   },
@@ -777,7 +786,7 @@
     "message": "Información legal"
   },
   "privacyPolicy": {
-    "message": "Política de privacidad"
+    "message": "Aviso de privacidad de la extensión"
   },
   "termsAndConditions": {
     "message": "Condiciones de uso y venta"
@@ -826,5 +835,77 @@
   },
   "deviceKindFirefox": {
     "message": "Navegador Firefox"
+  },
+  "generalPrivacyPolicy": {
+    "message": "Política general de privacidad"
+  },
+  "privacyNoticeTitle": {
+    "message": "Privacidad en la extensión FuzeVPN"
+  },
+  "privacyNoticeIntro": {
+    "message": "Este aviso describe los datos que utiliza esta extensión. Complementa la política general de privacidad de FuzeVPN, enlazada más abajo. El envío opcional de diagnósticos es independiente de los datos necesarios para iniciar sesión y utilizar la VPN."
+  },
+  "privacyNoticeUpdated": {
+    "message": "Aviso actualizado el 19 de octubre de 2026"
+  },
+  "privacyNoticeServiceTitle": {
+    "message": "Cuenta y servicio VPN"
+  },
+  "privacyNoticeService": {
+    "message": "La extensión intercambia datos de autenticación, cuenta, suscripción, dispositivo y sesión de proxy con api.fuzevpn.com. El proxy VPN transporta el tráfico que se dirige a través de él. Estas conexiones exponen metadatos de red al servicio receptor; este aviso no ofrece ninguna garantía adicional sobre el registro en los servidores."
+  },
+  "privacyNoticeLocalTitle": {
+    "message": "Datos almacenados en su navegador"
+  },
+  "privacyNoticeLocal": {
+    "message": "El almacenamiento del navegador conserva su sesión, datos de cuenta, preferencias, exclusiones de sitios e identidad del dispositivo. Los registros técnicos se guardan localmente durante un máximo de 10 minutos, incluso con el envío automático desactivado. Los borradores de diagnóstico y los informes en cola caducan localmente después de 24 horas; la limpieza se ejecuta cuando la extensión puede funcionar."
+  },
+  "privacyNoticeIpTitle": {
+    "message": "Comprobaciones de IP pública y terceros"
+  },
+  "privacyNoticeIp": {
+    "message": "La visualización de la IP y los diagnósticos de red contactan con api.ipify.org. La visualización de la IP puede recurrir a ipv4.icanhazip.com como alternativa. El proveedor recibe la IP de conexión y los metadatos habituales de la solicitud: su IP pública en modo directo o la IP de salida de la VPN cuando se utiliza el proxy. Estas solicitudes omiten cookies y referencias de origen y no envían tokens de cuenta ni historial de navegación."
+  },
+  "privacyNoticeReportsTitle": {
+    "message": "Contenido de los informes de diagnóstico"
+  },
+  "privacyNoticeReports": {
+    "message": "Los informes pueden incluir un identificador aleatorio, marcas de tiempo, versiones de la extensión y del navegador, familia y arquitectura del sistema operativo, estados de conexión y protección, códigos de error, contadores, duraciones y resultados de comprobaciones. Los informes completos pueden incluir eventos técnicos recientes. Su JSON excluye contraseñas, tokens de autenticación, direcciones de correo electrónico, direcciones IP, URL visitadas y dominios excluidos. Puede examinar y exportar un informe completo antes de enviarlo."
+  },
+  "privacyNoticeAccountTitle": {
+    "message": "Destinatario y vinculación con la cuenta"
+  },
+  "privacyNoticeAccount": {
+    "message": "Los informes se envían a FuzeVPN en api.fuzevpn.com/v1/diagnostics mediante una conexión autenticada. Esta conexión API no pasa por el proxy VPN: FuzeVPN recibe su IP pública directa incluso mientras la VPN está activa. Los informes están vinculados a la cuenta conectada y no son anónimos. La cabecera de autenticación y la IP están separadas del JSON del informe. Una recepción correcta confirma la aceptación por ese punto de acceso, no que un agente de asistencia haya leído el informe."
+  },
+  "privacyNoticeChoiceTitle": {
+    "message": "Envío opcional y retirada del consentimiento"
+  },
+  "privacyNoticeChoice": {
+    "message": "El envío automático está desactivado de forma predeterminada. Al activarlo, se autorizan informes de error sencillos para esa cuenta. El envío manual de un informe completo requiere marcar la casilla de envío. Firefox también requiere su permiso opcional de datos técnicos. Desactive el envío automático para detenerlo y eliminar los informes automáticos pendientes; cancele por separado los demás envíos pendientes. Rechazar el envío de diagnósticos no impide utilizar la VPN."
+  },
+  "privacyNoticeDeleteTitle": {
+    "message": "Eliminación local y archivos descargados"
+  },
+  "privacyNoticeDelete": {
+    "message": "En Diagnósticos, borre el historial técnico o elimine un informe local individual. Borrar el historial no elimina las copias existentes de informes. Cancelar o eliminar localmente no permite recuperar datos ya recibidos por el servicio, incluidos los envíos que llegaron antes de cancelarse. Las exportaciones descargadas son archivos independientes que debe eliminar por su cuenta."
+  },
+  "privacyNoticeServerTitle": {
+    "message": "Conservación en el servidor y solicitudes"
+  },
+  "privacyNoticeServer": {
+    "message": "Esta extensión no controla ni verifica la conservación o eliminación de datos en los servidores. Para conocer el plazo de conservación aplicado por FuzeVPN o presentar solicitudes sobre informes ya enviados, consulte la política general de privacidad o contacte con FuzeVPN. Este aviso no garantiza ningún plazo fijo de conservación en el servidor."
+  },
+  "privacyNoticeSupportTitle": {
+    "message": "Diagnósticos y asistencia son independientes"
+  },
+  "privacyNoticeSupport": {
+    "message": "Enviar un informe de diagnóstico no envía por sí mismo un mensaje de asistencia desde la extensión. Para explicar un problema o solicitar la eliminación de un informe recibido, utilice el canal de contacto de FuzeVPN indicado más abajo. Si decide compartir un archivo exportado por otro canal, revise primero su contenido."
+  },
+  "privacyNoticeManage": {
+    "message": "Abrir Diagnósticos"
+  },
+  "privacyNoticeLinksTitle": {
+    "message": "Política del servicio y contacto"
   }
 }

@@ -37,7 +37,8 @@ export function publicKeyId(key) {
 
 export async function manifestFor(target) {
   assertTarget(target);
-  const readJson = async (name) => JSON.parse(await readFile(resolve(projectRoot, name), "utf8"));
+  const readJson = async (name) =>
+    JSON.parse(await readFile(assertInsideProject(resolve(projectRoot, name)), "utf8"));
   const [common, overlay, packageInfo] = await Promise.all([
     readJson("manifests/common.json"),
     readJson(`manifests/${target}.json`),

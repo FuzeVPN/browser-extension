@@ -179,6 +179,9 @@
   "deleteDevice": {
     "message": "刪除設備"
   },
+  "deleteDeviceNamed": {
+    "message": "刪除裝置「$1」"
+  },
   "confirmDeleteDevice": {
     "message": "刪除“$1”？其 VPN 連線將停止，其設定檔將被刪除。"
   },
@@ -360,7 +363,7 @@
     "message": "不可用"
   },
   "ipLookupExplanation": {
-    "message": "使用 ipify 使用目前連線檢查 IP。不發送瀏覽記錄。"
+    "message": "透過目前的連線使用 ipify 檢查 IP，或使用備用服務 icanhazip。不會傳送瀏覽紀錄。"
   },
   "automaticLocation": {
     "message": "自動"
@@ -567,19 +570,22 @@
     "message": "您的數據"
   },
   "diagnosticsPrivacy": {
-    "message": "報告包含技術狀態和錯誤代碼，而不包含密碼、令牌、電子郵件地址、IP 位址、造訪過的 URL 或排除的網域。"
+    "message": "報告 JSON 包含技術狀態和錯誤代碼，不包含密碼、權杖、電子郵件地址、IP 位址、造訪過的 URL 或排除的網域。傳送會經過身分驗證，報告會連結至您的帳戶。關於網路資料，請參閱聲明。"
   },
   "diagnosticsAuto": {
     "message": "自動發送重要錯誤報告"
   },
   "diagnosticsAutoHelp": {
-    "message": "預設關閉。該帳戶僅發送簡單的技術報告，沒有瀏覽歷史記錄。支持讓他們保留 30 天。"
+    "message": "預設關閉。啟用後會傳送此帳戶的簡要技術報告，不包含瀏覽紀錄。在此關閉即可停止自動傳送，並移除待傳送的自動報告。"
   },
   "diagnosticsHistoryHelp": {
-    "message": "技術歷史記錄保留在本地：即使自動發送關閉，10 分鐘內最多可記錄 200 個事件。它不包含瀏覽記錄，並且會在瀏覽器關閉或帳戶變更時清除。"
+    "message": "技術歷程僅儲存在本機：即使關閉自動傳送，每個記錄也會保留最近10分鐘內最多200個事件。不包含瀏覽紀錄，可手動清除，也會在關閉瀏覽器或切換帳戶時清除。"
   },
   "diagnosticsHistoryCount": {
     "message": "$1 當地技術活動"
+  },
+  "diagnosticsConnectionLog": {
+    "message": "匯出連線記錄"
   },
   "diagnosticsAccountRequired": {
     "message": "登入以啟用發送。您仍然可以在沒有帳戶的情況下查看和匯出報告。"
@@ -624,10 +630,10 @@
     "message": "刪除本地報告"
   },
   "diagnosticsRetention": {
-    "message": "發送的報告會連結到您登入的帳戶，並由支援人員保留 30 天。刪除本機報告不會刪除支援人員已收到的報告。"
+    "message": "本機報告會在 24 小時後到期。在此刪除不會刪除服務已收到的報告。關於伺服器保留和刪除要求，請參閱聲明。"
   },
   "diagnosticsConsent": {
-    "message": "將此報告發送給支援人員"
+    "message": "將此診斷報告傳送給 FuzeVPN"
   },
   "diagnosticsDataCollectionRequired": {
     "message": "傳送診斷需要 Firefox 允許收集技術資料。請重試並授予此權限。"
@@ -702,7 +708,7 @@
     "message": "等待同一帳戶的有效會話"
   },
   "diagnosticsStatus_received": {
-    "message": "支援收到"
+    "message": "服務已收到"
   },
   "diagnosticsStatus_failed": {
     "message": "發送失敗"
@@ -743,6 +749,9 @@
   "noAvailableFavoriteLocations": {
     "message": "您收藏的位置暫時無法使用。"
   },
+  "error_location_favorites_limit": {
+    "message": "已達到100個收藏的上限。請先移除一個收藏，再新增其他收藏。"
+  },
   "error_server_full": {
     "message": "此伺服器已滿。請選擇其他位置。"
   },
@@ -777,7 +786,7 @@
     "message": "法律資訊"
   },
   "privacyPolicy": {
-    "message": "隱私權政策"
+    "message": "擴充功能隱私權聲明"
   },
   "termsAndConditions": {
     "message": "使用與銷售條款"
@@ -826,5 +835,77 @@
   },
   "deviceKindFirefox": {
     "message": "Firefox 瀏覽器"
+  },
+  "generalPrivacyPolicy": {
+    "message": "一般隱私權政策"
+  },
+  "privacyNoticeTitle": {
+    "message": "FuzeVPN 擴充功能中的隱私權保護"
+  },
+  "privacyNoticeIntro": {
+    "message": "本聲明說明此擴充功能使用的資料，並補充下方連結所指向的 FuzeVPN 一般隱私權政策。選擇性的診斷傳送與登入及使用 VPN 所需的資料是分開的。"
+  },
+  "privacyNoticeUpdated": {
+    "message": "聲明更新日期：2026 年 10 月 19 日"
+  },
+  "privacyNoticeServiceTitle": {
+    "message": "帳戶與 VPN 服務"
+  },
+  "privacyNoticeService": {
+    "message": "擴充功能與 api.fuzevpn.com 交換身分驗證、帳戶、訂閱、裝置及 Proxy 工作階段資料。VPN Proxy 承載經由其路由的流量。這些連線會向接收服務揭露網路中繼資料；本聲明不對伺服器日誌記錄作出個別承諾。"
+  },
+  "privacyNoticeLocalTitle": {
+    "message": "儲存在瀏覽器中的資料"
+  },
+  "privacyNoticeLocal": {
+    "message": "瀏覽器儲存空間保存工作階段、帳戶詳細資料、偏好設定、網站排除設定及裝置身分資訊。即使自動回報已關閉，技術日誌仍會在本機保留最多 10 分鐘。診斷草稿和佇列中待傳送的報告會在本機於 24 小時後到期；清理會在擴充功能能夠執行時進行。"
+  },
+  "privacyNoticeIpTitle": {
+    "message": "公用 IP 檢查與第三方服務"
+  },
+  "privacyNoticeIp": {
+    "message": "IP 顯示和網路診斷會連線至 api.ipify.org。IP 顯示可能使用 ipv4.icanhazip.com 作為備援服務。提供者會收到連線 IP 和一般要求的中繼資料：直接連線模式下是您的公用 IP，透過 Proxy 連線時則是 VPN 出口 IP。這些要求不攜帶 Cookie 和參照來源資訊，也不傳送帳戶權杖或瀏覽紀錄。"
+  },
+  "privacyNoticeReportsTitle": {
+    "message": "診斷報告包含的內容"
+  },
+  "privacyNoticeReports": {
+    "message": "報告可能包含隨機報告識別碼、時間戳記、擴充功能和瀏覽器版本、作業系統類別及架構、連線和保護狀態、錯誤代碼、計數、持續時間及檢查結果。完整報告可能包含近期技術事件。報告 JSON 不包含密碼、身分驗證權杖、電子郵件地址、IP 位址、造訪過的 URL 及排除的網域。您可以在傳送前檢視並匯出完整報告。"
+  },
+  "privacyNoticeAccountTitle": {
+    "message": "接收方及帳戶連結"
+  },
+  "privacyNoticeAccount": {
+    "message": "報告透過經過身分驗證的連線傳送至 FuzeVPN 的 api.fuzevpn.com/v1/diagnostics。此 API 連線會繞過 VPN Proxy，因此即使 VPN 已啟用，FuzeVPN 仍會收到您直接連線的公用 IP。報告會連結至已登入的帳戶，並非匿名資料。身分驗證標頭和 IP 與報告 JSON 分開傳送。成功的接收確認僅表示該端點已接受報告，不表示支援人員已閱讀報告。"
+  },
+  "privacyNoticeChoiceTitle": {
+    "message": "選擇性傳送與撤回同意"
+  },
+  "privacyNoticeChoice": {
+    "message": "自動傳送預設關閉。啟用即允許傳送該帳戶的簡要錯誤報告。手動傳送完整報告需要勾選傳送核取方塊。Firefox 還需要其選擇性的技術資料權限。關閉自動傳送即可停止傳送並移除待傳送的自動報告；各項待傳送作業須另行取消。拒絕傳送診斷不會妨礙使用 VPN。"
+  },
+  "privacyNoticeDeleteTitle": {
+    "message": "本機刪除與已下載的檔案"
+  },
+  "privacyNoticeDelete": {
+    "message": "您可以在「診斷」中清除技術歷程記錄或刪除個別本機報告。清除歷程記錄不會刪除現有的報告複本。在本機取消或刪除無法收回服務已收到的資料，包括在取消前已完成上傳的資料。下載的匯出檔案是獨立檔案，需要您自行刪除。"
+  },
+  "privacyNoticeServerTitle": {
+    "message": "伺服器保留與相關要求"
+  },
+  "privacyNoticeServer": {
+    "message": "此擴充功能不控制或驗證伺服器上的資料保留或伺服器端刪除。關於 FuzeVPN 適用的保留期限及針對已傳送報告的要求，請參閱一般隱私權政策或聯絡 FuzeVPN。本聲明不保證任何固定的伺服器保留期限。"
+  },
+  "privacyNoticeSupportTitle": {
+    "message": "診斷與支援彼此獨立"
+  },
+  "privacyNoticeSupport": {
+    "message": "傳送診斷報告本身不會從擴充功能傳送支援訊息。如需說明問題或要求刪除已接收的報告，請使用下方 FuzeVPN 聯絡管道。如果您選擇透過其他管道分享匯出的檔案，請先檢查其內容。"
+  },
+  "privacyNoticeManage": {
+    "message": "開啟診斷"
+  },
+  "privacyNoticeLinksTitle": {
+    "message": "服務政策與聯絡方式"
   }
 }

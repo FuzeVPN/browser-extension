@@ -30,6 +30,10 @@ export class ProxyControlError extends Error {
 export interface ProxyService {
   getControlLevel(): Promise<ProxyControlLevel>;
   assertControllable(): Promise<void>;
+  /** Keep a verified HTTPS route while the traffic guard is waiting for a session. */
+  ensureBlockingConfiguration(): Promise<void>;
+  /** Effective owned HTTPS route, exact bypass policy, and no direct fallback. */
+  isGuardedConfiguration(): Promise<boolean>;
   apply(session: ProxySession): Promise<void>;
   clear(): Promise<void>;
   isActiveConfiguration(session: ProxySession): Promise<boolean>;

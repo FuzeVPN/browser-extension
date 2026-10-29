@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: MPL-2.0
 
-import { mkdir, mkdtemp, readFile, rm, symlink, writeFile } from "node:fs/promises";
+import { mkdir, mkdtemp, readFile, readdir, rm, symlink, writeFile } from "node:fs/promises";
 import { resolve, sep } from "node:path";
 import { createHash } from "node:crypto";
 import { publishArchive, safeOutput, verifyArchive } from "../../../scripts/package.mjs";
@@ -95,4 +95,21 @@ describe("multi-browser release safety", () => {
     await symlink(actual, linked, "junction");
     await expect(safeOutput(resolve(linked, "archive.zip"))).rejects.toThrow("path is a link");
   });
+
+  it.each([".env", ".env.production", ".env.example", "nested/.npmrc", "private/account.json"])(
+    "rejects private archive entry %s before writing any release file",
+    async (name) => {
+      const directory = await fixture();
+      const contents = Buffer.from("SYNTHETIC-ONLY");
+      await expect(
+        publishArchive({
+          directory,
+          name: "fuzevpn-chrome-v0.9.2.zip",
+          entries: [[name, contents]],
+          expected: { [name]: checksum(contents) },
+        }),
+      ).rejects.toThrow("Forbidden public archive input");
+      expect(await readdir(directory)).toEqual([]);
+    },
+  );
 });

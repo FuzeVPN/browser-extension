@@ -179,6 +179,9 @@
   "deleteDevice": {
     "message": "Ta bort enhet"
   },
+  "deleteDeviceNamed": {
+    "message": "Ta bort enheten $1"
+  },
   "confirmDeleteDevice": {
     "message": "Ta bort ”$1”? VPN-anslutningarna avslutas och profilerna tas bort."
   },
@@ -360,7 +363,7 @@
     "message": "Inte tillgänglig"
   },
   "ipLookupExplanation": {
-    "message": "IP kontrolleras med ipify via din nuvarande anslutning. Ingen webbhistorik skickas."
+    "message": "IP-adressen kontrolleras via din nuvarande anslutning med ipify, eller med icanhazip som reserv. Ingen webbhistorik skickas."
   },
   "automaticLocation": {
     "message": "Automatiskt"
@@ -567,19 +570,22 @@
     "message": "Dina uppgifter"
   },
   "diagnosticsPrivacy": {
-    "message": "Rapporter innehåller tekniska tillstånd och felkoder, aldrig lösenord, token, e-postadresser, IP-adresser, besökta webbadresser eller undantagna domäner."
+    "message": "Rapportens JSON innehåller tekniska tillstånd och felkoder, utan lösenord, token, e-postadresser, IP-adresser, besökta webbadresser eller undantagna domäner. Sändningen autentiseras och kopplar rapporten till ditt konto. Läs informationen om integritet för uppgifter om nätverksdata."
   },
   "diagnosticsAuto": {
     "message": "Skicka rapporter om viktiga fel automatiskt"
   },
   "diagnosticsAutoHelp": {
-    "message": "Av som standard. Endast enkla tekniska rapporter skickas för kontot, utan webbhistorik. Supporten sparar dem i 30 dagar."
+    "message": "Avstängt som standard. Om du aktiverar detta skickas enkla tekniska rapporter för det här kontot, utan webbhistorik. Stäng av det här för att stoppa automatiska sändningar och ta bort väntande automatiska rapporter."
   },
   "diagnosticsHistoryHelp": {
-    "message": "Den tekniska historiken stannar lokalt: högst 200 händelser under 10 minuter, även utan automatisk sändning. Den innehåller ingen webbhistorik och rensas när webbläsaren stängs eller kontot byts."
+    "message": "Den tekniska historiken stannar lokalt: upp till 200 händelser per logg under 10 minuter, även utan automatisk sändning. Den innehåller ingen webbhistorik och rensas manuellt, när webbläsaren stängs eller när kontot byts."
   },
   "diagnosticsHistoryCount": {
     "message": "$1 lokala tekniska händelser"
+  },
+  "diagnosticsConnectionLog": {
+    "message": "Exportera anslutningslogg"
   },
   "diagnosticsAccountRequired": {
     "message": "Logga in för att aktivera sändning. Du kan visa och exportera en rapport utan konto."
@@ -624,10 +630,10 @@
     "message": "Ta bort lokal rapport"
   },
   "diagnosticsRetention": {
-    "message": "Skickade rapporter kopplas till ditt inloggade konto och sparas av supporten i 30 dagar. Att ta bort en lokal rapport tar inte bort en rapport som supporten redan har fått."
+    "message": "Lokala rapporter löper ut efter 24 timmar. Om du tar bort en rapport här tas den inte bort från tjänsten om den redan har tagits emot. Läs informationen om integritet för lagring på servern och begäran om radering."
   },
   "diagnosticsConsent": {
-    "message": "Skicka rapporten till supporten"
+    "message": "Skicka den här diagnostikrapporten till FuzeVPN"
   },
   "diagnosticsDataCollectionRequired": {
     "message": "Firefox måste tillåta insamling av tekniska data för att skicka diagnostik. Försök igen och ge denna behörighet."
@@ -702,7 +708,7 @@
     "message": "Väntar på en giltig session för samma konto"
   },
   "diagnosticsStatus_received": {
-    "message": "Mottagen av supporten"
+    "message": "Mottagen av tjänsten"
   },
   "diagnosticsStatus_failed": {
     "message": "Sändningen misslyckades"
@@ -743,6 +749,9 @@
   "noAvailableFavoriteLocations": {
     "message": "Dina favoritplatser är tillfälligt otillgängliga."
   },
+  "error_location_favorites_limit": {
+    "message": "Gränsen på 100 favoriter har nåtts. Ta bort en favorit för att lägga till en annan."
+  },
   "error_server_full": {
     "message": "Den här servern är full. Välj en annan plats."
   },
@@ -777,7 +786,7 @@
     "message": "Juridisk information"
   },
   "privacyPolicy": {
-    "message": "Integritetspolicy"
+    "message": "Tilläggets integritetsinformation"
   },
   "termsAndConditions": {
     "message": "Användnings- och försäljningsvillkor"
@@ -826,5 +835,77 @@
   },
   "deviceKindFirefox": {
     "message": "Firefox-webbläsare"
+  },
+  "generalPrivacyPolicy": {
+    "message": "Allmän integritetspolicy"
+  },
+  "privacyNoticeTitle": {
+    "message": "Integritet i tillägget FuzeVPN"
+  },
+  "privacyNoticeIntro": {
+    "message": "Den här informationen beskriver vilka data som används av tillägget. Den kompletterar FuzeVPN:s allmänna integritetspolicy, som länkas nedan. Den frivilliga sändningen av diagnostik är separat från de data som behövs för att logga in och använda VPN."
+  },
+  "privacyNoticeUpdated": {
+    "message": "Informationen uppdaterades den 19 oktober 2026"
+  },
+  "privacyNoticeServiceTitle": {
+    "message": "Konto och VPN-tjänst"
+  },
+  "privacyNoticeService": {
+    "message": "Tillägget utbyter autentiserings-, konto-, abonnemangs-, enhets- och proxysessionsdata med api.fuzevpn.com. VPN-proxyn överför den trafik som leds genom den. Dessa anslutningar gör nätverksmetadata tillgängliga för den mottagande tjänsten. Den här informationen ger inget separat löfte om loggning på servern."
+  },
+  "privacyNoticeLocalTitle": {
+    "message": "Data som lagras i webbläsaren"
+  },
+  "privacyNoticeLocal": {
+    "message": "Webbläsarens lagring innehåller din session, kontouppgifter, inställningar, webbplatsundantag och enhetsidentitet. Tekniska loggar sparas lokalt i upp till 10 minuter, även när automatisk rapportering är avstängd. Diagnostikutkast och rapporter i kö löper ut lokalt efter 24 timmar. Rensningen sker när tillägget kan köras."
+  },
+  "privacyNoticeIpTitle": {
+    "message": "Kontroller av offentlig IP-adress och tredje parter"
+  },
+  "privacyNoticeIp": {
+    "message": "IP-visningen och nätverksdiagnostiken kontaktar api.ipify.org. IP-visningen kan använda ipv4.icanhazip.com som reserv. Leverantören får anslutningens IP-adress och vanliga metadata för förfrågan: din offentliga IP-adress i direktläge eller VPN-utgångens IP-adress när förfrågan går via proxyn. Dessa förfrågningar skickar varken kakor, hänvisningsinformation, kontotoken eller webbhistorik."
+  },
+  "privacyNoticeReportsTitle": {
+    "message": "Vad diagnostikrapporter innehåller"
+  },
+  "privacyNoticeReports": {
+    "message": "Rapporter kan innehålla en slumpmässig rapportidentifierare, tidsstämplar, tilläggets och webbläsarens versioner, operativsystemfamilj och arkitektur, anslutnings- och skyddstillstånd, felkoder, antal, tidslängder och kontrollresultat. Fullständiga rapporter kan innehålla nyliga tekniska händelser. Deras JSON innehåller inte lösenord, autentiseringstoken, e-postadresser, IP-adresser, besökta webbadresser eller undantagna domäner. Du kan granska och exportera en fullständig rapport innan du skickar den."
+  },
+  "privacyNoticeAccountTitle": {
+    "message": "Mottagare och koppling till kontot"
+  },
+  "privacyNoticeAccount": {
+    "message": "Rapporter skickas till FuzeVPN på api.fuzevpn.com/v1/diagnostics via en autentiserad anslutning. Den här API-anslutningen går förbi VPN-proxyn: FuzeVPN får din direkta offentliga IP-adress även när VPN är aktivt. Rapporterna kopplas till det inloggade kontot och är inte anonyma. Autentiseringshuvudet och IP-adressen är separata från rapportens JSON. En mottagningsbekräftelse bekräftar att rapporten har accepterats av tjänsten på den här adressen, inte att någon i supporten har läst den."
+  },
+  "privacyNoticeChoiceTitle": {
+    "message": "Frivillig sändning och återkallelse"
+  },
+  "privacyNoticeChoice": {
+    "message": "Automatisk sändning är avstängd som standard. Om du aktiverar den tillåts enkla felrapporter för det här kontot. För att skicka en fullständig rapport manuellt måste du markera kryssrutan för sändning. Firefox kräver även sitt valfria tillstånd för tekniska data. Stäng av automatisk sändning för att stoppa den och ta bort väntande automatiska rapporter. Avbryt enskilda väntande sändningar separat. Om du avböjer att skicka diagnostik kan du fortfarande använda VPN."
+  },
+  "privacyNoticeDeleteTitle": {
+    "message": "Lokal radering och hämtade filer"
+  },
+  "privacyNoticeDelete": {
+    "message": "I Diagnostik kan du rensa den tekniska historiken eller ta bort en enskild lokal rapport. Om du rensar historiken raderas inte befintliga rapportkopior. Att avbryta eller ta bort lokalt kan inte återkalla data som tjänsten redan har tagit emot, inklusive en uppladdning som kom fram innan den avbröts. Hämtade exporter är separata filer som du själv måste ta bort."
+  },
+  "privacyNoticeServerTitle": {
+    "message": "Lagring på servern och begäranden"
+  },
+  "privacyNoticeServer": {
+    "message": "Det här tillägget styr eller verifierar inte lagring eller radering på servern. Läs den allmänna integritetspolicyn eller kontakta FuzeVPN för information om den lagringstid som FuzeVPN tillämpar och begäranden som gäller redan skickade rapporter. Den här informationen garanterar ingen fast lagringstid på servern."
+  },
+  "privacyNoticeSupportTitle": {
+    "message": "Diagnostik och support är separata"
+  },
+  "privacyNoticeSupport": {
+    "message": "Att skicka en diagnostikrapport innebär inte i sig att ett supportmeddelande skickas från tillägget. Använd FuzeVPN:s kontaktkanal nedan för att beskriva ett problem eller begära att en mottagen rapport raderas. Om du väljer att dela en exporterad fil via en annan kanal bör du först kontrollera innehållet."
+  },
+  "privacyNoticeManage": {
+    "message": "Öppna Diagnostik"
+  },
+  "privacyNoticeLinksTitle": {
+    "message": "Tjänstens policy och kontakt"
   }
 }

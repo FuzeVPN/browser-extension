@@ -6,10 +6,12 @@ import { pathToFileURL } from "node:url";
 import { CHROME_LOCALE_DIRECTORIES } from "./supported-locales.mjs";
 import { distributionDirectory, manifestFor, selectTargets } from "./targets.mjs";
 import { canonical, inventory, verifyChromiumParity } from "./verify-dist.mjs";
-import { projectRoot } from "./validation-common.mjs";
+import { assertInsideProject, projectRoot } from "./validation-common.mjs";
+import { readPublicTree } from "./public-inputs.mjs";
 
 export async function auditDist(target) {
   const directory = distributionDirectory(target);
+  readPublicTree(directory);
   const manifest = JSON.parse(await readFile(resolve(directory, "manifest.json"), "utf8"));
   const expected = await manifestFor(target);
   if (JSON.stringify(manifest) !== JSON.stringify(expected))
@@ -48,7 +50,10 @@ export async function auditDist(target) {
     }
   }
   const suffixLiterals = JSON.parse(
-    await readFile(resolve(projectRoot, "src/core/shared/vendor/public-suffix-rules.json"), "utf8"),
+    await readFile(
+      assertInsideProject(resolve(projectRoot, "src/core/shared/vendor/public-suffix-rules.json")),
+      "utf8",
+    ),
   ).filter((domain) => /\b(analytics|telemetry|tracker)\b/i.test(domain));
   const files = await inventory(directory);
   for (const name of Object.keys(files)) {

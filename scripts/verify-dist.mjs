@@ -1,22 +1,26 @@
 // SPDX-License-Identifier: MPL-2.0
 
 import { createHash } from "node:crypto";
-import { readFile, readdir } from "node:fs/promises";
+import { lstat, readFile, readdir } from "node:fs/promises";
 import { resolve } from "node:path";
 import { pathToFileURL } from "node:url";
 import { build, runnerImport } from "vite";
-import { projectRoot, sourceHashes } from "./validation-common.mjs";
+import { assertInsideProject, projectRoot, sourceHashes } from "./validation-common.mjs";
 import { distributionDirectory, manifestBytes, manifestFor, selectTargets } from "./targets.mjs";
+import { readPublicSources, readPublicTree } from "./public-inputs.mjs";
 
 export const digest = (bytes) => createHash("sha256").update(bytes).digest("hex");
 
 export async function inventory(directory) {
-  const result = {};
+  directory = assertInsideProject(directory);
+  if (!(await lstat(directory)).isDirectory())
+    throw new Error(`Invalid inventory root: ${directory}`);
+  const result = Object.create(null);
   const entries = (await readdir(directory, { withFileTypes: true })).sort((a, b) =>
     a.name < b.name ? -1 : a.name > b.name ? 1 : 0,
   );
   for (const entry of entries) {
-    const file = resolve(directory, entry.name);
+    const file = assertInsideProject(resolve(directory, entry.name));
     if (entry.isSymbolicLink()) throw new Error(`Symlink is not a distribution input: ${file}`);
     if (entry.isDirectory()) {
       for (const [name, hash] of Object.entries(await inventory(file)))
@@ -34,6 +38,7 @@ export function canonical(value) {
 }
 
 export async function verifyDist(target) {
+  readPublicSources();
   const directory = distributionDirectory(target);
   const before = canonical(sourceHashes());
   const manifest = await manifestFor(target);
@@ -61,6 +66,7 @@ export async function verifyDist(target) {
     }
   }
   const actual = await inventory(directory);
+  readPublicTree(directory);
   const differences = [...new Set([...Object.keys(expected), ...Object.keys(actual)])].filter(
     (name) => expected[name] !== actual[name],
   );

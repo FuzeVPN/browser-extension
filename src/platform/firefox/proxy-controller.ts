@@ -2,9 +2,14 @@
 
 import type { ProxySession } from "../../core/api/types";
 import { API_BASE_URL } from "../../core/shared/config";
-import { validateSiteExclusionPolicy, type SiteExclusion } from "../../core/shared/site-exclusions";
+import {
+  MAX_SITE_EXCLUSIONS,
+  validateSiteExclusionPolicy,
+  type SiteExclusion,
+} from "../../core/shared/site-exclusions";
 
 export const PROXY_BYPASS_LIST = [`${API_BASE_URL}:443`] as const;
+export const BLOCKING_PROXY_ENDPOINT = { host: "127.0.0.1", port: 9 } as const;
 const PAC_PREFIX = "data:application/x-ns-proxy-autoconfig;charset=utf-8,";
 const PAC_MARKER = "// FuzeVPN Firefox PAC 1\n// ";
 
@@ -120,6 +125,35 @@ export class PlatformProxyService implements ProxyService {
     if (!(await this.isActiveConfiguration(session))) {
       throw new ProxyControlError("configuration_rejected");
     }
+  }
+
+  async ensureBlockingConfiguration(): Promise<void> {
+    await this.assertControllable();
+    if (await this.isGuardedConfiguration()) return;
+    const current = await browser.proxy.settings.get({});
+    const configuration =
+      current.levelOfControl === "controlled_by_this_extension" &&
+      readProxyConfiguration(current.value);
+    const endpoint = configuration ? configuration.endpoint : BLOCKING_PROXY_ENDPOINT;
+    this.usedEndpoints.set(endpointKey(endpoint), endpoint);
+    await browser.proxy.settings.set({
+      scope: "regular",
+      value: proxyConfig(endpoint, this.exclusions),
+    });
+    await this.verifyExclusions(endpoint, this.exclusions);
+  }
+
+  async isGuardedConfiguration(): Promise<boolean> {
+    const settings = await this.readSettings();
+    const configuration = settings[0] && readProxyConfiguration(settings[0].value);
+    return (
+      !!configuration &&
+      settings.every(
+        (current) =>
+          current.levelOfControl === "controlled_by_this_extension" &&
+          matches(current.value, configuration.endpoint, this.exclusions),
+      )
+    );
   }
 
   async clear(): Promise<void> {
@@ -318,7 +352,22 @@ function matches(value: unknown, session: ProxyChallenger, exclusions: SiteExclu
 }
 
 function assertExclusions(entries: SiteExclusion[]): void {
-  if (!validateSiteExclusionPolicy({ revision: 0, enabled: true, entries })) {
+  // Internal route intersections may exceed a single user policy's 100 entries.
+  if (
+    !Array.isArray(entries) ||
+    entries.length > MAX_SITE_EXCLUSIONS * 2 ||
+    !validateSiteExclusionPolicy({
+      revision: 0,
+      enabled: true,
+      entries: entries.slice(0, MAX_SITE_EXCLUSIONS),
+    }) ||
+    !validateSiteExclusionPolicy({
+      revision: 0,
+      enabled: true,
+      entries: entries.slice(MAX_SITE_EXCLUSIONS),
+    }) ||
+    new Set(entries.map((entry) => entry.domain)).size !== entries.length
+  ) {
     throw new ProxyControlError("configuration_rejected");
   }
 }

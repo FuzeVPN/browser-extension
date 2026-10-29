@@ -293,21 +293,92 @@ describe("request-bound proxy authentication ownership", () => {
     },
   );
 
-  it("retains proven authentication ownership even if a request began before FuzeVPN took control", async () => {
+  it("requires request-bound TLS ownership before authenticating after a takeover", async () => {
     const f = fixture();
     const owned = f.state.regular;
     f.state.regular = f.foreign;
     f.state.private = f.foreign;
     await f.settle();
-    f.start("already-authenticated");
+    f.start("before-takeover");
     f.state.regular = owned;
     f.state.private = owned;
+    f.changed.emit(owned);
+    await f.settle();
+    await expect(f.challenge("before-takeover")).resolves.toEqual({ cancel: true });
+    expect(f.getSession).not.toHaveBeenCalled();
+    f.start("already-authenticated");
     expect((await f.challenge("already-authenticated")).authCredentials).toBeDefined();
     f.state.regular = f.foreign;
     f.state.private = f.foreign;
     f.state.known = false;
     await expect(f.challenge("already-authenticated")).resolves.toEqual({ cancel: true });
     expect(f.getSession).toHaveBeenCalledOnce();
+  });
+
+  it("never authenticates an old HTTP connection after HTTPS takes over the same endpoint", async () => {
+    const f = fixture();
+    const owned = f.state.regular;
+    const http: ProxySetting = {
+      levelOfControl: "controllable_by_this_extension",
+      value: {
+        mode: "fixed_servers",
+        rules: { singleProxy: { scheme: "http", host: f.session.host, port: f.session.port } },
+      },
+    };
+    f.state.regular = http;
+    f.state.private = http;
+    await f.settle();
+    f.start("old-http-connection");
+    f.state.regular = owned;
+    f.state.private = owned;
+    f.changed.emit(owned);
+    await f.settle();
+
+    await expect(f.challenge("old-http-connection")).resolves.toEqual({ cancel: true });
+    expect(f.getSession).not.toHaveBeenCalled();
+    f.start("new-https-connection");
+    expect((await f.challenge("new-https-connection")).authCredentials).toEqual({
+      username: f.session.username,
+      password: f.session.password,
+    });
+  });
+
+  it("does not retroactively attach a pending startup read to a request, then recovers on a new request", async () => {
+    let resolvePermission!: (allowed: boolean) => void;
+    const permission = new Promise<boolean>((resolve) => {
+      resolvePermission = resolve;
+    });
+    const f = fixture(permission);
+    const owned = f.state.regular;
+    f.state.regular = {
+      levelOfControl: "controllable_by_this_extension",
+      value: {
+        mode: "fixed_servers",
+        rules: { singleProxy: { scheme: "http", host: f.session.host, port: f.session.port } },
+      },
+    };
+    f.state.private = f.state.regular;
+    f.start("startup-unknown");
+    // Simulate a settings read observing the replacement even before its change
+    // notification is delivered: this cannot retroactively prove an old TLS route.
+    f.state.regular = owned;
+    f.state.private = owned;
+    resolvePermission(false);
+    await f.settle();
+
+    await expect(f.challenge("startup-unknown")).resolves.toEqual({ cancel: true });
+    expect(f.getSession).not.toHaveBeenCalled();
+    f.start("startup-verified");
+    expect((await f.challenge("startup-verified")).authCredentials).toBeDefined();
+  });
+
+  it("rejects an unrecorded challenge after worker restart without discarding the current session", async () => {
+    const f = fixture();
+    await f.settle();
+    await expect(f.challenge("in-flight-before-worker")).resolves.toEqual({ cancel: true });
+    expect(f.getSession).not.toHaveBeenCalled();
+    f.start("after-worker-restoration");
+    expect((await f.challenge("after-worker-restoration")).authCredentials).toBeDefined();
   });
 
   it("shares route reads across requests and bounds expired or abandoned provenance conservatively", async () => {

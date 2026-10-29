@@ -79,7 +79,9 @@ const EXCLUSION_GUARD_ALLOW_PRIORITY = 18;
 const SESSION_PRIORITY = 20;
 const FILTER_PRIORITY = 30;
 const API_PRIORITY = 40;
-const WEBRTC_POLICY = "disable_non_proxied_udp";
+// Firefox's conditional policy follows how the document was originally loaded.
+// Existing direct/excluded documents must also be confined once protection starts.
+const WEBRTC_POLICY = "proxy_only";
 
 const AUTHORITY_START = "^(?:https?|wss?)://(?:[^/?#@]*@)?";
 const HOST_END = "(?::[0-9]+)?(?:/|$)";

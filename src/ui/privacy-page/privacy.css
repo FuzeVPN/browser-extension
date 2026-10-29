@@ -1,0 +1,115 @@
+/* SPDX-License-Identifier: MPL-2.0 */
+
+:root {
+  color-scheme: dark;
+  font-family: system-ui, sans-serif;
+  background: #090f1e;
+  color: #e9eef9;
+  line-height: 1.65;
+}
+
+body {
+  margin: 0;
+}
+
+main {
+  max-width: 780px;
+  margin: 0 auto;
+  padding: 44px 24px 64px;
+}
+
+header {
+  padding-block-end: 20px;
+}
+
+header img {
+  object-fit: contain;
+  object-position: left;
+  filter: brightness(0) invert(1);
+}
+
+h1 {
+  margin-block: 22px 12px;
+  font-size: clamp(1.65rem, 5vw, 2.25rem);
+  line-height: 1.25;
+}
+
+h2 {
+  margin-block: 0 10px;
+  font-size: 1.15rem;
+  line-height: 1.4;
+}
+
+p {
+  margin-block: 0 12px;
+  overflow-wrap: anywhere;
+}
+
+.intro {
+  color: #dce5f6;
+  font-size: 1.06rem;
+}
+
+.updated {
+  color: #a9b8d2;
+  font-size: 0.9rem;
+}
+
+section,
+footer {
+  padding-block: 24px;
+  border-block-start: 1px solid #2c3852;
+}
+
+section p {
+  color: #c8d3e7;
+}
+
+nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 24px;
+}
+
+a {
+  color: #99c9ff;
+  text-underline-offset: 0.2em;
+}
+
+a:hover {
+  color: #d6e9ff;
+}
+
+a:focus-visible {
+  outline: 2px solid #b6d8ff;
+  outline-offset: 4px;
+}
+
+@media print {
+  :root {
+    color-scheme: light;
+    background: white;
+    color: black;
+  }
+
+  main {
+    max-width: none;
+    padding: 0;
+  }
+
+  .intro,
+  .updated,
+  section p,
+  a {
+    color: black;
+  }
+
+  section,
+  footer {
+    break-inside: avoid;
+  }
+
+  header img {
+    filter: none;
+  }
+}

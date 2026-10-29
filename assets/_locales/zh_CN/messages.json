@@ -179,6 +179,9 @@
   "deleteDevice": {
     "message": "删除设备"
   },
+  "deleteDeviceNamed": {
+    "message": "删除设备“$1”"
+  },
   "confirmDeleteDevice": {
     "message": "删除“$1”？其 VPN 连接将停止，其配置文件将被删除。"
   },
@@ -360,7 +363,7 @@
     "message": "不可用"
   },
   "ipLookupExplanation": {
-    "message": "使用 ipify 使用当前连接检查 IP。不发送浏览历史记录。"
+    "message": "通过当前连接使用 ipify 检查 IP，或使用备用服务 icanhazip。不会发送浏览历史记录。"
   },
   "automaticLocation": {
     "message": "自动"
@@ -567,19 +570,22 @@
     "message": "您的数据"
   },
   "diagnosticsPrivacy": {
-    "message": "报告包含技术状态和错误代码，而不包含密码、令牌、电子邮件地址、IP 地址、访问过的 URL 或排除的域。"
+    "message": "报告 JSON 包含技术状态和错误代码，不包含密码、令牌、电子邮件地址、IP 地址、访问过的 URL 或排除的域名。发送经过身份验证，报告会关联到您的账户。有关网络数据，请查阅声明。"
   },
   "diagnosticsAuto": {
     "message": "自动发送重要错误报告"
   },
   "diagnosticsAutoHelp": {
-    "message": "默认关闭。该帐户仅发送简单的技术报告，没有浏览历史记录。支持让他们保留 30 天。"
+    "message": "默认关闭。启用后会发送此账户的简要技术报告，不包含浏览记录。在此关闭可停止自动发送，并移除待发送的自动报告。"
   },
   "diagnosticsHistoryHelp": {
-    "message": "技术历史记录保留在本地：即使自动发送关闭，10 分钟内最多可记录 200 个事件。它不包含浏览历史记录，并且会在浏览器关闭或帐户更改时被清除。"
+    "message": "技术历史记录仅保存在本地：即使关闭自动发送，每个日志也会保留最近10分钟内最多200个事件。不包含浏览历史记录，可手动清除，也会在关闭浏览器或切换账户时清除。"
   },
   "diagnosticsHistoryCount": {
     "message": "$1 当地技术活动"
+  },
+  "diagnosticsConnectionLog": {
+    "message": "导出连接日志"
   },
   "diagnosticsAccountRequired": {
     "message": "登录以启用发送。您仍然可以在没有帐户的情况下查看和导出报告。"
@@ -624,10 +630,10 @@
     "message": "删除本地报告"
   },
   "diagnosticsRetention": {
-    "message": "发送的报告会链接到您登录的帐户，并由支持人员保留 30 天。删除本地报告不会删除支持人员已收到的报告。"
+    "message": "本地报告会在 24 小时后过期。在此删除不会删除服务已收到的报告。有关服务器保留和删除请求，请查阅声明。"
   },
   "diagnosticsConsent": {
-    "message": "将此报告发送给支持人员"
+    "message": "将此诊断报告发送给 FuzeVPN"
   },
   "diagnosticsDataCollectionRequired": {
     "message": "发送诊断需要 Firefox 允许收集技术数据。请重试并授予此权限。"
@@ -702,7 +708,7 @@
     "message": "等待同一帐户的有效会话"
   },
   "diagnosticsStatus_received": {
-    "message": "支持收到"
+    "message": "服务已收到"
   },
   "diagnosticsStatus_failed": {
     "message": "发送失败"
@@ -743,6 +749,9 @@
   "noAvailableFavoriteLocations": {
     "message": "您收藏的位置暂时不可用。"
   },
+  "error_location_favorites_limit": {
+    "message": "已达到100个收藏的上限。请先移除一个收藏，再添加其他收藏。"
+  },
   "error_server_full": {
     "message": "此服务器已满。请选择其他位置。"
   },
@@ -777,7 +786,7 @@
     "message": "法律信息"
   },
   "privacyPolicy": {
-    "message": "隐私政策"
+    "message": "扩展程序隐私声明"
   },
   "termsAndConditions": {
     "message": "使用和销售条款"
@@ -826,5 +835,77 @@
   },
   "deviceKindFirefox": {
     "message": "Firefox 浏览器"
+  },
+  "generalPrivacyPolicy": {
+    "message": "通用隐私政策"
+  },
+  "privacyNoticeTitle": {
+    "message": "FuzeVPN 扩展程序中的隐私保护"
+  },
+  "privacyNoticeIntro": {
+    "message": "本声明说明此扩展程序使用的数据，并补充下方链接所指向的 FuzeVPN 通用隐私政策。可选的诊断发送与登录和使用 VPN 所需的数据是分开的。"
+  },
+  "privacyNoticeUpdated": {
+    "message": "声明更新日期：2026 年 10 月 19 日"
+  },
+  "privacyNoticeServiceTitle": {
+    "message": "账户和 VPN 服务"
+  },
+  "privacyNoticeService": {
+    "message": "扩展程序与 api.fuzevpn.com 交换身份验证、账户、订阅、设备及代理会话数据。VPN 代理承载经由其路由的流量。这些连接会向接收服务暴露网络元数据；本声明不对服务器日志记录作出单独承诺。"
+  },
+  "privacyNoticeLocalTitle": {
+    "message": "存储在浏览器中的数据"
+  },
+  "privacyNoticeLocal": {
+    "message": "浏览器存储中保存会话、账户详情、偏好设置、站点排除设置及设备身份信息。即使自动报告已关闭，技术日志仍会在本地保留最多 10 分钟。诊断草稿和排队等待发送的报告会在本地于 24 小时后过期；清理会在扩展程序能够运行时执行。"
+  },
+  "privacyNoticeIpTitle": {
+    "message": "公网 IP 检查和第三方服务"
+  },
+  "privacyNoticeIp": {
+    "message": "IP 显示和网络诊断会访问 api.ipify.org。IP 显示可能使用 ipv4.icanhazip.com 作为备用服务。提供商会收到连接 IP 及常规请求元数据：直接连接模式下是您的公网 IP，经代理连接时是 VPN 出口 IP。这些请求不携带 Cookie 和引荐来源信息，也不发送账户令牌或浏览记录。"
+  },
+  "privacyNoticeReportsTitle": {
+    "message": "诊断报告包含的内容"
+  },
+  "privacyNoticeReports": {
+    "message": "报告可能包含随机报告标识符、时间戳、扩展程序和浏览器版本、操作系统类别及架构、连接和保护状态、错误代码、计数、持续时间及检查结果。完整报告可能包含近期技术事件。报告 JSON 不包含密码、身份验证令牌、电子邮件地址、IP 地址、访问过的 URL 及排除的域名。您可以在发送前查看和导出完整报告。"
+  },
+  "privacyNoticeAccountTitle": {
+    "message": "接收方及账户关联"
+  },
+  "privacyNoticeAccount": {
+    "message": "报告通过经过身份验证的连接发送到 FuzeVPN 的 api.fuzevpn.com/v1/diagnostics。此 API 连接绕过 VPN 代理，因此即使 VPN 处于启用状态，FuzeVPN 也会收到您直接连接的公网 IP。报告与已登录的账户关联，并非匿名。身份验证标头和 IP 与报告 JSON 分开发送。成功的接收确认仅表示该端点已接受报告，不表示支持人员已阅读报告。"
+  },
+  "privacyNoticeChoiceTitle": {
+    "message": "可选发送及撤回同意"
+  },
+  "privacyNoticeChoice": {
+    "message": "自动发送默认关闭。启用即允许发送该账户的简要错误报告。手动发送完整报告需要勾选发送复选框。Firefox 还需要其可选的技术数据权限。关闭自动发送可停止发送并移除待发送的自动报告；各项待发送任务需另行取消。拒绝发送诊断不会妨碍使用 VPN。"
+  },
+  "privacyNoticeDeleteTitle": {
+    "message": "本地删除和已下载的文件"
+  },
+  "privacyNoticeDelete": {
+    "message": "您可以在“诊断”中清除技术历史记录或删除单个本地报告。清除历史记录不会删除现有的报告副本。在本地取消或删除无法收回服务已收到的数据，包括在取消前已完成上传的数据。下载的导出文件是独立文件，需要您自行删除。"
+  },
+  "privacyNoticeServerTitle": {
+    "message": "服务器保留及相关请求"
+  },
+  "privacyNoticeServer": {
+    "message": "此扩展程序不控制或验证服务器上的数据保留或服务器端删除。有关 FuzeVPN 适用的保留期限以及针对已发送报告的请求，请查阅通用隐私政策或联系 FuzeVPN。本声明不保证任何固定的服务器保留期限。"
+  },
+  "privacyNoticeSupportTitle": {
+    "message": "诊断与支持相互独立"
+  },
+  "privacyNoticeSupport": {
+    "message": "发送诊断报告本身不会从扩展程序发送支持消息。如需说明问题或请求删除已接收的报告，请使用下方 FuzeVPN 联系渠道。如果您选择通过其他渠道分享导出的文件，请先检查其内容。"
+  },
+  "privacyNoticeManage": {
+    "message": "打开诊断"
+  },
+  "privacyNoticeLinksTitle": {
+    "message": "服务政策与联系方式"
   }
 }

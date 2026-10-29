@@ -179,6 +179,9 @@
   "deleteDevice": {
     "message": "Xóa thiết bị"
   },
+  "deleteDeviceNamed": {
+    "message": "Xóa thiết bị $1"
+  },
   "confirmDeleteDevice": {
     "message": "Xóa “$1”? Các kết nối VPN của nó sẽ dừng và hồ sơ của nó sẽ bị xóa."
   },
@@ -360,7 +363,7 @@
     "message": "Không có sẵn"
   },
   "ipLookupExplanation": {
-    "message": "IP đã được kiểm tra bằng ipify bằng kết nối hiện tại của bạn. Không có lịch sử duyệt web được gửi."
+    "message": "IP được kiểm tra bằng ipify hoặc dịch vụ dự phòng icanhazip qua kết nối hiện tại của bạn. Không gửi lịch sử duyệt web."
   },
   "automaticLocation": {
     "message": "tự động"
@@ -567,19 +570,22 @@
     "message": "Dữ liệu của bạn"
   },
   "diagnosticsPrivacy": {
-    "message": "Báo cáo chứa trạng thái kỹ thuật và mã lỗi, không bao giờ chứa mật khẩu, mã thông báo, địa chỉ email, địa chỉ IP, URL đã truy cập hoặc tên miền bị loại trừ."
+    "message": "JSON của báo cáo chứa các trạng thái kỹ thuật và mã lỗi, không chứa mật khẩu, mã thông báo, địa chỉ email, địa chỉ IP, URL đã truy cập hoặc tên miền bị loại trừ. Việc gửi được xác thực và gắn báo cáo với tài khoản của bạn. Xem thông báo để biết về dữ liệu mạng."
   },
   "diagnosticsAuto": {
     "message": "Tự động gửi báo cáo lỗi quan trọng"
   },
   "diagnosticsAutoHelp": {
-    "message": "Tắt theo mặc định. Chỉ những báo cáo kỹ thuật đơn giản mới được gửi cho tài khoản này mà không có lịch sử duyệt web. Hỗ trợ giữ chúng trong 30 ngày."
+    "message": "Mặc định tắt. Khi bật, tính năng này gửi các báo cáo kỹ thuật đơn giản cho tài khoản này, không kèm lịch sử duyệt web. Tắt tại đây để dừng gửi tự động và xóa các báo cáo tự động đang chờ gửi."
   },
   "diagnosticsHistoryHelp": {
-    "message": "Lịch sử kỹ thuật được lưu giữ cục bộ: tối đa 200 sự kiện trong 10 phút, ngay cả khi tính năng gửi tự động bị tắt. Nó không chứa lịch sử duyệt web và bị xóa khi đóng trình duyệt hoặc thay đổi tài khoản."
+    "message": "Lịch sử kỹ thuật được giữ cục bộ: tối đa 200 sự kiện trong mỗi nhật ký trong 10 phút, ngay cả khi tắt gửi tự động. Không chứa lịch sử duyệt web và được xóa thủ công, khi đóng trình duyệt hoặc khi đổi tài khoản."
   },
   "diagnosticsHistoryCount": {
     "message": "$1 sự kiện kỹ thuật địa phương"
+  },
+  "diagnosticsConnectionLog": {
+    "message": "Xuất nhật ký kết nối"
   },
   "diagnosticsAccountRequired": {
     "message": "Đăng nhập để cho phép gửi. Bạn vẫn có thể xem và xuất báo cáo mà không cần có tài khoản."
@@ -624,10 +630,10 @@
     "message": "Xóa báo cáo địa phương"
   },
   "diagnosticsRetention": {
-    "message": "Các báo cáo đã gửi sẽ được liên kết với tài khoản đã đăng nhập của bạn và được bộ phận hỗ trợ lưu giữ trong 30 ngày. Việc xóa báo cáo cục bộ sẽ không xóa báo cáo mà bộ phận hỗ trợ đã nhận được."
+    "message": "Báo cáo cục bộ hết hạn sau 24 giờ. Việc xóa tại đây không xóa báo cáo mà dịch vụ đã nhận. Xem thông báo để biết về thời gian lưu giữ trên máy chủ và yêu cầu xóa."
   },
   "diagnosticsConsent": {
-    "message": "Gửi báo cáo này để hỗ trợ"
+    "message": "Gửi báo cáo chẩn đoán này đến FuzeVPN"
   },
   "diagnosticsDataCollectionRequired": {
     "message": "Firefox cần cho phép thu thập dữ liệu kỹ thuật để gửi chẩn đoán. Hãy thử lại và cấp quyền này."
@@ -702,7 +708,7 @@
     "message": "Đang chờ phiên hợp lệ cho cùng một tài khoản"
   },
   "diagnosticsStatus_received": {
-    "message": "Đã nhận được sự hỗ trợ"
+    "message": "Dịch vụ đã nhận"
   },
   "diagnosticsStatus_failed": {
     "message": "Gửi không thành công"
@@ -743,6 +749,9 @@
   "noAvailableFavoriteLocations": {
     "message": "Các vị trí yêu thích của bạn tạm thời không khả dụng."
   },
+  "error_location_favorites_limit": {
+    "message": "Đã đạt giới hạn 100 mục yêu thích. Hãy xóa một mục yêu thích để thêm mục khác."
+  },
   "error_server_full": {
     "message": "Máy chủ này đã đầy. Hãy chọn vị trí khác."
   },
@@ -777,7 +786,7 @@
     "message": "Thông tin pháp lý"
   },
   "privacyPolicy": {
-    "message": "Chính sách quyền riêng tư"
+    "message": "Thông báo quyền riêng tư của tiện ích mở rộng"
   },
   "termsAndConditions": {
     "message": "Điều khoản sử dụng và bán hàng"
@@ -826,5 +835,77 @@
   },
   "deviceKindFirefox": {
     "message": "Trình duyệt Firefox"
+  },
+  "generalPrivacyPolicy": {
+    "message": "Chính sách quyền riêng tư chung"
+  },
+  "privacyNoticeTitle": {
+    "message": "Quyền riêng tư trong tiện ích mở rộng FuzeVPN"
+  },
+  "privacyNoticeIntro": {
+    "message": "Thông báo này mô tả dữ liệu mà tiện ích mở rộng này sử dụng. Thông báo bổ sung cho chính sách quyền riêng tư chung của FuzeVPN được liên kết bên dưới. Việc gửi dữ liệu chẩn đoán là tùy chọn và tách biệt với dữ liệu cần thiết để đăng nhập và sử dụng VPN."
+  },
+  "privacyNoticeUpdated": {
+    "message": "Thông báo được cập nhật ngày 19 tháng 10 năm 2026"
+  },
+  "privacyNoticeServiceTitle": {
+    "message": "Tài khoản và dịch vụ VPN"
+  },
+  "privacyNoticeService": {
+    "message": "Tiện ích trao đổi dữ liệu xác thực, tài khoản, gói đăng ký, thiết bị và phiên proxy với api.fuzevpn.com. Proxy VPN chuyển tiếp lưu lượng được định tuyến qua nó. Các kết nối này cung cấp siêu dữ liệu mạng cho dịch vụ tiếp nhận; thông báo này không đưa ra cam kết riêng về việc ghi nhật ký trên máy chủ."
+  },
+  "privacyNoticeLocalTitle": {
+    "message": "Dữ liệu được lưu trong trình duyệt của bạn"
+  },
+  "privacyNoticeLocal": {
+    "message": "Bộ nhớ trình duyệt lưu phiên, thông tin tài khoản, tùy chọn, các trang web được loại trừ và danh tính thiết bị của bạn. Nhật ký kỹ thuật được lưu cục bộ tối đa 10 phút, ngay cả khi tắt báo cáo tự động. Bản nháp chẩn đoán và báo cáo trong hàng đợi hết hạn cục bộ sau 24 giờ; quá trình dọn dẹp chạy khi tiện ích có thể hoạt động."
+  },
+  "privacyNoticeIpTitle": {
+    "message": "Kiểm tra IP công khai và bên thứ ba"
+  },
+  "privacyNoticeIp": {
+    "message": "Chức năng hiển thị IP và chẩn đoán mạng liên hệ với api.ipify.org. Chức năng hiển thị IP có thể dùng ipv4.icanhazip.com làm phương án dự phòng. Nhà cung cấp nhận IP kết nối và siêu dữ liệu thông thường của yêu cầu: IP công khai của bạn ở chế độ trực tiếp, hoặc IP đầu ra của VPN khi đi qua proxy. Các yêu cầu này không kèm cookie hay thông tin giới thiệu và không gửi mã thông báo tài khoản hoặc lịch sử duyệt web."
+  },
+  "privacyNoticeReportsTitle": {
+    "message": "Nội dung báo cáo chẩn đoán"
+  },
+  "privacyNoticeReports": {
+    "message": "Báo cáo có thể chứa mã định danh báo cáo ngẫu nhiên, dấu thời gian, phiên bản tiện ích và trình duyệt, họ và kiến trúc hệ điều hành, trạng thái kết nối và bảo vệ, mã lỗi, số lượng, thời lượng và kết quả kiểm tra. Báo cáo đầy đủ có thể chứa các sự kiện kỹ thuật gần đây. JSON của báo cáo không chứa mật khẩu, mã thông báo xác thực, địa chỉ email, địa chỉ IP, URL đã truy cập và tên miền bị loại trừ. Bạn có thể xem và xuất báo cáo đầy đủ trước khi gửi."
+  },
+  "privacyNoticeAccountTitle": {
+    "message": "Bên nhận và liên kết với tài khoản"
+  },
+  "privacyNoticeAccount": {
+    "message": "Báo cáo được gửi đến FuzeVPN tại api.fuzevpn.com/v1/diagnostics qua kết nối được xác thực. Kết nối API này không đi qua proxy VPN: FuzeVPN nhận IP công khai trực tiếp của bạn ngay cả khi VPN đang hoạt động. Báo cáo được gắn với tài khoản đang đăng nhập, không ẩn danh. Tiêu đề xác thực và IP tách biệt với JSON của báo cáo. Xác nhận nhận thành công cho biết điểm cuối đó đã chấp nhận báo cáo, không có nghĩa là nhân viên hỗ trợ đã đọc báo cáo."
+  },
+  "privacyNoticeChoiceTitle": {
+    "message": "Gửi tùy chọn và rút lại sự đồng ý"
+  },
+  "privacyNoticeChoice": {
+    "message": "Gửi tự động được tắt theo mặc định. Việc bật tính năng này cho phép gửi báo cáo lỗi đơn giản cho tài khoản đó. Gửi thủ công báo cáo đầy đủ yêu cầu đánh dấu ô gửi. Firefox cũng yêu cầu quyền tùy chọn đối với dữ liệu kỹ thuật. Tắt gửi tự động để dừng tính năng này và xóa các báo cáo tự động đang chờ; hủy riêng từng lần gửi khác đang chờ. Từ chối gửi dữ liệu chẩn đoán không cản trở việc sử dụng VPN."
+  },
+  "privacyNoticeDeleteTitle": {
+    "message": "Xóa cục bộ và tệp đã tải xuống"
+  },
+  "privacyNoticeDelete": {
+    "message": "Trong Chẩn đoán, hãy xóa lịch sử kỹ thuật hoặc một báo cáo cục bộ. Xóa lịch sử không xóa các bản sao báo cáo hiện có. Hủy hoặc xóa cục bộ không thể thu hồi dữ liệu mà dịch vụ đã nhận, kể cả dữ liệu tải lên đến nơi trước khi hủy. Các bản xuất đã tải xuống là những tệp riêng biệt mà bạn cần tự xóa."
+  },
+  "privacyNoticeServerTitle": {
+    "message": "Lưu giữ trên máy chủ và yêu cầu"
+  },
+  "privacyNoticeServer": {
+    "message": "Tiện ích này không kiểm soát hoặc xác minh việc lưu giữ hay xóa dữ liệu trên máy chủ. Để biết thời gian lưu giữ mà FuzeVPN áp dụng và gửi yêu cầu liên quan đến báo cáo đã gửi, hãy tham khảo chính sách quyền riêng tư chung hoặc liên hệ FuzeVPN. Thông báo này không đảm bảo một thời gian lưu giữ cố định nào trên máy chủ."
+  },
+  "privacyNoticeSupportTitle": {
+    "message": "Chẩn đoán và hỗ trợ là hai việc riêng biệt"
+  },
+  "privacyNoticeSupport": {
+    "message": "Việc gửi báo cáo chẩn đoán không tự gửi tin nhắn hỗ trợ từ tiện ích. Để giải thích sự cố hoặc yêu cầu xóa báo cáo đã nhận, hãy dùng kênh liên hệ FuzeVPN bên dưới. Nếu chọn chia sẻ tệp đã xuất qua kênh khác, hãy kiểm tra nội dung trước."
+  },
+  "privacyNoticeManage": {
+    "message": "Mở Chẩn đoán"
+  },
+  "privacyNoticeLinksTitle": {
+    "message": "Chính sách dịch vụ và liên hệ"
   }
 }

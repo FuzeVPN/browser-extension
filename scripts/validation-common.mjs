@@ -4,6 +4,7 @@ import { format } from "prettier";
 import { createHash } from "node:crypto";
 import {
   existsSync,
+  lstatSync,
   mkdirSync,
   readFileSync,
   readdirSync,
@@ -28,6 +29,11 @@ export function assertInsideProject(value) {
   const child = relative(projectRoot, target);
   if (isAbsolute(child) || child === ".." || child.startsWith("../") || child.startsWith("..\\")) {
     throw new Error(`Validation output must remain inside ExtensionsV2: ${target}`);
+  }
+  for (let ancestor = target; ; ancestor = dirname(ancestor)) {
+    if (lstatSync(ancestor, { throwIfNoEntry: false })?.isSymbolicLink())
+      throw new Error(`Validation path is a link: ${ancestor}`);
+    if (relative(projectRoot, ancestor) === "") break;
   }
   let existing = target;
   while (!existsSync(existing)) existing = dirname(existing);
@@ -78,7 +84,9 @@ export function sha256(value) {
 }
 
 export function fileHashes(directory, { skipDirectories = [] } = {}) {
-  const output = {};
+  directory = assertInsideProject(directory);
+  if (!lstatSync(directory).isDirectory()) throw new Error(`Invalid input directory: ${directory}`);
+  const output = Object.create(null);
   for (const entry of readdirSync(directory, { withFileTypes: true }).sort((a, b) =>
     a.name.localeCompare(b.name),
   )) {
@@ -86,20 +94,22 @@ export function fileHashes(directory, { skipDirectories = [] } = {}) {
       throw new Error(
         `Symlinks are not permitted in validation inputs: ${join(directory, entry.name)}`,
       );
-    const file = join(directory, entry.name);
+    const file = assertInsideProject(join(directory, entry.name));
     if (entry.isDirectory()) {
       if (skipDirectories.includes(entry.name)) continue;
       for (const [key, value] of Object.entries(fileHashes(file, { skipDirectories })))
         output[`${entry.name}/${key}`] = value;
-    } else output[entry.name] = sha256(readFileSync(file));
+    } else if (entry.isFile()) output[entry.name] = sha256(readFileSync(file));
+    else throw new Error(`Unsupported validation input: ${file}`);
   }
   return output;
 }
 
 export function sourceHashes() {
-  const output = {};
+  const output = Object.create(null);
   for (const directory of ["src", "assets", "manifests", "tests", "scripts"]) {
-    if (!existsSync(join(projectRoot, directory))) continue;
+    if (!lstatSync(assertInsideProject(join(projectRoot, directory)), { throwIfNoEntry: false }))
+      continue;
     for (const [key, value] of Object.entries(fileHashes(join(projectRoot, directory))))
       output[`${directory}/${key}`] = value;
   }
@@ -112,8 +122,12 @@ export function sourceHashes() {
     "vitest.config.ts",
     "vitest.chromium.config.ts",
   ]) {
-    if (existsSync(join(projectRoot, file)))
-      output[file] = sha256(readFileSync(join(projectRoot, file)));
+    const path = assertInsideProject(join(projectRoot, file));
+    const stat = lstatSync(path, { throwIfNoEntry: false });
+    if (stat) {
+      if (!stat.isFile()) throw new Error(`Invalid source input: ${path}`);
+      output[file] = sha256(readFileSync(path));
+    }
   }
   return output;
 }

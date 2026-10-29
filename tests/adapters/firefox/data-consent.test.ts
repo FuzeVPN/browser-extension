@@ -83,6 +83,7 @@ describe("Firefox diagnostic data consent", () => {
       version: 1,
       workerId: "worker-1",
       revision: 1,
+      accountEpoch: 0,
       language: "fr",
       signedIn: true,
       autoReporting: false,
@@ -99,6 +100,7 @@ describe("Firefox diagnostic data consent", () => {
         error: "data_collection_required",
       }),
     );
+    client.receive({ type: "diagnostics_changed", state });
     const response = await client.request({ type: "diagnostics_set_auto", enabled: true });
     expect(response?.ok).toBe(false);
     expect(client.available).toBe(true);
@@ -146,7 +148,7 @@ describe("diagnostic consent across account changes", () => {
     client.receive({ type: "diagnostics_changed", state: state({ revision: 2 }) });
     grant(true);
     await pending;
-    expect(send).toHaveBeenCalledWith(command);
+    expect(send).toHaveBeenCalledWith({ ...command, workerId: "worker-1", accountEpoch: 3 });
   });
 
   it("does not apply an accepted prompt to another signed-in account", async () => {
@@ -161,7 +163,7 @@ describe("diagnostic consent across account changes", () => {
     expect(send).not.toHaveBeenCalled();
   });
 
-  it("observes logout then login even for a historical state without an account epoch", async () => {
+  it("fails closed for a historical state without an account epoch", async () => {
     const initial = state({ accountEpoch: undefined });
     const { client, send, grant, requestConsent } = fixture(initial);
     const pending = client.requestWithDataConsent(command, requestConsent);
@@ -172,6 +174,7 @@ describe("diagnostic consent across account changes", () => {
     client.receive({ type: "diagnostics_changed", state: { ...initial, revision: 3 } });
     grant(true);
     expect(await pending).toBeNull();
+    expect(requestConsent).not.toHaveBeenCalled();
     expect(send).not.toHaveBeenCalled();
   });
 

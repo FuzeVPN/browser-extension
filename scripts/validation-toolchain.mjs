@@ -8,6 +8,16 @@ import { spawnSync } from "node:child_process";
 import { pathToFileURL } from "node:url";
 import { projectRoot, sha256 } from "./validation-common.mjs";
 
+function versionAtLeast(actual, minimum) {
+  const current = actual.split(".").map(Number);
+  const required = minimum.split(".").map(Number);
+  for (const [index, part] of required.entries()) {
+    const value = current[index] ?? 0;
+    if (value !== part) return value > part;
+  }
+  return true;
+}
+
 export async function existingToolchain(environment) {
   const target = environment.EXTENSION_TARGET || process.env.EXTENSION_TARGET;
   const expected = JSON.parse(
@@ -110,10 +120,14 @@ export async function existingToolchain(environment) {
     chromium: chromiumVersion,
     ...pythonVersions,
   };
+  // Windows updates the installed Edge by itself: its pin is the oldest qualified
+  // version, and the evidence records the exact one used.
+  const minimumVersions = target === "edge" ? ["chromium"] : [];
   for (const [tool, version] of Object.entries(expected)) {
-    if (actual[tool] !== version)
+    const minimum = minimumVersions.includes(tool);
+    if (minimum ? !versionAtLeast(actual[tool], version) : actual[tool] !== version)
       throw new Error(
-        `Unsupported validation toolchain: ${tool} ${actual[tool]} instead of pinned ${version}. Select the documented existing runtime; changing the pin requires a new complete validation.`,
+        `Unsupported validation toolchain: ${tool} ${actual[tool]} instead of pinned ${version}${minimum ? " or newer" : ""}. Select the documented existing runtime; changing the pin requires a new complete validation.`,
       );
   }
   return {
@@ -133,6 +147,7 @@ export async function existingToolchain(environment) {
       python: { executable: pythonExecutable, ...pythonVersions },
       installedAnything: false,
       expectedVersions: expected,
+      minimumVersions,
       toolAccess:
         "Existing executables and libraries may be read outside ExtensionsV2; output profiles, temporary files and caches are scoped inside ExtensionsV2.",
     },

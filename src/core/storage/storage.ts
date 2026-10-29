@@ -12,6 +12,9 @@ import { normalizeSubscription } from "../shared/subscription";
 
 const LOCAL_KEY = "fuzevpnState";
 const SESSION_KEY = "fuzevpnProxySession";
+const MAX_RETIRED_SESSION_RECORDS = 256;
+const MAX_CLEANUP_SESSION_ID_LENGTH = 1_024;
+const MAX_CLEANUP_EXPIRY_LENGTH = 64;
 
 export interface PersistedState {
   auth: AuthSession | null;
@@ -27,6 +30,7 @@ export interface TransientState {
   refreshAttempts: number;
   refreshRetryAt?: number;
   retiredSessions: RetiredProxySession[];
+  cleanupUncertain?: boolean;
 }
 
 export interface RetiredProxySession {
@@ -104,8 +108,13 @@ function sanitizePersisted(value: unknown): PersistedState {
 }
 
 function sanitizeTransient(value: unknown): TransientState {
-  if (!isRecord(value)) return { ...EMPTY_TRANSIENT_STATE };
+  if (!isRecord(value))
+    return {
+      ...EMPTY_TRANSIENT_STATE,
+      ...(value !== undefined && value !== null ? { cleanupUncertain: true } : {}),
+    };
   const proxySession = isProxySession(value.proxySession) ? value.proxySession : null;
+  const cleanup = sanitizeCleanupMetadata(value, proxySession !== null);
   return {
     proxySession,
     activeLocation:
@@ -121,7 +130,7 @@ function sanitizeTransient(value: unknown): TransientState {
           }
         : null,
     refreshAttempts:
-      typeof value.refreshAttempts === "number" && Number.isInteger(value.refreshAttempts)
+      typeof value.refreshAttempts === "number" && Number.isSafeInteger(value.refreshAttempts)
         ? Math.max(0, value.refreshAttempts)
         : 0,
     ...(typeof value.refreshRetryAt === "number" &&
@@ -129,9 +138,8 @@ function sanitizeTransient(value: unknown): TransientState {
     value.refreshRetryAt > 0
       ? { refreshRetryAt: value.refreshRetryAt }
       : {}),
-    retiredSessions: Array.isArray(value.retiredSessions)
-      ? value.retiredSessions.filter(isRetiredProxySession)
-      : [],
+    retiredSessions: cleanup.retiredSessions,
+    ...(cleanup.cleanupUncertain ? { cleanupUncertain: true } : {}),
   };
 }
 
@@ -149,14 +157,50 @@ function isLocation(value: unknown): value is Location {
   );
 }
 
-function isRetiredProxySession(value: unknown): value is RetiredProxySession {
-  return (
-    isRecord(value) &&
-    typeof value.sessionId === "string" &&
-    value.sessionId.length > 0 &&
-    typeof value.expiresAt === "string" &&
-    Number.isFinite(Date.parse(value.expiresAt))
-  );
+function sanitizeCleanupMetadata(
+  value: Record<string, unknown>,
+  hasUsableSession: boolean,
+): Pick<TransientState, "retiredSessions" | "cleanupUncertain"> {
+  const retained = new Map<string, RetiredProxySession>();
+  let cleanupUncertain = value.cleanupUncertain === true;
+  const retain = (candidate: unknown, idKey: "id" | "sessionId") => {
+    if (!isRecord(candidate)) {
+      cleanupUncertain = true;
+      return;
+    }
+    const sessionId = candidate[idKey];
+    const expiresAt = candidate.expiresAt;
+    if (
+      typeof sessionId !== "string" ||
+      sessionId.trim().length === 0 ||
+      sessionId.length > MAX_CLEANUP_SESSION_ID_LENGTH ||
+      /\p{Cc}/u.test(sessionId) ||
+      typeof expiresAt !== "string" ||
+      expiresAt.length > MAX_CLEANUP_EXPIRY_LENGTH ||
+      !Number.isFinite(Date.parse(expiresAt))
+    ) {
+      cleanupUncertain = true;
+      return;
+    }
+    const previous = retained.get(sessionId);
+    if (!previous && retained.size >= MAX_RETIRED_SESSION_RECORDS) {
+      cleanupUncertain = true;
+      return;
+    }
+    if (!previous || Date.parse(expiresAt) > Date.parse(previous.expiresAt))
+      retained.set(sessionId, { sessionId, expiresAt });
+  };
+  // Refusing credentials must not discard their only usable revocation metadata.
+  // Expiration is evaluated later with the controller's clock, never with issuedAt.
+  if (!hasUsableSession && value.proxySession !== null && value.proxySession !== undefined)
+    retain(value.proxySession, "id");
+  if (Array.isArray(value.retiredSessions)) {
+    if (value.retiredSessions.length > MAX_RETIRED_SESSION_RECORDS) cleanupUncertain = true;
+    for (const session of value.retiredSessions.slice(0, MAX_RETIRED_SESSION_RECORDS))
+      retain(session, "sessionId");
+  } else if (value.retiredSessions !== null && value.retiredSessions !== undefined)
+    cleanupUncertain = true;
+  return { retiredSessions: [...retained.values()], cleanupUncertain };
 }
 
 function isRecord(value: unknown): value is Record<string, unknown> {
@@ -188,15 +232,27 @@ function isProxySession(value: unknown): value is ProxySession {
   return (
     isRecord(value) &&
     typeof value.id === "string" &&
+    value.id.trim().length > 0 &&
     typeof value.locationId === "string" &&
+    value.locationId.trim().length > 0 &&
     value.scheme === "https" &&
     typeof value.host === "string" &&
+    value.host.trim().length > 0 &&
     typeof value.port === "number" &&
+    Number.isInteger(value.port) &&
+    value.port >= 1 &&
+    value.port <= 65_535 &&
     typeof value.username === "string" &&
+    value.username.length > 0 &&
     typeof value.password === "string" &&
+    value.password.length > 0 &&
     typeof value.issuedAt === "string" &&
+    Number.isFinite(Date.parse(value.issuedAt)) &&
     typeof value.expiresAt === "string" &&
+    Number.isFinite(Date.parse(value.expiresAt)) &&
+    Date.parse(value.expiresAt) > Date.parse(value.issuedAt) &&
     typeof value.refreshAfterSeconds === "number" &&
-    Number.isFinite(Date.parse(value.expiresAt))
+    Number.isSafeInteger(value.refreshAfterSeconds) &&
+    value.refreshAfterSeconds > 0
   );
 }

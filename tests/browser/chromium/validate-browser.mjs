@@ -58,6 +58,13 @@ const suites = [
     scope: "Built worker; synthetic API and local TLS proxy",
   },
   {
+    name: "ipv4-transport",
+    script: "browser-ipv4-transport-check.mjs",
+    output: "IPV4_TRANSPORT_OUTPUT",
+    report: "report.json",
+    scope: "Built worker and popup; real authenticated TLS proxy and IPv4 provider failover",
+  },
+  {
     name: "device-identity",
     script: "browser-device-identity-check.mjs",
     stdoutReport: true,

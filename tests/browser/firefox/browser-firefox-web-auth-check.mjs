@@ -309,7 +309,7 @@ export async function firefoxWebAuthCheck({
   const privacy = await extension(
     "Promise.all([browser.privacy.network.webRTCIPHandlingPolicy.get({}),browser.privacy.network.networkPredictionEnabled.get({})]).then(arguments[arguments.length-1]);",
   );
-  assert.equal(privacy[0].value, "disable_non_proxied_udp");
+  assert.equal(privacy[0].value, "proxy_only");
   assert.equal(privacy[1].value, false);
   record(
     "Web sign-in retains authenticated Firefox proxy routing, protected IP observation and WebRTC policy",
@@ -327,8 +327,16 @@ export async function firefoxWebAuthCheck({
   );
   assert(!nativeData.data_collection.includes("technicalAndInteraction"));
   const uploadsBefore = received.diagnostics.length;
+  const diagnosticContext = (await send({ type: "diagnostics_state" })).state;
   assert.equal(
-    (await send({ type: "diagnostics_set_auto", enabled: true })).error,
+    (
+      await send({
+        type: "diagnostics_set_auto",
+        enabled: true,
+        workerId: diagnosticContext.workerId,
+        accountEpoch: diagnosticContext.accountEpoch,
+      })
+    ).error,
     "data_collection_required",
   );
   assert.equal(received.diagnostics.length, uploadsBefore);

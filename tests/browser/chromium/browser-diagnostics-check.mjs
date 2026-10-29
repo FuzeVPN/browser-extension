@@ -38,12 +38,14 @@ const context = await browser.newContext({
 const state = {
   version: 1,
   workerId: "diagnostic-fixture",
+  accountEpoch: 0,
   revision: 1,
   language: "fr",
   signedIn: false,
   autoReporting: false,
   preparing: false,
   historyCount: 12,
+  connectionHistoryCount: 1,
   reports: [],
 };
 const contents = new Map();
@@ -90,6 +92,8 @@ function makeReport() {
   return id;
 }
 async function publish(patch = {}) {
+  if (Object.hasOwn(patch, "signedIn") && patch.signedIn !== state.signedIn)
+    state.accountEpoch += 1;
   Object.assign(state, patch);
   state.revision += 1;
   await Promise.all(
@@ -135,6 +139,34 @@ await context.route("**/*", async (route) => {
 await context.exposeBinding("diagnosticFixtureRequest", async (_source, request) => {
   requests.push(clone(request));
   if (legacy) return undefined;
+  if (["diagnostics_set_auto", "diagnostics_send"].includes(request.type)) {
+    assert.equal(request.workerId, state.workerId, "Consent must target the current worker");
+    assert.equal(
+      request.accountEpoch,
+      state.accountEpoch,
+      "Consent must target the current account",
+    );
+  }
+  if (request.type === "get_connection_journal")
+    return {
+      ok: true,
+      journal: {
+        schemaVersion: 1,
+        extensionVersion: "0.9.2",
+        events: [
+          {
+            event: "failure",
+            source: "local",
+            reason: "catalog_missing",
+            error: "invalid_location",
+            count: 1,
+            requestedPresent: false,
+            at: 1_792_173_000_000,
+            sequence: 1,
+          },
+        ],
+      },
+    };
   let error;
   let reportId;
   let report;
@@ -151,16 +183,21 @@ await context.exposeBinding("diagnosticFixtureRequest", async (_source, request)
       report = clone(contents.get(request.reportId));
       break;
     case "diagnostics_set_auto":
+      assert.deepEqual(
+        Object.keys(request).sort(),
+        ["type", "enabled", "workerId", "accountEpoch"].sort(),
+      );
       if (state.signedIn) state.autoReporting = request.enabled;
       else error = "session_required";
       break;
     case "diagnostics_clear_history":
       state.historyCount = 0;
+      state.connectionHistoryCount = 0;
       break;
     case "diagnostics_send":
       assert.deepEqual(
         Object.keys(request).sort(),
-        ["type", "reportId", "consent", "noticeVersion"].sort(),
+        ["type", "reportId", "consent", "noticeVersion", "workerId", "accountEpoch"].sort(),
       );
       assert.equal(request.consent, true);
       assert.equal(request.noticeVersion, 1);
@@ -295,8 +332,13 @@ async function verifyLegalLinks(page, language, translated) {
       link.kind === "contact"
         ? ({ es: "contacto", de: "kontakt" }[websiteLanguage] ?? "contact")
         : link.kind;
-    assert.equal(link.href, `https://fuzevpn.com/${websiteLanguage}/${target}.html`);
-    assert.equal(link.hreflang, websiteLanguage);
+    assert.equal(
+      link.href,
+      link.kind === "privacy"
+        ? `https://diagnostics.invalid/privacy-page/privacy.html?lang=${language}`
+        : `https://fuzevpn.com/${websiteLanguage}/${target}.html`,
+    );
+    assert.equal(link.hreflang, link.kind === "privacy" ? language : websiteLanguage);
     assert.equal(link.target, "_blank");
     assert.deepEqual(link.rel, ["noopener", "noreferrer"]);
     assert.equal(link.label, translated[link.key].message);
@@ -309,6 +351,24 @@ let page;
 try {
   page = await open();
   await verifyLegalLinks(page, "fr", catalog);
+  const connectionDownloadEvent = page.waitForEvent("download");
+  await page.locator("#connectionLogButton").click();
+  const connectionDownload = await connectionDownloadEvent;
+  assert.equal(connectionDownload.suggestedFilename(), "fuzevpn-connection-journal.json");
+  const connectionExport = join(output, "connection-journal-export.json");
+  await connectionDownload.saveAs(connectionExport);
+  const connectionJournal = JSON.parse(await readFile(connectionExport, "utf8"));
+  assert.equal(connectionJournal.schemaVersion, 1);
+  assert.equal(connectionJournal.events[0].reason, "catalog_missing");
+  assert.equal(connectionJournal.events[0].source, "local");
+  assert.equal(state.signedIn, false);
+  assert.equal(
+    requests.some((request) =>
+      ["diagnostics_run", "diagnostics_send", "diagnostics_set_auto"].includes(request.type),
+    ),
+    false,
+  );
+  record("Connection journal exports locally without an account, report, consent or upload");
   await page.screenshot({ path: join(output, "diagnostics-privacy-fr.png"), fullPage: true });
   assert.equal(await page.locator("#autoReporting").isChecked(), false);
   assert.equal(await page.locator("#autoReporting").isDisabled(), true);
@@ -385,7 +445,7 @@ try {
   const legalTabEvent = page.waitForEvent("popup");
   await page.keyboard.press("Enter");
   const legalTab = await legalTabEvent;
-  await legalTab.waitForURL("https://fuzevpn.com/fr/privacy.html");
+  await legalTab.waitForURL("https://diagnostics.invalid/privacy-page/privacy.html?lang=fr");
   assert.equal(await legalTab.evaluate(() => window.opener === null), true);
   await legalTab.close();
   assert.equal(await page.locator("#sendConsent").isChecked(), true);
@@ -445,8 +505,9 @@ try {
     },
   });
   await publish();
-  await page.waitForFunction(() =>
-    document.getElementById("reportStatus").textContent.includes("Reçu par l’assistance"),
+  await page.waitForFunction(
+    (text) => document.getElementById("reportStatus").textContent.includes(text),
+    catalog.diagnosticsStatus_received.message,
   );
   assert.equal(await page.locator("#cancelButton").isVisible(), false);
   record(
@@ -465,6 +526,7 @@ try {
   record("A delayed report reply after account change cannot restore content or consent");
 
   state.signedIn = true;
+  state.accountEpoch += 1;
   const malformedId = makeReport();
   contents.get(malformedId).email = "synthetic-secret@example.invalid";
   await publish({ signedIn: true });
@@ -478,6 +540,7 @@ try {
   await page.locator("#clearHistoryButton").click();
   await page.waitForFunction(() => document.getElementById("clearHistoryButton").disabled);
   assert.equal(state.historyCount, 0);
+  assert.equal(state.connectionHistoryCount, 0);
   record(
     "Malformed report content is neither displayed nor exported; local report and history deletion work",
   );
@@ -587,7 +650,10 @@ try {
     "A historical worker shows reload guidance and disables diagnostic controls without issuing VPN commands",
   );
   assert.equal(
-    requests.every((request) => request.type.startsWith("diagnostics_")),
+    requests.every(
+      (request) =>
+        request.type.startsWith("diagnostics_") || request.type === "get_connection_journal",
+    ),
     true,
   );
   assert.deepEqual(evidence.pageErrors, []);

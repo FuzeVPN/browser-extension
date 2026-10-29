@@ -6,14 +6,17 @@ import { protectedBrowserContexts, type ProxyChallenger } from "./proxy-controll
 
 const MAX_TRACKED_REQUESTS = 4_096;
 const REQUEST_PROVENANCE_MS = 5 * 60_000;
+const REQUEST_ROUTE_RETRY_MS = 1_000;
 
 type RequestRoutes = ReadonlyMap<boolean, ProxyChallenger | null | undefined>;
 
 interface StartedRequest {
+  requestId: string;
   startedAt: number;
   tabId: number;
   routeGeneration: number;
   routes: Promise<RequestRoutes>;
+  verifiedRoutes: RequestRoutes | null;
 }
 
 import type { ProxyAuthDependencies } from "../contracts/proxy-auth";
@@ -23,11 +26,15 @@ export class ProxyAuthHandler {
   private readonly attemptedSessionsByRequest = new Map<string, string>();
   private readonly startedRequests = new Map<string, StartedRequest>();
   private requestRoutes: Promise<RequestRoutes> = Promise.resolve(new Map());
+  private verifiedRequestRoutes: RequestRoutes | null = null;
   private requestRouteGeneration = 0;
+  private pendingRequestRouteRead: Promise<RequestRoutes> | null = null;
+  private requestRoutesNeedRecovery = false;
+  private nextRequestRouteReadAt = 0;
   private reportedFailureSessionId: string | null = null;
   private readonly credentialResponses = new WeakMap<
     chrome.webRequest.BlockingResponse,
-    ProxySession
+    { session: ProxySession; request: StartedRequest }
   >();
 
   constructor(private readonly dependencies: ProxyAuthDependencies) {}
@@ -36,10 +43,10 @@ export class ProxyAuthHandler {
     // Capture a route generation at request start, not its URL. A historic endpoint
     // alone cannot distinguish a late FuzeVPN 407 from a new request using another
     // extension's proxy. Reads are shared until Chrome reports a setting change.
-    this.requestRoutes = readRequestRoutes();
+    this.refreshRequestRoutes();
     chrome.proxy.settings.onChange.addListener(() => {
       this.requestRouteGeneration++;
-      this.requestRoutes = readRequestRoutes();
+      this.refreshRequestRoutes();
     });
     chrome.webRequest.onBeforeRequest.addListener(
       (details) => {
@@ -53,9 +60,15 @@ export class ProxyAuthHandler {
         if (!callback) return {};
         void this.handle(details)
           .then((response) => {
-            const session = this.credentialResponses.get(response);
+            const credentials = this.credentialResponses.get(response);
             // Disconnect can also run between handle() resolving and this callback.
-            callback(session && !this.canSendCredentials(session) ? { cancel: true } : response);
+            callback(
+              credentials &&
+                (!this.canSendCredentials(credentials.session) ||
+                  !this.isRequestProvenanceCurrent(credentials.request))
+                ? { cancel: true }
+                : response,
+            );
           })
           .catch(() => callback({}));
         return undefined;
@@ -88,15 +101,12 @@ export class ProxyAuthHandler {
         .catch(() => false);
       if (!usedByFuzeVpn) return {};
       const started = this.startedRequests.get(details.requestId);
-      if (
-        started?.routeGeneration === this.requestRouteGeneration &&
-        this.dependencies.now() - started.startedAt < REQUEST_PROVENANCE_MS
-      ) {
+      if (this.isRequestProvenanceCurrent(started)) {
         // A pending route read can observe settings newer than the request. A
         // setting change also invalidates evidence while the tab scope is read.
         if (
           (await startedOnDifferentRoute(started, details.challenger)) &&
-          started.routeGeneration === this.requestRouteGeneration
+          this.isRequestProvenanceCurrent(started)
         )
           return {};
       }
@@ -104,6 +114,17 @@ export class ProxyAuthHandler {
       // record. Preserve cancel-only recovery for those potentially late 407s.
       return { cancel: true };
     }
+    const started = this.startedRequests.get(details.requestId);
+    // Current proxy settings cannot establish how an already pending request
+    // reached its challenger. In particular, taking over an HTTP proxy with HTTPS
+    // at the same endpoint must not release credentials on its old cleartext TCP
+    // connection. Only a settled TLS route observed before request start is proof.
+    if (
+      !this.isRequestProvenanceCurrent(started) ||
+      !(await startedOnVerifiedRoute(started, details.challenger)) ||
+      !this.isRequestProvenanceCurrent(started)
+    )
+      return { cancel: true };
     const session = await withTimeout(
       this.dependencies.getSession(),
       this.dependencies.restoreTimeoutMs ?? PROXY_AUTH_RESTORE_TIMEOUT_MS,
@@ -116,7 +137,8 @@ export class ProxyAuthHandler {
       return { cancel: true };
     // The final ownership read is asynchronous: never emit credentials captured
     // before a disconnect, expiration or session replacement during that read.
-    if (!this.canSendCredentials(session)) return { cancel: true };
+    if (!this.canSendCredentials(session) || !this.isRequestProvenanceCurrent(started))
+      return { cancel: true };
     if (this.attemptedSessionsByRequest.get(details.requestId) === session.id) {
       this.reportAuthenticationFailure(session);
       return { cancel: true };
@@ -125,13 +147,49 @@ export class ProxyAuthHandler {
     const response = {
       authCredentials: { username: session.username, password: session.password },
     };
-    this.credentialResponses.set(response, session);
+    this.credentialResponses.set(response, { session, request: started });
     return response;
   }
 
   cleanup(requestId: string): void {
     this.attemptedSessionsByRequest.delete(requestId);
     this.startedRequests.delete(requestId);
+  }
+
+  private refreshRequestRoutes(invalidate = true): void {
+    const generation = this.requestRouteGeneration;
+    // A pending read may observe a configuration installed after onBeforeRequest.
+    // Never attach its eventual result to requests that have already started.
+    if (invalidate) this.verifiedRequestRoutes = null;
+    this.requestRoutesNeedRecovery = false;
+    this.nextRequestRouteReadAt = this.dependencies.now() + REQUEST_ROUTE_RETRY_MS;
+    const pending = readRequestRoutes();
+    this.requestRoutes = pending;
+    this.pendingRequestRouteRead = pending;
+    void pending
+      .then((routes) => {
+        if (generation !== this.requestRouteGeneration || this.requestRoutes !== pending) return;
+        this.verifiedRequestRoutes = routes;
+        this.requestRoutesNeedRecovery =
+          routes.size === 0 || [...routes.values()].some((route) => route === undefined);
+      })
+      .catch(() => {
+        if (generation === this.requestRouteGeneration && this.requestRoutes === pending)
+          this.requestRoutesNeedRecovery = true;
+      })
+      .finally(() => {
+        if (this.pendingRequestRouteRead === pending) this.pendingRequestRouteRead = null;
+      });
+  }
+
+  private isRequestProvenanceCurrent(
+    started: StartedRequest | undefined,
+  ): started is StartedRequest {
+    if (started?.routeGeneration !== this.requestRouteGeneration) return false;
+    // Terminal cleanup and eviction revoke a record that pending reads still hold.
+    if (this.startedRequests.get(started.requestId) !== started) return false;
+    const age = this.dependencies.now() - started.startedAt;
+    return age >= 0 && age < REQUEST_PROVENANCE_MS;
   }
 
   private rememberRequest(requestId: string, tabId: number): void {
@@ -145,14 +203,25 @@ export class ProxyAuthHandler {
         now - request.startedAt < REQUEST_PROVENANCE_MS
       )
         break;
-      this.startedRequests.delete(id);
+      // Attempts are recorded only under registered provenance: evict both.
+      this.cleanup(id);
     }
     this.startedRequests.set(requestId, {
+      requestId,
       startedAt: now,
       tabId,
       routeGeneration: this.requestRouteGeneration,
       routes: this.requestRoutes,
+      verifiedRoutes: this.verifiedRequestRoutes,
     });
+    // The triggering request keeps its original evidence. Retry unknown scopes
+    // only for later requests, with one shared read and no autonomous retry loop.
+    if (
+      this.requestRoutesNeedRecovery &&
+      !this.pendingRequestRouteRead &&
+      now >= this.nextRequestRouteReadAt
+    )
+      this.refreshRequestRoutes(false);
   }
 
   private reportAuthenticationFailure(session: ProxySession): void {
@@ -200,13 +269,34 @@ async function startedOnDifferentRoute(
   started: StartedRequest,
   challenger: ProxyChallenger,
 ): Promise<boolean> {
-  const routes = await started.routes;
-  const isDifferent = (route: ProxyChallenger | null | undefined): boolean =>
-    route === null || (route !== undefined && !sameEndpoint(route, challenger));
-  if (routes.size === 1 && routes.has(false)) return isDifferent(routes.get(false));
+  return startedRouteSatisfies(
+    started,
+    (route) => route === null || (route !== undefined && !sameEndpoint(route, challenger)),
+  );
+}
+
+async function startedOnVerifiedRoute(
+  started: StartedRequest,
+  challenger: ProxyChallenger,
+): Promise<boolean> {
+  return startedRouteSatisfies(
+    started,
+    (route) => route !== null && route !== undefined && sameEndpoint(route, challenger),
+    true,
+  );
+}
+
+async function startedRouteSatisfies(
+  started: StartedRequest,
+  satisfies: (route: ProxyChallenger | null | undefined) => boolean,
+  verifiedOnly = false,
+): Promise<boolean> {
+  const routes = verifiedOnly ? started.verifiedRoutes : await started.routes;
+  if (!routes) return false;
+  if (routes.size === 1 && routes.has(false)) return satisfies(routes.get(false));
   if (!routes.has(false) || !routes.has(true)) return false;
-  const regular = isDifferent(routes.get(false));
-  const privateWindow = isDifferent(routes.get(true));
+  const regular = satisfies(routes.get(false));
+  const privateWindow = satisfies(routes.get(true));
   if (regular === privateWindow) return regular;
   // webRequest has no incognito field. Only a mixed-scope challenge needs the
   // tab's basic incognito flag; no URL/title or additional permission is needed.

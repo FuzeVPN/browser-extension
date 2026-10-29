@@ -179,6 +179,9 @@
   "deleteDevice": {
     "message": "Slett enhet"
   },
+  "deleteDeviceNamed": {
+    "message": "Slett enheten $1"
+  },
   "confirmDeleteDevice": {
     "message": "Vil du fjerne «$1»? VPN-tilkoblingene vil stoppe og profilene vil bli fjernet."
   },
@@ -360,7 +363,7 @@
     "message": "Utilgjengelig"
   },
   "ipLookupExplanation": {
-    "message": "IP sjekket med ipify med din nåværende tilkobling. Ingen nettleserlogg sendes."
+    "message": "IP-adressen kontrolleres via den gjeldende tilkoblingen med ipify, eller med icanhazip som reserve. Ingen nettleserhistorikk sendes."
   },
   "automaticLocation": {
     "message": "Automatisk"
@@ -567,19 +570,22 @@
     "message": "Dine data"
   },
   "diagnosticsPrivacy": {
-    "message": "Rapporter inneholder tekniske tilstander og feilkoder, aldri passord, tokens, e-postadresser, IP-adresser, besøkte URL-er eller ekskluderte domener."
+    "message": "Rapportens JSON inneholder tekniske tilstander og feilkoder, uten passord, tokener, e-postadresser, IP-adresser, besøkte nettadresser eller unntatte domener. Sendingen autentiseres og knytter rapporten til kontoen din. Se personverninformasjonen for opplysninger om nettverksdata."
   },
   "diagnosticsAuto": {
     "message": "Send viktige feilrapporter automatisk"
   },
   "diagnosticsAutoHelp": {
-    "message": "Av som standard. Kun enkle tekniske rapporter sendes for denne kontoen, uten nettleserhistorikk. Support holder dem i 30 dager."
+    "message": "Av som standard. Hvis du aktiverer dette, sendes enkle tekniske rapporter for denne kontoen, uten nettleserhistorikk. Slå det av her for å stoppe automatisk sending og fjerne ventende automatiske rapporter."
   },
   "diagnosticsHistoryHelp": {
-    "message": "Teknisk historie forblir lokal: opptil 200 hendelser over 10 minutter, selv når automatisk sending er av. Den inneholder ingen nettleserhistorikk og slettes når nettleseren lukkes eller kontoen endres."
+    "message": "Den tekniske historikken forblir lokal: opptil 200 hendelser per logg i løpet av 10 minutter, også uten automatisk sending. Den inneholder ingen nettleserhistorikk og slettes manuelt, når nettleseren lukkes, eller når kontoen byttes."
   },
   "diagnosticsHistoryCount": {
     "message": "$1 lokale tekniske arrangementer"
+  },
+  "diagnosticsConnectionLog": {
+    "message": "Eksporter tilkoblingslogg"
   },
   "diagnosticsAccountRequired": {
     "message": "Logg på for å aktivere sending. Du kan fortsatt se og eksportere en rapport uten en konto."
@@ -624,10 +630,10 @@
     "message": "Slett lokal rapport"
   },
   "diagnosticsRetention": {
-    "message": "Sendte rapporter er knyttet til din påloggede konto og oppbevares av brukerstøtten i 30 dager. Sletting av en lokal rapport sletter ikke en rapport som allerede er mottatt av støtte."
+    "message": "Lokale rapporter utløper etter 24 timer. Hvis du sletter en rapport her, slettes den ikke fra tjenesten hvis den allerede er mottatt. Se personverninformasjonen for lagring på serveren og forespørsler om sletting."
   },
   "diagnosticsConsent": {
-    "message": "Send denne rapporten til support"
+    "message": "Send denne diagnostikkrapporten til FuzeVPN"
   },
   "diagnosticsDataCollectionRequired": {
     "message": "Firefox må tillate innsamling av tekniske data for å sende diagnostikk. Prøv igjen og gi denne tillatelsen."
@@ -702,7 +708,7 @@
     "message": "Venter på en gyldig økt for samme konto"
   },
   "diagnosticsStatus_received": {
-    "message": "Mottatt av support"
+    "message": "Mottatt av tjenesten"
   },
   "diagnosticsStatus_failed": {
     "message": "Sending mislyktes"
@@ -743,6 +749,9 @@
   "noAvailableFavoriteLocations": {
     "message": "Favorittplasseringene dine er midlertidig utilgjengelige."
   },
+  "error_location_favorites_limit": {
+    "message": "Grensen på 100 favoritter er nådd. Fjern en favoritt for å legge til en ny."
+  },
   "error_server_full": {
     "message": "Denne serveren er full. Velg en annen plassering."
   },
@@ -777,7 +786,7 @@
     "message": "Juridisk informasjon"
   },
   "privacyPolicy": {
-    "message": "Personvernerklæring"
+    "message": "Utvidelsens personverninformasjon"
   },
   "termsAndConditions": {
     "message": "Bruks- og salgsvilkår"
@@ -826,5 +835,77 @@
   },
   "deviceKindFirefox": {
     "message": "Firefox-nettleser"
+  },
+  "generalPrivacyPolicy": {
+    "message": "Generell personvernerklæring"
+  },
+  "privacyNoticeTitle": {
+    "message": "Personvern i FuzeVPN-utvidelsen"
+  },
+  "privacyNoticeIntro": {
+    "message": "Denne informasjonen beskriver dataene som brukes av utvidelsen. Den supplerer FuzeVPNs generelle personvernerklæring, som det lenkes til nedenfor. Valgfri sending av diagnostikkdata er atskilt fra dataene som trengs for å logge inn og bruke VPN."
+  },
+  "privacyNoticeUpdated": {
+    "message": "Informasjonen ble oppdatert 19. oktober 2026"
+  },
+  "privacyNoticeServiceTitle": {
+    "message": "Konto og VPN-tjeneste"
+  },
+  "privacyNoticeService": {
+    "message": "Utvidelsen utveksler data om autentisering, konto, abonnement, enhet og proxyøkt med api.fuzevpn.com. VPN-proxyen overfører trafikken som rutes gjennom den. Disse tilkoblingene gjør nettverksmetadata tilgjengelige for mottakertjenesten. Denne informasjonen gir ikke noe eget løfte om logging på serveren."
+  },
+  "privacyNoticeLocalTitle": {
+    "message": "Data som lagres i nettleseren"
+  },
+  "privacyNoticeLocal": {
+    "message": "Nettleserens lagring inneholder økten din, kontoopplysninger, innstillinger, nettstedsunntak og enhetsidentitet. Tekniske logger beholdes lokalt i opptil 10 minutter, også når automatisk rapportering er av. Diagnostikkutkast og rapporter i kø utløper lokalt etter 24 timer. Oppryddingen skjer når utvidelsen kan kjøre."
+  },
+  "privacyNoticeIpTitle": {
+    "message": "Kontroll av offentlig IP-adresse og tredjeparter"
+  },
+  "privacyNoticeIp": {
+    "message": "IP-visningen og nettverksdiagnostikken kontakter api.ipify.org. IP-visningen kan bruke ipv4.icanhazip.com som reserve. Leverandøren mottar tilkoblingens IP-adresse og vanlige metadata for forespørselen: den offentlige IP-adressen din i direkte modus eller VPN-utgangens IP-adresse når forespørselen går via proxyen. Disse forespørslene sender verken informasjonskapsler, henvisningsinformasjon, kontotokener eller nettleserhistorikk."
+  },
+  "privacyNoticeReportsTitle": {
+    "message": "Hva diagnostikkrapporter inneholder"
+  },
+  "privacyNoticeReports": {
+    "message": "Rapporter kan inneholde en tilfeldig rapportidentifikator, tidsstempler, utvidelsens og nettleserens versjoner, operativsystemfamilie og arkitektur, tilkoblings- og beskyttelsestilstander, feilkoder, antall, varigheter og kontrollresultater. Fullstendige rapporter kan inneholde nylige tekniske hendelser. JSON-innholdet utelater passord, autentiseringstokener, e-postadresser, IP-adresser, besøkte nettadresser og unntatte domener. Du kan se gjennom og eksportere en fullstendig rapport før du sender den."
+  },
+  "privacyNoticeAccountTitle": {
+    "message": "Mottaker og kobling til kontoen"
+  },
+  "privacyNoticeAccount": {
+    "message": "Rapporter sendes til FuzeVPN på api.fuzevpn.com/v1/diagnostics over en autentisert tilkobling. Denne API-tilkoblingen går utenom VPN-proxyen: FuzeVPN mottar den direkte offentlige IP-adressen din selv mens VPN er aktivt. Rapportene knyttes til kontoen som er logget inn, og er ikke anonyme. Autentiseringsheaderen og IP-adressen er atskilt fra rapportens JSON. En mottaksbekreftelse bekrefter at dette endepunktet har godtatt rapporten, ikke at en medarbeider i kundestøtten har lest den."
+  },
+  "privacyNoticeChoiceTitle": {
+    "message": "Valgfri sending og tilbaketrekking"
+  },
+  "privacyNoticeChoice": {
+    "message": "Automatisk sending er av som standard. Hvis du aktiverer den, tillates enkle feilrapporter for denne kontoen. For å sende en fullstendig rapport manuelt må du krysse av i avkrysningsboksen for sending. Firefox krever også sin valgfrie tillatelse til tekniske data. Slå av automatisk sending for å stoppe den og fjerne ventende automatiske rapporter. Avbryt de enkelte ventende sendingene separat. Hvis du avslår sending av diagnostikkdata, kan du fortsatt bruke VPN."
+  },
+  "privacyNoticeDeleteTitle": {
+    "message": "Lokal sletting og nedlastede filer"
+  },
+  "privacyNoticeDelete": {
+    "message": "I Diagnostikk kan du tømme den tekniske historikken eller slette en enkelt lokal rapport. Tømming av historikken sletter ikke eksisterende rapportkopier. Avbryting eller lokal sletting kan ikke tilbakekalle data som tjenesten allerede har mottatt, inkludert en opplasting som kom frem før den ble avbrutt. Nedlastede eksporter er separate filer som du selv må slette."
+  },
+  "privacyNoticeServerTitle": {
+    "message": "Lagring på serveren og forespørsler"
+  },
+  "privacyNoticeServer": {
+    "message": "Denne utvidelsen styrer eller kontrollerer ikke lagring eller sletting på serveren. Se den generelle personvernerklæringen eller kontakt FuzeVPN for opplysninger om lagringstiden FuzeVPN bruker, og forespørsler som gjelder rapporter som allerede er sendt. Denne informasjonen garanterer ingen fast lagringstid på serveren."
+  },
+  "privacyNoticeSupportTitle": {
+    "message": "Diagnostikk og kundestøtte er atskilt"
+  },
+  "privacyNoticeSupport": {
+    "message": "Å sende en diagnostikkrapport sender ikke i seg selv en melding til kundestøtten fra utvidelsen. Bruk FuzeVPNs kontaktkanal nedenfor for å forklare et problem eller be om sletting av en mottatt rapport. Hvis du velger å dele en eksportert fil via en annen kanal, bør du kontrollere innholdet først."
+  },
+  "privacyNoticeManage": {
+    "message": "Åpne Diagnostikk"
+  },
+  "privacyNoticeLinksTitle": {
+    "message": "Tjenestens retningslinjer og kontakt"
   }
 }

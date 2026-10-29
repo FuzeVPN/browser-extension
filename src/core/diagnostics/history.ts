@@ -12,12 +12,16 @@ interface HistoryItem {
 }
 interface HistoryData {
   owner: string | null;
+  /** Replaced on every reset; state derived from this history is bound to it. */
+  id: string;
   items: HistoryItem[];
   losses: { at: number; count: number }[];
 }
 
+const HISTORY_ID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/;
+
 export class DiagnosticHistory {
-  private data: HistoryData = { owner: null, items: [], losses: [] };
+  private data: HistoryData = { owner: null, id: crypto.randomUUID(), items: [], losses: [] };
   private writes: Promise<void> = Promise.resolve();
   private revision = 0;
   private persistedRevision = -1;
@@ -31,11 +35,12 @@ export class DiagnosticHistory {
 
   async initialize(owner: string | null): Promise<void> {
     const raw = await this.dependencies.read();
-    this.data = { owner, items: [], losses: [] };
+    this.data = { owner, id: crypto.randomUUID(), items: [], losses: [] };
     this.revision++;
     if (!raw || typeof raw !== "object") return this.persist();
     const stored = raw as Partial<HistoryData>;
     if (stored.owner !== owner || !Array.isArray(stored.items)) return this.persist();
+    if (typeof stored.id === "string" && HISTORY_ID.test(stored.id)) this.data.id = stored.id;
     this.data.items = stored.items.slice(-200).flatMap((item: unknown) => {
       if (!item || typeof item !== "object") return [];
       const candidate = item as Partial<HistoryItem>;
@@ -62,9 +67,15 @@ export class DiagnosticHistory {
   }
 
   clear(owner: string | null): Promise<void> {
-    this.data = { owner, items: [], losses: [] };
+    // A new id durably invalidates derived state whose own purge failed to persist.
+    this.data = { owner, id: crypto.randomUUID(), items: [], losses: [] };
     this.revision++;
     return this.persist();
+  }
+
+  /** Identifies the current history window until its next reset. */
+  id(): string {
+    return this.data.id;
   }
 
   record(event: DiagnosticEvent): Promise<void> {

@@ -494,23 +494,251 @@ async function reviewPopupDesign() {
 try {
   let page = await open();
   await page.evaluate(() => {
+    const f = window.fixture;
+    f.commands = [];
+    f.requests = [];
+    f.publish({
+      status: "disconnected",
+      protected: false,
+      protectionRequested: false,
+      trafficBlocked: false,
+      activeLocationId: null,
+      error: null,
+      nextRetryAt: null,
+      blockingScope: "none",
+    });
+    f.heldType = "connect";
+  });
+  await rendered(page);
+  await page.locator("#protectButton").click();
+  await page.waitForFunction(() => Boolean(window.fixture.held));
+  await page.evaluate(() =>
+    window.fixture.publish({
+      status: "connecting",
+      protected: false,
+      protectionRequested: true,
+      trafficBlocked: true,
+      blockingScope: "all",
+    }),
+  );
+  await rendered(page);
+  async function assertProgress(expectedStatus) {
+    assert.equal(await page.locator("#recoveryPanel").isVisible(), false);
+    assert.equal(await page.locator("#statusCard").isVisible(), true);
+    assert.equal(await page.locator("#statusLabel").textContent(), expectedStatus);
+    assert.equal((await status(page)).orb, "status-orb reconnecting");
+    assert.notEqual(
+      await page.locator("#statusLabel").textContent(),
+      catalog.statusProtected.message,
+    );
+    assert.equal(await page.locator("#protectButton").textContent(), catalog.disconnect.message);
+    assert.equal(await page.locator("#protectButton").isEnabled(), true);
+    assert.equal(await page.locator("#changeLocationButton").isDisabled(), true);
+    assert.equal(await page.locator("#retryButton").isVisible(), false);
+    assert.equal(await page.locator("#errorBanner").isVisible(), false);
+  }
+  await assertProgress(catalog.statusConnecting.message);
+  const connectionRequests = await page.evaluate(() =>
+    window.fixture.requests.filter(({ type }) =>
+      ["connect", "retry_connection", "select_location", "change_location"].includes(type),
+    ),
+  );
+  assert.deepEqual(connectionRequests, [{ type: "connect", locationId: "fr" }]);
+  await page.screenshot({
+    animations: "disabled",
+    path: join(output, "POP-connecting-blocked-progress.png"),
+  });
+  await page.evaluate(() => {
+    window.fixture.publish({
+      status: "connected",
+      protected: true,
+      activeLocationId: "fr",
+      trafficBlocked: false,
+      blockingScope: "none",
+    });
+    window.fixture.held();
+    window.fixture.held = null;
+  });
+  await rendered(page);
+  assert.equal((await status(page)).orb, "status-orb connected");
+  assert.equal(await page.locator("#recoveryPanel").isVisible(), false);
+  report.checks.push({
+    passed: true,
+    name: "A held initial connection shows amber progress while traffic is blocked, keeps disconnect available and sends no automatic retry",
+  });
+  for (const transition of [
+    {
+      status: "refreshing",
+      protected: false,
+      trafficBlocked: true,
+      blockingScope: "all",
+      label: "statusRefreshing",
+    },
+    {
+      status: "refreshing",
+      protected: true,
+      trafficBlocked: false,
+      blockingScope: "none",
+      label: "statusRefreshing",
+    },
+    {
+      status: "connecting",
+      protected: true,
+      trafficBlocked: false,
+      blockingScope: "none",
+      label: "statusChanging",
+    },
+  ]) {
+    const { label, ...patch } = transition;
+    await page.evaluate((patch) => window.fixture.publish(patch), patch);
+    await rendered(page);
+    await assertProgress(catalog[label].message);
+  }
+  assert.equal(
+    await page.evaluate(
+      () => window.fixture.commands.filter((type) => type === "retry_connection").length,
+    ),
+    0,
+  );
+  report.checks.push({
+    passed: true,
+    name: "Session renewal and location changes use their existing progress translations without claiming green protection",
+  });
+  await page.evaluate(() =>
+    window.fixture.publish({
+      status: "connecting",
+      protected: false,
+      trafficBlocked: true,
+      blockingScope: "unverified",
+      error: null,
+    }),
+  );
+  await rendered(page);
+  assert.equal(await page.locator("#recoveryPanel").isVisible(), true);
+  assert.equal(
+    await page.locator("#recoveryStatus").textContent(),
+    catalog.securityBlockUnverified.message,
+  );
+  await page.evaluate(() =>
+    window.fixture.publish({
+      status: "refreshing",
+      blockingScope: "all",
+      error: "proxy_unavailable",
+    }),
+  );
+  await rendered(page);
+  assert.equal(await page.locator("#recoveryPanel").isVisible(), true);
+  assert.equal(await page.locator("#errorBanner").isVisible(), true);
+  await page.evaluate(() =>
+    window.fixture.publish({
+      status: "blocked",
+      protected: false,
+      trafficBlocked: true,
+      blockingScope: "all",
+      error: "proxy_unavailable",
+    }),
+  );
+  await rendered(page);
+  assert.equal(await page.locator("#recoveryPanel").isVisible(), true);
+  assert.equal(await page.locator("#statusCard").isVisible(), false);
+  assert.equal(
+    await page.locator("#recoveryStatus").textContent(),
+    catalog.statusBlockedAction.message,
+  );
+  assert.equal(await page.locator("#retryButton").isEnabled(), true);
+  assert.equal(await page.locator("#recoveryPanel [data-i18n='recoveryHelp']").isVisible(), true);
+  assert.equal(await page.locator("#errorBanner").isVisible(), true);
+  await page.evaluate(() =>
+    window.fixture.publish({
+      error: "invalid_location",
+      selectedLocationId: null,
+      activeLocationId: null,
+    }),
+  );
+  await rendered(page);
+  assert.equal(
+    await page.locator("#errorMessage").textContent(),
+    catalog.error_invalid_location.message,
+  );
+  assert.equal(await page.locator("#recoveryPanel").isVisible(), true);
+  assert.equal(await page.locator("#retryButton").isDisabled(), true);
+  report.checks.push({
+    passed: true,
+    name: "An unverified route and actual reconnect errors retain recovery; an invalid-location error stays visible",
+  });
+  await page.close();
+  page = await open();
+  await page.evaluate(() => {
     window.fixture.failTypes = ["refresh_network"];
     window.dispatchEvent(new Event("online"));
   });
   await rendered(page);
   const failedObservation = await status(page);
-  assert.notEqual(failedObservation.orb, "status-orb connected");
-  assert.equal(failedObservation.errorVisible, true);
-  assert.equal(failedObservation.recoveryVisible, true);
+  assert.equal(failedObservation.orb, "status-orb connected");
+  assert.equal(failedObservation.errorVisible, false);
+  assert.equal(failedObservation.recoveryVisible, false);
+  assert.equal(await page.locator("#protectButton").isEnabled(), true);
+  assert.equal(await page.locator("#protectButton").isVisible(), true);
   report.checks.push({
     id: "POP-01",
     passed: true,
-    name: "A failed network refresh immediately removes the protection claim and shows communication recovery",
+    name: "An optional IP messaging failure preserves protection display and disconnect controls",
     actual: failedObservation,
   });
   await page.screenshot({
     animations: "disabled",
-    path: join(output, "POP-01-silent-communication-failure.png"),
+    path: join(output, "POP-01-optional-ip-failure.png"),
+  });
+  await page.evaluate(() => {
+    window.fixture.failTypes = [];
+    window.fixture.responsePatches.refresh_network = { status: "malformed" };
+    window.dispatchEvent(new Event("online"));
+  });
+  await rendered(page);
+  assert.equal((await status(page)).orb, "status-orb connected");
+  assert.equal((await status(page)).errorVisible, false);
+  assert.equal(await page.locator("#protectButton").isEnabled(), true);
+  report.checks.push({
+    passed: true,
+    name: "A malformed optional IP response leaves the confirmed VPN state usable",
+  });
+  await page.evaluate(() => {
+    delete window.fixture.responsePatches.refresh_network;
+    window.fixture.publish({
+      status: "connected",
+      network: { ...window.fixture.snapshot.network, status: "checking" },
+    });
+  });
+  await rendered(page);
+  assert.match(await page.locator("#publicIp").textContent(), /203\.0\.113\.7/);
+  await page.evaluate(() =>
+    window.fixture.publish({
+      network: { ...window.fixture.snapshot.network, status: "unavailable", ip: null },
+    }),
+  );
+  await rendered(page);
+  assert.equal(
+    await page.locator("#publicIp").textContent(),
+    `${catalog.vpnIp.message} · ${catalog.ipUnavailable.message}`,
+  );
+  assert.equal((await status(page)).orb, "status-orb connected");
+  report.checks.push({
+    passed: true,
+    name: "The same-route IPv4 remains visible during refresh and is cleared after both providers fail",
+  });
+  await page.evaluate(() => {
+    delete window.fixture.responsePatches.refresh_network;
+    window.fixture.publish({ status: "connected" });
+    window.fixture.failTypes = ["refresh_account"];
+  });
+  await page.locator("#refreshSubscriptionButton").click();
+  await page.waitForFunction(
+    () => !document.getElementById("errorBanner").classList.contains("hidden"),
+  );
+  assert.equal((await status(page)).recoveryVisible, true);
+  report.checks.push({
+    passed: true,
+    name: "A failed account command still triggers the existing global communication recovery",
   });
   await page.evaluate(() => {
     window.fixture.failTypes = [];
@@ -1056,6 +1284,69 @@ try {
     name: "A late logout outcome cannot restore an old warning after a newer account snapshot",
   });
   await page.close();
+
+  page = await open();
+  await page.evaluate(() =>
+    window.fixture.publish({
+      currentDeviceId: "current",
+      devices: [
+        {
+          deviceId: "current",
+          name: "Current browser",
+          kind: "browser_extension",
+          profiles: [],
+          createdAt: "2026-01-01T00:00:00Z",
+        },
+        {
+          deviceId: "remote",
+          name: "Google Chrome",
+          kind: "browser_extension",
+          profiles: [],
+          createdAt: "2026-01-02T00:00:00Z",
+        },
+        {
+          deviceId: "phone",
+          name: "Travel phone",
+          kind: "vpn",
+          profiles: [],
+          createdAt: "2026-01-03T00:00:00Z",
+        },
+      ],
+    }),
+  );
+  await page.locator("#settingsButton").click();
+  await page.locator("#manageDevicesButton").click();
+  const namedDevices = page.locator(".device-item");
+  assert.equal(
+    await namedDevices.nth(1).locator(".device-meta").first().textContent(),
+    catalog.deviceKindBrowser.message,
+  );
+  for (const name of ["Current browser", "Google Chrome", "Travel phone"]) {
+    assert.equal(
+      await page
+        .getByRole("button", {
+          name: `${catalog.deleteDevice.message} — ${name}`,
+          exact: true,
+        })
+        .count(),
+      1,
+    );
+  }
+  await page
+    .getByRole("button", {
+      name: `${catalog.deleteDevice.message} — Google Chrome`,
+      exact: true,
+    })
+    .click();
+  assert.match(await page.locator("#confirmationMessage").textContent(), /Google Chrome/);
+  await page.locator("#confirmationCancelButton").click();
+  assert.equal(await namedDevices.count(), 3);
+  report.checks.push({
+    passed: true,
+    name: "Remote browser metadata remains generic and named delete controls identify the same device as their confirmation",
+  });
+  await page.close();
+
   page = await open();
   page.on("dialog", (dialog) => dialog.accept());
   await page.evaluate(() =>
@@ -1311,7 +1602,7 @@ try {
       compilerOptions: { module: ts.ModuleKind.ESNext, target: ts.ScriptTarget.ES2022 },
     },
   ).outputText;
-  const { LocationPreferences } = await import(
+  const { LocationPreferences, LocationPreferenceError } = await import(
     `data:text/javascript;base64,${Buffer.from(locationPreferencesModule).toString("base64")}`
   );
   let storedFavorites = {
@@ -1342,8 +1633,10 @@ try {
             await preferences.setFavorite(request.locationId, request.favorite);
           } catch (error) {
             favoriteFailures.push(error.message);
-            // The worker maps the preference class's ordinary Error to unknown_error.
-            result = { ok: false, commandError: "unknown_error" };
+            result = {
+              ok: false,
+              commandError: error instanceof LocationPreferenceError ? error.code : "unknown_error",
+            };
           }
         }
         return { ...result, locationPreferences: preferences.getState(connected.locations) };
@@ -1358,7 +1651,7 @@ try {
   await page.locator("#locationPreferenceError").waitFor({ state: "visible" });
   assert.equal(
     await page.locator("#locationPreferenceError").textContent(),
-    catalog.error_unknown_error.message,
+    catalog.error_location_favorites_limit.message,
   );
   assert.deepEqual(favoriteFailures, ["location_favorites_limit"]);
   assert.equal(favoriteWrites.length, 0);

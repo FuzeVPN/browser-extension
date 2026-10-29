@@ -41,10 +41,18 @@ describe("diagnostic UI contract", () => {
     expect(isDiagnosticUiState(state())).toBe(true);
     expect(state().reports[0]?.canSend).toBe(false);
   });
+  it("accepts a separate bounded connection journal count", () => {
+    expect(isDiagnosticUiState(state({ historyCount: 200, connectionHistoryCount: 200 }))).toBe(
+      true,
+    );
+    expect(isDiagnosticUiState(state({ connectionHistoryCount: 0 }))).toBe(true);
+  });
   it.each([
     { version: 0 },
     { revision: -1 },
     { historyCount: 201 },
+    { connectionHistoryCount: 201 },
+    { connectionHistoryCount: -1 },
     { language: "auto" },
     { signedIn: "true" },
     { reports: [{ id: "untrusted" }] },

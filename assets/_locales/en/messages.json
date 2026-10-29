@@ -179,6 +179,9 @@
   "deleteDevice": {
     "message": "Delete device"
   },
+  "deleteDeviceNamed": {
+    "message": "Delete device $1"
+  },
   "confirmDeleteDevice": {
     "message": "Remove “$1”? Its VPN connections will stop and its profiles will be removed."
   },
@@ -360,7 +363,7 @@
     "message": "Unavailable"
   },
   "ipLookupExplanation": {
-    "message": "IP checked with ipify using your current connection. No browsing history is sent."
+    "message": "IP checked with ipify, or icanhazip as a fallback, using your current connection. No browsing history is sent."
   },
   "automaticLocation": {
     "message": "Automatic"
@@ -567,19 +570,22 @@
     "message": "Your data"
   },
   "diagnosticsPrivacy": {
-    "message": "Reports contain technical states and error codes, never passwords, tokens, email addresses, IP addresses, visited URLs or excluded domains."
+    "message": "The report JSON contains technical states and error codes, without passwords, tokens, email addresses, IP addresses, visited URLs or excluded domains. Sending is authenticated and links the report to your account. See the notice for network data."
   },
   "diagnosticsAuto": {
     "message": "Send important error reports automatically"
   },
   "diagnosticsAutoHelp": {
-    "message": "Off by default. Only simple technical reports are sent for this account, without browsing history. Support keeps them for 30 days."
+    "message": "Off by default. Enabling this sends simple technical reports for this account, without browsing history. Turn it off here to stop automatic sending and remove pending automatic reports."
   },
   "diagnosticsHistoryHelp": {
-    "message": "Technical history stays local: up to 200 events over 10 minutes, even when automatic sending is off. It contains no browsing history and is cleared when the browser closes or the account changes."
+    "message": "Technical history stays local: up to 200 events per journal over 10 minutes, even when automatic sending is off. It contains no browsing history and is cleared manually, when the browser closes or when the account changes."
   },
   "diagnosticsHistoryCount": {
     "message": "$1 local technical events"
+  },
+  "diagnosticsConnectionLog": {
+    "message": "Export connection log"
   },
   "diagnosticsAccountRequired": {
     "message": "Sign in to enable sending. You can still view and export a report without an account."
@@ -624,10 +630,10 @@
     "message": "Delete local report"
   },
   "diagnosticsRetention": {
-    "message": "Sent reports are linked to your signed-in account and kept by support for 30 days. Deleting a local report does not delete a report already received by support."
+    "message": "Local reports expire after 24 hours. Deleting here does not delete a report already received by the service. See the notice for server retention and deletion requests."
   },
   "diagnosticsConsent": {
-    "message": "Send this report to support"
+    "message": "Send this diagnostic report to FuzeVPN"
   },
   "diagnosticsDataCollectionRequired": {
     "message": "Firefox must allow technical data collection to send diagnostics. Try again and grant this permission."
@@ -702,7 +708,7 @@
     "message": "Waiting for a valid session for the same account"
   },
   "diagnosticsStatus_received": {
-    "message": "Received by support"
+    "message": "Received by the service"
   },
   "diagnosticsStatus_failed": {
     "message": "Sending failed"
@@ -743,6 +749,9 @@
   "noAvailableFavoriteLocations": {
     "message": "Your favorite locations are temporarily unavailable."
   },
+  "error_location_favorites_limit": {
+    "message": "The 100-favorite limit has been reached. Remove a favorite to add another."
+  },
   "error_server_full": {
     "message": "This server is full. Choose another location."
   },
@@ -777,7 +786,7 @@
     "message": "Legal information"
   },
   "privacyPolicy": {
-    "message": "Privacy policy"
+    "message": "Extension privacy notice"
   },
   "termsAndConditions": {
     "message": "Terms of use and sale"
@@ -826,5 +835,77 @@
   },
   "deviceKindFirefox": {
     "message": "Firefox browser"
+  },
+  "generalPrivacyPolicy": {
+    "message": "General privacy policy"
+  },
+  "privacyNoticeTitle": {
+    "message": "Privacy in the FuzeVPN extension"
+  },
+  "privacyNoticeIntro": {
+    "message": "This notice describes the data used by this extension. It supplements the general FuzeVPN privacy policy, linked below. Optional diagnostic sending is separate from the data needed to sign in and use the VPN."
+  },
+  "privacyNoticeUpdated": {
+    "message": "Notice updated on 19 October 2026"
+  },
+  "privacyNoticeServiceTitle": {
+    "message": "Account and VPN service"
+  },
+  "privacyNoticeService": {
+    "message": "The extension exchanges authentication, account, subscription, device and proxy-session data with api.fuzevpn.com. The VPN proxy carries the traffic routed through it. These connections expose network metadata to the receiving service; this notice makes no separate promise about server logging."
+  },
+  "privacyNoticeLocalTitle": {
+    "message": "Data stored in your browser"
+  },
+  "privacyNoticeLocal": {
+    "message": "Browser storage holds your session, account details, preferences, site exclusions and device identity. Technical journals are kept locally for up to 10 minutes, even when automatic reporting is off. Diagnostic drafts and queued reports expire locally after 24 hours; cleanup runs when the extension can execute."
+  },
+  "privacyNoticeIpTitle": {
+    "message": "Public IP checks and third parties"
+  },
+  "privacyNoticeIp": {
+    "message": "IP display and network diagnostics contact api.ipify.org. IP display may use ipv4.icanhazip.com as a fallback. The provider receives the connection IP and ordinary request metadata: your public IP in direct mode, or the VPN exit IP when proxied. These requests omit cookies and referrers and send no account token or browsing history."
+  },
+  "privacyNoticeReportsTitle": {
+    "message": "What diagnostic reports contain"
+  },
+  "privacyNoticeReports": {
+    "message": "Reports can include a random report identifier, timestamps, extension and browser versions, operating-system family and architecture, connection and protection states, error codes, counts, durations and check results. Full reports can include recent technical events. Their JSON excludes passwords, authentication tokens, email addresses, IP addresses, visited URLs and excluded domains. You can inspect and export a full report before sending it."
+  },
+  "privacyNoticeAccountTitle": {
+    "message": "Recipient and account attribution"
+  },
+  "privacyNoticeAccount": {
+    "message": "Reports are sent to FuzeVPN at api.fuzevpn.com/v1/diagnostics over an authenticated connection. This API connection bypasses the VPN proxy: FuzeVPN receives your direct public IP even while the VPN is active. Reports are linked to the signed-in account, not anonymous. The authentication header and IP are separate from the report JSON. A successful receipt confirms acceptance by that endpoint, not that a support agent has read the report."
+  },
+  "privacyNoticeChoiceTitle": {
+    "message": "Optional sending and withdrawal"
+  },
+  "privacyNoticeChoice": {
+    "message": "Automatic sending is off by default. Enabling it permits simple error reports for that account. Manual full-report sending requires the send checkbox. Firefox also requires its optional technical-data permission. Disable automatic sending to stop it and remove pending automatic reports; cancel individual pending sends separately. Refusing diagnostic sending does not prevent VPN use."
+  },
+  "privacyNoticeDeleteTitle": {
+    "message": "Local deletion and downloaded files"
+  },
+  "privacyNoticeDelete": {
+    "message": "In Diagnostics, clear technical history or delete an individual local report. Clearing history does not erase existing report copies. Cancelling or deleting locally cannot recall data already received by the service, including an upload that arrived before cancellation. Downloaded exports are separate files that you must delete yourself."
+  },
+  "privacyNoticeServerTitle": {
+    "message": "Server retention and requests"
+  },
+  "privacyNoticeServer": {
+    "message": "This extension does not control or verify server retention or server-side deletion. For the retention period applied by FuzeVPN and requests concerning reports already sent, consult the general privacy policy or contact FuzeVPN. No fixed server-retention period is guaranteed by this notice."
+  },
+  "privacyNoticeSupportTitle": {
+    "message": "Diagnostics and support are separate"
+  },
+  "privacyNoticeSupport": {
+    "message": "Sending a diagnostic report does not itself send a support message from the extension. To explain a problem or request deletion of a received report, use the FuzeVPN contact channel below. If you choose to share an exported file through another channel, check its contents first."
+  },
+  "privacyNoticeManage": {
+    "message": "Open Diagnostics"
+  },
+  "privacyNoticeLinksTitle": {
+    "message": "Service policy and contact"
   }
 }

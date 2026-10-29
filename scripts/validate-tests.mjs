@@ -65,7 +65,13 @@ const changedInputs = [...new Set([...Object.keys(before), ...Object.keys(after)
   (file) => before[file] !== after[file],
 );
 const inputFilesStable = changedInputs.length === 0;
-const success = tests.success && inputFilesStable;
+// Vitest's JSON success only reflects suites and assertions; asynchronous
+// failures can leave it true while the context and process report an error.
+const unhandledErrors = context?.state.getUnhandledErrors().length ?? 0;
+const executionExitCode = Number(process.exitCode ?? 0);
+const success =
+  tests.success === true && inputFilesStable && unhandledErrors === 0 && executionExitCode === 0;
+if (!success && executionExitCode === 0) process.exitCode = 1;
 await writeJson(join(output, "run.json"), {
   startedAt,
   completedAt: new Date().toISOString(),
@@ -76,10 +82,11 @@ await writeJson(join(output, "run.json"), {
   total: tests.numTotalTests,
   passed: tests.numPassedTests,
   failed: tests.numFailedTests,
+  unhandledErrors,
+  exitCode: Number(process.exitCode ?? 0),
   changedInputs,
   inputFilesStable,
   scope:
     "Existing unit tests; ExtensionsV2-scoped temporary/cache files; writes outside ExtensionsV2 rejected by the Node preloader.",
 });
-if (!success) process.exitCode = 1;
 process.stdout.write(`Validation evidence: ${output}\n`);

@@ -179,6 +179,9 @@
   "deleteDevice": {
     "message": "Smazat zařízení"
   },
+  "deleteDeviceNamed": {
+    "message": "Smazat zařízení $1"
+  },
   "confirmDeleteDevice": {
     "message": "Odebrat „$1“? Jeho připojení VPN se zastaví a jeho profily budou odstraněny."
   },
@@ -360,7 +363,7 @@
     "message": "Není k dispozici"
   },
   "ipLookupExplanation": {
-    "message": "IP zkontrolována pomocí ipify pomocí vašeho aktuálního připojení. Není odeslána žádná historie procházení."
+    "message": "IP se ověřuje přes aktuální připojení pomocí ipify nebo náhradní služby icanhazip. Historie prohlížení se neodesílá."
   },
   "automaticLocation": {
     "message": "Automaticky"
@@ -567,19 +570,22 @@
     "message": "Vaše data"
   },
   "diagnosticsPrivacy": {
-    "message": "Zprávy obsahují technické stavy a chybové kódy, nikdy hesla, tokeny, e-mailové adresy, IP adresy, navštívené adresy URL nebo vyloučené domény."
+    "message": "JSON zprávy obsahuje technické stavy a chybové kódy, bez hesel, tokenů, e-mailových adres, IP adres, navštívených URL nebo vyloučených domén. Odesílání je autentizované a propojuje zprávu s vaším účtem. Podrobnosti o síťových údajích najdete v informacích o soukromí."
   },
   "diagnosticsAuto": {
     "message": "Odesílejte automaticky důležitá chybová hlášení"
   },
   "diagnosticsAutoHelp": {
-    "message": "Ve výchozím nastavení vypnuto. Pro tento účet jsou odesílány pouze jednoduché technické zprávy bez historie procházení. Podpora je uchovává po dobu 30 dnů."
+    "message": "Ve výchozím nastavení vypnuto. Zapnutím povolíte odesílání jednoduchých technických zpráv pro tento účet bez historie prohlížení. Vypnutím zde zastavíte automatické odesílání a odstraníte čekající automatické zprávy."
   },
   "diagnosticsHistoryHelp": {
-    "message": "Technická historie zůstává místní: až 200 událostí za 10 minut, i když je automatické odesílání vypnuto. Neobsahuje žádnou historii procházení a vymaže se při zavření prohlížeče nebo změně účtu."
+    "message": "Technická historie zůstává místní: až 200 událostí v každém protokolu za 10 minut, i bez automatického odesílání. Neobsahuje historii prohlížení a maže se ručně, při zavření prohlížeče nebo při změně účtu."
   },
   "diagnosticsHistoryCount": {
     "message": "$1 místní technické akce"
+  },
+  "diagnosticsConnectionLog": {
+    "message": "Exportovat protokol připojení"
   },
   "diagnosticsAccountRequired": {
     "message": "Chcete-li povolit odesílání, přihlaste se. Přehled můžete zobrazit a exportovat i bez účtu."
@@ -624,10 +630,10 @@
     "message": "Smazat místní přehled"
   },
   "diagnosticsRetention": {
-    "message": "Odeslané přehledy jsou propojeny s vaším přihlášeným účtem a podpora je uchovává po dobu 30 dnů. Smazáním místní zprávy neodstraníte zprávu, kterou již podpora obdržela."
+    "message": "Platnost místních zpráv vyprší po 24 hodinách. Smazání zde neodstraní zprávu, kterou již služba přijala. Podrobnosti o uchovávání na serveru a žádostech o smazání najdete v informacích o soukromí."
   },
   "diagnosticsConsent": {
-    "message": "Pošlete tuto zprávu podpoře"
+    "message": "Odeslat tuto diagnostickou zprávu do FuzeVPN"
   },
   "diagnosticsDataCollectionRequired": {
     "message": "Firefox musí povolit shromažďování technických údajů, aby bylo možné odeslat diagnostiku. Zkuste to znovu a udělte toto oprávnění."
@@ -702,7 +708,7 @@
     "message": "Čekání na platnou relaci pro stejný účet"
   },
   "diagnosticsStatus_received": {
-    "message": "Přijato podporou"
+    "message": "Přijato službou"
   },
   "diagnosticsStatus_failed": {
     "message": "Odeslání se nezdařilo"
@@ -743,6 +749,9 @@
   "noAvailableFavoriteLocations": {
     "message": "Vaše oblíbená umístění jsou dočasně nedostupná."
   },
+  "error_location_favorites_limit": {
+    "message": "Bylo dosaženo limitu 100 oblíbených položek. Odeberte jednu, abyste mohli přidat další."
+  },
   "error_server_full": {
     "message": "Tento server je plný. Vyberte jiné umístění."
   },
@@ -777,7 +786,7 @@
     "message": "Právní informace"
   },
   "privacyPolicy": {
-    "message": "Zásady ochrany osobních údajů"
+    "message": "Informace o soukromí rozšíření"
   },
   "termsAndConditions": {
     "message": "Podmínky používání a prodeje"
@@ -826,5 +835,77 @@
   },
   "deviceKindFirefox": {
     "message": "Prohlížeč Firefox"
+  },
+  "generalPrivacyPolicy": {
+    "message": "Obecné zásady ochrany soukromí"
+  },
+  "privacyNoticeTitle": {
+    "message": "Soukromí v rozšíření FuzeVPN"
+  },
+  "privacyNoticeIntro": {
+    "message": "Tyto informace popisují údaje používané tímto rozšířením. Doplňují obecné zásady ochrany soukromí FuzeVPN, na které odkazujeme níže. Volitelné odesílání diagnostiky je oddělené od údajů potřebných k přihlášení a používání VPN."
+  },
+  "privacyNoticeUpdated": {
+    "message": "Informace aktualizovány 19. října 2026"
+  },
+  "privacyNoticeServiceTitle": {
+    "message": "Účet a služba VPN"
+  },
+  "privacyNoticeService": {
+    "message": "Rozšíření si s api.fuzevpn.com vyměňuje údaje o autentizaci, účtu, předplatném, zařízení a relacích proxy. Proxy server VPN přenáší provoz, který je přes něj směrován. Tato spojení zpřístupňují přijímající službě síťová metadata; tyto informace neposkytují žádný samostatný příslib ohledně zaznamenávání údajů na serveru."
+  },
+  "privacyNoticeLocalTitle": {
+    "message": "Údaje uložené v prohlížeči"
+  },
+  "privacyNoticeLocal": {
+    "message": "Úložiště prohlížeče uchovává vaši relaci, údaje o účtu, předvolby, výjimky pro weby a identitu zařízení. Technické protokoly se uchovávají místně nejvýše 10 minut, i když je automatické odesílání vypnuté. Platnost diagnostických konceptů a zpráv ve frontě místně vyprší po 24 hodinách; čištění probíhá, když má rozšíření možnost běžet."
+  },
+  "privacyNoticeIpTitle": {
+    "message": "Kontroly veřejné IP adresy a služby třetích stran"
+  },
+  "privacyNoticeIp": {
+    "message": "Zobrazení IP adresy a diagnostika sítě kontaktují api.ipify.org. Zobrazení IP adresy může jako záložní službu použít ipv4.icanhazip.com. Poskytovatel obdrží IP adresu spojení a běžná metadata požadavku: vaši veřejnou IP adresu v přímém režimu, nebo výstupní IP adresu VPN při směrování přes proxy. Tyto požadavky neobsahují soubory cookie ani hlavičky Referer a neodesílají token účtu ani historii prohlížení."
+  },
+  "privacyNoticeReportsTitle": {
+    "message": "Co obsahují diagnostické zprávy"
+  },
+  "privacyNoticeReports": {
+    "message": "Zprávy mohou obsahovat náhodný identifikátor zprávy, časové údaje, verze rozšíření a prohlížeče, rodinu a architekturu operačního systému, stavy připojení a ochrany, chybové kódy, počty, doby trvání a výsledky kontrol. Úplné zprávy mohou obsahovat nedávné technické události. Jejich JSON neobsahuje hesla, autentizační tokeny, e-mailové adresy, IP adresy, navštívené URL ani vyloučené domény. Úplnou zprávu si můžete před odesláním prohlédnout a exportovat."
+  },
+  "privacyNoticeAccountTitle": {
+    "message": "Příjemce a propojení s účtem"
+  },
+  "privacyNoticeAccount": {
+    "message": "Zprávy se odesílají společnosti FuzeVPN na api.fuzevpn.com/v1/diagnostics prostřednictvím autentizovaného spojení. Toto spojení s API obchází proxy server VPN: FuzeVPN obdrží veřejnou IP adresu vašeho přímého připojení, i když je VPN aktivní. Zprávy jsou propojené s přihlášeným účtem a nejsou anonymní. Autentizační hlavička a IP adresa jsou oddělené od JSON zprávy. Potvrzení o přijetí znamená, že zprávu přijala služba na této adrese, nikoli že si ji přečetl pracovník podpory."
+  },
+  "privacyNoticeChoiceTitle": {
+    "message": "Volitelné odesílání a odvolání souhlasu"
+  },
+  "privacyNoticeChoice": {
+    "message": "Automatické odesílání je ve výchozím nastavení vypnuté. Jeho zapnutím povolíte jednoduché zprávy o chybách pro tento účet. Ruční odeslání úplné zprávy vyžaduje zaškrtnutí políčka pro odeslání. Firefox navíc vyžaduje své volitelné oprávnění k technickým údajům. Vypnutím automatického odesílání jej zastavíte a odstraníte čekající automatické zprávy; jednotlivá čekající odeslání zrušte zvlášť. Odmítnutí odesílání diagnostiky nebrání používání VPN."
+  },
+  "privacyNoticeDeleteTitle": {
+    "message": "Místní smazání a stažené soubory"
+  },
+  "privacyNoticeDelete": {
+    "message": "V Diagnostice můžete vymazat technickou historii nebo smazat jednotlivou místní zprávu. Vymazání historie neodstraní existující kopie zpráv. Místním zrušením nebo smazáním nelze vzít zpět údaje, které již služba přijala, včetně dat doručených před zrušením odesílání. Stažené exporty jsou samostatné soubory, které musíte smazat sami."
+  },
+  "privacyNoticeServerTitle": {
+    "message": "Uchovávání na serveru a žádosti"
+  },
+  "privacyNoticeServer": {
+    "message": "Toto rozšíření neřídí ani neověřuje uchovávání nebo mazání údajů na serveru. Chcete-li zjistit dobu uchovávání uplatňovanou společností FuzeVPN nebo podat žádost týkající se již odeslaných zpráv, přečtěte si obecné zásady ochrany soukromí nebo kontaktujte FuzeVPN. Tyto informace nezaručují žádnou pevnou dobu uchovávání na serveru."
+  },
+  "privacyNoticeSupportTitle": {
+    "message": "Diagnostika a podpora jsou oddělené"
+  },
+  "privacyNoticeSupport": {
+    "message": "Samotné odeslání diagnostické zprávy neodešle z rozšíření zprávu podpoře. Chcete-li vysvětlit problém nebo požádat o smazání přijaté zprávy, použijte níže uvedený kontakt na FuzeVPN. Pokud se rozhodnete sdílet exportovaný soubor jiným kanálem, nejprve zkontrolujte jeho obsah."
+  },
+  "privacyNoticeManage": {
+    "message": "Otevřít Diagnostiku"
+  },
+  "privacyNoticeLinksTitle": {
+    "message": "Zásady služby a kontakt"
   }
 }

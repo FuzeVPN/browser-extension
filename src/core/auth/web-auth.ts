@@ -8,6 +8,7 @@ export const WEB_AUTH_CLIENT_ID = "fuzevpn-browser-extension";
 export const WEB_AUTH_TIMEOUT_MS = 5 * 60 * 1_000;
 
 const RANDOM_BYTES = 32;
+const NATIVE_RETRY_INTERVAL_MS = 1_000;
 const MAX_RETURN_URL_LENGTH = 2_048;
 // A 32-byte code uses 43 unpadded base64url characters; unused bits must be zero.
 const OPAQUE_CODE = /^[A-Za-z0-9_-]{42}[AEIMQUYcgkosw048]$/;
@@ -59,15 +60,19 @@ interface Attempt {
   timer: ReturnType<typeof setTimeout>;
   signal?: AbortSignal;
   onAbort: () => void;
+  preparationAbort: AbortController;
+  nativeStartedAt: number;
+  nativePending: boolean;
   resolve: (authorization: WebAuthorization) => void;
   reject: (error: Error) => void;
 }
 
 /**
  * PKCE secrets are confined to the background context and disappear on termination.
- * The browsers do not offer cancellation of an interactive identity window. A cancelled
- * or expired window therefore keeps the native-flow lock until its promise settles;
- * its eventual response is discarded and cannot become an account session.
+ * The browsers do not offer cancellation of an interactive identity window. Local
+ * cancellation/expiration retires its attempt, so a hidden, stalled native flow
+ * cannot prevent an explicit retry. Retired responses are discarded. Launches after
+ * abandonment are spaced to avoid accumulating windows through rapid cancellation.
  */
 export class ExtensionWebAuthService implements WebAuthService {
   private readonly startUrl: string;
@@ -76,7 +81,7 @@ export class ExtensionWebAuthService implements WebAuthService {
   private readonly timeoutMs: number;
   private readonly now: () => number;
   private active: Attempt | null = null;
-  private nativeBusy = false;
+  private nativeRetryAt = 0;
 
   constructor(options: WebAuthOptions) {
     this.startUrl = validateStartUrl(options.startUrl);
@@ -90,7 +95,7 @@ export class ExtensionWebAuthService implements WebAuthService {
 
   authorize(signal?: AbortSignal, locale?: string): Promise<WebAuthorization> {
     if (signal?.aborted) return Promise.reject(cancelled());
-    if (this.active || this.nativeBusy) return Promise.reject(new WebAuthError("web_login_busy"));
+    if (this.active) return Promise.reject(new WebAuthError("web_login_busy"));
     let canonicalLocale: string | undefined;
     if (locale !== undefined) {
       const candidate = locale.replaceAll("_", "-");
@@ -111,6 +116,9 @@ export class ExtensionWebAuthService implements WebAuthService {
         }, this.timeoutMs),
         signal,
         onAbort: () => this.reject(attempt, cancelled()),
+        preparationAbort: new AbortController(),
+        nativeStartedAt: 0,
+        nativePending: false,
         resolve,
         reject,
       };
@@ -135,6 +143,12 @@ export class ExtensionWebAuthService implements WebAuthService {
       );
       if (!this.isCurrent(attempt)) return;
 
+      const retryDelay = this.nativeRetryAt - performance.now();
+      if (retryDelay > 0) {
+        await waitForNativeRetry(retryDelay, attempt.preparationAbort.signal);
+        if (!this.isCurrent(attempt)) return;
+      }
+
       const start = new URL(this.startUrl);
       start.searchParams.set("client_id", WEB_AUTH_CLIENT_ID);
       start.searchParams.set("redirect_uri", redirectUri);
@@ -143,8 +157,9 @@ export class ExtensionWebAuthService implements WebAuthService {
       start.searchParams.set("code_challenge_method", "S256");
       if (locale) start.searchParams.set("locale", locale);
 
-      this.nativeBusy = true;
       let response: string | undefined;
+      attempt.nativeStartedAt = performance.now();
+      attempt.nativePending = true;
       try {
         response = await this.identity.launchWebAuthFlow({ url: start.href, interactive: true });
       } catch (error) {
@@ -160,7 +175,9 @@ export class ExtensionWebAuthService implements WebAuthService {
           ].includes(String(error.message));
         throw new WebAuthError(dismissed ? "web_login_cancelled" : "web_login_unavailable");
       } finally {
-        this.nativeBusy = false;
+        // Only this attempt changes: an older promise must never release or
+        // invalidate a newer attempt when it eventually settles.
+        attempt.nativePending = false;
       }
       if (!this.isCurrent(attempt)) return;
       const code = validateResponse(response, redirectUri, state);
@@ -191,6 +208,11 @@ export class ExtensionWebAuthService implements WebAuthService {
 
   private reject(attempt: Attempt, error: Error): void {
     if (attempt.settled) return;
+    if (attempt.nativePending)
+      this.nativeRetryAt = Math.max(
+        this.nativeRetryAt,
+        attempt.nativeStartedAt + NATIVE_RETRY_INTERVAL_MS,
+      );
     this.finish(attempt);
     attempt.reject(error);
   }
@@ -199,6 +221,7 @@ export class ExtensionWebAuthService implements WebAuthService {
     attempt.settled = true;
     clearTimeout(attempt.timer);
     attempt.signal?.removeEventListener("abort", attempt.onAbort);
+    attempt.preparationAbort.abort();
     if (this.active === attempt) this.active = null;
   }
 }
@@ -314,4 +337,20 @@ function base64Url(bytes: Uint8Array): string {
 
 function cancelled(): DOMException {
   return new DOMException("Web authentication cancelled", "AbortError");
+}
+
+function waitForNativeRetry(delayMs: number, signal: AbortSignal): Promise<void> {
+  return new Promise((resolve, reject) => {
+    const abort = (): void => {
+      clearTimeout(timer);
+      signal.removeEventListener("abort", abort);
+      reject(cancelled());
+    };
+    const timer = setTimeout(() => {
+      signal.removeEventListener("abort", abort);
+      resolve();
+    }, delayMs);
+    signal.addEventListener("abort", abort, { once: true });
+    if (signal.aborted) abort();
+  });
 }

@@ -20,7 +20,7 @@ function fixture(incognitoAllowed = true) {
       value: proxyConfig(proxySession()),
       levelOfControl: "controlled_by_this_extension",
     },
-    privacy: { value: "disable_non_proxied_udp", levelOfControl: "controlled_by_this_extension" },
+    privacy: { value: "proxy_only", levelOfControl: "controlled_by_this_extension" },
   };
   const proxyGet = vi.fn(async (query: Record<string, unknown>) => {
     expect(query).toEqual({});

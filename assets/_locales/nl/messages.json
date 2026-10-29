@@ -179,6 +179,9 @@
   "deleteDevice": {
     "message": "Apparaat verwijderen"
   },
+  "deleteDeviceNamed": {
+    "message": "Apparaat $1 verwijderen"
+  },
   "confirmDeleteDevice": {
     "message": "‘$1’ verwijderen? De VPN-verbindingen worden gestopt en de profielen verwijderd."
   },
@@ -360,7 +363,7 @@
     "message": "Niet beschikbaar"
   },
   "ipLookupExplanation": {
-    "message": "IP gecontroleerd met ipify via je huidige verbinding. Er wordt geen browsegeschiedenis verzonden."
+    "message": "Het IP-adres wordt via uw huidige verbinding gecontroleerd met ipify, of met icanhazip als alternatief. Er wordt geen browsegeschiedenis verzonden."
   },
   "automaticLocation": {
     "message": "Automatisch"
@@ -567,19 +570,22 @@
     "message": "Uw gegevens"
   },
   "diagnosticsPrivacy": {
-    "message": "Rapporten bevatten technische statussen en foutcodes, nooit wachtwoorden, tokens, e-mailadressen, IP-adressen, bezochte URL’s of uitgesloten domeinen."
+    "message": "De JSON van het rapport bevat technische statussen en foutcodes, zonder wachtwoorden, tokens, e-mailadressen, IP-adressen, bezochte URL’s of uitgesloten domeinen. Verzending wordt geauthenticeerd en koppelt het rapport aan uw account. Lees de privacyverklaring voor informatie over netwerkgegevens."
   },
   "diagnosticsAuto": {
     "message": "Rapporten over belangrijke fouten automatisch verzenden"
   },
   "diagnosticsAutoHelp": {
-    "message": "Standaard uit. Voor dit account worden alleen eenvoudige technische rapporten verzonden, zonder browsegeschiedenis. Ondersteuning bewaart ze 30 dagen."
+    "message": "Standaard uitgeschakeld. Inschakelen verstuurt eenvoudige technische rapporten voor dit account, zonder browsegeschiedenis. Schakel dit hier uit om automatische verzending te stoppen en wachtende automatische rapporten te verwijderen."
   },
   "diagnosticsHistoryHelp": {
-    "message": "De technische geschiedenis blijft lokaal: maximaal 200 gebeurtenissen over 10 minuten, ook zonder automatisch verzenden. Ze bevat geen browsegeschiedenis en wordt gewist als de browser sluit of het account verandert."
+    "message": "De technische geschiedenis blijft lokaal: maximaal 200 gebeurtenissen per logboek over 10 minuten, ook zonder automatische verzending. Ze bevat geen browsegeschiedenis en wordt handmatig gewist, wanneer de browser sluit of wanneer het account verandert."
   },
   "diagnosticsHistoryCount": {
     "message": "$1 lokale technische gebeurtenissen"
+  },
+  "diagnosticsConnectionLog": {
+    "message": "Verbindingslogboek exporteren"
   },
   "diagnosticsAccountRequired": {
     "message": "Meld u aan om verzenden in te schakelen. Zonder account kunt u een rapport bekijken en exporteren."
@@ -624,10 +630,10 @@
     "message": "Lokaal rapport verwijderen"
   },
   "diagnosticsRetention": {
-    "message": "Verzonden rapporten worden aan uw aangemelde account gekoppeld en 30 dagen door ondersteuning bewaard. Een lokaal rapport verwijderen verwijdert geen rapport dat ondersteuning al heeft ontvangen."
+    "message": "Lokale rapporten verlopen na 24 uur. Hier verwijderen verwijdert geen rapport dat al door de dienst is ontvangen. Lees de privacyverklaring voor informatie over bewaring op de server en verwijderingsverzoeken."
   },
   "diagnosticsConsent": {
-    "message": "Dit rapport naar ondersteuning verzenden"
+    "message": "Dit diagnostische rapport naar FuzeVPN sturen"
   },
   "diagnosticsDataCollectionRequired": {
     "message": "Firefox moet het verzamelen van technische gegevens toestaan om diagnostiek te versturen. Probeer het opnieuw en geef deze toestemming."
@@ -702,7 +708,7 @@
     "message": "Wacht op een geldige sessie voor hetzelfde account"
   },
   "diagnosticsStatus_received": {
-    "message": "Ontvangen door ondersteuning"
+    "message": "Ontvangen door de dienst"
   },
   "diagnosticsStatus_failed": {
     "message": "Verzenden mislukt"
@@ -743,6 +749,9 @@
   "noAvailableFavoriteLocations": {
     "message": "Je favoriete locaties zijn tijdelijk niet beschikbaar."
   },
+  "error_location_favorites_limit": {
+    "message": "De limiet van 100 favorieten is bereikt. Verwijder een favoriet om een andere toe te voegen."
+  },
   "error_server_full": {
     "message": "Deze server is vol. Kies een andere locatie."
   },
@@ -777,7 +786,7 @@
     "message": "Juridische informatie"
   },
   "privacyPolicy": {
-    "message": "Privacybeleid"
+    "message": "Privacyverklaring van de extensie"
   },
   "termsAndConditions": {
     "message": "Gebruiks- en verkoopvoorwaarden"
@@ -826,5 +835,77 @@
   },
   "deviceKindFirefox": {
     "message": "Firefox-browser"
+  },
+  "generalPrivacyPolicy": {
+    "message": "Algemeen privacybeleid"
+  },
+  "privacyNoticeTitle": {
+    "message": "Privacy in de FuzeVPN-extensie"
+  },
+  "privacyNoticeIntro": {
+    "message": "Deze verklaring beschrijft de gegevens die deze extensie gebruikt. Ze vormt een aanvulling op het algemene privacybeleid van FuzeVPN, waarnaar hieronder wordt verwezen. Optionele verzending van diagnostische gegevens staat los van de gegevens die nodig zijn om in te loggen en de VPN te gebruiken."
+  },
+  "privacyNoticeUpdated": {
+    "message": "Verklaring bijgewerkt op 19 oktober 2026"
+  },
+  "privacyNoticeServiceTitle": {
+    "message": "Account en VPN-dienst"
+  },
+  "privacyNoticeService": {
+    "message": "De extensie wisselt authenticatie-, account-, abonnements-, apparaat- en proxysessiegegevens uit met api.fuzevpn.com. De VPN-proxy vervoert het verkeer dat erdoorheen wordt geleid. Deze verbindingen maken netwerkmetagegevens zichtbaar voor de ontvangende dienst; deze verklaring doet geen aanvullende toezegging over logregistratie op de server."
+  },
+  "privacyNoticeLocalTitle": {
+    "message": "Gegevens die in uw browser worden opgeslagen"
+  },
+  "privacyNoticeLocal": {
+    "message": "De browseropslag bevat uw sessie, accountgegevens, voorkeuren, website-uitzonderingen en apparaatidentiteit. Technische logboeken worden maximaal 10 minuten lokaal bewaard, ook als automatisch rapporteren is uitgeschakeld. Diagnostische concepten en rapporten in de wachtrij verlopen lokaal na 24 uur; het opschonen gebeurt wanneer de extensie kan worden uitgevoerd."
+  },
+  "privacyNoticeIpTitle": {
+    "message": "Openbare IP-controles en derden"
+  },
+  "privacyNoticeIp": {
+    "message": "De IP-weergave en netwerkdiagnostiek maken verbinding met api.ipify.org. De IP-weergave kan ipv4.icanhazip.com als alternatief gebruiken. De aanbieder ontvangt het IP-adres van de verbinding en gebruikelijke metagegevens van de aanvraag: uw openbare IP-adres in directe modus of het uitgaande IP-adres van de VPN bij gebruik van de proxy. Deze aanvragen bevatten geen cookies of verwijzende adressen en versturen geen accounttoken of browsegeschiedenis."
+  },
+  "privacyNoticeReportsTitle": {
+    "message": "Inhoud van diagnostische rapporten"
+  },
+  "privacyNoticeReports": {
+    "message": "Rapporten kunnen een willekeurige rapport-ID, tijdstempels, extensie- en browserversies, besturingssysteemfamilie en architectuur, verbindings- en beveiligingsstatussen, foutcodes, aantallen, tijdsduren en controleresultaten bevatten. Volledige rapporten kunnen recente technische gebeurtenissen bevatten. Hun JSON bevat geen wachtwoorden, authenticatietokens, e-mailadressen, IP-adressen, bezochte URL’s of uitgesloten domeinen. U kunt een volledig rapport vóór verzending bekijken en exporteren."
+  },
+  "privacyNoticeAccountTitle": {
+    "message": "Ontvanger en koppeling aan het account"
+  },
+  "privacyNoticeAccount": {
+    "message": "Rapporten worden via een geauthenticeerde verbinding naar FuzeVPN gestuurd op api.fuzevpn.com/v1/diagnostics. Deze API-verbinding omzeilt de VPN-proxy: FuzeVPN ontvangt uw directe openbare IP-adres, ook wanneer de VPN actief is. Rapporten zijn gekoppeld aan het ingelogde account en zijn niet anoniem. De authenticatieheader en het IP-adres staan los van de JSON van het rapport. Een geslaagde ontvangst bevestigt dat dit eindpunt het rapport heeft geaccepteerd, niet dat een ondersteuningsmedewerker het heeft gelezen."
+  },
+  "privacyNoticeChoiceTitle": {
+    "message": "Optionele verzending en intrekking"
+  },
+  "privacyNoticeChoice": {
+    "message": "Automatische verzending is standaard uitgeschakeld. Inschakelen geeft toestemming voor eenvoudige foutrapporten voor dat account. Voor het handmatig versturen van een volledig rapport moet het verzendvakje worden aangevinkt. Firefox vereist ook zijn optionele toestemming voor technische gegevens. Schakel automatische verzending uit om deze te stoppen en wachtende automatische rapporten te verwijderen; annuleer andere wachtende verzendingen afzonderlijk. Diagnostische verzending weigeren verhindert het gebruik van de VPN niet."
+  },
+  "privacyNoticeDeleteTitle": {
+    "message": "Lokaal verwijderen en gedownloade bestanden"
+  },
+  "privacyNoticeDelete": {
+    "message": "Wis in Diagnostiek de technische geschiedenis of verwijder een afzonderlijk lokaal rapport. De geschiedenis wissen verwijdert geen bestaande rapportkopieën. Lokaal annuleren of verwijderen kan gegevens die de dienst al heeft ontvangen niet terughalen, ook niet als een upload vóór de annulering is aangekomen. Gedownloade exports zijn afzonderlijke bestanden die u zelf moet verwijderen."
+  },
+  "privacyNoticeServerTitle": {
+    "message": "Bewaring op de server en verzoeken"
+  },
+  "privacyNoticeServer": {
+    "message": "Deze extensie beheert of controleert de bewaring en verwijdering op servers niet. Raadpleeg het algemene privacybeleid of neem contact op met FuzeVPN voor de door FuzeVPN gehanteerde bewaartermijn en verzoeken over al verzonden rapporten. Deze verklaring garandeert geen vaste bewaartermijn op de server."
+  },
+  "privacyNoticeSupportTitle": {
+    "message": "Diagnostiek en ondersteuning staan los van elkaar"
+  },
+  "privacyNoticeSupport": {
+    "message": "Een diagnostisch rapport versturen verzendt op zichzelf geen ondersteuningsbericht vanuit de extensie. Gebruik het onderstaande contactkanaal van FuzeVPN om een probleem toe te lichten of om verwijdering van een ontvangen rapport te vragen. Als u een geëxporteerd bestand via een ander kanaal wilt delen, controleer dan eerst de inhoud."
+  },
+  "privacyNoticeManage": {
+    "message": "Diagnostiek openen"
+  },
+  "privacyNoticeLinksTitle": {
+    "message": "Dienstbeleid en contact"
   }
 }

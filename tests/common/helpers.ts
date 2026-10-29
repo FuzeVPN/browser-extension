@@ -382,9 +382,10 @@ export class FakeProxy implements ProxyService {
     this.exclusions = structuredClone(entries);
   }
   async updateExistingExclusions(): Promise<void> {
+    if (!this.active && !this.blockingRoute) return;
     if (this.exclusionWait) await this.exclusionWait;
     if (this.rejectExclusions) throw new Error("exclusion_update_failed");
-    if (this.active) this.activeExclusions = structuredClone(this.exclusions);
+    this.activeExclusions = structuredClone(this.exclusions);
   }
   async isExclusionConfiguration(): Promise<boolean> {
     return (
@@ -393,6 +394,8 @@ export class FakeProxy implements ProxyService {
   }
   level: ProxyControlLevel = "controllable_by_this_extension";
   active: ProxySession | null = null;
+  blockingRoute = false;
+  ensureBlockingCalls = 0;
   clearCalls = 0;
   applyCalls = 0;
   applyWait: Promise<void> | null = null;
@@ -410,6 +413,24 @@ export class FakeProxy implements ProxyService {
       throw new ProxyControlError(this.level);
   }
 
+  async ensureBlockingConfiguration(): Promise<void> {
+    this.ensureBlockingCalls += 1;
+    await this.assertControllable();
+    if (await this.isGuardedConfiguration()) return;
+    this.active = null;
+    this.blockingRoute = true;
+    this.activeExclusions = structuredClone(this.exclusions);
+    this.level = "controlled_by_this_extension";
+  }
+
+  async isGuardedConfiguration(): Promise<boolean> {
+    return (
+      this.level === "controlled_by_this_extension" &&
+      (this.active !== null || this.blockingRoute) &&
+      JSON.stringify(this.activeExclusions) === JSON.stringify(this.exclusions)
+    );
+  }
+
   async apply(session: ProxySession): Promise<void> {
     this.applyCalls += 1;
     await this.assertControllable();
@@ -417,12 +438,14 @@ export class FakeProxy implements ProxyService {
     const wait = this.applyWait;
     if (wait) await wait;
     this.active = session;
+    this.blockingRoute = false;
     this.activeExclusions = structuredClone(this.exclusions);
     this.level = "controlled_by_this_extension";
   }
 
   async clear(): Promise<void> {
     this.active = null;
+    this.blockingRoute = false;
     this.clearCalls += 1;
     if (this.level === "controlled_by_this_extension")
       this.level = "controllable_by_this_extension";

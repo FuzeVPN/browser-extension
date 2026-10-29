@@ -179,6 +179,9 @@
   "deleteDevice": {
     "message": "Padam peranti"
   },
+  "deleteDeviceNamed": {
+    "message": "Padam peranti $1"
+  },
   "confirmDeleteDevice": {
     "message": "Alih keluar “$1”? Sambungan VPNnya akan berhenti dan profilnya akan dialih keluar."
   },
@@ -360,7 +363,7 @@
     "message": "Tidak tersedia"
   },
   "ipLookupExplanation": {
-    "message": "IP disemak dengan ipify menggunakan sambungan semasa anda. Tiada sejarah penyemakan imbas dihantar."
+    "message": "IP disemak dengan ipify, atau icanhazip sebagai sandaran, melalui sambungan semasa anda. Sejarah pelayaran tidak dihantar."
   },
   "automaticLocation": {
     "message": "Automatik"
@@ -567,19 +570,22 @@
     "message": "Data anda"
   },
   "diagnosticsPrivacy": {
-    "message": "Laporan mengandungi keadaan teknikal dan kod ralat, tidak pernah kata laluan, token, alamat e-mel, alamat IP, URL yang dilawati atau domain yang dikecualikan."
+    "message": "JSON laporan mengandungi keadaan teknikal dan kod ralat, tanpa kata laluan, token, alamat e-mel, alamat IP, URL yang dilawati atau domain yang dikecualikan. Penghantaran disahkan dan mengaitkan laporan dengan akaun anda. Lihat notis untuk maklumat tentang data rangkaian."
   },
   "diagnosticsAuto": {
     "message": "Hantar laporan ralat penting secara automatik"
   },
   "diagnosticsAutoHelp": {
-    "message": "Mati secara lalai. Hanya laporan teknikal mudah dihantar untuk akaun ini, tanpa sejarah penyemakan imbas. Sokongan mengekalkan mereka selama 30 hari."
+    "message": "Dimatikan secara lalai. Menghidupkannya akan menghantar laporan teknikal ringkas untuk akaun ini, tanpa sejarah pelayaran. Matikannya di sini untuk menghentikan penghantaran automatik dan mengalih keluar laporan automatik yang masih menunggu."
   },
   "diagnosticsHistoryHelp": {
-    "message": "Sejarah teknikal kekal setempat: sehingga 200 acara dalam tempoh 10 minit, walaupun semasa penghantaran automatik dimatikan. Ia tidak mengandungi sejarah penyemakan imbas dan dikosongkan apabila penyemak imbas ditutup atau akaun berubah."
+    "message": "Sejarah teknikal kekal setempat: sehingga 200 peristiwa bagi setiap log dalam tempoh 10 minit, walaupun penghantaran automatik dimatikan. Ia tidak mengandungi sejarah pelayaran dan dipadam secara manual, apabila pelayar ditutup atau apabila akaun ditukar."
   },
   "diagnosticsHistoryCount": {
     "message": "$1 acara teknikal tempatan"
+  },
+  "diagnosticsConnectionLog": {
+    "message": "Eksport log sambungan"
   },
   "diagnosticsAccountRequired": {
     "message": "Log masuk untuk mendayakan penghantaran. Anda masih boleh melihat dan mengeksport laporan tanpa akaun."
@@ -624,10 +630,10 @@
     "message": "Padamkan laporan tempatan"
   },
   "diagnosticsRetention": {
-    "message": "Laporan yang dihantar dipautkan ke akaun anda yang dilog masuk dan disimpan oleh sokongan selama 30 hari. Memadamkan laporan tempatan tidak memadamkan laporan yang telah diterima oleh sokongan."
+    "message": "Laporan setempat luput selepas 24 jam. Pemadaman di sini tidak memadamkan laporan yang sudah diterima oleh perkhidmatan. Lihat notis untuk maklumat tentang penyimpanan pada pelayan dan permintaan pemadaman."
   },
   "diagnosticsConsent": {
-    "message": "Hantar laporan ini kepada sokongan"
+    "message": "Hantar laporan diagnostik ini kepada FuzeVPN"
   },
   "diagnosticsDataCollectionRequired": {
     "message": "Firefox mesti membenarkan pengumpulan data teknikal untuk menghantar diagnostik. Cuba lagi dan berikan kebenaran ini."
@@ -702,7 +708,7 @@
     "message": "Menunggu sesi yang sah untuk akaun yang sama"
   },
   "diagnosticsStatus_received": {
-    "message": "Diterima dengan sokongan"
+    "message": "Diterima oleh perkhidmatan"
   },
   "diagnosticsStatus_failed": {
     "message": "Penghantaran gagal"
@@ -743,6 +749,9 @@
   "noAvailableFavoriteLocations": {
     "message": "Lokasi kegemaran anda tidak tersedia buat sementara waktu."
   },
+  "error_location_favorites_limit": {
+    "message": "Had 100 kegemaran telah dicapai. Alih keluar satu kegemaran untuk menambah yang lain."
+  },
   "error_server_full": {
     "message": "Pelayan ini penuh. Pilih lokasi lain."
   },
@@ -777,7 +786,7 @@
     "message": "Maklumat undang-undang"
   },
   "privacyPolicy": {
-    "message": "Dasar privasi"
+    "message": "Notis privasi sambungan"
   },
   "termsAndConditions": {
     "message": "Terma penggunaan dan jualan"
@@ -826,5 +835,77 @@
   },
   "deviceKindFirefox": {
     "message": "Pelayar Firefox"
+  },
+  "generalPrivacyPolicy": {
+    "message": "Dasar privasi umum"
+  },
+  "privacyNoticeTitle": {
+    "message": "Privasi dalam sambungan FuzeVPN"
+  },
+  "privacyNoticeIntro": {
+    "message": "Notis ini menerangkan data yang digunakan oleh sambungan ini. Notis ini melengkapkan dasar privasi umum FuzeVPN yang dipautkan di bawah. Penghantaran diagnostik adalah pilihan dan berasingan daripada data yang diperlukan untuk log masuk dan menggunakan VPN."
+  },
+  "privacyNoticeUpdated": {
+    "message": "Notis dikemas kini pada 19 Oktober 2026"
+  },
+  "privacyNoticeServiceTitle": {
+    "message": "Akaun dan perkhidmatan VPN"
+  },
+  "privacyNoticeService": {
+    "message": "Sambungan ini bertukar data pengesahan, akaun, langganan, peranti dan sesi proksi dengan api.fuzevpn.com. Proksi VPN membawa trafik yang dihalakan melaluinya. Sambungan ini mendedahkan metadata rangkaian kepada perkhidmatan penerima; notis ini tidak membuat janji berasingan tentang pengelogan pada pelayan."
+  },
+  "privacyNoticeLocalTitle": {
+    "message": "Data yang disimpan dalam pelayar anda"
+  },
+  "privacyNoticeLocal": {
+    "message": "Storan pelayar menyimpan sesi, butiran akaun, keutamaan, pengecualian laman dan identiti peranti anda. Log teknikal disimpan secara setempat selama sehingga 10 minit, walaupun pelaporan automatik dimatikan. Draf diagnostik dan laporan dalam baris gilir luput secara setempat selepas 24 jam; pembersihan dijalankan apabila sambungan boleh beroperasi."
+  },
+  "privacyNoticeIpTitle": {
+    "message": "Semakan IP awam dan pihak ketiga"
+  },
+  "privacyNoticeIp": {
+    "message": "Paparan IP dan diagnostik rangkaian menghubungi api.ipify.org. Paparan IP boleh menggunakan ipv4.icanhazip.com sebagai sandaran. Penyedia menerima IP sambungan dan metadata permintaan biasa: IP awam anda dalam mod terus, atau IP keluar VPN apabila melalui proksi. Permintaan ini tidak menyertakan kuki atau perujuk dan tidak menghantar token akaun atau sejarah pelayaran."
+  },
+  "privacyNoticeReportsTitle": {
+    "message": "Kandungan laporan diagnostik"
+  },
+  "privacyNoticeReports": {
+    "message": "Laporan boleh mengandungi pengecam laporan rawak, cap masa, versi sambungan dan pelayar, keluarga serta seni bina sistem pengendalian, keadaan sambungan dan perlindungan, kod ralat, bilangan, tempoh dan hasil semakan. Laporan penuh boleh menyertakan peristiwa teknikal terkini. JSON laporan tidak mengandungi kata laluan, token pengesahan, alamat e-mel, alamat IP, URL yang dilawati atau domain yang dikecualikan. Anda boleh menyemak dan mengeksport laporan penuh sebelum menghantarnya."
+  },
+  "privacyNoticeAccountTitle": {
+    "message": "Penerima dan kaitan dengan akaun"
+  },
+  "privacyNoticeAccount": {
+    "message": "Laporan dihantar kepada FuzeVPN di api.fuzevpn.com/v1/diagnostics melalui sambungan yang disahkan. Sambungan API ini memintas proksi VPN: FuzeVPN menerima IP awam terus anda walaupun VPN sedang aktif. Laporan dikaitkan dengan akaun yang dilog masuk dan bukan tanpa nama. Pengepala pengesahan dan IP adalah berasingan daripada JSON laporan. Pengesahan penerimaan yang berjaya mengesahkan bahawa titik akhir tersebut telah menerima laporan, bukan bahawa ejen sokongan telah membacanya."
+  },
+  "privacyNoticeChoiceTitle": {
+    "message": "Penghantaran pilihan dan penarikan persetujuan"
+  },
+  "privacyNoticeChoice": {
+    "message": "Penghantaran automatik dimatikan secara lalai. Menghidupkannya membenarkan laporan ralat ringkas untuk akaun tersebut. Penghantaran laporan penuh secara manual memerlukan kotak semak penghantaran ditandakan. Firefox juga memerlukan kebenaran data teknikal pilihannya. Matikan penghantaran automatik untuk menghentikannya dan mengalih keluar laporan automatik yang masih menunggu; batalkan penghantaran lain yang masih menunggu secara berasingan. Penolakan penghantaran diagnostik tidak menghalang penggunaan VPN."
+  },
+  "privacyNoticeDeleteTitle": {
+    "message": "Pemadaman setempat dan fail yang dimuat turun"
+  },
+  "privacyNoticeDelete": {
+    "message": "Dalam Diagnostik, kosongkan sejarah teknikal atau padamkan satu laporan setempat. Mengosongkan sejarah tidak memadamkan salinan laporan yang sedia ada. Pembatalan atau pemadaman setempat tidak boleh menarik balik data yang sudah diterima oleh perkhidmatan, termasuk muat naik yang tiba sebelum pembatalan. Eksport yang dimuat turun ialah fail berasingan yang perlu anda padamkan sendiri."
+  },
+  "privacyNoticeServerTitle": {
+    "message": "Penyimpanan pada pelayan dan permintaan"
+  },
+  "privacyNoticeServer": {
+    "message": "Sambungan ini tidak mengawal atau mengesahkan penyimpanan atau pemadaman pada pelayan. Untuk mengetahui tempoh penyimpanan yang digunakan oleh FuzeVPN dan membuat permintaan berkenaan laporan yang sudah dihantar, rujuk dasar privasi umum atau hubungi FuzeVPN. Notis ini tidak menjamin tempoh penyimpanan pelayan yang tetap."
+  },
+  "privacyNoticeSupportTitle": {
+    "message": "Diagnostik dan sokongan adalah berasingan"
+  },
+  "privacyNoticeSupport": {
+    "message": "Menghantar laporan diagnostik tidak dengan sendirinya menghantar mesej sokongan daripada sambungan. Untuk menerangkan masalah atau meminta pemadaman laporan yang sudah diterima, gunakan saluran hubungan FuzeVPN di bawah. Jika anda memilih untuk berkongsi fail eksport melalui saluran lain, semak kandungannya terlebih dahulu."
+  },
+  "privacyNoticeManage": {
+    "message": "Buka Diagnostik"
+  },
+  "privacyNoticeLinksTitle": {
+    "message": "Dasar perkhidmatan dan hubungan"
   }
 }

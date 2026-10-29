@@ -8,6 +8,7 @@ import {
   proxyConfig,
 } from "../../../src/platform/chromium/proxy-controller";
 import { NOW, proxySession } from "./helpers";
+import { captureProxyAuthRequest } from "./proxy-auth-fixture";
 
 function authDetails(
   overrides: Record<string, unknown> = {},
@@ -63,6 +64,7 @@ describe("Chrome proxy", () => {
       isConfiguredProxyChallenge: async () => ++checks === 1,
       now: () => NOW,
     });
+    await captureProxyAuthRequest(handler, "request-1");
     await expect(handler.handle(authDetails())).resolves.toEqual({ cancel: true });
   });
 
@@ -93,19 +95,19 @@ describe("Chrome proxy", () => {
   });
 
   it("never answers a non-proxy authentication challenge", async () => {
-    const handler = handlerFor(proxySession());
+    const handler = await handlerFor(proxySession());
     await expect(handler.handle(authDetails({ isProxy: false }))).resolves.toEqual({});
   });
 
   it("never answers a challenger that does not match the active node", async () => {
-    const handler = handlerFor(proxySession());
+    const handler = await handlerFor(proxySession());
     await expect(
       handler.handle(authDetails({ challenger: { host: "example.com", port: 443 } })),
     ).resolves.toEqual({});
   });
 
   it("cancels its own proxy challenge when startup credentials are unavailable", async () => {
-    const handler = handlerFor(null);
+    const handler = await handlerFor(null);
     await expect(handler.handle(authDetails())).resolves.toEqual({ cancel: true });
   });
 
@@ -116,7 +118,7 @@ describe("Chrome proxy", () => {
       "2026-08-26T11:40:00Z",
       "2026-08-26T11:50:00Z",
     );
-    const handler = handlerFor(expired);
+    const handler = await handlerFor(expired);
     await expect(handler.handle(authDetails())).resolves.toEqual({ cancel: true });
   });
 
@@ -133,7 +135,7 @@ describe("Chrome proxy", () => {
 
   it("provides credentials once and cancels a repeated challenge", async () => {
     const session = proxySession();
-    const handler = handlerFor(session);
+    const handler = await handlerFor(session);
     await expect(handler.handle(authDetails())).resolves.toEqual({
       authCredentials: { username: session.username, password: session.password },
     });
@@ -151,6 +153,7 @@ describe("Chrome proxy", () => {
       isConfiguredProxyChallenge: async () => true,
       now: () => NOW,
     });
+    await captureProxyAuthRequest(handler, "request-1", first);
 
     await expect(handler.handle(authDetails())).resolves.toEqual({
       authCredentials: { username: first.username, password: first.password },
@@ -175,6 +178,7 @@ describe("Chrome proxy", () => {
       now: () => NOW,
       restoreTimeoutMs: 100,
     });
+    await captureProxyAuthRequest(handler, "request-1", session);
 
     const response = handler.handle(authDetails());
     release(session);
@@ -193,13 +197,14 @@ describe("Chrome proxy", () => {
       now: () => NOW,
       restoreTimeoutMs: 1,
     });
+    await captureProxyAuthRequest(handler, "request-1");
 
     await expect(handler.handle(authDetails())).resolves.toEqual({ cancel: true });
   });
 });
 
-function handlerFor(session: ProxySession | null): ProxyAuthHandler {
-  return new ProxyAuthHandler({
+async function handlerFor(session: ProxySession | null): Promise<ProxyAuthHandler> {
+  const handler = new ProxyAuthHandler({
     wasUsedProxyChallenge: async () => false,
     isSessionCurrent: () => true,
     getSession: async () => session,
@@ -208,4 +213,6 @@ function handlerFor(session: ProxySession | null): ProxyAuthHandler {
       challenger.port === 443,
     now: () => NOW,
   });
+  await captureProxyAuthRequest(handler, "request-1", session ?? proxySession());
+  return handler;
 }

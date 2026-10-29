@@ -179,6 +179,9 @@
   "deleteDevice": {
     "message": "Cihazı sil"
   },
+  "deleteDeviceNamed": {
+    "message": "$1 cihazını sil"
+  },
   "confirmDeleteDevice": {
     "message": "“$1” kaldırılsın mı? VPN bağlantıları durdurulacak ve profilleri kaldırılacak."
   },
@@ -360,7 +363,7 @@
     "message": "Kullanılamıyor"
   },
   "ipLookupExplanation": {
-    "message": "IP, mevcut bağlantınızı kullanarak ipify ile kontrol edildi. Tarama geçmişi gönderilmez."
+    "message": "IP, mevcut bağlantınız üzerinden ipify ile veya yedek olarak icanhazip ile kontrol edilir. Tarama geçmişi gönderilmez."
   },
   "automaticLocation": {
     "message": "Otomatik"
@@ -567,19 +570,22 @@
     "message": "Verileriniz"
   },
   "diagnosticsPrivacy": {
-    "message": "Raporlar teknik durumları ve hata kodlarını içerir; asla şifreleri, belirteçleri, e-posta adreslerini, IP adreslerini, ziyaret edilen URL'leri veya hariç tutulan alanları içermez."
+    "message": "Raporun JSON içeriğinde teknik durumlar ve hata kodları bulunur; parolalar, belirteçler, e-posta adresleri, IP adresleri, ziyaret edilen URL'ler ve hariç tutulan alan adları yer almaz. Gönderim kimlik doğrulamasıyla yapılır ve rapor hesabınızla ilişkilendirilir. Ağ verileri için bildirime bakın."
   },
   "diagnosticsAuto": {
     "message": "Önemli hata raporlarını otomatik olarak gönder"
   },
   "diagnosticsAutoHelp": {
-    "message": "Varsayılan olarak kapalıdır. Bu hesap için tarama geçmişi olmadan yalnızca basit teknik raporlar gönderilir. Destek onları 30 gün boyunca tutar."
+    "message": "Varsayılan olarak kapalıdır. Açıldığında bu hesap için tarama geçmişi içermeyen basit teknik raporlar gönderilir. Otomatik gönderimi durdurmak ve bekleyen otomatik raporları kaldırmak için buradan kapatın."
   },
   "diagnosticsHistoryHelp": {
-    "message": "Teknik geçmiş yerel kalır: Otomatik gönderme kapalı olsa bile 10 dakika içinde 200'e kadar olay. Tarama geçmişi içermez ve tarayıcı kapatıldığında veya hesap değiştiğinde temizlenir."
+    "message": "Teknik geçmiş yerel kalır: otomatik gönderim kapalıyken bile her günlükte son 10 dakikadan en fazla 200 olay tutulur. Tarama geçmişi içermez; elle, tarayıcı kapatıldığında veya hesap değiştiğinde temizlenir."
   },
   "diagnosticsHistoryCount": {
     "message": "$1 yerel teknik etkinlikler"
+  },
+  "diagnosticsConnectionLog": {
+    "message": "Bağlantı günlüğünü dışa aktar"
   },
   "diagnosticsAccountRequired": {
     "message": "Göndermeyi etkinleştirmek için oturum açın. Hesap olmadan da bir raporu görüntüleyebilir ve dışa aktarabilirsiniz."
@@ -624,10 +630,10 @@
     "message": "Yerel raporu sil"
   },
   "diagnosticsRetention": {
-    "message": "Gönderilen raporlar, oturum açtığınız hesabınıza bağlanır ve destek tarafından 30 gün boyunca saklanır. Yerel bir raporun silinmesi, destek tarafından halihazırda alınmış olan bir raporun silinmesine neden olmaz."
+    "message": "Yerel raporların süresi 24 saat sonra dolar. Buradan silmek, hizmetin daha önce aldığı bir raporu silmez. Sunucuda saklama ve silme talepleri için bildirime bakın."
   },
   "diagnosticsConsent": {
-    "message": "Bu raporu desteğe gönder"
+    "message": "Bu tanılama raporunu FuzeVPN'e gönder"
   },
   "diagnosticsDataCollectionRequired": {
     "message": "Tanılama göndermek için Firefox teknik verilerin toplanmasına izin vermelidir. Tekrar deneyin ve bu izni verin."
@@ -702,7 +708,7 @@
     "message": "Aynı hesap için geçerli bir oturum bekleniyor"
   },
   "diagnosticsStatus_received": {
-    "message": "Destek tarafından alındı"
+    "message": "Hizmet tarafından alındı"
   },
   "diagnosticsStatus_failed": {
     "message": "Gönderim başarısız oldu"
@@ -743,6 +749,9 @@
   "noAvailableFavoriteLocations": {
     "message": "Favori konumlarınız geçici olarak kullanılamıyor."
   },
+  "error_location_favorites_limit": {
+    "message": "100 favori sınırına ulaşıldı. Yeni bir favori eklemek için bir favoriyi kaldırın."
+  },
   "error_server_full": {
     "message": "Bu sunucu dolu. Başka bir konum seçin."
   },
@@ -777,7 +786,7 @@
     "message": "Yasal bilgiler"
   },
   "privacyPolicy": {
-    "message": "Gizlilik politikası"
+    "message": "Uzantı gizlilik bildirimi"
   },
   "termsAndConditions": {
     "message": "Kullanım ve satış koşulları"
@@ -826,5 +835,77 @@
   },
   "deviceKindFirefox": {
     "message": "Firefox tarayıcısı"
+  },
+  "generalPrivacyPolicy": {
+    "message": "Genel gizlilik politikası"
+  },
+  "privacyNoticeTitle": {
+    "message": "FuzeVPN uzantısında gizlilik"
+  },
+  "privacyNoticeIntro": {
+    "message": "Bu bildirim, uzantının kullandığı verileri açıklar. Aşağıda bağlantısı verilen genel FuzeVPN gizlilik politikasını tamamlar. İsteğe bağlı tanılama raporu gönderimi, oturum açmak ve VPN'i kullanmak için gerekli verilerden ayrıdır."
+  },
+  "privacyNoticeUpdated": {
+    "message": "Bildirim 19 Ekim 2026 tarihinde güncellendi"
+  },
+  "privacyNoticeServiceTitle": {
+    "message": "Hesap ve VPN hizmeti"
+  },
+  "privacyNoticeService": {
+    "message": "Uzantı; kimlik doğrulama, hesap, abonelik, cihaz ve proxy oturumu verilerini api.fuzevpn.com ile paylaşır. VPN proxy'si, üzerinden yönlendirilen trafiği taşır. Bu bağlantılar ağ meta verilerini alıcı hizmete açığa çıkarır; bu bildirim sunucuda günlük tutulmasına ilişkin ayrıca bir taahhüt vermez."
+  },
+  "privacyNoticeLocalTitle": {
+    "message": "Tarayıcınızda saklanan veriler"
+  },
+  "privacyNoticeLocal": {
+    "message": "Tarayıcı depolaması oturumunuzu, hesap bilgilerinizi, tercihlerinizi, site istisnalarını ve cihaz kimliğinizi tutar. Otomatik raporlama kapalıyken de teknik günlükler en fazla 10 dakika yerel olarak saklanır. Tanılama taslaklarının ve sıradaki raporların yerel süresi 24 saat sonra dolar; temizleme, uzantı çalışabildiğinde yapılır."
+  },
+  "privacyNoticeIpTitle": {
+    "message": "Genel IP denetimleri ve üçüncü taraflar"
+  },
+  "privacyNoticeIp": {
+    "message": "IP gösterimi ve ağ tanılaması api.ipify.org ile iletişim kurar. IP gösterimi yedek olarak ipv4.icanhazip.com hizmetini kullanabilir. Sağlayıcı, bağlantının IP adresini ve olağan istek meta verilerini alır: doğrudan bağlantıda genel IP adresinizi, proxy üzerinden bağlantıda ise VPN çıkış IP adresini. Bu isteklerde çerezler ve yönlendiren bilgisi bulunmaz; hesap belirteci veya tarama geçmişi gönderilmez."
+  },
+  "privacyNoticeReportsTitle": {
+    "message": "Tanılama raporlarının içeriği"
+  },
+  "privacyNoticeReports": {
+    "message": "Raporlar; rastgele bir rapor tanımlayıcısı, zaman damgaları, uzantı ve tarayıcı sürümleri, işletim sistemi ailesi ve mimarisi, bağlantı ve koruma durumları, hata kodları, sayılar, süreler ve denetim sonuçları içerebilir. Tam raporlar yakın zamandaki teknik olayları içerebilir. JSON içeriklerinde parolalar, kimlik doğrulama belirteçleri, e-posta adresleri, IP adresleri, ziyaret edilen URL'ler ve hariç tutulan alan adları bulunmaz. Tam raporu göndermeden önce inceleyebilir ve dışa aktarabilirsiniz."
+  },
+  "privacyNoticeAccountTitle": {
+    "message": "Alıcı ve hesapla ilişkilendirme"
+  },
+  "privacyNoticeAccount": {
+    "message": "Raporlar kimliği doğrulanmış bir bağlantı üzerinden api.fuzevpn.com/v1/diagnostics adresindeki FuzeVPN hizmetine gönderilir. Bu API bağlantısı VPN proxy'sini atlar: VPN etkin olsa bile FuzeVPN doğrudan bağlantınızın genel IP adresini alır. Raporlar oturum açılan hesapla ilişkilendirilir; anonim değildir. Kimlik doğrulama başlığı ve IP adresi raporun JSON içeriğinden ayrıdır. Başarılı alındı bildirimi raporun bu uç noktada kabul edildiğini doğrular, bir destek görevlisinin raporu okuduğunu değil."
+  },
+  "privacyNoticeChoiceTitle": {
+    "message": "İsteğe bağlı gönderim ve izni geri çekme"
+  },
+  "privacyNoticeChoice": {
+    "message": "Otomatik gönderim varsayılan olarak kapalıdır. Açılması, o hesap için basit hata raporlarına izin verir. Tam raporu elle göndermek için gönderim onay kutusunun işaretlenmesi gerekir. Firefox ayrıca isteğe bağlı teknik veri iznini gerektirir. Otomatik gönderimi durdurmak ve bekleyen otomatik raporları kaldırmak için kapatın; diğer bekleyen gönderimleri ayrı ayrı iptal edin. Tanılama raporu göndermeyi reddetmek VPN kullanımını engellemez."
+  },
+  "privacyNoticeDeleteTitle": {
+    "message": "Yerel silme ve indirilen dosyalar"
+  },
+  "privacyNoticeDelete": {
+    "message": "Tanılama bölümünde teknik geçmişi temizleyebilir veya tek bir yerel raporu silebilirsiniz. Geçmişi temizlemek, mevcut rapor kopyalarını silmez. Yerel iptal veya silme, iptalden önce ulaşmış bir yükleme de dahil olmak üzere hizmetin daha önce aldığı verileri geri çağıramaz. İndirilen dışa aktarımlar, kendiniz silmeniz gereken ayrı dosyalardır."
+  },
+  "privacyNoticeServerTitle": {
+    "message": "Sunucuda saklama ve talepler"
+  },
+  "privacyNoticeServer": {
+    "message": "Bu uzantı, sunucuda saklama veya sunucu tarafında silme işlemlerini kontrol etmez ve doğrulamaz. FuzeVPN'in uyguladığı saklama süresi ve daha önce gönderilmiş raporlarla ilgili talepler için genel gizlilik politikasına bakın veya FuzeVPN ile iletişime geçin. Bu bildirim, sunucuda belirli bir saklama süresi garanti etmez."
+  },
+  "privacyNoticeSupportTitle": {
+    "message": "Tanılama ve destek birbirinden ayrıdır"
+  },
+  "privacyNoticeSupport": {
+    "message": "Tanılama raporu göndermek, uzantıdan ayrıca bir destek mesajı göndermez. Bir sorunu açıklamak veya alınmış bir raporun silinmesini istemek için aşağıdaki FuzeVPN iletişim kanalını kullanın. Dışa aktarılan bir dosyayı başka bir kanaldan paylaşmayı seçerseniz önce içeriğini kontrol edin."
+  },
+  "privacyNoticeManage": {
+    "message": "Tanılamayı aç"
+  },
+  "privacyNoticeLinksTitle": {
+    "message": "Hizmet politikası ve iletişim"
   }
 }

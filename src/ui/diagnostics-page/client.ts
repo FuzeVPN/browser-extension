@@ -6,6 +6,7 @@ import type {
   DiagnosticResponse,
   DiagnosticUiError,
   DiagnosticUiState,
+  DiagnosticWorkerRequest,
 } from "../../core/shared/diagnostics-ui";
 import { isLanguagePreference } from "../../core/shared/language";
 
@@ -57,6 +58,7 @@ export function isDiagnosticUiState(value: unknown): value is DiagnosticUiState 
     typeof value.autoReporting !== "boolean" ||
     typeof value.preparing !== "boolean" ||
     !integer(value.historyCount, 200) ||
+    (value.connectionHistoryCount !== undefined && !integer(value.connectionHistoryCount, 200)) ||
     !Array.isArray(value.reports) ||
     value.reports.length > 200
   )
@@ -107,22 +109,34 @@ export function isDiagnosticUiState(value: unknown): value is DiagnosticUiState 
 export class DiagnosticConnection {
   state: DiagnosticUiState | null = null;
   available = false;
-  error: DiagnosticUiError | null = null;
+  private currentError: DiagnosticUiError | null = null;
+  private errorGeneration = 0;
   private readonly retiredWorkers = new Set<string>();
   private accountBoundary = 0;
+  private actionGeneration = 0;
 
   constructor(
     private readonly changed: () => void,
-    private readonly send: (request: DiagnosticRequest) => Promise<unknown> = (request) =>
+    private readonly send: (request: DiagnosticWorkerRequest) => Promise<unknown> = (request) =>
       extensionApi.runtime.sendMessage(request),
     private readonly timeoutMs = 15_000,
   ) {}
+
+  get error(): DiagnosticUiError | null {
+    return this.currentError;
+  }
+
+  set error(value: DiagnosticUiError | null) {
+    this.currentError = value;
+    this.errorGeneration += 1;
+  }
 
   receive(message: unknown): void {
     if (!record(message) || message.type !== "diagnostics_changed") return;
     if (isDiagnosticUiState(message.state) && this.accept(message.state)) {
       if (this.error === "unavailable") {
-        this.error = null;
+        // Proof of liveness clears a transport error without superseding a pending action.
+        this.currentError = null;
         this.changed();
       }
     }
@@ -134,8 +148,14 @@ export class DiagnosticConnection {
       if (this.retiredWorkers.has(next.workerId)) return false;
       if (this.state) this.retiredWorkers.add(this.state.workerId);
     }
-    if (this.state?.workerId !== next.workerId || this.state.signedIn !== next.signedIn)
+    if (
+      this.state?.workerId !== next.workerId ||
+      this.state.signedIn !== next.signedIn ||
+      this.state.accountEpoch !== next.accountEpoch
+    ) {
       this.accountBoundary += 1;
+      if (this.state) this.error = null;
+    }
     this.state = structuredClone(next);
     this.available = true;
     this.changed();
@@ -147,18 +167,24 @@ export class DiagnosticConnection {
     requestConsent: () => Promise<boolean>,
     contextUnchanged: () => boolean = () => true,
   ): Promise<DiagnosticResponse | null> {
+    const generation = ++this.actionGeneration;
+    const errorGeneration = this.errorGeneration;
     const context = this.state;
     const boundary = this.accountBoundary;
     if (!this.available || !context?.signedIn) return null;
+    const bound = this.bindConsentContext(request, context);
+    if (!bound) return null;
     // Invoked synchronously in the user gesture; no prior permission lookup or await.
     const granted = await requestConsent();
     if (!this.consentContextCurrent(context, boundary) || !contextUnchanged()) return null;
     if (!granted) {
-      this.error = "data_collection_required";
-      this.changed();
+      if (generation === this.actionGeneration && errorGeneration === this.errorGeneration) {
+        this.error = "data_collection_required";
+        this.changed();
+      }
       return null;
     }
-    return this.request(request);
+    return this.transmit(bound, generation, errorGeneration);
   }
 
   private consentContextCurrent(context: DiagnosticUiState, boundary: number): boolean {
@@ -172,8 +198,34 @@ export class DiagnosticConnection {
   }
 
   async request(request: DiagnosticRequest): Promise<DiagnosticResponse | null> {
+    const generation = ++this.actionGeneration;
+    const errorGeneration = this.errorGeneration;
+    const bound = this.bindConsentContext(request, this.state);
+    return bound ? this.transmit(bound, generation, errorGeneration) : null;
+  }
+
+  private bindConsentContext(
+    request: DiagnosticRequest,
+    context: DiagnosticUiState | null,
+  ): DiagnosticWorkerRequest | null {
+    if (request.type !== "diagnostics_set_auto" && request.type !== "diagnostics_send")
+      return request;
+    if (!this.available || !context?.signedIn || context.accountEpoch === undefined) {
+      this.error = "session_required";
+      this.changed();
+      return null;
+    }
+    return { ...request, workerId: context.workerId, accountEpoch: context.accountEpoch };
+  }
+
+  private async transmit(
+    request: DiagnosticWorkerRequest,
+    generation: number,
+    errorGeneration: number,
+  ): Promise<DiagnosticResponse | null> {
     let timer: ReturnType<typeof setTimeout> | undefined;
     const previous = this.state;
+    const boundary = this.accountBoundary;
     try {
       const response: unknown = await Promise.race([
         this.send(request),
@@ -190,20 +242,44 @@ export class DiagnosticConnection {
           (typeof response.error !== "string" || !errors.has(response.error)))
       )
         throw new Error("diagnostics_unavailable");
-      if (this.retiredWorkers.has(response.state.workerId)) return null;
+      const next = response.state;
+      if (this.retiredWorkers.has(next.workerId)) return null;
+      // A reply predating a confirmed worker change cannot establish another unknown worker.
+      // Revisions remain comparable for replies from the worker already confirmed.
       if (
-        this.state?.workerId === response.state.workerId &&
-        response.state.revision < this.state.revision
+        this.state &&
+        this.state.workerId !== next.workerId &&
+        previous?.workerId !== this.state.workerId
       )
-        return response as unknown as DiagnosticResponse;
-      this.error = response.ok
-        ? null
-        : ((response.error as DiagnosticUiError | undefined) ?? "unavailable");
-      this.accept(response.state);
+        return null;
+      const sameContext = (state: DiagnosticUiState | null) =>
+        state !== null &&
+        state.workerId === next.workerId &&
+        state.accountEpoch === next.accountEpoch &&
+        state.signedIn === next.signedIn;
+      const currentContext = previous
+        ? boundary === this.accountBoundary && sameContext(previous) && sameContext(this.state)
+        : !this.state || sameContext(this.state);
+      // State freshness and the action owning the error are independent: an older
+      // action can still deliver a newer state without replacing a later refusal.
+      if (
+        generation === this.actionGeneration &&
+        errorGeneration === this.errorGeneration &&
+        currentContext
+      )
+        this.error = response.ok
+          ? null
+          : ((response.error as DiagnosticUiError | undefined) ?? "unavailable");
+      this.accept(next);
       this.changed();
       return response as unknown as DiagnosticResponse;
     } catch {
-      if (this.state !== previous && this.available) return null;
+      if (
+        generation !== this.actionGeneration ||
+        errorGeneration !== this.errorGeneration ||
+        boundary !== this.accountBoundary
+      )
+        return null;
       this.available = false;
       this.error = "unavailable";
       this.changed();

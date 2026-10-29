@@ -26,6 +26,10 @@ export async function firefoxConsentCheck({
   const nativePermissions = () =>
     extension("const done=arguments[arguments.length-1]; browser.permissions.getAll().then(done);");
   const diagnostics = () => send({ type: "diagnostics_state" });
+  const consentCommand = async (request) => {
+    const { state } = await diagnostics();
+    return send({ ...request, workerId: state.workerId, accountEpoch: state.accountEpoch });
+  };
   const uploads = () => received.api.filter((request) => request.path === "/v1/diagnostics");
   const downloadPath = join(output, "downloads");
   await mkdir(downloadPath, { recursive: true });
@@ -146,10 +150,10 @@ export async function firefoxConsentCheck({
   record("Declining optional diagnostics collection leaves VPN and IP observation operational");
 
   const local = await localReport();
-  const rejectedAuto = await send({ type: "diagnostics_set_auto", enabled: true });
+  const rejectedAuto = await consentCommand({ type: "diagnostics_set_auto", enabled: true });
   assert.equal(rejectedAuto.ok, false);
   assert.equal(rejectedAuto.error, "data_collection_required");
-  const rejectedSend = await send({
+  const rejectedSend = await consentCommand({
     type: "diagnostics_send",
     reportId: local.id,
     consent: true,
@@ -237,7 +241,7 @@ export async function firefoxConsentCheck({
     (value) => value.state.autoReporting,
     "Popup automatic opt-in accepted",
   );
-  assert.equal((await send({ type: "diagnostics_set_auto", enabled: false })).ok, true);
+  assert.equal((await consentCommand({ type: "diagnostics_set_auto", enabled: false })).ok, true);
   record(
     "Popup automatic diagnostics control requests native consent and handles rejection and approval",
   );
@@ -259,7 +263,7 @@ export async function firefoxConsentCheck({
     "Automatic native opt-in accepted",
   );
   assert((await nativePermissions()).data_collection.includes("technicalAndInteraction"));
-  assert.equal((await send({ type: "diagnostics_set_auto", enabled: false })).ok, true);
+  assert.equal((await consentCommand({ type: "diagnostics_set_auto", enabled: false })).ok, true);
   record(
     "Automatic diagnostics switch requests native consent and preserves separate internal opt-in",
   );

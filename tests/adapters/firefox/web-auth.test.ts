@@ -46,11 +46,11 @@ function fixture(options: Partial<WebAuthOptions> = {}) {
     crypto: cryptoImpl,
     ...options,
   });
-  const start = () => new URL(launchWebAuthFlow.mock.calls[0]![0].url);
-  const callback = (parameters: Record<string, string> = {}) => {
+  const start = (index = 0) => new URL(launchWebAuthFlow.mock.calls[index]![0].url);
+  const callback = (parameters: Record<string, string> = {}, index = 0) => {
     const url = new URL(REDIRECT_URI);
     url.searchParams.set("code", CODE);
-    url.searchParams.set("state", start().searchParams.get("state")!);
+    url.searchParams.set("state", start(index).searchParams.get("state")!);
     for (const [key, value] of Object.entries(parameters)) url.searchParams.set(key, value);
     return url.href;
   };
@@ -350,7 +350,8 @@ describe("web authentication attempt lifecycle", () => {
     expect(context.launchWebAuthFlow).not.toHaveBeenCalled();
   });
 
-  it("ignores a late native response after cancellation and prevents overlapping windows", async () => {
+  it("isolates a cancelled native response from the replacement attempt and its lock", async () => {
+    vi.useFakeTimers();
     const context = fixture();
     const controller = new AbortController();
     const operation = context.service.authorize(controller.signal);
@@ -358,31 +359,77 @@ describe("web authentication attempt lifecycle", () => {
     const stale = context.callback();
     controller.abort();
     await expect(operation).rejects.toMatchObject({ name: "AbortError" });
-    await expect(context.service.authorize()).rejects.toMatchObject({ code: "web_login_busy" });
-    context.response.resolve(stale);
-    await prepare();
     const nextResponse = deferred<string | undefined>();
     context.launchWebAuthFlow.mockReturnValueOnce(nextResponse.promise);
     const next = context.service.authorize();
     await prepare();
+    expect(context.launchWebAuthFlow).toHaveBeenCalledOnce();
+    await vi.advanceTimersByTimeAsync(1_000);
     expect(context.launchWebAuthFlow).toHaveBeenCalledTimes(2);
+    context.response.resolve(stale);
+    await prepare();
+    await expect(context.service.authorize()).rejects.toMatchObject({ code: "web_login_busy" });
     nextResponse.resolve(stale);
     await expect(next).rejects.toMatchObject({ code: "web_login_invalid_callback" });
   });
 
-  it("expires a native window locally and discards its later success", async () => {
+  it("retries after three expirations while all retired native flows remain pending", async () => {
     vi.useFakeTimers();
     const context = fixture({ timeoutMs: 30_000 });
-    const operation = context.service.authorize();
-    const failure = expect(operation).rejects.toMatchObject({ code: "web_login_timeout" });
+    const responses = Array.from({ length: 4 }, () => deferred<string | undefined>());
+    context.launchWebAuthFlow.mockImplementation(
+      () => responses[context.launchWebAuthFlow.mock.calls.length - 1]!.promise,
+    );
+    const stale: string[] = [];
+    for (let index = 0; index < 3; index++) {
+      const operation = context.service.authorize();
+      const failure = expect(operation).rejects.toMatchObject({ code: "web_login_timeout" });
+      await prepare();
+      expect(context.launchWebAuthFlow).toHaveBeenCalledTimes(index + 1);
+      stale.push(context.callback({}, index));
+      await vi.advanceTimersByTimeAsync(30_000);
+      await failure;
+    }
+    const replacement = context.service.authorize();
     await prepare();
-    const stale = context.callback();
-    await vi.advanceTimersByTimeAsync(30_000);
-    await failure;
+    expect(context.launchWebAuthFlow).toHaveBeenCalledTimes(4);
+    responses[0]!.resolve(stale[0]);
+    responses[1]!.reject(new Error("User cancelled the flow."));
+    responses[2]!.resolve(stale[2]);
+    await prepare();
     await expect(context.service.authorize()).rejects.toMatchObject({ code: "web_login_busy" });
-    context.response.resolve(stale);
+    responses[3]!.resolve(context.callback({}, 3));
+    await expect(replacement).resolves.toMatchObject({ code: CODE });
+    expect(vi.getTimerCount()).toBe(0);
+  });
+
+  it("bounds rapid cancellation retries and cancels pending cooldowns without another native flow", async () => {
+    vi.useFakeTimers();
+    const context = fixture();
+    const firstController = new AbortController();
+    const first = context.service.authorize(firstController.signal);
     await prepare();
+    firstController.abort();
+    await expect(first).rejects.toMatchObject({ name: "AbortError" });
+    const waitingController = new AbortController();
+    const waiting = context.service.authorize(waitingController.signal);
+    await prepare();
+    await vi.advanceTimersByTimeAsync(999);
     expect(context.launchWebAuthFlow).toHaveBeenCalledOnce();
+    waitingController.abort();
+    await expect(waiting).rejects.toMatchObject({ name: "AbortError" });
+    expect(vi.getTimerCount()).toBe(0);
+    const response = deferred<string | undefined>();
+    context.launchWebAuthFlow.mockReturnValueOnce(response.promise);
+    const replacement = context.service.authorize();
+    await prepare();
+    await vi.advanceTimersByTimeAsync(1);
+    expect(context.launchWebAuthFlow).toHaveBeenCalledTimes(2);
+    response.resolve(context.callback({}, 1));
+    await expect(replacement).resolves.toMatchObject({ code: CODE });
+    context.response.resolve(context.callback());
+    await prepare();
+    expect(vi.getTimerCount()).toBe(0);
   });
 
   it("checks the absolute deadline when a timer is delayed by worker suspension", async () => {

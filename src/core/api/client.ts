@@ -280,6 +280,8 @@ export class ApiClient implements ApiService {
         body: options.body === undefined ? undefined : JSON.stringify(options.body),
         credentials: "omit",
         cache: "no-store",
+        // Redirects must never replay authorization codes, PKCE verifiers or device proofs.
+        redirect: "error",
         signal,
       });
       const expected = Array.isArray(options.expectedStatus)

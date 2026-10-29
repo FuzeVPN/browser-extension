@@ -47,11 +47,11 @@ node scripts/verify-dist.mjs
 
 `validate` runs formatting, TypeScript, ESLint, unit tests, build, distribution audits and Firefox validation through Mozilla's `addons-linter` 10.13.0. This is the validator used by `web-ext` and addons.mozilla.org; the project invokes it directly without the Android tooling dependency. The evidence-producing unit runner additionally rejects out-of-project writes and reports failure if inputs change while tests execute. Tests use synthetic accounts and dependencies.
 
-The distribution verifier reconstructs executable outputs in memory and compares every file with `dist/<target>`. It rejects stale files, unexpected files, changed sources and symbolic links. The audit checks trusted manifest profiles, thirty locale catalogs, remote execution restrictions and Chrome/Edge parity.
+The separate `node scripts/verify-dist.mjs` command reconstructs executable outputs in memory and compares every file with `dist/<target>`. It rejects stale files, unexpected files, changed sources and symbolic links. `npm run validate` builds the distributions and audits trusted manifest profiles, thirty locale catalogs, remote execution restrictions and Chrome/Edge parity; it does not run this independent reconstruction. Packaging runs the complete distribution comparison before creating archives.
 
 ## Native browser validation
 
-Native tests require existing browser/tool executables. Chromium runners do not install or download their toolchain. Exact qualified versions are recorded in `scripts/browser-toolchain.json` and `scripts/browser-toolchain-edge.json`; a mismatch stops validation before executing suites.
+Native tests require existing browser/tool executables. Chromium runners do not install or download their toolchain. Exact qualified versions are recorded in `scripts/browser-toolchain.json` and `scripts/browser-toolchain-edge.json`; a mismatch stops validation before executing suites. Windows updates the installed Edge by itself, so the Edge browser version is a minimum: a newer Edge is accepted and the evidence records the exact version used.
 
 ```text
 node scripts/validate-browser.mjs chrome

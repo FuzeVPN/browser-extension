@@ -26,7 +26,8 @@ import {
 } from "../../core/shared/state";
 import { countryLabel } from "./country-label";
 import { buildLocationGroups, chooseGroupLocation } from "./location-groups";
-import { deviceDisplayName } from "./device-display";
+import { deviceDisplayName, deviceKindMessageKey } from "./device-display";
+import { deviceAccessibleName, deviceDisplayNames } from "./device-accessible-name";
 import { displayedLocation, missingLocationMessage } from "./location-state";
 import { matchesLocationSearch, normalizeLocationSearch } from "./location-search";
 import { countryFlagPath } from "../../core/shared/country-flags";
@@ -42,6 +43,10 @@ interface PopupResponse extends ExtensionResponse {
   stale?: boolean;
   transportFailed?: boolean;
 }
+
+// An in-flight request marker holds an opaque token: only the request that stored it may
+// release it, and render() releases every marker when the account or worker changes.
+type PendingRequest = false | object;
 
 const elements = {
   languageSelect: element<HTMLSelectElement>("languageSelect"),
@@ -148,7 +153,7 @@ let communicationFailed = false;
 let diagnosticsPending = false;
 const diagnostics = new DiagnosticConnection(renderDiagnostics);
 let loginPending = false;
-let accountRefreshPending = false;
+let accountRefreshPending: PendingRequest = false;
 let verificationPending = false;
 let verificationRequest = 0;
 let verificationSent = false;
@@ -157,21 +162,21 @@ let verificationCooldownUntil = 0;
 let verificationObservedCooldown: number | null = null;
 let verificationFailure: { code: AppErrorCode; retryAfter: number | null } | null = null;
 let verificationTimer: ReturnType<typeof setTimeout> | undefined;
-let devicesRefreshPending = false;
+let devicesRefreshPending: PendingRequest = false;
 let accountEpoch = 0;
 let devicesAction = 0;
 let devicesFailure: { transport: boolean; code: AppErrorCode; retryAfter: number | null } | null =
   null;
 const deviceDeletions = new Set<string>();
 let returnToSettingsAfterDevices = false;
-let securityPreferencesPending = false;
-let connectionRetryPending = false;
+let securityPreferencesPending: PendingRequest = false;
+let connectionRetryPending: PendingRequest = false;
 let observedNetworkRoute: string | null = null;
 let locationFilter: "all" | "favorites" | "recent" = "all";
 let locationPreferenceFailure: AppErrorCode | "save" | "transport" | null = null;
-let locationsRefreshPending = false;
+let locationsRefreshPending: PendingRequest = false;
 let locationsRefreshFailed = false;
-let automaticSelectionPending = false;
+let automaticSelectionPending: PendingRequest = false;
 let locationSelectionPending = false;
 const expandedLocationCountries = new Set<string>();
 const expandedLocationCities = new Set<string>();
@@ -189,6 +194,8 @@ let currentBrowserName = "Browser";
 let translate: (key: string, substitutions?: string[]) => string = (key, substitutions) =>
   extensionApi.i18n.getMessage(key, substitutions) || key;
 let renderSequence = 0;
+let confirmedSnapshotSequence = 0;
+let connectionRequestIntent = 0;
 let languageRequest = 0;
 let languagePending = false;
 let languageFailed = false;
@@ -283,9 +290,10 @@ function bindEvents(): void {
   }
   elements.automaticLocationButton.addEventListener("click", () => {
     if (!snapshot?.profile || isBusy(snapshot.status) || automaticSelectionPending) return;
-    automaticSelectionPending = true;
-    locationSelectionPending = false;
     const epoch = accountEpoch;
+    const pending = {};
+    automaticSelectionPending = pending;
+    locationSelectionPending = false;
     const selection = ++locationSelectionRequest;
     locationPreferenceFailure = null;
     renderLocations(snapshot);
@@ -302,7 +310,8 @@ function bindEvents(): void {
         locationPreferenceFailure = "transport";
       })
       .finally(() => {
-        if (epoch !== accountEpoch) return;
+        // A newer account or worker may already own a selection of its own.
+        if (automaticSelectionPending !== pending) return;
         automaticSelectionPending = false;
         if (snapshot) renderLocations(snapshot);
       });
@@ -433,15 +442,19 @@ async function retryConnection(): Promise<void> {
   if (!snapshot || connectionRetryPending) return;
   const reloadStorage = snapshot.error === "storage_unavailable";
   if (!reloadStorage && (!snapshot.profile || isBusy(snapshot.status))) return;
-  connectionRetryPending = true;
+  const pending = {};
+  connectionRetryPending = pending;
   renderError(snapshot);
   renderSecurity(snapshot);
   try {
     await request({ type: reloadStorage ? "get_snapshot" : "retry_connection" });
   } finally {
-    connectionRetryPending = false;
-    renderError(snapshot);
-    renderSecurity(snapshot);
+    // A newer account or worker may already own a retry of its own.
+    if (connectionRetryPending === pending) {
+      connectionRetryPending = false;
+      renderError(snapshot);
+      renderSecurity(snapshot);
+    }
   }
 }
 
@@ -529,7 +542,8 @@ async function updateSecurityPreferences(): Promise<void> {
     killSwitchEnabled: elements.killSwitchEnabled.checked,
     webRtcProtectionEnabled: elements.webRtcProtectionEnabled.checked,
   };
-  securityPreferencesPending = true;
+  const pending = {};
+  securityPreferencesPending = pending;
   elements.killSwitchEnabled.disabled = true;
   elements.webRtcProtectionEnabled.disabled = true;
   try {
@@ -540,8 +554,11 @@ async function updateSecurityPreferences(): Promise<void> {
     elements.settingsError.textContent = message("error_unknown_error");
     elements.settingsError.classList.remove("hidden");
   } finally {
-    securityPreferencesPending = false;
-    renderSecurity(snapshot);
+    // A newer account or worker may already own an update of its own.
+    if (securityPreferencesPending === pending) {
+      securityPreferencesPending = false;
+      renderSecurity(snapshot);
+    }
   }
 }
 
@@ -766,8 +783,9 @@ function renderSiteExclusions(next: PopupSnapshot): void {
 async function refreshDevices(): Promise<void> {
   if (!snapshot?.profile || devicesRefreshPending) return;
   const epoch = accountEpoch;
+  const pending = {};
   const action = ++devicesAction;
-  devicesRefreshPending = true;
+  devicesRefreshPending = pending;
   devicesFailure = null;
   renderDevices(snapshot);
   try {
@@ -776,7 +794,8 @@ async function refreshDevices(): Promise<void> {
     devicesFailure = deviceFailure(response);
     render(response.snapshot);
   } finally {
-    if (epoch === accountEpoch) {
+    // A newer account or worker may already own a refresh of its own.
+    if (devicesRefreshPending === pending) {
       devicesRefreshPending = false;
       renderDevices(snapshot);
     }
@@ -808,24 +827,29 @@ async function initializePopup(): Promise<void> {
 
 async function refreshAccount(): Promise<void> {
   if (accountRefreshPending) return;
-  accountRefreshPending = true;
+  const epoch = accountEpoch;
+  const pending = {};
+  accountRefreshPending = pending;
   if (snapshot) render(snapshot);
   try {
     const response = await request({ type: "refresh_account" });
-    if (response.stale) return;
+    if (epoch !== accountEpoch || accountRefreshPending !== pending || response.stale) return;
     render(response.snapshot);
   } catch {
     // The service worker publishes a localized state when the API request itself fails.
   } finally {
-    accountRefreshPending = false;
-    if (snapshot) render(snapshot);
+    if (epoch === accountEpoch && accountRefreshPending === pending) {
+      accountRefreshPending = false;
+      if (snapshot) render(snapshot);
+    }
   }
 }
 
 async function refreshLocations(): Promise<void> {
   if (!snapshot?.profile || locationsRefreshPending) return;
   const epoch = accountEpoch;
-  locationsRefreshPending = true;
+  const pending = {};
+  locationsRefreshPending = pending;
   locationsRefreshFailed = false;
   renderLocations(snapshot);
   try {
@@ -835,10 +859,10 @@ async function refreshLocations(): Promise<void> {
   } catch {
     if (epoch === accountEpoch) locationsRefreshFailed = true;
   } finally {
-    if (epoch === accountEpoch) {
-      locationsRefreshPending = false;
-      renderLocations(snapshot);
-    }
+    // A newer account or worker may already own a refresh of its own. A reply from the
+    // replacement worker releases the marker itself, yet its stored result must be shown.
+    if (locationsRefreshPending === pending) locationsRefreshPending = false;
+    if (epoch === accountEpoch) renderLocations(snapshot);
   }
 }
 
@@ -857,17 +881,27 @@ function render(value: unknown, confirmed = false): boolean {
     return false;
   }
   if (!snapshotOrder.accept(next)) return false;
-  if ((snapshot?.profile?.userId ?? null) !== (next.profile?.userId ?? null)) {
+  const accountChanged = (snapshot?.profile?.userId ?? null) !== (next.profile?.userId ?? null);
+  if (accountChanged || snapshot?.snapshotVersion?.workerId !== next.snapshotVersion?.workerId) {
+    // Every PendingRequest marker is released here: a reply still owed by a previous
+    // account or worker cannot block the current one.
+    accountRefreshPending = false;
+    devicesRefreshPending = false;
+    locationsRefreshPending = false;
+    connectionRetryPending = false;
+    securityPreferencesPending = false;
+    automaticSelectionPending = false;
+    // verificationRequest still guards the old send's finally against a newer send.
+    verificationPending = false;
+  }
+  if (accountChanged) {
     ++accountEpoch;
     elements.confirmationDialog.close("cancel");
     ++devicesAction;
     ++locationSelectionRequest;
     devicesFailure = null;
-    devicesRefreshPending = false;
     locationPreferenceFailure = null;
-    locationsRefreshPending = false;
     locationsRefreshFailed = false;
-    automaticSelectionPending = false;
     locationSelectionPending = false;
     expandedLocationCountries.clear();
     expandedLocationCities.clear();
@@ -875,6 +909,7 @@ function render(value: unknown, confirmed = false): boolean {
   }
   snapshot = next;
   if (confirmed) {
+    ++confirmedSnapshotSequence;
     communicationFailed = false;
     if (next.locationsStatus === "ready") locationsRefreshFailed = false;
   }
@@ -1039,9 +1074,13 @@ function renderCurrent(next: PopupSnapshot): void {
     next.subscription?.hasAccess ? "subscriptionActive" : "subscriptionInactive",
   );
   elements.subscriptionExpiry.textContent = subscriptionExpiry(next);
-  elements.refreshSubscriptionButton.disabled = accountRefreshPending || isBusy(next.status);
-  elements.refreshSubscriptionButton.classList.toggle("refreshing", accountRefreshPending);
-  elements.refreshSubscriptionButton.setAttribute("aria-busy", String(accountRefreshPending));
+  elements.refreshSubscriptionButton.disabled =
+    Boolean(accountRefreshPending) || isBusy(next.status);
+  elements.refreshSubscriptionButton.classList.toggle("refreshing", Boolean(accountRefreshPending));
+  elements.refreshSubscriptionButton.setAttribute(
+    "aria-busy",
+    String(Boolean(accountRefreshPending)),
+  );
   const refreshLabel = message(
     accountRefreshPending ? "refreshingSubscription" : "refreshSubscription",
   );
@@ -1106,7 +1145,8 @@ function renderNetwork(next: AppSnapshot): void {
   const observation = next.network;
   const isVpn = next.protected;
   const matchesRoute =
-    observation.status === "ready" &&
+    (observation.status === "ready" || observation.status === "checking") &&
+    observation.ip !== null &&
     (isVpn
       ? observation.mode === "vpn" && observation.locationId === next.activeLocationId
       : observation.mode === "direct" && !next.protectionRequested && !next.trafficBlocked);
@@ -1125,7 +1165,10 @@ function renderNetwork(next: AppSnapshot): void {
 
 function renderSecurity(next: AppSnapshot): void {
   const recovering = next.protectionRequested && !next.protected;
-  const showRecovery = communicationFailed || recovering || next.trafficBlocked;
+  const showRecovery =
+    communicationFailed ||
+    next.blockingScope === "unverified" ||
+    (!isConnectionProgress(next) && (recovering || next.trafficBlocked));
   elements.recoveryPanel.classList.toggle("hidden", !showRecovery);
   elements.statusCard.classList.toggle("hidden", showRecovery);
   // Recovery must retain access to the selector so an empty catalogue can be refreshed.
@@ -1146,14 +1189,15 @@ function renderSecurity(next: AppSnapshot): void {
           : "statusProtectionUnavailable",
   );
   elements.retryButton.disabled =
-    connectionRetryPending ||
+    Boolean(connectionRetryPending) ||
     (next.error !== "storage_unavailable" &&
       ((next.profile !== null && !next.selectedLocationId) || isBusy(next.status)));
   elements.recoveryDisconnectButton.disabled = next.status === "disconnecting";
   elements.killSwitchEnabled.checked = next.securityPreferences.killSwitchEnabled;
   elements.webRtcProtectionEnabled.checked = next.securityPreferences.webRtcProtectionEnabled;
-  elements.killSwitchEnabled.disabled = communicationFailed || securityPreferencesPending;
-  elements.webRtcProtectionEnabled.disabled = communicationFailed || securityPreferencesPending;
+  elements.killSwitchEnabled.disabled = communicationFailed || Boolean(securityPreferencesPending);
+  elements.webRtcProtectionEnabled.disabled =
+    communicationFailed || Boolean(securityPreferencesPending);
   elements.securityState.textContent = communicationFailed
     ? message("extensionCommunicationError")
     : message("securityEffectiveState", [
@@ -1203,7 +1247,7 @@ function renderError(next: AppSnapshot): void {
     next.error !== "proxy_creation_uncertain",
   );
   elements.retryUncertainConnectionButton.disabled =
-    communicationFailed || connectionRetryPending || isBusy(next.status);
+    communicationFailed || Boolean(connectionRetryPending) || isBusy(next.status);
   renderVerification(next);
   elements.errorManageDevicesButton.classList.toggle(
     "hidden",
@@ -1234,7 +1278,7 @@ function renderLogoutOutcome(next: AppSnapshot): void {
 }
 
 function renderLocations(next: AppSnapshot): void {
-  const loading = next.locationsStatus === "loading" || locationsRefreshPending;
+  const loading = next.locationsStatus === "loading" || Boolean(locationsRefreshPending);
   const failed = next.locationsStatus === "error" || locationsRefreshFailed;
   const unknown = next.locations.length === 0 && next.locationsStatus !== "ready";
   elements.refreshLocationsButton.disabled = loading || !next.profile;
@@ -1261,7 +1305,7 @@ function renderLocations(next: AppSnapshot): void {
   }
   elements.automaticLocationButton.setAttribute("aria-pressed", String(preferences.automatic));
   elements.automaticLocationButton.disabled =
-    isBusy(next.status) || automaticSelectionPending || !next.locations.length;
+    isBusy(next.status) || Boolean(automaticSelectionPending) || !next.locations.length;
   const failure =
     locationPreferenceFailure ??
     (next.error === "server_full" || next.error === "capacity_unavailable" ? next.error : null);
@@ -1655,6 +1699,7 @@ function isolatedText(value: string, direction: "auto" | "ltr" = "auto"): HTMLEl
 }
 
 function renderDevices(next: AppSnapshot): void {
+  const refreshing = Boolean(devicesRefreshPending);
   elements.devicesError.classList.toggle("hidden", !devicesFailure);
   elements.devicesError.textContent = devicesFailure
     ? devicesFailure.transport
@@ -1663,18 +1708,18 @@ function renderDevices(next: AppSnapshot): void {
     : "";
   elements.deviceCount.textContent =
     next.deviceLimit === null
-      ? message(devicesRefreshPending ? "deviceQuotaLoading" : "deviceQuotaUnknown")
+      ? message(refreshing ? "deviceQuotaLoading" : "deviceQuotaUnknown")
       : message("deviceCount", [String(next.devices.length), String(next.deviceLimit)]);
-  elements.refreshDevicesButton.disabled = devicesRefreshPending || isBusy(next.status);
-  elements.refreshDevicesButton.classList.toggle("refreshing", devicesRefreshPending);
-  elements.refreshDevicesButton.setAttribute("aria-busy", String(devicesRefreshPending));
+  elements.refreshDevicesButton.disabled = refreshing || isBusy(next.status);
+  elements.refreshDevicesButton.classList.toggle("refreshing", refreshing);
+  elements.refreshDevicesButton.setAttribute("aria-busy", String(refreshing));
   const listKey = JSON.stringify([
     locale,
     accountEpoch,
     next.devices,
     next.currentDeviceId,
     isBusy(next.status),
-    devicesRefreshPending,
+    refreshing,
     [...deviceDeletions],
   ]);
   if (listKey === renderedDevices) return;
@@ -1682,10 +1727,23 @@ function renderDevices(next: AppSnapshot): void {
   if (next.devices.length === 0) {
     const empty = document.createElement("p");
     empty.className = "muted";
-    empty.textContent = devicesRefreshPending ? message("loadingDevices") : message("noDevices");
+    empty.textContent = refreshing ? message("loadingDevices") : message("noDevices");
     entries.push(empty);
   } else {
-    for (const device of next.devices) entries.push(deviceElement(device, next));
+    const displayNames = deviceDisplayNames(
+      next.devices,
+      (device) => displayDeviceName(device, next.currentDeviceId),
+      locale,
+      (device) => message(deviceKindMessageKey(device, next.currentDeviceId, currentBrowserName)),
+    );
+    for (const device of next.devices)
+      entries.push(
+        deviceElement(
+          device,
+          next,
+          displayNames.get(device.deviceId) ?? displayDeviceName(device, next.currentDeviceId),
+        ),
+      );
   }
   renderedDevices = listKey;
   replaceListChildren(
@@ -1741,14 +1799,14 @@ function displayDeviceName(device: Device, currentDeviceId: string | null): stri
   return deviceDisplayName(device, currentDeviceId, currentLabel, message("deviceKindBrowser"));
 }
 
-function deviceElement(device: Device, state: AppSnapshot): HTMLElement {
+function deviceElement(device: Device, state: AppSnapshot, displayName: string): HTMLElement {
   const article = document.createElement("article");
   article.className = "device-item";
   const head = document.createElement("div");
   head.className = "device-head";
   const title = document.createElement("p");
   title.className = "device-name";
-  title.append(isolatedText(displayDeviceName(device, state.currentDeviceId)));
+  title.append(isolatedText(displayName));
   if (device.deviceId === state.currentDeviceId) {
     const current = document.createElement("span");
     current.className = "device-current";
@@ -1758,11 +1816,7 @@ function deviceElement(device: Device, state: AppSnapshot): HTMLElement {
   const kind = document.createElement("p");
   kind.className = "device-meta";
   kind.textContent = message(
-    device.kind === "browser_extension"
-      ? currentBrowserName === "Firefox"
-        ? "deviceKindFirefox"
-        : "deviceKindBrowser"
-      : "deviceKindVpn",
+    deviceKindMessageKey(device, state.currentDeviceId, currentBrowserName),
   );
   const created = document.createElement("p");
   created.className = "device-meta";
@@ -1772,6 +1826,7 @@ function deviceElement(device: Device, state: AppSnapshot): HTMLElement {
   remove.className = "delete-device-button";
   remove.dataset.focusKey = device.deviceId;
   remove.textContent = message("deleteDevice");
+  remove.setAttribute("aria-label", deviceAccessibleName(message("deleteDevice"), displayName));
   const deletionKey = JSON.stringify([accountEpoch, device.deviceId]);
   remove.disabled = isBusy(state.status) || deviceDeletions.has(deletionKey);
   remove.setAttribute("aria-busy", String(deviceDeletions.has(deletionKey)));
@@ -1796,21 +1851,39 @@ async function deleteDevice(
   )
     return;
   const epoch = accountEpoch;
+  const confirmationLocale = locale;
+  const displayNames = deviceDisplayNames(
+    current.devices,
+    (device) => displayDeviceName(device, current.currentDeviceId),
+    locale,
+    (device) => message(deviceKindMessageKey(device, current.currentDeviceId, currentBrowserName)),
+  );
+  const confirmationDisplayName =
+    displayNames.get(deviceId) ?? displayDeviceName(currentDevice, current.currentDeviceId);
   if (
     !(await confirmAction(
       message("deleteDevice"),
-      message("confirmDeleteDevice", [displayDeviceName(currentDevice, current.currentDeviceId)]),
+      message("confirmDeleteDevice", [confirmationDisplayName]),
     ))
   )
     return;
   if (
     epoch !== accountEpoch ||
+    locale !== confirmationLocale ||
     !snapshot?.profile ||
     isBusy(snapshot.status) ||
     !snapshot.devices.some((device) => device.deviceId === deviceId) ||
     deviceDeletions.has(deletionKey)
   )
     return;
+  const latest = snapshot;
+  const currentDisplayNames = deviceDisplayNames(
+    latest.devices,
+    (device) => displayDeviceName(device, latest.currentDeviceId),
+    locale,
+    (device) => message(deviceKindMessageKey(device, latest.currentDeviceId, currentBrowserName)),
+  );
+  if (currentDisplayNames.get(deviceId) !== confirmationDisplayName) return;
   if (document.activeElement === remove) {
     const fallback = elements.refreshDevicesButton.disabled
       ? elements.closeDevicesButton
@@ -1852,8 +1925,23 @@ function countryFlag(code: string): HTMLImageElement {
   return flag;
 }
 
+function isConnectionProgress(next: AppSnapshot): boolean {
+  return (
+    !communicationFailed &&
+    next.error === null &&
+    next.blockingScope !== "unverified" &&
+    (next.status === "connecting" || next.status === "refreshing")
+  );
+}
+
 function statusKey(next: AppSnapshot): string {
   const { status, protected: protectedState } = next;
+  if (isConnectionProgress(next))
+    return status === "refreshing"
+      ? "statusRefreshing"
+      : protectedState
+        ? "statusChanging"
+        : "statusConnecting";
   if (next.trafficBlocked)
     return next.nextRetryAt !== null || status === "connecting"
       ? "statusBlockedRetry"
@@ -1897,7 +1985,102 @@ function errorMessage(code: AppErrorCode, retryAfter: number | null): string {
   return translated && translated !== key ? translated : message("error_unknown_error");
 }
 
+function connectionRequestState(
+  next: AppSnapshot | null,
+  command: ExtensionRequest,
+): string | null {
+  if (!next || next.error || isBusy(next.status)) return null;
+  switch (command.type) {
+    case "logout":
+      return next.profile === null && !next.protected && !next.protectionRequested
+        ? "logged_out"
+        : null;
+    case "disconnect":
+      return !next.protected && !next.protectionRequested && next.activeLocationId === null
+        ? "disconnected"
+        : null;
+    case "connect":
+    case "change_location":
+      return next.protected &&
+        next.protectionRequested &&
+        next.activeLocationId === command.locationId
+        ? command.locationId
+        : null;
+    case "retry_connection":
+      return next.protected && next.protectionRequested && next.activeLocationId !== null
+        ? next.activeLocationId
+        : null;
+    case "select_location":
+      return !next.locationPreferences.automatic &&
+        next.selectedLocationId === command.locationId &&
+        (!next.protectionRequested ||
+          (next.protected && next.activeLocationId === command.locationId))
+        ? command.locationId
+        : null;
+    case "select_automatic_location":
+      return next.locationPreferences.automatic &&
+        (!next.protectionRequested ||
+          (next.protected && next.activeLocationId === next.selectedLocationId))
+        ? JSON.stringify([true, next.selectedLocationId])
+        : null;
+    case "web_login":
+      return next.profile && !next.webLoginPending ? next.profile.userId : null;
+    case "reset_device_identity":
+      return next.currentDeviceId === null && !next.protected && !next.protectionRequested
+        ? "identity_reset"
+        : null;
+    case "delete_device":
+      return next.devices.some(({ deviceId }) => deviceId === command.deviceId) ? null : "deleted";
+    case "update_security_preferences":
+      return next.securityPreferences.killSwitchEnabled === command.killSwitchEnabled &&
+        next.securityPreferences.webRtcProtectionEnabled === command.webRtcProtectionEnabled
+        ? JSON.stringify(next.securityPreferences)
+        : null;
+    case "update_site_exclusions":
+    case "retry_site_exclusions": {
+      const { saved, applied, pending, error } = next.siteExclusions;
+      if (pending || error || JSON.stringify(saved) !== JSON.stringify(applied)) return null;
+      if (
+        command.type === "update_site_exclusions" &&
+        (saved.revision <= command.expectedRevision ||
+          saved.enabled !== command.enabled ||
+          JSON.stringify(saved.entries) !== JSON.stringify(command.entries))
+      )
+        return null;
+      return JSON.stringify(applied);
+    }
+    default:
+      return null;
+  }
+}
+
 async function request(messageValue: ExtensionRequest): Promise<PopupResponse> {
+  const epoch = accountEpoch;
+  const workerId = snapshot?.snapshotVersion?.workerId ?? null;
+  const confirmation = confirmedSnapshotSequence;
+  const previousState = connectionRequestState(snapshot, messageValue);
+  const changesConnection = [
+    "web_login",
+    "logout",
+    "connect",
+    "disconnect",
+    "change_location",
+    "select_location",
+    "select_automatic_location",
+    "retry_connection",
+    "reset_device_identity",
+    "delete_device",
+    "update_security_preferences",
+    "update_site_exclusions",
+    "retry_site_exclusions",
+  ].includes(messageValue.type);
+  const intent = changesConnection ? ++connectionRequestIntent : connectionRequestIntent;
+  // A newer account or worker supersedes every reply. A newer connection command supersedes
+  // only older connection commands; any other reply keeps its own outcome.
+  const isSuperseded = () =>
+    epoch !== accountEpoch ||
+    workerId !== (snapshot?.snapshotVersion?.workerId ?? null) ||
+    (changesConnection && intent !== connectionRequestIntent);
   try {
     const response: unknown = await extensionApi.runtime.sendMessage(messageValue);
     if (
@@ -1909,6 +2092,8 @@ async function request(messageValue: ExtensionRequest): Promise<PopupResponse> {
     )
       throw new Error("invalid_extension_response");
     const next = popupSnapshot(response.snapshot);
+    if (isSuperseded())
+      return { ok: false, stale: true, superseded: true, snapshot: snapshot ?? next };
     const command = response as ExtensionResponse;
     const accepted = render(next, true);
     return {
@@ -1922,10 +2107,32 @@ async function request(messageValue: ExtensionRequest): Promise<PopupResponse> {
       ...(!accepted ? { stale: true } : {}),
     };
   } catch {
-    renderCommunicationFailure();
+    const superseded = isSuperseded();
+    const currentState = connectionRequestState(snapshot, messageValue);
+    // Only a newer confirmed state that is not in progress can answer a lost reply. Any
+    // such state answers a snapshot read, and these list and preference callers keep
+    // their own transport failure visible. Every other command, including account
+    // refreshes and verification emails, is confirmed only by its own effect: IP
+    // observations and unrelated lists cannot confirm its completion.
+    const newerStateSuffices = [
+      "get_snapshot",
+      "refresh_devices",
+      "refresh_locations",
+      "set_location_favorite",
+      "set_language_preference",
+    ].includes(messageValue.type);
+    const stateConfirmed =
+      confirmation !== confirmedSnapshotSequence &&
+      snapshot !== null &&
+      !isBusy(snapshot.status) &&
+      (newerStateSuffices || (currentState !== null && previousState !== currentState));
+    // Public IP is optional; its message channel cannot change the connection UI.
+    if (messageValue.type !== "refresh_network" && !superseded && !stateConfirmed)
+      renderCommunicationFailure();
     return {
       ok: false,
       transportFailed: true,
+      ...(superseded ? { stale: true, superseded: true } : {}),
       snapshot: snapshot ?? popupSnapshot({ ...EMPTY_SNAPSHOT, siteExclusions: undefined }),
     };
   }

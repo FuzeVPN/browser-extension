@@ -14,6 +14,7 @@ import type {
   DiagnosticResponse,
   DiagnosticUiState,
   DiagnosticReportSummary,
+  DiagnosticConsentContext,
 } from "../shared/diagnostics-ui";
 import { isDiagnosticRequest } from "../shared/diagnostics-ui";
 import { DiagnosticDelivery, DiagnosticDeliveryError, type DiagnosticAccount } from "./delivery";
@@ -35,6 +36,8 @@ export const DIAGNOSTIC_HISTORY_KEY = "fuzevpnDiagnosticHistory";
 export const DIAGNOSTIC_DRAFTS_KEY = "fuzevpnDiagnosticDrafts";
 export const DIAGNOSTIC_DELIVERY_KEY = "fuzevpnDiagnosticDelivery";
 const TTL = 86_400_000;
+/** Lifetime of a repeated-error counter, measured from its first occurrence. */
+const INCIDENT_WINDOW_MS = 600_000;
 interface Draft {
   owner: string | null;
   report: DiagnosticReport;
@@ -46,6 +49,8 @@ interface Incident {
   count: number;
   first: number;
   reported: boolean;
+  /** History window the incident was counted in; a history reset invalidates it. */
+  history: string;
 }
 
 interface ServiceDependencies extends CollectorDependencies {
@@ -58,6 +63,13 @@ interface ServiceDependencies extends CollectorDependencies {
   uuid?(): string;
   environment?(): Promise<DiagnosticEnvironment>;
   canSendDiagnostics?(): Promise<boolean>;
+  connectionHistory?: {
+    initialize(): Promise<void>;
+    clear(): void;
+    count(): number;
+    pruneExpired(): Promise<void>;
+    nextExpiry(): number | null;
+  };
 }
 
 /** Keeps diagnostics entirely outside the VPN command/error state machine. */
@@ -71,6 +83,8 @@ export class DiagnosticService {
   private incidents: Incident[] = [];
   private preparing = false;
   private epoch = 0;
+  /** Bumped by every automatic consent decision; older automatic work is void. */
+  private automaticGeneration = 0;
   private revision = 0;
   private readonly workerId = crypto.randomUUID();
   private writes: Promise<void> = Promise.resolve();
@@ -119,6 +133,7 @@ export class DiagnosticService {
 
   private async load(): Promise<void> {
     await this.dependencies.whenReady?.();
+    await this.dependencies.connectionHistory?.initialize();
     await configureTrustedStorage();
     // Firefox does not expose setAccessLevel. Session storage is trusted-only;
     // the manifest and package audit prohibit content scripts and injection.
@@ -173,8 +188,9 @@ export class DiagnosticService {
               item.count < 1 ||
               !Number.isFinite(item.first) ||
               typeof item.reported !== "boolean" ||
+              item.history !== this.history.id() ||
               item.first > this.dependencies.now() ||
-              item.first < this.dependencies.now() - 600_000
+              item.first < this.dependencies.now() - INCIDENT_WINDOW_MS
             )
               continue;
             const safe = diagnosticError(item.code, item.operation as DiagnosticError["operation"]);
@@ -212,6 +228,7 @@ export class DiagnosticService {
               count: Math.min(item.count, 1_000_000),
               first: item.first,
               reported: item.reported,
+              history: item.history,
             });
           }
       }
@@ -243,6 +260,7 @@ export class DiagnosticService {
       this.owner = owner;
       this.epoch += 1;
       this.incidents = [];
+      this.dependencies.connectionHistory?.clear();
       if (this.loaded) {
         void this.history
           .clear(owner)
@@ -261,6 +279,12 @@ export class DiagnosticService {
 
   permissionsChanged(): void {
     this.delivery.permissionsChanged();
+  }
+
+  connectionHistoryChanged(): void {
+    if (!this.loaded) return;
+    void this.scheduleHousekeeping().catch(() => undefined);
+    this.changed();
   }
 
   state(): DiagnosticUiState {
@@ -289,6 +313,9 @@ export class DiagnosticService {
       autoReporting: account !== null && this.delivery.getAuto(account.ownerId),
       preparing: this.preparing,
       historyCount: this.history.snapshot().events.length,
+      ...(this.dependencies.connectionHistory
+        ? { connectionHistoryCount: this.dependencies.connectionHistory.count() }
+        : {}),
       reports: [...drafts, ...queued].sort((a, b) => b.createdAt.localeCompare(a.createdAt)),
     };
   }
@@ -307,8 +334,27 @@ export class DiagnosticService {
         case "diagnostics_state":
           break;
         case "diagnostics_set_auto": {
-          const account = this.requireAccount();
-          await this.delivery.setAuto(account.ownerId, request.enabled);
+          const account = this.requireConsentContext(request);
+          // An opt-in covers only incidents counted under it: OFF/ON must not
+          // revive pending automatic work or repeated-error counts of an older one.
+          this.automaticGeneration += 1;
+          if (request.enabled) {
+            // A restart restores stored counts, and the purge by OFF may have failed
+            // to persist: ON is accepted only once a purge has reached storage.
+            this.incidents = [];
+            const purge = this.persist();
+            const revision = this.draftRevision;
+            await purge.catch(() => undefined);
+            if (this.persistedDraftRevision < revision)
+              throw new DiagnosticDeliveryError("storage_unavailable");
+          } else if (this.incidents.length) {
+            // Opting out never depends on this store; nothing is counted while OFF.
+            this.incidents = [];
+            void this.persist().catch(() => undefined);
+          }
+          await this.delivery.setAuto(account.ownerId, request.enabled, () => {
+            this.requireConsentContext(request);
+          });
           break;
         }
         case "diagnostics_run":
@@ -318,12 +364,18 @@ export class DiagnosticService {
           report = this.findReport(request.reportId);
           break;
         case "diagnostics_send": {
-          const account = this.requireAccount();
+          const account = this.requireConsentContext(request);
           report = this.findReport(request.reportId);
           const draft = this.drafts.find((item) => item.report.report_id === request.reportId);
           if (draft?.owner !== account.ownerId)
             throw new DiagnosticDeliveryError("session_required");
-          await this.delivery.enqueue(report, account.ownerId);
+          await this.delivery.enqueue(report, account.ownerId, () => {
+            this.requireConsentContext(request);
+            // The request keeps a parsed copy across permission/storage waits.
+            // Only the original, still-retained draft can authorize its enqueue.
+            if (!this.drafts.includes(draft) || !this.isFresh(draft.report))
+              throw new DiagnosticDeliveryError("not_found");
+          });
           this.drafts = this.drafts.filter((item) => item !== draft);
           // Delivery is already durable. A failed draft cleanup is retried by
           // housekeeping and must not turn the accepted send into a failure.
@@ -343,6 +395,12 @@ export class DiagnosticService {
           break;
         }
         case "diagnostics_clear_history":
+          // Invalidate completions that started before the user's deletion.
+          this.epoch += 1;
+          this.incidents = [];
+          this.dependencies.connectionHistory?.clear();
+          // If this write fails, the awaited history reset still voids stored incidents.
+          void this.persist().catch(() => undefined);
           await this.history.clear(this.owner).finally(() => this.scheduleHousekeeping());
           break;
       }
@@ -372,10 +430,13 @@ export class DiagnosticService {
 
   async historyAlarm(): Promise<void> {
     try {
+      // Journal retention must still run if another diagnostic store cannot load.
+      await this.dependencies.connectionHistory?.pruneExpired();
       await this.initialize();
       this.syncAccount();
       await this.history.pruneExpired();
       this.pruneDrafts();
+      this.pruneIncidents();
       await this.persist();
       this.changed();
     } finally {
@@ -395,6 +456,7 @@ export class DiagnosticService {
     if (command.startsWith("diagnostics_")) return;
     const operation = diagnosticOperation(command);
     const epoch = this.epoch;
+    const generation = this.automaticGeneration;
     this.work = this.work
       .catch(() => undefined)
       .then(async () => {
@@ -413,7 +475,7 @@ export class DiagnosticService {
           .finally(() => this.scheduleHousekeeping());
         if (epoch !== this.epoch) return;
         if (result.superseded) return;
-        if (error) await this.maybeAutomatic(error);
+        if (error) await this.maybeAutomatic(error, generation);
         else {
           this.incidents = this.incidents.filter((incident) => incident.operation !== operation);
           await this.persist();
@@ -472,11 +534,22 @@ export class DiagnosticService {
     }
   }
 
-  private async maybeAutomatic(error: DiagnosticError): Promise<void> {
+  private async maybeAutomatic(error: DiagnosticError, generation: number): Promise<void> {
     const epoch = this.epoch;
     const account = this.dependencies.getAccount();
     if (!account || !this.delivery.getAuto(account.ownerId)) return;
+    const assertContext = () => {
+      if (
+        epoch !== this.epoch ||
+        generation !== this.automaticGeneration ||
+        this.currentOwner() !== account.ownerId ||
+        this.dependencies.getAccount()?.ownerId !== account.ownerId ||
+        !this.delivery.getAuto(account.ownerId)
+      )
+        throw new DiagnosticDeliveryError("invalid_report");
+    };
     if (!(await this.nativeConsentGranted())) return;
+    assertContext();
     const terminal = [
       "storage_unavailable",
       "traffic_guard_failed",
@@ -491,7 +564,7 @@ export class DiagnosticService {
     if (!terminal && !repeated) return;
     const now = this.dependencies.now();
     this.incidents = this.incidents.filter(
-      (item) => item.owner === account.ownerId && item.first >= now - 600_000,
+      (item) => item.owner === account.ownerId && item.first >= now - INCIDENT_WINDOW_MS,
     );
     let incident = this.incidents.find(
       (item) => item.code === error.code && item.operation === error.operation,
@@ -504,6 +577,7 @@ export class DiagnosticService {
         first: now,
         count: 0,
         reported: false,
+        history: this.history.id(),
       };
       this.incidents.push(incident);
     }
@@ -513,13 +587,9 @@ export class DiagnosticService {
       return;
     }
     const environment = await this.environment();
-    if (
-      epoch !== this.epoch ||
-      this.dependencies.getAccount()?.ownerId !== account.ownerId ||
-      !this.delivery.getAuto(account.ownerId) ||
-      !(await this.nativeConsentGranted())
-    )
-      return;
+    assertContext();
+    if (!(await this.nativeConsentGranted())) return;
+    assertContext();
     const report = parseDiagnosticReport({
       ...reportBase(
         this.uuid(),
@@ -532,7 +602,7 @@ export class DiagnosticService {
       error,
       occurrences: incident.count,
     });
-    await this.delivery.enqueue(report, account.ownerId);
+    await this.delivery.enqueue(report, account.ownerId, assertContext);
     incident.reported = true;
     await this.persist();
   }
@@ -551,6 +621,13 @@ export class DiagnosticService {
     if (!account) throw new DiagnosticDeliveryError("session_required");
     return account;
   }
+  private requireConsentContext(context: DiagnosticConsentContext): DiagnosticAccount {
+    this.syncAccount();
+    const account = this.requireAccount();
+    if (context.workerId !== this.workerId || context.accountEpoch !== this.epoch)
+      throw new DiagnosticDeliveryError("invalid_report");
+    return account;
+  }
   private currentOwner(): string | null {
     return (
       this.dependencies.getAccount()?.ownerId ??
@@ -567,6 +644,16 @@ export class DiagnosticService {
     if (fresh.length === this.drafts.length) return;
     this.drafts = fresh;
     void this.persist().catch(() => undefined);
+  }
+  /**
+   * Repeated-error counters keep the same ten-minute duration as the technical
+   * history, to the millisecond rather than on its whole-second boundaries.
+   */
+  private pruneIncidents(): void {
+    const now = this.dependencies.now();
+    this.incidents = this.incidents.filter(
+      (item) => item.first <= now && item.first >= now - INCIDENT_WINDOW_MS,
+    );
   }
   private uuid(): string {
     return this.dependencies.uuid?.() ?? crypto.randomUUID();
@@ -607,8 +694,13 @@ export class DiagnosticService {
       .catch(() => undefined)
       .then(async () => {
         const historyExpiry = this.history.nextExpiry();
+        const connectionExpiry = this.dependencies.connectionHistory?.nextExpiry();
         const deadlines = this.drafts.map((draft) => Date.parse(draft.report.created_at) + TTL);
+        for (const incident of this.incidents)
+          deadlines.push(incident.first + INCIDENT_WINDOW_MS + 1);
         if (historyExpiry !== null) deadlines.push(historyExpiry);
+        if (connectionExpiry !== null && connectionExpiry !== undefined)
+          deadlines.push(connectionExpiry);
         if (this.draftRevision !== this.persistedDraftRevision)
           deadlines.push(this.dependencies.now() + 60_000);
         if (!deadlines.length) {

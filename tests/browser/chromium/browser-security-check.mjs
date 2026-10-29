@@ -6,13 +6,14 @@
 import assert from "node:assert/strict";
 import { createHash } from "node:crypto";
 import { createServer } from "node:http";
-import { mkdtemp, mkdir, readFile, writeFile } from "node:fs/promises";
+import { mkdtemp, mkdir, readFile, rm, writeFile } from "node:fs/promises";
 import { createRequire } from "node:module";
 import { homedir, tmpdir } from "node:os";
-import { resolve, join } from "node:path";
+import { basename, dirname, resolve, join } from "node:path";
 import { pathToFileURL } from "node:url";
 import ts from "typescript";
 import { SUPPORTED_LANGUAGES, localeDirectory } from "../../../scripts/supported-locales.mjs";
+import { assertInsideProject } from "../../../scripts/validation-common.mjs";
 
 const root = resolve(import.meta.dirname, "../../..");
 const require = createRequire(import.meta.url);
@@ -30,9 +31,15 @@ if (!playwrightPath) {
 }
 const { chromium } = await import(pathToFileURL(resolve(playwrightPath)).href);
 const testRoot = await mkdtemp(join(tmpdir(), "fuzevpn-browser-security-"));
+// Edge's native DNR writer can reject deep profile paths before installing any rule.
+// Keep profiles short while retaining reports, fixture sources and captures in testRoot.
+const profileParent = assertInsideProject(join(root, "node_modules/.cache"));
+await mkdir(profileParent, { recursive: true });
+const profileRoot = await mkdtemp(join(profileParent, "s-"));
 const report = {
   timestamp: new Date().toISOString(),
   profileIsolation: "Fresh temporary profiles; installed user browsers and settings untouched",
+  profileRoot,
   checks: [],
   limitations: [
     "No production API credentials, VPN proxy, external STUN/TURN, or public IPv6 path tested.",
@@ -76,12 +83,19 @@ async function launch(extensionPath, profileName) {
   };
   if (process.env.CHROMIUM_EXECUTABLE)
     launchOptions.executablePath = process.env.CHROMIUM_EXECUTABLE;
-  context = await chromium.launchPersistentContext(join(testRoot, profileName), launchOptions);
+  context = await chromium.launchPersistentContext(join(profileRoot, profileName), launchOptions);
   report.chromium = context.browser().version();
   const worker =
     context.serviceWorkers()[0] ??
     (await context.waitForEvent("serviceworker", { timeout: 15000 }));
   return worker;
+}
+
+async function cleanProfiles() {
+  const target = assertInsideProject(profileRoot);
+  if (dirname(target) !== profileParent || !basename(target).startsWith("s-"))
+    throw new Error("Invalid temporary security profile directory");
+  await rm(target, { recursive: true, force: true });
 }
 
 async function collectIce(page) {
@@ -149,8 +163,15 @@ async function verifyLegalLinks(popup, language, catalog) {
       link.kind === "contact"
         ? ({ es: "contacto", de: "kontakt" }[websiteLanguage] ?? "contact")
         : link.kind;
-    assert.equal(link.href, `https://fuzevpn.com/${websiteLanguage}/${page}.html`);
-    assert.equal(link.hreflang, websiteLanguage);
+    const privacy = new URL("../privacy-page/privacy.html", popup.url());
+    privacy.searchParams.set("lang", language);
+    assert.equal(
+      link.href,
+      link.kind === "privacy"
+        ? privacy.href
+        : `https://fuzevpn.com/${websiteLanguage}/${page}.html`,
+    );
+    assert.equal(link.hreflang, link.kind === "privacy" ? language : websiteLanguage);
     assert.equal(link.target, "_blank");
     assert.deepEqual(link.rel, ["noopener", "noreferrer"]);
     assert.equal(link.label, catalog[link.key].message);
@@ -564,10 +585,12 @@ async function verifyBuiltApplication() {
     await popup.evaluate(() => {
       const original = chrome.runtime.sendMessage.bind(chrome.runtime);
       globalThis.auditMessages = [];
+      globalThis.auditCommandResults = [];
       chrome.runtime.sendMessage = (...args) => {
         if (args[0]?.type !== "get_snapshot") globalThis.auditMessages.push(args[0]);
         const response = original(...args);
-        if (args[0]?.type !== "get_snapshot") globalThis.auditMutationResult = response;
+        if (args[0]?.type !== "get_snapshot")
+          globalThis.auditCommandResults.push({ type: args[0]?.type, response });
         return response;
       };
     });
@@ -584,6 +607,28 @@ async function verifyBuiltApplication() {
         `Message failed: ${request.type}: ${JSON.stringify(response)}`,
       );
     return response.snapshot;
+  }
+  async function popupCommand(popup, type, action) {
+    const start = await popup.evaluate(() => globalThis.auditCommandResults.length);
+    await action();
+    const response = await popup.evaluate(
+      ({ type, start }) => {
+        // Route publications can send refresh_network while a mutation is pending.
+        // Await the command caused by this action, never the last unrelated message.
+        const commands = globalThis.auditCommandResults
+          .slice(start)
+          .filter((entry) => entry.type === type);
+        if (commands.length !== 1)
+          throw new Error(
+            `Expected one ${type} command after the action; received ${commands.length}`,
+          );
+        return commands[0].response;
+      },
+      { type, start },
+    );
+    assert(response && response.ok, `Popup command failed: ${type}: ${JSON.stringify(response)}`);
+    assert(!response.superseded, `Popup command superseded: ${type}: ${JSON.stringify(response)}`);
+    return response;
   }
   async function verifyLanguages(popup, worker, state) {
     const languages = SUPPORTED_LANGUAGES;
@@ -769,8 +814,9 @@ async function verifyBuiltApplication() {
   await verifyLanguages(popup, worker, "blocked");
   apiMode = "healthy";
   assert(await popup.locator("#retryButton").isEnabled());
-  await popup.locator("#retryButton").click();
-  const retried = (await popup.evaluate(() => globalThis.auditMutationResult)).snapshot;
+  const retried = (
+    await popupCommand(popup, "retry_connection", () => popup.locator("#retryButton").click())
+  ).snapshot;
   assert.equal(retried.protected, true, JSON.stringify(retried));
   assert.equal(retried.trafficBlocked, false);
   record("Explicit retry restores connection only after verified configuration");
@@ -788,8 +834,9 @@ async function verifyBuiltApplication() {
   await popup.locator("#settingsButton").click();
   assert(await popup.locator("#settingsPanel").isVisible());
   await screenshot(popup, "popup-blocked-settings.png");
-  await popup.locator("#killSwitchEnabled").uncheck();
-  const updateResponse = await popup.evaluate(() => globalThis.auditMutationResult);
+  const updateResponse = await popupCommand(popup, "update_security_preferences", () =>
+    popup.locator("#killSwitchEnabled").uncheck(),
+  );
   const disabled = await message(popup, { type: "get_snapshot" });
   assert.equal(disabled.webRtcProtected, true);
   assert.equal(
@@ -801,14 +848,14 @@ async function verifyBuiltApplication() {
       sent: await popup.evaluate(() => globalThis.auditMessages),
     }),
   );
-  await popup.locator("#killSwitchEnabled").check();
-  const rearmed = await popup.evaluate(() => globalThis.auditMutationResult);
+  const rearmed = await popupCommand(popup, "update_security_preferences", () =>
+    popup.locator("#killSwitchEnabled").check(),
+  );
   assert.equal(rearmed.snapshot.trafficBlocked, true);
   await popup.keyboard.press("Escape");
   assert(!(await popup.locator("#settingsPanel").isVisible()));
   record("Blocked logged-out popup settings independently release and restore kill switch");
-  await popup.locator("#recoveryDisconnectButton").click();
-  await popup.evaluate(() => globalThis.auditMutationResult);
+  await popupCommand(popup, "disconnect", () => popup.locator("#recoveryDisconnectButton").click());
   const released = await message(popup, { type: "get_snapshot" });
   assert.equal(released.protectionRequested, false);
   assert.equal(released.trafficBlocked, false);
@@ -883,6 +930,15 @@ try {
   process.exitCode = 1;
 } finally {
   if (context) await context.close();
+  try {
+    await cleanProfiles();
+    report.profileCleaned = true;
+  } catch (error) {
+    report.profileCleaned = false;
+    report.cleanupError = String(error.stack ?? error);
+    report.passed = false;
+    process.exitCode = 1;
+  }
   await new Promise((done) => server.close(done));
   await writeFile(join(testRoot, "report.json"), `${JSON.stringify(report, null, 2)}\n`);
   process.stdout.write(`Report: ${join(testRoot, "report.json")}\n`);

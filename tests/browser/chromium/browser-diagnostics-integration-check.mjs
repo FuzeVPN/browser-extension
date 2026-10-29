@@ -375,6 +375,22 @@ try {
 
   await login();
   assert.equal((await state()).autoReporting, false);
+  const signedInContext = await state();
+  for (const staleContext of [
+    { workerId: `${signedInContext.workerId}-retired`, accountEpoch: signedInContext.accountEpoch },
+    { workerId: signedInContext.workerId, accountEpoch: signedInContext.accountEpoch + 1 },
+  ]) {
+    const rejected = await request({
+      type: "diagnostics_set_auto",
+      enabled: true,
+      ...staleContext,
+    });
+    assert.equal(rejected.ok, false);
+    assert.equal(rejected.error, "invalid_report");
+    assert.equal((await state()).autoReporting, false);
+    assert.equal(posts.length, 0);
+  }
+  record("The built worker rejects automatic consent addressed to another worker or account epoch");
   assert(
     !(await state()).reports.some((item) => item.id === anonymous.report_id),
     "Anonymous report leaked into the signed-in account",
@@ -422,6 +438,22 @@ try {
       "ready",
     );
     assert.equal(posts.length, before);
+    const currentContext = await state();
+    const staleConsent = await request({
+      type: "diagnostics_send",
+      reportId: full.report_id,
+      consent: true,
+      noticeVersion: 1,
+      workerId: currentContext.workerId,
+      accountEpoch: currentContext.accountEpoch + 1,
+    });
+    assert.equal(staleConsent.ok, false);
+    assert.equal(staleConsent.error, "invalid_report");
+    assert.equal(posts.length, before);
+    assert.equal(
+      (await state()).reports.find((item) => item.id === full.report_id).status,
+      "ready",
+    );
     await sendReport(full, status);
     const received = await waitStatus(full.report_id, "received");
     assert.equal(received.receipt.client_report_id, full.report_id);

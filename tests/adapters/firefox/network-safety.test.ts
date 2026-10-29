@@ -1036,11 +1036,22 @@ describe("persistent Firefox traffic guard", () => {
 
   it("sets and verifies restricted WebRTC, then restores the underlying Firefox setting", async () => {
     await safety.setWebRtc(true);
-    expect(fake.privacy.value).toBe("disable_non_proxied_udp");
+    expect(fake.privacy.value).toBe("proxy_only");
     await expect(safety.inspect()).resolves.toMatchObject({ webRtcProtected: true });
     await safety.setWebRtc(false);
     expect(fake.privacy).toEqual(fake.underlyingPrivacy);
     await expect(safety.inspect()).resolves.toMatchObject({ webRtcProtected: false });
+  });
+
+  it("does not claim protection for the former conditional WebRTC policy", async () => {
+    fake.privacy = {
+      value: "disable_non_proxied_udp",
+      levelOfControl: "controlled_by_this_extension",
+    };
+    await expect(safety.inspect()).resolves.toMatchObject({ webRtcProtected: false });
+    await safety.setWebRtc(true);
+    expect(fake.privacy.value).toBe("proxy_only");
+    await expect(safety.inspect()).resolves.toMatchObject({ webRtcProtected: true });
   });
 
   it.each(["not_controllable", "controlled_by_other_extensions"])(

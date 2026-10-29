@@ -87,7 +87,7 @@ describe("bounded diagnostic history", () => {
     const f = fixture({ owner: "owner-a", items: [{ at: NOW, event: event() }], dropped: 1 });
     await f.history.initialize("owner-b");
     expect(f.history.snapshot()).toEqual({ events: [], dropped: 0 });
-    expect(f.stored()).toEqual({ owner: "owner-b", items: [], losses: [] });
+    expect(f.stored()).toEqual({ owner: "owner-b", id: f.history.id(), items: [], losses: [] });
   });
 
   it("purges persisted events and loss buckets at the next expiry without recording another event", async () => {
@@ -97,7 +97,7 @@ describe("bounded diagnostic history", () => {
     expect(f.history.nextExpiry()).toBe(NOW + 600_001);
     f.setNow(NOW + 600_001);
     await f.history.pruneExpired();
-    expect(f.stored()).toEqual({ owner: "owner-a", items: [], losses: [] });
+    expect(f.stored()).toEqual({ owner: "owner-a", id: f.history.id(), items: [], losses: [] });
     expect(f.history.nextExpiry()).toBeNull();
     const writes = f.writes.length;
     await f.history.pruneExpired();
@@ -114,7 +114,7 @@ describe("bounded diagnostic history", () => {
     await vi.waitFor(() => expect(f.dependencies.write).toHaveBeenCalledTimes(3));
     expect(f.history.nextExpiry()).toBe(NOW + 660_001);
     await f.history.pruneExpired();
-    expect(f.stored()).toEqual({ owner: "owner-a", items: [], losses: [] });
+    expect(f.stored()).toEqual({ owner: "owner-a", id: f.history.id(), items: [], losses: [] });
     expect(f.history.nextExpiry()).toBeNull();
   });
 

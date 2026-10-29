@@ -16,7 +16,6 @@ import {
   fileHashes,
   projectRoot,
   runDirectory,
-  runtimeRoot,
   sha256,
   writeJson,
 } from "../../../scripts/validation-common.mjs";
@@ -25,11 +24,10 @@ const output = assertInsideProject(
   resolve(process.env.WEB_AUTH_INTEGRATION_OUTPUT ?? runDirectory("web-auth-integration")),
 );
 await mkdir(output, { recursive: true });
-// Keep the browser profile in the scoped runtime temp directory: nesting it below
-// the timestamped evidence directory exceeds Windows IndexedDB path limits.
-const nativeRuntime = assertInsideProject(join(runtimeRoot, "web-auth"));
+// Keep the browser profile short even when the evidence output has a long audit path.
+const nativeRuntime = assertInsideProject(join(projectRoot, "node_modules/.cache/validation"));
 await mkdir(nativeRuntime, { recursive: true });
-const temporary = await mkdtemp(join(nativeRuntime, "run-"));
+const temporary = await mkdtemp(join(nativeRuntime, "wa-"));
 const runtime = join(homedir(), ".cache/codex-runtimes/codex-primary-runtime/dependencies");
 const playwright =
   process.env.PLAYWRIGHT_MODULE_PATH ?? join(runtime, "node/node_modules/playwright/index.mjs");
@@ -405,7 +403,10 @@ try {
     return route.abort("blockedbyclient");
   });
   await context.route(/^https:\/\/api(?:64)?\.ipify\.org\//, (route) =>
-    route.fulfill({ status: 200, contentType: "application/json", body: '{"ip":"203.0.113.8"}' }),
+    route.fulfill({ status: 200, contentType: "application/json", body: '{"ip":"9.9.9.9"}' }),
+  );
+  await context.route("https://ipv4.icanhazip.com/", (route) =>
+    route.fulfill({ status: 200, contentType: "text/plain", body: "9.9.9.9\n" }),
   );
   await context.route("https://api.fuzevpn.com/**", api);
   worker =
@@ -506,8 +507,7 @@ try {
     { message: "Late native callback did not close its browser authentication window" },
   );
   await settled();
-  // A new flow cannot open until the old native promise has settled. Retry its status
-  // only, without launching a second flow or relying on arbitrary sleeps.
+  // Confirm the invalidated attempt is retired before testing a fresh sign-in.
   const late = await waitForRead(
     snapshot,
     (state) => !state.webLoginPending && state.profile === null,

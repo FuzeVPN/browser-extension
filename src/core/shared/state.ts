@@ -39,6 +39,7 @@ export type AppErrorCode =
   | "device_exists"
   | "not_found"
   | "invalid_location"
+  | "location_favorites_limit"
   | "server_full"
   | "capacity_unavailable"
   | "rate_limited"

@@ -26,7 +26,7 @@ export function inspectPublicPath(name) {
     findings.push("internal_documentation");
   if (
     /(?:^|\/)(?:COMPTE_TEST_PRIVE[^/]*|\.npmrc|\.pypirc)$/i.test(name) ||
-    (/(?:^|\/)\.env(?:\.|$)/i.test(name) && !/(?:^|\/)\.env\.example$/i.test(name)) ||
+    /(?:^|\/)\.env(?:\.|$)/i.test(name) ||
     /\.(?:zip|xpi|crx|sha256|bundle|pem|key|pfx|p12|log|har|sqlite|sqlite3)$/i.test(name)
   )
     findings.push("private_or_generated_file");

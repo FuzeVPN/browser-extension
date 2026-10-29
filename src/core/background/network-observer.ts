@@ -8,11 +8,12 @@ import {
 } from "../shared/network";
 import type { AppSnapshot } from "../shared/state";
 
-const DIRECT_IP_ENDPOINT = "https://api64.ipify.org?format=json";
-const VPN_IP_ENDPOINT = "https://api.ipify.org?format=json";
+const IP_ENDPOINT = "https://api.ipify.org?format=json";
+const FALLBACK_IP_ENDPOINT = "https://ipv4.icanhazip.com/";
 const CACHE_MS = 30_000;
 const TIMEOUT_MS = 8_000;
-const RETRY_DELAY_MS = 750;
+const PROVIDER_TIMEOUT_MS = 3_000;
+const VPN_RETRY_DELAY_MS = 500;
 const MAX_RESPONSE_BYTES = 1_024;
 
 type RouteMode = "direct" | "vpn";
@@ -23,16 +24,11 @@ interface NetworkObserverOptions {
   onChanged(): void;
   fetch?: typeof fetch;
   now?: () => number;
-  retryTransientFailures?: boolean;
+  useFallback?: boolean;
 }
 
-class TransientObservationError extends Error {}
-
-class RateLimitedObservationError extends Error {
-  constructor(readonly cacheMs: number) {
-    super("network_observation_rate_limited");
-  }
-}
+class UnverifiedRouteError extends Error {}
+class TransportObservationError extends Error {}
 
 interface PendingObservation {
   revision: number;
@@ -47,6 +43,7 @@ export class NetworkObserver {
   private revision = 0;
   private pending: PendingObservation | null = null;
   private failureCacheMs = NETWORK_OBSERVATION_POLL_MS;
+  private readonly providerRetryAt = new Map<string, number>();
   private readonly fetcher: typeof fetch;
   private readonly now: () => number;
   private readonly elapsedNow: () => number;
@@ -96,7 +93,7 @@ export class NetworkObserver {
     const promise = Promise.resolve().then(() => this.probe(mode, revision, abort));
     this.pending = { revision, abort, promise };
     this.replace({
-      ...EMPTY_NETWORK_OBSERVATION,
+      ...this.state,
       status: "checking",
       mode,
       locationId: mode === "vpn" ? snapshot.activeLocationId : null,
@@ -114,7 +111,7 @@ export class NetworkObserver {
         }, TIMEOUT_MS);
       });
       const result = await Promise.race([
-        this.readWithRetry(mode, revision, abort.signal),
+        this.readProviders(mode, revision, abort.signal),
         deadline,
       ]);
       if (!this.isCurrent(revision)) return;
@@ -125,10 +122,14 @@ export class NetworkObserver {
         latencyMs: result.latencyMs,
         checkedAt: this.now(),
       });
-    } catch (error) {
+    } catch {
       if (!this.isCurrent(revision)) return;
-      this.failureCacheMs =
-        error instanceof RateLimitedObservationError ? error.cacheMs : NETWORK_OBSERVATION_POLL_MS;
+      const remainingCooldowns = this.providers(mode).map(
+        (endpoint) => (this.providerRetryAt.get(endpoint) ?? 0) - this.now(),
+      );
+      this.failureCacheMs = remainingCooldowns.every((delay) => delay > 0)
+        ? Math.min(...remainingCooldowns)
+        : NETWORK_OBSERVATION_POLL_MS;
       this.replace({
         ...this.state,
         status: "unavailable",
@@ -143,34 +144,107 @@ export class NetworkObserver {
     }
   }
 
-  private async readWithRetry(
+  private providers(mode: RouteMode): string[] {
+    const policy = this.options.getSnapshot().siteExclusions.applied;
+    const fallbackExcluded =
+      mode === "vpn" &&
+      policy.enabled &&
+      policy.entries.some(
+        ({ domain, includeSubdomains }) =>
+          domain === "ipv4.icanhazip.com" ||
+          (includeSubdomains && "ipv4.icanhazip.com".endsWith(`.${domain}`)),
+      );
+    return this.options.useFallback && !fallbackExcluded
+      ? [IP_ENDPOINT, FALLBACK_IP_ENDPOINT]
+      : [IP_ENDPOINT];
+  }
+
+  private async readProviders(
     mode: RouteMode,
     revision: number,
     signal: AbortSignal,
   ): Promise<{ ip: string; latencyMs: number }> {
-    try {
-      return await this.readCurrentRoute(mode, revision, signal);
-    } catch (error) {
-      this.assertCurrent(revision, signal);
-      if (!this.options.retryTransientFailures || !(error instanceof TransientObservationError))
-        throw error;
-      // One retry on the same endpoint, within the original eight-second deadline.
-      // Route verification runs again before any new request is sent.
+    const retryVpn = this.options.useFallback && mode === "vpn";
+    if (retryVpn && this.state.checkedAt === null) {
       await waitForRetry(signal);
       this.assertCurrent(revision, signal);
-      return this.readCurrentRoute(mode, revision, signal);
     }
+    let endpoints = this.providers(mode);
+    for (let round = 0; round < (retryVpn ? 3 : 1); round++) {
+      const retryEndpoints: string[] = [];
+      for (const endpoint of endpoints) {
+        this.assertCurrent(revision, signal);
+        if ((this.providerRetryAt.get(endpoint) ?? 0) > this.now()) continue;
+        try {
+          return await this.readCurrentRoute(mode, revision, signal, endpoint);
+        } catch (error) {
+          this.assertCurrent(revision, signal);
+          if (error instanceof UnverifiedRouteError) throw error;
+          if (error instanceof TransportObservationError) retryEndpoints.push(endpoint);
+        }
+      }
+      if (!retryVpn || round === 2 || retryEndpoints.length === 0) break;
+      await waitForRetry(signal);
+      this.assertCurrent(revision, signal);
+      endpoints = retryEndpoints;
+    }
+    throw new Error("network_observation_failed");
   }
 
   private async readCurrentRoute(
     mode: RouteMode,
     revision: number,
     signal: AbortSignal,
+    endpoint: string,
   ): Promise<{ ip: string; latencyMs: number }> {
-    if (!(await this.options.verifyRoute(mode))) throw new Error("network_route_unverified");
+    await this.verifyRoute(mode, revision, signal);
     this.assertCurrent(revision, signal);
     const startedAt = this.elapsedNow();
-    const endpoint = mode === "vpn" ? VPN_IP_ENDPOINT : DIRECT_IP_ENDPOINT;
+    const attempt = new AbortController();
+    let timer: ReturnType<typeof setTimeout> | undefined;
+    let cancel = (): void => undefined;
+    let ip: string;
+    try {
+      const deadline = new Promise<never>((_, reject) => {
+        cancel = () => {
+          attempt.abort();
+          reject(new DOMException("Network observation superseded", "AbortError"));
+        };
+        signal.addEventListener("abort", cancel, { once: true });
+        if (this.options.useFallback)
+          timer = setTimeout(() => {
+            attempt.abort();
+            reject(new Error("network_observation_timeout"));
+          }, PROVIDER_TIMEOUT_MS);
+      });
+      ip = await Promise.race([this.readResponse(endpoint, revision, attempt.signal), deadline]);
+    } finally {
+      clearTimeout(timer);
+      signal.removeEventListener("abort", cancel);
+      attempt.abort();
+    }
+    const latencyMs = Math.max(0, Math.round(this.elapsedNow() - startedAt));
+    await this.verifyRoute(mode, revision, signal);
+    this.assertCurrent(revision, signal);
+    return { ip, latencyMs };
+  }
+
+  private async verifyRoute(mode: RouteMode, revision: number, signal: AbortSignal): Promise<void> {
+    let verified = false;
+    try {
+      verified = await this.options.verifyRoute(mode);
+    } catch {
+      /* An unavailable route inspection is not permission to try another provider. */
+    }
+    this.assertCurrent(revision, signal);
+    if (!verified) throw new UnverifiedRouteError("network_route_unverified");
+  }
+
+  private async readResponse(
+    endpoint: string,
+    revision: number,
+    signal: AbortSignal,
+  ): Promise<string> {
     let response: Response;
     try {
       response = await this.fetcher(endpoint, {
@@ -183,7 +257,7 @@ export class NetworkObserver {
       });
     } catch {
       this.assertCurrent(revision, signal);
-      throw new TransientObservationError("network_observation_transport_failed");
+      throw new TransportObservationError("network_observation_transport_failed");
     }
     this.assertCurrent(revision, signal);
     if (response.status === 429) {
@@ -194,24 +268,21 @@ export class NetworkObserver {
           ? Number(retryAfter) * 1_000
           : Date.parse(retryAfter) - this.now()
         : CACHE_MS;
-      throw new RateLimitedObservationError(
-        Number.isFinite(delay) ? Math.max(CACHE_MS, delay) : CACHE_MS,
+      this.providerRetryAt.set(
+        endpoint,
+        this.now() + (Number.isFinite(delay) ? Math.max(CACHE_MS, delay) : CACHE_MS),
       );
+      throw new Error("network_observation_rate_limited");
     }
-    if (!response.redirected && (response.status === 408 || response.status >= 500)) {
+    if (!response.ok || response.redirected) {
       void response.body?.cancel().catch(() => undefined);
-      throw new TransientObservationError("network_observation_service_unavailable");
+      throw new Error("network_observation_failed");
     }
-    if (!response.ok || response.redirected) throw new Error("network_observation_failed");
     const raw = await readBoundedBody(response, signal);
     this.assertCurrent(revision, signal);
-    const value: unknown = JSON.parse(raw);
-    const ip = parsePublicIp(value, mode);
-    if (!ip) throw new Error("network_observation_invalid_ip");
-    const latencyMs = Math.max(0, Math.round(this.elapsedNow() - startedAt));
-    if (!(await this.options.verifyRoute(mode))) throw new Error("network_route_unverified");
-    this.assertCurrent(revision, signal);
-    return { ip, latencyMs };
+    const ip = endpoint === FALLBACK_IP_ENDPOINT ? raw.trim() : parsePublicIp(JSON.parse(raw));
+    if (!ip || !isPublicIpv4(ip)) throw new Error("network_observation_invalid_ip");
+    return ip;
   }
 
   private assertCurrent(revision: number, signal: AbortSignal): void {
@@ -242,7 +313,7 @@ function waitForRetry(signal: AbortSignal): Promise<void> {
     const timer = setTimeout(() => {
       signal.removeEventListener("abort", cancel);
       resolve();
-    }, RETRY_DELAY_MS);
+    }, VPN_RETRY_DELAY_MS);
     signal.addEventListener("abort", cancel, { once: true });
   });
 }
@@ -281,7 +352,13 @@ async function readBoundedBody(response: Response, signal: AbortSignal): Promise
   try {
     for (;;) {
       signal.throwIfAborted();
-      const chunk = await reader.read();
+      let chunk: ReadableStreamReadResult<Uint8Array>;
+      try {
+        chunk = await reader.read();
+      } catch {
+        signal.throwIfAborted();
+        throw new TransportObservationError("network_observation_transport_failed");
+      }
       signal.throwIfAborted();
       if (chunk.done) break;
       total += chunk.value.byteLength;
@@ -295,33 +372,10 @@ async function readBoundedBody(response: Response, signal: AbortSignal): Promise
   }
 }
 
-function parsePublicIp(value: unknown, mode: RouteMode): string | null {
+function parsePublicIp(value: unknown): string | null {
   if (!value || typeof value !== "object" || Array.isArray(value)) return null;
   const ip = (value as Record<string, unknown>).ip;
-  if (typeof ip !== "string" || ip.length > 45) return null;
-  if (isPublicIpv4(ip)) return ip;
-  if (mode === "vpn") return null;
-  if (!ip.includes(":") || !/^[0-9a-f:]+$/i.test(ip)) return null;
-  try {
-    // URL supplies the browser's IPv6 parser and canonical compression.
-    const normalized = new URL(`https://[${ip}]/`).hostname.slice(1, -1);
-    const halves = normalized.split("::");
-    const head = halves[0] ? halves[0].split(":") : [];
-    const tail = halves[1] ? halves[1].split(":") : [];
-    const words =
-      halves.length === 1
-        ? head
-        : [...head, ...Array<string>(8 - head.length - tail.length).fill("0"), ...tail];
-    const first = Number.parseInt(words[0] ?? "", 16);
-    const second = Number.parseInt(words[1] ?? "", 16);
-    // Conservatively accept global unicast, excluding documentation and special-use blocks.
-    if (first < 0x2000 || first > 0x3fff) return null;
-    if (first === 0x2001 && (second < 0x0200 || second === 0x0db8)) return null;
-    if (first === 0x3fff && second <= 0x0fff) return null;
-    return normalized;
-  } catch {
-    return null;
-  }
+  return typeof ip === "string" && isPublicIpv4(ip) ? ip : null;
 }
 
 function isPublicIpv4(ip: string): boolean {

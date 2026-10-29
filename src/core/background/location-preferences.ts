@@ -8,6 +8,13 @@ const MAX_FAVORITES = 100;
 const MAX_RECENT = 5;
 const MEASUREMENT_TTL_MS = 10 * 60_000;
 
+export class LocationPreferenceError extends Error {
+  constructor(readonly code: "location_favorites_limit") {
+    super(code);
+    this.name = "LocationPreferenceError";
+  }
+}
+
 interface StoredLocationPreferences {
   favoriteIds: string[];
   recentIds: string[];
@@ -96,7 +103,7 @@ export class LocationPreferences {
       if (typeof favorite !== "boolean") throw new Error("invalid_location_preference");
       if (current.favoriteIds.includes(locationId) === favorite) return current;
       if (favorite && current.favoriteIds.length >= MAX_FAVORITES)
-        throw new Error("location_favorites_limit");
+        throw new LocationPreferenceError("location_favorites_limit");
       return {
         ...current,
         favoriteIds: favorite

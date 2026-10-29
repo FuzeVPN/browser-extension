@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: MPL-2.0
 
-import { deviceDisplayName } from "../../src/ui/popup/device-display";
+import { deviceDisplayName, deviceKindMessageKey } from "../../src/ui/popup/device-display";
 
 const device = { deviceId: "current", kind: "browser_extension", name: "Firefox" } as const;
 
@@ -38,6 +38,27 @@ describe("Firefox device names", () => {
   it("does not rename another device kind", () => {
     expect(deviceDisplayName({ ...device, kind: "vpn" }, "current", "Navigateur Firefox")).toBe(
       "Firefox",
+    );
+  });
+});
+
+describe("device kind labels", () => {
+  it("identifies Firefox only for the current browser installation", () => {
+    expect(deviceKindMessageKey(device, "current", "Firefox")).toBe("deviceKindFirefox");
+    for (const currentDeviceId of ["another", null]) {
+      expect(deviceKindMessageKey(device, currentDeviceId, "Firefox")).toBe("deviceKindBrowser");
+    }
+  });
+
+  it("uses the generic browser kind for other local browser brands", () => {
+    for (const name of ["Browser", "Google Chrome", "Brave", "Microsoft Edge"]) {
+      expect(deviceKindMessageKey(device, "current", name)).toBe("deviceKindBrowser");
+    }
+  });
+
+  it("keeps VPN devices independent of the local browser", () => {
+    expect(deviceKindMessageKey({ ...device, kind: "vpn" }, "current", "Firefox")).toBe(
+      "deviceKindVpn",
     );
   });
 });

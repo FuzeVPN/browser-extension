@@ -17,3 +17,14 @@ export function deviceDisplayName(
       ? genericBrowserLabel
       : device.name;
 }
+
+export function deviceKindMessageKey(
+  device: Pick<Device, "deviceId" | "kind">,
+  currentDeviceId: string | null,
+  currentBrowserName: string,
+): "deviceKindFirefox" | "deviceKindBrowser" | "deviceKindVpn" {
+  if (device.kind !== "browser_extension") return "deviceKindVpn";
+  return device.deviceId === currentDeviceId && currentBrowserName === "Firefox"
+    ? "deviceKindFirefox"
+    : "deviceKindBrowser";
+}

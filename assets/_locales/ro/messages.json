@@ -179,6 +179,9 @@
   "deleteDevice": {
     "message": "Ștergeți dispozitivul"
   },
+  "deleteDeviceNamed": {
+    "message": "Șterge dispozitivul $1"
+  },
   "confirmDeleteDevice": {
     "message": "Eliminați „$1”? Conexiunile sale VPN se vor opri și profilurile sale vor fi eliminate."
   },
@@ -360,7 +363,7 @@
     "message": "Indisponibil"
   },
   "ipLookupExplanation": {
-    "message": "IP verificat cu ipify folosind conexiunea curentă. Nu se trimite istoric de navigare."
+    "message": "IP-ul este verificat prin conexiunea actuală cu ipify sau, ca alternativă, cu icanhazip. Istoricul de navigare nu este trimis."
   },
   "automaticLocation": {
     "message": "automată"
@@ -567,19 +570,22 @@
     "message": "Datele dvs"
   },
   "diagnosticsPrivacy": {
-    "message": "Rapoartele conțin stări tehnice și coduri de eroare, niciodată parole, simboluri, adrese de e-mail, adrese IP, adrese URL vizitate sau domenii excluse."
+    "message": "Raportul JSON conține stări tehnice și coduri de eroare, fără parole, tokenuri, adrese de e-mail, adrese IP, URL-uri vizitate sau domenii excluse. Trimiterea este autentificată și asociază raportul cu contul dvs. Consultați informarea pentru detalii despre datele de rețea."
   },
   "diagnosticsAuto": {
     "message": "Trimite automat rapoarte de eroare importante"
   },
   "diagnosticsAutoHelp": {
-    "message": "Oprit implicit. Pentru acest cont sunt trimise doar rapoarte tehnice simple, fără istoric de navigare. Asistența îi păstrează timp de 30 de zile."
+    "message": "Dezactivată implicit. Activarea trimite rapoarte tehnice simple pentru acest cont, fără istoricul de navigare. Dezactivați aici pentru a opri trimiterea automată și a elimina rapoartele automate în așteptare."
   },
   "diagnosticsHistoryHelp": {
-    "message": "Istoricul tehnic rămâne local: până la 200 de evenimente în 10 minute, chiar și atunci când trimiterea automată este dezactivată. Nu conține istoric de navigare și este șters atunci când browserul se închide sau se schimbă contul."
+    "message": "Istoricul tehnic rămâne local: până la 200 de evenimente în fiecare jurnal, pe durata a 10 minute, chiar și fără trimitere automată. Nu conține istoricul de navigare și se șterge manual, la închiderea browserului sau la schimbarea contului."
   },
   "diagnosticsHistoryCount": {
     "message": "$1 evenimente tehnice locale"
+  },
+  "diagnosticsConnectionLog": {
+    "message": "Exportă jurnalul de conexiune"
   },
   "diagnosticsAccountRequired": {
     "message": "Conectați-vă pentru a activa trimiterea. Puteți vedea și exporta în continuare un raport fără un cont."
@@ -624,10 +630,10 @@
     "message": "Ștergeți raportul local"
   },
   "diagnosticsRetention": {
-    "message": "Rapoartele trimise sunt conectate la contul dvs. conectat și păstrate de asistență timp de 30 de zile. Ștergerea unui raport local nu șterge un raport deja primit de asistență."
+    "message": "Rapoartele locale expiră după 24 de ore. Ștergerea de aici nu șterge un raport deja primit de serviciu. Consultați informarea pentru păstrarea pe server și cererile de ștergere."
   },
   "diagnosticsConsent": {
-    "message": "Trimiteți acest raport la asistență"
+    "message": "Trimiteți acest raport de diagnostic către FuzeVPN"
   },
   "diagnosticsDataCollectionRequired": {
     "message": "Firefox trebuie să permită colectarea datelor tehnice pentru a trimite diagnostice. Încercați din nou și acordați această permisiune."
@@ -702,7 +708,7 @@
     "message": "Se așteaptă o sesiune validă pentru același cont"
   },
   "diagnosticsStatus_received": {
-    "message": "Primit de suport"
+    "message": "Primit de serviciu"
   },
   "diagnosticsStatus_failed": {
     "message": "Trimiterea a eșuat"
@@ -743,6 +749,9 @@
   "noAvailableFavoriteLocations": {
     "message": "Locațiile tale favorite sunt temporar indisponibile."
   },
+  "error_location_favorites_limit": {
+    "message": "A fost atinsă limita de 100 de favorite. Elimină o favorită pentru a adăuga alta."
+  },
   "error_server_full": {
     "message": "Acest server este plin. Alege altă locație."
   },
@@ -777,7 +786,7 @@
     "message": "Informații juridice"
   },
   "privacyPolicy": {
-    "message": "Politica de confidențialitate"
+    "message": "Informare privind confidențialitatea extensiei"
   },
   "termsAndConditions": {
     "message": "Condiții de utilizare și vânzare"
@@ -826,5 +835,77 @@
   },
   "deviceKindFirefox": {
     "message": "Browser Firefox"
+  },
+  "generalPrivacyPolicy": {
+    "message": "Politica generală de confidențialitate"
+  },
+  "privacyNoticeTitle": {
+    "message": "Confidențialitatea în extensia FuzeVPN"
+  },
+  "privacyNoticeIntro": {
+    "message": "Această informare descrie datele utilizate de această extensie. Ea completează politica generală de confidențialitate FuzeVPN, disponibilă prin linkul de mai jos. Trimiterea opțională a diagnosticelor este distinctă de datele necesare pentru autentificare și utilizarea VPN-ului."
+  },
+  "privacyNoticeUpdated": {
+    "message": "Informare actualizată la 19 octombrie 2026"
+  },
+  "privacyNoticeServiceTitle": {
+    "message": "Contul și serviciul VPN"
+  },
+  "privacyNoticeService": {
+    "message": "Extensia schimbă cu api.fuzevpn.com date de autentificare, de cont, de abonament, de dispozitiv și de sesiune proxy. Proxy-ul VPN transportă traficul direcționat prin el. Aceste conexiuni expun metadate de rețea serviciului destinatar; această informare nu oferă o promisiune separată privind jurnalizarea pe server."
+  },
+  "privacyNoticeLocalTitle": {
+    "message": "Date stocate în browser"
+  },
+  "privacyNoticeLocal": {
+    "message": "Stocarea browserului păstrează sesiunea, datele contului, preferințele, excluderile de site-uri și identitatea dispozitivului. Jurnalele tehnice sunt păstrate local timp de cel mult 10 minute, chiar și când trimiterea automată este dezactivată. Schițele rapoartelor de diagnostic și rapoartele în coadă expiră local după 24 de ore; curățarea se face când extensia poate rula."
+  },
+  "privacyNoticeIpTitle": {
+    "message": "Verificarea IP-ului public și serviciile terțe"
+  },
+  "privacyNoticeIp": {
+    "message": "Afișarea IP-ului și diagnosticele de rețea contactează api.ipify.org. Afișarea IP-ului poate folosi ipv4.icanhazip.com ca serviciu de rezervă. Furnizorul primește IP-ul conexiunii și metadatele obișnuite ale cererii: IP-ul dvs. public în modul direct sau IP-ul de ieșire VPN când cererea trece prin proxy. Aceste cereri nu includ cookie-uri sau antete Referer și nu trimit tokenul contului sau istoricul de navigare."
+  },
+  "privacyNoticeReportsTitle": {
+    "message": "Ce conțin rapoartele de diagnostic"
+  },
+  "privacyNoticeReports": {
+    "message": "Rapoartele pot include un identificator aleatoriu al raportului, marcaje temporale, versiunile extensiei și browserului, familia și arhitectura sistemului de operare, stările conexiunii și protecției, coduri de eroare, contoare, durate și rezultate ale verificărilor. Rapoartele complete pot include evenimente tehnice recente. Datele lor JSON nu conțin parole, tokenuri de autentificare, adrese de e-mail, adrese IP, URL-uri vizitate sau domenii excluse. Puteți examina și exporta un raport complet înainte de a-l trimite."
+  },
+  "privacyNoticeAccountTitle": {
+    "message": "Destinatarul și asocierea cu contul"
+  },
+  "privacyNoticeAccount": {
+    "message": "Rapoartele sunt trimise către FuzeVPN la api.fuzevpn.com/v1/diagnostics printr-o conexiune autentificată. Această conexiune API ocolește proxy-ul VPN: FuzeVPN primește IP-ul public al conexiunii dvs. directe chiar și când VPN-ul este activ. Rapoartele sunt asociate contului conectat și nu sunt anonime. Antetul de autentificare și IP-ul sunt separate de datele JSON ale raportului. Confirmarea primirii indică acceptarea de către serviciul de la acea adresă, nu faptul că un agent de asistență a citit raportul."
+  },
+  "privacyNoticeChoiceTitle": {
+    "message": "Trimiterea opțională și retragerea acordului"
+  },
+  "privacyNoticeChoice": {
+    "message": "Trimiterea automată este dezactivată implicit. Activarea ei permite rapoarte simple de eroare pentru acel cont. Trimiterea manuală a unui raport complet necesită bifarea casetei de trimitere. Firefox necesită și permisiunea sa opțională pentru date tehnice. Dezactivați trimiterea automată pentru a o opri și a elimina rapoartele automate în așteptare; anulați separat trimiterile individuale în așteptare. Refuzul trimiterii diagnosticelor nu împiedică utilizarea VPN-ului."
+  },
+  "privacyNoticeDeleteTitle": {
+    "message": "Ștergerea locală și fișierele descărcate"
+  },
+  "privacyNoticeDelete": {
+    "message": "În Diagnostice, ștergeți istoricul tehnic sau un raport local individual. Ștergerea istoricului nu elimină copiile existente ale rapoartelor. Anularea sau ștergerea locală nu poate retrage datele deja primite de serviciu, inclusiv datele ajunse înainte de anularea încărcării. Exporturile descărcate sunt fișiere separate pe care trebuie să le ștergeți dvs."
+  },
+  "privacyNoticeServerTitle": {
+    "message": "Păstrarea pe server și cererile"
+  },
+  "privacyNoticeServer": {
+    "message": "Această extensie nu controlează și nu verifică păstrarea pe server sau ștergerea datelor pe server. Pentru perioada de păstrare aplicată de FuzeVPN și cererile privind rapoartele deja trimise, consultați politica generală de confidențialitate sau contactați FuzeVPN. Această informare nu garantează o perioadă fixă de păstrare pe server."
+  },
+  "privacyNoticeSupportTitle": {
+    "message": "Diagnosticele și asistența sunt separate"
+  },
+  "privacyNoticeSupport": {
+    "message": "Trimiterea unui raport de diagnostic nu trimite în sine un mesaj de asistență din extensie. Pentru a explica o problemă sau a cere ștergerea unui raport primit, folosiți canalul de contact FuzeVPN de mai jos. Dacă alegeți să distribuiți un fișier exportat prin alt canal, verificați mai întâi conținutul acestuia."
+  },
+  "privacyNoticeManage": {
+    "message": "Deschideți Diagnostice"
+  },
+  "privacyNoticeLinksTitle": {
+    "message": "Politica serviciului și contact"
   }
 }

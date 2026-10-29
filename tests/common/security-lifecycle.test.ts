@@ -352,11 +352,13 @@ describe("network protection lifecycle", () => {
     await harness.controller.handlePrivacyChange();
     expect(harness.controller.getSnapshot()).toMatchObject({
       protected: false,
-      trafficBlocked: true,
+      trafficBlocked: false,
+      blockingScope: "unverified",
       webRtcProtected: false,
       error: "webrtc_control_unavailable",
       nextRetryAt: null,
     });
+    expect(harness.safety.status.filterActive).toBe(true);
   });
 
   it("does not claim protection merely because an account refresh interrupted a pending proxy write", async () => {

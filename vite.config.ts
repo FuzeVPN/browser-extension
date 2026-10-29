@@ -19,6 +19,7 @@ export function makeBuildConfig(target: BuildTarget, outDir?: string) {
         input: {
           popup: resolve(import.meta.dirname, "src/ui/popup/popup.html"),
           diagnostics: resolve(import.meta.dirname, "src/ui/diagnostics-page/diagnostics.html"),
+          privacy: resolve(import.meta.dirname, "src/ui/privacy-page/privacy.html"),
           worker: resolve(import.meta.dirname, "src/core/background/service-worker.ts"),
         },
         output: {

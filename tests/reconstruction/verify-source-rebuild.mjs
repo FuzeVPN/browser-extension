@@ -6,29 +6,40 @@ import { createHash, randomUUID } from "node:crypto";
 import { existsSync } from "node:fs";
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 import { dirname, isAbsolute, relative, resolve } from "node:path";
+import { pathToFileURL } from "node:url";
 import { readZip } from "../../scripts/zip.mjs";
 import { inventory } from "../../scripts/verify-dist.mjs";
-import { projectRoot, scopedEnvironment } from "../../scripts/validation-common.mjs";
-import { inspectPublicPath } from "../../scripts/audit-publication.mjs";
+import {
+  assertInsideProject,
+  guardPath,
+  projectRoot,
+  scopedEnvironment,
+} from "../../scripts/validation-common.mjs";
+import { assertPublicEntry } from "../../scripts/public-inputs.mjs";
 
-const packageInfo = JSON.parse(await readFile(resolve(projectRoot, "package.json"), "utf8"));
+const packageInfo = JSON.parse(
+  await readFile(assertInsideProject(resolve(projectRoot, "package.json")), "utf8"),
+);
 const archive = resolve(
   projectRoot,
   "releases",
   `fuzevpn-extensions-v${packageInfo.version}-sources.zip`,
 );
-const bytes = await readFile(archive);
+const bytes = await readFile(assertInsideProject(archive));
 const sourceFiles = readZip(bytes);
-const output = resolve(projectRoot, "audit/local/source-rebuild", randomUUID());
-const extraction = resolve(output, "extracted");
+for (const [name, contents] of sourceFiles) assertPublicEntry(name, contents);
+const output = assertInsideProject(
+  resolve(projectRoot, "audit/local/source-rebuild", randomUUID()),
+);
+const extraction = assertInsideProject(resolve(output, "extracted"));
 await mkdir(extraction, { recursive: true });
 assert(
   !extraction.split(/[\\/]/).includes("node_modules"),
   "Rebuild must be outside node_modules so Vite reads tsconfig",
 );
 for (const [name, contents] of sourceFiles) {
-  assert(inspectPublicPath(name).length === 0, `Forbidden source entry ${name}`);
-  const file = resolve(extraction, name);
+  assertPublicEntry(name, contents);
+  const file = assertInsideProject(resolve(extraction, name));
   const child = relative(extraction, file);
   assert(
     child &&
@@ -37,13 +48,18 @@ for (const [name, contents] of sourceFiles) {
       !child.startsWith(`..${process.platform === "win32" ? "\\" : "/"}`),
     "Unsafe extraction path",
   );
-  await mkdir(dirname(file), { recursive: true });
-  await writeFile(file, contents, { flag: "wx" });
+  await mkdir(assertInsideProject(dirname(file)), { recursive: true });
+  await writeFile(assertInsideProject(file), contents, { flag: "wx" });
 }
 const npmCli =
   process.env.npm_execpath ?? resolve(dirname(process.execPath), "node_modules/npm/bin/npm-cli.js");
 assert(existsSync(npmCli), "Run through npm run verify:sources or provide an installed npm CLI");
-const environment = { ...scopedEnvironment(), npm_config_update_notifier: "false" };
+const preload = `--import=${JSON.stringify(pathToFileURL(guardPath).href)}`;
+const environment = {
+  ...scopedEnvironment(),
+  npm_config_update_notifier: "false",
+  NODE_OPTIONS: `${process.env.NODE_OPTIONS || ""} ${preload}`.trim(),
+};
 async function run(args, name) {
   const chunks = [];
   const code = await new Promise((done, reject) => {
@@ -58,7 +74,7 @@ async function run(args, name) {
     child.once("error", reject);
     child.once("close", done);
   });
-  await writeFile(resolve(output, `${name}.log`), Buffer.concat(chunks));
+  await writeFile(assertInsideProject(resolve(output, `${name}.log`)), Buffer.concat(chunks));
   assert.equal(code, 0, `${name} failed; inspect the ignored reconstruction log`);
 }
 process.stdout.write("Extracted clean source archive; installing the single lockfile.\n");
@@ -73,7 +89,7 @@ for (const target of ["chrome", "edge", "firefox"]) {
   distributions[target] = { files: Object.keys(actual).length, byteIdentical: true };
 }
 await writeFile(
-  resolve(output, "report.json"),
+  assertInsideProject(resolve(output, "report.json")),
   JSON.stringify(
     {
       version: packageInfo.version,
