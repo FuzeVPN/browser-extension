@@ -13,6 +13,7 @@ const FALLBACK_IP_ENDPOINT = "https://ipv4.icanhazip.com/";
 const CACHE_MS = 30_000;
 const TIMEOUT_MS = 8_000;
 const PROVIDER_TIMEOUT_MS = 3_000;
+const FALLBACK_HEDGE_MS = 750;
 const VPN_RETRY_DELAY_MS = 500;
 const MAX_RESPONSE_BYTES = 1_024;
 
@@ -171,24 +172,93 @@ export class NetworkObserver {
     }
     let endpoints = this.providers(mode);
     for (let round = 0; round < (retryVpn ? 3 : 1); round++) {
+      this.assertCurrent(revision, signal);
       const retryEndpoints: string[] = [];
-      for (const endpoint of endpoints) {
-        this.assertCurrent(revision, signal);
-        if ((this.providerRetryAt.get(endpoint) ?? 0) > this.now()) continue;
-        try {
-          return await this.readCurrentRoute(mode, revision, signal, endpoint);
-        } catch (error) {
-          this.assertCurrent(revision, signal);
-          if (error instanceof UnverifiedRouteError) throw error;
-          if (error instanceof TransportObservationError) retryEndpoints.push(endpoint);
-        }
-      }
+      const eligible = endpoints.filter(
+        (endpoint) => (this.providerRetryAt.get(endpoint) ?? 0) <= this.now(),
+      );
+      const result = await this.readRound(mode, revision, signal, eligible, retryEndpoints);
+      if (result) return result;
       if (!retryVpn || round === 2 || retryEndpoints.length === 0) break;
       await waitForRetry(signal);
       this.assertCurrent(revision, signal);
-      endpoints = retryEndpoints;
+      // Retry in the original provider order, whichever request failed first.
+      endpoints = endpoints.filter((endpoint) => retryEndpoints.includes(endpoint));
     }
     throw new Error("network_observation_failed");
+  }
+
+  /**
+   * Tries providers in order. A request still unanswered after the hedge delay no longer
+   * holds back the next provider; the first verified IPv4 wins and cancels the others.
+   */
+  private readRound(
+    mode: RouteMode,
+    revision: number,
+    signal: AbortSignal,
+    endpoints: string[],
+    retryEndpoints: string[],
+  ): Promise<{ ip: string; latencyMs: number } | null> {
+    const round = new AbortController();
+    const cancel = (): void => round.abort();
+    signal.addEventListener("abort", cancel, { once: true });
+    return new Promise((resolve, reject) => {
+      let next = 0;
+      let pending = 0;
+      let settled = false;
+      let hedge: ReturnType<typeof setTimeout> | undefined;
+      const finish = (settle: () => void): void => {
+        if (settled) return;
+        settled = true;
+        clearTimeout(hedge);
+        signal.removeEventListener("abort", cancel);
+        round.abort();
+        settle();
+      };
+      const start = (): void => {
+        clearTimeout(hedge);
+        if (settled) return;
+        const endpoint = endpoints[next];
+        if (endpoint === undefined) {
+          if (pending === 0) finish(() => resolve(null));
+          return;
+        }
+        try {
+          this.assertCurrent(revision, signal);
+        } catch (superseded) {
+          finish(() => reject(asError(superseded)));
+          return;
+        }
+        next += 1;
+        pending += 1;
+        const started = next;
+        // Count the hedge delay from the request itself, never from its route check.
+        const sent = (): void => {
+          if (!settled && started === next && this.options.useFallback && next < endpoints.length)
+            hedge = setTimeout(start, FALLBACK_HEDGE_MS);
+        };
+        this.readCurrentRoute(mode, revision, round.signal, endpoint, sent).then(
+          (result) => finish(() => resolve(result)),
+          (error: unknown) => {
+            pending -= 1;
+            if (settled) return;
+            try {
+              this.assertCurrent(revision, signal);
+            } catch (superseded) {
+              finish(() => reject(asError(superseded)));
+              return;
+            }
+            if (error instanceof UnverifiedRouteError) {
+              finish(() => reject(error));
+              return;
+            }
+            if (error instanceof TransportObservationError) retryEndpoints.push(endpoint);
+            start();
+          },
+        );
+      };
+      start();
+    });
   }
 
   private async readCurrentRoute(
@@ -196,9 +266,11 @@ export class NetworkObserver {
     revision: number,
     signal: AbortSignal,
     endpoint: string,
+    sent: () => void = () => undefined,
   ): Promise<{ ip: string; latencyMs: number }> {
     await this.verifyRoute(mode, revision, signal);
     this.assertCurrent(revision, signal);
+    sent();
     const startedAt = this.elapsedNow();
     const attempt = new AbortController();
     let timer: ReturnType<typeof setTimeout> | undefined;
@@ -301,6 +373,10 @@ export class NetworkObserver {
     this.state = state;
     this.options.onChanged();
   }
+}
+
+function asError(error: unknown): Error {
+  return error instanceof Error ? error : new Error(String(error));
 }
 
 function waitForRetry(signal: AbortSignal): Promise<void> {

@@ -324,11 +324,16 @@ describe("network observation", () => {
     expect(f.observer.getState().status).toBe("checking");
     await vi.advanceTimersByTimeAsync(1);
     await pending;
-    expect(f.fetcher.mock.calls.map(([url]) => url)).toEqual([PRIMARY, FALLBACK, PRIMARY]);
+    expect(f.fetcher.mock.calls.map(([url]) => url)).toEqual([
+      PRIMARY,
+      FALLBACK,
+      PRIMARY,
+      FALLBACK,
+    ]);
     expect(f.observer.getState()).toMatchObject({ status: "unavailable", ip: null });
     expect(f.fetcher.mock.calls.every(([, options]) => options?.signal?.aborted)).toBe(true);
     await vi.advanceTimersByTimeAsync(3_000);
-    expect(f.fetcher).toHaveBeenCalledTimes(3);
+    expect(f.fetcher).toHaveBeenCalledTimes(4);
   });
 
   it("stops body transport recovery when route verification is refused", async () => {
@@ -513,7 +518,7 @@ describe("network observation", () => {
   });
 
   it.each(["fetch", "body"])(
-    "uses the fallback after a primary %s hangs for three seconds",
+    "queries the fallback in parallel once a primary %s has been pending for 750 ms",
     async (stage) => {
       vi.useFakeTimers();
       const f = setup(VPN, true);
@@ -522,23 +527,106 @@ describe("network observation", () => {
       else
         f.fetcher.mockResolvedValueOnce(new Response(new ReadableStream<Uint8Array>({ cancel })));
       const pending = f.observer.refresh();
-      await vi.advanceTimersByTimeAsync(3_499);
+      // The new VPN route settles for 500 ms before the primary starts.
+      await vi.advanceTimersByTimeAsync(1_249);
       expect(f.fetcher).toHaveBeenCalledOnce();
       await vi.advanceTimersByTimeAsync(1);
       await pending;
       expect(f.fetcher.mock.calls.map(([url]) => url)).toEqual([PRIMARY, FALLBACK]);
+      expect(f.verifyRoute).toHaveBeenCalledTimes(3);
       expect(f.fetcher.mock.calls[0]?.[1]?.signal?.aborted).toBe(true);
       if (stage === "body") expect(cancel).toHaveBeenCalledOnce();
       expect(f.observer.getState()).toMatchObject({ status: "ready", ip: "8.8.8.8" });
     },
   );
 
-  it("finishes after both providers hang without exceeding their three-second budgets", async () => {
+  it("does not query the fallback when the primary answers within 750 ms", async () => {
+    vi.useFakeTimers();
+    const f = setup(VPN, true);
+    f.fetcher.mockImplementationOnce(
+      () =>
+        new Promise<Response>((resolve) => setTimeout(() => resolve(ipResponse("1.1.1.1")), 749)),
+    );
+    const pending = f.observer.refresh();
+    await vi.advanceTimersByTimeAsync(1_249);
+    await pending;
+    expect(f.fetcher.mock.calls.map(([url]) => url)).toEqual([PRIMARY]);
+    expect(f.observer.getState()).toMatchObject({ status: "ready", ip: "1.1.1.1" });
+    await vi.advanceTimersByTimeAsync(5_000);
+    expect(f.fetcher).toHaveBeenCalledOnce();
+    expect(vi.getTimerCount()).toBe(0);
+  });
+
+  it("counts the hedge delay from the primary request, not from its route check", async () => {
+    vi.useFakeTimers();
+    const f = setup(VPN, true);
+    f.verifyRoute.mockImplementationOnce(
+      () => new Promise((resolve) => setTimeout(() => resolve(true), 400)),
+    );
+    f.fetcher.mockImplementationOnce(
+      () =>
+        new Promise<Response>((resolve) => setTimeout(() => resolve(ipResponse("1.1.1.1")), 600)),
+    );
+    const pending = f.observer.refresh();
+    await vi.advanceTimersByTimeAsync(1_500);
+    await pending;
+    expect(f.fetcher.mock.calls.map(([url]) => url)).toEqual([PRIMARY]);
+    expect(f.observer.getState()).toMatchObject({ status: "ready", ip: "1.1.1.1" });
+  });
+
+  it("contacts no provider when a slow route check refuses the primary", async () => {
+    vi.useFakeTimers();
+    const f = setup(VPN, true);
+    f.verifyRoute.mockImplementationOnce(
+      () => new Promise((resolve) => setTimeout(() => resolve(false), 1_000)),
+    );
+    const pending = f.observer.refresh();
+    await vi.advanceTimersByTimeAsync(1_500);
+    await pending;
+    expect(f.fetcher).not.toHaveBeenCalled();
+    expect(f.verifyRoute).toHaveBeenCalledOnce();
+    expect(f.observer.getState()).toMatchObject({ status: "unavailable", ip: null });
+  });
+
+  it("retries the primary first after a hedged round of transport failures", async () => {
+    vi.useFakeTimers();
+    const f = setup(VPN, true);
+    f.fetcher
+      .mockImplementationOnce(
+        () =>
+          new Promise<Response>((_, reject) =>
+            setTimeout(() => reject(new TypeError("Network error")), 1_000),
+          ),
+      )
+      .mockRejectedValueOnce(new TypeError("Network error"));
+    const pending = f.observer.refresh();
+    await vi.advanceTimersByTimeAsync(2_000);
+    await pending;
+    expect(f.fetcher.mock.calls.map(([url]) => url)).toEqual([PRIMARY, FALLBACK, PRIMARY]);
+    expect(f.observer.getState()).toMatchObject({ status: "ready", ip: "8.8.8.8" });
+  });
+
+  it("cancels a pending primary when the parallel fallback finds the route refused", async () => {
+    vi.useFakeTimers();
+    const f = setup(VPN, true);
+    f.fetcher.mockReturnValueOnce(new Promise<Response>(() => undefined));
+    f.verifyRoute.mockResolvedValueOnce(true).mockResolvedValueOnce(false);
+    const pending = f.observer.refresh();
+    await vi.advanceTimersByTimeAsync(1_250);
+    await pending;
+    expect(f.fetcher.mock.calls.map(([url]) => url)).toEqual([PRIMARY]);
+    expect(f.fetcher.mock.calls[0]?.[1]?.signal?.aborted).toBe(true);
+    expect(f.observer.getState()).toMatchObject({ status: "unavailable", ip: null });
+    expect(vi.getTimerCount()).toBe(0);
+  });
+
+  it("finishes after both providers hang, each within its three-second budget", async () => {
     vi.useFakeTimers();
     const f = setup(VPN, true);
     f.fetcher.mockReturnValue(new Promise<Response>(() => undefined));
     const pending = f.observer.refresh();
-    await vi.advanceTimersByTimeAsync(6_499);
+    // The fallback starts at 1 250 ms and times out three seconds later.
+    await vi.advanceTimersByTimeAsync(4_249);
     expect(f.observer.getState().status).toBe("checking");
     await vi.advanceTimersByTimeAsync(1);
     await pending;
@@ -547,7 +635,7 @@ describe("network observation", () => {
     expect(f.observer.getState()).toMatchObject({ status: "unavailable", ip: null });
   });
 
-  it("ignores a late primary reply after its timeout and successful fallback", async () => {
+  it("ignores a late primary reply after the parallel fallback answered", async () => {
     vi.useFakeTimers();
     const f = setup(VPN, true);
     const response = deferred<Response>();

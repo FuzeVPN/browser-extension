@@ -68,8 +68,10 @@ not change that desktop target.
 
 The popup measures public IPv4 through `api.ipify.org` in both direct and VPN modes.
 If that request fails, hangs or returns an invalid address, it tries the plain-text
-IPv4 service `ipv4.icanhazip.com`. Each provider has a three-second limit within an
-eight-second observation deadline. IPv6 is rejected. Each request uses the selected
+IPv4 service `ipv4.icanhazip.com`. A primary request still unanswered 750 ms after it
+is sent no longer holds back the fallback: both run, the first verified IPv4 wins and the other request
+is cancelled. Each provider has a three-second limit within an eight-second
+observation deadline. IPv6 is rejected. Each request uses the selected
 route; a refused route stops the observation without contacting another provider.
 
 On a new VPN route, the first display probe waits 500 ms after the connected state.

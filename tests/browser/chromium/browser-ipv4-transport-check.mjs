@@ -271,7 +271,8 @@ async function createTlsFixture() {
         });
         response.end(body);
       };
-      if (!fallback && ["primary-hung", "hold-primary"].includes(requestMode)) {
+      // Holding every provider keeps a lookup pending although the fallback is hedged.
+      if (requestMode === "hold-providers" || (!fallback && requestMode === "primary-hung")) {
         heldResponses.push(respond);
         trace("origin-held", { slot, mode: requestMode });
       } else respond();
@@ -645,7 +646,7 @@ async function verify() {
   assert.equal(await popup.locator("#recoveryPanel").isVisible(), false);
   record("both IP services fail without changing protection or disabling disconnect");
 
-  mode = "hold-primary";
+  mode = "hold-providers";
   start = report.transport.length;
   await reconnect();
   await waitHeld(start);
