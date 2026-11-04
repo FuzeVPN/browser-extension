@@ -907,5 +907,23 @@
   },
   "privacyNoticeLinksTitle": {
     "message": "Zásady služby a kontakt"
+  },
+  "theme": {
+    "message": "Motiv"
+  },
+  "themeSystem": {
+    "message": "Systém"
+  },
+  "themeLight": {
+    "message": "Světlý"
+  },
+  "themeDark": {
+    "message": "Tmavý"
+  },
+  "switchToDarkTheme": {
+    "message": "Přepnout na tmavý motiv"
+  },
+  "switchToLightTheme": {
+    "message": "Přepnout na světlý motiv"
   }
 }

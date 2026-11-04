@@ -907,5 +907,23 @@
   },
   "privacyNoticeLinksTitle": {
     "message": "Dienstbeleid en contact"
+  },
+  "theme": {
+    "message": "Thema"
+  },
+  "themeSystem": {
+    "message": "Systeem"
+  },
+  "themeLight": {
+    "message": "Licht"
+  },
+  "themeDark": {
+    "message": "Donker"
+  },
+  "switchToDarkTheme": {
+    "message": "Overschakelen naar donker thema"
+  },
+  "switchToLightTheme": {
+    "message": "Overschakelen naar licht thema"
   }
 }

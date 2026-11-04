@@ -907,5 +907,23 @@
   },
   "privacyNoticeLinksTitle": {
     "message": "サービスのポリシーとお問い合わせ"
+  },
+  "theme": {
+    "message": "テーマ"
+  },
+  "themeSystem": {
+    "message": "システム"
+  },
+  "themeLight": {
+    "message": "ライト"
+  },
+  "themeDark": {
+    "message": "ダーク"
+  },
+  "switchToDarkTheme": {
+    "message": "ダークテーマに切り替え"
+  },
+  "switchToLightTheme": {
+    "message": "ライトテーマに切り替え"
   }
 }

@@ -37,6 +37,14 @@ import { PopupSnapshotOrder, popupSnapshot, type PopupSnapshot } from "./snapsho
 import { exclusionRetry, type ExclusionIntent } from "./exclusion-retry";
 import { DiagnosticConnection, diagnosticErrorKey } from "../diagnostics-page/client";
 import { requestDiagnosticsConsent } from "../../core/shared/data-consent";
+import {
+  isThemePreference,
+  readThemePreference,
+  resolveTheme,
+  toggledTheme,
+  writeThemePreference,
+  type ThemePreference,
+} from "./theme";
 
 interface PopupResponse extends ExtensionResponse {
   snapshot: PopupSnapshot;
@@ -48,8 +56,15 @@ interface PopupResponse extends ExtensionResponse {
 // release it, and render() releases every marker when the account or worker changes.
 type PendingRequest = false | object;
 
+// Apply the saved theme before the popup renders anything.
+const systemDarkTheme = matchMedia("(prefers-color-scheme: dark)");
+let themePreference = readThemePreference();
+document.documentElement.dataset.theme = resolveTheme(themePreference, systemDarkTheme.matches);
+
 const elements = {
   languageSelect: element<HTMLSelectElement>("languageSelect"),
+  themeSelect: element<HTMLSelectElement>("themeSelect"),
+  themeToggleButton: element<HTMLButtonElement>("themeToggleButton"),
   languageError: element<HTMLElement>("languageError"),
   loginView: element<HTMLElement>("loginView"),
   mainView: element<HTMLElement>("mainView"),
@@ -260,6 +275,14 @@ function bindEvents(): void {
     });
   });
   elements.languageSelect.addEventListener("change", () => void changeLanguage());
+  elements.themeSelect.addEventListener("change", () => {
+    const preference = elements.themeSelect.value;
+    if (isThemePreference(preference)) setThemePreference(preference);
+  });
+  elements.themeToggleButton.addEventListener("click", () =>
+    setThemePreference(toggledTheme(themePreference, systemDarkTheme.matches)),
+  );
+  systemDarkTheme.addEventListener("change", renderTheme);
   elements.loginForm.addEventListener("submit", (event) => {
     event.preventDefault();
     void signInOnWeb();
@@ -2156,6 +2179,22 @@ function localizeDocument(): void {
   document.querySelectorAll<HTMLElement>("[data-i18n-title]").forEach((node) => {
     node.setAttribute("title", message(node.dataset.i18nTitle ?? ""));
   });
+  renderTheme();
+}
+
+function setThemePreference(preference: ThemePreference): void {
+  themePreference = preference;
+  writeThemePreference(preference);
+  renderTheme();
+}
+
+function renderTheme(): void {
+  const theme = resolveTheme(themePreference, systemDarkTheme.matches);
+  document.documentElement.dataset.theme = theme;
+  elements.themeSelect.value = themePreference;
+  const label = message(theme === "dark" ? "switchToLightTheme" : "switchToDarkTheme");
+  elements.themeToggleButton.setAttribute("aria-label", label);
+  elements.themeToggleButton.title = label;
 }
 
 function configureLinks(): void {

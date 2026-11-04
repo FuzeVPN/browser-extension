@@ -907,5 +907,23 @@
   },
   "privacyNoticeLinksTitle": {
     "message": "นโยบายของบริการและการติดต่อ"
+  },
+  "theme": {
+    "message": "ธีม"
+  },
+  "themeSystem": {
+    "message": "ตามระบบ"
+  },
+  "themeLight": {
+    "message": "สว่าง"
+  },
+  "themeDark": {
+    "message": "มืด"
+  },
+  "switchToDarkTheme": {
+    "message": "เปลี่ยนเป็นธีมมืด"
+  },
+  "switchToLightTheme": {
+    "message": "เปลี่ยนเป็นธีมสว่าง"
   }
 }

@@ -907,5 +907,23 @@
   },
   "privacyNoticeLinksTitle": {
     "message": "سیاست سرویس و تماس"
+  },
+  "theme": {
+    "message": "پوسته"
+  },
+  "themeSystem": {
+    "message": "سیستم"
+  },
+  "themeLight": {
+    "message": "روشن"
+  },
+  "themeDark": {
+    "message": "تیره"
+  },
+  "switchToDarkTheme": {
+    "message": "تغییر به پوستهٔ تیره"
+  },
+  "switchToLightTheme": {
+    "message": "تغییر به پوستهٔ روشن"
   }
 }

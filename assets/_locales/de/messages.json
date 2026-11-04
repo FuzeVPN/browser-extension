@@ -907,5 +907,23 @@
   },
   "privacyNoticeLinksTitle": {
     "message": "Datenschutzerklärung des Dienstes und Kontakt"
+  },
+  "theme": {
+    "message": "Design"
+  },
+  "themeSystem": {
+    "message": "System"
+  },
+  "themeLight": {
+    "message": "Hell"
+  },
+  "themeDark": {
+    "message": "Dunkel"
+  },
+  "switchToDarkTheme": {
+    "message": "Zum dunklen Design wechseln"
+  },
+  "switchToLightTheme": {
+    "message": "Zum hellen Design wechseln"
   }
 }

@@ -907,5 +907,23 @@
   },
   "privacyNoticeLinksTitle": {
     "message": "服務政策與聯絡方式"
+  },
+  "theme": {
+    "message": "主題"
+  },
+  "themeSystem": {
+    "message": "跟隨系統"
+  },
+  "themeLight": {
+    "message": "淺色"
+  },
+  "themeDark": {
+    "message": "深色"
+  },
+  "switchToDarkTheme": {
+    "message": "切換到深色主題"
+  },
+  "switchToLightTheme": {
+    "message": "切換到淺色主題"
   }
 }

@@ -1815,3 +1815,84 @@ h3,
     display: none;
   }
 }
+
+.topbar-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+:root[data-theme="dark"] .theme-icon-to-dark,
+:root:not([data-theme="dark"]) .theme-icon-to-light {
+  display: none;
+}
+
+/* Dark theme, chosen in settings or followed from the system. */
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --ink: #ede8de;
+  --paper: #0b1115;
+  --surface: #141d23;
+  --network: #22313a;
+  --wash: #1e2a31;
+  --line: #2c3a43;
+  --line-strong: #43525c;
+  --muted: #a7a095;
+  --prose: #d3ccc0;
+  --signal-soft: #3a3119;
+  --signal-deep: #e2b44c;
+}
+
+/* The status and sign-in cards stay dark in both themes. */
+:root[data-theme="dark"] .status-card,
+:root[data-theme="dark"] .intro {
+  --ink: #101820;
+  --paper: #f3efe6;
+  --surface: #faf8f3;
+  --network: #17242c;
+  --muted: #625d54;
+  --signal-soft: #f8e9bb;
+  --signal-deep: #8f6107;
+  border-color: #2c3a43;
+}
+
+:root[data-theme="dark"] .logo {
+  filter: invert(1);
+}
+
+:root[data-theme="dark"] .error-banner {
+  border-color: #6b5326;
+  color: #f1d9a4;
+  background: #2b2414;
+}
+
+:root[data-theme="dark"] .recovery-panel {
+  border-color: #6b5326;
+}
+
+:root[data-theme="dark"] .recovery-icon,
+:root[data-theme="dark"] .recovery-status {
+  color: #f1d9a4;
+}
+
+:root[data-theme="dark"] .danger-button,
+:root[data-theme="dark"] .delete-device-button,
+:root[data-theme="dark"] .exclusion-remove {
+  border-color: #6e3434;
+  color: #f2a7a7;
+  background: #2a1717;
+}
+
+:root[data-theme="dark"] .exclusion-input-error {
+  color: #f2a7a7;
+}
+
+:root[data-theme="dark"] .device-current {
+  color: #8fe0c4;
+  background: #123329;
+}
+
+/* Text on the yellow signal stays dark for contrast. */
+:root[data-theme="dark"] .primary {
+  color: #101820;
+}

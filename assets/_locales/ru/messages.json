@@ -907,5 +907,23 @@
   },
   "privacyNoticeLinksTitle": {
     "message": "Политика сервиса и контакты"
+  },
+  "theme": {
+    "message": "Тема"
+  },
+  "themeSystem": {
+    "message": "Системная"
+  },
+  "themeLight": {
+    "message": "Светлая"
+  },
+  "themeDark": {
+    "message": "Тёмная"
+  },
+  "switchToDarkTheme": {
+    "message": "Включить тёмную тему"
+  },
+  "switchToLightTheme": {
+    "message": "Включить светлую тему"
   }
 }

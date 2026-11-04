@@ -907,5 +907,23 @@
   },
   "privacyNoticeLinksTitle": {
     "message": "서비스 정책 및 연락처"
+  },
+  "theme": {
+    "message": "테마"
+  },
+  "themeSystem": {
+    "message": "시스템"
+  },
+  "themeLight": {
+    "message": "라이트"
+  },
+  "themeDark": {
+    "message": "다크"
+  },
+  "switchToDarkTheme": {
+    "message": "다크 테마로 전환"
+  },
+  "switchToLightTheme": {
+    "message": "라이트 테마로 전환"
   }
 }

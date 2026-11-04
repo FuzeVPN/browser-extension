@@ -907,5 +907,23 @@
   },
   "privacyNoticeLinksTitle": {
     "message": "Πολιτική της υπηρεσίας και επικοινωνία"
+  },
+  "theme": {
+    "message": "Θέμα"
+  },
+  "themeSystem": {
+    "message": "Σύστημα"
+  },
+  "themeLight": {
+    "message": "Ανοιχτό"
+  },
+  "themeDark": {
+    "message": "Σκούρο"
+  },
+  "switchToDarkTheme": {
+    "message": "Μετάβαση σε σκούρο θέμα"
+  },
+  "switchToLightTheme": {
+    "message": "Μετάβαση σε ανοιχτό θέμα"
   }
 }

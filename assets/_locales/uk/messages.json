@@ -907,5 +907,23 @@
   },
   "privacyNoticeLinksTitle": {
     "message": "Політика сервісу та контакти"
+  },
+  "theme": {
+    "message": "Тема"
+  },
+  "themeSystem": {
+    "message": "Системна"
+  },
+  "themeLight": {
+    "message": "Світла"
+  },
+  "themeDark": {
+    "message": "Темна"
+  },
+  "switchToDarkTheme": {
+    "message": "Увімкнути темну тему"
+  },
+  "switchToLightTheme": {
+    "message": "Увімкнути світлу тему"
   }
 }

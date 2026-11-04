@@ -907,5 +907,23 @@
   },
   "privacyNoticeLinksTitle": {
     "message": "Política del servicio y contacto"
+  },
+  "theme": {
+    "message": "Tema"
+  },
+  "themeSystem": {
+    "message": "Sistema"
+  },
+  "themeLight": {
+    "message": "Claro"
+  },
+  "themeDark": {
+    "message": "Oscuro"
+  },
+  "switchToDarkTheme": {
+    "message": "Cambiar al tema oscuro"
+  },
+  "switchToLightTheme": {
+    "message": "Cambiar al tema claro"
   }
 }

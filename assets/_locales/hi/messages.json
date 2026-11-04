@@ -907,5 +907,23 @@
   },
   "privacyNoticeLinksTitle": {
     "message": "सेवा की नीति और संपर्क"
+  },
+  "theme": {
+    "message": "थीम"
+  },
+  "themeSystem": {
+    "message": "सिस्टम"
+  },
+  "themeLight": {
+    "message": "हल्की"
+  },
+  "themeDark": {
+    "message": "गहरी"
+  },
+  "switchToDarkTheme": {
+    "message": "गहरी थीम पर जाएँ"
+  },
+  "switchToLightTheme": {
+    "message": "हल्की थीम पर जाएँ"
   }
 }

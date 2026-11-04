@@ -907,5 +907,23 @@
   },
   "privacyNoticeLinksTitle": {
     "message": "Politica serviciului și contact"
+  },
+  "theme": {
+    "message": "Temă"
+  },
+  "themeSystem": {
+    "message": "Sistem"
+  },
+  "themeLight": {
+    "message": "Luminoasă"
+  },
+  "themeDark": {
+    "message": "Întunecată"
+  },
+  "switchToDarkTheme": {
+    "message": "Comută la tema întunecată"
+  },
+  "switchToLightTheme": {
+    "message": "Comută la tema luminoasă"
   }
 }

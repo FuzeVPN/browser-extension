@@ -907,5 +907,23 @@
   },
   "privacyNoticeLinksTitle": {
     "message": "Patakaran ng serbisyo at pakikipag-ugnayan"
+  },
+  "theme": {
+    "message": "Tema"
+  },
+  "themeSystem": {
+    "message": "Sistema"
+  },
+  "themeLight": {
+    "message": "Maliwanag"
+  },
+  "themeDark": {
+    "message": "Madilim"
+  },
+  "switchToDarkTheme": {
+    "message": "Lumipat sa madilim na tema"
+  },
+  "switchToLightTheme": {
+    "message": "Lumipat sa maliwanag na tema"
   }
 }

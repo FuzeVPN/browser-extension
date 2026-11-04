@@ -907,5 +907,23 @@
   },
   "privacyNoticeLinksTitle": {
     "message": "سروس کی پالیسی اور رابطہ"
+  },
+  "theme": {
+    "message": "تھیم"
+  },
+  "themeSystem": {
+    "message": "سسٹم"
+  },
+  "themeLight": {
+    "message": "ہلکی"
+  },
+  "themeDark": {
+    "message": "گہری"
+  },
+  "switchToDarkTheme": {
+    "message": "گہری تھیم پر جائیں"
+  },
+  "switchToLightTheme": {
+    "message": "ہلکی تھیم پر جائیں"
   }
 }

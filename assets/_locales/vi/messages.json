@@ -907,5 +907,23 @@
   },
   "privacyNoticeLinksTitle": {
     "message": "Chính sách dịch vụ và liên hệ"
+  },
+  "theme": {
+    "message": "Giao diện"
+  },
+  "themeSystem": {
+    "message": "Hệ thống"
+  },
+  "themeLight": {
+    "message": "Sáng"
+  },
+  "themeDark": {
+    "message": "Tối"
+  },
+  "switchToDarkTheme": {
+    "message": "Chuyển sang giao diện tối"
+  },
+  "switchToLightTheme": {
+    "message": "Chuyển sang giao diện sáng"
   }
 }

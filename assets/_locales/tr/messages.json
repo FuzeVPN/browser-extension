@@ -907,5 +907,23 @@
   },
   "privacyNoticeLinksTitle": {
     "message": "Hizmet politikası ve iletişim"
+  },
+  "theme": {
+    "message": "Tema"
+  },
+  "themeSystem": {
+    "message": "Sistem"
+  },
+  "themeLight": {
+    "message": "Açık"
+  },
+  "themeDark": {
+    "message": "Koyu"
+  },
+  "switchToDarkTheme": {
+    "message": "Koyu temaya geç"
+  },
+  "switchToLightTheme": {
+    "message": "Açık temaya geç"
   }
 }

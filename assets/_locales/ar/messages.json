@@ -907,5 +907,23 @@
   },
   "privacyNoticeLinksTitle": {
     "message": "سياسة الخدمة والتواصل"
+  },
+  "theme": {
+    "message": "المظهر"
+  },
+  "themeSystem": {
+    "message": "النظام"
+  },
+  "themeLight": {
+    "message": "فاتح"
+  },
+  "themeDark": {
+    "message": "داكن"
+  },
+  "switchToDarkTheme": {
+    "message": "التبديل إلى المظهر الداكن"
+  },
+  "switchToLightTheme": {
+    "message": "التبديل إلى المظهر الفاتح"
   }
 }

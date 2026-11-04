@@ -907,5 +907,23 @@
   },
   "privacyNoticeLinksTitle": {
     "message": "Service policy and contact"
+  },
+  "theme": {
+    "message": "Theme"
+  },
+  "themeSystem": {
+    "message": "System"
+  },
+  "themeLight": {
+    "message": "Light"
+  },
+  "themeDark": {
+    "message": "Dark"
+  },
+  "switchToDarkTheme": {
+    "message": "Switch to dark theme"
+  },
+  "switchToLightTheme": {
+    "message": "Switch to light theme"
   }
 }

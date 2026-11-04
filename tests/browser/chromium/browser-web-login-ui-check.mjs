@@ -256,12 +256,14 @@ try {
     );
     await capture(page, language, "ready", {
       text: designText,
-      controls: ["#settingsButton", "#loginButton", "#loginPrivacyLink"],
+      controls: ["#themeToggleButton", "#settingsButton", "#loginButton", "#loginPrivacyLink"],
       primary: ["#loginButton"],
       inView: ["#loginButton"],
     });
     check(`Single web sign-in, no credentials and accessible layout in ${language}`);
 
+    await page.keyboard.press("Tab");
+    assert.equal(await page.evaluate(() => document.activeElement.id), "themeToggleButton");
     await page.keyboard.press("Tab");
     assert.equal(await page.evaluate(() => document.activeElement.id), "settingsButton");
     await page.keyboard.press("Tab");

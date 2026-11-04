@@ -907,5 +907,23 @@
   },
   "privacyNoticeLinksTitle": {
     "message": "Tjenestens retningslinjer og kontakt"
+  },
+  "theme": {
+    "message": "Tema"
+  },
+  "themeSystem": {
+    "message": "System"
+  },
+  "themeLight": {
+    "message": "Lyst"
+  },
+  "themeDark": {
+    "message": "Mørkt"
+  },
+  "switchToDarkTheme": {
+    "message": "Bytt til mørkt tema"
+  },
+  "switchToLightTheme": {
+    "message": "Bytt til lyst tema"
   }
 }

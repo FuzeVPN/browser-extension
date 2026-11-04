@@ -907,5 +907,23 @@
   },
   "privacyNoticeLinksTitle": {
     "message": "Dasar perkhidmatan dan hubungan"
+  },
+  "theme": {
+    "message": "Tema"
+  },
+  "themeSystem": {
+    "message": "Sistem"
+  },
+  "themeLight": {
+    "message": "Cerah"
+  },
+  "themeDark": {
+    "message": "Gelap"
+  },
+  "switchToDarkTheme": {
+    "message": "Tukar ke tema gelap"
+  },
+  "switchToLightTheme": {
+    "message": "Tukar ke tema cerah"
   }
 }
