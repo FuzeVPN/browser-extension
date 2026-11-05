@@ -83,11 +83,12 @@ Outputs under ignored `releases/`:
 ```text
 fuzevpn-chrome-v0.9.3.zip
 fuzevpn-edge-v0.9.3.zip
+fuzevpn-edge-v0.9.3-store.zip
 fuzevpn-firefox-v0.9.3.zip
 fuzevpn-extensions-v0.9.3-sources.zip
 ```
 
-This command creates all four archives. The source packager can also be invoked independently with `node scripts/package-source.mjs`. Every archive has a matching `.sha256` file. Packaging verifies the complete distribution and ZIP inventories and never overwrites an existing version. An identical release is preserved byte for byte; a different or incomplete release requires a new version. Sources, audits, private files and publication metadata are excluded from installable ZIPs. The source ZIP contains the checked-in assets, lockfile, build tools, tests, notices and reconstruction instructions, without generated distributions or private data.
+This command creates all five archives. The Edge store ZIP is the Edge ZIP without the manifest `key`, which Edge Add-ons rejects; that key only pins the identity of unpacked installs. The source packager can also be invoked independently with `node scripts/package-source.mjs`. Every archive has a matching `.sha256` file. Packaging verifies the complete distribution and ZIP inventories and never overwrites an existing version. An identical release is preserved byte for byte; a different or incomplete release requires a new version. Sources, audits, private files and publication metadata are excluded from installable ZIPs. The source ZIP contains the checked-in assets, lockfile, build tools, tests, notices and reconstruction instructions, without generated distributions or private data.
 
 Run `npm run verify:sources` to extract the source ZIP into a local audit directory, install from its lockfile, rebuild all three targets and compare every file with the distributions. This verifies an independently extracted source archive. Store signing can change the outer store package; compare reconstructed extension contents.
 

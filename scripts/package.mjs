@@ -5,7 +5,7 @@ import { resolve } from "node:path";
 import { pathToFileURL } from "node:url";
 import { randomUUID } from "node:crypto";
 import { assertInsideProject, projectRoot } from "./validation-common.mjs";
-import { distributionDirectory, selectTargets } from "./targets.mjs";
+import { distributionDirectory, manifestBytes, selectTargets } from "./targets.mjs";
 import { canonical, digest, verifyDist, verifyChromiumParity } from "./verify-dist.mjs";
 import { createZip, readZip } from "./zip.mjs";
 import { assertPublicEntry, readPublicFile, readPublicSources } from "./public-inputs.mjs";
@@ -80,6 +80,14 @@ export async function publishArchive({ directory, name, entries, expected }) {
   return { archive: name, sha256: digest(bytes), preserved: false };
 }
 
+/** Edge Add-ons rejects the manifest key that pins the identity of unpacked installs. */
+export function edgeStoreManifest(contents) {
+  const manifest = JSON.parse(Buffer.from(contents).toString("utf8"));
+  if (typeof manifest.key !== "string") throw new Error("Edge manifest key missing");
+  delete manifest.key;
+  return Buffer.from(manifestBytes(manifest));
+}
+
 export async function packageTarget(target) {
   readPublicSources();
   await auditDist(target);
@@ -103,7 +111,21 @@ export async function packageTarget(target) {
       entries,
       expected: inputs.files,
     });
-    return { target, version: inputs.version, ...result };
+    const packaged = { target, version: inputs.version, ...result };
+    if (target !== "edge") return packaged;
+    const storeEntries = entries.map(([name, contents]) => [
+      name,
+      name === "manifest.json" ? edgeStoreManifest(contents) : contents,
+    ]);
+    const store = await publishArchive({
+      directory: releaseDirectory,
+      name: `fuzevpn-edge-v${inputs.version}-store.zip`,
+      entries: storeEntries,
+      expected: Object.fromEntries(
+        storeEntries.map(([name, contents]) => [name, digest(contents)]),
+      ),
+    });
+    return { ...packaged, store };
   } finally {
     await lock.close();
     await unlink(lockPath);

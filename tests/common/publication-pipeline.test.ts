@@ -17,6 +17,7 @@ import {
 } from "node:fs/promises";
 import { dirname, join, resolve, sep } from "node:path";
 import { SOURCE_DIRECTORIES, SOURCE_ROOT_FILES } from "../../scripts/public-inputs.mjs";
+import { readZip } from "../../scripts/zip.mjs";
 
 const root = resolve(import.meta.dirname, "../..");
 const cache = join(root, "audit/local/fixes-2026-10-19/build_supply_chain/pipeline-tests");
@@ -234,7 +235,25 @@ describe("exact publication pipeline rejects unsafe inputs before writing artifa
           ),
         ),
       );
-      expect(releaseHashes.size).toBe(4);
+      expect(releaseHashes.size).toBe(5);
+      // The Edge store archive differs from the Edge archive only by its manifest key.
+      const edge = [...releaseHashes.keys()].find((name) =>
+        /^fuzevpn-edge-v[\d.]+\.zip$/.test(name),
+      );
+      const store = [...releaseHashes.keys()].find((name) => name.endsWith("-store.zip"));
+      expect(store).toBe(edge?.replace(/\.zip$/, "-store.zip"));
+      const files = (name: string) =>
+        readFile(join(project, "releases", name)).then((bytes) => new Map(readZip(bytes)));
+      const [edgeFiles, storeFiles] = await Promise.all([files(edge ?? ""), files(store ?? "")]);
+      expect([...storeFiles.keys()]).toEqual([...edgeFiles.keys()]);
+      for (const [name, contents] of edgeFiles)
+        if (name !== "manifest.json")
+          expect(hash(storeFiles.get(name) ?? new Uint8Array())).toBe(hash(contents));
+      const { key, ...edgeManifest } = JSON.parse(String(edgeFiles.get("manifest.json"))) as {
+        key?: string;
+      };
+      expect(typeof key).toBe("string");
+      expect(JSON.parse(String(storeFiles.get("manifest.json")))).toEqual(edgeManifest);
     },
     PIPELINE_TIMEOUT,
   );
@@ -242,7 +261,7 @@ describe("exact publication pipeline rejects unsafe inputs before writing artifa
   it(
     "preserves existing same-version installable and source archives",
     async () => {
-      expect(releaseHashes.size).toBe(4);
+      expect(releaseHashes.size).toBe(5);
       expect(run("scripts/package.mjs", ["chrome"]).status).toBe(0);
       expect(run("scripts/package-source.mjs").status).toBe(0);
       for (const [name, checksum] of releaseHashes)
