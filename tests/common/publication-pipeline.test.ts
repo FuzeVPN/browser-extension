@@ -75,7 +75,10 @@ beforeAll(async () => {
   );
   const result = run("scripts/build.mjs");
   if (result.status !== 0) throw new Error(`Synthetic fixture build failed: ${result.output}`);
-  expect(result.output).toContain("Built firefox 0.9.2");
+  const { version } = JSON.parse(await readFile(join(project, "package.json"), "utf8")) as {
+    version: string;
+  };
+  expect(result.output).toContain(`Built firefox ${version}`);
   expect(result.status).toBe(0);
 }, PIPELINE_TIMEOUT);
 
