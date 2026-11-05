@@ -1896,3 +1896,15 @@ h3,
 :root[data-theme="dark"] .primary {
   color: #101820;
 }
+
+/* The IP line spans the card under the location, clear of the change button. */
+.location-card {
+  flex-wrap: wrap;
+  row-gap: 2px;
+}
+
+.location-card > .public-ip {
+  flex: 0 0 100%;
+  margin: 0;
+  padding-inline-start: 44px;
+}
