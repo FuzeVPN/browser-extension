@@ -1,0 +1,929 @@
+{
+  "extensionName": {
+    "message": "FuzeVPN"
+  },
+  "extensionDescription": {
+    "message": "ਇੱਕ ਕਲਿੱਕ ਨਾਲ ਆਪਣੀ ਪਰਦੇਦਾਰੀ ਬਚਾਓ ਅਤੇ ਆਪਣੀ ਸੁਰੱਖਿਆ ਮਜ਼ਬੂਤ ਕਰੋ।"
+  },
+  "siteExclusionsReloadRequired": {
+    "message": "ਅੱਪਡੇਟ ਪੂਰਾ ਕਰਨ ਅਤੇ ਸਾਈਟ ਛੋਟਾਂ ਵਰਤਣ ਲਈ ਬ੍ਰਾਊਜ਼ਰ ਦੇ ਐਕਸਟੈਂਸ਼ਨ ਮੈਨੇਜਰ ਤੋਂ FuzeVPN ਨੂੰ ਮੁੜ-ਲੋਡ ਕਰੋ।"
+  },
+  "extensionCommunicationError": {
+    "message": "ਐਕਸਟੈਂਸ਼ਨ ਜਵਾਬ ਨਹੀਂ ਦੇ ਰਹੀ। ਇਹ ਵਿੰਡੋ ਬੰਦ ਕਰੋ, ਫਿਰ ਬ੍ਰਾਊਜ਼ਰ ਦੇ ਐਕਸਟੈਂਸ਼ਨ ਮੈਨੇਜਰ ਤੋਂ FuzeVPN ਨੂੰ ਮੁੜ-ਲੋਡ ਕਰੋ।"
+  },
+  "actionDisconnected": {
+    "message": "FuzeVPN — ਡਿਸਕਨੈਕਟ ਹੈ"
+  },
+  "actionConnected": {
+    "message": "FuzeVPN — ਇਸ ਬ੍ਰਾਊਜ਼ਰ ਵਿੱਚ ਸੁਰੱਖਿਅਤ"
+  },
+  "actionReconnecting": {
+    "message": "FuzeVPN — ਮੁੜ-ਕਨੈਕਟ ਹੋ ਰਿਹਾ ਹੈ"
+  },
+  "actionError": {
+    "message": "FuzeVPN — ਧਿਆਨ ਦੇਣ ਦੀ ਲੋੜ ਹੈ"
+  },
+  "browserProtection": {
+    "message": "ਬ੍ਰਾਊਜ਼ਰ ਸੁਰੱਖਿਆ"
+  },
+  "loginTitle": {
+    "message": "FuzeVPN ਵਿੱਚ ਜੀ ਆਇਆਂ ਨੂੰ"
+  },
+  "loginSubtitle": {
+    "message": "ਇਸ ਬ੍ਰਾਊਜ਼ਰ ਵਿੱਚ ਆਪਣੀ ਬ੍ਰਾਊਜ਼ਿੰਗ ਨੂੰ ਸੁਰੱਖਿਅਤ ਕਰਨ ਲਈ ਸਾਈਨ ਇਨ ਕਰੋ।"
+  },
+  "email": {
+    "message": "ਈਮੇਲ ਪਤਾ"
+  },
+  "emailPlaceholder": {
+    "message": "you@example.com"
+  },
+  "password": {
+    "message": "ਪਾਸਵਰਡ"
+  },
+  "signIn": {
+    "message": "ਸਾਈਨ ਇਨ ਕਰੋ"
+  },
+  "signingIn": {
+    "message": "ਸਾਈਨ ਇਨ ਹੋ ਰਿਹਾ ਹੈ…"
+  },
+  "forgotPassword": {
+    "message": "ਪਾਸਵਰਡ ਭੁੱਲ ਗਏ?"
+  },
+  "createAccount": {
+    "message": "ਖਾਤਾ ਬਣਾਓ"
+  },
+  "settings": {
+    "message": "ਸੈਟਿੰਗਾਂ"
+  },
+  "close": {
+    "message": "ਬੰਦ ਕਰੋ"
+  },
+  "statusDisconnected": {
+    "message": "ਡਿਸਕਨੈਕਟ ਹੈ"
+  },
+  "statusConnecting": {
+    "message": "ਕਨੈਕਟ ਹੋ ਰਿਹਾ ਹੈ…"
+  },
+  "statusChanging": {
+    "message": "ਟਿਕਾਣਾ ਬਦਲਿਆ ਜਾ ਰਿਹਾ ਹੈ…"
+  },
+  "statusProtected": {
+    "message": "ਇਸ ਬ੍ਰਾਊਜ਼ਰ ਵਿੱਚ ਸੁਰੱਖਿਅਤ"
+  },
+  "statusRefreshing": {
+    "message": "ਸੁਰੱਖਿਅਤ ਢੰਗ ਨਾਲ ਨਵਿਆਇਆ ਜਾ ਰਿਹਾ ਹੈ…"
+  },
+  "statusDisconnecting": {
+    "message": "ਡਿਸਕਨੈਕਟ ਹੋ ਰਿਹਾ ਹੈ…"
+  },
+  "statusError": {
+    "message": "ਸੁਰੱਖਿਆ ਰੁਕ ਗਈ"
+  },
+  "browserOnlyDetail": {
+    "message": "ਇਸ ਬ੍ਰਾਊਜ਼ਰ ਲਈ ਸੁਰੱਖਿਆ।"
+  },
+  "location": {
+    "message": "ਟਿਕਾਣਾ"
+  },
+  "change": {
+    "message": "ਬਦਲੋ"
+  },
+  "noLocation": {
+    "message": "ਕੋਈ ਟਿਕਾਣਾ ਉਪਲਬਧ ਨਹੀਂ"
+  },
+  "protectBrowser": {
+    "message": "ਬ੍ਰਾਊਜ਼ਰ ਨੂੰ ਸੁਰੱਖਿਅਤ ਕਰੋ"
+  },
+  "disconnect": {
+    "message": "ਡਿਸਕਨੈਕਟ ਕਰੋ"
+  },
+  "subscription": {
+    "message": "ਸਬਸਕ੍ਰਿਪਸ਼ਨ"
+  },
+  "refreshSubscription": {
+    "message": "ਸਬਸਕ੍ਰਿਪਸ਼ਨ ਰਿਫ੍ਰੈਸ਼ ਕਰੋ"
+  },
+  "refreshingSubscription": {
+    "message": "ਸਬਸਕ੍ਰਿਪਸ਼ਨ ਰਿਫ੍ਰੈਸ਼ ਹੋ ਰਹੀ ਹੈ…"
+  },
+  "subscriptionActive": {
+    "message": "ਕਿਰਿਆਸ਼ੀਲ"
+  },
+  "subscriptionInactive": {
+    "message": "ਅਕਿਰਿਆਸ਼ੀਲ"
+  },
+  "expiresOn": {
+    "message": "ਮਿਆਦ ਸਮਾਪਤੀ: $1"
+  },
+  "noExpiry": {
+    "message": "ਕੋਈ ਮਿਆਦ ਸਮਾਪਤੀ ਮਿਤੀ ਨਹੀਂ"
+  },
+  "browserOnlyNotice": {
+    "message": "ਸਿਰਫ਼ ਇਹ ਬ੍ਰਾਊਜ਼ਰ। ਹੋਰ ਐਪਾਂ ਅਤੇ ਬ੍ਰਾਊਜ਼ਰ ਸ਼ਾਮਲ ਨਹੀਂ ਹਨ।"
+  },
+  "resendVerification": {
+    "message": "ਈਮੇਲ ਦੁਬਾਰਾ ਭੇਜੋ"
+  },
+  "incognitoHelp": {
+    "message": "ਨਿੱਜੀ ਬ੍ਰਾਊਜ਼ਿੰਗ ਉਹੀ ਸੁਰੱਖਿਆ ਤਾਂ ਹੀ ਵਰਤਦੀ ਹੈ ਜੇਕਰ ਬ੍ਰਾਊਜ਼ਰ ਦੀਆਂ ਸੈਟਿੰਗਾਂ ਵਿੱਚ ਐਕਸਟੈਂਸ਼ਨ ਨੂੰ ਨਿੱਜੀ ਮੋਡ ਵਿੱਚ ਚੱਲਣ ਦੀ ਇਜਾਜ਼ਤ ਦਿੱਤੀ ਗਈ ਹੋਵੇ।"
+  },
+  "manageAccount": {
+    "message": "ਮੇਰਾ ਖਾਤਾ ਪ੍ਰਬੰਧਿਤ ਕਰੋ"
+  },
+  "account": {
+    "message": "ਖਾਤਾ"
+  },
+  "devices": {
+    "message": "ਡੀਵਾਈਸ"
+  },
+  "manageDevices": {
+    "message": "ਡੀਵਾਈਸ ਪ੍ਰਬੰਧਿਤ ਕਰੋ"
+  },
+  "refreshDevices": {
+    "message": "ਡੀਵਾਈਸ ਰਿਫ੍ਰੈਸ਼ ਕਰੋ"
+  },
+  "deviceCount": {
+    "message": "$1 / $2 ਡੀਵਾਈਸ"
+  },
+  "loadingDevices": {
+    "message": "ਡੀਵਾਈਸ ਲੋਡ ਹੋ ਰਹੇ ਹਨ…"
+  },
+  "noDevices": {
+    "message": "ਕੋਈ ਕਿਰਿਆਸ਼ੀਲ ਡੀਵਾਈਸ ਨਹੀਂ।"
+  },
+  "currentDevice": {
+    "message": "ਇਹ ਡੀਵਾਈਸ"
+  },
+  "deviceKindBrowser": {
+    "message": "ਬ੍ਰਾਊਜ਼ਰ ਐਕਸਟੈਂਸ਼ਨ"
+  },
+  "deviceKindVpn": {
+    "message": "VPN ਡੀਵਾਈਸ"
+  },
+  "profile_browser_proxy": {
+    "message": "ਬ੍ਰਾਊਜ਼ਰ ਪ੍ਰੌਕਸੀ"
+  },
+  "profile_wireguard": {
+    "message": "WireGuard"
+  },
+  "profile_openvpn": {
+    "message": "OpenVPN"
+  },
+  "none": {
+    "message": "ਕੋਈ ਨਹੀਂ"
+  },
+  "deviceCreatedOn": {
+    "message": "ਬਣਾਉਣ ਦੀ ਮਿਤੀ: $1"
+  },
+  "deleteDevice": {
+    "message": "ਡੀਵਾਈਸ ਮਿਟਾਓ"
+  },
+  "deleteDeviceNamed": {
+    "message": "ਡੀਵਾਈਸ ਮਿਟਾਓ: $1"
+  },
+  "confirmDeleteDevice": {
+    "message": "ਕੀ “$1” ਨੂੰ ਹਟਾਉਣਾ ਹੈ? ਇਸਦੇ VPN ਕਨੈਕਸ਼ਨ ਬੰਦ ਹੋ ਜਾਣਗੇ ਅਤੇ ਇਸਦੇ ਪ੍ਰੋਫਾਈਲ ਹਟਾ ਦਿੱਤੇ ਜਾਣਗੇ।"
+  },
+  "resetDevice": {
+    "message": "ਡੀਵਾਈਸ ਰੀਸੈੱਟ ਕਰੋ"
+  },
+  "confirmResetDevice": {
+    "message": "ਕੀ ਇਸ ਐਕਸਟੈਂਸ਼ਨ ਨੂੰ ਰੀਸੈੱਟ ਕਰਨਾ ਹੈ? ਅਗਲੀ ਵਾਰ ਵਰਤਣ 'ਤੇ ਇਹ ਨਵੇਂ ਡੀਵਾਈਸ ਵਜੋਂ ਰਜਿਸਟਰ ਹੋਵੇਗੀ।"
+  },
+  "signOutAccount": {
+    "message": "ਖਾਤੇ ਤੋਂ ਸਾਈਨ ਆਉਟ ਕਰੋ"
+  },
+  "chooseLocation": {
+    "message": "ਕੋਈ ਟਿਕਾਣਾ ਚੁਣੋ"
+  },
+  "error_invalid_credentials": {
+    "message": "ਈਮੇਲ ਪਤਾ ਜਾਂ ਪਾਸਵਰਡ ਗਲਤ ਹੈ।"
+  },
+  "error_unauthorized": {
+    "message": "ਤੁਹਾਡੇ ਸੈਸ਼ਨ ਦੀ ਮਿਆਦ ਪੁੱਗ ਗਈ ਹੈ। ਕਿਰਪਾ ਕਰਕੇ ਦੁਬਾਰਾ ਸਾਈਨ ਇਨ ਕਰੋ।"
+  },
+  "error_email_verification_required": {
+    "message": "ਸੁਰੱਖਿਆ ਚਾਲੂ ਕਰਨ ਤੋਂ ਪਹਿਲਾਂ ਆਪਣੇ ਈਮੇਲ ਪਤੇ ਦੀ ਪੁਸ਼ਟੀ ਕਰੋ।"
+  },
+  "errorVerificationCooldown": {
+    "message": "ਨਵੀਂ ਈਮੇਲ $1 ਸਕਿੰਟਾਂ ਬਾਅਦ ਮੰਗੀ ਜਾ ਸਕਦੀ ਹੈ।"
+  },
+  "error_verification_email_cooldown": {
+    "message": "ਕਿਰਪਾ ਕਰਕੇ ਹੋਰ ਈਮੇਲ ਮੰਗਣ ਤੋਂ ਪਹਿਲਾਂ ਉਡੀਕ ਕਰੋ।"
+  },
+  "error_subscription_required": {
+    "message": "ਇਸ ਬ੍ਰਾਊਜ਼ਰ ਨੂੰ ਸੁਰੱਖਿਅਤ ਕਰਨ ਲਈ ਕਿਰਿਆਸ਼ੀਲ ਸਬਸਕ੍ਰਿਪਸ਼ਨ ਲੋੜੀਂਦੀ ਹੈ।"
+  },
+  "error_device_limit": {
+    "message": "ਡੀਵਾਈਸ ਸੀਮਾ ਪੂਰੀ ਹੋ ਗਈ। ਕਿਰਪਾ ਕਰਕੇ ਇੱਕ ਡੀਵਾਈਸ ਹਟਾਓ।"
+  },
+  "error_device_identity_revoked": {
+    "message": "ਇਹ ਡੀਵਾਈਸ ਹੁਣ ਅਧਿਕਾਰਤ ਨਹੀਂ ਹੈ। ਦੁਬਾਰਾ ਕਨੈਕਟ ਕਰਨ ਦੀ ਕੋਸ਼ਿਸ਼ ਕਰੋ।"
+  },
+  "error_device_proof_invalid": {
+    "message": "ਅਸੀਂ ਇਸ ਡੀਵਾਈਸ ਦੀ ਪੁਸ਼ਟੀ ਨਹੀਂ ਕਰ ਸਕੇ। ਆਪਣੇ ਕੰਪਿਊਟਰ ਦੀ ਮਿਤੀ ਅਤੇ ਸਮਾਂ ਜਾਂਚੋ, ਫਿਰ ਦੁਬਾਰਾ ਕੋਸ਼ਿਸ਼ ਕਰੋ।"
+  },
+  "error_device_proof_replayed": {
+    "message": "ਇਸ ਬੇਨਤੀ 'ਤੇ ਪਹਿਲਾਂ ਹੀ ਕਾਰਵਾਈ ਹੋ ਚੁੱਕੀ ਹੈ। ਦੁਬਾਰਾ ਕੋਸ਼ਿਸ਼ ਕਰੋ।"
+  },
+  "error_invalid_device": {
+    "message": "ਇਸ ਡੀਵਾਈਸ ਦੀ ਪਛਾਣ ਨਹੀਂ ਹੋਈ। ਦੁਬਾਰਾ ਕਨੈਕਟ ਕਰਨ ਦੀ ਕੋਸ਼ਿਸ਼ ਕਰੋ।"
+  },
+  "error_device_exists": {
+    "message": "ਇਹ ਡੀਵਾਈਸ ਪਛਾਣ ਪਹਿਲਾਂ ਹੀ ਕਿਸੇ ਹੋਰ ਖਾਤੇ ਨਾਲ ਲਿੰਕ ਹੈ।"
+  },
+  "error_not_found": {
+    "message": "ਇਹ ਕਾਰਵਾਈ ਹੁਣ ਉਪਲਬਧ ਨਹੀਂ ਹੈ। ਦੁਬਾਰਾ ਕੋਸ਼ਿਸ਼ ਕਰੋ।"
+  },
+  "error_invalid_location": {
+    "message": "ਇਹ ਟਿਕਾਣਾ ਉਪਲਬਧ ਨਹੀਂ ਹੈ। ਕੋਈ ਹੋਰ ਚੁਣੋ।"
+  },
+  "error_rate_limited": {
+    "message": "ਬਹੁਤ ਜ਼ਿਆਦਾ ਕੋਸ਼ਿਸ਼ਾਂ। ਥੋੜ੍ਹੀ ਦੇਰ ਉਡੀਕ ਕਰੋ ਅਤੇ ਦੁਬਾਰਾ ਕੋਸ਼ਿਸ਼ ਕਰੋ।"
+  },
+  "error_proxy_unavailable": {
+    "message": "ਇਹ ਸਰਵਰ ਆਰਜ਼ੀ ਤੌਰ 'ਤੇ ਉਪਲਬਧ ਨਹੀਂ ਹੈ। ਥੋੜ੍ਹੀ ਦੇਰ ਬਾਅਦ ਦੁਬਾਰਾ ਕੋਸ਼ਿਸ਼ ਕਰੋ।"
+  },
+  "error_api_token_expired": {
+    "message": "ਤੁਹਾਡੇ ਖਾਤਾ ਸੈਸ਼ਨ ਦੀ ਮਿਆਦ ਪੁੱਗ ਗਈ ਹੈ। ਕਿਰਪਾ ਕਰਕੇ ਦੁਬਾਰਾ ਸਾਈਨ ਇਨ ਕਰੋ।"
+  },
+  "error_network_error": {
+    "message": "ਨੈੱਟਵਰਕ ਉਪਲਬਧ ਨਹੀਂ ਹੈ। ਆਪਣਾ ਇੰਟਰਨੈੱਟ ਕਨੈਕਸ਼ਨ ਜਾਂਚੋ।"
+  },
+  "error_request_timeout": {
+    "message": "ਸੇਵਾ ਨੇ ਜਵਾਬ ਦੇਣ ਵਿੱਚ ਬਹੁਤ ਸਮਾਂ ਲਿਆ। ਦੁਬਾਰਾ ਕੋਸ਼ਿਸ਼ ਕਰੋ।"
+  },
+  "error_invalid_response": {
+    "message": "ਸੇਵਾ ਨੇ ਅਣਕਿਆਸਿਆ ਜਵਾਬ ਦਿੱਤਾ।"
+  },
+  "error_proxy_certificate_invalid": {
+    "message": "ਅਸੀਂ ਸਰਵਰ ਦੀ ਸੁਰੱਖਿਆ ਦੀ ਪੁਸ਼ਟੀ ਨਹੀਂ ਕਰ ਸਕੇ। ਕਨੈਕਸ਼ਨ ਰੋਕ ਦਿੱਤਾ ਗਿਆ ਹੈ।"
+  },
+  "error_proxy_controlled_by_extension": {
+    "message": "ਇਸ ਵੇਲੇ ਕੋਈ ਹੋਰ ਐਕਸਟੈਂਸ਼ਨ ਬ੍ਰਾਊਜ਼ਰ ਦੀ ਪ੍ਰੌਕਸੀ ਨੂੰ ਕੰਟਰੋਲ ਕਰਦੀ ਹੈ।"
+  },
+  "error_proxy_controlled_by_policy": {
+    "message": "ਪ੍ਰਸ਼ਾਸਕ ਦੀ ਨੀਤੀ FuzeVPN ਨੂੰ ਪ੍ਰੌਕਸੀ ਬਦਲਣ ਤੋਂ ਰੋਕਦੀ ਹੈ।"
+  },
+  "error_proxy_authentication_failed": {
+    "message": "ਸਰਵਰ ਨੇ ਕਨੈਕਸ਼ਨ ਸਵੀਕਾਰ ਨਹੀਂ ਕੀਤਾ। ਦੁਬਾਰਾ ਕਨੈਕਟ ਕਰਨ ਦੀ ਕੋਸ਼ਿਸ਼ ਕਰੋ।"
+  },
+  "error_session_expired": {
+    "message": "ਤੁਹਾਡੇ ਸੁਰੱਖਿਅਤ ਕਨੈਕਸ਼ਨ ਦੀ ਮਿਆਦ ਪੁੱਗ ਗਈ ਹੈ। ਦੁਬਾਰਾ ਕਨੈਕਟ ਕਰੋ।"
+  },
+  "error_email_delivery_unavailable": {
+    "message": "ਇਸ ਵੇਲੇ ਈਮੇਲ ਨਹੀਂ ਭੇਜੀ ਜਾ ਸਕਦੀ।"
+  },
+  "error_unknown_error": {
+    "message": "ਇੱਕ ਅਣਕਿਆਸੀ ਗੜਬੜ ਹੋਈ। ਦੁਬਾਰਾ ਕੋਸ਼ਿਸ਼ ਕਰੋ।"
+  },
+  "actionBlocked": {
+    "message": "FuzeVPN — ਬ੍ਰਾਊਜ਼ਿੰਗ ਬਲੌਕ ਹੈ"
+  },
+  "statusBlockedRetry": {
+    "message": "ਬ੍ਰਾਊਜ਼ਿੰਗ ਰੁਕੀ ਹੋਈ ਹੈ — ਮੁੜ-ਕਨੈਕਟ ਹੋ ਰਿਹਾ ਹੈ"
+  },
+  "statusBlockedAction": {
+    "message": "ਬ੍ਰਾਊਜ਼ਿੰਗ ਰੁਕੀ ਹੋਈ ਹੈ — ਕਨੈਕਸ਼ਨ ਜਾਂਚੋ"
+  },
+  "statusProtectionUnavailable": {
+    "message": "ਸੁਰੱਖਿਆ ਉਪਲਬਧ ਨਹੀਂ — ਬ੍ਰਾਊਜ਼ਿੰਗ ਬਲੌਕ ਨਹੀਂ ਹੈ"
+  },
+  "recoveryHelp": {
+    "message": "ਸੁਰੱਖਿਆ ਮੁੜ ਸ਼ੁਰੂ ਕਰਨ ਲਈ ਦੁਬਾਰਾ ਕੋਸ਼ਿਸ਼ ਕਰੋ। ਡਿਸਕਨੈਕਟ ਕਰਕੇ ਤੁਸੀਂ FuzeVPN ਤੋਂ ਬਿਨਾਂ ਬ੍ਰਾਊਜ਼ ਕਰ ਸਕਦੇ ਹੋ।"
+  },
+  "retryConnection": {
+    "message": "ਦੁਬਾਰਾ ਕੋਸ਼ਿਸ਼ ਕਰੋ"
+  },
+  "killSwitch": {
+    "message": "ਕਿੱਲ ਸਵਿੱਚ"
+  },
+  "killSwitchHelp": {
+    "message": "VPN ਕਨੈਕਸ਼ਨ ਟੁੱਟਣ 'ਤੇ ਨਵੀਆਂ ਵੈੱਬ ਬੇਨਤੀਆਂ ਨੂੰ ਬਲੌਕ ਕਰਦਾ ਹੈ। ਬਾਹਰ ਰੱਖੀਆਂ ਸਾਈਟਾਂ VPN ਤੋਂ ਬਾਹਰ ਪਹੁੰਚਯੋਗ ਰਹਿੰਦੀਆਂ ਹਨ।"
+  },
+  "webRtcProtection": {
+    "message": "WebRTC ਸੁਰੱਖਿਆ"
+  },
+  "webRtcHelp": {
+    "message": "ਵੈੱਬ ਕਾਲਾਂ ਦੌਰਾਨ ਤੁਹਾਡੇ IP ਪਤੇ ਨੂੰ ਨਿੱਜੀ ਰੱਖਣ ਵਿੱਚ ਮਦਦ ਕਰਦਾ ਹੈ। ਕੁਝ ਕਾਲਾਂ ਸ਼ਾਇਦ ਕੰਮ ਨਾ ਕਰਨ। ਇਸਨੂੰ ਬੰਦ ਕਰਨ ਨਾਲ ਤੁਹਾਡਾ ਅਸਲ IP ਪਤਾ ਜ਼ਾਹਰ ਹੋ ਸਕਦਾ ਹੈ।"
+  },
+  "securityEffectiveState": {
+    "message": "$1 · $2"
+  },
+  "securityBlocked": {
+    "message": "ਬ੍ਰਾਊਜ਼ਿੰਗ ਬਲੌਕ ਹੈ"
+  },
+  "securityNotBlocked": {
+    "message": "ਬ੍ਰਾਊਜ਼ਿੰਗ ਬਲੌਕ ਨਹੀਂ ਹੈ"
+  },
+  "securityWebRtcActive": {
+    "message": "WebRTC ਪਾਬੰਦੀ ਕਿਰਿਆਸ਼ੀਲ"
+  },
+  "securityWebRtcInactive": {
+    "message": "WebRTC ਪਾਬੰਦੀ ਅਕਿਰਿਆਸ਼ੀਲ"
+  },
+  "localNetworkHelp": {
+    "message": "ਸੁਰੱਖਿਆ ਦੌਰਾਨ ਸਥਾਨਕ IP ਪਤੇ ਅਤੇ ਆਮ ਸਥਾਨਕ ਨਾਮ ਬਲੌਕ ਕੀਤੇ ਜਾਂਦੇ ਹਨ। ਬਾਹਰ ਰੱਖਿਆ ਡੋਮੇਨ ਫਿਰ ਵੀ ਸਥਾਨਕ ਨੈੱਟਵਰਕ ਤੱਕ ਪਹੁੰਚ ਦੇ ਸਕਦਾ ਹੈ। ਸਿਸਟਮ ਦੀਆਂ IPv6 ਸੈਟਿੰਗਾਂ ਨਹੀਂ ਬਦਲਦੀਆਂ।"
+  },
+  "securityLimits": {
+    "message": "ਇਸ ਸੁਰੱਖਿਆ ਬਾਰੇ"
+  },
+  "killSwitchLimits": {
+    "message": "ਸਿਰਫ਼ ਇਹ ਬ੍ਰਾਊਜ਼ਰ: ਮੌਜੂਦਾ ਕਨੈਕਸ਼ਨ ਅਤੇ ਕੁਝ ਅੰਦਰੂਨੀ ਬ੍ਰਾਊਜ਼ਰ ਜਾਂ ਹੋਰ ਐਕਸਟੈਂਸ਼ਨ ਸੰਚਾਰ ਜਾਰੀ ਰਹਿ ਸਕਦੇ ਹਨ। FuzeVPN ਦੇ ਪ੍ਰਤੀਕਿਰਿਆ ਕਰਨ ਤੋਂ ਪਹਿਲਾਂ ਕੋਈ ਹੋਰ ਐਕਸਟੈਂਸ਼ਨ ਜਾਂ ਨੀਤੀ ਪ੍ਰੌਕਸੀ ਨੂੰ ਬਦਲ ਸਕਦੀ ਹੈ। ਐਕਸਟੈਂਸ਼ਨ ਨੂੰ ਬੰਦ ਕਰਨ ਨਾਲ ਸੁਰੱਖਿਆ ਹਟ ਜਾਂਦੀ ਹੈ। ਕੋਈ ਸਿਸਟਮ-ਵਿਆਪੀ ਬਲੌਕਿੰਗ ਨਹੀਂ।"
+  },
+  "error_traffic_guard_failed": {
+    "message": "ਬ੍ਰਾਊਜ਼ਿੰਗ ਬਲੌਕ ਦੀ ਪੁਸ਼ਟੀ ਨਹੀਂ ਹੋ ਸਕੀ। ਸੁਰੱਖਿਆ ਦੀ ਗਰੰਟੀ ਨਹੀਂ ਹੈ। ਐਕਸਟੈਂਸ਼ਨ ਦੀਆਂ ਇਜਾਜ਼ਤਾਂ ਜਾਂਚੋ।"
+  },
+  "error_webrtc_control_unavailable": {
+    "message": "WebRTC ਪਾਬੰਦੀ ਲਾਗੂ ਨਹੀਂ ਹੋ ਸਕੀ। ਆਪਣੀਆਂ ਸੈਟਿੰਗਾਂ, ਹੋਰ ਐਕਸਟੈਂਸ਼ਨਾਂ ਜਾਂ ਪ੍ਰਸ਼ਾਸਕ ਨੀਤੀ ਜਾਂਚੋ।"
+  },
+  "language": {
+    "message": "ਭਾਸ਼ਾ"
+  },
+  "languageAutomatic": {
+    "message": "ਸਵੈਚਲਿਤ — ਬ੍ਰਾਊਜ਼ਰ ਦੀ ਭਾਸ਼ਾ"
+  },
+  "languageHelp": {
+    "message": "ਤਬਦੀਲੀਆਂ ਤੁਰੰਤ ਲਾਗੂ ਹੁੰਦੀਆਂ ਹਨ। ਸਵੈਚਲਿਤ ਬ੍ਰਾਊਜ਼ਰ ਦੀ ਭਾਸ਼ਾ ਦੀ ਪਾਲਣਾ ਕਰਦਾ ਹੈ, ਜੋ ਸਿਸਟਮ ਦੀ ਭਾਸ਼ਾ ਤੋਂ ਵੱਖਰੀ ਹੋ ਸਕਦੀ ਹੈ।"
+  },
+  "languageSaveError": {
+    "message": "ਭਾਸ਼ਾ ਰੱਖਿਅਤ ਨਹੀਂ ਹੋ ਸਕੀ। ਤੁਹਾਡੀ ਪਿਛਲੀ ਚੋਣ ਬਰਕਰਾਰ ਹੈ। ਦੁਬਾਰਾ ਕੋਸ਼ਿਸ਼ ਕਰੋ।"
+  },
+  "publicIp": {
+    "message": "ਜਨਤਕ IP"
+  },
+  "vpnIp": {
+    "message": "VPN IP"
+  },
+  "ipChecking": {
+    "message": "ਜਾਂਚ ਕੀਤੀ ਜਾ ਰਹੀ ਹੈ…"
+  },
+  "ipUnavailable": {
+    "message": "ਉਪਲਬਧ ਨਹੀਂ"
+  },
+  "ipLookupExplanation": {
+    "message": "ਤੁਹਾਡੇ ਮੌਜੂਦਾ ਕਨੈਕਸ਼ਨ ਦੀ ਵਰਤੋਂ ਕਰਕੇ ipify, ਜਾਂ ਬਦਲ ਵਜੋਂ icanhazip ਨਾਲ IP ਜਾਂਚਿਆ ਜਾਂਦਾ ਹੈ। ਕੋਈ ਬ੍ਰਾਊਜ਼ਿੰਗ ਇਤਿਹਾਸ ਨਹੀਂ ਭੇਜਿਆ ਜਾਂਦਾ।"
+  },
+  "automaticLocation": {
+    "message": "ਸਵੈਚਲਿਤ"
+  },
+  "automaticLocationHelp": {
+    "message": "ਹਾਲੀਆ ਸਭ ਤੋਂ ਵਧੀਆ ਜਵਾਬ ਸਮਾਂ, ਜਾਂ ਤੁਹਾਡਾ ਪਿਛਲਾ ਟਿਕਾਣਾ।"
+  },
+  "automaticLocationName": {
+    "message": "ਸਵੈਚਲਿਤ · $1"
+  },
+  "searchLocations": {
+    "message": "ਦੇਸ਼ ਜਾਂ ਸ਼ਹਿਰ ਖੋਜੋ"
+  },
+  "locationFilters": {
+    "message": "ਟਿਕਾਣੇ ਫਿਲਟਰ ਕਰੋ"
+  },
+  "allLocations": {
+    "message": "ਸਾਰੇ"
+  },
+  "favoriteLocations": {
+    "message": "ਮਨਪਸੰਦ"
+  },
+  "recentLocations": {
+    "message": "ਹਾਲੀਆ"
+  },
+  "noMatchingLocations": {
+    "message": "ਤੁਹਾਡੀ ਖੋਜ ਨਾਲ ਕੋਈ ਟਿਕਾਣਾ ਮੇਲ ਨਹੀਂ ਖਾਂਦਾ।"
+  },
+  "noFavoriteLocations": {
+    "message": "ਆਪਣੇ ਮਨਪਸੰਦ ਟਿਕਾਣੇ ਇੱਥੇ ਰੱਖਣ ਲਈ ਤਾਰਾ ਲਗਾਓ।"
+  },
+  "noRecentLocations": {
+    "message": "ਤੁਹਾਡੇ ਹਾਲ ਹੀ ਵਿੱਚ ਕਨੈਕਟ ਕੀਤੇ ਟਿਕਾਣੇ ਇੱਥੇ ਦਿਖਾਈ ਦੇਣਗੇ।"
+  },
+  "addFavorite": {
+    "message": "ਮਨਪਸੰਦ ਵਿੱਚ ਸ਼ਾਮਲ ਕਰੋ: $1"
+  },
+  "removeFavorite": {
+    "message": "ਮਨਪਸੰਦ ਵਿੱਚੋਂ ਹਟਾਓ: $1"
+  },
+  "unavailableFavoriteLocation": {
+    "message": "ਅਣਉਪਲਬਧ ਮਨਪਸੰਦ: $1"
+  },
+  "locationSaveError": {
+    "message": "ਤਬਦੀਲੀ ਪੂਰੀ ਨਹੀਂ ਹੋ ਸਕੀ। ਕੁਝ ਸੈਟਿੰਗਾਂ ਰੱਖਿਅਤ ਹੋ ਗਈਆਂ ਹੋ ਸਕਦੀਆਂ ਹਨ। ਦੁਬਾਰਾ ਕੋਸ਼ਿਸ਼ ਕਰਨ ਤੋਂ ਪਹਿਲਾਂ ਦਿਖਾਈ ਗਈ ਚੋਣ ਜਾਂਚੋ।"
+  },
+  "siteExclusions": {
+    "message": "ਬਾਹਰ ਰੱਖੀਆਂ ਸਾਈਟਾਂ"
+  },
+  "siteExclusionsHelp": {
+    "message": "ਇਹ ਸਾਈਟਾਂ FuzeVPN ਤੋਂ ਬਿਨਾਂ ਤੁਹਾਡਾ ਕਨੈਕਸ਼ਨ ਵਰਤਦੀਆਂ ਹਨ, ਭਾਵੇਂ VPN ਬੰਦ ਹੋ ਜਾਵੇ।"
+  },
+  "siteExclusionsEnabled": {
+    "message": "ਛੋਟਾਂ ਚਾਲੂ ਕਰੋ"
+  },
+  "siteExclusionInput": {
+    "message": "ਡੋਮੇਨ ਜਾਂ URL"
+  },
+  "siteExclusionPlaceholder": {
+    "message": "example.com"
+  },
+  "siteExclusionPreview": {
+    "message": "ਚੁਣਿਆ ਡੋਮੇਨ: $1"
+  },
+  "siteExclusionSubdomains": {
+    "message": "ਸਬਡੋਮੇਨ ਸ਼ਾਮਲ ਕਰੋ"
+  },
+  "siteExclusionAdd": {
+    "message": "ਸਾਈਟ ਸ਼ਾਮਲ ਕਰੋ"
+  },
+  "siteExclusionsEmpty": {
+    "message": "ਕੋਈ ਬਾਹਰ ਰੱਖੀ ਸਾਈਟ ਨਹੀਂ। ਸਿਰਫ਼ ਉਹ ਸਾਈਟਾਂ ਸ਼ਾਮਲ ਕਰੋ ਜਿਨ੍ਹਾਂ ਨੂੰ ਤੁਸੀਂ VPN ਤੋਂ ਬਿਨਾਂ ਵਰਤਣਾ ਚਾਹੁੰਦੇ ਹੋ।"
+  },
+  "siteExclusionsCount": {
+    "message": "$1 / 100 ਸਾਈਟਾਂ"
+  },
+  "siteExclusionScopeSubdomains": {
+    "message": "ਡੋਮੇਨ ਅਤੇ ਸਬਡੋਮੇਨ"
+  },
+  "siteExclusionScopeExact": {
+    "message": "ਸਿਰਫ਼ ਸਟੀਕ ਡੋਮੇਨ"
+  },
+  "siteExclusionRemove": {
+    "message": "ਹਟਾਓ: $1"
+  },
+  "siteExclusionsDetails": {
+    "message": "ਛੋਟਾਂ ਕਿਵੇਂ ਕੰਮ ਕਰਦੀਆਂ ਹਨ?"
+  },
+  "siteExclusionsResources": {
+    "message": "ਹੋਰ ਡੋਮੇਨਾਂ ਦੇ ਸਰੋਤ ਸੁਰੱਖਿਅਤ ਰਹਿੰਦੇ ਹਨ। ਕਿਸੇ ਪੰਨੇ ਨੂੰ ਬਾਹਰ ਰੱਖਣ ਨਾਲ ਉਸਦੀ ਹੋਰ ਸਮੱਗਰੀ ਆਪਣੇ ਆਪ ਬਾਹਰ ਨਹੀਂ ਹੁੰਦੀ।"
+  },
+  "siteExclusionsReload": {
+    "message": "ਤਬਦੀਲੀ ਤੋਂ ਬਾਅਦ ਸਾਈਟ ਨੂੰ ਮੁੜ-ਲੋਡ ਕਰੋ। ਮੌਜੂਦਾ ਕਨੈਕਸ਼ਨ ਆਪਣਾ ਪਿਛਲਾ ਰੂਟ ਬਰਕਰਾਰ ਰੱਖ ਸਕਦੇ ਹਨ।"
+  },
+  "siteExclusionsWebRtc": {
+    "message": "WebRTC ਸੁਰੱਖਿਆ ਇੱਕ ਗਲੋਬਲ ਸੈਟਿੰਗ ਬਣੀ ਰਹਿੰਦੀ ਹੈ, ਬਾਹਰ ਰੱਖੀਆਂ ਸਾਈਟਾਂ ਲਈ ਵੀ।"
+  },
+  "siteExclusionsLocal": {
+    "message": "ਸਿਰਫ਼ ਇਸ ਬ੍ਰਾਊਜ਼ਰ ਵਿੱਚ ਰੱਖਿਅਤ ਹੁੰਦਾ ਹੈ ਅਤੇ ਖਾਤੇ ਤੋਂ ਸਾਈਨ ਆਉਟ ਕਰਨ ਤੋਂ ਬਾਅਦ ਵੀ ਬਣਿਆ ਰਹਿੰਦਾ ਹੈ।"
+  },
+  "siteExclusionsOn": {
+    "message": "ਛੋਟਾਂ ਚਾਲੂ ਹਨ"
+  },
+  "siteExclusionsOff": {
+    "message": "ਛੋਟਾਂ ਬੰਦ ਹਨ"
+  },
+  "siteExclusionsSummary": {
+    "message": "VPN ਤੋਂ ਬਾਹਰ ਸਾਈਟਾਂ: $1"
+  },
+  "siteExclusionsPending": {
+    "message": "ਛੋਟਾਂ ਲਾਗੂ ਕੀਤੀਆਂ ਜਾ ਰਹੀਆਂ ਹਨ…"
+  },
+  "siteExclusionsInterrupted": {
+    "message": "ਤਬਦੀਲੀ ਵਿੱਚ ਵਿਘਨ ਪਿਆ। ਆਰਜ਼ੀ ਸੁਰੱਖਿਆ ਰੋਕ ਲਾਗੂ ਰਹਿੰਦੀ ਹੈ।"
+  },
+  "siteExclusionsSaveError": {
+    "message": "ਤਬਦੀਲੀ ਪੂਰੀ ਨਹੀਂ ਹੋ ਸਕੀ। ਆਪਣੀਆਂ ਸੈਟਿੰਗਾਂ ਜਾਂਚੋ ਅਤੇ ਦੁਬਾਰਾ ਕੋਸ਼ਿਸ਼ ਕਰੋ।"
+  },
+  "siteExclusionsRetry": {
+    "message": "ਦੁਬਾਰਾ ਕੋਸ਼ਿਸ਼ ਕਰੋ"
+  },
+  "siteExclusionInvalid": {
+    "message": "ਕੋਈ ਵੈਧ ਜਨਤਕ ਡੋਮੇਨ ਦਾਖਲ ਕਰੋ। IP, ਸਥਾਨਕ ਨਾਮ, ਵਾਈਲਡਕਾਰਡ, ਜਨਤਕ ਪਿਛੇਤਰ ਅਤੇ ਰਾਖਵੇਂ ਡੋਮੇਨ ਸਵੀਕਾਰ ਨਹੀਂ ਕੀਤੇ ਜਾਂਦੇ।"
+  },
+  "siteExclusionDuplicate": {
+    "message": "ਇਹ ਡੋਮੇਨ ਪਹਿਲਾਂ ਹੀ ਸੂਚੀ ਵਿੱਚ ਹੈ।"
+  },
+  "siteExclusionsLimit": {
+    "message": "100 ਸਾਈਟਾਂ ਦੀ ਸੀਮਾ ਪੂਰੀ ਹੋ ਗਈ ਹੈ। ਹੋਰ ਸ਼ਾਮਲ ਕਰਨ ਲਈ ਇੱਕ ਸਾਈਟ ਹਟਾਓ।"
+  },
+  "statusProtectedExceptions": {
+    "message": "VPN ਕਿਰਿਆਸ਼ੀਲ · ਛੋਟਾਂ: $1"
+  },
+  "statusBlockedExceptions": {
+    "message": "ਸਿਰਫ਼ ਬਾਹਰ ਰੱਖੀਆਂ ਸਾਈਟਾਂ ਪਹੁੰਚਯੋਗ ਰਹਿੰਦੀਆਂ ਹਨ"
+  },
+  "securityBlockedExceptions": {
+    "message": "ਬਾਹਰ ਰੱਖੀਆਂ ਸਾਈਟਾਂ ਤੋਂ ਇਲਾਵਾ ਬ੍ਰਾਊਜ਼ਿੰਗ ਬਲੌਕ ਹੈ"
+  },
+  "securityBlockUnverified": {
+    "message": "ਬਲੌਕਿੰਗ ਦੀ ਪੁਸ਼ਟੀ ਨਹੀਂ ਹੋਈ"
+  },
+  "logoutLocalComplete": {
+    "message": "ਸਥਾਨਕ ਸਾਈਨ ਆਉਟ ਪੂਰਾ ਹੋਇਆ।"
+  },
+  "logoutApiSession": {
+    "message": "ਮੌਜੂਦਾ ਖਾਤਾ ਸੈਸ਼ਨ"
+  },
+  "logoutProxySessions": {
+    "message": "ਜਾਣੇ-ਪਛਾਣੇ VPN ਸੈਸ਼ਨ"
+  },
+  "logoutRevocationPending": {
+    "message": "ਰੱਦ ਕਰਨਾ ਜਾਰੀ ਹੈ…"
+  },
+  "logoutRevocationConfirmed": {
+    "message": "ਰੱਦ ਕਰਨ ਦੀ ਪੁਸ਼ਟੀ ਹੋਈ"
+  },
+  "logoutRevocationUnconfirmed": {
+    "message": "ਰੱਦ ਕਰਨ ਦੀ ਪੁਸ਼ਟੀ ਨਹੀਂ ਹੋਈ"
+  },
+  "logoutUnconfirmedHelp": {
+    "message": "ਕੁਝ ਰਿਮੋਟ ਸੈਸ਼ਨ ਮਿਆਦ ਪੁੱਗਣ ਤੱਕ ਕਿਰਿਆਸ਼ੀਲ ਰਹਿ ਸਕਦੇ ਹਨ।"
+  },
+  "deviceQuotaLoading": {
+    "message": "ਡੀਵਾਈਸ ਸੀਮਾ ਲੋਡ ਹੋ ਰਹੀ ਹੈ…"
+  },
+  "deviceQuotaUnknown": {
+    "message": "ਡੀਵਾਈਸ ਸੀਮਾ ਉਪਲਬਧ ਨਹੀਂ"
+  },
+  "error_proxy_creation_uncertain": {
+    "message": "ਸਰਵਰ ਨੇ ਨਵਾਂ ਕਨੈਕਸ਼ਨ ਬਣਨ ਦੀ ਪੁਸ਼ਟੀ ਨਹੀਂ ਕੀਤੀ। ਸਵੈਚਲਿਤ ਮੁੜ-ਕਨੈਕਸ਼ਨ ਰੋਕਿਆ ਹੋਇਆ ਹੈ।"
+  },
+  "siteExclusionsPreferencesReset": {
+    "message": "ਤੁਹਾਡੀਆਂ ਰੱਖਿਅਤ ਸਾਈਟ ਛੋਟਾਂ ਪੜ੍ਹੀਆਂ ਨਾ ਜਾ ਸਕਣ ਕਾਰਨ ਰੀਸੈੱਟ ਕਰ ਦਿੱਤੀਆਂ ਗਈਆਂ। ਜਿਹੜੀਆਂ ਸਾਈਟਾਂ ਤੁਸੀਂ ਬਾਹਰ ਰੱਖਣਾ ਚਾਹੁੰਦੇ ਹੋ, ਉਹਨਾਂ ਨੂੰ ਦੁਬਾਰਾ ਸ਼ਾਮਲ ਕਰੋ।"
+  },
+  "siteExclusionsConflict": {
+    "message": "ਬਾਹਰ ਰੱਖੀਆਂ ਸਾਈਟਾਂ ਦੀ ਸੂਚੀ ਬਦਲ ਗਈ ਹੈ। ਇਸਦੀ ਸਮੀਖਿਆ ਕਰੋ, ਫਿਰ ਆਪਣੀ ਤਬਦੀਲੀ ਦੁਬਾਰਾ ਕੋਸ਼ਿਸ਼ ਕਰੋ।"
+  },
+  "unavailableLocation": {
+    "message": "ਟਿਕਾਣਾ ਉਪਲਬਧ ਨਹੀਂ"
+  },
+  "verificationSending": {
+    "message": "ਪੁਸ਼ਟੀਕਰਨ ਈਮੇਲ ਭੇਜੀ ਜਾ ਰਹੀ ਹੈ…"
+  },
+  "verificationSent": {
+    "message": "ਪੁਸ਼ਟੀਕਰਨ ਈਮੇਲ ਭੇਜੀ ਗਈ। ਆਪਣਾ ਇਨਬਾਕਸ ਅਤੇ ਸਪੈਮ ਫੋਲਡਰ ਜਾਂਚੋ।"
+  },
+  "error_login_requires_disconnect": {
+    "message": "ਕਿਸੇ ਹੋਰ ਖਾਤੇ ਵਿੱਚ ਸਾਈਨ ਇਨ ਕਰਨ ਤੋਂ ਪਹਿਲਾਂ ਮੌਜੂਦਾ VPN ਕਨੈਕਸ਼ਨ ਡਿਸਕਨੈਕਟ ਕਰੋ।"
+  },
+  "error_storage_unavailable": {
+    "message": "ਸਥਾਨਕ ਖਾਤਾ ਸੈਟਿੰਗਾਂ ਉਪਲਬਧ ਨਹੀਂ ਹਨ। ਬ੍ਰਾਊਜ਼ਰ ਸਟੋਰੇਜ ਉਪਲਬਧ ਹੋਣ 'ਤੇ ਦੁਬਾਰਾ ਕੋਸ਼ਿਸ਼ ਕਰੋ; ਤੁਹਾਡਾ ਰੱਖਿਅਤ ਖਾਤਾ ਸਾਂਭ ਕੇ ਰੱਖਿਆ ਗਿਆ ਹੈ।"
+  },
+  "diagnosticsAssistance": {
+    "message": "ਸਹਾਇਤਾ"
+  },
+  "diagnosticsTitle": {
+    "message": "ਡਾਇਗਨੌਸਟਿਕਸ"
+  },
+  "diagnosticsIntro": {
+    "message": "ਆਪਣੀ ਸੁਰੱਖਿਆ ਬਦਲੇ ਬਿਨਾਂ FuzeVPN ਅਤੇ ਮੌਜੂਦਾ ਕਨੈਕਸ਼ਨ ਦੀ ਜਾਂਚ ਕਰੋ।"
+  },
+  "diagnosticsPrivacyTitle": {
+    "message": "ਤੁਹਾਡਾ ਡਾਟਾ"
+  },
+  "diagnosticsPrivacy": {
+    "message": "ਰਿਪੋਰਟ JSON ਵਿੱਚ ਤਕਨੀਕੀ ਸਥਿਤੀਆਂ ਅਤੇ ਗੜਬੜ ਕੋਡ ਹੁੰਦੇ ਹਨ; ਪਾਸਵਰਡ, ਟੋਕਨ, ਈਮੇਲ ਪਤੇ, IP ਪਤੇ, ਦੇਖੇ ਗਏ URL ਜਾਂ ਬਾਹਰ ਰੱਖੇ ਡੋਮੇਨ ਨਹੀਂ ਹੁੰਦੇ। ਭੇਜਣਾ ਪ੍ਰਮਾਣਿਤ ਹੁੰਦਾ ਹੈ ਅਤੇ ਰਿਪੋਰਟ ਨੂੰ ਤੁਹਾਡੇ ਖਾਤੇ ਨਾਲ ਜੋੜਦਾ ਹੈ। ਨੈੱਟਵਰਕ ਡਾਟਾ ਲਈ ਨੋਟਿਸ ਦੇਖੋ।"
+  },
+  "diagnosticsAuto": {
+    "message": "ਮਹੱਤਵਪੂਰਨ ਗੜਬੜ ਰਿਪੋਰਟਾਂ ਸਵੈਚਲਿਤ ਤੌਰ 'ਤੇ ਭੇਜੋ"
+  },
+  "diagnosticsAutoHelp": {
+    "message": "ਪੂਰਵ-ਨਿਰਧਾਰਤ ਤੌਰ 'ਤੇ ਬੰਦ। ਇਸਨੂੰ ਚਾਲੂ ਕਰਨ ਨਾਲ ਇਸ ਖਾਤੇ ਲਈ ਬ੍ਰਾਊਜ਼ਿੰਗ ਇਤਿਹਾਸ ਤੋਂ ਬਿਨਾਂ ਸਧਾਰਨ ਤਕਨੀਕੀ ਰਿਪੋਰਟਾਂ ਭੇਜੀਆਂ ਜਾਂਦੀਆਂ ਹਨ। ਸਵੈਚਲਿਤ ਭੇਜਣਾ ਰੋਕਣ ਅਤੇ ਬਕਾਇਆ ਸਵੈਚਲਿਤ ਰਿਪੋਰਟਾਂ ਹਟਾਉਣ ਲਈ ਇਸਨੂੰ ਇੱਥੇ ਬੰਦ ਕਰੋ।"
+  },
+  "diagnosticsHistoryHelp": {
+    "message": "ਤਕਨੀਕੀ ਇਤਿਹਾਸ ਸਥਾਨਕ ਰਹਿੰਦਾ ਹੈ: 10 ਮਿੰਟਾਂ ਵਿੱਚ ਪ੍ਰਤੀ ਜਰਨਲ ਵੱਧ ਤੋਂ ਵੱਧ 200 ਇਵੈਂਟ, ਭਾਵੇਂ ਸਵੈਚਲਿਤ ਭੇਜਣਾ ਬੰਦ ਹੋਵੇ। ਇਸ ਵਿੱਚ ਕੋਈ ਬ੍ਰਾਊਜ਼ਿੰਗ ਇਤਿਹਾਸ ਨਹੀਂ ਹੁੰਦਾ ਅਤੇ ਇਹ ਹੱਥੀਂ, ਬ੍ਰਾਊਜ਼ਰ ਬੰਦ ਹੋਣ 'ਤੇ ਜਾਂ ਖਾਤਾ ਬਦਲਣ 'ਤੇ ਸਾਫ਼ ਹੋ ਜਾਂਦਾ ਹੈ।"
+  },
+  "diagnosticsHistoryCount": {
+    "message": "ਸਥਾਨਕ ਤਕਨੀਕੀ ਇਵੈਂਟ: $1"
+  },
+  "diagnosticsConnectionLog": {
+    "message": "ਕਨੈਕਸ਼ਨ ਲੌਗ ਨਿਰਯਾਤ ਕਰੋ"
+  },
+  "diagnosticsAccountRequired": {
+    "message": "ਭੇਜਣਾ ਚਾਲੂ ਕਰਨ ਲਈ ਸਾਈਨ ਇਨ ਕਰੋ। ਤੁਸੀਂ ਖਾਤੇ ਤੋਂ ਬਿਨਾਂ ਵੀ ਰਿਪੋਰਟ ਦੇਖ ਅਤੇ ਨਿਰਯਾਤ ਕਰ ਸਕਦੇ ਹੋ।"
+  },
+  "diagnosticsRun": {
+    "message": "ਡਾਇਗਨੌਸਟਿਕਸ ਚਲਾਓ"
+  },
+  "diagnosticsClearHistory": {
+    "message": "ਸਥਾਨਕ ਇਤਿਹਾਸ ਸਾਫ਼ ਕਰੋ"
+  },
+  "diagnosticsPreparing": {
+    "message": "ਰਿਪੋਰਟ ਤਿਆਰ ਕੀਤੀ ਜਾ ਰਹੀ ਹੈ…"
+  },
+  "diagnosticsReports": {
+    "message": "ਰਿਪੋਰਟਾਂ"
+  },
+  "diagnosticsEmpty": {
+    "message": "ਹਾਲੇ ਕੋਈ ਸਥਾਨਕ ਰਿਪੋਰਟ ਨਹੀਂ।"
+  },
+  "diagnosticsChooseReport": {
+    "message": "ਕੋਈ ਰਿਪੋਰਟ ਚੁਣੋ"
+  },
+  "diagnosticsReportLabel": {
+    "message": "$1 · $2 · $3"
+  },
+  "diagnosticsTypeFull": {
+    "message": "ਪੂਰੀ ਰਿਪੋਰਟ"
+  },
+  "diagnosticsTypeSimple": {
+    "message": "ਗੜਬੜ ਰਿਪੋਰਟ"
+  },
+  "diagnosticsSummary": {
+    "message": "ਇਕੱਤਰ ਕਰਨ ਦੀ ਮਿਤੀ: $1। FuzeVPN ਵਰਜਨ $2।"
+  },
+  "diagnosticsJson": {
+    "message": "ਰਿਪੋਰਟ ਦੀ ਸਮੱਗਰੀ ਦੇਖੋ (JSON)"
+  },
+  "diagnosticsExport": {
+    "message": "ਰਿਪੋਰਟ ਨਿਰਯਾਤ ਕਰੋ"
+  },
+  "diagnosticsDelete": {
+    "message": "ਸਥਾਨਕ ਰਿਪੋਰਟ ਮਿਟਾਓ"
+  },
+  "diagnosticsRetention": {
+    "message": "ਸਥਾਨਕ ਰਿਪੋਰਟਾਂ ਦੀ ਮਿਆਦ 24 ਘੰਟਿਆਂ ਬਾਅਦ ਪੁੱਗ ਜਾਂਦੀ ਹੈ। ਇੱਥੇ ਮਿਟਾਉਣ ਨਾਲ ਸੇਵਾ ਵੱਲੋਂ ਪਹਿਲਾਂ ਹੀ ਪ੍ਰਾਪਤ ਕੀਤੀ ਰਿਪੋਰਟ ਨਹੀਂ ਮਿਟਦੀ। ਸਰਵਰ 'ਤੇ ਰੱਖਣ ਦੀ ਮਿਆਦ ਅਤੇ ਮਿਟਾਉਣ ਦੀਆਂ ਬੇਨਤੀਆਂ ਲਈ ਨੋਟਿਸ ਦੇਖੋ।"
+  },
+  "diagnosticsConsent": {
+    "message": "ਇਹ ਡਾਇਗਨੌਸਟਿਕ ਰਿਪੋਰਟ FuzeVPN ਨੂੰ ਭੇਜੋ"
+  },
+  "diagnosticsDataCollectionRequired": {
+    "message": "ਡਾਇਗਨੌਸਟਿਕਸ ਭੇਜਣ ਲਈ Firefox ਵਿੱਚ ਤਕਨੀਕੀ ਡਾਟਾ ਇਕੱਤਰ ਕਰਨ ਦੀ ਇਜਾਜ਼ਤ ਹੋਣੀ ਲਾਜ਼ਮੀ ਹੈ। ਦੁਬਾਰਾ ਕੋਸ਼ਿਸ਼ ਕਰੋ ਅਤੇ ਇਹ ਇਜਾਜ਼ਤ ਦਿਓ।"
+  },
+  "diagnosticsSendHelp": {
+    "message": "ਭੇਜਣਾ ਵਿਕਲਪਿਕ ਹੈ। ਮਨਜ਼ੂਰੀ ਤੋਂ ਬਾਅਦ, ਇਹ ਉਸੇ ਖਾਤੇ ਦੇ ਵੈਧ ਸੈਸ਼ਨ ਨਾਲ 24 ਘੰਟਿਆਂ ਤੱਕ ਦੁਬਾਰਾ ਕੋਸ਼ਿਸ਼ ਕਰ ਸਕਦਾ ਹੈ। ਤੁਸੀਂ ਅਗਲੀਆਂ ਕੋਸ਼ਿਸ਼ਾਂ ਰੱਦ ਕਰ ਸਕਦੇ ਹੋ। ਦੇਰ ਨਾਲ ਰੱਦ ਕਰਨਾ ਇਸ ਗੱਲ ਦੀ ਗਰੰਟੀ ਨਹੀਂ ਦਿੰਦਾ ਕਿ ਸਰਵਰ ਨੂੰ ਰਿਪੋਰਟ ਪਹਿਲਾਂ ਹੀ ਪ੍ਰਾਪਤ ਨਹੀਂ ਹੋਈ।"
+  },
+  "diagnosticsSend": {
+    "message": "ਰਿਪੋਰਟ ਭੇਜੋ"
+  },
+  "diagnosticsCancel": {
+    "message": "ਭੇਜਣਾ ਰੱਦ ਕਰੋ"
+  },
+  "diagnosticsReload": {
+    "message": "ਇਹ ਪੰਨਾ ਮੁੜ-ਲੋਡ ਕਰੋ"
+  },
+  "diagnosticsUnavailable": {
+    "message": "ਡਾਇਗਨੌਸਟਿਕਸ ਉਪਲਬਧ ਨਹੀਂ ਹਨ। ਬ੍ਰਾਊਜ਼ਰ ਦੇ ਐਕਸਟੈਂਸ਼ਨ ਮੈਨੇਜਰ ਤੋਂ FuzeVPN ਨੂੰ ਮੁੜ-ਲੋਡ ਕਰੋ, ਫਿਰ ਇਹ ਪੰਨਾ ਦੁਬਾਰਾ ਖੋਲ੍ਹੋ। ਤੁਹਾਡਾ VPN ਨਹੀਂ ਬਦਲਿਆ।"
+  },
+  "diagnosticsQueueFull": {
+    "message": "ਭੇਜਣ ਦੀ ਕਤਾਰ ਭਰੀ ਹੋਈ ਹੈ। ਕੋਈ ਸਥਾਨਕ ਰਿਪੋਰਟ ਮਿਟਾਓ ਜਾਂ ਬਕਾਇਆ ਰਿਪੋਰਟ ਦੇ ਪੂਰਾ ਹੋਣ ਦੀ ਉਡੀਕ ਕਰੋ।"
+  },
+  "diagnosticsContentUnavailable": {
+    "message": "ਰਿਪੋਰਟ ਦੀ ਸਮੱਗਰੀ ਉਪਲਬਧ ਨਹੀਂ ਹੈ। ਜੇ ਸਥਾਨਕ ਰਿਪੋਰਟ ਉਪਲਬਧ ਹੈ ਤਾਂ ਉਸਨੂੰ ਨਿਰਯਾਤ ਕਰੋ ਅਤੇ ਸਹਾਇਤਾ ਨਾਲ ਸੰਪਰਕ ਕਰੋ।"
+  },
+  "diagnosticsFailure": {
+    "message": "ਡਾਇਗਨੌਸਟਿਕ ਕਾਰਵਾਈ ਪੂਰੀ ਨਹੀਂ ਹੋ ਸਕੀ। ਤੁਹਾਡਾ VPN ਨਹੀਂ ਬਦਲਿਆ।"
+  },
+  "diagnosticsChecks": {
+    "message": "ਜਾਂਚਾਂ"
+  },
+  "diagnosticsCheckFallback": {
+    "message": "ਤਕਨੀਕੀ ਜਾਂਚ: $1"
+  },
+  "diagnosticsCheckLine": {
+    "message": "$1 — $2"
+  },
+  "diagnosticsProxy": {
+    "message": "ਬ੍ਰਾਊਜ਼ਰ ਪ੍ਰੌਕਸੀ"
+  },
+  "diagnosticsStorage": {
+    "message": "ਸਥਾਨਕ ਸਟੋਰੇਜ"
+  },
+  "diagnosticsNetwork": {
+    "message": "ਨੈੱਟਵਰਕ ਕਨੈਕਸ਼ਨ"
+  },
+  "diagnosticsCleanup": {
+    "message": "ਸੈਸ਼ਨ ਸਫ਼ਾਈ"
+  },
+  "diagnosticsResult_passed": {
+    "message": "ਸਫਲ"
+  },
+  "diagnosticsResult_failed": {
+    "message": "ਅਸਫਲ"
+  },
+  "diagnosticsResult_skipped": {
+    "message": "ਨਹੀਂ ਕੀਤੀ ਗਈ"
+  },
+  "diagnosticsResult_unknown": {
+    "message": "ਅਗਿਆਤ"
+  },
+  "diagnosticsStatus_ready": {
+    "message": "ਇਸ ਡੀਵਾਈਸ 'ਤੇ ਤਿਆਰ"
+  },
+  "diagnosticsStatus_pending": {
+    "message": "ਭੇਜਣ ਦੀ ਉਡੀਕ ਵਿੱਚ"
+  },
+  "diagnosticsStatus_sending": {
+    "message": "ਭੇਜੀ ਜਾ ਰਹੀ ਹੈ…"
+  },
+  "diagnosticsStatus_session_required": {
+    "message": "ਉਸੇ ਖਾਤੇ ਦੇ ਵੈਧ ਸੈਸ਼ਨ ਦੀ ਉਡੀਕ ਵਿੱਚ"
+  },
+  "diagnosticsStatus_received": {
+    "message": "ਸੇਵਾ ਵੱਲੋਂ ਪ੍ਰਾਪਤ ਕੀਤੀ ਗਈ"
+  },
+  "diagnosticsStatus_failed": {
+    "message": "ਭੇਜਣਾ ਅਸਫਲ ਰਿਹਾ"
+  },
+  "diagnosticsStatus_cancelled": {
+    "message": "ਭੇਜਣਾ ਰੱਦ ਕੀਤਾ ਗਿਆ"
+  },
+  "diagnosticsStatus_expired": {
+    "message": "ਭੇਜਣ ਦੀ ਸਮਾਂ-ਸੀਮਾ ਲੰਘ ਗਈ"
+  },
+  "diagnosticsReceivedAt": {
+    "message": "ਪ੍ਰਾਪਤੀ ਦੀ ਮਿਤੀ: $1"
+  },
+  "error_private_browsing_required": {
+    "message": "ਆਮ ਵਿੰਡੋਆਂ ਵਿੱਚ ਵੀ VPN ਦੀ ਸੰਰਚਨਾ ਕਰਨ ਲਈ Firefox ਨੂੰ ਇਸ ਇਜਾਜ਼ਤ ਦੀ ਲੋੜ ਹੈ। about:addons → FuzeVPN ਖੋਲ੍ਹੋ, ਇਸਨੂੰ ਨਿੱਜੀ ਵਿੰਡੋਆਂ ਵਿੱਚ ਚੱਲਣ ਦੀ ਇਜਾਜ਼ਤ ਦਿਓ, ਫਿਰ ਦੁਬਾਰਾ ਕੋਸ਼ਿਸ਼ ਕਰੋ।"
+  },
+  "error_host_permissions_required": {
+    "message": "Firefox ਵਿੱਚ, about:addons → FuzeVPN → ਇਜਾਜ਼ਤਾਂ ਖੋਲ੍ਹੋ ਅਤੇ ਸਾਰੀਆਂ ਵੈੱਬਸਾਈਟਾਂ ਤੱਕ ਪਹੁੰਚ ਦੀ ਇਜਾਜ਼ਤ ਦਿਓ, ਫਿਰ ਦੁਬਾਰਾ ਕੋਸ਼ਿਸ਼ ਕਰੋ।"
+  },
+  "cancelAction": {
+    "message": "ਰੱਦ ਕਰੋ"
+  },
+  "refreshLocations": {
+    "message": "ਟਿਕਾਣੇ ਰਿਫ੍ਰੈਸ਼ ਕਰੋ"
+  },
+  "refreshingLocations": {
+    "message": "ਟਿਕਾਣੇ ਰਿਫ੍ਰੈਸ਼ ਹੋ ਰਹੇ ਹਨ…"
+  },
+  "locationsRefreshError": {
+    "message": "ਟਿਕਾਣਿਆਂ ਦੀ ਸੂਚੀ ਰਿਫ੍ਰੈਸ਼ ਨਹੀਂ ਹੋ ਸਕੀ। ਕਿਰਪਾ ਕਰਕੇ ਦੁਬਾਰਾ ਕੋਸ਼ਿਸ਼ ਕਰੋ।"
+  },
+  "error_device_revoked_limit": {
+    "message": "ਇਹ ਡੀਵਾਈਸ ਰੱਦ ਕਰ ਦਿੱਤਾ ਗਿਆ ਹੈ। ਡੀਵਾਈਸ ਸੀਮਾ ਪੂਰੀ ਹੋ ਗਈ: ਕਿਰਪਾ ਕਰਕੇ ਇੱਕ ਡੀਵਾਈਸ ਹਟਾਓ।"
+  },
+  "noAvailableLocations": {
+    "message": "ਇਸ ਵੇਲੇ ਕੋਈ ਟਿਕਾਣਾ ਉਪਲਬਧ ਨਹੀਂ ਹੈ। ਕਿਰਪਾ ਕਰਕੇ ਥੋੜ੍ਹੀ ਦੇਰ ਬਾਅਦ ਦੁਬਾਰਾ ਕੋਸ਼ਿਸ਼ ਕਰੋ।"
+  },
+  "noAvailableFavoriteLocations": {
+    "message": "ਤੁਹਾਡੇ ਮਨਪਸੰਦ ਟਿਕਾਣੇ ਆਰਜ਼ੀ ਤੌਰ 'ਤੇ ਉਪਲਬਧ ਨਹੀਂ ਹਨ।"
+  },
+  "error_location_favorites_limit": {
+    "message": "100 ਮਨਪਸੰਦਾਂ ਦੀ ਸੀਮਾ ਪੂਰੀ ਹੋ ਗਈ ਹੈ। ਹੋਰ ਸ਼ਾਮਲ ਕਰਨ ਲਈ ਇੱਕ ਮਨਪਸੰਦ ਹਟਾਓ।"
+  },
+  "error_server_full": {
+    "message": "ਇਹ ਸਰਵਰ ਭਰਿਆ ਹੋਇਆ ਹੈ। ਕੋਈ ਹੋਰ ਟਿਕਾਣਾ ਚੁਣੋ।"
+  },
+  "error_capacity_unavailable": {
+    "message": "ਇਸ ਸਰਵਰ ਦੀ ਉਪਲਬਧਤਾ ਦੀ ਇਸ ਵੇਲੇ ਪੁਸ਼ਟੀ ਨਹੀਂ ਹੋ ਸਕਦੀ। ਕਿਰਪਾ ਕਰਕੇ ਥੋੜ੍ਹੀ ਦੇਰ ਬਾਅਦ ਦੁਬਾਰਾ ਕੋਸ਼ਿਸ਼ ਕਰੋ।"
+  },
+  "locationHierarchyHelp": {
+    "message": "ਨਾਮ ਸਰਵਰ ਚੁਣਦਾ ਹੈ; ਤੀਰ ਵੇਰਵੇ ਦਿਖਾਉਂਦਾ ਹੈ।"
+  },
+  "locationCountrySelect": {
+    "message": "ਉਪਲਬਧ ਸਰਵਰ ਚੁਣੋ: $1"
+  },
+  "locationCitySelect": {
+    "message": "ਉਪਲਬਧ ਸਰਵਰ ਚੁਣੋ: $1"
+  },
+  "locationShowCities": {
+    "message": "ਸ਼ਹਿਰ ਦਿਖਾਓ: $1"
+  },
+  "locationHideCities": {
+    "message": "ਸ਼ਹਿਰ ਲੁਕਾਓ: $1"
+  },
+  "locationShowServers": {
+    "message": "ਸਰਵਰ ਦਿਖਾਓ: $1"
+  },
+  "locationHideServers": {
+    "message": "ਸਰਵਰ ਲੁਕਾਓ: $1"
+  },
+  "locationAvailableServers": {
+    "message": "ਉਪਲਬਧ ਸਰਵਰ: $1"
+  },
+  "legalInformation": {
+    "message": "ਕਾਨੂੰਨੀ ਜਾਣਕਾਰੀ"
+  },
+  "privacyPolicy": {
+    "message": "ਐਕਸਟੈਂਸ਼ਨ ਪਰਦੇਦਾਰੀ ਨੋਟਿਸ"
+  },
+  "termsAndConditions": {
+    "message": "ਵਰਤੋਂ ਅਤੇ ਵਿਕਰੀ ਦੀਆਂ ਸ਼ਰਤਾਂ"
+  },
+  "legalNotice": {
+    "message": "ਕਾਨੂੰਨੀ ਨੋਟਿਸ"
+  },
+  "contactSupport": {
+    "message": "ਸਹਾਇਤਾ ਨਾਲ ਸੰਪਰਕ ਕਰੋ"
+  },
+  "webSignIn": {
+    "message": "FuzeVPN ਵਿੱਚ ਸਾਈਨ ਇਨ ਕਰੋ"
+  },
+  "webSignInDisconnect": {
+    "message": "ਡਿਸਕਨੈਕਟ ਕਰੋ ਅਤੇ ਸਾਈਨ ਇਨ ਕਰੋ"
+  },
+  "webSignInPending": {
+    "message": "ਸਾਈਨ ਇਨ ਜਾਰੀ ਹੈ…"
+  },
+  "webSignInHelp": {
+    "message": "FuzeVPN ਗਾਹਕ ਖੇਤਰ ਵਿੱਚ Google ਜਾਂ ਈਮੇਲ ਨਾਲ ਸਾਈਨ ਇਨ ਕਰੋ ਜਾਂ ਖਾਤਾ ਬਣਾਓ।"
+  },
+  "webSignInDisconnectHelp": {
+    "message": "ਇਹ ਬਟਨ ਬ੍ਰਾਊਜ਼ਰ ਸੁਰੱਖਿਆ ਨੂੰ ਰੋਕਦਾ ਹੈ ਤਾਂ ਜੋ ਤੁਸੀਂ Google ਜਾਂ ਈਮੇਲ ਨਾਲ ਸਾਈਨ ਇਨ ਕਰ ਸਕੋ। ਸਾਈਨ ਇਨ ਦੌਰਾਨ ਤੁਹਾਡੀ ਬ੍ਰਾਊਜ਼ਿੰਗ ਅਸੁਰੱਖਿਅਤ ਹੋਵੇਗੀ।"
+  },
+  "webSignInStatus": {
+    "message": "FuzeVPN ਸਾਈਨ-ਇਨ ਵਿੰਡੋ ਵਿੱਚ ਜਾਰੀ ਰੱਖੋ। ਤੁਹਾਡੇ ਪੂਰਾ ਕਰਨ 'ਤੇ ਐਕਸਟੈਂਸ਼ਨ ਆਪਣੇ ਆਪ ਅੱਪਡੇਟ ਹੋ ਜਾਂਦੀ ਹੈ। ਰੱਦ ਕਰਨ ਲਈ ਉਹ ਵਿੰਡੋ ਬੰਦ ਕਰੋ।"
+  },
+  "error_web_login_cancelled": {
+    "message": "ਸਾਈਨ ਇਨ ਰੱਦ ਕੀਤਾ ਗਿਆ। ਦੁਬਾਰਾ ਕੋਸ਼ਿਸ਼ ਕਰੋ।"
+  },
+  "error_web_login_timeout": {
+    "message": "ਸਾਈਨ ਇਨ ਵਿੱਚ ਬਹੁਤ ਸਮਾਂ ਲੱਗਿਆ। ਦੁਬਾਰਾ ਕੋਸ਼ਿਸ਼ ਕਰੋ।"
+  },
+  "error_web_login_unavailable": {
+    "message": "ਵੈੱਬ ਸਾਈਨ ਇਨ ਉਪਲਬਧ ਨਹੀਂ ਹੈ। ਬਾਅਦ ਵਿੱਚ ਦੁਬਾਰਾ ਕੋਸ਼ਿਸ਼ ਕਰੋ।"
+  },
+  "error_web_login_invalid_callback": {
+    "message": "ਸਾਈਨ ਇਨ ਦੀ ਪੁਸ਼ਟੀ ਨਹੀਂ ਹੋ ਸਕੀ। ਐਕਸਟੈਂਸ਼ਨ ਤੋਂ ਦੁਬਾਰਾ ਸ਼ੁਰੂ ਕਰੋ।"
+  },
+  "error_web_login_denied": {
+    "message": "ਸਾਈਨ ਇਨ ਨੂੰ ਅਧਿਕਾਰ ਨਹੀਂ ਮਿਲਿਆ। ਦੁਬਾਰਾ ਕੋਸ਼ਿਸ਼ ਕਰੋ।"
+  },
+  "error_web_login_busy": {
+    "message": "ਦੁਬਾਰਾ ਕੋਸ਼ਿਸ਼ ਕਰਨ ਤੋਂ ਪਹਿਲਾਂ ਪਹਿਲਾਂ ਤੋਂ ਖੁੱਲ੍ਹੀ ਸਾਈਨ-ਇਨ ਵਿੰਡੋ ਬੰਦ ਕਰੋ।"
+  },
+  "deviceKindFirefox": {
+    "message": "Firefox ਬ੍ਰਾਊਜ਼ਰ"
+  },
+  "generalPrivacyPolicy": {
+    "message": "ਆਮ ਪਰਦੇਦਾਰੀ ਨੀਤੀ"
+  },
+  "privacyNoticeTitle": {
+    "message": "FuzeVPN ਐਕਸਟੈਂਸ਼ਨ ਵਿੱਚ ਪਰਦੇਦਾਰੀ"
+  },
+  "privacyNoticeIntro": {
+    "message": "ਇਹ ਨੋਟਿਸ ਇਸ ਐਕਸਟੈਂਸ਼ਨ ਵੱਲੋਂ ਵਰਤੇ ਜਾਂਦੇ ਡਾਟੇ ਦਾ ਵਰਣਨ ਕਰਦਾ ਹੈ। ਇਹ ਹੇਠਾਂ ਲਿੰਕ ਕੀਤੀ FuzeVPN ਦੀ ਆਮ ਪਰਦੇਦਾਰੀ ਨੀਤੀ ਦਾ ਪੂਰਕ ਹੈ। ਵਿਕਲਪਿਕ ਡਾਇਗਨੌਸਟਿਕ ਭੇਜਣਾ ਸਾਈਨ ਇਨ ਕਰਨ ਅਤੇ VPN ਵਰਤਣ ਲਈ ਲੋੜੀਂਦੇ ਡਾਟੇ ਤੋਂ ਵੱਖਰਾ ਹੈ।"
+  },
+  "privacyNoticeUpdated": {
+    "message": "ਨੋਟਿਸ 19 ਅਕਤੂਬਰ 2026 ਨੂੰ ਅੱਪਡੇਟ ਕੀਤਾ ਗਿਆ"
+  },
+  "privacyNoticeServiceTitle": {
+    "message": "ਖਾਤਾ ਅਤੇ VPN ਸੇਵਾ"
+  },
+  "privacyNoticeService": {
+    "message": "ਐਕਸਟੈਂਸ਼ਨ api.fuzevpn.com ਨਾਲ ਪ੍ਰਮਾਣੀਕਰਨ, ਖਾਤਾ, ਸਬਸਕ੍ਰਿਪਸ਼ਨ, ਡੀਵਾਈਸ ਅਤੇ ਪ੍ਰੌਕਸੀ-ਸੈਸ਼ਨ ਡਾਟੇ ਦਾ ਵਟਾਂਦਰਾ ਕਰਦੀ ਹੈ। VPN ਪ੍ਰੌਕਸੀ ਆਪਣੇ ਰਾਹੀਂ ਭੇਜੇ ਗਏ ਟ੍ਰੈਫਿਕ ਨੂੰ ਲੈ ਕੇ ਜਾਂਦੀ ਹੈ। ਇਹ ਕਨੈਕਸ਼ਨ ਪ੍ਰਾਪਤ ਕਰਨ ਵਾਲੀ ਸੇਵਾ ਨੂੰ ਨੈੱਟਵਰਕ ਮੈਟਾਡਾਟਾ ਜ਼ਾਹਰ ਕਰਦੇ ਹਨ; ਇਹ ਨੋਟਿਸ ਸਰਵਰ ਲੌਗਿੰਗ ਬਾਰੇ ਕੋਈ ਵੱਖਰਾ ਵਾਅਦਾ ਨਹੀਂ ਕਰਦਾ।"
+  },
+  "privacyNoticeLocalTitle": {
+    "message": "ਤੁਹਾਡੇ ਬ੍ਰਾਊਜ਼ਰ ਵਿੱਚ ਸਟੋਰ ਕੀਤਾ ਡਾਟਾ"
+  },
+  "privacyNoticeLocal": {
+    "message": "ਬ੍ਰਾਊਜ਼ਰ ਸਟੋਰੇਜ ਵਿੱਚ ਤੁਹਾਡਾ ਸੈਸ਼ਨ, ਖਾਤੇ ਦੇ ਵੇਰਵੇ, ਤਰਜੀਹਾਂ, ਸਾਈਟ ਛੋਟਾਂ ਅਤੇ ਡੀਵਾਈਸ ਪਛਾਣ ਰਹਿੰਦੀ ਹੈ। ਸਵੈਚਲਿਤ ਰਿਪੋਰਟਿੰਗ ਬੰਦ ਹੋਣ 'ਤੇ ਵੀ ਤਕਨੀਕੀ ਜਰਨਲ 10 ਮਿੰਟਾਂ ਤੱਕ ਸਥਾਨਕ ਤੌਰ 'ਤੇ ਰੱਖੇ ਜਾਂਦੇ ਹਨ। ਡਾਇਗਨੌਸਟਿਕ ਡਰਾਫਟਾਂ ਅਤੇ ਕਤਾਰ ਵਿੱਚ ਪਈਆਂ ਰਿਪੋਰਟਾਂ ਦੀ ਮਿਆਦ 24 ਘੰਟਿਆਂ ਬਾਅਦ ਸਥਾਨਕ ਤੌਰ 'ਤੇ ਪੁੱਗ ਜਾਂਦੀ ਹੈ; ਸਫ਼ਾਈ ਉਦੋਂ ਹੁੰਦੀ ਹੈ ਜਦੋਂ ਐਕਸਟੈਂਸ਼ਨ ਚੱਲ ਸਕਦੀ ਹੈ।"
+  },
+  "privacyNoticeIpTitle": {
+    "message": "ਜਨਤਕ IP ਜਾਂਚਾਂ ਅਤੇ ਤੀਜੀਆਂ ਧਿਰਾਂ"
+  },
+  "privacyNoticeIp": {
+    "message": "IP ਡਿਸਪਲੇ ਅਤੇ ਨੈੱਟਵਰਕ ਡਾਇਗਨੌਸਟਿਕਸ api.ipify.org ਨਾਲ ਸੰਪਰਕ ਕਰਦੇ ਹਨ। IP ਡਿਸਪਲੇ ਬਦਲ ਵਜੋਂ ipv4.icanhazip.com ਵਰਤ ਸਕਦਾ ਹੈ। ਪ੍ਰਦਾਤਾ ਨੂੰ ਕਨੈਕਸ਼ਨ IP ਅਤੇ ਆਮ ਬੇਨਤੀ ਮੈਟਾਡਾਟਾ ਮਿਲਦਾ ਹੈ: ਸਿੱਧੇ ਮੋਡ ਵਿੱਚ ਤੁਹਾਡਾ ਜਨਤਕ IP, ਜਾਂ ਪ੍ਰੌਕਸੀ ਹੋਣ 'ਤੇ VPN ਐਗਜ਼ਿਟ IP। ਇਹਨਾਂ ਬੇਨਤੀਆਂ ਵਿੱਚ ਕੂਕੀਜ਼ ਅਤੇ ਰੈਫ਼ਰਰ ਨਹੀਂ ਹੁੰਦੇ ਅਤੇ ਕੋਈ ਖਾਤਾ ਟੋਕਨ ਜਾਂ ਬ੍ਰਾਊਜ਼ਿੰਗ ਇਤਿਹਾਸ ਨਹੀਂ ਭੇਜਿਆ ਜਾਂਦਾ।"
+  },
+  "privacyNoticeReportsTitle": {
+    "message": "ਡਾਇਗਨੌਸਟਿਕ ਰਿਪੋਰਟਾਂ ਵਿੱਚ ਕੀ ਹੁੰਦਾ ਹੈ"
+  },
+  "privacyNoticeReports": {
+    "message": "ਰਿਪੋਰਟਾਂ ਵਿੱਚ ਇੱਕ ਬੇਤਰਤੀਬ ਰਿਪੋਰਟ ਪਛਾਣਕਰਤਾ, ਟਾਈਮਸਟੈਂਪ, ਐਕਸਟੈਂਸ਼ਨ ਅਤੇ ਬ੍ਰਾਊਜ਼ਰ ਦੇ ਵਰਜਨ, ਓਪਰੇਟਿੰਗ ਸਿਸਟਮ ਦਾ ਪਰਿਵਾਰ ਅਤੇ ਆਰਕੀਟੈਕਚਰ, ਕਨੈਕਸ਼ਨ ਅਤੇ ਸੁਰੱਖਿਆ ਸਥਿਤੀਆਂ, ਗੜਬੜ ਕੋਡ, ਗਿਣਤੀਆਂ, ਮਿਆਦਾਂ ਅਤੇ ਜਾਂਚ ਨਤੀਜੇ ਸ਼ਾਮਲ ਹੋ ਸਕਦੇ ਹਨ। ਪੂਰੀਆਂ ਰਿਪੋਰਟਾਂ ਵਿੱਚ ਹਾਲੀਆ ਤਕਨੀਕੀ ਇਵੈਂਟ ਸ਼ਾਮਲ ਹੋ ਸਕਦੇ ਹਨ। ਉਹਨਾਂ ਦੇ JSON ਵਿੱਚ ਪਾਸਵਰਡ, ਪ੍ਰਮਾਣੀਕਰਨ ਟੋਕਨ, ਈਮੇਲ ਪਤੇ, IP ਪਤੇ, ਦੇਖੇ ਗਏ URL ਅਤੇ ਬਾਹਰ ਰੱਖੇ ਡੋਮੇਨ ਸ਼ਾਮਲ ਨਹੀਂ ਹੁੰਦੇ। ਭੇਜਣ ਤੋਂ ਪਹਿਲਾਂ ਤੁਸੀਂ ਪੂਰੀ ਰਿਪੋਰਟ ਦੀ ਜਾਂਚ ਅਤੇ ਨਿਰਯਾਤ ਕਰ ਸਕਦੇ ਹੋ।"
+  },
+  "privacyNoticeAccountTitle": {
+    "message": "ਪ੍ਰਾਪਤਕਰਤਾ ਅਤੇ ਖਾਤੇ ਨਾਲ ਸੰਬੰਧ"
+  },
+  "privacyNoticeAccount": {
+    "message": "ਰਿਪੋਰਟਾਂ ਪ੍ਰਮਾਣਿਤ ਕਨੈਕਸ਼ਨ ਰਾਹੀਂ api.fuzevpn.com/v1/diagnostics 'ਤੇ FuzeVPN ਨੂੰ ਭੇਜੀਆਂ ਜਾਂਦੀਆਂ ਹਨ। ਇਹ API ਕਨੈਕਸ਼ਨ VPN ਪ੍ਰੌਕਸੀ ਨੂੰ ਬਾਈਪਾਸ ਕਰਦਾ ਹੈ: VPN ਕਿਰਿਆਸ਼ੀਲ ਹੋਣ 'ਤੇ ਵੀ FuzeVPN ਨੂੰ ਤੁਹਾਡਾ ਸਿੱਧਾ ਜਨਤਕ IP ਮਿਲਦਾ ਹੈ। ਰਿਪੋਰਟਾਂ ਸਾਈਨ ਇਨ ਕੀਤੇ ਖਾਤੇ ਨਾਲ ਜੁੜੀਆਂ ਹੁੰਦੀਆਂ ਹਨ, ਗੁਮਨਾਮ ਨਹੀਂ। ਪ੍ਰਮਾਣੀਕਰਨ ਹੈਡਰ ਅਤੇ IP ਰਿਪੋਰਟ JSON ਤੋਂ ਵੱਖਰੇ ਹੁੰਦੇ ਹਨ। ਸਫਲ ਪ੍ਰਾਪਤੀ ਉਸ ਐਂਡਪੁਆਇੰਟ ਵੱਲੋਂ ਸਵੀਕਾਰ ਕੀਤੇ ਜਾਣ ਦੀ ਪੁਸ਼ਟੀ ਕਰਦੀ ਹੈ, ਇਹ ਨਹੀਂ ਕਿ ਕਿਸੇ ਸਹਾਇਤਾ ਏਜੰਟ ਨੇ ਰਿਪੋਰਟ ਪੜ੍ਹੀ ਹੈ।"
+  },
+  "privacyNoticeChoiceTitle": {
+    "message": "ਵਿਕਲਪਿਕ ਭੇਜਣਾ ਅਤੇ ਸਹਿਮਤੀ ਵਾਪਸ ਲੈਣਾ"
+  },
+  "privacyNoticeChoice": {
+    "message": "ਸਵੈਚਲਿਤ ਭੇਜਣਾ ਪੂਰਵ-ਨਿਰਧਾਰਤ ਤੌਰ 'ਤੇ ਬੰਦ ਹੁੰਦਾ ਹੈ। ਇਸਨੂੰ ਚਾਲੂ ਕਰਨ ਨਾਲ ਉਸ ਖਾਤੇ ਲਈ ਸਧਾਰਨ ਗੜਬੜ ਰਿਪੋਰਟਾਂ ਦੀ ਇਜਾਜ਼ਤ ਮਿਲਦੀ ਹੈ। ਹੱਥੀਂ ਪੂਰੀ ਰਿਪੋਰਟ ਭੇਜਣ ਲਈ ਭੇਜਣ ਵਾਲਾ ਚੈੱਕਬਾਕਸ ਲੋੜੀਂਦਾ ਹੈ। Firefox ਨੂੰ ਆਪਣੀ ਵਿਕਲਪਿਕ ਤਕਨੀਕੀ-ਡਾਟਾ ਇਜਾਜ਼ਤ ਦੀ ਵੀ ਲੋੜ ਹੁੰਦੀ ਹੈ। ਸਵੈਚਲਿਤ ਭੇਜਣਾ ਰੋਕਣ ਅਤੇ ਬਕਾਇਆ ਸਵੈਚਲਿਤ ਰਿਪੋਰਟਾਂ ਹਟਾਉਣ ਲਈ ਇਸਨੂੰ ਬੰਦ ਕਰੋ; ਬਕਾਇਆ ਵਿਅਕਤੀਗਤ ਭੇਜਣਾਂ ਨੂੰ ਵੱਖਰੇ ਤੌਰ 'ਤੇ ਰੱਦ ਕਰੋ। ਡਾਇਗਨੌਸਟਿਕ ਭੇਜਣ ਤੋਂ ਇਨਕਾਰ ਕਰਨ ਨਾਲ VPN ਦੀ ਵਰਤੋਂ ਨਹੀਂ ਰੁਕਦੀ।"
+  },
+  "privacyNoticeDeleteTitle": {
+    "message": "ਸਥਾਨਕ ਮਿਟਾਉਣਾ ਅਤੇ ਡਾਊਨਲੋਡ ਕੀਤੀਆਂ ਫ਼ਾਈਲਾਂ"
+  },
+  "privacyNoticeDelete": {
+    "message": "ਡਾਇਗਨੌਸਟਿਕਸ ਵਿੱਚ, ਤਕਨੀਕੀ ਇਤਿਹਾਸ ਸਾਫ਼ ਕਰੋ ਜਾਂ ਕੋਈ ਇਕੱਲੀ ਸਥਾਨਕ ਰਿਪੋਰਟ ਮਿਟਾਓ। ਇਤਿਹਾਸ ਸਾਫ਼ ਕਰਨ ਨਾਲ ਮੌਜੂਦਾ ਰਿਪੋਰਟ ਕਾਪੀਆਂ ਨਹੀਂ ਮਿਟਦੀਆਂ। ਸਥਾਨਕ ਤੌਰ 'ਤੇ ਰੱਦ ਕਰਨ ਜਾਂ ਮਿਟਾਉਣ ਨਾਲ ਸੇਵਾ ਵੱਲੋਂ ਪਹਿਲਾਂ ਹੀ ਪ੍ਰਾਪਤ ਡਾਟਾ ਵਾਪਸ ਨਹੀਂ ਲਿਆ ਜਾ ਸਕਦਾ, ਜਿਸ ਵਿੱਚ ਰੱਦ ਕਰਨ ਤੋਂ ਪਹਿਲਾਂ ਪਹੁੰਚਿਆ ਅੱਪਲੋਡ ਵੀ ਸ਼ਾਮਲ ਹੈ। ਡਾਊਨਲੋਡ ਕੀਤੇ ਨਿਰਯਾਤ ਵੱਖਰੀਆਂ ਫ਼ਾਈਲਾਂ ਹਨ ਜਿਨ੍ਹਾਂ ਨੂੰ ਤੁਹਾਨੂੰ ਖੁਦ ਮਿਟਾਉਣਾ ਪਵੇਗਾ।"
+  },
+  "privacyNoticeServerTitle": {
+    "message": "ਸਰਵਰ 'ਤੇ ਡਾਟਾ ਰੱਖਣਾ ਅਤੇ ਬੇਨਤੀਆਂ"
+  },
+  "privacyNoticeServer": {
+    "message": "ਇਹ ਐਕਸਟੈਂਸ਼ਨ ਸਰਵਰ 'ਤੇ ਡਾਟਾ ਰੱਖਣ ਜਾਂ ਸਰਵਰ-ਪਾਸੇ ਮਿਟਾਉਣ ਨੂੰ ਨਾ ਤਾਂ ਕੰਟਰੋਲ ਕਰਦੀ ਹੈ ਅਤੇ ਨਾ ਹੀ ਉਸਦੀ ਪੁਸ਼ਟੀ ਕਰਦੀ ਹੈ। FuzeVPN ਵੱਲੋਂ ਲਾਗੂ ਕੀਤੀ ਡਾਟਾ ਰੱਖਣ ਦੀ ਮਿਆਦ ਅਤੇ ਪਹਿਲਾਂ ਭੇਜੀਆਂ ਰਿਪੋਰਟਾਂ ਸੰਬੰਧੀ ਬੇਨਤੀਆਂ ਲਈ, ਆਮ ਪਰਦੇਦਾਰੀ ਨੀਤੀ ਦੇਖੋ ਜਾਂ FuzeVPN ਨਾਲ ਸੰਪਰਕ ਕਰੋ। ਇਹ ਨੋਟਿਸ ਸਰਵਰ 'ਤੇ ਡਾਟਾ ਰੱਖਣ ਦੀ ਕਿਸੇ ਨਿਸ਼ਚਿਤ ਮਿਆਦ ਦੀ ਗਰੰਟੀ ਨਹੀਂ ਦਿੰਦਾ।"
+  },
+  "privacyNoticeSupportTitle": {
+    "message": "ਡਾਇਗਨੌਸਟਿਕਸ ਅਤੇ ਸਹਾਇਤਾ ਵੱਖਰੇ ਹਨ"
+  },
+  "privacyNoticeSupport": {
+    "message": "ਡਾਇਗਨੌਸਟਿਕ ਰਿਪੋਰਟ ਭੇਜਣ ਨਾਲ ਐਕਸਟੈਂਸ਼ਨ ਤੋਂ ਆਪਣੇ ਆਪ ਕੋਈ ਸਹਾਇਤਾ ਸੁਨੇਹਾ ਨਹੀਂ ਜਾਂਦਾ। ਕਿਸੇ ਸਮੱਸਿਆ ਬਾਰੇ ਦੱਸਣ ਜਾਂ ਪ੍ਰਾਪਤ ਹੋਈ ਰਿਪੋਰਟ ਨੂੰ ਮਿਟਾਉਣ ਦੀ ਬੇਨਤੀ ਕਰਨ ਲਈ, ਹੇਠਾਂ ਦਿੱਤਾ FuzeVPN ਸੰਪਰਕ ਚੈਨਲ ਵਰਤੋ। ਜੇਕਰ ਤੁਸੀਂ ਕਿਸੇ ਹੋਰ ਚੈਨਲ ਰਾਹੀਂ ਨਿਰਯਾਤ ਕੀਤੀ ਫ਼ਾਈਲ ਸਾਂਝੀ ਕਰਨ ਦੀ ਚੋਣ ਕਰਦੇ ਹੋ, ਤਾਂ ਪਹਿਲਾਂ ਉਸਦੀ ਸਮੱਗਰੀ ਜਾਂਚੋ।"
+  },
+  "privacyNoticeManage": {
+    "message": "ਡਾਇਗਨੌਸਟਿਕਸ ਖੋਲ੍ਹੋ"
+  },
+  "privacyNoticeLinksTitle": {
+    "message": "ਸੇਵਾ ਨੀਤੀ ਅਤੇ ਸੰਪਰਕ"
+  },
+  "theme": {
+    "message": "ਥੀਮ"
+  },
+  "themeSystem": {
+    "message": "ਸਿਸਟਮ"
+  },
+  "themeLight": {
+    "message": "ਹਲਕਾ"
+  },
+  "themeDark": {
+    "message": "ਗੂੜ੍ਹਾ"
+  },
+  "switchToDarkTheme": {
+    "message": "ਗੂੜ੍ਹੇ ਥੀਮ 'ਤੇ ਜਾਓ"
+  },
+  "switchToLightTheme": {
+    "message": "ਹਲਕੇ ਥੀਮ 'ਤੇ ਜਾਓ"
+  }
+}

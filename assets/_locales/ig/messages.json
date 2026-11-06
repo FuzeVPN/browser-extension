@@ -1,0 +1,929 @@
+{
+  "extensionName": {
+    "message": "FuzeVPN"
+  },
+  "extensionDescription": {
+    "message": "Chekwaa nzuzo gị ma mee ka nchekwa gị sie ike site n'ịpị otu ugboro."
+  },
+  "siteExclusionsReloadRequired": {
+    "message": "Bugoghachi FuzeVPN site na njikwa ndọtị nke ihe nchọgharị iji mezue mmelite ahụ ma jiri saịtị ewepụrụ."
+  },
+  "extensionCommunicationError": {
+    "message": "Ndọtị ahụ anaghị aza. Mechie windo a, wee bugoghachi FuzeVPN site na njikwa ndọtị nke ihe nchọgharị."
+  },
+  "actionDisconnected": {
+    "message": "FuzeVPN — Ejikọghị"
+  },
+  "actionConnected": {
+    "message": "FuzeVPN — Echekwara n'ihe nchọgharị a"
+  },
+  "actionReconnecting": {
+    "message": "FuzeVPN — Na-ejikọ ọzọ"
+  },
+  "actionError": {
+    "message": "FuzeVPN — Achọrọ nlebara anya"
+  },
+  "browserProtection": {
+    "message": "Nchekwa ihe nchọgharị"
+  },
+  "loginTitle": {
+    "message": "Nnọọ na FuzeVPN"
+  },
+  "loginSubtitle": {
+    "message": "Banye iji chekwaa nchọgharị gị n'ihe nchọgharị a."
+  },
+  "email": {
+    "message": "Adreesị email"
+  },
+  "emailPlaceholder": {
+    "message": "you@example.com"
+  },
+  "password": {
+    "message": "Okwuntughe"
+  },
+  "signIn": {
+    "message": "Banye"
+  },
+  "signingIn": {
+    "message": "Na-abanye…"
+  },
+  "forgotPassword": {
+    "message": "Chefuru okwuntughe?"
+  },
+  "createAccount": {
+    "message": "Mepụta akaụntụ"
+  },
+  "settings": {
+    "message": "Ntọala"
+  },
+  "close": {
+    "message": "Mechie"
+  },
+  "statusDisconnected": {
+    "message": "Ejikọghị"
+  },
+  "statusConnecting": {
+    "message": "Na-ejikọ…"
+  },
+  "statusChanging": {
+    "message": "Na-agbanwe ebe…"
+  },
+  "statusProtected": {
+    "message": "Echekwara n'ihe nchọgharị a"
+  },
+  "statusRefreshing": {
+    "message": "Na-emelite n'ụzọ echekwara…"
+  },
+  "statusDisconnecting": {
+    "message": "Na-akwụsị njikọ…"
+  },
+  "statusError": {
+    "message": "Nchekwa akwụsịla"
+  },
+  "browserOnlyDetail": {
+    "message": "Nchekwa maka ihe nchọgharị a."
+  },
+  "location": {
+    "message": "Ebe"
+  },
+  "change": {
+    "message": "Gbanwee"
+  },
+  "noLocation": {
+    "message": "Enweghị ebe dị"
+  },
+  "protectBrowser": {
+    "message": "Chekwaa ihe nchọgharị"
+  },
+  "disconnect": {
+    "message": "Kwụsị njikọ"
+  },
+  "subscription": {
+    "message": "Ndenye aha"
+  },
+  "refreshSubscription": {
+    "message": "Melite ndenye aha"
+  },
+  "refreshingSubscription": {
+    "message": "Na-emelite ndenye aha…"
+  },
+  "subscriptionActive": {
+    "message": "Na-arụ ọrụ"
+  },
+  "subscriptionInactive": {
+    "message": "Anaghị arụ ọrụ"
+  },
+  "expiresOn": {
+    "message": "Ọ ga-agwụ: $1"
+  },
+  "noExpiry": {
+    "message": "Enweghị ụbọchị ngwụcha"
+  },
+  "browserOnlyNotice": {
+    "message": "Naanị ihe nchọgharị a. Ngwa ndị ọzọ na ihe nchọgharị ndị ọzọ anọghị n'okpuru nchekwa a."
+  },
+  "resendVerification": {
+    "message": "Zigharịa email"
+  },
+  "incognitoHelp": {
+    "message": "Nchọgharị nzuzo na-eji otu nchekwa ahụ naanị mgbe e kwere ka ndọtị ahụ rụọ ọrụ n'ọnọdụ nzuzo na ntọala ihe nchọgharị."
+  },
+  "manageAccount": {
+    "message": "Jikwaa akaụntụ m"
+  },
+  "account": {
+    "message": "Akaụntụ"
+  },
+  "devices": {
+    "message": "Ngwaọrụ"
+  },
+  "manageDevices": {
+    "message": "Jikwaa ngwaọrụ"
+  },
+  "refreshDevices": {
+    "message": "Melite ngwaọrụ"
+  },
+  "deviceCount": {
+    "message": "Ngwaọrụ $1 / $2"
+  },
+  "loadingDevices": {
+    "message": "Na-ebugo ngwaọrụ…"
+  },
+  "noDevices": {
+    "message": "Enweghị ngwaọrụ na-arụ ọrụ."
+  },
+  "currentDevice": {
+    "message": "Ngwaọrụ a"
+  },
+  "deviceKindBrowser": {
+    "message": "Ndọtị ihe nchọgharị"
+  },
+  "deviceKindVpn": {
+    "message": "Ngwaọrụ VPN"
+  },
+  "profile_browser_proxy": {
+    "message": "Proxy ihe nchọgharị"
+  },
+  "profile_wireguard": {
+    "message": "WireGuard"
+  },
+  "profile_openvpn": {
+    "message": "OpenVPN"
+  },
+  "none": {
+    "message": "ọ dịghị"
+  },
+  "deviceCreatedOn": {
+    "message": "E mepụtara ya: $1"
+  },
+  "deleteDevice": {
+    "message": "Hichapụ ngwaọrụ"
+  },
+  "deleteDeviceNamed": {
+    "message": "Hichapụ ngwaọrụ: $1"
+  },
+  "confirmDeleteDevice": {
+    "message": "Wepụ “$1”? Njikọ VPN ya ga-akwụsị, a ga-ewepụkwa profaịlụ ya."
+  },
+  "resetDevice": {
+    "message": "Tọgharịa ngwaọrụ"
+  },
+  "confirmResetDevice": {
+    "message": "Tọgharịa ndọtị a? A ga-edebanye ya aha dị ka ngwaọrụ ọhụrụ oge ọzọ ị ga-eji ya."
+  },
+  "signOutAccount": {
+    "message": "Pụọ na akaụntụ"
+  },
+  "chooseLocation": {
+    "message": "Họrọ ebe"
+  },
+  "error_invalid_credentials": {
+    "message": "Adreesị email ma ọ bụ okwuntughe ezighi ezi."
+  },
+  "error_unauthorized": {
+    "message": "Oge nnọkọ gị agwụla. Biko banye ọzọ."
+  },
+  "error_email_verification_required": {
+    "message": "Nyochaa adreesị email gị tupu ịgbanye nchekwa."
+  },
+  "errorVerificationCooldown": {
+    "message": "Ị nwere ike ịrịọ email ọhụrụ mgbe sekọnd $1 gachara."
+  },
+  "error_verification_email_cooldown": {
+    "message": "Biko chere tupu ịrịọ email ọzọ."
+  },
+  "error_subscription_required": {
+    "message": "Achọrọ ndenye aha na-arụ ọrụ iji chekwaa ihe nchọgharị a."
+  },
+  "error_device_limit": {
+    "message": "Ọnụ ọgụgụ ngwaọrụ eruola oke. Biko wepụ otu ngwaọrụ."
+  },
+  "error_device_identity_revoked": {
+    "message": "Ngwaọrụ a enweghịzi ikike. Gbalịa ijikọ ọzọ."
+  },
+  "error_device_proof_invalid": {
+    "message": "Anyị enweghị ike inyocha ngwaọrụ a. Lelee ụbọchị na oge kọmputa gị, wee nwaa ọzọ."
+  },
+  "error_device_proof_replayed": {
+    "message": "Edozilarị arịrịọ a. Nwaa ọzọ."
+  },
+  "error_invalid_device": {
+    "message": "Amataghị ngwaọrụ a. Gbalịa ijikọ ọzọ."
+  },
+  "error_device_exists": {
+    "message": "Ejikọtalarị njirimara ngwaọrụ a na akaụntụ ọzọ."
+  },
+  "error_not_found": {
+    "message": "Ọrụ a adịghịzi. Nwaa ọzọ."
+  },
+  "error_invalid_location": {
+    "message": "Ebe a adịghị. Họrọ ebe ọzọ."
+  },
+  "error_rate_limited": {
+    "message": "Mgbalị abaala ụba. Chere ntakịrị wee nwaa ọzọ."
+  },
+  "error_proxy_unavailable": {
+    "message": "Sava a adịghị nwa oge. Nwaa ọzọ n'oge na-adịghị anya."
+  },
+  "error_api_token_expired": {
+    "message": "Oge nnọkọ akaụntụ gị agwụla. Biko banye ọzọ."
+  },
+  "error_network_error": {
+    "message": "Netwọk adịghị. Lelee njikọ ịntanetị gị."
+  },
+  "error_request_timeout": {
+    "message": "Ọrụ ahụ were oge dị ogologo iji zaa. Nwaa ọzọ."
+  },
+  "error_invalid_response": {
+    "message": "Ọrụ ahụ zighachiri nzaghachi a na-atụghị anya ya."
+  },
+  "error_proxy_certificate_invalid": {
+    "message": "Anyị enweghị ike inyocha nchekwa sava ahụ. Akwụsịla njikọ ahụ."
+  },
+  "error_proxy_controlled_by_extension": {
+    "message": "Ndọtị ọzọ na-achịkwa proxy ihe nchọgharị ugbu a."
+  },
+  "error_proxy_controlled_by_policy": {
+    "message": "Iwu onye nchịkwa na-egbochi FuzeVPN ịgbanwe proxy."
+  },
+  "error_proxy_authentication_failed": {
+    "message": "Sava ahụ anabataghị njikọ ahụ. Gbalịa ijikọ ọzọ."
+  },
+  "error_session_expired": {
+    "message": "Njikọ gị echekwara agwụla. Jikọọ ọzọ."
+  },
+  "error_email_delivery_unavailable": {
+    "message": "Enweghị ike iziga email ahụ ugbu a."
+  },
+  "error_unknown_error": {
+    "message": "Njehie a na-atụghị anya ya mere. Nwaa ọzọ."
+  },
+  "actionBlocked": {
+    "message": "FuzeVPN — Egbochiri nchọgharị"
+  },
+  "statusBlockedRetry": {
+    "message": "Nchọgharị kwụsịrị nwa oge — na-ejikọ ọzọ"
+  },
+  "statusBlockedAction": {
+    "message": "Nchọgharị kwụsịrị nwa oge — lelee njikọ"
+  },
+  "statusProtectionUnavailable": {
+    "message": "Nchekwa adịghị — egbochighị nchọgharị"
+  },
+  "recoveryHelp": {
+    "message": "Nwaa ọzọ iji maliteghachi nchekwa. Ịkwụsị njikọ na-enye gị ohere ịchọgharị na-enweghị FuzeVPN."
+  },
+  "retryConnection": {
+    "message": "Nwaa ọzọ"
+  },
+  "killSwitch": {
+    "message": "Mgbanyụ mberede"
+  },
+  "killSwitchHelp": {
+    "message": "Na-egbochi arịrịọ weebụ ọhụrụ ma ọ bụrụ na njikọ VPN adaa. Saịtị ewepụrụ ka na-adị n'èzí VPN."
+  },
+  "webRtcProtection": {
+    "message": "Nchekwa WebRTC"
+  },
+  "webRtcHelp": {
+    "message": "Na-enyere aka idobe adreesị IP gị na nzuzo n'oge oku weebụ. Ụfọdụ oku nwere ike ọ gaghị arụ ọrụ. Ịgbanyụ nke a nwere ike ikpughe ezigbo adreesị IP gị."
+  },
+  "securityEffectiveState": {
+    "message": "$1 · $2"
+  },
+  "securityBlocked": {
+    "message": "Egbochiri nchọgharị"
+  },
+  "securityNotBlocked": {
+    "message": "Egbochighị nchọgharị"
+  },
+  "securityWebRtcActive": {
+    "message": "Mmachi WebRTC na-arụ ọrụ"
+  },
+  "securityWebRtcInactive": {
+    "message": "Mmachi WebRTC anaghị arụ ọrụ"
+  },
+  "localNetworkHelp": {
+    "message": "A na-egbochi adreesị IP mpaghara na aha mpaghara a na-ahụkarị n'oge nchekwa. Ngalaba ewepụrụ ka nwere ike inye ohere ịbanye na netwọk mpaghara. Ntọala IPv6 nke sistemụ agbanweghị."
+  },
+  "securityLimits": {
+    "message": "Banyere nchekwa a"
+  },
+  "killSwitchLimits": {
+    "message": "Naanị ihe nchọgharị a: njikọ dị adị na ụfọdụ nkwurịta okwu dị n'ime ihe nchọgharị ma ọ bụ nke ndọtị ndị ọzọ nwere ike ịga n'ihu. Ndọtị ọzọ ma ọ bụ iwu nwere ike dochie proxy tupu FuzeVPN emeghachi omume. Ịgbanyụ ndọtị ahụ na-ewepụ nchekwa. Enweghị mgbochi n'ofe sistemụ niile."
+  },
+  "error_traffic_guard_failed": {
+    "message": "Enweghị ike inyocha mgbochi nchọgharị. Enweghị nkwa nchekwa. Lelee ikike ndọtị ahụ."
+  },
+  "error_webrtc_control_unavailable": {
+    "message": "Enweghị ike itinye mmachi WebRTC. Lelee ntọala gị, ndọtị ndị ọzọ ma ọ bụ iwu onye nchịkwa."
+  },
+  "language": {
+    "message": "Asụsụ"
+  },
+  "languageAutomatic": {
+    "message": "Akpaaka — asụsụ ihe nchọgharị"
+  },
+  "languageHelp": {
+    "message": "Mgbanwe na-amalite ozugbo. Akpaaka na-agbaso asụsụ ihe nchọgharị, nke nwere ike ịdị iche na asụsụ sistemụ."
+  },
+  "languageSaveError": {
+    "message": "Enweghị ike ịchekwa asụsụ ahụ. Edobere nhọrọ gị gara aga. Nwaa ọzọ."
+  },
+  "publicIp": {
+    "message": "IP ọha"
+  },
+  "vpnIp": {
+    "message": "IP VPN"
+  },
+  "ipChecking": {
+    "message": "Na-enyocha…"
+  },
+  "ipUnavailable": {
+    "message": "Adịghị"
+  },
+  "ipLookupExplanation": {
+    "message": "E nyochara IP site na ipify, ma ọ bụ icanhazip dị ka ndabere, site na njikọ gị ugbu a. Ọ dịghị ndekọ nchọgharị e zigara."
+  },
+  "automaticLocation": {
+    "message": "Akpaaka"
+  },
+  "automaticLocationHelp": {
+    "message": "Oge nzaghachi kacha mma na nso nso a, ma ọ bụ ebe ikpeazụ gị."
+  },
+  "automaticLocationName": {
+    "message": "Akpaaka · $1"
+  },
+  "searchLocations": {
+    "message": "Chọọ mba ma ọ bụ obodo"
+  },
+  "locationFilters": {
+    "message": "Zachaa ebe"
+  },
+  "allLocations": {
+    "message": "Niile"
+  },
+  "favoriteLocations": {
+    "message": "Ọkacha mmasị"
+  },
+  "recentLocations": {
+    "message": "Nke na-adịbeghị anya"
+  },
+  "noMatchingLocations": {
+    "message": "Ọ dịghị ebe dabara na ọchụchọ gị."
+  },
+  "noFavoriteLocations": {
+    "message": "Tinye kpakpando ka idobe ebe ọkacha mmasị gị ebe a."
+  },
+  "noRecentLocations": {
+    "message": "Ebe ị jikọrọ na nso nso a ga-apụta ebe a."
+  },
+  "addFavorite": {
+    "message": "Tinye na ọkacha mmasị: $1"
+  },
+  "removeFavorite": {
+    "message": "Wepụ na ọkacha mmasị: $1"
+  },
+  "unavailableFavoriteLocation": {
+    "message": "Ọkacha mmasị adịghị: $1"
+  },
+  "locationSaveError": {
+    "message": "Enweghị ike imezu mgbanwe ahụ. E nwere ike ịchekwala ụfọdụ ntọala. Lelee nhọrọ e gosiri tupu ịnwa ọzọ."
+  },
+  "siteExclusions": {
+    "message": "Saịtị ewepụrụ"
+  },
+  "siteExclusionsHelp": {
+    "message": "Saịtị ndị a na-eji njikọ gị na-enweghị FuzeVPN, ọbụlagodi ma VPN daa."
+  },
+  "siteExclusionsEnabled": {
+    "message": "Gbanye mwepụ"
+  },
+  "siteExclusionInput": {
+    "message": "Ngalaba ma ọ bụ URL"
+  },
+  "siteExclusionPlaceholder": {
+    "message": "example.com"
+  },
+  "siteExclusionPreview": {
+    "message": "Ngalaba ahọrọ: $1"
+  },
+  "siteExclusionSubdomains": {
+    "message": "Gụnye ngalaba nta"
+  },
+  "siteExclusionAdd": {
+    "message": "Tinye saịtị"
+  },
+  "siteExclusionsEmpty": {
+    "message": "Enweghị saịtị ewepụrụ. Tinye naanị saịtị ị chọrọ iji na-enweghị VPN."
+  },
+  "siteExclusionsCount": {
+    "message": "Saịtị $1 / 100"
+  },
+  "siteExclusionScopeSubdomains": {
+    "message": "Ngalaba na ngalaba nta"
+  },
+  "siteExclusionScopeExact": {
+    "message": "Naanị ngalaba ahụ kpọmkwem"
+  },
+  "siteExclusionRemove": {
+    "message": "Wepụ $1"
+  },
+  "siteExclusionsDetails": {
+    "message": "Kedu ka mwepụ si arụ ọrụ?"
+  },
+  "siteExclusionsResources": {
+    "message": "Akụrụngwa si na ngalaba ndị ọzọ ka na-echekwa. Iwepụ otu peeji anaghị ewepụ ihe ndị ọzọ dị na ya na-akpaghị aka."
+  },
+  "siteExclusionsReload": {
+    "message": "Bugoghachi saịtị ahụ mgbe mgbanwe gasịrị. Njikọ dị adị nwere ike idobe ụzọ ha gara aga."
+  },
+  "siteExclusionsWebRtc": {
+    "message": "Nchekwa WebRTC ka bụ ntọala n'ozuzu, gụnyere maka saịtị ewepụrụ."
+  },
+  "siteExclusionsLocal": {
+    "message": "Echekwara naanị n'ihe nchọgharị a, a na-edobekwa ya mgbe ị pụrụ na akaụntụ gị."
+  },
+  "siteExclusionsOn": {
+    "message": "Agbanyere mwepụ"
+  },
+  "siteExclusionsOff": {
+    "message": "Agbanyụrụ mwepụ"
+  },
+  "siteExclusionsSummary": {
+    "message": "Saịtị $1 n'èzí VPN"
+  },
+  "siteExclusionsPending": {
+    "message": "Na-etinye mwepụ…"
+  },
+  "siteExclusionsInterrupted": {
+    "message": "Mgbanwe kwụsịrị. Nchekwa nwa oge ka dị."
+  },
+  "siteExclusionsSaveError": {
+    "message": "Enweghị ike imezu mgbanwe ahụ. Lelee ntọala gị ma nwaa ọzọ."
+  },
+  "siteExclusionsRetry": {
+    "message": "Nwaa ọzọ"
+  },
+  "siteExclusionInvalid": {
+    "message": "Tinye ngalaba ọha ziri ezi. Anaghị anabata IP, aha mpaghara, akara wildcard, njedebe ngalaba ọha na ngalaba edobere iche."
+  },
+  "siteExclusionDuplicate": {
+    "message": "Ngalaba a adịlarị na ndepụta."
+  },
+  "siteExclusionsLimit": {
+    "message": "Eruola oke saịtị 100. Wepụ otu saịtị iji tinye ọzọ."
+  },
+  "statusProtectedExceptions": {
+    "message": "VPN na-arụ ọrụ · mwepụ $1"
+  },
+  "statusBlockedExceptions": {
+    "message": "Naanị saịtị ewepụrụ ka a na-enweta"
+  },
+  "securityBlockedExceptions": {
+    "message": "Egbochiri nchọgharị ma e wezụga saịtị ewepụrụ"
+  },
+  "securityBlockUnverified": {
+    "message": "Enyochabeghị mgbochi"
+  },
+  "logoutLocalComplete": {
+    "message": "Ọpụpụ n'ime ngwaọrụ a mezuru."
+  },
+  "logoutApiSession": {
+    "message": "Nnọkọ akaụntụ ugbu a"
+  },
+  "logoutProxySessions": {
+    "message": "Nnọkọ VPN a maara"
+  },
+  "logoutRevocationPending": {
+    "message": "Nkagbu na-aga n'ihu…"
+  },
+  "logoutRevocationConfirmed": {
+    "message": "Ekwenyela nkagbu"
+  },
+  "logoutRevocationUnconfirmed": {
+    "message": "Ekwenyeghị nkagbu"
+  },
+  "logoutUnconfirmedHelp": {
+    "message": "Ụfọdụ nnọkọ dị anya nwere ike ịnọgide na-arụ ọrụ ruo mgbe ha gwụrụ."
+  },
+  "deviceQuotaLoading": {
+    "message": "Na-ebugo oke ngwaọrụ…"
+  },
+  "deviceQuotaUnknown": {
+    "message": "Oke ngwaọrụ adịghị"
+  },
+  "error_proxy_creation_uncertain": {
+    "message": "Sava ahụ ekwenyeghị na e mepụtara njikọ ọhụrụ ahụ. Njikọghachi akpaaka kwụsịrị nwa oge."
+  },
+  "siteExclusionsPreferencesReset": {
+    "message": "A tọgharịrị mwepụ saịtị gị echekwara n'ihi na enweghị ike ịgụ ha. Tinyeghachi saịtị ị chọrọ iwepụ."
+  },
+  "siteExclusionsConflict": {
+    "message": "Ndepụta saịtị ewepụrụ agbanweela. Lelee ya, wee nwaa mgbanwe gị ọzọ."
+  },
+  "unavailableLocation": {
+    "message": "Ebe adịghị"
+  },
+  "verificationSending": {
+    "message": "Na-eziga email nkwenye…"
+  },
+  "verificationSent": {
+    "message": "E zigala email nkwenye. Lelee igbe ozi gị na folda spam."
+  },
+  "error_login_requires_disconnect": {
+    "message": "Kwụsị njikọ VPN ugbu a tupu ịbanye na akaụntụ ọzọ."
+  },
+  "error_storage_unavailable": {
+    "message": "Ntọala akaụntụ mpaghara adịghị. Nwaa ọzọ mgbe ebe nchekwa ihe nchọgharị dị; edobere akaụntụ gị echekwara."
+  },
+  "diagnosticsAssistance": {
+    "message": "Nkwado"
+  },
+  "diagnosticsTitle": {
+    "message": "Nchọpụta nsogbu"
+  },
+  "diagnosticsIntro": {
+    "message": "Lelee FuzeVPN na njikọ ugbu a na-agbanweghị nchekwa gị."
+  },
+  "diagnosticsPrivacyTitle": {
+    "message": "Data gị"
+  },
+  "diagnosticsPrivacy": {
+    "message": "JSON akụkọ ahụ nwere ọnọdụ teknụzụ na koodu njehie, na-enweghị okwuntughe, token, adreesị email, adreesị IP, URL a gara ma ọ bụ ngalaba ewepụrụ. Iziga ya chọrọ nkwenye njirimara ma jikọọ akụkọ ahụ na akaụntụ gị. Lee ọkwa ahụ maka data netwọk."
+  },
+  "diagnosticsAuto": {
+    "message": "Ziga akụkọ njehie dị mkpa na-akpaghị aka"
+  },
+  "diagnosticsAutoHelp": {
+    "message": "Agbanyụrụ ya na mbụ. Ịgbanye nke a na-eziga akụkọ teknụzụ dị mfe maka akaụntụ a, na-enweghị ndekọ nchọgharị. Gbanyụọ ya ebe a iji kwụsị iziga akpaaka ma wepụ akụkọ akpaaka na-echere."
+  },
+  "diagnosticsHistoryHelp": {
+    "message": "Ndekọ ihe mere teknụzụ na-anọ n'ime ngwaọrụ a: ruo ihe omume 200 kwa ndekọ n'ime nkeji 10, ọbụlagodi mgbe agbanyụrụ iziga akpaaka. O nweghị ndekọ nchọgharị, a na-ehichapụkwa ya n'aka, mgbe ihe nchọgharị mechiri ma ọ bụ mgbe akaụntụ gbanwere."
+  },
+  "diagnosticsHistoryCount": {
+    "message": "Ihe omume teknụzụ mpaghara: $1"
+  },
+  "diagnosticsConnectionLog": {
+    "message": "Bupụ ndekọ njikọ"
+  },
+  "diagnosticsAccountRequired": {
+    "message": "Banye iji gbanye iziga. Ị ka nwere ike ilele ma bupụ akụkọ na-enweghị akaụntụ."
+  },
+  "diagnosticsRun": {
+    "message": "Malite nchọpụta nsogbu"
+  },
+  "diagnosticsClearHistory": {
+    "message": "Hichapụ ndekọ ihe mere mpaghara"
+  },
+  "diagnosticsPreparing": {
+    "message": "Na-akwado akụkọ ahụ…"
+  },
+  "diagnosticsReports": {
+    "message": "Akụkọ"
+  },
+  "diagnosticsEmpty": {
+    "message": "Enwebeghị akụkọ mpaghara."
+  },
+  "diagnosticsChooseReport": {
+    "message": "Họrọ akụkọ"
+  },
+  "diagnosticsReportLabel": {
+    "message": "$1 · $2 · $3"
+  },
+  "diagnosticsTypeFull": {
+    "message": "Akụkọ zuru ezu"
+  },
+  "diagnosticsTypeSimple": {
+    "message": "Akụkọ njehie"
+  },
+  "diagnosticsSummary": {
+    "message": "E nakọtara ya: $1. Ụdị FuzeVPN: $2."
+  },
+  "diagnosticsJson": {
+    "message": "Lee ihe dị n'akụkọ ahụ (JSON)"
+  },
+  "diagnosticsExport": {
+    "message": "Bupụ akụkọ"
+  },
+  "diagnosticsDelete": {
+    "message": "Hichapụ akụkọ mpaghara"
+  },
+  "diagnosticsRetention": {
+    "message": "Akụkọ mpaghara na-agwụ mgbe awa 24 gachara. Ihichapụ ya ebe a anaghị ehichapụ akụkọ ọrụ ahụ natalarị. Lee ọkwa ahụ maka ndobe na sava na arịrịọ nhichapụ."
+  },
+  "diagnosticsConsent": {
+    "message": "Ziga akụkọ nchọpụta nsogbu a na FuzeVPN"
+  },
+  "diagnosticsDataCollectionRequired": {
+    "message": "Firefox ga-ekwerịrị nchịkọta data teknụzụ iji ziga nchọpụta nsogbu. Nwaa ọzọ ma nye ikike a."
+  },
+  "diagnosticsSendHelp": {
+    "message": "Iziga bụ nhọrọ. Ozugbo ekwenyere, ọ nwere ike ịnwaghachi ruo awa 24 site na nnọkọ ziri ezi nke otu akaụntụ ahụ. Ị nwere ike ịkagbu mgbalị ndị ọzọ. Ịkagbu n'oge mbubreyo anaghị ekwe nkwa na sava anatabeghị akụkọ ahụ."
+  },
+  "diagnosticsSend": {
+    "message": "Ziga akụkọ"
+  },
+  "diagnosticsCancel": {
+    "message": "Kagbuo iziga"
+  },
+  "diagnosticsReload": {
+    "message": "Bugoghachi peeji a"
+  },
+  "diagnosticsUnavailable": {
+    "message": "Nchọpụta nsogbu adịghị. Bugoghachi FuzeVPN site na njikwa ndọtị nke ihe nchọgharị, wee mepeghachi peeji a. VPN gị agbanweghị."
+  },
+  "diagnosticsQueueFull": {
+    "message": "Ahịrị iziga ejupụtala. Hichapụ akụkọ mpaghara ma ọ bụ chere ka akụkọ na-echere mezue."
+  },
+  "diagnosticsContentUnavailable": {
+    "message": "Ihe dị n'akụkọ ahụ adịghị. Bupụ akụkọ mpaghara ma ọ bụrụ na ọ dị ma kpọtụrụ nkwado."
+  },
+  "diagnosticsFailure": {
+    "message": "Enweghị ike imezu omume nchọpụta nsogbu. VPN gị agbanweghị."
+  },
+  "diagnosticsChecks": {
+    "message": "Nlele"
+  },
+  "diagnosticsCheckFallback": {
+    "message": "Nlele teknụzụ: $1"
+  },
+  "diagnosticsCheckLine": {
+    "message": "$1 — $2"
+  },
+  "diagnosticsProxy": {
+    "message": "Proxy ihe nchọgharị"
+  },
+  "diagnosticsStorage": {
+    "message": "Ebe nchekwa mpaghara"
+  },
+  "diagnosticsNetwork": {
+    "message": "Njikọ netwọk"
+  },
+  "diagnosticsCleanup": {
+    "message": "Nhicha nnọkọ"
+  },
+  "diagnosticsResult_passed": {
+    "message": "Gafere"
+  },
+  "diagnosticsResult_failed": {
+    "message": "Dara"
+  },
+  "diagnosticsResult_skipped": {
+    "message": "Emeghị ya"
+  },
+  "diagnosticsResult_unknown": {
+    "message": "Amaghị"
+  },
+  "diagnosticsStatus_ready": {
+    "message": "Dị njikere na ngwaọrụ a"
+  },
+  "diagnosticsStatus_pending": {
+    "message": "Na-echere iziga"
+  },
+  "diagnosticsStatus_sending": {
+    "message": "Na-eziga…"
+  },
+  "diagnosticsStatus_session_required": {
+    "message": "Na-echere nnọkọ ziri ezi nke otu akaụntụ ahụ"
+  },
+  "diagnosticsStatus_received": {
+    "message": "Ọrụ ahụ natara ya"
+  },
+  "diagnosticsStatus_failed": {
+    "message": "Iziga dara"
+  },
+  "diagnosticsStatus_cancelled": {
+    "message": "Akagburu iziga"
+  },
+  "diagnosticsStatus_expired": {
+    "message": "Oge iziga agwụla"
+  },
+  "diagnosticsReceivedAt": {
+    "message": "Enatara ya: $1"
+  },
+  "error_private_browsing_required": {
+    "message": "Firefox chọrọ ikike a iji hazie VPN, ọbụlagodi na windo nkịtị. Mepee about:addons → FuzeVPN, kwe ka ọ rụọ ọrụ na windo nzuzo, wee nwaa ọzọ."
+  },
+  "error_host_permissions_required": {
+    "message": "Na Firefox, mepee about:addons → FuzeVPN → Ikike (Permissions) ma kwe ka ọ nweta saịtị weebụ niile, wee nwaa ọzọ."
+  },
+  "cancelAction": {
+    "message": "Kagbuo"
+  },
+  "refreshLocations": {
+    "message": "Melite ebe"
+  },
+  "refreshingLocations": {
+    "message": "Na-emelite ebe…"
+  },
+  "locationsRefreshError": {
+    "message": "Enweghị ike imelite ndepụta ebe. Biko nwaa ọzọ."
+  },
+  "error_device_revoked_limit": {
+    "message": "Akagburu ngwaọrụ a. Ọnụ ọgụgụ ngwaọrụ eruola oke: biko wepụ otu ngwaọrụ."
+  },
+  "noAvailableLocations": {
+    "message": "Enweghị ebe dị ugbu a. Biko nwaa ọzọ n'oge na-adịghị anya."
+  },
+  "noAvailableFavoriteLocations": {
+    "message": "Ebe ọkacha mmasị gị adịghị nwa oge."
+  },
+  "error_location_favorites_limit": {
+    "message": "Eruola oke ọkacha mmasị 100. Wepụ otu ọkacha mmasị iji tinye ọzọ."
+  },
+  "error_server_full": {
+    "message": "Sava a ejupụtala. Họrọ ebe ọzọ."
+  },
+  "error_capacity_unavailable": {
+    "message": "Enweghị ike ikwenye ma sava a dị ugbu a. Biko nwaa ọzọ n'oge na-adịghị anya."
+  },
+  "locationHierarchyHelp": {
+    "message": "Aha ahụ na-ahọrọ sava; akụ ahụ na-egosi nkọwa."
+  },
+  "locationCountrySelect": {
+    "message": "Họrọ sava dị: $1"
+  },
+  "locationCitySelect": {
+    "message": "Họrọ sava dị: $1"
+  },
+  "locationShowCities": {
+    "message": "Gosi obodo: $1"
+  },
+  "locationHideCities": {
+    "message": "Zoo obodo: $1"
+  },
+  "locationShowServers": {
+    "message": "Gosi sava: $1"
+  },
+  "locationHideServers": {
+    "message": "Zoo sava: $1"
+  },
+  "locationAvailableServers": {
+    "message": "Sava dị: $1"
+  },
+  "legalInformation": {
+    "message": "Ozi gbasara iwu"
+  },
+  "privacyPolicy": {
+    "message": "Ọkwa nzuzo nke ndọtị"
+  },
+  "termsAndConditions": {
+    "message": "Usoro ojiji na ire ere"
+  },
+  "legalNotice": {
+    "message": "Ọkwa iwu"
+  },
+  "contactSupport": {
+    "message": "Kpọtụrụ nkwado"
+  },
+  "webSignIn": {
+    "message": "Banye na FuzeVPN"
+  },
+  "webSignInDisconnect": {
+    "message": "Kwụsị njikọ ma banye"
+  },
+  "webSignInPending": {
+    "message": "Ịbanye na-aga n'ihu…"
+  },
+  "webSignInHelp": {
+    "message": "Banye ma ọ bụ mepụta akaụntụ site na Google ma ọ bụ email na mpaghara ndị ahịa FuzeVPN."
+  },
+  "webSignInDisconnectHelp": {
+    "message": "Bọtịnụ a na-akwụsị nchekwa ihe nchọgharị ka i wee banye site na Google ma ọ bụ email. Nchọgharị gị agaghị enwe nchekwa n'oge ịbanye."
+  },
+  "webSignInStatus": {
+    "message": "Gaa n'ihu na windo ịbanye FuzeVPN. Ndọtị ahụ ga-emelite onwe ya mgbe ị mechara. Mechie windo ahụ iji kagbuo."
+  },
+  "error_web_login_cancelled": {
+    "message": "Akagburu ịbanye. Nwaa ọzọ."
+  },
+  "error_web_login_timeout": {
+    "message": "Ịbanye were oge dị ogologo. Nwaa ọzọ."
+  },
+  "error_web_login_unavailable": {
+    "message": "Ịbanye weebụ adịghị. Nwaa ọzọ ma emechaa."
+  },
+  "error_web_login_invalid_callback": {
+    "message": "Enweghị ike inyocha ịbanye. Malitegharịa site na ndọtị ahụ."
+  },
+  "error_web_login_denied": {
+    "message": "Enyeghị ikike ịbanye. Nwaa ọzọ."
+  },
+  "error_web_login_busy": {
+    "message": "Mechie windo ịbanye meghere emeghe tupu ịnwa ọzọ."
+  },
+  "deviceKindFirefox": {
+    "message": "Ihe nchọgharị Firefox"
+  },
+  "generalPrivacyPolicy": {
+    "message": "Iwu nzuzo n'ozuzu"
+  },
+  "privacyNoticeTitle": {
+    "message": "Nzuzo na ndọtị FuzeVPN"
+  },
+  "privacyNoticeIntro": {
+    "message": "Ọkwa a na-akọwa data ndọtị a na-eji. Ọ na-agbakwunye iwu nzuzo n'ozuzu nke FuzeVPN, nke ejikọrọ n'okpuru. Iziga nchọpụta nsogbu nke nhọrọ dị iche na data achọrọ iji banye ma jiri VPN."
+  },
+  "privacyNoticeUpdated": {
+    "message": "E melitere ọkwa a na 19 Ọktoba 2026"
+  },
+  "privacyNoticeServiceTitle": {
+    "message": "Akaụntụ na ọrụ VPN"
+  },
+  "privacyNoticeService": {
+    "message": "Ndọtị ahụ na-agbanwe data nkwenye njirimara, akaụntụ, ndenye aha, ngwaọrụ na nnọkọ proxy na api.fuzevpn.com. Proxy VPN na-ebu okporo data e zigara site na ya. Njikọ ndị a na-ekpughe metadata netwọk nye ọrụ na-anata ya; ọkwa a anaghị ekwe nkwa ọ bụla dị iche gbasara ndekọ sava."
+  },
+  "privacyNoticeLocalTitle": {
+    "message": "Data echekwara n'ihe nchọgharị gị"
+  },
+  "privacyNoticeLocal": {
+    "message": "Ebe nchekwa ihe nchọgharị na-edobe nnọkọ gị, nkọwa akaụntụ, mmasị, mwepụ saịtị na njirimara ngwaọrụ. A na-edobe ndekọ teknụzụ n'ime ngwaọrụ a ruo nkeji 10, ọbụlagodi mgbe agbanyụrụ akụkọ akpaaka. Akụkọ nchọpụta nsogbu edezubeghị na akụkọ nọ n'ahịrị na-agwụ n'ime ngwaọrụ a mgbe awa 24 gachara; nhicha na-eme mgbe ndọtị ahụ nwere ike ịrụ ọrụ."
+  },
+  "privacyNoticeIpTitle": {
+    "message": "Nlele IP ọha na ndị ọzọ"
+  },
+  "privacyNoticeIp": {
+    "message": "Ngosipụta IP na nchọpụta nsogbu netwọk na-akpọtụrụ api.ipify.org. Ngosipụta IP nwere ike iji ipv4.icanhazip.com dị ka ndabere. Onye na-enye ọrụ ahụ na-anata IP njikọ na metadata arịrịọ nkịtị: IP ọha gị n'ọnọdụ kpọmkwem, ma ọ bụ IP mpụta VPN mgbe ọ gafere proxy. Arịrịọ ndị a anaghị etinye kuki ma ọ bụ referrer, ha anaghịkwa eziga token akaụntụ ma ọ bụ ndekọ nchọgharị."
+  },
+  "privacyNoticeReportsTitle": {
+    "message": "Ihe dị n'akụkọ nchọpụta nsogbu"
+  },
+  "privacyNoticeReports": {
+    "message": "Akụkọ nwere ike ịgụnye njirimara akụkọ a họpụtara n'enweghị usoro, stampụ oge, ụdị ndọtị na ihe nchọgharị, ezinụlọ na nhazi sistemụ arụmọrụ, ọnọdụ njikọ na nchekwa, koodu njehie, ọnụ ọgụgụ, ogologo oge na nsonaazụ nlele. Akụkọ zuru ezu nwere ike ịgụnye ihe omume teknụzụ na nso nso a. JSON ha anaghị agụnye okwuntughe, token nkwenye njirimara, adreesị email, adreesị IP, URL a gara na ngalaba ewepụrụ. Ị nwere ike inyocha ma bupụ akụkọ zuru ezu tupu iziga ya."
+  },
+  "privacyNoticeAccountTitle": {
+    "message": "Onye nnata na njikọ akaụntụ"
+  },
+  "privacyNoticeAccount": {
+    "message": "A na-eziga akụkọ na FuzeVPN na api.fuzevpn.com/v1/diagnostics site na njikọ enyochara njirimara ya. Njikọ API a na-agafe proxy VPN: FuzeVPN na-anata IP ọha gị kpọmkwem ọbụlagodi mgbe VPN na-arụ ọrụ. A na-ejikọ akụkọ na akaụntụ abanyere, ọ bụghị n'amaghị aha. Isi nkwenye njirimara na IP dị iche na JSON akụkọ ahụ. Nnata gara nke ọma na-egosi na ebe njedebe ahụ nabatara ya, ọ bụghị na onye ọrụ nkwado agụọla akụkọ ahụ."
+  },
+  "privacyNoticeChoiceTitle": {
+    "message": "Iziga nhọrọ na ịwepụ nkwenye"
+  },
+  "privacyNoticeChoice": {
+    "message": "Agbanyụrụ iziga akpaaka na mbụ. Ịgbanye ya na-enye ohere akụkọ njehie dị mfe maka akaụntụ ahụ. Iziga akụkọ zuru ezu n'aka chọrọ igbe nhọrọ iziga. Firefox chọkwara ikike nhọrọ ya maka data teknụzụ. Gbanyụọ iziga akpaaka iji kwụsị ya ma wepụ akụkọ akpaaka na-echere; kagbuo iziga ọ bụla na-echere iche iche. Ịjụ iziga nchọpụta nsogbu anaghị egbochi iji VPN."
+  },
+  "privacyNoticeDeleteTitle": {
+    "message": "Nhichapụ mpaghara na faịlụ ebudatara"
+  },
+  "privacyNoticeDelete": {
+    "message": "Na Nchọpụta nsogbu, hichapụ ndekọ ihe mere teknụzụ ma ọ bụ hichapụ otu akụkọ mpaghara. Ihichapụ ndekọ ihe mere anaghị ehichapụ mbipụta akụkọ dị adị. Ịkagbu ma ọ bụ ihichapụ n'ime ngwaọrụ a enweghị ike ịkpọghachi data ọrụ ahụ natalarị, gụnyere nbugo ruru tupu nkagbu. Faịlụ ebupụrụ ebudatara bụ faịlụ dị iche nke ị ga-ehichapụ n'onwe gị."
+  },
+  "privacyNoticeServerTitle": {
+    "message": "Ndobe na sava na arịrịọ"
+  },
+  "privacyNoticeServer": {
+    "message": "Ndọtị a anaghị achịkwa ma ọ bụ nyochaa ndobe na sava ma ọ bụ nhichapụ n'akụkụ sava. Maka oge ndobe FuzeVPN na-etinye na arịrịọ gbasara akụkọ e zigalarị, gụọ iwu nzuzo n'ozuzu ma ọ bụ kpọtụrụ FuzeVPN. Ọkwa a anaghị ekwe nkwa oge ndobe sava a kapịrị ọnụ."
+  },
+  "privacyNoticeSupportTitle": {
+    "message": "Nchọpụta nsogbu na nkwado dị iche"
+  },
+  "privacyNoticeSupport": {
+    "message": "Iziga akụkọ nchọpụta nsogbu n'onwe ya anaghị eziga ozi nkwado site na ndọtị ahụ. Iji kọwaa nsogbu ma ọ bụ rịọ ka ehichapụ akụkọ enatara, jiri ụzọ kọntaktị FuzeVPN dị n'okpuru. Ọ bụrụ na ị họrọ ịkekọrịta faịlụ ebupụrụ site n'ụzọ ọzọ, buru ụzọ lelee ihe dị na ya."
+  },
+  "privacyNoticeManage": {
+    "message": "Mepee Nchọpụta nsogbu"
+  },
+  "privacyNoticeLinksTitle": {
+    "message": "Iwu ọrụ na kọntaktị"
+  },
+  "theme": {
+    "message": "Isiokwu"
+  },
+  "themeSystem": {
+    "message": "Sistemụ"
+  },
+  "themeLight": {
+    "message": "Ìhè"
+  },
+  "themeDark": {
+    "message": "Ọchịchịrị"
+  },
+  "switchToDarkTheme": {
+    "message": "Gbanwee gaa na isiokwu ọchịchịrị"
+  },
+  "switchToLightTheme": {
+    "message": "Gbanwee gaa na isiokwu ìhè"
+  }
+}

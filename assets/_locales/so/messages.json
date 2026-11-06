@@ -1,0 +1,929 @@
+{
+  "extensionName": {
+    "message": "FuzeVPN"
+  },
+  "extensionDescription": {
+    "message": "Ilaali asturnaantaada oo xoogee amnigaaga hal gujin."
+  },
+  "siteExclusionsReloadRequired": {
+    "message": "Dib u shub FuzeVPN adigoo adeegsanaya maareeyaha kordhinnada biraawsarka si aad u dhammaystirto cusboonaysiinta oo aad u isticmaasho bogagga la reebay."
+  },
+  "extensionCommunicationError": {
+    "message": "Kordhintu ma jawaabayso. Xidh daaqaddan, kadibna dib u shub FuzeVPN adigoo adeegsanaya maareeyaha kordhinnada biraawsarka."
+  },
+  "actionDisconnected": {
+    "message": "FuzeVPN — Go'an"
+  },
+  "actionConnected": {
+    "message": "FuzeVPN — Ilaalsan biraawsarkan"
+  },
+  "actionReconnecting": {
+    "message": "FuzeVPN — Dib u xidhmaya"
+  },
+  "actionError": {
+    "message": "FuzeVPN — Fiiro gaar ah ayaa loo baahan yahay"
+  },
+  "browserProtection": {
+    "message": "Ilaalinta biraawsarka"
+  },
+  "loginTitle": {
+    "message": "Ku soo dhawoow FuzeVPN"
+  },
+  "loginSubtitle": {
+    "message": "Gal si aad u ilaaliso baadhistaada biraawsarkan."
+  },
+  "email": {
+    "message": "Ciwaanka iimaylka"
+  },
+  "emailPlaceholder": {
+    "message": "you@example.com"
+  },
+  "password": {
+    "message": "Furaha sirta ah"
+  },
+  "signIn": {
+    "message": "Gal"
+  },
+  "signingIn": {
+    "message": "Waa la galayaa…"
+  },
+  "forgotPassword": {
+    "message": "Ma ilowday furaha sirta ah?"
+  },
+  "createAccount": {
+    "message": "Samee akoon"
+  },
+  "settings": {
+    "message": "Dejinta"
+  },
+  "close": {
+    "message": "Xidh"
+  },
+  "statusDisconnected": {
+    "message": "Go'an"
+  },
+  "statusConnecting": {
+    "message": "Waa la xidhayaa…"
+  },
+  "statusChanging": {
+    "message": "Goobta waa la beddelayaa…"
+  },
+  "statusProtected": {
+    "message": "Ilaalsan biraawsarkan"
+  },
+  "statusRefreshing": {
+    "message": "Si ammaan ah ayaa loo cusboonaysiinayaa…"
+  },
+  "statusDisconnecting": {
+    "message": "Waa la goynayaa…"
+  },
+  "statusError": {
+    "message": "Ilaalintu way joogsatay"
+  },
+  "browserOnlyDetail": {
+    "message": "Ilaalin loogu talagalay biraawsarkan."
+  },
+  "location": {
+    "message": "Goobta"
+  },
+  "change": {
+    "message": "Beddel"
+  },
+  "noLocation": {
+    "message": "Goob la heli karo ma jirto"
+  },
+  "protectBrowser": {
+    "message": "Ilaali biraawsarka"
+  },
+  "disconnect": {
+    "message": "Ka goo"
+  },
+  "subscription": {
+    "message": "Is-diiwaangelinta"
+  },
+  "refreshSubscription": {
+    "message": "Cusboonaysii is-diiwaangelinta"
+  },
+  "refreshingSubscription": {
+    "message": "Is-diiwaangelinta waa la cusboonaysiinayaa…"
+  },
+  "subscriptionActive": {
+    "message": "Firfircoon"
+  },
+  "subscriptionInactive": {
+    "message": "Aan firfircoonayn"
+  },
+  "expiresOn": {
+    "message": "Wuxuu dhacayaa: $1"
+  },
+  "noExpiry": {
+    "message": "Taariikh dhicitaan ma leh"
+  },
+  "browserOnlyNotice": {
+    "message": "Biraawsarkan oo keliya. Abka iyo biraawsarrada kale ma daboolna."
+  },
+  "resendVerification": {
+    "message": "Dib u dir iimaylka"
+  },
+  "incognitoHelp": {
+    "message": "Baadhista gaarka ahi waxay isticmaashaa isla ilaalintan oo keliya marka kordhinta loo oggolaado qaabka gaarka ah ee dejinta biraawsarka."
+  },
+  "manageAccount": {
+    "message": "Maamul akoonkayga"
+  },
+  "account": {
+    "message": "Akoonka"
+  },
+  "devices": {
+    "message": "Qalabka"
+  },
+  "manageDevices": {
+    "message": "Maamul qalabka"
+  },
+  "refreshDevices": {
+    "message": "Cusboonaysii qalabka"
+  },
+  "deviceCount": {
+    "message": "Qalab $1 / $2"
+  },
+  "loadingDevices": {
+    "message": "Qalabka waa la soo rarayaa…"
+  },
+  "noDevices": {
+    "message": "Qalab firfircoon ma jiro."
+  },
+  "currentDevice": {
+    "message": "Qalabkan"
+  },
+  "deviceKindBrowser": {
+    "message": "Kordhinta biraawsarka"
+  },
+  "deviceKindVpn": {
+    "message": "Qalab VPN"
+  },
+  "profile_browser_proxy": {
+    "message": "Proxy-ga biraawsarka"
+  },
+  "profile_wireguard": {
+    "message": "WireGuard"
+  },
+  "profile_openvpn": {
+    "message": "OpenVPN"
+  },
+  "none": {
+    "message": "midna"
+  },
+  "deviceCreatedOn": {
+    "message": "La sameeyay: $1"
+  },
+  "deleteDevice": {
+    "message": "Tirtir qalabka"
+  },
+  "deleteDeviceNamed": {
+    "message": "Tirtir qalabka: $1"
+  },
+  "confirmDeleteDevice": {
+    "message": "Ka saar “$1”? Xidhiidhadiisa VPN way joogsan doonaan, profile-yadiisana waa la saari doonaa."
+  },
+  "resetDevice": {
+    "message": "Dib u deji qalabka"
+  },
+  "confirmResetDevice": {
+    "message": "Dib u deji kordhintan? Waxaa loo diiwaangelin doonaa qalab cusub marka xigta ee aad isticmaasho."
+  },
+  "signOutAccount": {
+    "message": "Ka bax akoonka"
+  },
+  "chooseLocation": {
+    "message": "Dooro goob"
+  },
+  "error_invalid_credentials": {
+    "message": "Ciwaanka iimaylka ama furaha sirta ah waa khalad."
+  },
+  "error_unauthorized": {
+    "message": "Fadhigaagu wuu dhacay. Fadlan mar kale gal."
+  },
+  "error_email_verification_required": {
+    "message": "Xaqiiji ciwaanka iimaylkaaga ka hor intaadan daarin ilaalinta."
+  },
+  "errorVerificationCooldown": {
+    "message": "Iimayl cusub waxaa la codsan karaa $1 ilbiriqsi kadib."
+  },
+  "error_verification_email_cooldown": {
+    "message": "Fadlan sug ka hor intaadan codsan iimayl kale."
+  },
+  "error_subscription_required": {
+    "message": "Is-diiwaangelin firfircoon ayaa loo baahan yahay si loo ilaaliyo biraawsarkan."
+  },
+  "error_device_limit": {
+    "message": "Xadka qalabka waa la gaadhay. Fadlan ka saar qalab."
+  },
+  "error_device_identity_revoked": {
+    "message": "Qalabkan mar dambe looma oggola. Isku day inaad mar kale ku xidhid."
+  },
+  "error_device_proof_invalid": {
+    "message": "Ma xaqiijin karno qalabkan. Hubi taariikhda iyo waqtiga kombiyuutarkaaga, kadibna isku day mar kale."
+  },
+  "error_device_proof_replayed": {
+    "message": "Codsigan horay ayaa loo farsameeyay. Isku day mar kale."
+  },
+  "error_invalid_device": {
+    "message": "Qalabkan lama aqoonsan. Isku day inaad mar kale ku xidhid."
+  },
+  "error_device_exists": {
+    "message": "Aqoonsiga qalabkan horay ayaa loogu xidhay akoon kale."
+  },
+  "error_not_found": {
+    "message": "Hawlgalkan hadda lama heli karo. Isku day mar kale."
+  },
+  "error_invalid_location": {
+    "message": "Goobtan lama heli karo. Dooro mid kale."
+  },
+  "error_rate_limited": {
+    "message": "Isku dayo aad u badan. Sug wax yar oo isku day mar kale."
+  },
+  "error_proxy_unavailable": {
+    "message": "Seerfarkan si ku meel gaadh ah looma heli karo. Isku day mar kale dhawaan."
+  },
+  "error_api_token_expired": {
+    "message": "Fadhiga akoonkaagu wuu dhacay. Fadlan mar kale gal."
+  },
+  "error_network_error": {
+    "message": "Shabakadda lama heli karo. Hubi xidhiidhkaaga internetka."
+  },
+  "error_request_timeout": {
+    "message": "Adeeggu wuxuu qaatay waqti aad u dheer si uu u jawaabo. Isku day mar kale."
+  },
+  "error_invalid_response": {
+    "message": "Adeeggu wuxuu soo celiyay jawaab aan la filayn."
+  },
+  "error_proxy_certificate_invalid": {
+    "message": "Ma xaqiijin karno amniga seerfarka. Xidhiidhka waa la joojiyay."
+  },
+  "error_proxy_controlled_by_extension": {
+    "message": "Kordhin kale ayaa hadda maamusha proxy-ga biraawsarka."
+  },
+  "error_proxy_controlled_by_policy": {
+    "message": "Siyaasad maamule ayaa ka hor istaagaysa FuzeVPN inuu beddelo proxy-ga."
+  },
+  "error_proxy_authentication_failed": {
+    "message": "Seerfarku ma aqbalin xidhiidhka. Isku day inaad mar kale ku xidhid."
+  },
+  "error_session_expired": {
+    "message": "Xidhiidhkaaga ilaalsan wuu dhacay. Mar kale ku xidh."
+  },
+  "error_email_delivery_unavailable": {
+    "message": "Iimaylka hadda lama diri karo."
+  },
+  "error_unknown_error": {
+    "message": "Khalad aan la filayn ayaa dhacay. Isku day mar kale."
+  },
+  "actionBlocked": {
+    "message": "FuzeVPN — Baadhista waa la xannibay"
+  },
+  "statusBlockedRetry": {
+    "message": "Baadhista waa la hakiyay — dib u xidhmaya"
+  },
+  "statusBlockedAction": {
+    "message": "Baadhista waa la hakiyay — hubi xidhiidhka"
+  },
+  "statusProtectionUnavailable": {
+    "message": "Ilaalin lama heli karo — baadhista lama xannibin"
+  },
+  "recoveryHelp": {
+    "message": "Isku day mar kale si ilaalintu u sii socoto. Ka goynta waxay kuu oggolaanaysaa inaad baadho adigoon FuzeVPN isticmaalin."
+  },
+  "retryConnection": {
+    "message": "Isku day mar kale"
+  },
+  "killSwitch": {
+    "message": "Joojiyaha degdegga ah"
+  },
+  "killSwitchHelp": {
+    "message": "Wuxuu xannibaa codsiyada webka ee cusub haddii xidhiidhka VPN-ku go'o. Bogagga la reebay waxay sii ahaanayaan kuwo la heli karo iyagoo ka baxsan VPN-ka."
+  },
+  "webRtcProtection": {
+    "message": "Ilaalinta WebRTC"
+  },
+  "webRtcHelp": {
+    "message": "Wuxuu kaa caawiyaa inaad ciwaankaaga IP qarsoodi ka dhigto inta lagu jiro wicitaannada webka. Wicitaannada qaarkood ma shaqayn karaan. Damintiisu waxay muujin kartaa ciwaankaaga IP ee dhabta ah."
+  },
+  "securityEffectiveState": {
+    "message": "$1 · $2"
+  },
+  "securityBlocked": {
+    "message": "Baadhista waa la xannibay"
+  },
+  "securityNotBlocked": {
+    "message": "Baadhista lama xannibin"
+  },
+  "securityWebRtcActive": {
+    "message": "Xaddidaadda WebRTC waa firfircoon tahay"
+  },
+  "securityWebRtcInactive": {
+    "message": "Xaddidaadda WebRTC ma firfircoona"
+  },
+  "localNetworkHelp": {
+    "message": "Ciwaannada IP ee maxalliga ah iyo magacyada maxalliga ah ee caadiga ah waa la xannibaa inta ilaalintu socoto. Domain la reebay ayaa weli fursad u siin kara shabakadda maxalliga ah. Dejinta IPv6 ee nidaamka lama beddelin."
+  },
+  "securityLimits": {
+    "message": "Ku saabsan ilaalintan"
+  },
+  "killSwitchLimits": {
+    "message": "Biraawsarkan oo keliya: xidhiidhada jira iyo isgaadhsiinta gudaha biraawsarka ama kordhinnada kale qaarkood way sii socon karaan. Kordhin kale ama siyaasad ayaa beddeli karta proxy-ga ka hor intaan FuzeVPN falcelin. Damitaanka kordhinta waxay meesha ka saartaa ilaalinta. Ma jiro xannibaad nidaamka oo dhan ah."
+  },
+  "error_traffic_guard_failed": {
+    "message": "Xannibaadda baadhista lama xaqiijin karin. Ilaalinta lama dammaanad qaadi karo. Hubi oggolaanshaha kordhinta."
+  },
+  "error_webrtc_control_unavailable": {
+    "message": "Xaddidaadda WebRTC lama dabaqi karin. Hubi dejintaada, kordhinnada kale ama siyaasadda maamulaha."
+  },
+  "language": {
+    "message": "Luqadda"
+  },
+  "languageAutomatic": {
+    "message": "Toos — luqadda biraawsarka"
+  },
+  "languageHelp": {
+    "message": "Isbeddelladu isla markiiba way dhaqan galaan. Toos wuxuu raacaa luqadda biraawsarka, taas oo ka duwanaan karta luqadda nidaamka."
+  },
+  "languageSaveError": {
+    "message": "Luqadda lama kaydin karin. Doorashadaadii hore waa la hayaa. Isku day mar kale."
+  },
+  "publicIp": {
+    "message": "IP-ga dadweynaha"
+  },
+  "vpnIp": {
+    "message": "IP-ga VPN"
+  },
+  "ipChecking": {
+    "message": "Waa la hubinayaa…"
+  },
+  "ipUnavailable": {
+    "message": "Lama heli karo"
+  },
+  "ipLookupExplanation": {
+    "message": "IP-ga waxaa lagu hubiyay ipify, ama icanhazip beddel ahaan, iyadoo la adeegsanayo xidhiidhkaaga hadda. Taariikhda baadhista lama diro."
+  },
+  "automaticLocation": {
+    "message": "Toos"
+  },
+  "automaticLocationHelp": {
+    "message": "Waqtiga jawaabta ugu fiican ee dhawaan, ama goobtaadii ugu dambaysay."
+  },
+  "automaticLocationName": {
+    "message": "Toos · $1"
+  },
+  "searchLocations": {
+    "message": "Raadi dal ama magaalo"
+  },
+  "locationFilters": {
+    "message": "Shaandhee goobaha"
+  },
+  "allLocations": {
+    "message": "Dhammaan"
+  },
+  "favoriteLocations": {
+    "message": "Kuwa la jecel yahay"
+  },
+  "recentLocations": {
+    "message": "Dhawaan"
+  },
+  "noMatchingLocations": {
+    "message": "Goob ku habboon raadintaada ma jirto."
+  },
+  "noFavoriteLocations": {
+    "message": "Ku dar xiddig si aad halkan ugu hayso goobaha aad jeceshahay."
+  },
+  "noRecentLocations": {
+    "message": "Goobaha aad dhawaan ku xidhantay ayaa halkan ka muuqan doona."
+  },
+  "addFavorite": {
+    "message": "Ku dar kuwa la jecel yahay: $1"
+  },
+  "removeFavorite": {
+    "message": "Ka saar kuwa la jecel yahay: $1"
+  },
+  "unavailableFavoriteLocation": {
+    "message": "Mid la jecel yahay oo aan la heli karin: $1"
+  },
+  "locationSaveError": {
+    "message": "Isbeddelka lama dhammaystiri karin. Waxaa laga yaabaa in dejinta qaarkood la kaydiyay. Hubi doorashada la muujiyay ka hor intaadan mar kale isku dayin."
+  },
+  "siteExclusions": {
+    "message": "Bogagga la reebay"
+  },
+  "siteExclusionsHelp": {
+    "message": "Bogaggan waxay isticmaalaan xidhiidhkaaga iyagoon FuzeVPN marin, xitaa haddii VPN-ku go'o."
+  },
+  "siteExclusionsEnabled": {
+    "message": "Daar ka-reebisyada"
+  },
+  "siteExclusionInput": {
+    "message": "Domain ama URL"
+  },
+  "siteExclusionPlaceholder": {
+    "message": "example.com"
+  },
+  "siteExclusionPreview": {
+    "message": "Domain-ka la doortay: $1"
+  },
+  "siteExclusionSubdomains": {
+    "message": "Ku dar domain-yada hoose"
+  },
+  "siteExclusionAdd": {
+    "message": "Ku dar bog"
+  },
+  "siteExclusionsEmpty": {
+    "message": "Bogag la reebay ma jiraan. Ku dar oo keliya bogagga aad rabto inaad isticmaasho VPN la'aan."
+  },
+  "siteExclusionsCount": {
+    "message": "Bogag $1 / 100"
+  },
+  "siteExclusionScopeSubdomains": {
+    "message": "Domain-ka iyo domain-yada hoose"
+  },
+  "siteExclusionScopeExact": {
+    "message": "Domain-ka saxda ah oo keliya"
+  },
+  "siteExclusionRemove": {
+    "message": "Ka saar $1"
+  },
+  "siteExclusionsDetails": {
+    "message": "Sidee ayay ka-reebisyadu u shaqeeyaan?"
+  },
+  "siteExclusionsResources": {
+    "message": "Kheyraadka ka imanaya domain-yada kale way sii ilaalsanaanayaan. Ka reebidda bog si toos ah uma reebto waxyaabihiisa kale."
+  },
+  "siteExclusionsReload": {
+    "message": "Dib u shub bogga isbeddel kadib. Xidhiidhada jira waxay sii hayn karaan waddadoodii hore."
+  },
+  "siteExclusionsWebRtc": {
+    "message": "Ilaalinta WebRTC waxay ahaanaysaa dejin guud, oo ay ku jiraan bogagga la reebay."
+  },
+  "siteExclusionsLocal": {
+    "message": "Waxaa lagu kaydiyay biraawsarkan oo keliya, waana la hayaa kadib markaad akoonkaaga ka baxdo."
+  },
+  "siteExclusionsOn": {
+    "message": "Ka-reebisyadu waa daaran yihiin"
+  },
+  "siteExclusionsOff": {
+    "message": "Ka-reebisyadu waa dansan yihiin"
+  },
+  "siteExclusionsSummary": {
+    "message": "$1 bog oo ka baxsan VPN"
+  },
+  "siteExclusionsPending": {
+    "message": "Ka-reebisyada waa la dabaqayaa…"
+  },
+  "siteExclusionsInterrupted": {
+    "message": "Isbeddelka waa la hakiyay. Ilaalinta ku meel gaadhka ah way sii jirtaa."
+  },
+  "siteExclusionsSaveError": {
+    "message": "Isbeddelka lama dhammaystiri karin. Hubi dejintaada oo isku day mar kale."
+  },
+  "siteExclusionsRetry": {
+    "message": "Isku day mar kale"
+  },
+  "siteExclusionInvalid": {
+    "message": "Geli domain dadweyne oo sax ah. Lama aqbalo IP-yo, magacyo maxalli ah, calaamadaha wildcard, dhammaadyada domain-ka dadweynaha iyo domain-yada loo xafiday."
+  },
+  "siteExclusionDuplicate": {
+    "message": "Domain-kan horay ayuu ugu jiray liiska."
+  },
+  "siteExclusionsLimit": {
+    "message": "Xadka 100 bog waa la gaadhay. Ka saar bog si aad mid kale ugu darto."
+  },
+  "statusProtectedExceptions": {
+    "message": "VPN firfircoon · $1 ka-reebis"
+  },
+  "statusBlockedExceptions": {
+    "message": "Bogagga la reebay oo keliya ayaa la heli karaa"
+  },
+  "securityBlockedExceptions": {
+    "message": "Baadhista waa la xannibay marka laga reebo bogagga la reebay"
+  },
+  "securityBlockUnverified": {
+    "message": "Xannibaadda lama xaqiijin"
+  },
+  "logoutLocalComplete": {
+    "message": "Ka bixitaanka maxalliga ah waa dhammaaday."
+  },
+  "logoutApiSession": {
+    "message": "Fadhiga akoonka ee hadda"
+  },
+  "logoutProxySessions": {
+    "message": "Fadhiyada VPN ee la yaqaan"
+  },
+  "logoutRevocationPending": {
+    "message": "Burinta waa socotaa…"
+  },
+  "logoutRevocationConfirmed": {
+    "message": "Burinta waa la xaqiijiyay"
+  },
+  "logoutRevocationUnconfirmed": {
+    "message": "Burinta lama xaqiijin"
+  },
+  "logoutUnconfirmedHelp": {
+    "message": "Fadhiyada fog qaarkood way sii firfircoonaan karaan ilaa ay ka dhacaan."
+  },
+  "deviceQuotaLoading": {
+    "message": "Xadka qalabka waa la soo rarayaa…"
+  },
+  "deviceQuotaUnknown": {
+    "message": "Xadka qalabka lama heli karo"
+  },
+  "error_proxy_creation_uncertain": {
+    "message": "Seerfarku ma xaqiijin abuurista xidhiidhka cusub. Dib u xidhista tooska ah waa la hakiyay."
+  },
+  "siteExclusionsPreferencesReset": {
+    "message": "Ka-reebisyadaada bogagga ee la kaydiyay dib ayaa loo dejiyay kadib markii aan la akhriyi karin. Mar kale ku dar bogagga aad rabto inaad reebto."
+  },
+  "siteExclusionsConflict": {
+    "message": "Liiska bogagga la reebay wuu isbeddelay. Dib u eeg, kadibna mar kale isku day isbeddelkaaga."
+  },
+  "unavailableLocation": {
+    "message": "Goobta lama heli karo"
+  },
+  "verificationSending": {
+    "message": "Iimaylka xaqiijinta waa la dirayaa…"
+  },
+  "verificationSent": {
+    "message": "Iimaylka xaqiijinta waa la diray. Hubi sanduuqaaga fariimaha iyo galka spam-ka."
+  },
+  "error_login_requires_disconnect": {
+    "message": "Ka goo xidhiidhka VPN ee hadda ka hor intaadan gelin akoon kale."
+  },
+  "error_storage_unavailable": {
+    "message": "Dejinta akoonka ee maxalliga ah lama heli karo. Isku day mar kale marka kaydka biraawsarku diyaar yahay; akoonkaaga la kaydiyay waa la ilaaliyay."
+  },
+  "diagnosticsAssistance": {
+    "message": "Taageero"
+  },
+  "diagnosticsTitle": {
+    "message": "Baadhista cilladaha"
+  },
+  "diagnosticsIntro": {
+    "message": "Hubi FuzeVPN iyo xidhiidhka hadda adigoon beddelin ilaalintaada."
+  },
+  "diagnosticsPrivacyTitle": {
+    "message": "Xogtaada"
+  },
+  "diagnosticsPrivacy": {
+    "message": "JSON-ka warbixintu wuxuu ka kooban yahay xaaladaha farsamada iyo koodhadhka khaladka, iyadoo aan lahayn furayaasha sirta ah, tokens, ciwaannada iimaylka, ciwaannada IP, URL-yada la booqday ama domain-yada la reebay. Diristu waa la xaqiijiyaa waxayna warbixinta ku xidhaa akoonkaaga. Eeg ogeysiiska wixii ku saabsan xogta shabakadda."
+  },
+  "diagnosticsAuto": {
+    "message": "Si toos ah u dir warbixinnada khaladaadka muhiimka ah"
+  },
+  "diagnosticsAutoHelp": {
+    "message": "Si caadi ah waa dansan yahay. Daariddiisu waxay u diraysaa warbixinno farsamo oo fudud akoonkan, iyadoo aan la lahayn taariikhda baadhista. Halkan ka dami si aad u joojiso dirista tooska ah oo aad meesha uga saarto warbixinnada tooska ah ee sugaya."
+  },
+  "diagnosticsHistoryHelp": {
+    "message": "Taariikhda farsamadu waxay ku jirtaa qalabkan: ilaa 200 dhacdo diiwaan kasta muddo 10 daqiiqo ah, xitaa marka dirista tooska ahi dansan tahay. Kuma jirto taariikhda baadhista, waxaana lagu tirtiraa gacan, marka biraawsarka la xidho ama marka akoonku isbeddelo."
+  },
+  "diagnosticsHistoryCount": {
+    "message": "Dhacdooyinka farsamo ee maxalliga ah: $1"
+  },
+  "diagnosticsConnectionLog": {
+    "message": "Dhoofi diiwaanka xidhiidhka"
+  },
+  "diagnosticsAccountRequired": {
+    "message": "Gal si aad u daarto dirista. Weli waad arki kartaa oo dhoofin kartaa warbixin akoon la'aan."
+  },
+  "diagnosticsRun": {
+    "message": "Samee baadhista"
+  },
+  "diagnosticsClearHistory": {
+    "message": "Tirtir taariikhda maxalliga ah"
+  },
+  "diagnosticsPreparing": {
+    "message": "Warbixinta waa la diyaarinayaa…"
+  },
+  "diagnosticsReports": {
+    "message": "Warbixinnada"
+  },
+  "diagnosticsEmpty": {
+    "message": "Weli ma jirto warbixin maxalli ah."
+  },
+  "diagnosticsChooseReport": {
+    "message": "Dooro warbixin"
+  },
+  "diagnosticsReportLabel": {
+    "message": "$1 · $2 · $3"
+  },
+  "diagnosticsTypeFull": {
+    "message": "Warbixin dhammaystiran"
+  },
+  "diagnosticsTypeSimple": {
+    "message": "Warbixin khalad"
+  },
+  "diagnosticsSummary": {
+    "message": "La ururiyay: $1. Nooca FuzeVPN: $2."
+  },
+  "diagnosticsJson": {
+    "message": "Eeg waxa ku jira warbixinta (JSON)"
+  },
+  "diagnosticsExport": {
+    "message": "Dhoofi warbixinta"
+  },
+  "diagnosticsDelete": {
+    "message": "Tirtir warbixinta maxalliga ah"
+  },
+  "diagnosticsRetention": {
+    "message": "Warbixinnada maxalliga ahi waxay dhacaan 24 saacadood kadib. Halkan ka tirtiriddu ma tirtirto warbixin uu adeeggu horay u helay. Eeg ogeysiiska wixii ku saabsan kaydinta seerfarka iyo codsiyada tirtirista."
+  },
+  "diagnosticsConsent": {
+    "message": "U dir warbixintan baadhista FuzeVPN"
+  },
+  "diagnosticsDataCollectionRequired": {
+    "message": "Firefox waa inuu oggolaadaa ururinta xogta farsamada si loo diro baadhista. Isku day mar kale oo bixi oggolaanshahan."
+  },
+  "diagnosticsSendHelp": {
+    "message": "Diristu waa ikhtiyaari. Marka la oggolaado, waxay isku dayi kartaa ilaa 24 saacadood iyadoo la adeegsanayo fadhi sax ah oo isla akoonka ah. Waad joojin kartaa isku dayada dambe. Joojinta goor dambe ma dammaanad qaado in seerfarku uusan horay u helin warbixinta."
+  },
+  "diagnosticsSend": {
+    "message": "Dir warbixinta"
+  },
+  "diagnosticsCancel": {
+    "message": "Jooji dirista"
+  },
+  "diagnosticsReload": {
+    "message": "Dib u shub boggan"
+  },
+  "diagnosticsUnavailable": {
+    "message": "Baadhista cilladaha lama heli karo. Dib u shub FuzeVPN adigoo adeegsanaya maareeyaha kordhinnada biraawsarka, kadibna dib u fur boggan. VPN-kaagu isma beddelin."
+  },
+  "diagnosticsQueueFull": {
+    "message": "Safka dirista wuu buuxsamay. Tirtir warbixin maxalli ah ama sug inta warbixin sugaysaa dhammaanayso."
+  },
+  "diagnosticsContentUnavailable": {
+    "message": "Waxa ku jira warbixinta lama heli karo. Dhoofi warbixinta maxalliga ah haddii la heli karo oo la xidhiidh taageerada."
+  },
+  "diagnosticsFailure": {
+    "message": "Ficilka baadhista lama dhammaystiri karin. VPN-kaagu isma beddelin."
+  },
+  "diagnosticsChecks": {
+    "message": "Hubinnada"
+  },
+  "diagnosticsCheckFallback": {
+    "message": "Hubin farsamo: $1"
+  },
+  "diagnosticsCheckLine": {
+    "message": "$1 — $2"
+  },
+  "diagnosticsProxy": {
+    "message": "Proxy-ga biraawsarka"
+  },
+  "diagnosticsStorage": {
+    "message": "Kaydka maxalliga ah"
+  },
+  "diagnosticsNetwork": {
+    "message": "Xidhiidhka shabakadda"
+  },
+  "diagnosticsCleanup": {
+    "message": "Nadiifinta fadhiyada"
+  },
+  "diagnosticsResult_passed": {
+    "message": "Wuu gudbay"
+  },
+  "diagnosticsResult_failed": {
+    "message": "Wuu fashilmay"
+  },
+  "diagnosticsResult_skipped": {
+    "message": "Lama samayn"
+  },
+  "diagnosticsResult_unknown": {
+    "message": "Lama yaqaan"
+  },
+  "diagnosticsStatus_ready": {
+    "message": "Diyaar ku ah qalabkan"
+  },
+  "diagnosticsStatus_pending": {
+    "message": "Sugaya in la diro"
+  },
+  "diagnosticsStatus_sending": {
+    "message": "Waa la dirayaa…"
+  },
+  "diagnosticsStatus_session_required": {
+    "message": "Sugaya fadhi sax ah oo isla akoonka ah"
+  },
+  "diagnosticsStatus_received": {
+    "message": "Adeeggu wuu helay"
+  },
+  "diagnosticsStatus_failed": {
+    "message": "Diristu way fashilantay"
+  },
+  "diagnosticsStatus_cancelled": {
+    "message": "Dirista waa la joojiyay"
+  },
+  "diagnosticsStatus_expired": {
+    "message": "Waqtiga dirista wuu dhacay"
+  },
+  "diagnosticsReceivedAt": {
+    "message": "La helay: $1"
+  },
+  "error_private_browsing_required": {
+    "message": "Firefox wuxuu u baahan yahay oggolaanshahan si uu u habeeyo VPN-ka, xitaa daaqadaha caadiga ah. Fur about:addons → FuzeVPN, u oggolow inuu ku shaqeeyo daaqadaha gaarka ah, kadibna isku day mar kale."
+  },
+  "error_host_permissions_required": {
+    "message": "Firefox gudihiisa, fur about:addons → FuzeVPN → Oggolaanshaha (Permissions) oo oggolow gelitaanka dhammaan bogagga internetka, kadibna isku day mar kale."
+  },
+  "cancelAction": {
+    "message": "Jooji"
+  },
+  "refreshLocations": {
+    "message": "Cusboonaysii goobaha"
+  },
+  "refreshingLocations": {
+    "message": "Goobaha waa la cusboonaysiinayaa…"
+  },
+  "locationsRefreshError": {
+    "message": "Liiska goobaha lama cusboonaysiin karin. Fadlan isku day mar kale."
+  },
+  "error_device_revoked_limit": {
+    "message": "Qalabkan waa la buriyay. Xadka qalabka waa la gaadhay: fadlan ka saar qalab."
+  },
+  "noAvailableLocations": {
+    "message": "Hadda goob la heli karo ma jirto. Fadlan isku day mar kale dhawaan."
+  },
+  "noAvailableFavoriteLocations": {
+    "message": "Goobaha aad jeceshahay si ku meel gaadh ah looma heli karo."
+  },
+  "error_location_favorites_limit": {
+    "message": "Xadka 100 ee kuwa la jecel yahay waa la gaadhay. Ka saar mid si aad mid kale ugu darto."
+  },
+  "error_server_full": {
+    "message": "Seerfarkan wuu buuxaa. Dooro goob kale."
+  },
+  "error_capacity_unavailable": {
+    "message": "Helitaanka seerfarkan hadda lama xaqiijin karo. Fadlan isku day mar kale dhawaan."
+  },
+  "locationHierarchyHelp": {
+    "message": "Magacu wuxuu doortaa seerfar; fallaadhuna waxay muujisaa faahfaahinta."
+  },
+  "locationCountrySelect": {
+    "message": "Dooro seerfar la heli karo: $1"
+  },
+  "locationCitySelect": {
+    "message": "Dooro seerfar la heli karo: $1"
+  },
+  "locationShowCities": {
+    "message": "Muuji magaalooyinka: $1"
+  },
+  "locationHideCities": {
+    "message": "Qari magaalooyinka: $1"
+  },
+  "locationShowServers": {
+    "message": "Muuji seerfarrada: $1"
+  },
+  "locationHideServers": {
+    "message": "Qari seerfarrada: $1"
+  },
+  "locationAvailableServers": {
+    "message": "Seerfarrada la heli karo: $1"
+  },
+  "legalInformation": {
+    "message": "Macluumaad sharci"
+  },
+  "privacyPolicy": {
+    "message": "Ogeysiiska asturnaanta kordhinta"
+  },
+  "termsAndConditions": {
+    "message": "Shuruudaha isticmaalka iyo iibka"
+  },
+  "legalNotice": {
+    "message": "Ogeysiis sharci"
+  },
+  "contactSupport": {
+    "message": "La xidhiidh taageerada"
+  },
+  "webSignIn": {
+    "message": "Gal FuzeVPN"
+  },
+  "webSignInDisconnect": {
+    "message": "Ka goo oo gal"
+  },
+  "webSignInPending": {
+    "message": "Galitaanku waa socdaa…"
+  },
+  "webSignInHelp": {
+    "message": "Gal ama samee akoon adigoo isticmaalaya Google ama iimayl qaybta macmiilka FuzeVPN."
+  },
+  "webSignInDisconnectHelp": {
+    "message": "Badhankani wuxuu joojiyaa ilaalinta biraawsarka si aad ugu gasho Google ama iimayl. Baadhistaadu ilaalin ma yeelan doonto inta galitaanku socdo."
+  },
+  "webSignInStatus": {
+    "message": "Ku sii wad daaqadda galitaanka FuzeVPN. Kordhintu si toos ah ayay isu cusboonaysiin doontaa markaad dhammayso. Xidh daaqaddaas si aad u joojiso."
+  },
+  "error_web_login_cancelled": {
+    "message": "Galitaanka waa la joojiyay. Isku day mar kale."
+  },
+  "error_web_login_timeout": {
+    "message": "Galitaanku waqti aad u dheer ayuu qaatay. Isku day mar kale."
+  },
+  "error_web_login_unavailable": {
+    "message": "Galitaanka webka lama heli karo. Isku day mar kale goor dambe."
+  },
+  "error_web_login_invalid_callback": {
+    "message": "Galitaanka lama xaqiijin karin. Mar kale ka bilow kordhinta."
+  },
+  "error_web_login_denied": {
+    "message": "Galitaanka looma oggolaan. Isku day mar kale."
+  },
+  "error_web_login_busy": {
+    "message": "Xidh daaqadda galitaanka ee horay u furan ka hor intaadan mar kale isku dayin."
+  },
+  "deviceKindFirefox": {
+    "message": "Biraawsarka Firefox"
+  },
+  "generalPrivacyPolicy": {
+    "message": "Siyaasadda asturnaanta guud"
+  },
+  "privacyNoticeTitle": {
+    "message": "Asturnaanta kordhinta FuzeVPN"
+  },
+  "privacyNoticeIntro": {
+    "message": "Ogeysiiskan wuxuu sharxayaa xogta ay kordhintani isticmaasho. Wuxuu dhammaystirayaa siyaasadda asturnaanta guud ee FuzeVPN, oo hoos looga xidhay. Dirista ikhtiyaariga ah ee baadhistu way ka duwan tahay xogta loo baahan yahay si loo galo loona isticmaalo VPN-ka."
+  },
+  "privacyNoticeUpdated": {
+    "message": "Ogeysiiska waxaa la cusboonaysiiyay 19 Oktoobar 2026"
+  },
+  "privacyNoticeServiceTitle": {
+    "message": "Akoonka iyo adeegga VPN"
+  },
+  "privacyNoticeService": {
+    "message": "Kordhintu waxay xogta xaqiijinta, akoonka, is-diiwaangelinta, qalabka iyo fadhiga proxy-ga la wadaagtaa api.fuzevpn.com. Proxy-ga VPN wuxuu qaadaa taraafikada la mariyo. Xidhiidhadani waxay metadata-da shabakadda u muujiyaan adeegga qaata; ogeysiiskani ma samaynayo ballan gaar ah oo ku saabsan diiwaangelinta seerfarka."
+  },
+  "privacyNoticeLocalTitle": {
+    "message": "Xogta lagu kaydiyay biraawsarkaaga"
+  },
+  "privacyNoticeLocal": {
+    "message": "Kaydka biraawsarku wuxuu hayaa fadhigaaga, faahfaahinta akoonka, dookhyada, ka-reebisyada bogagga iyo aqoonsiga qalabka. Diiwaannada farsamada waxaa lagu hayaa qalabka ilaa 10 daqiiqo, xitaa marka warbixinta tooska ahi dansan tahay. Qabyo-qoraallada baadhista iyo warbixinnada safka ku jira waxay ku dhacaan qalabka 24 saacadood kadib; nadiifintu waxay dhacdaa marka kordhintu shaqayn karto."
+  },
+  "privacyNoticeIpTitle": {
+    "message": "Hubinta IP-ga dadweynaha iyo dhinacyo saddexaad"
+  },
+  "privacyNoticeIp": {
+    "message": "Muujinta IP-ga iyo baadhista shabakaddu waxay la xidhiidhaan api.ipify.org. Muujinta IP-ga waxay isticmaali kartaa ipv4.icanhazip.com beddel ahaan. Bixiyuhu wuxuu helaa IP-ga xidhiidhka iyo metadata-da caadiga ah ee codsiga: IP-gaaga dadweynaha qaabka tooska ah, ama IP-ga ka bixitaanka VPN marka proxy la mariyo. Codsiyadani kuma daraan cookies ama referrer, mana diraan token akoon ama taariikhda baadhista."
+  },
+  "privacyNoticeReportsTitle": {
+    "message": "Waxa ku jira warbixinnada baadhista"
+  },
+  "privacyNoticeReports": {
+    "message": "Warbixinnadu waxay ku dari karaan aqoonsi warbixineed oo aan kala sooc lahayn, shaambadaha waqtiga, noocyada kordhinta iyo biraawsarka, qoyska iyo naqshadda nidaamka hawlgalka, xaaladaha xidhiidhka iyo ilaalinta, koodhadhka khaladka, tirinnada, muddooyinka iyo natiijooyinka hubinta. Warbixinnada dhammaystiran waxay ku dari karaan dhacdooyin farsamo oo dhawaan dhacay. JSON-koodu kama koobna furayaasha sirta ah, tokens-ka xaqiijinta, ciwaannada iimaylka, ciwaannada IP, URL-yada la booqday iyo domain-yada la reebay. Waad baadhi kartaa oo dhoofin kartaa warbixin dhammaystiran ka hor intaadan dirin."
+  },
+  "privacyNoticeAccountTitle": {
+    "message": "Qaataha iyo ku xidhidda akoonka"
+  },
+  "privacyNoticeAccount": {
+    "message": "Warbixinnada waxaa loo diraa FuzeVPN ee api.fuzevpn.com/v1/diagnostics iyadoo loo marayo xidhiidh la xaqiijiyay. Xidhiidhkan API wuxuu ka leexdaa proxy-ga VPN: FuzeVPN wuxuu helaa IP-gaaga dadweynaha ee tooska ah xitaa marka VPN-ku firfircoon yahay. Warbixinnada waxaa lagu xidhaa akoonka la galay, ma aha kuwo magac la'aan ah. Madaxa xaqiijinta iyo IP-gu way ka duwan yihiin JSON-ka warbixinta. Helitaan guulaystay wuxuu xaqiijinayaa in barta dhammaadku aqbashay, ee ma aha in wakiil taageero uu akhriyay warbixinta."
+  },
+  "privacyNoticeChoiceTitle": {
+    "message": "Dirista ikhtiyaariga ah iyo ka noqoshada"
+  },
+  "privacyNoticeChoice": {
+    "message": "Dirista tooska ahi si caadi ah waa dansan tahay. Daariddeedu waxay oggolaataa warbixinno khalad oo fudud oo loogu talagalay akoonkaas. Dirista gacanta ee warbixinta dhammaystiran waxay u baahan tahay sanduuqa calaamadaynta dirista. Firefox sidoo kale wuxuu u baahan yahay oggolaanshihiisa ikhtiyaariga ah ee xogta farsamada. Dami dirista tooska ah si aad u joojiso oo aad meesha uga saarto warbixinnada tooska ah ee sugaya; si gaar ah u jooji diris kasta oo sugaysa. Diidmada dirista baadhistu kama hor istaagto isticmaalka VPN-ka."
+  },
+  "privacyNoticeDeleteTitle": {
+    "message": "Tirtiridda maxalliga ah iyo faylasha la soo dejiyay"
+  },
+  "privacyNoticeDelete": {
+    "message": "Baadhista cilladaha gudaheeda, tirtir taariikhda farsamada ama tirtir hal warbixin oo maxalli ah. Tirtiridda taariikhdu ma tirtirto nuqullada warbixinnada jira. Joojinta ama tirtiridda maxalliga ahi dib uma soo celin karto xogta uu adeeggu horay u helay, oo ay ku jirto dirid gaadhay ka hor joojinta. Dhoofinnada la soo dejiyay waa faylal gaar ah oo ay tahay inaad adigu tirtirto."
+  },
+  "privacyNoticeServerTitle": {
+    "message": "Kaydinta seerfarka iyo codsiyada"
+  },
+  "privacyNoticeServer": {
+    "message": "Kordhintani ma maamusho mana xaqiijiso kaydinta seerfarka ama tirtirista dhinaca seerfarka. Muddada kaydinta ee FuzeVPN dabaqo iyo codsiyada ku saabsan warbixinnada horay loo diray, eeg siyaasadda asturnaanta guud ama la xidhiidh FuzeVPN. Ogeysiiskani ma dammaanad qaadayo muddo go'an oo kaydinta seerfarka ah."
+  },
+  "privacyNoticeSupportTitle": {
+    "message": "Baadhista iyo taageeradu way kala duwan yihiin"
+  },
+  "privacyNoticeSupport": {
+    "message": "Dirista warbixinta baadhistu iyada laftigeedu uma dirto fariin taageero kordhinta. Si aad u sharaxdo dhibaato ama u codsato tirtirista warbixin la helay, isticmaal habka la xidhiidhka FuzeVPN ee hoose. Haddii aad doorato inaad fayl la dhoofiyay ku wadaagto hab kale, marka hore hubi waxa ku jira."
+  },
+  "privacyNoticeManage": {
+    "message": "Fur Baadhista cilladaha"
+  },
+  "privacyNoticeLinksTitle": {
+    "message": "Siyaasadda adeegga iyo xidhiidhka"
+  },
+  "theme": {
+    "message": "Muuqaalka"
+  },
+  "themeSystem": {
+    "message": "Nidaamka"
+  },
+  "themeLight": {
+    "message": "Iftiin"
+  },
+  "themeDark": {
+    "message": "Mugdi"
+  },
+  "switchToDarkTheme": {
+    "message": "U beddel muuqaalka mugdiga"
+  },
+  "switchToLightTheme": {
+    "message": "U beddel muuqaalka iftiinka"
+  }
+}

@@ -1,0 +1,929 @@
+{
+  "extensionName": {
+    "message": "FuzeVPN"
+  },
+  "extensionDescription": {
+    "message": "Arovy ny fiainanao manokana ary hamafiso ny fiarovana anao amin'ny tsindry iray monja."
+  },
+  "siteExclusionsReloadRequired": {
+    "message": "Avereno ampidirina ny FuzeVPN avy amin'ny mpitantana fanitarana ao amin'ny mpitety mba hamitana ny fanavaozana sy hampiasana ny tranonkala maningana."
+  },
+  "extensionCommunicationError": {
+    "message": "Tsy mamaly ny fanitarana. Akatony ity varavarankely ity, dia avereno ampidirina ny FuzeVPN avy amin'ny mpitantana fanitarana ao amin'ny mpitety."
+  },
+  "actionDisconnected": {
+    "message": "FuzeVPN — Tapaka"
+  },
+  "actionConnected": {
+    "message": "FuzeVPN — Voaaro amin'ity mpitety ity"
+  },
+  "actionReconnecting": {
+    "message": "FuzeVPN — Mifandray indray"
+  },
+  "actionError": {
+    "message": "FuzeVPN — Mila fiheverana"
+  },
+  "browserProtection": {
+    "message": "Fiarovana ny mpitety"
+  },
+  "loginTitle": {
+    "message": "Tongasoa eto amin'ny FuzeVPN"
+  },
+  "loginSubtitle": {
+    "message": "Midira mba hiarovana ny fitetezanao amin'ity mpitety ity."
+  },
+  "email": {
+    "message": "Adiresy mailaka"
+  },
+  "emailPlaceholder": {
+    "message": "you@example.com"
+  },
+  "password": {
+    "message": "Tenimiafina"
+  },
+  "signIn": {
+    "message": "Hiditra"
+  },
+  "signingIn": {
+    "message": "Miditra…"
+  },
+  "forgotPassword": {
+    "message": "Adinonao ny tenimiafina?"
+  },
+  "createAccount": {
+    "message": "Hamorona kaonty"
+  },
+  "settings": {
+    "message": "Fikirana"
+  },
+  "close": {
+    "message": "Hanidy"
+  },
+  "statusDisconnected": {
+    "message": "Tapaka"
+  },
+  "statusConnecting": {
+    "message": "Mifandray…"
+  },
+  "statusChanging": {
+    "message": "Manova toerana…"
+  },
+  "statusProtected": {
+    "message": "Voaaro amin'ity mpitety ity"
+  },
+  "statusRefreshing": {
+    "message": "Manavao amin'ny fomba azo antoka…"
+  },
+  "statusDisconnecting": {
+    "message": "Manapaka ny fifandraisana…"
+  },
+  "statusError": {
+    "message": "Nijanona ny fiarovana"
+  },
+  "browserOnlyDetail": {
+    "message": "Fiarovana ho an'ity mpitety ity."
+  },
+  "location": {
+    "message": "Toerana"
+  },
+  "change": {
+    "message": "Hanova"
+  },
+  "noLocation": {
+    "message": "Tsy misy toerana azo ampiasaina"
+  },
+  "protectBrowser": {
+    "message": "Hiaro ny mpitety"
+  },
+  "disconnect": {
+    "message": "Hanapaka"
+  },
+  "subscription": {
+    "message": "Famandrihana"
+  },
+  "refreshSubscription": {
+    "message": "Hanavao ny famandrihana"
+  },
+  "refreshingSubscription": {
+    "message": "Manavao ny famandrihana…"
+  },
+  "subscriptionActive": {
+    "message": "Mavitrika"
+  },
+  "subscriptionInactive": {
+    "message": "Tsy mavitrika"
+  },
+  "expiresOn": {
+    "message": "Lany daty: $1"
+  },
+  "noExpiry": {
+    "message": "Tsy misy daty fahataperana"
+  },
+  "browserOnlyNotice": {
+    "message": "Ity mpitety ity ihany. Tsy voakasika ny rindranasa sy mpitety hafa."
+  },
+  "resendVerification": {
+    "message": "Handefa indray ny mailaka"
+  },
+  "incognitoHelp": {
+    "message": "Ny fitetezana manokana dia mampiasa ny fiarovana mitovy raha toa ka navela hiasa amin'ny fomba manokana ao amin'ny fikiran'ny mpitety ny fanitarana ihany."
+  },
+  "manageAccount": {
+    "message": "Hitantana ny kaontiko"
+  },
+  "account": {
+    "message": "Kaonty"
+  },
+  "devices": {
+    "message": "Fitaovana"
+  },
+  "manageDevices": {
+    "message": "Hitantana ny fitaovana"
+  },
+  "refreshDevices": {
+    "message": "Hanavao ny fitaovana"
+  },
+  "deviceCount": {
+    "message": "Fitaovana $1 / $2"
+  },
+  "loadingDevices": {
+    "message": "Maka ny fitaovana…"
+  },
+  "noDevices": {
+    "message": "Tsy misy fitaovana mavitrika."
+  },
+  "currentDevice": {
+    "message": "Ity fitaovana ity"
+  },
+  "deviceKindBrowser": {
+    "message": "Fanitarana mpitety"
+  },
+  "deviceKindVpn": {
+    "message": "Fitaovana VPN"
+  },
+  "profile_browser_proxy": {
+    "message": "Proxy an'ny mpitety"
+  },
+  "profile_wireguard": {
+    "message": "WireGuard"
+  },
+  "profile_openvpn": {
+    "message": "OpenVPN"
+  },
+  "none": {
+    "message": "tsy misy"
+  },
+  "deviceCreatedOn": {
+    "message": "Noforonina tamin'ny $1"
+  },
+  "deleteDevice": {
+    "message": "Hamafa ny fitaovana"
+  },
+  "deleteDeviceNamed": {
+    "message": "Hamafa ny fitaovana: $1"
+  },
+  "confirmDeleteDevice": {
+    "message": "Esorina ve ny “$1”? Hijanona ny fifandraisana VPN-ny ary hesorina ny mombamomba azy."
+  },
+  "resetDevice": {
+    "message": "Hamerina ny fitaovana amin'ny laoniny"
+  },
+  "confirmResetDevice": {
+    "message": "Haverina amin'ny laoniny ve ity fanitarana ity? Hisoratra ho fitaovana vaovao izy amin'ny manaraka hampiasanao azy."
+  },
+  "signOutAccount": {
+    "message": "Hivoaka amin'ny kaonty"
+  },
+  "chooseLocation": {
+    "message": "Misafidiana toerana"
+  },
+  "error_invalid_credentials": {
+    "message": "Diso ny adiresy mailaka na ny tenimiafina."
+  },
+  "error_unauthorized": {
+    "message": "Tapitra ny fotoam-pidiranao. Midira indray azafady."
+  },
+  "error_email_verification_required": {
+    "message": "Hamarino ny adiresy mailakao alohan'ny hampandehanana ny fiarovana."
+  },
+  "errorVerificationCooldown": {
+    "message": "Afaka mangataka mailaka vaovao ianao rehefa afaka $1 segondra."
+  },
+  "error_verification_email_cooldown": {
+    "message": "Miandrasa kely azafady alohan'ny hangatahana mailaka hafa."
+  },
+  "error_subscription_required": {
+    "message": "Ilaina ny famandrihana mavitrika mba hiarovana ity mpitety ity."
+  },
+  "error_device_limit": {
+    "message": "Tratra ny fetran'ny fitaovana. Esory ny fitaovana iray azafady."
+  },
+  "error_device_identity_revoked": {
+    "message": "Tsy manana alalana intsony ity fitaovana ity. Andramo mifandray indray."
+  },
+  "error_device_proof_invalid": {
+    "message": "Tsy voamarinay ity fitaovana ity. Hamarino ny daty sy ny ora amin'ny solosainao, dia andramo indray."
+  },
+  "error_device_proof_replayed": {
+    "message": "Efa voakarakara ity fangatahana ity. Andramo indray."
+  },
+  "error_invalid_device": {
+    "message": "Tsy fantatra ity fitaovana ity. Andramo mifandray indray."
+  },
+  "error_device_exists": {
+    "message": "Efa mifamatotra amin'ny kaonty hafa ny famantarana ity fitaovana ity."
+  },
+  "error_not_found": {
+    "message": "Tsy azo atao intsony ity asa ity. Andramo indray."
+  },
+  "error_invalid_location": {
+    "message": "Tsy azo ampiasaina ity toerana ity. Misafidiana hafa."
+  },
+  "error_rate_limited": {
+    "message": "Be loatra ny andrana. Miandrasa kely dia andramo indray."
+  },
+  "error_proxy_unavailable": {
+    "message": "Tsy azo ampiasaina vonjimaika ity mpizara ity. Andramo indray afaka fotoana fohy."
+  },
+  "error_api_token_expired": {
+    "message": "Tapitra ny fotoam-pidirana amin'ny kaontinao. Midira indray azafady."
+  },
+  "error_network_error": {
+    "message": "Tsy misy tambajotra. Hamarino ny fifandraisanao amin'ny Internet."
+  },
+  "error_request_timeout": {
+    "message": "Ela loatra vao namaly ny tolotra. Andramo indray."
+  },
+  "error_invalid_response": {
+    "message": "Namerina valiny tsy nampoizina ny tolotra."
+  },
+  "error_proxy_certificate_invalid": {
+    "message": "Tsy voamarinay ny fiarovana ny mpizara. Najanona ny fifandraisana."
+  },
+  "error_proxy_controlled_by_extension": {
+    "message": "Fanitarana hafa no mifehy ny proxy an'ny mpitety amin'izao fotoana izao."
+  },
+  "error_proxy_controlled_by_policy": {
+    "message": "Misy politikan'ny mpitantana manakana ny FuzeVPN tsy hanova ny proxy."
+  },
+  "error_proxy_authentication_failed": {
+    "message": "Tsy nanaiky ny fifandraisana ny mpizara. Andramo mifandray indray."
+  },
+  "error_session_expired": {
+    "message": "Tapitra ny fifandraisanao voaaro. Mifandraisa indray."
+  },
+  "error_email_delivery_unavailable": {
+    "message": "Tsy azo alefa ny mailaka amin'izao fotoana izao."
+  },
+  "error_unknown_error": {
+    "message": "Nisy hadisoana tsy nampoizina. Andramo indray."
+  },
+  "actionBlocked": {
+    "message": "FuzeVPN — Voasakana ny fitetezana"
+  },
+  "statusBlockedRetry": {
+    "message": "Najanona ny fitetezana — mifandray indray"
+  },
+  "statusBlockedAction": {
+    "message": "Najanona ny fitetezana — hamarino ny fifandraisana"
+  },
+  "statusProtectionUnavailable": {
+    "message": "Tsy misy fiarovana — tsy voasakana ny fitetezana"
+  },
+  "recoveryHelp": {
+    "message": "Andramo indray mba hamerenana ny fiarovana. Ny fanapahana dia ahafahanao mitety tsy misy FuzeVPN."
+  },
+  "retryConnection": {
+    "message": "Andramo indray"
+  },
+  "killSwitch": {
+    "message": "Sakana vonjy maika"
+  },
+  "killSwitchHelp": {
+    "message": "Manakana ny fangatahana tranonkala vaovao raha tapaka ny fifandraisana VPN. Mbola azo idirana ivelan'ny VPN ny tranonkala maningana."
+  },
+  "webRtcProtection": {
+    "message": "Fiarovana WebRTC"
+  },
+  "webRtcHelp": {
+    "message": "Manampy amin'ny fitazonana ho tsiambaratelo ny adiresy IP-nao mandritra ny antso an-tranonkala. Mety tsy handeha ny antso sasany. Mety hampiseho ny tena adiresy IP-nao ny famonoana azy."
+  },
+  "securityEffectiveState": {
+    "message": "$1 · $2"
+  },
+  "securityBlocked": {
+    "message": "Voasakana ny fitetezana"
+  },
+  "securityNotBlocked": {
+    "message": "Tsy voasakana ny fitetezana"
+  },
+  "securityWebRtcActive": {
+    "message": "Mandeha ny famerana WebRTC"
+  },
+  "securityWebRtcInactive": {
+    "message": "Tsy mandeha ny famerana WebRTC"
+  },
+  "localNetworkHelp": {
+    "message": "Voasakana mandritra ny fiarovana ny adiresy IP eo an-toerana sy ny anarana eo an-toerana mahazatra. Mety mbola hanome fidirana amin'ny tambajotra eo an-toerana ny sehatra maningana. Tsy miova ny fikirana IPv6 an'ny rafitra."
+  },
+  "securityLimits": {
+    "message": "Momba ity fiarovana ity"
+  },
+  "killSwitchLimits": {
+    "message": "Ity mpitety ity ihany: mety hitohy ny fifandraisana efa misy sy ny fifandraisana anatiny sasany an'ny mpitety na fanitarana hafa. Mety hisolo ny proxy ny fanitarana hafa na politika iray alohan'ny hihetsehan'ny FuzeVPN. Manala ny fiarovana ny famonoana ny fanitarana. Tsy misy fanakanana manerana ny rafitra."
+  },
+  "error_traffic_guard_failed": {
+    "message": "Tsy voamarina ny fanakanana ny fitetezana. Tsy azo antoka ny fiarovana. Hamarino ny alalan'ny fanitarana."
+  },
+  "error_webrtc_control_unavailable": {
+    "message": "Tsy nampiharina ny famerana WebRTC. Hamarino ny fikiranao, ny fanitarana hafa na ny politikan'ny mpitantana."
+  },
+  "language": {
+    "message": "Fiteny"
+  },
+  "languageAutomatic": {
+    "message": "Ho azy — fitenin'ny mpitety"
+  },
+  "languageHelp": {
+    "message": "Mihatra avy hatrany ny fiovana. Ny safidy ho azy dia manaraka ny fitenin'ny mpitety, izay mety ho hafa amin'ny fitenin'ny rafitra."
+  },
+  "languageSaveError": {
+    "message": "Tsy voatahiry ny fiteny. Voatazona ny safidinao teo aloha. Andramo indray."
+  },
+  "publicIp": {
+    "message": "IP ampahibemaso"
+  },
+  "vpnIp": {
+    "message": "IP VPN"
+  },
+  "ipChecking": {
+    "message": "Manamarina…"
+  },
+  "ipUnavailable": {
+    "message": "Tsy misy"
+  },
+  "ipLookupExplanation": {
+    "message": "Voamarina amin'ny alalan'ny ipify ny IP, na icanhazip raha tsy mety izany, amin'ny fampiasana ny fifandraisanao ankehitriny. Tsy misy tantaran'ny fitetezana alefa."
+  },
+  "automaticLocation": {
+    "message": "Ho azy"
+  },
+  "automaticLocationHelp": {
+    "message": "Ny fotoam-pamaliana tsara indrindra vao haingana, na ny toerana farany nampiasainao."
+  },
+  "automaticLocationName": {
+    "message": "Ho azy · $1"
+  },
+  "searchLocations": {
+    "message": "Hikaroka firenena na tanàna"
+  },
+  "locationFilters": {
+    "message": "Hanivana ny toerana"
+  },
+  "allLocations": {
+    "message": "Rehetra"
+  },
+  "favoriteLocations": {
+    "message": "Ankafizina"
+  },
+  "recentLocations": {
+    "message": "Vao haingana"
+  },
+  "noMatchingLocations": {
+    "message": "Tsy misy toerana mifanaraka amin'ny fikarohanao."
+  },
+  "noFavoriteLocations": {
+    "message": "Asio kintana mba hitazonana eto ny toerana ankafizinao."
+  },
+  "noRecentLocations": {
+    "message": "Hiseho eto ireo toerana nifandraisanao vao haingana."
+  },
+  "addFavorite": {
+    "message": "Hanampy ho ankafizina: $1"
+  },
+  "removeFavorite": {
+    "message": "Hanala amin'ny ankafizina: $1"
+  },
+  "unavailableFavoriteLocation": {
+    "message": "Ankafizina tsy azo ampiasaina: $1"
+  },
+  "locationSaveError": {
+    "message": "Tsy vita ny fiovana. Mety efa voatahiry ny fikirana sasany. Hamarino ny safidy aseho alohan'ny hanandramana indray."
+  },
+  "siteExclusions": {
+    "message": "Tranonkala maningana"
+  },
+  "siteExclusionsHelp": {
+    "message": "Mampiasa ny fifandraisanao tsy misy FuzeVPN ireo tranonkala ireo, na dia tapaka aza ny VPN."
+  },
+  "siteExclusionsEnabled": {
+    "message": "Hampandeha ny maningana"
+  },
+  "siteExclusionInput": {
+    "message": "Sehatra na URL"
+  },
+  "siteExclusionPlaceholder": {
+    "message": "example.com"
+  },
+  "siteExclusionPreview": {
+    "message": "Sehatra voafidy: $1"
+  },
+  "siteExclusionSubdomains": {
+    "message": "Ampidiro ny zana-tsehatra"
+  },
+  "siteExclusionAdd": {
+    "message": "Hanampy tranonkala"
+  },
+  "siteExclusionsEmpty": {
+    "message": "Tsy misy tranonkala maningana. Ampio fotsiny ireo tranonkala tianao hampiasaina tsy misy VPN."
+  },
+  "siteExclusionsCount": {
+    "message": "Tranonkala $1 / 100"
+  },
+  "siteExclusionScopeSubdomains": {
+    "message": "Sehatra sy zana-tsehatra"
+  },
+  "siteExclusionScopeExact": {
+    "message": "Ity sehatra ity ihany"
+  },
+  "siteExclusionRemove": {
+    "message": "Hanala: $1"
+  },
+  "siteExclusionsDetails": {
+    "message": "Ahoana no fiasan'ny maningana?"
+  },
+  "siteExclusionsResources": {
+    "message": "Mijanona ho voaaro ny loharano avy amin'ny sehatra hafa. Ny fanavahana pejy iray dia tsy manavaka ho azy ireo votoatiny hafa ao aminy."
+  },
+  "siteExclusionsReload": {
+    "message": "Avereno ampidirina ny tranonkala aorian'ny fiovana. Mety hitazona ny lalana teo aloha ny fifandraisana efa misy."
+  },
+  "siteExclusionsWebRtc": {
+    "message": "Mijanona ho fikirana ankapobeny ny fiarovana WebRTC, eny fa na ho an'ny tranonkala maningana aza."
+  },
+  "siteExclusionsLocal": {
+    "message": "Voatahiry amin'ity mpitety ity ihany ary mijanona na dia efa nivoaka tamin'ny kaontinao aza ianao."
+  },
+  "siteExclusionsOn": {
+    "message": "Mandeha ny maningana"
+  },
+  "siteExclusionsOff": {
+    "message": "Tsy mandeha ny maningana"
+  },
+  "siteExclusionsSummary": {
+    "message": "Tranonkala ivelan'ny VPN: $1"
+  },
+  "siteExclusionsPending": {
+    "message": "Mampihatra ny maningana…"
+  },
+  "siteExclusionsInterrupted": {
+    "message": "Tapaka ny fiovana. Mijanona ihany ny fiarovana vonjimaika."
+  },
+  "siteExclusionsSaveError": {
+    "message": "Tsy vita ny fiovana. Hamarino ny fikiranao dia andramo indray."
+  },
+  "siteExclusionsRetry": {
+    "message": "Andramo indray"
+  },
+  "siteExclusionInvalid": {
+    "message": "Ampidiro sehatra ampahibemaso manan-kery. Tsy ekena ny IP, ny anarana eo an-toerana, ny marika fanoloana (*), ny tovana ampahibemaso ary ny sehatra voatokana."
+  },
+  "siteExclusionDuplicate": {
+    "message": "Efa ao anaty lisitra ity sehatra ity."
+  },
+  "siteExclusionsLimit": {
+    "message": "Tratra ny fetra 100 tranonkala. Esory ny tranonkala iray hanampiana hafa."
+  },
+  "statusProtectedExceptions": {
+    "message": "VPN mandeha · maningana: $1"
+  },
+  "statusBlockedExceptions": {
+    "message": "Ny tranonkala maningana ihany no mbola azo idirana"
+  },
+  "securityBlockedExceptions": {
+    "message": "Voasakana ny fitetezana afa-tsy ny tranonkala maningana"
+  },
+  "securityBlockUnverified": {
+    "message": "Tsy voamarina ny fanakanana"
+  },
+  "logoutLocalComplete": {
+    "message": "Vita ny fivoahana eo an-toerana."
+  },
+  "logoutApiSession": {
+    "message": "Fotoam-pidirana amin'ny kaonty ankehitriny"
+  },
+  "logoutProxySessions": {
+    "message": "Fotoam-pidirana VPN fantatra"
+  },
+  "logoutRevocationPending": {
+    "message": "Eo am-panafoanana…"
+  },
+  "logoutRevocationConfirmed": {
+    "message": "Voamarina ny fanafoanana"
+  },
+  "logoutRevocationUnconfirmed": {
+    "message": "Tsy voamarina ny fanafoanana"
+  },
+  "logoutUnconfirmedHelp": {
+    "message": "Mety mbola mandeha ny fotoam-pidirana lavitra sasany mandra-pahatapitr'izy ireo."
+  },
+  "deviceQuotaLoading": {
+    "message": "Maka ny fetran'ny fitaovana…"
+  },
+  "deviceQuotaUnknown": {
+    "message": "Tsy fantatra ny fetran'ny fitaovana"
+  },
+  "error_proxy_creation_uncertain": {
+    "message": "Tsy nanamafy ny mpizara fa voaforona ny fifandraisana vaovao. Najanona ny fifandraisana indray ho azy."
+  },
+  "siteExclusionsPreferencesReset": {
+    "message": "Naverina tamin'ny laoniny ny tranonkala maningana voatahiry satria tsy voavaky. Ampio indray ireo tranonkala tianao avahana."
+  },
+  "siteExclusionsConflict": {
+    "message": "Niova ny lisitry ny tranonkala maningana. Jereo izany, dia andramo indray ny fiovanao."
+  },
+  "unavailableLocation": {
+    "message": "Tsy azo ampiasaina ny toerana"
+  },
+  "verificationSending": {
+    "message": "Mandefa ny mailaka fanamarinana…"
+  },
+  "verificationSent": {
+    "message": "Lasa ny mailaka fanamarinana. Jereo ny boaty fandraisanao sy ny lahatahiry spam."
+  },
+  "error_login_requires_disconnect": {
+    "message": "Tapaho ny fifandraisana VPN ankehitriny alohan'ny hidirana amin'ny kaonty hafa."
+  },
+  "error_storage_unavailable": {
+    "message": "Tsy azo ampiasaina ny fikirana kaonty eo an-toerana. Andramo indray rehefa azo ampiasaina ny fitahirizan'ny mpitety; voatazona ny kaontinao voatahiry."
+  },
+  "diagnosticsAssistance": {
+    "message": "Fanampiana"
+  },
+  "diagnosticsTitle": {
+    "message": "Fanadihadiana"
+  },
+  "diagnosticsIntro": {
+    "message": "Hamarino ny FuzeVPN sy ny fifandraisana ankehitriny nefa tsy manova ny fiarovanao."
+  },
+  "diagnosticsPrivacyTitle": {
+    "message": "Ny angonao"
+  },
+  "diagnosticsPrivacy": {
+    "message": "Ny JSON an'ny tatitra dia misy toe-javatra ara-teknika sy kaody hadisoana, tsy misy tenimiafina, token, adiresy mailaka, adiresy IP, URL notsidihina na sehatra maningana. Voamarina ny fandefasana ary mampifandray ny tatitra amin'ny kaontinao. Jereo ny fampahafantarana momba ny angona tambajotra."
+  },
+  "diagnosticsAuto": {
+    "message": "Handefa ho azy ny tatitry ny hadisoana lehibe"
+  },
+  "diagnosticsAutoHelp": {
+    "message": "Maty raha tsy ovaina. Raha alefa, dia mandefa tatitra ara-teknika tsotra ho an'ity kaonty ity izy, tsy misy tantaran'ny fitetezana. Vonoy eto mba hampijanonana ny fandefasana ho azy sy hanalana ny tatitra ho azy mbola miandry."
+  },
+  "diagnosticsHistoryHelp": {
+    "message": "Mijanona eo an-toerana ny tantara ara-teknika: hetsika 200 farafahabetsany isaky ny diary mandritra ny 10 minitra, na dia maty aza ny fandefasana ho azy. Tsy misy tantaran'ny fitetezana ao ary fafana amin'ny tanana, rehefa mikatona ny mpitety na rehefa miova ny kaonty."
+  },
+  "diagnosticsHistoryCount": {
+    "message": "Hetsika ara-teknika eo an-toerana: $1"
+  },
+  "diagnosticsConnectionLog": {
+    "message": "Hanondrana ny diarin'ny fifandraisana"
+  },
+  "diagnosticsAccountRequired": {
+    "message": "Midira mba hampandehanana ny fandefasana. Afaka mijery sy manondrana tatitra ianao na tsy misy kaonty aza."
+  },
+  "diagnosticsRun": {
+    "message": "Hanao fanadihadiana"
+  },
+  "diagnosticsClearHistory": {
+    "message": "Hamafa ny tantara eo an-toerana"
+  },
+  "diagnosticsPreparing": {
+    "message": "Manomana ny tatitra…"
+  },
+  "diagnosticsReports": {
+    "message": "Tatitra"
+  },
+  "diagnosticsEmpty": {
+    "message": "Mbola tsy misy tatitra eo an-toerana."
+  },
+  "diagnosticsChooseReport": {
+    "message": "Misafidiana tatitra"
+  },
+  "diagnosticsReportLabel": {
+    "message": "$1 · $2 · $3"
+  },
+  "diagnosticsTypeFull": {
+    "message": "Tatitra feno"
+  },
+  "diagnosticsTypeSimple": {
+    "message": "Tatitry ny hadisoana"
+  },
+  "diagnosticsSummary": {
+    "message": "Nangonina tamin'ny $1. FuzeVPN dikan-teny $2."
+  },
+  "diagnosticsJson": {
+    "message": "Hijery ny votoatin'ny tatitra (JSON)"
+  },
+  "diagnosticsExport": {
+    "message": "Hanondrana ny tatitra"
+  },
+  "diagnosticsDelete": {
+    "message": "Hamafa ny tatitra eo an-toerana"
+  },
+  "diagnosticsRetention": {
+    "message": "Lany daty aorian'ny 24 ora ny tatitra eo an-toerana. Tsy mamafa tatitra efa voarain'ny tolotra ny famafana eto. Jereo ny fampahafantarana momba ny fitehirizana amin'ny mpizara sy ny fangatahana famafana."
+  },
+  "diagnosticsConsent": {
+    "message": "Handefa ity tatitry ny fanadihadiana ity any amin'ny FuzeVPN"
+  },
+  "diagnosticsDataCollectionRequired": {
+    "message": "Tsy maintsy mamela ny fanangonana angona ara-teknika ny Firefox vao afaka mandefa fanadihadiana. Andramo indray ary omeo ity alalana ity."
+  },
+  "diagnosticsSendHelp": {
+    "message": "Tsy voatery ny fandefasana. Rehefa ekena, dia mety hanandrana indray mandritra ny 24 ora izy amin'ny fotoam-pidirana manan-kery ho an'io kaonty io ihany. Azonao foanana ny andrana manaraka. Tsy manome antoka ny fanafoanana tara fa mbola tsy voarain'ny mpizara ny tatitra."
+  },
+  "diagnosticsSend": {
+    "message": "Handefa ny tatitra"
+  },
+  "diagnosticsCancel": {
+    "message": "Hanafoana ny fandefasana"
+  },
+  "diagnosticsReload": {
+    "message": "Hamerina hampiditra ity pejy ity"
+  },
+  "diagnosticsUnavailable": {
+    "message": "Tsy azo ampiasaina ny fanadihadiana. Avereno ampidirina ny FuzeVPN avy amin'ny mpitantana fanitarana ao amin'ny mpitety, dia sokafy indray ity pejy ity. Tsy niova ny VPN-nao."
+  },
+  "diagnosticsQueueFull": {
+    "message": "Feno ny filaharana fandefasana. Fafao ny tatitra eo an-toerana iray na andraso ho vita ny tatitra miandry."
+  },
+  "diagnosticsContentUnavailable": {
+    "message": "Tsy azo jerena ny votoatin'ny tatitra. Aondrano ny tatitra eo an-toerana raha misy ary mifandraisa amin'ny fanampiana."
+  },
+  "diagnosticsFailure": {
+    "message": "Tsy vita ny asa fanadihadiana. Tsy niova ny VPN-nao."
+  },
+  "diagnosticsChecks": {
+    "message": "Fanamarinana"
+  },
+  "diagnosticsCheckFallback": {
+    "message": "Fanamarinana ara-teknika: $1"
+  },
+  "diagnosticsCheckLine": {
+    "message": "$1 — $2"
+  },
+  "diagnosticsProxy": {
+    "message": "Proxy an'ny mpitety"
+  },
+  "diagnosticsStorage": {
+    "message": "Fitahirizana eo an-toerana"
+  },
+  "diagnosticsNetwork": {
+    "message": "Fifandraisana amin'ny tambajotra"
+  },
+  "diagnosticsCleanup": {
+    "message": "Fanadiovana ny fotoam-pidirana"
+  },
+  "diagnosticsResult_passed": {
+    "message": "Nahomby"
+  },
+  "diagnosticsResult_failed": {
+    "message": "Tsy nahomby"
+  },
+  "diagnosticsResult_skipped": {
+    "message": "Tsy natao"
+  },
+  "diagnosticsResult_unknown": {
+    "message": "Tsy fantatra"
+  },
+  "diagnosticsStatus_ready": {
+    "message": "Vonona amin'ity fitaovana ity"
+  },
+  "diagnosticsStatus_pending": {
+    "message": "Miandry halefa"
+  },
+  "diagnosticsStatus_sending": {
+    "message": "Mandefa…"
+  },
+  "diagnosticsStatus_session_required": {
+    "message": "Miandry fotoam-pidirana manan-kery ho an'io kaonty io ihany"
+  },
+  "diagnosticsStatus_received": {
+    "message": "Voarain'ny tolotra"
+  },
+  "diagnosticsStatus_failed": {
+    "message": "Tsy lasa ny fandefasana"
+  },
+  "diagnosticsStatus_cancelled": {
+    "message": "Nofoanana ny fandefasana"
+  },
+  "diagnosticsStatus_expired": {
+    "message": "Lany ny fe-potoana fandefasana"
+  },
+  "diagnosticsReceivedAt": {
+    "message": "Voaray tamin'ny $1"
+  },
+  "error_private_browsing_required": {
+    "message": "Mila ity alalana ity ny Firefox mba hanamboarana ny VPN, na dia amin'ny varavarankely tsotra aza. Sokafy ny about:addons → FuzeVPN, avelao hiasa amin'ny varavarankely manokana izy, dia andramo indray."
+  },
+  "error_host_permissions_required": {
+    "message": "Ao amin'ny Firefox, sokafy ny about:addons → FuzeVPN → Alalana ary omeo fidirana amin'ny tranonkala rehetra, dia andramo indray."
+  },
+  "cancelAction": {
+    "message": "Hanafoana"
+  },
+  "refreshLocations": {
+    "message": "Hanavao ny toerana"
+  },
+  "refreshingLocations": {
+    "message": "Manavao ny toerana…"
+  },
+  "locationsRefreshError": {
+    "message": "Tsy voavao ny lisitry ny toerana. Andramo indray azafady."
+  },
+  "error_device_revoked_limit": {
+    "message": "Nofoanana ity fitaovana ity. Tratra ny fetran'ny fitaovana: esory ny fitaovana iray azafady."
+  },
+  "noAvailableLocations": {
+    "message": "Tsy misy toerana azo ampiasaina amin'izao fotoana izao. Andramo indray tsy ho ela azafady."
+  },
+  "noAvailableFavoriteLocations": {
+    "message": "Tsy azo ampiasaina vonjimaika ny toerana ankafizinao."
+  },
+  "error_location_favorites_limit": {
+    "message": "Tratra ny fetra 100 ankafizina. Esory ny ankafizina iray hanampiana hafa."
+  },
+  "error_server_full": {
+    "message": "Feno ity mpizara ity. Misafidiana toerana hafa."
+  },
+  "error_capacity_unavailable": {
+    "message": "Tsy azo hamafisina amin'izao fotoana izao ny fahafahan'ity mpizara ity. Andramo indray tsy ho ela azafady."
+  },
+  "locationHierarchyHelp": {
+    "message": "Ny anarana no misafidy mpizara; ny zana-tsipìka no mampiseho ny antsipiriany."
+  },
+  "locationCountrySelect": {
+    "message": "Hisafidy mpizara azo ampiasaina: $1"
+  },
+  "locationCitySelect": {
+    "message": "Hisafidy mpizara azo ampiasaina: $1"
+  },
+  "locationShowCities": {
+    "message": "Haneho ny tanàna: $1"
+  },
+  "locationHideCities": {
+    "message": "Hanafina ny tanàna: $1"
+  },
+  "locationShowServers": {
+    "message": "Haneho ny mpizara: $1"
+  },
+  "locationHideServers": {
+    "message": "Hanafina ny mpizara: $1"
+  },
+  "locationAvailableServers": {
+    "message": "Mpizara azo ampiasaina: $1"
+  },
+  "legalInformation": {
+    "message": "Fampahalalana ara-dalàna"
+  },
+  "privacyPolicy": {
+    "message": "Fampahafantarana momba ny fiainana manokana ao amin'ny fanitarana"
+  },
+  "termsAndConditions": {
+    "message": "Fepetra fampiasana sy fivarotana"
+  },
+  "legalNotice": {
+    "message": "Fampahafantarana ara-dalàna"
+  },
+  "contactSupport": {
+    "message": "Hifandray amin'ny fanampiana"
+  },
+  "webSignIn": {
+    "message": "Hiditra amin'ny FuzeVPN"
+  },
+  "webSignInDisconnect": {
+    "message": "Hanapaka ary hiditra"
+  },
+  "webSignInPending": {
+    "message": "Eo am-pidirana…"
+  },
+  "webSignInHelp": {
+    "message": "Midira na mamorona kaonty amin'ny Google na mailaka ao amin'ny faritry ny mpanjifa FuzeVPN."
+  },
+  "webSignInDisconnectHelp": {
+    "message": "Ity bokotra ity dia mampijanona ny fiarovana ny mpitety mba ahafahanao miditra amin'ny Google na mailaka. Tsy ho voaaro ny fitetezanao mandritra ny fidirana."
+  },
+  "webSignInStatus": {
+    "message": "Tohizo ao amin'ny varavarankely fidirana FuzeVPN. Mihavao ho azy ny fanitarana rehefa vita. Akatony io varavarankely io raha hanafoana."
+  },
+  "error_web_login_cancelled": {
+    "message": "Nofoanana ny fidirana. Andramo indray."
+  },
+  "error_web_login_timeout": {
+    "message": "Naharitra loatra ny fidirana. Andramo indray."
+  },
+  "error_web_login_unavailable": {
+    "message": "Tsy azo ampiasaina ny fidirana amin'ny tranonkala. Andramo indray any aoriana."
+  },
+  "error_web_login_invalid_callback": {
+    "message": "Tsy voamarina ny fidirana. Atombohy indray avy amin'ny fanitarana."
+  },
+  "error_web_login_denied": {
+    "message": "Tsy nahazo alalana ny fidirana. Andramo indray."
+  },
+  "error_web_login_busy": {
+    "message": "Akatony aloha ny varavarankely fidirana efa misokatra vao manandrana indray."
+  },
+  "deviceKindFirefox": {
+    "message": "Mpitety Firefox"
+  },
+  "generalPrivacyPolicy": {
+    "message": "Politika ankapobeny momba ny fiainana manokana"
+  },
+  "privacyNoticeTitle": {
+    "message": "Fiainana manokana ao amin'ny fanitarana FuzeVPN"
+  },
+  "privacyNoticeIntro": {
+    "message": "Ity fampahafantarana ity dia mamaritra ny angona ampiasain'ity fanitarana ity. Mameno ny politika ankapobeny momba ny fiainana manokana an'ny FuzeVPN, misy rohy eo ambany, izy io. Tsy mitovy amin'ny angona ilaina hidirana sy hampiasana ny VPN ny fandefasana fanadihadiana tsy voatery."
+  },
+  "privacyNoticeUpdated": {
+    "message": "Fampahafantarana nohavaozina tamin'ny 19 Oktobra 2026"
+  },
+  "privacyNoticeServiceTitle": {
+    "message": "Kaonty sy tolotra VPN"
+  },
+  "privacyNoticeService": {
+    "message": "Mifanakalo angona momba ny fanamarinana, kaonty, famandrihana, fitaovana ary fotoam-pidirana proxy amin'ny api.fuzevpn.com ny fanitarana. Ny proxy VPN no mitondra ny fifamoivoizana alefa amin'ny alalany. Ireo fifandraisana ireo dia mampiseho metadata tambajotra amin'ny tolotra mandray; tsy manome toky manokana momba ny firaketana eo amin'ny mpizara ity fampahafantarana ity."
+  },
+  "privacyNoticeLocalTitle": {
+    "message": "Angona voatahiry ao amin'ny mpitety"
+  },
+  "privacyNoticeLocal": {
+    "message": "Ny fitahirizan'ny mpitety dia mitazona ny fotoam-pidiranao, ny antsipirian'ny kaontinao, ny safidinao, ny tranonkala maningana ary ny famantarana ny fitaovana. Tazonina eo an-toerana mandritra ny 10 minitra ny diary ara-teknika, na dia maty aza ny fandefasana tatitra ho azy. Lany daty eo an-toerana aorian'ny 24 ora ny drafitra fanadihadiana sy ny tatitra miandry; atao ny fanadiovana rehefa afaka mandeha ny fanitarana."
+  },
+  "privacyNoticeIpTitle": {
+    "message": "Fanamarinana IP ampahibemaso sy antoko fahatelo"
+  },
+  "privacyNoticeIp": {
+    "message": "Mifandray amin'ny api.ipify.org ny fanehoana IP sy ny fanadihadiana tambajotra. Mety hampiasa ipv4.icanhazip.com ho solony ny fanehoana IP. Mahazo ny IP an'ny fifandraisana sy ny metadata fangatahana mahazatra ny mpamatsy: ny IP ampahibemaso anao amin'ny fomba mivantana, na ny IP fivoahan'ny VPN rehefa mandalo proxy. Tsy misy cookie na referrer ireo fangatahana ireo ary tsy mandefa token kaonty na tantaran'ny fitetezana."
+  },
+  "privacyNoticeReportsTitle": {
+    "message": "Ny votoatin'ny tatitry ny fanadihadiana"
+  },
+  "privacyNoticeReports": {
+    "message": "Mety ahitana famantarana tatitra kisendrasendra, marika fotoana, dikan-tenin'ny fanitarana sy ny mpitety, fianakavian'ny rafitra fiasana sy ny maritrano, toetry ny fifandraisana sy ny fiarovana, kaody hadisoana, isa, faharetana ary valin'ny fanamarinana ny tatitra. Mety ahitana hetsika ara-teknika vao haingana ny tatitra feno. Ny JSON-ny dia tsy ahitana tenimiafina, token fanamarinana, adiresy mailaka, adiresy IP, URL notsidihina ary sehatra maningana. Afaka mijery sy manondrana tatitra feno ianao alohan'ny handefasana azy."
+  },
+  "privacyNoticeAccountTitle": {
+    "message": "Mpandray sy fifandraisana amin'ny kaonty"
+  },
+  "privacyNoticeAccount": {
+    "message": "Alefa any amin'ny FuzeVPN ao amin'ny api.fuzevpn.com/v1/diagnostics ny tatitra amin'ny alalan'ny fifandraisana voamarina. Mandingana ny proxy VPN ity fifandraisana API ity: mahazo ny IP ampahibemaso mivantana anao ny FuzeVPN na dia mandeha aza ny VPN. Mifamatotra amin'ny kaonty niditra ny tatitra fa tsy miafin'anarana. Misaraka amin'ny JSON an'ny tatitra ny loha-fanamarinana sy ny IP. Ny fandraisana nahomby dia manamarina fa nekena tamin'io teboka farany io izy, fa tsy hoe efa novakian'ny mpiasan'ny fanampiana ny tatitra."
+  },
+  "privacyNoticeChoiceTitle": {
+    "message": "Fandefasana tsy voatery sy fisintonana"
+  },
+  "privacyNoticeChoice": {
+    "message": "Maty raha tsy ovaina ny fandefasana ho azy. Ny fampandehanana azy dia mamela tatitry ny hadisoana tsotra ho an'io kaonty io. Ilaina ny boaty fanamarinana fandefasana mba handefasana tatitra feno amin'ny tanana. Mila ny alalany tsy voatery momba ny angona ara-teknika koa ny Firefox. Vonoy ny fandefasana ho azy mba hampijanonana azy sy hanalana ny tatitra ho azy mbola miandry; foano tsirairay ny fandefasana miandry hafa. Tsy manakana ny fampiasana ny VPN ny fandavana ny fandefasana fanadihadiana."
+  },
+  "privacyNoticeDeleteTitle": {
+    "message": "Famafana eo an-toerana sy rakitra nalaina"
+  },
+  "privacyNoticeDelete": {
+    "message": "Ao amin'ny Fanadihadiana, fafao ny tantara ara-teknika na fafao tsirairay ny tatitra eo an-toerana. Tsy mamafa ny dika mitovy amin'ny tatitra efa misy ny famafana ny tantara. Ny fanafoanana na famafana eo an-toerana dia tsy afaka maka indray angona efa voarain'ny tolotra, anisan'izany ny fandefasana tonga talohan'ny fanafoanana. Rakitra misaraka ny fanondranana nalaina ka tsy maintsy fafanao samirery."
+  },
+  "privacyNoticeServerTitle": {
+    "message": "Fitehirizana amin'ny mpizara sy fangatahana"
+  },
+  "privacyNoticeServer": {
+    "message": "Tsy mifehy na manamarina ny fitehirizana na ny famafana eo amin'ny mpizara ity fanitarana ity. Momba ny faharetan'ny fitehirizana ampiharin'ny FuzeVPN sy ny fangatahana momba ny tatitra efa nalefa, jereo ny politika ankapobeny momba ny fiainana manokana na mifandraisa amin'ny FuzeVPN. Tsy misy faharetan'ny fitehirizana raikitra eo amin'ny mpizara iantohan'ity fampahafantarana ity."
+  },
+  "privacyNoticeSupportTitle": {
+    "message": "Misaraka ny fanadihadiana sy ny fanampiana"
+  },
+  "privacyNoticeSupport": {
+    "message": "Ny fandefasana tatitry ny fanadihadiana dia tsy mandefa hafatra ho an'ny fanampiana avy amin'ny fanitarana. Mba hanazavana olana na hangatahana ny famafana tatitra voaray, ampiasao ny fantsona fifandraisana FuzeVPN eo ambany. Raha misafidy hizara rakitra naondrana amin'ny fantsona hafa ianao, dia hamarino aloha ny votoatiny."
+  },
+  "privacyNoticeManage": {
+    "message": "Hanokatra ny Fanadihadiana"
+  },
+  "privacyNoticeLinksTitle": {
+    "message": "Politikan'ny tolotra sy fifandraisana"
+  },
+  "theme": {
+    "message": "Endrika"
+  },
+  "themeSystem": {
+    "message": "Rafitra"
+  },
+  "themeLight": {
+    "message": "Mazava"
+  },
+  "themeDark": {
+    "message": "Maizina"
+  },
+  "switchToDarkTheme": {
+    "message": "Hiova ho endrika maizina"
+  },
+  "switchToLightTheme": {
+    "message": "Hiova ho endrika mazava"
+  }
+}

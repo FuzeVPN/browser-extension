@@ -1,0 +1,929 @@
+{
+  "extensionName": {
+    "message": "FuzeVPN"
+  },
+  "extensionDescription": {
+    "message": "ຮັກສາຄວາມເປັນສ່ວນຕົວ ແລະ ເພີ່ມຄວາມປອດໄພຂອງທ່ານໃນຄລິກດຽວ."
+  },
+  "siteExclusionsReloadRequired": {
+    "message": "ໂຫຼດ FuzeVPN ຄືນໃໝ່ຈາກຕົວຈັດການສ່ວນຂະຫຍາຍຂອງບຣາວເຊີ ເພື່ອສຳເລັດການອັບເດດ ແລະ ໃຊ້ເວັບໄຊທີ່ຍົກເວັ້ນ."
+  },
+  "extensionCommunicationError": {
+    "message": "ສ່ວນຂະຫຍາຍບໍ່ຕອບສະໜອງ. ປິດໜ້າຕ່າງນີ້ ແລ້ວໂຫຼດ FuzeVPN ຄືນໃໝ່ຈາກຕົວຈັດການສ່ວນຂະຫຍາຍຂອງບຣາວເຊີ."
+  },
+  "actionDisconnected": {
+    "message": "FuzeVPN — ຕັດການເຊື່ອມຕໍ່ແລ້ວ"
+  },
+  "actionConnected": {
+    "message": "FuzeVPN — ປົກປ້ອງຢູ່ໃນບຣາວເຊີນີ້"
+  },
+  "actionReconnecting": {
+    "message": "FuzeVPN — ກຳລັງເຊື່ອມຕໍ່ຄືນໃໝ່"
+  },
+  "actionError": {
+    "message": "FuzeVPN — ຕ້ອງການການກວດສອບ"
+  },
+  "browserProtection": {
+    "message": "ການປົກປ້ອງບຣາວເຊີ"
+  },
+  "loginTitle": {
+    "message": "ຍິນດີຕ້ອນຮັບສູ່ FuzeVPN"
+  },
+  "loginSubtitle": {
+    "message": "ເຂົ້າສູ່ລະບົບເພື່ອປົກປ້ອງການທ່ອງເວັບຂອງທ່ານໃນບຣາວເຊີນີ້."
+  },
+  "email": {
+    "message": "ທີ່ຢູ່ອີເມວ"
+  },
+  "emailPlaceholder": {
+    "message": "you@example.com"
+  },
+  "password": {
+    "message": "ລະຫັດຜ່ານ"
+  },
+  "signIn": {
+    "message": "ເຂົ້າສູ່ລະບົບ"
+  },
+  "signingIn": {
+    "message": "ກຳລັງເຂົ້າສູ່ລະບົບ…"
+  },
+  "forgotPassword": {
+    "message": "ລືມລະຫັດຜ່ານ?"
+  },
+  "createAccount": {
+    "message": "ສ້າງບັນຊີ"
+  },
+  "settings": {
+    "message": "ການຕັ້ງຄ່າ"
+  },
+  "close": {
+    "message": "ປິດ"
+  },
+  "statusDisconnected": {
+    "message": "ຕັດການເຊື່ອມຕໍ່ແລ້ວ"
+  },
+  "statusConnecting": {
+    "message": "ກຳລັງເຊື່ອມຕໍ່…"
+  },
+  "statusChanging": {
+    "message": "ກຳລັງປ່ຽນສະຖານທີ່…"
+  },
+  "statusProtected": {
+    "message": "ປົກປ້ອງຢູ່ໃນບຣາວເຊີນີ້"
+  },
+  "statusRefreshing": {
+    "message": "ກຳລັງຕໍ່ອາຍຸຢ່າງປອດໄພ…"
+  },
+  "statusDisconnecting": {
+    "message": "ກຳລັງຕັດການເຊື່ອມຕໍ່…"
+  },
+  "statusError": {
+    "message": "ການປົກປ້ອງຢຸດແລ້ວ"
+  },
+  "browserOnlyDetail": {
+    "message": "ການປົກປ້ອງສຳລັບບຣາວເຊີນີ້."
+  },
+  "location": {
+    "message": "ສະຖານທີ່"
+  },
+  "change": {
+    "message": "ປ່ຽນ"
+  },
+  "noLocation": {
+    "message": "ບໍ່ມີສະຖານທີ່ໃຫ້ໃຊ້"
+  },
+  "protectBrowser": {
+    "message": "ປົກປ້ອງບຣາວເຊີ"
+  },
+  "disconnect": {
+    "message": "ຕັດການເຊື່ອມຕໍ່"
+  },
+  "subscription": {
+    "message": "ການສະໝັກໃຊ້"
+  },
+  "refreshSubscription": {
+    "message": "ອັບເດດການສະໝັກໃຊ້"
+  },
+  "refreshingSubscription": {
+    "message": "ກຳລັງອັບເດດການສະໝັກໃຊ້…"
+  },
+  "subscriptionActive": {
+    "message": "ໃຊ້ງານຢູ່"
+  },
+  "subscriptionInactive": {
+    "message": "ບໍ່ໄດ້ໃຊ້ງານ"
+  },
+  "expiresOn": {
+    "message": "ໝົດອາຍຸ: $1"
+  },
+  "noExpiry": {
+    "message": "ບໍ່ມີວັນໝົດອາຍຸ"
+  },
+  "browserOnlyNotice": {
+    "message": "ສະເພາະບຣາວເຊີນີ້. ແອັບ ແລະ ບຣາວເຊີອື່ນບໍ່ໄດ້ຮັບການປົກປ້ອງ."
+  },
+  "resendVerification": {
+    "message": "ສົ່ງອີເມວຄືນ"
+  },
+  "incognitoHelp": {
+    "message": "ການທ່ອງເວັບແບບສ່ວນຕົວຈະໃຊ້ການປົກປ້ອງດຽວກັນ ກໍຕໍ່ເມື່ອສ່ວນຂະຫຍາຍໄດ້ຮັບອະນຸຍາດໃນໂໝດສ່ວນຕົວ ໃນການຕັ້ງຄ່າຂອງບຣາວເຊີ."
+  },
+  "manageAccount": {
+    "message": "ຈັດການບັນຊີຂອງຂ້ອຍ"
+  },
+  "account": {
+    "message": "ບັນຊີ"
+  },
+  "devices": {
+    "message": "ອຸປະກອນ"
+  },
+  "manageDevices": {
+    "message": "ຈັດການອຸປະກອນ"
+  },
+  "refreshDevices": {
+    "message": "ອັບເດດອຸປະກອນ"
+  },
+  "deviceCount": {
+    "message": "ອຸປະກອນ $1 / $2"
+  },
+  "loadingDevices": {
+    "message": "ກຳລັງໂຫຼດອຸປະກອນ…"
+  },
+  "noDevices": {
+    "message": "ບໍ່ມີອຸປະກອນທີ່ໃຊ້ງານຢູ່."
+  },
+  "currentDevice": {
+    "message": "ອຸປະກອນນີ້"
+  },
+  "deviceKindBrowser": {
+    "message": "ສ່ວນຂະຫຍາຍບຣາວເຊີ"
+  },
+  "deviceKindVpn": {
+    "message": "ອຸປະກອນ VPN"
+  },
+  "profile_browser_proxy": {
+    "message": "ພຣັອກຊີບຣາວເຊີ"
+  },
+  "profile_wireguard": {
+    "message": "WireGuard"
+  },
+  "profile_openvpn": {
+    "message": "OpenVPN"
+  },
+  "none": {
+    "message": "ບໍ່ມີ"
+  },
+  "deviceCreatedOn": {
+    "message": "ສ້າງເມື່ອ: $1"
+  },
+  "deleteDevice": {
+    "message": "ລຶບອຸປະກອນ"
+  },
+  "deleteDeviceNamed": {
+    "message": "ລຶບອຸປະກອນ $1"
+  },
+  "confirmDeleteDevice": {
+    "message": "ລຶບ “$1” ອອກບໍ? ການເຊື່ອມຕໍ່ VPN ຂອງມັນຈະຢຸດ ແລະ ໂປຣໄຟລ໌ຂອງມັນຈະຖືກລຶບອອກ."
+  },
+  "resetDevice": {
+    "message": "ຣີເຊັດອຸປະກອນ"
+  },
+  "confirmResetDevice": {
+    "message": "ຣີເຊັດສ່ວນຂະຫຍາຍນີ້ບໍ? ມັນຈະຖືກລົງທະບຽນເປັນອຸປະກອນໃໝ່ໃນຄັ້ງຕໍ່ໄປທີ່ທ່ານໃຊ້."
+  },
+  "signOutAccount": {
+    "message": "ອອກຈາກລະບົບບັນຊີ"
+  },
+  "chooseLocation": {
+    "message": "ເລືອກສະຖານທີ່"
+  },
+  "error_invalid_credentials": {
+    "message": "ທີ່ຢູ່ອີເມວ ຫຼື ລະຫັດຜ່ານບໍ່ຖືກຕ້ອງ."
+  },
+  "error_unauthorized": {
+    "message": "ເຊດຊັນຂອງທ່ານໝົດອາຍຸແລ້ວ. ກະລຸນາເຂົ້າສູ່ລະບົບອີກຄັ້ງ."
+  },
+  "error_email_verification_required": {
+    "message": "ຢືນຢັນທີ່ຢູ່ອີເມວຂອງທ່ານກ່ອນເປີດການປົກປ້ອງ."
+  },
+  "errorVerificationCooldown": {
+    "message": "ສາມາດຂໍອີເມວໃໝ່ໄດ້ໃນອີກ $1 ວິນາທີ."
+  },
+  "error_verification_email_cooldown": {
+    "message": "ກະລຸນາລໍຖ້າກ່ອນຂໍອີເມວອີກສະບັບ."
+  },
+  "error_subscription_required": {
+    "message": "ຕ້ອງມີການສະໝັກໃຊ້ທີ່ໃຊ້ງານຢູ່ເພື່ອປົກປ້ອງບຣາວເຊີນີ້."
+  },
+  "error_device_limit": {
+    "message": "ຮອດຂີດຈຳກັດອຸປະກອນແລ້ວ. ກະລຸນາລຶບອຸປະກອນໜຶ່ງອອກ."
+  },
+  "error_device_identity_revoked": {
+    "message": "ອຸປະກອນນີ້ບໍ່ໄດ້ຮັບອະນຸຍາດອີກຕໍ່ໄປ. ລອງເຊື່ອມຕໍ່ອີກຄັ້ງ."
+  },
+  "error_device_proof_invalid": {
+    "message": "ພວກເຮົາບໍ່ສາມາດຢືນຢັນອຸປະກອນນີ້ໄດ້. ກວດສອບວັນທີ ແລະ ເວລາຂອງຄອມພິວເຕີຂອງທ່ານ ແລ້ວລອງໃໝ່."
+  },
+  "error_device_proof_replayed": {
+    "message": "ຄຳຂໍນີ້ຖືກດຳເນີນການແລ້ວ. ລອງໃໝ່."
+  },
+  "error_invalid_device": {
+    "message": "ບໍ່ຮູ້ຈັກອຸປະກອນນີ້. ລອງເຊື່ອມຕໍ່ອີກຄັ້ງ."
+  },
+  "error_device_exists": {
+    "message": "ຕົວຕົນອຸປະກອນນີ້ຖືກເຊື່ອມໂຍງກັບບັນຊີອື່ນແລ້ວ."
+  },
+  "error_not_found": {
+    "message": "ການດຳເນີນການນີ້ບໍ່ມີໃຫ້ໃຊ້ອີກຕໍ່ໄປ. ລອງໃໝ່."
+  },
+  "error_invalid_location": {
+    "message": "ສະຖານທີ່ນີ້ບໍ່ສາມາດໃຊ້ໄດ້. ເລືອກສະຖານທີ່ອື່ນ."
+  },
+  "error_rate_limited": {
+    "message": "ພະຍາຍາມຫຼາຍເກີນໄປ. ລໍຖ້າຈັກໜ້ອຍ ແລ້ວລອງໃໝ່."
+  },
+  "error_proxy_unavailable": {
+    "message": "ເຊີບເວີນີ້ບໍ່ສາມາດໃຊ້ໄດ້ຊົ່ວຄາວ. ລອງໃໝ່ໃນອີກບໍ່ດົນ."
+  },
+  "error_api_token_expired": {
+    "message": "ເຊດຊັນບັນຊີຂອງທ່ານໝົດອາຍຸແລ້ວ. ກະລຸນາເຂົ້າສູ່ລະບົບອີກຄັ້ງ."
+  },
+  "error_network_error": {
+    "message": "ເຄືອຂ່າຍບໍ່ສາມາດໃຊ້ໄດ້. ກວດສອບການເຊື່ອມຕໍ່ອິນເຕີເນັດຂອງທ່ານ."
+  },
+  "error_request_timeout": {
+    "message": "ບໍລິການໃຊ້ເວລາຕອບສະໜອງດົນເກີນໄປ. ລອງໃໝ່."
+  },
+  "error_invalid_response": {
+    "message": "ບໍລິການສົ່ງຄຳຕອບທີ່ບໍ່ຄາດຄິດກັບມາ."
+  },
+  "error_proxy_certificate_invalid": {
+    "message": "ພວກເຮົາບໍ່ສາມາດຢືນຢັນຄວາມປອດໄພຂອງເຊີບເວີໄດ້. ການເຊື່ອມຕໍ່ຖືກຢຸດແລ້ວ."
+  },
+  "error_proxy_controlled_by_extension": {
+    "message": "ມີສ່ວນຂະຫຍາຍອື່ນກຳລັງຄວບຄຸມພຣັອກຊີຂອງບຣາວເຊີຢູ່."
+  },
+  "error_proxy_controlled_by_policy": {
+    "message": "ນະໂຍບາຍຂອງຜູ້ເບິ່ງແຍງລະບົບກີດກັນບໍ່ໃຫ້ FuzeVPN ປ່ຽນພຣັອກຊີ."
+  },
+  "error_proxy_authentication_failed": {
+    "message": "ເຊີບເວີບໍ່ຍອມຮັບການເຊື່ອມຕໍ່. ລອງເຊື່ອມຕໍ່ອີກຄັ້ງ."
+  },
+  "error_session_expired": {
+    "message": "ການເຊື່ອມຕໍ່ທີ່ປົກປ້ອງຂອງທ່ານໝົດອາຍຸແລ້ວ. ເຊື່ອມຕໍ່ອີກຄັ້ງ."
+  },
+  "error_email_delivery_unavailable": {
+    "message": "ບໍ່ສາມາດສົ່ງອີເມວໄດ້ໃນຕອນນີ້."
+  },
+  "error_unknown_error": {
+    "message": "ເກີດຂໍ້ຜິດພາດທີ່ບໍ່ຄາດຄິດ. ລອງໃໝ່."
+  },
+  "actionBlocked": {
+    "message": "FuzeVPN — ການທ່ອງເວັບຖືກບລັອກ"
+  },
+  "statusBlockedRetry": {
+    "message": "ການທ່ອງເວັບຢຸດຊົ່ວຄາວ — ກຳລັງເຊື່ອມຕໍ່ຄືນໃໝ່"
+  },
+  "statusBlockedAction": {
+    "message": "ການທ່ອງເວັບຢຸດຊົ່ວຄາວ — ກວດສອບການເຊື່ອມຕໍ່"
+  },
+  "statusProtectionUnavailable": {
+    "message": "ການປົກປ້ອງບໍ່ພ້ອມໃຊ້ — ການທ່ອງເວັບບໍ່ຖືກບລັອກ"
+  },
+  "recoveryHelp": {
+    "message": "ລອງໃໝ່ເພື່ອສືບຕໍ່ການປົກປ້ອງ. ການຕັດການເຊື່ອມຕໍ່ຊ່ວຍໃຫ້ທ່ານທ່ອງເວັບໄດ້ໂດຍບໍ່ມີ FuzeVPN."
+  },
+  "retryConnection": {
+    "message": "ລອງໃໝ່"
+  },
+  "killSwitch": {
+    "message": "ສະວິດຢຸດສຸກເສີນ"
+  },
+  "killSwitchHelp": {
+    "message": "ບລັອກຄຳຂໍເວັບໃໝ່ ຖ້າການເຊື່ອມຕໍ່ VPN ຂາດ. ເວັບໄຊທີ່ຍົກເວັ້ນຍັງເຂົ້າເຖິງໄດ້ນອກ VPN."
+  },
+  "webRtcProtection": {
+    "message": "ການປົກປ້ອງ WebRTC"
+  },
+  "webRtcHelp": {
+    "message": "ຊ່ວຍຮັກສາທີ່ຢູ່ IP ຂອງທ່ານໃຫ້ເປັນສ່ວນຕົວລະຫວ່າງການໂທຜ່ານເວັບ. ການໂທບາງອັນອາດໃຊ້ບໍ່ໄດ້. ການປິດສິ່ງນີ້ອາດເປີດເຜີຍທີ່ຢູ່ IP ແທ້ຂອງທ່ານ."
+  },
+  "securityEffectiveState": {
+    "message": "$1 · $2"
+  },
+  "securityBlocked": {
+    "message": "ການທ່ອງເວັບຖືກບລັອກ"
+  },
+  "securityNotBlocked": {
+    "message": "ການທ່ອງເວັບບໍ່ຖືກບລັອກ"
+  },
+  "securityWebRtcActive": {
+    "message": "ການຈຳກັດ WebRTC ເປີດຢູ່"
+  },
+  "securityWebRtcInactive": {
+    "message": "ການຈຳກັດ WebRTC ປິດຢູ່"
+  },
+  "localNetworkHelp": {
+    "message": "ທີ່ຢູ່ IP ທ້ອງຖິ່ນ ແລະ ຊື່ທ້ອງຖິ່ນທົ່ວໄປຖືກບລັອກລະຫວ່າງການປົກປ້ອງ. ໂດເມນທີ່ຍົກເວັ້ນອາດຍັງໃຫ້ເຂົ້າເຖິງເຄືອຂ່າຍທ້ອງຖິ່ນໄດ້. ການຕັ້ງຄ່າ IPv6 ຂອງລະບົບບໍ່ຖືກປ່ຽນແປງ."
+  },
+  "securityLimits": {
+    "message": "ກ່ຽວກັບການປົກປ້ອງນີ້"
+  },
+  "killSwitchLimits": {
+    "message": "ສະເພາະບຣາວເຊີນີ້: ການເຊື່ອມຕໍ່ທີ່ມີຢູ່ແລ້ວ ແລະ ການສື່ສານພາຍໃນບາງຢ່າງຂອງບຣາວເຊີ ຫຼື ສ່ວນຂະຫຍາຍອື່ນອາດສືບຕໍ່. ສ່ວນຂະຫຍາຍອື່ນ ຫຼື ນະໂຍບາຍອາດແທນທີ່ພຣັອກຊີກ່ອນທີ່ FuzeVPN ຈະຕອບສະໜອງ. ການປິດສ່ວນຂະຫຍາຍຈະເອົາການປົກປ້ອງອອກ. ບໍ່ມີການບລັອກທົ່ວທັງລະບົບ."
+  },
+  "error_traffic_guard_failed": {
+    "message": "ບໍ່ສາມາດຢືນຢັນການບລັອກການທ່ອງເວັບໄດ້. ບໍ່ຮັບປະກັນການປົກປ້ອງ. ກວດສອບການອະນຸຍາດຂອງສ່ວນຂະຫຍາຍ."
+  },
+  "error_webrtc_control_unavailable": {
+    "message": "ບໍ່ສາມາດນຳໃຊ້ການຈຳກັດ WebRTC ໄດ້. ກວດສອບການຕັ້ງຄ່າ, ສ່ວນຂະຫຍາຍອື່ນ ຫຼື ນະໂຍບາຍຂອງຜູ້ເບິ່ງແຍງລະບົບ."
+  },
+  "language": {
+    "message": "ພາສາ"
+  },
+  "languageAutomatic": {
+    "message": "ອັດຕະໂນມັດ — ພາສາຂອງບຣາວເຊີ"
+  },
+  "languageHelp": {
+    "message": "ການປ່ຽນແປງມີຜົນທັນທີ. ອັດຕະໂນມັດຈະໃຊ້ພາສາຂອງບຣາວເຊີ ເຊິ່ງອາດແຕກຕ່າງຈາກພາສາຂອງລະບົບ."
+  },
+  "languageSaveError": {
+    "message": "ບໍ່ສາມາດບັນທຶກພາສາໄດ້. ຍັງຄົງໃຊ້ຕົວເລືອກກ່ອນໜ້າຂອງທ່ານ. ລອງໃໝ່."
+  },
+  "publicIp": {
+    "message": "IP ສາທາລະນະ"
+  },
+  "vpnIp": {
+    "message": "IP ຂອງ VPN"
+  },
+  "ipChecking": {
+    "message": "ກຳລັງກວດສອບ…"
+  },
+  "ipUnavailable": {
+    "message": "ບໍ່ພ້ອມໃຊ້"
+  },
+  "ipLookupExplanation": {
+    "message": "ກວດສອບ IP ດ້ວຍ ipify ຫຼື icanhazip ເປັນທາງສຳຮອງ ຜ່ານການເຊື່ອມຕໍ່ປັດຈຸບັນຂອງທ່ານ. ບໍ່ມີການສົ່ງປະຫວັດການທ່ອງເວັບ."
+  },
+  "automaticLocation": {
+    "message": "ອັດຕະໂນມັດ"
+  },
+  "automaticLocationHelp": {
+    "message": "ເວລາຕອບສະໜອງທີ່ດີທີ່ສຸດຫຼ້າສຸດ ຫຼື ສະຖານທີ່ສຸດທ້າຍຂອງທ່ານ."
+  },
+  "automaticLocationName": {
+    "message": "ອັດຕະໂນມັດ · $1"
+  },
+  "searchLocations": {
+    "message": "ຊອກຫາປະເທດ ຫຼື ເມືອງ"
+  },
+  "locationFilters": {
+    "message": "ກັ່ນຕອງສະຖານທີ່"
+  },
+  "allLocations": {
+    "message": "ທັງໝົດ"
+  },
+  "favoriteLocations": {
+    "message": "ລາຍການທີ່ມັກ"
+  },
+  "recentLocations": {
+    "message": "ຫຼ້າສຸດ"
+  },
+  "noMatchingLocations": {
+    "message": "ບໍ່ມີສະຖານທີ່ທີ່ກົງກັບການຊອກຫາຂອງທ່ານ."
+  },
+  "noFavoriteLocations": {
+    "message": "ໝາຍດາວເພື່ອເກັບສະຖານທີ່ທີ່ທ່ານມັກໄວ້ທີ່ນີ້."
+  },
+  "noRecentLocations": {
+    "message": "ສະຖານທີ່ທີ່ທ່ານເຊື່ອມຕໍ່ຫຼ້າສຸດຈະສະແດງຢູ່ທີ່ນີ້."
+  },
+  "addFavorite": {
+    "message": "ເພີ່ມ $1 ໃສ່ລາຍການທີ່ມັກ"
+  },
+  "removeFavorite": {
+    "message": "ລຶບ $1 ອອກຈາກລາຍການທີ່ມັກ"
+  },
+  "unavailableFavoriteLocation": {
+    "message": "ລາຍການທີ່ມັກບໍ່ພ້ອມໃຊ້: $1"
+  },
+  "locationSaveError": {
+    "message": "ບໍ່ສາມາດປ່ຽນແປງໃຫ້ສຳເລັດໄດ້. ການຕັ້ງຄ່າບາງຢ່າງອາດຖືກບັນທຶກແລ້ວ. ກວດສອບຕົວເລືອກທີ່ສະແດງຢູ່ກ່ອນລອງໃໝ່."
+  },
+  "siteExclusions": {
+    "message": "ເວັບໄຊທີ່ຍົກເວັ້ນ"
+  },
+  "siteExclusionsHelp": {
+    "message": "ເວັບໄຊເຫຼົ່ານີ້ໃຊ້ການເຊື່ອມຕໍ່ຂອງທ່ານໂດຍບໍ່ຜ່ານ FuzeVPN ເຖິງແມ່ນວ່າ VPN ຈະຂາດ."
+  },
+  "siteExclusionsEnabled": {
+    "message": "ເປີດໃຊ້ຂໍ້ຍົກເວັ້ນ"
+  },
+  "siteExclusionInput": {
+    "message": "ໂດເມນ ຫຼື URL"
+  },
+  "siteExclusionPlaceholder": {
+    "message": "example.com"
+  },
+  "siteExclusionPreview": {
+    "message": "ໂດເມນທີ່ເລືອກ: $1"
+  },
+  "siteExclusionSubdomains": {
+    "message": "ລວມໂດເມນຍ່ອຍ"
+  },
+  "siteExclusionAdd": {
+    "message": "ເພີ່ມເວັບໄຊ"
+  },
+  "siteExclusionsEmpty": {
+    "message": "ບໍ່ມີເວັບໄຊທີ່ຍົກເວັ້ນ. ເພີ່ມສະເພາະເວັບໄຊທີ່ທ່ານຕ້ອງການໃຊ້ໂດຍບໍ່ມີ VPN."
+  },
+  "siteExclusionsCount": {
+    "message": "ເວັບໄຊ $1 / 100"
+  },
+  "siteExclusionScopeSubdomains": {
+    "message": "ໂດເມນ ແລະ ໂດເມນຍ່ອຍ"
+  },
+  "siteExclusionScopeExact": {
+    "message": "ສະເພາະໂດເມນນີ້ເທົ່ານັ້ນ"
+  },
+  "siteExclusionRemove": {
+    "message": "ລຶບ $1"
+  },
+  "siteExclusionsDetails": {
+    "message": "ຂໍ້ຍົກເວັ້ນເຮັດວຽກແນວໃດ?"
+  },
+  "siteExclusionsResources": {
+    "message": "ຊັບພະຍາກອນຈາກໂດເມນອື່ນຍັງໄດ້ຮັບການປົກປ້ອງ. ການຍົກເວັ້ນໜ້າເວັບໜຶ່ງບໍ່ໄດ້ຍົກເວັ້ນເນື້ອຫາອື່ນຂອງມັນໂດຍອັດຕະໂນມັດ."
+  },
+  "siteExclusionsReload": {
+    "message": "ໂຫຼດເວັບໄຊຄືນໃໝ່ຫຼັງຈາກປ່ຽນແປງ. ການເຊື່ອມຕໍ່ທີ່ມີຢູ່ແລ້ວອາດຍັງໃຊ້ເສັ້ນທາງເກົ່າ."
+  },
+  "siteExclusionsWebRtc": {
+    "message": "ການປົກປ້ອງ WebRTC ຍັງເປັນການຕັ້ງຄ່າທົ່ວໄປ ລວມທັງສຳລັບເວັບໄຊທີ່ຍົກເວັ້ນ."
+  },
+  "siteExclusionsLocal": {
+    "message": "ບັນທຶກໄວ້ສະເພາະໃນບຣາວເຊີນີ້ ແລະ ຍັງຄົງຢູ່ຫຼັງຈາກອອກຈາກລະບົບບັນຊີຂອງທ່ານ."
+  },
+  "siteExclusionsOn": {
+    "message": "ເປີດໃຊ້ຂໍ້ຍົກເວັ້ນແລ້ວ"
+  },
+  "siteExclusionsOff": {
+    "message": "ປິດໃຊ້ຂໍ້ຍົກເວັ້ນແລ້ວ"
+  },
+  "siteExclusionsSummary": {
+    "message": "$1 ເວັບໄຊຢູ່ນອກ VPN"
+  },
+  "siteExclusionsPending": {
+    "message": "ກຳລັງນຳໃຊ້ຂໍ້ຍົກເວັ້ນ…"
+  },
+  "siteExclusionsInterrupted": {
+    "message": "ການປ່ຽນແປງຖືກຂັດຈັງຫວະ. ການປ້ອງກັນຊົ່ວຄາວຍັງຄົງຢູ່."
+  },
+  "siteExclusionsSaveError": {
+    "message": "ບໍ່ສາມາດປ່ຽນແປງໃຫ້ສຳເລັດໄດ້. ກວດສອບການຕັ້ງຄ່າຂອງທ່ານ ແລ້ວລອງໃໝ່."
+  },
+  "siteExclusionsRetry": {
+    "message": "ລອງໃໝ່"
+  },
+  "siteExclusionInvalid": {
+    "message": "ປ້ອນໂດເມນສາທາລະນະທີ່ຖືກຕ້ອງ. ບໍ່ຮັບ IP, ຊື່ທ້ອງຖິ່ນ, ໄວລ໌ດຄາດ, ສ່ວນທ້າຍສາທາລະນະ ແລະ ໂດເມນທີ່ສະຫງວນໄວ້."
+  },
+  "siteExclusionDuplicate": {
+    "message": "ໂດເມນນີ້ມີຢູ່ໃນລາຍການແລ້ວ."
+  },
+  "siteExclusionsLimit": {
+    "message": "ຮອດຂີດຈຳກັດ 100 ເວັບໄຊແລ້ວ. ລຶບເວັບໄຊໜຶ່ງອອກເພື່ອເພີ່ມອັນໃໝ່."
+  },
+  "statusProtectedExceptions": {
+    "message": "VPN ເປີດຢູ່ · ຂໍ້ຍົກເວັ້ນ $1"
+  },
+  "statusBlockedExceptions": {
+    "message": "ເຂົ້າເຖິງໄດ້ສະເພາະເວັບໄຊທີ່ຍົກເວັ້ນ"
+  },
+  "securityBlockedExceptions": {
+    "message": "ບລັອກການທ່ອງເວັບ ຍົກເວັ້ນເວັບໄຊທີ່ໄດ້ຍົກເວັ້ນໄວ້"
+  },
+  "securityBlockUnverified": {
+    "message": "ຍັງບໍ່ໄດ້ຢືນຢັນການບລັອກ"
+  },
+  "logoutLocalComplete": {
+    "message": "ອອກຈາກລະບົບໃນເຄື່ອງສຳເລັດແລ້ວ."
+  },
+  "logoutApiSession": {
+    "message": "ເຊດຊັນບັນຊີປັດຈຸບັນ"
+  },
+  "logoutProxySessions": {
+    "message": "ເຊດຊັນ VPN ທີ່ຮູ້ຈັກ"
+  },
+  "logoutRevocationPending": {
+    "message": "ກຳລັງຖອນສິດ…"
+  },
+  "logoutRevocationConfirmed": {
+    "message": "ຢືນຢັນການຖອນສິດແລ້ວ"
+  },
+  "logoutRevocationUnconfirmed": {
+    "message": "ຍັງບໍ່ໄດ້ຢືນຢັນການຖອນສິດ"
+  },
+  "logoutUnconfirmedHelp": {
+    "message": "ເຊດຊັນທາງໄກບາງອັນອາດຍັງໃຊ້ງານຢູ່ຈົນກວ່າຈະໝົດອາຍຸ."
+  },
+  "deviceQuotaLoading": {
+    "message": "ກຳລັງໂຫຼດຂີດຈຳກັດອຸປະກອນ…"
+  },
+  "deviceQuotaUnknown": {
+    "message": "ບໍ່ມີຂໍ້ມູນຂີດຈຳກັດອຸປະກອນ"
+  },
+  "error_proxy_creation_uncertain": {
+    "message": "ເຊີບເວີບໍ່ໄດ້ຢືນຢັນການສ້າງການເຊື່ອມຕໍ່ໃໝ່. ການເຊື່ອມຕໍ່ຄືນໃໝ່ອັດຕະໂນມັດຖືກຢຸດຊົ່ວຄາວ."
+  },
+  "siteExclusionsPreferencesReset": {
+    "message": "ຂໍ້ຍົກເວັ້ນເວັບໄຊທີ່ບັນທຶກໄວ້ຖືກຣີເຊັດ ເນື່ອງຈາກບໍ່ສາມາດອ່ານໄດ້. ເພີ່ມເວັບໄຊທີ່ທ່ານຕ້ອງການຍົກເວັ້ນອີກຄັ້ງ."
+  },
+  "siteExclusionsConflict": {
+    "message": "ລາຍການເວັບໄຊທີ່ຍົກເວັ້ນມີການປ່ຽນແປງ. ກວດສອບມັນ ແລ້ວລອງປ່ຽນແປງອີກຄັ້ງ."
+  },
+  "unavailableLocation": {
+    "message": "ສະຖານທີ່ບໍ່ພ້ອມໃຊ້"
+  },
+  "verificationSending": {
+    "message": "ກຳລັງສົ່ງອີເມວຢືນຢັນ…"
+  },
+  "verificationSent": {
+    "message": "ສົ່ງອີເມວຢືນຢັນແລ້ວ. ກວດສອບກ່ອງຈົດໝາຍເຂົ້າ ແລະ ໂຟນເດີສະແປມຂອງທ່ານ."
+  },
+  "error_login_requires_disconnect": {
+    "message": "ຕັດການເຊື່ອມຕໍ່ VPN ປັດຈຸບັນກ່ອນເຂົ້າສູ່ລະບົບບັນຊີອື່ນ."
+  },
+  "error_storage_unavailable": {
+    "message": "ການຕັ້ງຄ່າບັນຊີໃນເຄື່ອງບໍ່ພ້ອມໃຊ້. ລອງໃໝ່ເມື່ອບ່ອນຈັດເກັບຂອງບຣາວເຊີພ້ອມໃຊ້; ບັນຊີທີ່ບັນທຶກໄວ້ຂອງທ່ານຍັງຄົງຢູ່."
+  },
+  "diagnosticsAssistance": {
+    "message": "ຊ່ວຍເຫຼືອ"
+  },
+  "diagnosticsTitle": {
+    "message": "ການວິນິດໄສ"
+  },
+  "diagnosticsIntro": {
+    "message": "ກວດສອບ FuzeVPN ແລະ ການເຊື່ອມຕໍ່ປັດຈຸບັນ ໂດຍບໍ່ປ່ຽນແປງການປົກປ້ອງຂອງທ່ານ."
+  },
+  "diagnosticsPrivacyTitle": {
+    "message": "ຂໍ້ມູນຂອງທ່ານ"
+  },
+  "diagnosticsPrivacy": {
+    "message": "JSON ຂອງລາຍງານມີສະຖານະທາງເຕັກນິກ ແລະ ລະຫັດຂໍ້ຜິດພາດ ໂດຍບໍ່ມີລະຫັດຜ່ານ, ໂທເຄັນ, ທີ່ຢູ່ອີເມວ, ທີ່ຢູ່ IP, URL ທີ່ເຂົ້າເບິ່ງ ຫຼື ໂດເມນທີ່ຍົກເວັ້ນ. ການສົ່ງຜ່ານການຢືນຢັນຕົວຕົນ ແລະ ເຊື່ອມໂຍງລາຍງານກັບບັນຊີຂອງທ່ານ. ເບິ່ງແຈ້ງການສຳລັບຂໍ້ມູນເຄືອຂ່າຍ."
+  },
+  "diagnosticsAuto": {
+    "message": "ສົ່ງລາຍງານຂໍ້ຜິດພາດທີ່ສຳຄັນໂດຍອັດຕະໂນມັດ"
+  },
+  "diagnosticsAutoHelp": {
+    "message": "ປິດໄວ້ຕາມຄ່າເລີ່ມຕົ້ນ. ການເປີດໃຊ້ຈະສົ່ງລາຍງານທາງເຕັກນິກແບບງ່າຍສຳລັບບັນຊີນີ້ ໂດຍບໍ່ມີປະຫວັດການທ່ອງເວັບ. ປິດມັນຢູ່ທີ່ນີ້ເພື່ອຢຸດການສົ່ງອັດຕະໂນມັດ ແລະ ລຶບລາຍງານອັດຕະໂນມັດທີ່ລໍຖ້າຢູ່."
+  },
+  "diagnosticsHistoryHelp": {
+    "message": "ປະຫວັດທາງເຕັກນິກຢູ່ໃນເຄື່ອງເທົ່ານັ້ນ: ສູງສຸດ 200 ເຫດການຕໍ່ບັນທຶກໃນ 10 ນາທີ ເຖິງແມ່ນວ່າການສົ່ງອັດຕະໂນມັດຈະປິດຢູ່. ມັນບໍ່ມີປະຫວັດການທ່ອງເວັບ ແລະ ຈະຖືກລຶບເມື່ອທ່ານລຶບເອງ, ເມື່ອປິດບຣາວເຊີ ຫຼື ເມື່ອປ່ຽນບັນຊີ."
+  },
+  "diagnosticsHistoryCount": {
+    "message": "$1 ເຫດການທາງເຕັກນິກໃນເຄື່ອງ"
+  },
+  "diagnosticsConnectionLog": {
+    "message": "ສົ່ງອອກບັນທຶກການເຊື່ອມຕໍ່"
+  },
+  "diagnosticsAccountRequired": {
+    "message": "ເຂົ້າສູ່ລະບົບເພື່ອເປີດໃຊ້ການສົ່ງ. ທ່ານຍັງສາມາດເບິ່ງ ແລະ ສົ່ງອອກລາຍງານໄດ້ໂດຍບໍ່ມີບັນຊີ."
+  },
+  "diagnosticsRun": {
+    "message": "ເລີ່ມການວິນິດໄສ"
+  },
+  "diagnosticsClearHistory": {
+    "message": "ລຶບປະຫວັດໃນເຄື່ອງ"
+  },
+  "diagnosticsPreparing": {
+    "message": "ກຳລັງກະກຽມລາຍງານ…"
+  },
+  "diagnosticsReports": {
+    "message": "ລາຍງານ"
+  },
+  "diagnosticsEmpty": {
+    "message": "ຍັງບໍ່ມີລາຍງານໃນເຄື່ອງ."
+  },
+  "diagnosticsChooseReport": {
+    "message": "ເລືອກລາຍງານ"
+  },
+  "diagnosticsReportLabel": {
+    "message": "$1 · $2 · $3"
+  },
+  "diagnosticsTypeFull": {
+    "message": "ລາຍງານເຕັມ"
+  },
+  "diagnosticsTypeSimple": {
+    "message": "ລາຍງານຂໍ້ຜິດພາດ"
+  },
+  "diagnosticsSummary": {
+    "message": "ເກັບກຳເມື່ອ $1. FuzeVPN ເວີຊັນ $2."
+  },
+  "diagnosticsJson": {
+    "message": "ເບິ່ງເນື້ອຫາລາຍງານ (JSON)"
+  },
+  "diagnosticsExport": {
+    "message": "ສົ່ງອອກລາຍງານ"
+  },
+  "diagnosticsDelete": {
+    "message": "ລຶບລາຍງານໃນເຄື່ອງ"
+  },
+  "diagnosticsRetention": {
+    "message": "ລາຍງານໃນເຄື່ອງຈະໝົດອາຍຸຫຼັງຈາກ 24 ຊົ່ວໂມງ. ການລຶບຢູ່ທີ່ນີ້ບໍ່ໄດ້ລຶບລາຍງານທີ່ບໍລິການໄດ້ຮັບແລ້ວ. ເບິ່ງແຈ້ງການກ່ຽວກັບການເກັບຮັກສາໃນເຊີບເວີ ແລະ ຄຳຂໍລຶບ."
+  },
+  "diagnosticsConsent": {
+    "message": "ສົ່ງລາຍງານການວິນິດໄສນີ້ໄປຫາ FuzeVPN"
+  },
+  "diagnosticsDataCollectionRequired": {
+    "message": "Firefox ຕ້ອງອະນຸຍາດການເກັບກຳຂໍ້ມູນທາງເຕັກນິກເພື່ອສົ່ງການວິນິດໄສ. ລອງໃໝ່ ແລະ ໃຫ້ການອະນຸຍາດນີ້."
+  },
+  "diagnosticsSendHelp": {
+    "message": "ການສົ່ງເປັນທາງເລືອກ. ເມື່ອອະນຸມັດແລ້ວ ມັນອາດລອງສົ່ງໃໝ່ໄດ້ສູງສຸດ 24 ຊົ່ວໂມງ ດ້ວຍເຊດຊັນທີ່ຖືກຕ້ອງສຳລັບບັນຊີດຽວກັນ. ທ່ານສາມາດຍົກເລີກຄວາມພະຍາຍາມຕໍ່ໄປໄດ້. ການຍົກເລີກຊ້າບໍ່ຮັບປະກັນວ່າເຊີບເວີຍັງບໍ່ໄດ້ຮັບລາຍງານ."
+  },
+  "diagnosticsSend": {
+    "message": "ສົ່ງລາຍງານ"
+  },
+  "diagnosticsCancel": {
+    "message": "ຍົກເລີກການສົ່ງ"
+  },
+  "diagnosticsReload": {
+    "message": "ໂຫຼດໜ້ານີ້ຄືນໃໝ່"
+  },
+  "diagnosticsUnavailable": {
+    "message": "ການວິນິດໄສບໍ່ພ້ອມໃຊ້. ໂຫຼດ FuzeVPN ຄືນໃໝ່ຈາກຕົວຈັດການສ່ວນຂະຫຍາຍຂອງບຣາວເຊີ ແລ້ວເປີດໜ້ານີ້ອີກຄັ້ງ. VPN ຂອງທ່ານບໍ່ມີການປ່ຽນແປງ."
+  },
+  "diagnosticsQueueFull": {
+    "message": "ຄິວການສົ່ງເຕັມແລ້ວ. ລຶບລາຍງານໃນເຄື່ອງໜຶ່ງ ຫຼື ລໍຖ້າໃຫ້ລາຍງານທີ່ລໍຖ້າຢູ່ສຳເລັດ."
+  },
+  "diagnosticsContentUnavailable": {
+    "message": "ເນື້ອຫາລາຍງານບໍ່ພ້ອມໃຊ້. ສົ່ງອອກລາຍງານໃນເຄື່ອງຖ້າມີ ແລະ ຕິດຕໍ່ຝ່າຍຊ່ວຍເຫຼືອ."
+  },
+  "diagnosticsFailure": {
+    "message": "ບໍ່ສາມາດດຳເນີນການວິນິດໄສໃຫ້ສຳເລັດໄດ້. VPN ຂອງທ່ານບໍ່ມີການປ່ຽນແປງ."
+  },
+  "diagnosticsChecks": {
+    "message": "ການກວດສອບ"
+  },
+  "diagnosticsCheckFallback": {
+    "message": "ການກວດສອບທາງເຕັກນິກ: $1"
+  },
+  "diagnosticsCheckLine": {
+    "message": "$1 — $2"
+  },
+  "diagnosticsProxy": {
+    "message": "ພຣັອກຊີບຣາວເຊີ"
+  },
+  "diagnosticsStorage": {
+    "message": "ບ່ອນຈັດເກັບໃນເຄື່ອງ"
+  },
+  "diagnosticsNetwork": {
+    "message": "ການເຊື່ອມຕໍ່ເຄືອຂ່າຍ"
+  },
+  "diagnosticsCleanup": {
+    "message": "ການລ້າງເຊດຊັນ"
+  },
+  "diagnosticsResult_passed": {
+    "message": "ຜ່ານ"
+  },
+  "diagnosticsResult_failed": {
+    "message": "ລົ້ມເຫຼວ"
+  },
+  "diagnosticsResult_skipped": {
+    "message": "ບໍ່ໄດ້ດຳເນີນການ"
+  },
+  "diagnosticsResult_unknown": {
+    "message": "ບໍ່ຮູ້"
+  },
+  "diagnosticsStatus_ready": {
+    "message": "ພ້ອມຢູ່ໃນອຸປະກອນນີ້"
+  },
+  "diagnosticsStatus_pending": {
+    "message": "ລໍຖ້າສົ່ງ"
+  },
+  "diagnosticsStatus_sending": {
+    "message": "ກຳລັງສົ່ງ…"
+  },
+  "diagnosticsStatus_session_required": {
+    "message": "ລໍຖ້າເຊດຊັນທີ່ຖືກຕ້ອງສຳລັບບັນຊີດຽວກັນ"
+  },
+  "diagnosticsStatus_received": {
+    "message": "ບໍລິການໄດ້ຮັບແລ້ວ"
+  },
+  "diagnosticsStatus_failed": {
+    "message": "ການສົ່ງລົ້ມເຫຼວ"
+  },
+  "diagnosticsStatus_cancelled": {
+    "message": "ຍົກເລີກການສົ່ງແລ້ວ"
+  },
+  "diagnosticsStatus_expired": {
+    "message": "ໝົດກຳນົດເວລາສົ່ງ"
+  },
+  "diagnosticsReceivedAt": {
+    "message": "ໄດ້ຮັບເມື່ອ: $1"
+  },
+  "error_private_browsing_required": {
+    "message": "Firefox ຕ້ອງການການອະນຸຍາດນີ້ເພື່ອຕັ້ງຄ່າ VPN ເຖິງແມ່ນໃນໜ້າຕ່າງປົກກະຕິ. ເປີດ about:addons → FuzeVPN, ອະນຸຍາດໃຫ້ມັນເຮັດວຽກໃນໜ້າຕ່າງສ່ວນຕົວ ແລ້ວລອງໃໝ່."
+  },
+  "error_host_permissions_required": {
+    "message": "ໃນ Firefox, ເປີດ about:addons → FuzeVPN → ການອະນຸຍາດ ແລະ ອະນຸຍາດໃຫ້ເຂົ້າເຖິງທຸກເວັບໄຊ ແລ້ວລອງໃໝ່."
+  },
+  "cancelAction": {
+    "message": "ຍົກເລີກ"
+  },
+  "refreshLocations": {
+    "message": "ອັບເດດສະຖານທີ່"
+  },
+  "refreshingLocations": {
+    "message": "ກຳລັງອັບເດດສະຖານທີ່…"
+  },
+  "locationsRefreshError": {
+    "message": "ບໍ່ສາມາດອັບເດດລາຍການສະຖານທີ່ໄດ້. ກະລຸນາລອງໃໝ່."
+  },
+  "error_device_revoked_limit": {
+    "message": "ອຸປະກອນນີ້ຖືກຖອນສິດແລ້ວ. ຮອດຂີດຈຳກັດອຸປະກອນແລ້ວ: ກະລຸນາລຶບອຸປະກອນໜຶ່ງອອກ."
+  },
+  "noAvailableLocations": {
+    "message": "ຕອນນີ້ບໍ່ມີສະຖານທີ່ທີ່ພ້ອມໃຊ້. ກະລຸນາລອງໃໝ່ໃນອີກບໍ່ດົນ."
+  },
+  "noAvailableFavoriteLocations": {
+    "message": "ສະຖານທີ່ທີ່ທ່ານມັກບໍ່ພ້ອມໃຊ້ຊົ່ວຄາວ."
+  },
+  "error_location_favorites_limit": {
+    "message": "ຮອດຂີດຈຳກັດ 100 ລາຍການທີ່ມັກແລ້ວ. ລຶບລາຍການທີ່ມັກໜຶ່ງອອກເພື່ອເພີ່ມອັນໃໝ່."
+  },
+  "error_server_full": {
+    "message": "ເຊີບເວີນີ້ເຕັມແລ້ວ. ເລືອກສະຖານທີ່ອື່ນ."
+  },
+  "error_capacity_unavailable": {
+    "message": "ບໍ່ສາມາດຢືນຢັນຄວາມພ້ອມຂອງເຊີບເວີນີ້ໄດ້ໃນຕອນນີ້. ກະລຸນາລອງໃໝ່ໃນອີກບໍ່ດົນ."
+  },
+  "locationHierarchyHelp": {
+    "message": "ຊື່ໃຊ້ເລືອກເຊີບເວີ; ລູກສອນສະແດງລາຍລະອຽດ."
+  },
+  "locationCountrySelect": {
+    "message": "ເລືອກເຊີບເວີທີ່ພ້ອມໃຊ້: $1"
+  },
+  "locationCitySelect": {
+    "message": "ເລືອກເຊີບເວີທີ່ພ້ອມໃຊ້: $1"
+  },
+  "locationShowCities": {
+    "message": "ສະແດງເມືອງ: $1"
+  },
+  "locationHideCities": {
+    "message": "ເຊື່ອງເມືອງ: $1"
+  },
+  "locationShowServers": {
+    "message": "ສະແດງເຊີບເວີ: $1"
+  },
+  "locationHideServers": {
+    "message": "ເຊື່ອງເຊີບເວີ: $1"
+  },
+  "locationAvailableServers": {
+    "message": "ເຊີບເວີທີ່ພ້ອມໃຊ້: $1"
+  },
+  "legalInformation": {
+    "message": "ຂໍ້ມູນທາງກົດໝາຍ"
+  },
+  "privacyPolicy": {
+    "message": "ແຈ້ງການຄວາມເປັນສ່ວນຕົວຂອງສ່ວນຂະຫຍາຍ"
+  },
+  "termsAndConditions": {
+    "message": "ເງື່ອນໄຂການນຳໃຊ້ ແລະ ການຂາຍ"
+  },
+  "legalNotice": {
+    "message": "ແຈ້ງການທາງກົດໝາຍ"
+  },
+  "contactSupport": {
+    "message": "ຕິດຕໍ່ຝ່າຍຊ່ວຍເຫຼືອ"
+  },
+  "webSignIn": {
+    "message": "ເຂົ້າສູ່ລະບົບ FuzeVPN"
+  },
+  "webSignInDisconnect": {
+    "message": "ຕັດການເຊື່ອມຕໍ່ ແລະ ເຂົ້າສູ່ລະບົບ"
+  },
+  "webSignInPending": {
+    "message": "ກຳລັງເຂົ້າສູ່ລະບົບ…"
+  },
+  "webSignInHelp": {
+    "message": "ເຂົ້າສູ່ລະບົບ ຫຼື ສ້າງບັນຊີດ້ວຍ Google ຫຼື ອີເມວ ໃນພື້ນທີ່ລູກຄ້າ FuzeVPN."
+  },
+  "webSignInDisconnectHelp": {
+    "message": "ປຸ່ມນີ້ຈະຢຸດການປົກປ້ອງບຣາວເຊີ ເພື່ອໃຫ້ທ່ານເຂົ້າສູ່ລະບົບດ້ວຍ Google ຫຼື ອີເມວໄດ້. ການທ່ອງເວັບຂອງທ່ານຈະບໍ່ໄດ້ຮັບການປົກປ້ອງລະຫວ່າງການເຂົ້າສູ່ລະບົບ."
+  },
+  "webSignInStatus": {
+    "message": "ສືບຕໍ່ໃນໜ້າຕ່າງເຂົ້າສູ່ລະບົບ FuzeVPN. ສ່ວນຂະຫຍາຍຈະອັບເດດອັດຕະໂນມັດເມື່ອທ່ານເຮັດສຳເລັດ. ປິດໜ້າຕ່າງນັ້ນເພື່ອຍົກເລີກ."
+  },
+  "error_web_login_cancelled": {
+    "message": "ການເຂົ້າສູ່ລະບົບຖືກຍົກເລີກ. ລອງໃໝ່."
+  },
+  "error_web_login_timeout": {
+    "message": "ການເຂົ້າສູ່ລະບົບໃຊ້ເວລາດົນເກີນໄປ. ລອງໃໝ່."
+  },
+  "error_web_login_unavailable": {
+    "message": "ການເຂົ້າສູ່ລະບົບຜ່ານເວັບບໍ່ພ້ອມໃຊ້. ລອງໃໝ່ພາຍຫຼັງ."
+  },
+  "error_web_login_invalid_callback": {
+    "message": "ບໍ່ສາມາດຢືນຢັນການເຂົ້າສູ່ລະບົບໄດ້. ເລີ່ມໃໝ່ຈາກສ່ວນຂະຫຍາຍ."
+  },
+  "error_web_login_denied": {
+    "message": "ການເຂົ້າສູ່ລະບົບບໍ່ໄດ້ຮັບອະນຸຍາດ. ລອງໃໝ່."
+  },
+  "error_web_login_busy": {
+    "message": "ປິດໜ້າຕ່າງເຂົ້າສູ່ລະບົບທີ່ເປີດຢູ່ແລ້ວກ່ອນລອງໃໝ່."
+  },
+  "deviceKindFirefox": {
+    "message": "ບຣາວເຊີ Firefox"
+  },
+  "generalPrivacyPolicy": {
+    "message": "ນະໂຍບາຍຄວາມເປັນສ່ວນຕົວທົ່ວໄປ"
+  },
+  "privacyNoticeTitle": {
+    "message": "ຄວາມເປັນສ່ວນຕົວໃນສ່ວນຂະຫຍາຍ FuzeVPN"
+  },
+  "privacyNoticeIntro": {
+    "message": "ແຈ້ງການນີ້ອະທິບາຍຂໍ້ມູນທີ່ສ່ວນຂະຫຍາຍນີ້ໃຊ້. ມັນເປັນສ່ວນເສີມຂອງນະໂຍບາຍຄວາມເປັນສ່ວນຕົວທົ່ວໄປຂອງ FuzeVPN ທີ່ມີລິ້ງຢູ່ດ້ານລຸ່ມ. ການສົ່ງການວິນິດໄສທີ່ເປັນທາງເລືອກແມ່ນແຍກຕ່າງຫາກຈາກຂໍ້ມູນທີ່ຈຳເປັນເພື່ອເຂົ້າສູ່ລະບົບ ແລະ ໃຊ້ VPN."
+  },
+  "privacyNoticeUpdated": {
+    "message": "ແຈ້ງການອັບເດດເມື່ອວັນທີ 19 ຕຸລາ 2026"
+  },
+  "privacyNoticeServiceTitle": {
+    "message": "ບັນຊີ ແລະ ບໍລິການ VPN"
+  },
+  "privacyNoticeService": {
+    "message": "ສ່ວນຂະຫຍາຍແລກປ່ຽນຂໍ້ມູນການຢືນຢັນຕົວຕົນ, ບັນຊີ, ການສະໝັກໃຊ້, ອຸປະກອນ ແລະ ເຊດຊັນພຣັອກຊີກັບ api.fuzevpn.com. ພຣັອກຊີ VPN ນຳສົ່ງການຮັບສົ່ງຂໍ້ມູນທີ່ຖືກສົ່ງຜ່ານມັນ. ການເຊື່ອມຕໍ່ເຫຼົ່ານີ້ເປີດເຜີຍເມຕາເດຕາເຄືອຂ່າຍໃຫ້ແກ່ບໍລິການທີ່ຮັບ; ແຈ້ງການນີ້ບໍ່ໄດ້ໃຫ້ຄຳໝັ້ນສັນຍາແຍກຕ່າງຫາກກ່ຽວກັບການບັນທຶກຂອງເຊີບເວີ."
+  },
+  "privacyNoticeLocalTitle": {
+    "message": "ຂໍ້ມູນທີ່ຈັດເກັບໃນບຣາວເຊີຂອງທ່ານ"
+  },
+  "privacyNoticeLocal": {
+    "message": "ບ່ອນຈັດເກັບຂອງບຣາວເຊີເກັບເຊດຊັນ, ລາຍລະອຽດບັນຊີ, ການຕັ້ງຄ່າທີ່ທ່ານເລືອກ, ເວັບໄຊທີ່ຍົກເວັ້ນ ແລະ ຕົວຕົນອຸປະກອນຂອງທ່ານ. ບັນທຶກທາງເຕັກນິກຖືກເກັບໄວ້ໃນເຄື່ອງສູງສຸດ 10 ນາທີ ເຖິງແມ່ນວ່າການລາຍງານອັດຕະໂນມັດຈະປິດຢູ່. ຮ່າງການວິນິດໄສ ແລະ ລາຍງານທີ່ຢູ່ໃນຄິວຈະໝົດອາຍຸໃນເຄື່ອງຫຼັງຈາກ 24 ຊົ່ວໂມງ; ການລ້າງຂໍ້ມູນຈະເຮັດວຽກເມື່ອສ່ວນຂະຫຍາຍສາມາດເຮັດວຽກໄດ້."
+  },
+  "privacyNoticeIpTitle": {
+    "message": "ການກວດສອບ IP ສາທາລະນະ ແລະ ພາກສ່ວນທີສາມ"
+  },
+  "privacyNoticeIp": {
+    "message": "ການສະແດງ IP ແລະ ການວິນິດໄສເຄືອຂ່າຍຕິດຕໍ່ຫາ api.ipify.org. ການສະແດງ IP ອາດໃຊ້ ipv4.icanhazip.com ເປັນທາງສຳຮອງ. ຜູ້ໃຫ້ບໍລິການໄດ້ຮັບ IP ຂອງການເຊື່ອມຕໍ່ ແລະ ເມຕາເດຕາຄຳຂໍທົ່ວໄປ: IP ສາທາລະນະຂອງທ່ານໃນໂໝດໂດຍກົງ ຫຼື IP ທາງອອກຂອງ VPN ເມື່ອຜ່ານພຣັອກຊີ. ຄຳຂໍເຫຼົ່ານີ້ບໍ່ລວມຄຸກກີ້ ແລະ ຂໍ້ມູນຜູ້ອ້າງອີງ (referrer) ແລະ ບໍ່ສົ່ງໂທເຄັນບັນຊີ ຫຼື ປະຫວັດການທ່ອງເວັບ."
+  },
+  "privacyNoticeReportsTitle": {
+    "message": "ສິ່ງທີ່ລາຍງານການວິນິດໄສມີ"
+  },
+  "privacyNoticeReports": {
+    "message": "ລາຍງານອາດລວມມີຕົວລະບຸລາຍງານແບບສຸ່ມ, ເວລາບັນທຶກ, ເວີຊັນຂອງສ່ວນຂະຫຍາຍ ແລະ ບຣາວເຊີ, ຕະກູນ ແລະ ສະຖາປັດຕະຍະກຳຂອງລະບົບປະຕິບັດການ, ສະຖານະການເຊື່ອມຕໍ່ ແລະ ການປົກປ້ອງ, ລະຫັດຂໍ້ຜິດພາດ, ຈຳນວນນັບ, ໄລຍະເວລາ ແລະ ຜົນການກວດສອບ. ລາຍງານເຕັມອາດລວມມີເຫດການທາງເຕັກນິກຫຼ້າສຸດ. JSON ຂອງລາຍງານບໍ່ລວມລະຫັດຜ່ານ, ໂທເຄັນການຢືນຢັນຕົວຕົນ, ທີ່ຢູ່ອີເມວ, ທີ່ຢູ່ IP, URL ທີ່ເຂົ້າເບິ່ງ ແລະ ໂດເມນທີ່ຍົກເວັ້ນ. ທ່ານສາມາດກວດເບິ່ງ ແລະ ສົ່ງອອກລາຍງານເຕັມກ່ອນສົ່ງໄດ້."
+  },
+  "privacyNoticeAccountTitle": {
+    "message": "ຜູ້ຮັບ ແລະ ການເຊື່ອມໂຍງກັບບັນຊີ"
+  },
+  "privacyNoticeAccount": {
+    "message": "ລາຍງານຖືກສົ່ງໄປຫາ FuzeVPN ທີ່ api.fuzevpn.com/v1/diagnostics ຜ່ານການເຊື່ອມຕໍ່ທີ່ຢືນຢັນຕົວຕົນແລ້ວ. ການເຊື່ອມຕໍ່ API ນີ້ຂ້າມພຣັອກຊີ VPN: FuzeVPN ໄດ້ຮັບ IP ສາທາລະນະໂດຍກົງຂອງທ່ານ ເຖິງແມ່ນວ່າ VPN ເປີດຢູ່. ລາຍງານຖືກເຊື່ອມໂຍງກັບບັນຊີທີ່ເຂົ້າສູ່ລະບົບ ບໍ່ແມ່ນແບບບໍ່ລະບຸຕົວຕົນ. ສ່ວນຫົວການຢືນຢັນຕົວຕົນ ແລະ IP ແມ່ນແຍກຕ່າງຫາກຈາກ JSON ຂອງລາຍງານ. ການໄດ້ຮັບສຳເລັດຢືນຢັນວ່າບໍລິການນັ້ນໄດ້ຍອມຮັບ ບໍ່ແມ່ນວ່າພະນັກງານຊ່ວຍເຫຼືອໄດ້ອ່ານລາຍງານແລ້ວ."
+  },
+  "privacyNoticeChoiceTitle": {
+    "message": "ການສົ່ງທີ່ເປັນທາງເລືອກ ແລະ ການຖອນຄວາມຍິນຍອມ"
+  },
+  "privacyNoticeChoice": {
+    "message": "ການສົ່ງອັດຕະໂນມັດປິດໄວ້ຕາມຄ່າເລີ່ມຕົ້ນ. ການເປີດໃຊ້ຈະອະນຸຍາດລາຍງານຂໍ້ຜິດພາດແບບງ່າຍສຳລັບບັນຊີນັ້ນ. ການສົ່ງລາຍງານເຕັມດ້ວຍຕົນເອງຕ້ອງໝາຍຊ່ອງສົ່ງ. Firefox ຍັງຕ້ອງການການອະນຸຍາດຂໍ້ມູນທາງເຕັກນິກທີ່ເປັນທາງເລືອກຂອງມັນ. ປິດການສົ່ງອັດຕະໂນມັດເພື່ອຢຸດມັນ ແລະ ລຶບລາຍງານອັດຕະໂນມັດທີ່ລໍຖ້າຢູ່; ຍົກເລີກການສົ່ງທີ່ລໍຖ້າແຕ່ລະອັນແຍກຕ່າງຫາກ. ການປະຕິເສດການສົ່ງການວິນິດໄສບໍ່ໄດ້ກີດກັນການໃຊ້ VPN."
+  },
+  "privacyNoticeDeleteTitle": {
+    "message": "ການລຶບໃນເຄື່ອງ ແລະ ໄຟລ໌ທີ່ດາວໂຫຼດ"
+  },
+  "privacyNoticeDelete": {
+    "message": "ໃນການວິນິດໄສ, ລຶບປະຫວັດທາງເຕັກນິກ ຫຼື ລຶບລາຍງານໃນເຄື່ອງແຕ່ລະອັນ. ການລຶບປະຫວັດບໍ່ໄດ້ລຶບສຳເນົາລາຍງານທີ່ມີຢູ່. ການຍົກເລີກ ຫຼື ລຶບໃນເຄື່ອງບໍ່ສາມາດເອີ້ນຄືນຂໍ້ມູນທີ່ບໍລິການໄດ້ຮັບແລ້ວ ລວມທັງການອັບໂຫຼດທີ່ມາຮອດກ່ອນການຍົກເລີກ. ໄຟລ໌ສົ່ງອອກທີ່ດາວໂຫຼດແມ່ນໄຟລ໌ແຍກຕ່າງຫາກທີ່ທ່ານຕ້ອງລຶບເອງ."
+  },
+  "privacyNoticeServerTitle": {
+    "message": "ການເກັບຮັກສາໃນເຊີບເວີ ແລະ ຄຳຂໍ"
+  },
+  "privacyNoticeServer": {
+    "message": "ສ່ວນຂະຫຍາຍນີ້ບໍ່ໄດ້ຄວບຄຸມ ຫຼື ກວດສອບການເກັບຮັກສາ ຫຼື ການລຶບຢູ່ຝັ່ງເຊີບເວີ. ສຳລັບໄລຍະເວລາເກັບຮັກສາທີ່ FuzeVPN ນຳໃຊ້ ແລະ ຄຳຂໍກ່ຽວກັບລາຍງານທີ່ສົ່ງແລ້ວ, ເບິ່ງນະໂຍບາຍຄວາມເປັນສ່ວນຕົວທົ່ວໄປ ຫຼື ຕິດຕໍ່ FuzeVPN. ແຈ້ງການນີ້ບໍ່ຮັບປະກັນໄລຍະເວລາເກັບຮັກສາໃນເຊີບເວີທີ່ແນ່ນອນ."
+  },
+  "privacyNoticeSupportTitle": {
+    "message": "ການວິນິດໄສ ແລະ ການຊ່ວຍເຫຼືອແມ່ນແຍກກັນ"
+  },
+  "privacyNoticeSupport": {
+    "message": "ການສົ່ງລາຍງານການວິນິດໄສບໍ່ໄດ້ສົ່ງຂໍ້ຄວາມຂໍຄວາມຊ່ວຍເຫຼືອຈາກສ່ວນຂະຫຍາຍໃນຕົວມັນເອງ. ເພື່ອອະທິບາຍບັນຫາ ຫຼື ຂໍໃຫ້ລຶບລາຍງານທີ່ໄດ້ຮັບແລ້ວ, ໃຊ້ຊ່ອງທາງຕິດຕໍ່ FuzeVPN ດ້ານລຸ່ມ. ຖ້າທ່ານເລືອກແບ່ງປັນໄຟລ໌ທີ່ສົ່ງອອກຜ່ານຊ່ອງທາງອື່ນ, ໃຫ້ກວດເບິ່ງເນື້ອຫາຂອງມັນກ່ອນ."
+  },
+  "privacyNoticeManage": {
+    "message": "ເປີດການວິນິດໄສ"
+  },
+  "privacyNoticeLinksTitle": {
+    "message": "ນະໂຍບາຍບໍລິການ ແລະ ການຕິດຕໍ່"
+  },
+  "theme": {
+    "message": "ຮູບແບບສີ"
+  },
+  "themeSystem": {
+    "message": "ລະບົບ"
+  },
+  "themeLight": {
+    "message": "ແຈ້ງ"
+  },
+  "themeDark": {
+    "message": "ມືດ"
+  },
+  "switchToDarkTheme": {
+    "message": "ປ່ຽນເປັນຮູບແບບມືດ"
+  },
+  "switchToLightTheme": {
+    "message": "ປ່ຽນເປັນຮູບແບບແຈ້ງ"
+  }
+}

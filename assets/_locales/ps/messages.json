@@ -1,0 +1,929 @@
+{
+  "extensionName": {
+    "message": "FuzeVPN"
+  },
+  "extensionDescription": {
+    "message": "په یوه کلیک خپل محرمیت وساتئ او خپل امنیت پیاوړی کړئ."
+  },
+  "siteExclusionsReloadRequired": {
+    "message": "د تازه کولو د بشپړولو او د سایټونو د استثناوو د کارولو لپاره، FuzeVPN د براوزر د غځونو له مدیر څخه بیا پورته کړئ."
+  },
+  "extensionCommunicationError": {
+    "message": "غځونه ځواب نه ورکوي. دا کړکۍ وتړئ، بیا FuzeVPN د براوزر د غځونو له مدیر څخه بیا پورته کړئ."
+  },
+  "actionDisconnected": {
+    "message": "FuzeVPN — پرې شوی"
+  },
+  "actionConnected": {
+    "message": "FuzeVPN — په دې براوزر کې خوندي"
+  },
+  "actionReconnecting": {
+    "message": "FuzeVPN — بیا نښلېږي"
+  },
+  "actionError": {
+    "message": "FuzeVPN — پاملرنې ته اړتیا ده"
+  },
+  "browserProtection": {
+    "message": "د براوزر ساتنه"
+  },
+  "loginTitle": {
+    "message": "FuzeVPN ته ښه راغلاست"
+  },
+  "loginSubtitle": {
+    "message": "په دې براوزر کې د خپلې ګرځېدنې د ساتلو لپاره ننوځئ."
+  },
+  "email": {
+    "message": "برېښنالیک پته"
+  },
+  "emailPlaceholder": {
+    "message": "you@example.com"
+  },
+  "password": {
+    "message": "پټنوم"
+  },
+  "signIn": {
+    "message": "ننوتل"
+  },
+  "signingIn": {
+    "message": "ننوتل روان دي…"
+  },
+  "forgotPassword": {
+    "message": "پټنوم مو هېر شوی؟"
+  },
+  "createAccount": {
+    "message": "حساب جوړ کړئ"
+  },
+  "settings": {
+    "message": "امستنې"
+  },
+  "close": {
+    "message": "تړل"
+  },
+  "statusDisconnected": {
+    "message": "پرې شوی"
+  },
+  "statusConnecting": {
+    "message": "نښلېږي…"
+  },
+  "statusChanging": {
+    "message": "ځای بدلېږي…"
+  },
+  "statusProtected": {
+    "message": "په دې براوزر کې خوندي"
+  },
+  "statusRefreshing": {
+    "message": "په خوندي ډول نوي کېږي…"
+  },
+  "statusDisconnecting": {
+    "message": "پرې کېږي…"
+  },
+  "statusError": {
+    "message": "ساتنه ودرېده"
+  },
+  "browserOnlyDetail": {
+    "message": "د دې براوزر لپاره ساتنه."
+  },
+  "location": {
+    "message": "ځای"
+  },
+  "change": {
+    "message": "بدلول"
+  },
+  "noLocation": {
+    "message": "هېڅ ځای شتون نه لري"
+  },
+  "protectBrowser": {
+    "message": "براوزر خوندي کړئ"
+  },
+  "disconnect": {
+    "message": "پرې کول"
+  },
+  "subscription": {
+    "message": "ګډون"
+  },
+  "refreshSubscription": {
+    "message": "ګډون تازه کړئ"
+  },
+  "refreshingSubscription": {
+    "message": "ګډون تازه کېږي…"
+  },
+  "subscriptionActive": {
+    "message": "فعال"
+  },
+  "subscriptionInactive": {
+    "message": "غیرفعال"
+  },
+  "expiresOn": {
+    "message": "د پای نېټه: $1"
+  },
+  "noExpiry": {
+    "message": "د پای نېټه نشته"
+  },
+  "browserOnlyNotice": {
+    "message": "یوازې دا براوزر. نور اپلیکېشنونه او براوزرونه نه پوښل کېږي."
+  },
+  "resendVerification": {
+    "message": "برېښنالیک بیا ولېږئ"
+  },
+  "incognitoHelp": {
+    "message": "خصوصي ګرځېدنه همدا ساتنه یوازې هغه وخت کاروي چې د براوزر په امستنو کې غځونې ته په خصوصي حالت کې د چلېدو اجازه ورکړل شوې وي."
+  },
+  "manageAccount": {
+    "message": "زما حساب اداره کړئ"
+  },
+  "account": {
+    "message": "حساب"
+  },
+  "devices": {
+    "message": "وسیلې"
+  },
+  "manageDevices": {
+    "message": "وسیلې اداره کړئ"
+  },
+  "refreshDevices": {
+    "message": "وسیلې تازه کړئ"
+  },
+  "deviceCount": {
+    "message": "وسیلې: $1 / $2"
+  },
+  "loadingDevices": {
+    "message": "وسیلې پورته کېږي…"
+  },
+  "noDevices": {
+    "message": "هېڅ فعاله وسیله نشته."
+  },
+  "currentDevice": {
+    "message": "دا وسیله"
+  },
+  "deviceKindBrowser": {
+    "message": "د براوزر غځونه"
+  },
+  "deviceKindVpn": {
+    "message": "VPN وسیله"
+  },
+  "profile_browser_proxy": {
+    "message": "د براوزر پراکسي"
+  },
+  "profile_wireguard": {
+    "message": "WireGuard"
+  },
+  "profile_openvpn": {
+    "message": "OpenVPN"
+  },
+  "none": {
+    "message": "هېڅ"
+  },
+  "deviceCreatedOn": {
+    "message": "د جوړېدو نېټه: $1"
+  },
+  "deleteDevice": {
+    "message": "وسیله ړنګه کړئ"
+  },
+  "deleteDeviceNamed": {
+    "message": "وسیله ړنګه کړئ: $1"
+  },
+  "confirmDeleteDevice": {
+    "message": "«$1» لرې شي؟ د هغې VPN اتصالونه به ودرېږي او پروفایلونه به یې لرې شي."
+  },
+  "resetDevice": {
+    "message": "وسیله بیا تنظیم کړئ"
+  },
+  "confirmResetDevice": {
+    "message": "دا غځونه بیا تنظیم شي؟ بل ځل چې یې وکاروئ، د یوې نوې وسیلې په توګه به ثبت شي."
+  },
+  "signOutAccount": {
+    "message": "له حساب څخه وتل"
+  },
+  "chooseLocation": {
+    "message": "یو ځای وټاکئ"
+  },
+  "error_invalid_credentials": {
+    "message": "برېښنالیک پته یا پټنوم ناسم دی."
+  },
+  "error_unauthorized": {
+    "message": "ستاسو ناسته پای ته رسېدلې ده. مهرباني وکړئ بیا ننوځئ."
+  },
+  "error_email_verification_required": {
+    "message": "د ساتنې له فعالولو مخکې خپله برېښنالیک پته تایید کړئ."
+  },
+  "errorVerificationCooldown": {
+    "message": "نوی برېښنالیک له $1 ثانیو وروسته غوښتل کېدای شي."
+  },
+  "error_verification_email_cooldown": {
+    "message": "مهرباني وکړئ د بل برېښنالیک له غوښتلو مخکې انتظار وکړئ."
+  },
+  "error_subscription_required": {
+    "message": "د دې براوزر د ساتنې لپاره فعال ګډون ته اړتیا ده."
+  },
+  "error_device_limit": {
+    "message": "د وسیلو حد ډک شوی. مهرباني وکړئ یوه وسیله لرې کړئ."
+  },
+  "error_device_identity_revoked": {
+    "message": "دا وسیله نور اجازه نه لري. بیا د نښلولو هڅه وکړئ."
+  },
+  "error_device_proof_invalid": {
+    "message": "موږ ونه شو کولای دا وسیله تایید کړو. د خپل کمپیوټر نېټه او وخت وګورئ، بیا هڅه وکړئ."
+  },
+  "error_device_proof_replayed": {
+    "message": "دا غوښتنه مخکې پروسس شوې ده. بیا هڅه وکړئ."
+  },
+  "error_invalid_device": {
+    "message": "دا وسیله ونه پېژندل شوه. بیا د نښلولو هڅه وکړئ."
+  },
+  "error_device_exists": {
+    "message": "د دې وسیلې پېژندنه دمخه له بل حساب سره تړل شوې ده."
+  },
+  "error_not_found": {
+    "message": "دا عملیه نور شتون نه لري. بیا هڅه وکړئ."
+  },
+  "error_invalid_location": {
+    "message": "دا ځای شتون نه لري. بل ځای وټاکئ."
+  },
+  "error_rate_limited": {
+    "message": "ډېرې هڅې شوې. یوه شېبه انتظار وکړئ او بیا هڅه وکړئ."
+  },
+  "error_proxy_unavailable": {
+    "message": "دا سرور په لنډمهاله توګه شتون نه لري. یوه شېبه وروسته بیا هڅه وکړئ."
+  },
+  "error_api_token_expired": {
+    "message": "د حساب ناسته مو پای ته رسېدلې ده. مهرباني وکړئ بیا ننوځئ."
+  },
+  "error_network_error": {
+    "message": "شبکه شتون نه لري. خپل انټرنېټ اتصال وګورئ."
+  },
+  "error_request_timeout": {
+    "message": "خدمت د ځواب لپاره ډېر وخت ونیو. بیا هڅه وکړئ."
+  },
+  "error_invalid_response": {
+    "message": "خدمت یو ناڅاپي ځواب راستون کړ."
+  },
+  "error_proxy_certificate_invalid": {
+    "message": "موږ ونه شو کولای د سرور امنیت تایید کړو. اتصال ودرول شو."
+  },
+  "error_proxy_controlled_by_extension": {
+    "message": "اوس مهال بله غځونه د براوزر پراکسي کنټرولوي."
+  },
+  "error_proxy_controlled_by_policy": {
+    "message": "د مدیر یوه پالیسي FuzeVPN د پراکسي له بدلولو منع کوي."
+  },
+  "error_proxy_authentication_failed": {
+    "message": "سرور اتصال ونه مانه. بیا د نښلولو هڅه وکړئ."
+  },
+  "error_session_expired": {
+    "message": "ستاسو خوندي اتصال پای ته رسېدلی دی. بیا ونښلئ."
+  },
+  "error_email_delivery_unavailable": {
+    "message": "برېښنالیک اوس نه شي لېږل کېدای."
+  },
+  "error_unknown_error": {
+    "message": "یوه ناڅاپي تېروتنه رامنځته شوه. بیا هڅه وکړئ."
+  },
+  "actionBlocked": {
+    "message": "FuzeVPN — ګرځېدنه بنده شوې"
+  },
+  "statusBlockedRetry": {
+    "message": "ګرځېدنه ځنډول شوې — بیا نښلېږي"
+  },
+  "statusBlockedAction": {
+    "message": "ګرځېدنه ځنډول شوې — اتصال وګورئ"
+  },
+  "statusProtectionUnavailable": {
+    "message": "ساتنه شتون نه لري — ګرځېدنه نه ده بنده شوې"
+  },
+  "recoveryHelp": {
+    "message": "د ساتنې د بیا پیلولو لپاره بیا هڅه وکړئ. پرې کول تاسو ته اجازه درکوي چې پرته له FuzeVPN ګرځېدنه وکړئ."
+  },
+  "retryConnection": {
+    "message": "بیا هڅه"
+  },
+  "killSwitch": {
+    "message": "بېړنی بندوونکی"
+  },
+  "killSwitchHelp": {
+    "message": "که د VPN اتصال پرې شي، نوې وېب غوښتنې بندوي. استثنا شوي سایټونه د VPN بهر د لاسرسي وړ پاتې کېږي."
+  },
+  "webRtcProtection": {
+    "message": "د WebRTC ساتنه"
+  },
+  "webRtcHelp": {
+    "message": "د وېب زنګونو پر مهال ستاسو IP پته پټه ساتلو کې مرسته کوي. ځینې زنګونه ښايي کار ونه کړي. د دې بندول ښايي ستاسو اصلي IP پته څرګنده کړي."
+  },
+  "securityEffectiveState": {
+    "message": "$1 · $2"
+  },
+  "securityBlocked": {
+    "message": "ګرځېدنه بنده ده"
+  },
+  "securityNotBlocked": {
+    "message": "ګرځېدنه بنده نه ده"
+  },
+  "securityWebRtcActive": {
+    "message": "د WebRTC محدودیت فعال دی"
+  },
+  "securityWebRtcInactive": {
+    "message": "د WebRTC محدودیت غیرفعال دی"
+  },
+  "localNetworkHelp": {
+    "message": "د ساتنې پر مهال محلي IP پتې او عام محلي نومونه بندېږي. یو استثنا شوی ډومېن ښايي بیا هم محلي شبکې ته لاسرسی ورکړي. د سیستم IPv6 امستنې نه بدلېږي."
+  },
+  "securityLimits": {
+    "message": "د دې ساتنې په اړه"
+  },
+  "killSwitchLimits": {
+    "message": "یوازې دا براوزر: موجود اتصالونه او د براوزر ځینې داخلي اړیکې یا د نورو غځونو اړیکې ښايي دوام وکړي. بله غځونه یا پالیسي ښايي مخکې له دې چې FuzeVPN غبرګون وښيي پراکسي بدله کړي. د غځونې غیرفعالول ساتنه لرې کوي. د ټول سیستم په کچه بندیز نشته."
+  },
+  "error_traffic_guard_failed": {
+    "message": "د ګرځېدنې بندیز تایید نه شو. ساتنه تضمین نه ده. د غځونې اجازې وګورئ."
+  },
+  "error_webrtc_control_unavailable": {
+    "message": "د WebRTC محدودیت پلي نه شو. خپلې امستنې، نورې غځونې یا د مدیر پالیسي وګورئ."
+  },
+  "language": {
+    "message": "ژبه"
+  },
+  "languageAutomatic": {
+    "message": "اتوماتیک — د براوزر ژبه"
+  },
+  "languageHelp": {
+    "message": "بدلونونه سمدستي پلي کېږي. اتوماتیک حالت د براوزر ژبه تعقیبوي، چې ښايي د سیستم له ژبې توپیر ولري."
+  },
+  "languageSaveError": {
+    "message": "ژبه خوندي نه شوه. ستاسو پخوانی انتخاب ساتل شوی. بیا هڅه وکړئ."
+  },
+  "publicIp": {
+    "message": "عامه IP"
+  },
+  "vpnIp": {
+    "message": "د VPN IP"
+  },
+  "ipChecking": {
+    "message": "کتل کېږي…"
+  },
+  "ipUnavailable": {
+    "message": "شتون نه لري"
+  },
+  "ipLookupExplanation": {
+    "message": "IP ستاسو د اوسني اتصال له لارې د ipify، یا د بدیل په توګه د icanhazip په مرسته کتل کېږي. د ګرځېدنې تاریخچه نه لېږل کېږي."
+  },
+  "automaticLocation": {
+    "message": "اتوماتیک"
+  },
+  "automaticLocationHelp": {
+    "message": "وروستی غوره ځواب وخت، یا ستاسو وروستی ځای."
+  },
+  "automaticLocationName": {
+    "message": "اتوماتیک · $1"
+  },
+  "searchLocations": {
+    "message": "هېواد یا ښار ولټوئ"
+  },
+  "locationFilters": {
+    "message": "ځایونه فلټر کړئ"
+  },
+  "allLocations": {
+    "message": "ټول"
+  },
+  "favoriteLocations": {
+    "message": "خوښې"
+  },
+  "recentLocations": {
+    "message": "وروستي"
+  },
+  "noMatchingLocations": {
+    "message": "ستاسو له لټون سره هېڅ ځای سمون نه خوري."
+  },
+  "noFavoriteLocations": {
+    "message": "خپل خوښ ځایونه دلته د ساتلو لپاره ستوری ورکړئ."
+  },
+  "noRecentLocations": {
+    "message": "هغه ځایونه چې وروستیو کې ورسره نښلېدلي یاست دلته به ښکاره شي."
+  },
+  "addFavorite": {
+    "message": "خوښو ته اضافه کړئ: $1"
+  },
+  "removeFavorite": {
+    "message": "له خوښو لرې کړئ: $1"
+  },
+  "unavailableFavoriteLocation": {
+    "message": "خوښ ځای شتون نه لري: $1"
+  },
+  "locationSaveError": {
+    "message": "بدلون بشپړ نه شو. ښايي ځینې امستنې خوندي شوې وي. له بیا هڅې مخکې ښودل شوی انتخاب وګورئ."
+  },
+  "siteExclusions": {
+    "message": "استثنا شوي سایټونه"
+  },
+  "siteExclusionsHelp": {
+    "message": "دا سایټونه ستاسو اتصال پرته له FuzeVPN کاروي، حتی که VPN پرې شي."
+  },
+  "siteExclusionsEnabled": {
+    "message": "استثناوې فعالې کړئ"
+  },
+  "siteExclusionInput": {
+    "message": "ډومېن یا URL"
+  },
+  "siteExclusionPlaceholder": {
+    "message": "example.com"
+  },
+  "siteExclusionPreview": {
+    "message": "ټاکل شوی ډومېن: $1"
+  },
+  "siteExclusionSubdomains": {
+    "message": "فرعي ډومېنونه شامل کړئ"
+  },
+  "siteExclusionAdd": {
+    "message": "سایټ اضافه کړئ"
+  },
+  "siteExclusionsEmpty": {
+    "message": "هېڅ استثنا شوی سایټ نشته. یوازې هغه سایټونه اضافه کړئ چې غواړئ پرته له VPN یې وکاروئ."
+  },
+  "siteExclusionsCount": {
+    "message": "سایټونه: $1 / 100"
+  },
+  "siteExclusionScopeSubdomains": {
+    "message": "ډومېن او فرعي ډومېنونه"
+  },
+  "siteExclusionScopeExact": {
+    "message": "یوازې دقیق ډومېن"
+  },
+  "siteExclusionRemove": {
+    "message": "لرې کړئ: $1"
+  },
+  "siteExclusionsDetails": {
+    "message": "استثناوې څنګه کار کوي؟"
+  },
+  "siteExclusionsResources": {
+    "message": "د نورو ډومېنونو سرچینې خوندي پاتې کېږي. د یوې پاڼې استثنا کول په اتوماتیک ډول د هغې نوره منځپانګه نه استثنا کوي."
+  },
+  "siteExclusionsReload": {
+    "message": "له بدلون وروسته سایټ بیا پورته کړئ. موجود اتصالونه ښايي خپله پخوانۍ لار وساتي."
+  },
+  "siteExclusionsWebRtc": {
+    "message": "د WebRTC ساتنه یوه عمومي امستنه پاتې کېږي، د استثنا شویو سایټونو لپاره هم."
+  },
+  "siteExclusionsLocal": {
+    "message": "یوازې په دې براوزر کې خوندي کېږي او له حساب څخه د وتلو وروسته هم ساتل کېږي."
+  },
+  "siteExclusionsOn": {
+    "message": "استثناوې فعالې دي"
+  },
+  "siteExclusionsOff": {
+    "message": "استثناوې غیرفعالې دي"
+  },
+  "siteExclusionsSummary": {
+    "message": "د VPN بهر سایټونه: $1"
+  },
+  "siteExclusionsPending": {
+    "message": "استثناوې پلي کېږي…"
+  },
+  "siteExclusionsInterrupted": {
+    "message": "بدلون ودرول شو. لنډمهاله ساتنه لا هم پر ځای ده."
+  },
+  "siteExclusionsSaveError": {
+    "message": "بدلون بشپړ نه شو. خپلې امستنې وګورئ او بیا هڅه وکړئ."
+  },
+  "siteExclusionsRetry": {
+    "message": "بیا هڅه"
+  },
+  "siteExclusionInvalid": {
+    "message": "یو سم عامه ډومېن ولیکئ. IP پتې، محلي نومونه، وائلډکارډونه، عامه وروستاړي او ځانګړي شوي ډومېنونه نه منل کېږي."
+  },
+  "siteExclusionDuplicate": {
+    "message": "دا ډومېن دمخه په لېست کې دی."
+  },
+  "siteExclusionsLimit": {
+    "message": "د 100 سایټونو حد ډک شوی. د بل اضافه کولو لپاره یو سایټ لرې کړئ."
+  },
+  "statusProtectedExceptions": {
+    "message": "VPN فعال · استثناوې: $1"
+  },
+  "statusBlockedExceptions": {
+    "message": "یوازې استثنا شوي سایټونه د لاسرسي وړ دي"
+  },
+  "securityBlockedExceptions": {
+    "message": "له استثنا شویو سایټونو پرته ګرځېدنه بنده ده"
+  },
+  "securityBlockUnverified": {
+    "message": "بندیز نه دی تایید شوی"
+  },
+  "logoutLocalComplete": {
+    "message": "په دې وسیله کې وتل بشپړ شول."
+  },
+  "logoutApiSession": {
+    "message": "د حساب اوسنۍ ناسته"
+  },
+  "logoutProxySessions": {
+    "message": "پېژندل شوې VPN ناستې"
+  },
+  "logoutRevocationPending": {
+    "message": "لغوه کول روان دي…"
+  },
+  "logoutRevocationConfirmed": {
+    "message": "لغوه کول تایید شول"
+  },
+  "logoutRevocationUnconfirmed": {
+    "message": "لغوه کول تایید نه شول"
+  },
+  "logoutUnconfirmedHelp": {
+    "message": "ځینې لرې ناستې ښايي د پای ته رسېدو تر وخته فعالې پاتې شي."
+  },
+  "deviceQuotaLoading": {
+    "message": "د وسیلو حد پورته کېږي…"
+  },
+  "deviceQuotaUnknown": {
+    "message": "د وسیلو حد شتون نه لري"
+  },
+  "error_proxy_creation_uncertain": {
+    "message": "سرور د نوي اتصال جوړېدل تایید نه کړل. اتوماتیک بیا نښلول ځنډول شوي دي."
+  },
+  "siteExclusionsPreferencesReset": {
+    "message": "ستاسو خوندي شوې د سایټونو استثناوې بیا تنظیم شوې ځکه چې لوستل یې ونه شول. هغه سایټونه چې غواړئ استثنا یې کړئ بیا اضافه کړئ."
+  },
+  "siteExclusionsConflict": {
+    "message": "د استثنا شویو سایټونو لېست بدل شوی دی. هغه وګورئ، بیا خپل بدلون یو ځل بیا وازمویئ."
+  },
+  "unavailableLocation": {
+    "message": "ځای شتون نه لري"
+  },
+  "verificationSending": {
+    "message": "د تایید برېښنالیک لېږل کېږي…"
+  },
+  "verificationSent": {
+    "message": "د تایید برېښنالیک ولېږل شو. خپل راغلي لیکونه او د سپام فولډر وګورئ."
+  },
+  "error_login_requires_disconnect": {
+    "message": "بل حساب ته د ننوتلو مخکې اوسنی VPN اتصال پرې کړئ."
+  },
+  "error_storage_unavailable": {
+    "message": "د حساب محلي امستنې شتون نه لري. کله چې د براوزر زېرمه شتون ولري بیا هڅه وکړئ؛ ستاسو خوندي شوی حساب ساتل شوی دی."
+  },
+  "diagnosticsAssistance": {
+    "message": "ملاتړ"
+  },
+  "diagnosticsTitle": {
+    "message": "تشخیص"
+  },
+  "diagnosticsIntro": {
+    "message": "پرته له دې چې ساتنه مو بدله کړئ، FuzeVPN او اوسنی اتصال وګورئ."
+  },
+  "diagnosticsPrivacyTitle": {
+    "message": "ستاسو معلومات"
+  },
+  "diagnosticsPrivacy": {
+    "message": "د راپور JSON تخنیکي حالتونه او د تېروتنې کوډونه لري، پرته له پټنومونو، ټوکنونو، برېښنالیک پتو، IP پتو، لیدل شویو URL پتو یا استثنا شویو ډومېنونو. لېږل د تصدیق سره ترسره کېږي او راپور ستاسو له حساب سره تړي. د شبکې د معلوماتو لپاره خبرتیا وګورئ."
+  },
+  "diagnosticsAuto": {
+    "message": "د مهمو تېروتنو راپورونه په اتوماتیک ډول ولېږئ"
+  },
+  "diagnosticsAutoHelp": {
+    "message": "په ډیفالټ ډول بند. د دې فعالول د دې حساب لپاره ساده تخنیکي راپورونه لېږي، پرته له ګرځېدنې تاریخچې. د اتوماتیک لېږلو د درولو او د پاتې اتوماتیک راپورونو د لرې کولو لپاره دا دلته بند کړئ."
+  },
+  "diagnosticsHistoryHelp": {
+    "message": "تخنیکي تاریخچه محلي پاتې کېږي: په هر ژورنال کې د 10 دقیقو په اوږدو کې تر 200 پېښو پورې، حتی کله چې اتوماتیک لېږل بند وي. دا د ګرځېدنې تاریخچه نه لري او په لاسي ډول، د براوزر د تړلو پر مهال یا د حساب د بدلېدو پر مهال پاکېږي."
+  },
+  "diagnosticsHistoryCount": {
+    "message": "محلي تخنیکي پېښې: $1"
+  },
+  "diagnosticsConnectionLog": {
+    "message": "د اتصال لاګ صادر کړئ"
+  },
+  "diagnosticsAccountRequired": {
+    "message": "د لېږلو د فعالولو لپاره ننوځئ. تاسو کولای شئ پرته له حساب هم راپور وګورئ او صادر یې کړئ."
+  },
+  "diagnosticsRun": {
+    "message": "تشخیص پیل کړئ"
+  },
+  "diagnosticsClearHistory": {
+    "message": "محلي تاریخچه پاکه کړئ"
+  },
+  "diagnosticsPreparing": {
+    "message": "راپور چمتو کېږي…"
+  },
+  "diagnosticsReports": {
+    "message": "راپورونه"
+  },
+  "diagnosticsEmpty": {
+    "message": "تر اوسه هېڅ محلي راپور نشته."
+  },
+  "diagnosticsChooseReport": {
+    "message": "یو راپور وټاکئ"
+  },
+  "diagnosticsReportLabel": {
+    "message": "$1 · $2 · $3"
+  },
+  "diagnosticsTypeFull": {
+    "message": "بشپړ راپور"
+  },
+  "diagnosticsTypeSimple": {
+    "message": "د تېروتنې راپور"
+  },
+  "diagnosticsSummary": {
+    "message": "د راټولولو نېټه: $1. د FuzeVPN نسخه: $2."
+  },
+  "diagnosticsJson": {
+    "message": "د راپور منځپانګه وګورئ (JSON)"
+  },
+  "diagnosticsExport": {
+    "message": "راپور صادر کړئ"
+  },
+  "diagnosticsDelete": {
+    "message": "محلي راپور ړنګ کړئ"
+  },
+  "diagnosticsRetention": {
+    "message": "محلي راپورونه له 24 ساعتونو وروسته پای ته رسېږي. دلته ړنګول هغه راپور نه ړنګوي چې خدمت دمخه ترلاسه کړی وي. د سرور د زېرمه کولو مودې او د ړنګولو غوښتنو لپاره خبرتیا وګورئ."
+  },
+  "diagnosticsConsent": {
+    "message": "دا تشخیصي راپور FuzeVPN ته ولېږئ"
+  },
+  "diagnosticsDataCollectionRequired": {
+    "message": "د تشخیص د لېږلو لپاره Firefox باید د تخنیکي معلوماتو راټولولو اجازه ورکړي. بیا هڅه وکړئ او دا اجازه ورکړئ."
+  },
+  "diagnosticsSendHelp": {
+    "message": "لېږل اختیاري دي. له تایید وروسته، ښايي د همدې حساب لپاره د یوې باوري ناستې سره تر 24 ساعتونو پورې بیا هڅه وکړي. تاسو کولای شئ نورې هڅې لغوه کړئ. ناوخته لغوه کول دا تضمین نه کوي چې سرور دمخه راپور نه دی ترلاسه کړی."
+  },
+  "diagnosticsSend": {
+    "message": "راپور ولېږئ"
+  },
+  "diagnosticsCancel": {
+    "message": "لېږل لغوه کړئ"
+  },
+  "diagnosticsReload": {
+    "message": "دا پاڼه بیا پورته کړئ"
+  },
+  "diagnosticsUnavailable": {
+    "message": "تشخیص شتون نه لري. FuzeVPN د براوزر د غځونو له مدیر څخه بیا پورته کړئ، بیا دا پاڼه بیا پرانیزئ. ستاسو VPN نه دی بدل شوی."
+  },
+  "diagnosticsQueueFull": {
+    "message": "د لېږلو کتار ډک دی. یو محلي راپور ړنګ کړئ یا انتظار وکړئ چې یو پاتې راپور بشپړ شي."
+  },
+  "diagnosticsContentUnavailable": {
+    "message": "د راپور منځپانګه شتون نه لري. که محلي راپور شتون ولري صادر یې کړئ او له ملاتړ سره اړیکه ونیسئ."
+  },
+  "diagnosticsFailure": {
+    "message": "تشخیصي کړنه بشپړه نه شوه. ستاسو VPN نه دی بدل شوی."
+  },
+  "diagnosticsChecks": {
+    "message": "ازموینې"
+  },
+  "diagnosticsCheckFallback": {
+    "message": "تخنیکي ازموینه: $1"
+  },
+  "diagnosticsCheckLine": {
+    "message": "$1 — $2"
+  },
+  "diagnosticsProxy": {
+    "message": "د براوزر پراکسي"
+  },
+  "diagnosticsStorage": {
+    "message": "محلي زېرمه"
+  },
+  "diagnosticsNetwork": {
+    "message": "د شبکې اتصال"
+  },
+  "diagnosticsCleanup": {
+    "message": "د ناستې پاکول"
+  },
+  "diagnosticsResult_passed": {
+    "message": "بریالی"
+  },
+  "diagnosticsResult_failed": {
+    "message": "ناکام"
+  },
+  "diagnosticsResult_skipped": {
+    "message": "نه دی ترسره شوی"
+  },
+  "diagnosticsResult_unknown": {
+    "message": "نامعلوم"
+  },
+  "diagnosticsStatus_ready": {
+    "message": "په دې وسیله کې چمتو"
+  },
+  "diagnosticsStatus_pending": {
+    "message": "د لېږلو په تمه"
+  },
+  "diagnosticsStatus_sending": {
+    "message": "لېږل کېږي…"
+  },
+  "diagnosticsStatus_session_required": {
+    "message": "د همدې حساب لپاره د باوري ناستې په تمه"
+  },
+  "diagnosticsStatus_received": {
+    "message": "خدمت ترلاسه کړ"
+  },
+  "diagnosticsStatus_failed": {
+    "message": "لېږل ناکام شول"
+  },
+  "diagnosticsStatus_cancelled": {
+    "message": "لېږل لغوه شول"
+  },
+  "diagnosticsStatus_expired": {
+    "message": "د لېږلو موده پای ته ورسېده"
+  },
+  "diagnosticsReceivedAt": {
+    "message": "د ترلاسه کېدو نېټه: $1"
+  },
+  "error_private_browsing_required": {
+    "message": "Firefox د VPN د تنظیمولو لپاره حتی په عادي کړکیو کې هم دې اجازې ته اړتیا لري. about:addons → FuzeVPN پرانیزئ، په خصوصي کړکیو کې د چلېدو اجازه ورکړئ، بیا هڅه وکړئ."
+  },
+  "error_host_permissions_required": {
+    "message": "په Firefox کې about:addons → FuzeVPN → اجازې پرانیزئ او ټولو وېبسایټونو ته د لاسرسي اجازه ورکړئ، بیا هڅه وکړئ."
+  },
+  "cancelAction": {
+    "message": "لغوه کول"
+  },
+  "refreshLocations": {
+    "message": "ځایونه تازه کړئ"
+  },
+  "refreshingLocations": {
+    "message": "ځایونه تازه کېږي…"
+  },
+  "locationsRefreshError": {
+    "message": "د ځایونو لېست تازه نه شو. مهرباني وکړئ بیا هڅه وکړئ."
+  },
+  "error_device_revoked_limit": {
+    "message": "د دې وسیلې اجازه لغوه شوې ده. د وسیلو حد ډک شوی: مهرباني وکړئ یوه وسیله لرې کړئ."
+  },
+  "noAvailableLocations": {
+    "message": "اوس مهال هېڅ ځای شتون نه لري. مهرباني وکړئ لږ وروسته بیا هڅه وکړئ."
+  },
+  "noAvailableFavoriteLocations": {
+    "message": "ستاسو خوښ ځایونه په لنډمهاله توګه شتون نه لري."
+  },
+  "error_location_favorites_limit": {
+    "message": "د 100 خوښو حد ډک شوی. د بل اضافه کولو لپاره یو خوښ ځای لرې کړئ."
+  },
+  "error_server_full": {
+    "message": "دا سرور ډک دی. بل ځای وټاکئ."
+  },
+  "error_capacity_unavailable": {
+    "message": "د دې سرور شتون اوس نه شي تایید کېدای. مهرباني وکړئ لږ وروسته بیا هڅه وکړئ."
+  },
+  "locationHierarchyHelp": {
+    "message": "نوم سرور ټاکي؛ غشی جزئیات ښيي."
+  },
+  "locationCountrySelect": {
+    "message": "یو شته سرور وټاکئ: $1"
+  },
+  "locationCitySelect": {
+    "message": "یو شته سرور وټاکئ: $1"
+  },
+  "locationShowCities": {
+    "message": "ښارونه وښایئ: $1"
+  },
+  "locationHideCities": {
+    "message": "ښارونه پټ کړئ: $1"
+  },
+  "locationShowServers": {
+    "message": "سرورونه وښایئ: $1"
+  },
+  "locationHideServers": {
+    "message": "سرورونه پټ کړئ: $1"
+  },
+  "locationAvailableServers": {
+    "message": "شته سرورونه: $1"
+  },
+  "legalInformation": {
+    "message": "حقوقي معلومات"
+  },
+  "privacyPolicy": {
+    "message": "د غځونې د محرمیت خبرتیا"
+  },
+  "termsAndConditions": {
+    "message": "د کارونې او پلور شرطونه"
+  },
+  "legalNotice": {
+    "message": "حقوقي خبرتیا"
+  },
+  "contactSupport": {
+    "message": "له ملاتړ سره اړیکه"
+  },
+  "webSignIn": {
+    "message": "FuzeVPN ته ننوتل"
+  },
+  "webSignInDisconnect": {
+    "message": "پرې کړئ او ننوځئ"
+  },
+  "webSignInPending": {
+    "message": "ننوتل روان دي…"
+  },
+  "webSignInHelp": {
+    "message": "د FuzeVPN د پېرودونکو په برخه کې د Google یا برېښنالیک له لارې ننوځئ یا حساب جوړ کړئ."
+  },
+  "webSignInDisconnectHelp": {
+    "message": "دا تڼۍ د براوزر ساتنه دروي ترڅو تاسو د Google یا برېښنالیک له لارې ننوځئ. د ننوتلو پر مهال به ستاسو ګرځېدنه خوندي نه وي."
+  },
+  "webSignInStatus": {
+    "message": "د FuzeVPN د ننوتلو په کړکۍ کې دوام ورکړئ. کله چې پای ته ورسوئ، غځونه په اتوماتیک ډول تازه کېږي. د لغوه کولو لپاره هغه کړکۍ وتړئ."
+  },
+  "error_web_login_cancelled": {
+    "message": "ننوتل لغوه شول. بیا هڅه وکړئ."
+  },
+  "error_web_login_timeout": {
+    "message": "ننوتلو ډېر وخت ونیو. بیا هڅه وکړئ."
+  },
+  "error_web_login_unavailable": {
+    "message": "د وېب له لارې ننوتل شتون نه لري. وروسته بیا هڅه وکړئ."
+  },
+  "error_web_login_invalid_callback": {
+    "message": "ننوتل تایید نه شول. له غځونې څخه بیا پیل کړئ."
+  },
+  "error_web_login_denied": {
+    "message": "ننوتلو ته اجازه ورنه کړل شوه. بیا هڅه وکړئ."
+  },
+  "error_web_login_busy": {
+    "message": "له بیا هڅې مخکې د ننوتلو هغه کړکۍ وتړئ چې دمخه پرانیستې ده."
+  },
+  "deviceKindFirefox": {
+    "message": "Firefox براوزر"
+  },
+  "generalPrivacyPolicy": {
+    "message": "د محرمیت عمومي پالیسي"
+  },
+  "privacyNoticeTitle": {
+    "message": "د FuzeVPN په غځونه کې محرمیت"
+  },
+  "privacyNoticeIntro": {
+    "message": "دا خبرتیا هغه معلومات بیانوي چې دا غځونه یې کاروي. دا د FuzeVPN د محرمیت عمومي پالیسي بشپړوي چې لینک یې لاندې دی. اختیاري تشخیصي لېږل د ننوتلو او VPN کارولو لپاره له اړینو معلوماتو جلا دي."
+  },
+  "privacyNoticeUpdated": {
+    "message": "خبرتیا د 2026 کال د اکتوبر په 19 تازه شوه"
+  },
+  "privacyNoticeServiceTitle": {
+    "message": "حساب او VPN خدمت"
+  },
+  "privacyNoticeService": {
+    "message": "غځونه له api.fuzevpn.com سره د تصدیق، حساب، ګډون، وسیلې او پراکسي ناستې معلومات تبادله کوي. د VPN پراکسي هغه ټرافیک لېږدوي چې له لارې یې تېرېږي. دا اتصالونه ترلاسه کوونکي خدمت ته د شبکې میټاډاټا ښکاره کوي؛ دا خبرتیا د سرور د لاګونو په اړه بېله ژمنه نه کوي."
+  },
+  "privacyNoticeLocalTitle": {
+    "message": "ستاسو په براوزر کې زېرمه شوي معلومات"
+  },
+  "privacyNoticeLocal": {
+    "message": "د براوزر زېرمه ستاسو ناسته، د حساب جزئیات، غوره توبونه، د سایټونو استثناوې او د وسیلې پېژندنه ساتي. تخنیکي ژورنالونه تر 10 دقیقو پورې په محلي ډول ساتل کېږي، حتی کله چې اتوماتیک راپور ورکول بند وي. تشخیصي مسودې او په کتار کې راپورونه له 24 ساعتونو وروسته په محلي ډول پای ته رسېږي؛ پاکول هغه وخت ترسره کېږي چې غځونه وچلېدای شي."
+  },
+  "privacyNoticeIpTitle": {
+    "message": "د عامه IP کتنې او درېیمګړي"
+  },
+  "privacyNoticeIp": {
+    "message": "د IP ښودنه او د شبکې تشخیص له api.ipify.org سره اړیکه نیسي. د IP ښودنه ښايي د بدیل په توګه ipv4.icanhazip.com وکاروي. چمتو کوونکی د اتصال IP او د غوښتنې عادي میټاډاټا ترلاسه کوي: په مستقیم حالت کې ستاسو عامه IP، یا د پراکسي پر مهال د VPN د وتلو IP. دا غوښتنې کوکيز او ریفرر نه لري او د حساب ټوکن یا د ګرځېدنې تاریخچه نه لېږي."
+  },
+  "privacyNoticeReportsTitle": {
+    "message": "تشخیصي راپورونه څه لري"
+  },
+  "privacyNoticeReports": {
+    "message": "راپورونه کېدای شي یو تصادفي راپور پېژندونکی، د وخت نښې، د غځونې او براوزر نسخې، د عملیاتي سیستم کورنۍ او جوړښت، د اتصال او ساتنې حالتونه، د تېروتنې کوډونه، شمېرې، مودې او د ازموینو پایلې ولري. بشپړ راپورونه کېدای شي وروستۍ تخنیکي پېښې ولري. د دوی JSON پټنومونه، د تصدیق ټوکنونه، برېښنالیک پتې، IP پتې، لیدل شوې URL پتې او استثنا شوي ډومېنونه نه لري. تاسو کولای شئ بشپړ راپور له لېږلو مخکې وګورئ او صادر یې کړئ."
+  },
+  "privacyNoticeAccountTitle": {
+    "message": "ترلاسه کوونکی او له حساب سره تړاو"
+  },
+  "privacyNoticeAccount": {
+    "message": "راپورونه د یوه تصدیق شوي اتصال له لارې په api.fuzevpn.com/v1/diagnostics کې FuzeVPN ته لېږل کېږي. دا API اتصال د VPN پراکسي نه کاروي: FuzeVPN ستاسو مستقیم عامه IP ترلاسه کوي حتی کله چې VPN فعال وي. راپورونه له ننوتي حساب سره تړل کېږي او بې نومه نه دي. د تصدیق سرلیک او IP د راپور له JSON څخه جلا دي. بریالی ترلاسه کېدل یوازې دا تاییدوي چې هغې API پتې راپور منلی، نه دا چې د ملاتړ کارکوونکي لوستلی دی."
+  },
+  "privacyNoticeChoiceTitle": {
+    "message": "اختیاري لېږل او د رضایت بېرته اخیستل"
+  },
+  "privacyNoticeChoice": {
+    "message": "اتوماتیک لېږل په ډیفالټ ډول بند دي. د دې فعالول د هغه حساب لپاره د ساده تېروتنو راپورونو ته اجازه ورکوي. د بشپړ راپور لاسي لېږل د لېږلو چک باکس ته اړتیا لري. Firefox هم خپلې اختیاري تخنیکي معلوماتو اجازې ته اړتیا لري. د اتوماتیک لېږلو د درولو او پاتې اتوماتیک راپورونو د لرې کولو لپاره یې بند کړئ؛ پاتې انفرادي لېږل په جلا توګه لغوه کړئ. د تشخیصي لېږلو ردول د VPN کارولو مخه نه نیسي."
+  },
+  "privacyNoticeDeleteTitle": {
+    "message": "محلي ړنګول او ډاونلوډ شوې فایلونه"
+  },
+  "privacyNoticeDelete": {
+    "message": "په تشخیص برخه کې تخنیکي تاریخچه پاکه کړئ یا یو جلا محلي راپور ړنګ کړئ. د تاریخچې پاکول د راپورونو موجودې کاپي نه ړنګوي. محلي لغوه کول یا ړنګول هغه معلومات بېرته نه شي راګرځولای چې خدمت دمخه ترلاسه کړي، په شمول د هغه اپلوډ چې له لغوه کولو مخکې رسېدلی. ډاونلوډ شوي صادرات جلا فایلونه دي چې باید پخپله یې ړنګ کړئ."
+  },
+  "privacyNoticeServerTitle": {
+    "message": "د سرور زېرمه کول او غوښتنې"
+  },
+  "privacyNoticeServer": {
+    "message": "دا غځونه د سرور زېرمه کول یا د سرور په لوري ړنګول نه کنټرولوي او نه یې تاییدوي. د هغې مودې لپاره چې FuzeVPN یې پلي کوي او د دمخه لېږل شویو راپورونو په اړه د غوښتنو لپاره، د محرمیت عمومي پالیسي وګورئ یا له FuzeVPN سره اړیکه ونیسئ. دا خبرتیا د سرور د زېرمه کولو هېڅ ټاکلې موده نه تضمینوي."
+  },
+  "privacyNoticeSupportTitle": {
+    "message": "تشخیص او ملاتړ جلا دي"
+  },
+  "privacyNoticeSupport": {
+    "message": "د تشخیصي راپور لېږل پخپله له غځونې څخه ملاتړ ته پیغام نه لېږي. د یوې ستونزې د تشریح یا د ترلاسه شوي راپور د ړنګولو غوښتنې لپاره، لاندې د FuzeVPN د اړیکې چینل وکاروئ. که پرېکړه وکړئ چې صادر شوی فایل د بل چینل له لارې شریک کړئ، لومړی یې منځپانګه وګورئ."
+  },
+  "privacyNoticeManage": {
+    "message": "تشخیص پرانیزئ"
+  },
+  "privacyNoticeLinksTitle": {
+    "message": "د خدمت پالیسي او اړیکه"
+  },
+  "theme": {
+    "message": "بڼه"
+  },
+  "themeSystem": {
+    "message": "سیستم"
+  },
+  "themeLight": {
+    "message": "روښانه"
+  },
+  "themeDark": {
+    "message": "تیاره"
+  },
+  "switchToDarkTheme": {
+    "message": "تیارې بڼې ته واوړئ"
+  },
+  "switchToLightTheme": {
+    "message": "روښانه بڼې ته واوړئ"
+  }
+}

@@ -787,7 +787,7 @@ try {
     await rendered(page);
     await expandAllLocations(page);
     await page.locator("#publicIp bdi").waitFor({ state: "attached" });
-    const rtl = ["ar", "fa", "ur", "he"].includes(code);
+    const rtl = ["ar", "fa", "ur", "he", "ps"].includes(code);
     const direction = await page.evaluate(() => {
       const title = document.getElementById("locationDialogTitle").getBoundingClientRect();
       const close = document.getElementById("closeLocationButton").getBoundingClientRect();
@@ -848,7 +848,7 @@ try {
     "Changing language unexpectedly created a VPN session",
   );
   record(
-    "Search, filters, favorites, and automatic choice render in all fifty languages without horizontal overflow",
+    "Search, filters, favorites, and automatic choice render in all seventy languages without horizontal overflow",
   );
 
   await page.locator("#closeLocationButton").click();

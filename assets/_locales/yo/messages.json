@@ -1,0 +1,929 @@
+{
+  "extensionName": {
+    "message": "FuzeVPN"
+  },
+  "extensionDescription": {
+    "message": "Dáàbò bo àṣírí rẹ kí o sì mú ààbò rẹ lágbára pẹ̀lú títẹ̀ ẹ̀ẹ̀kan ṣoṣo."
+  },
+  "siteExclusionsReloadRequired": {
+    "message": "Tún FuzeVPN gbé láti inú alákòóso àfikún aṣàwákiri láti parí ìmúdójúìwọ̀n náà kí o sì lo àwọn ojú-òpó tí a yọ sílẹ̀."
+  },
+  "extensionCommunicationError": {
+    "message": "Àfikún náà kò dáhùn. Pa fèrèsé yìí dé, lẹ́yìn náà tún FuzeVPN gbé láti inú alákòóso àfikún aṣàwákiri."
+  },
+  "actionDisconnected": {
+    "message": "FuzeVPN — A ti ge ìsopọ̀"
+  },
+  "actionConnected": {
+    "message": "FuzeVPN — Ó ní ààbò nínú aṣàwákiri yìí"
+  },
+  "actionReconnecting": {
+    "message": "FuzeVPN — Ń tún sopọ̀"
+  },
+  "actionError": {
+    "message": "FuzeVPN — Ó nílò àfiyèsí"
+  },
+  "browserProtection": {
+    "message": "Ààbò aṣàwákiri"
+  },
+  "loginTitle": {
+    "message": "Káàbọ̀ sí FuzeVPN"
+  },
+  "loginSubtitle": {
+    "message": "Wọlé láti dáàbò bo ìwákiri rẹ nínú aṣàwákiri yìí."
+  },
+  "email": {
+    "message": "Àdírẹ́sì ímeèlì"
+  },
+  "emailPlaceholder": {
+    "message": "you@example.com"
+  },
+  "password": {
+    "message": "Ọ̀rọ̀ aṣínà"
+  },
+  "signIn": {
+    "message": "Wọlé"
+  },
+  "signingIn": {
+    "message": "Ń wọlé…"
+  },
+  "forgotPassword": {
+    "message": "O gbàgbé ọ̀rọ̀ aṣínà?"
+  },
+  "createAccount": {
+    "message": "Ṣẹ̀dá àkọọ́lẹ̀"
+  },
+  "settings": {
+    "message": "Ètò"
+  },
+  "close": {
+    "message": "Pa dé"
+  },
+  "statusDisconnected": {
+    "message": "A ti ge ìsopọ̀"
+  },
+  "statusConnecting": {
+    "message": "Ń sopọ̀…"
+  },
+  "statusChanging": {
+    "message": "Ń yí ibùdó padà…"
+  },
+  "statusProtected": {
+    "message": "Ó ní ààbò nínú aṣàwákiri yìí"
+  },
+  "statusRefreshing": {
+    "message": "Ń ṣe ìsọdọ̀tun ní ààbò…"
+  },
+  "statusDisconnecting": {
+    "message": "Ń ge ìsopọ̀…"
+  },
+  "statusError": {
+    "message": "Ààbò ti dáwọ́ dúró"
+  },
+  "browserOnlyDetail": {
+    "message": "Ààbò fún aṣàwákiri yìí."
+  },
+  "location": {
+    "message": "Ibùdó"
+  },
+  "change": {
+    "message": "Yí padà"
+  },
+  "noLocation": {
+    "message": "Kò sí ibùdó tó wà"
+  },
+  "protectBrowser": {
+    "message": "Dáàbò bo aṣàwákiri"
+  },
+  "disconnect": {
+    "message": "Ge ìsopọ̀"
+  },
+  "subscription": {
+    "message": "Àsansílẹ̀"
+  },
+  "refreshSubscription": {
+    "message": "Sọ àsansílẹ̀ dọ̀tun"
+  },
+  "refreshingSubscription": {
+    "message": "Ń sọ àsansílẹ̀ dọ̀tun…"
+  },
+  "subscriptionActive": {
+    "message": "Ó ń ṣiṣẹ́"
+  },
+  "subscriptionInactive": {
+    "message": "Kò ṣiṣẹ́"
+  },
+  "expiresOn": {
+    "message": "Yóò parí: $1"
+  },
+  "noExpiry": {
+    "message": "Kò sí ọjọ́ ìparí"
+  },
+  "browserOnlyNotice": {
+    "message": "Aṣàwákiri yìí nìkan. Àwọn áàpù àti aṣàwákiri mìíràn kò sí lábẹ́ ààbò yìí."
+  },
+  "resendVerification": {
+    "message": "Tún ímeèlì fi ránṣẹ́"
+  },
+  "incognitoHelp": {
+    "message": "Ìwákiri àṣírí ń lo ààbò kan náà kìkì tí a bá gba àfikún náà láàyè ní ipò àṣírí nínú ètò aṣàwákiri."
+  },
+  "manageAccount": {
+    "message": "Ṣàkóso àkọọ́lẹ̀ mi"
+  },
+  "account": {
+    "message": "Àkọọ́lẹ̀"
+  },
+  "devices": {
+    "message": "Àwọn ẹ̀rọ"
+  },
+  "manageDevices": {
+    "message": "Ṣàkóso àwọn ẹ̀rọ"
+  },
+  "refreshDevices": {
+    "message": "Sọ àwọn ẹ̀rọ dọ̀tun"
+  },
+  "deviceCount": {
+    "message": "Ẹ̀rọ $1 / $2"
+  },
+  "loadingDevices": {
+    "message": "Ń gbé àwọn ẹ̀rọ wọlé…"
+  },
+  "noDevices": {
+    "message": "Kò sí ẹ̀rọ tó ń ṣiṣẹ́."
+  },
+  "currentDevice": {
+    "message": "Ẹ̀rọ yìí"
+  },
+  "deviceKindBrowser": {
+    "message": "Àfikún aṣàwákiri"
+  },
+  "deviceKindVpn": {
+    "message": "Ẹ̀rọ VPN"
+  },
+  "profile_browser_proxy": {
+    "message": "Proxy aṣàwákiri"
+  },
+  "profile_wireguard": {
+    "message": "WireGuard"
+  },
+  "profile_openvpn": {
+    "message": "OpenVPN"
+  },
+  "none": {
+    "message": "kò sí"
+  },
+  "deviceCreatedOn": {
+    "message": "Ọjọ́ ìṣẹ̀dá: $1"
+  },
+  "deleteDevice": {
+    "message": "Pa ẹ̀rọ rẹ́"
+  },
+  "deleteDeviceNamed": {
+    "message": "Pa ẹ̀rọ rẹ́: $1"
+  },
+  "confirmDeleteDevice": {
+    "message": "Yọ “$1” kúrò? Àwọn ìsopọ̀ VPN rẹ̀ yóò dúró, a ó sì yọ àwọn profaili rẹ̀ kúrò."
+  },
+  "resetDevice": {
+    "message": "Tún ẹ̀rọ tò"
+  },
+  "confirmResetDevice": {
+    "message": "Tún àfikún yìí tò? A ó forúkọ rẹ̀ sílẹ̀ gẹ́gẹ́ bí ẹ̀rọ tuntun nígbà tí o bá lò ó lẹ́ẹ̀kan sí i."
+  },
+  "signOutAccount": {
+    "message": "Jáde kúrò nínú àkọọ́lẹ̀"
+  },
+  "chooseLocation": {
+    "message": "Yan ibùdó"
+  },
+  "error_invalid_credentials": {
+    "message": "Àdírẹ́sì ímeèlì tàbí ọ̀rọ̀ aṣínà kò tọ̀nà."
+  },
+  "error_unauthorized": {
+    "message": "Ìgbà ìlò rẹ ti parí. Jọ̀wọ́ wọlé lẹ́ẹ̀kan sí i."
+  },
+  "error_email_verification_required": {
+    "message": "Jẹ́rìí sí àdírẹ́sì ímeèlì rẹ kí o tó tan ààbò."
+  },
+  "errorVerificationCooldown": {
+    "message": "O lè béèrè ímeèlì tuntun lẹ́yìn ìṣẹ́jú-àáyá $1."
+  },
+  "error_verification_email_cooldown": {
+    "message": "Jọ̀wọ́ dúró kí o tó béèrè ímeèlì mìíràn."
+  },
+  "error_subscription_required": {
+    "message": "A nílò àsansílẹ̀ tó ń ṣiṣẹ́ láti dáàbò bo aṣàwákiri yìí."
+  },
+  "error_device_limit": {
+    "message": "O ti dé òpin iye ẹ̀rọ. Jọ̀wọ́ yọ ẹ̀rọ kan kúrò."
+  },
+  "error_device_identity_revoked": {
+    "message": "Ẹ̀rọ yìí kò ní àṣẹ mọ́. Gbìyànjú láti sopọ̀ lẹ́ẹ̀kan sí i."
+  },
+  "error_device_proof_invalid": {
+    "message": "A kò lè jẹ́rìí sí ẹ̀rọ yìí. Ṣàyẹ̀wò ọjọ́ àti àkókò kọ̀ǹpútà rẹ, lẹ́yìn náà tún gbìyànjú."
+  },
+  "error_device_proof_replayed": {
+    "message": "A ti ṣe ìbéèrè yìí tẹ́lẹ̀. Tún gbìyànjú."
+  },
+  "error_invalid_device": {
+    "message": "A kò dá ẹ̀rọ yìí mọ̀. Gbìyànjú láti sopọ̀ lẹ́ẹ̀kan sí i."
+  },
+  "error_device_exists": {
+    "message": "Ìdánimọ̀ ẹ̀rọ yìí ti so mọ́ àkọọ́lẹ̀ mìíràn tẹ́lẹ̀."
+  },
+  "error_not_found": {
+    "message": "Iṣẹ́ yìí kò sí mọ́. Tún gbìyànjú."
+  },
+  "error_invalid_location": {
+    "message": "Ibùdó yìí kò sí. Yan òmíràn."
+  },
+  "error_rate_limited": {
+    "message": "Ìgbìyànjú ti pọ̀ jù. Dúró díẹ̀ kí o sì tún gbìyànjú."
+  },
+  "error_proxy_unavailable": {
+    "message": "Apèsè yìí kò sí fún ìgbà díẹ̀. Tún gbìyànjú láìpẹ́."
+  },
+  "error_api_token_expired": {
+    "message": "Ìgbà ìlò àkọọ́lẹ̀ rẹ ti parí. Jọ̀wọ́ wọlé lẹ́ẹ̀kan sí i."
+  },
+  "error_network_error": {
+    "message": "Nẹ́tíwọ̀ọ̀kì kò sí. Ṣàyẹ̀wò ìsopọ̀ íntánẹ́ẹ̀tì rẹ."
+  },
+  "error_request_timeout": {
+    "message": "Iṣẹ́ náà pẹ́ jù kó tó dáhùn. Tún gbìyànjú."
+  },
+  "error_invalid_response": {
+    "message": "Iṣẹ́ náà dá ìdáhùn tí a kò retí padà."
+  },
+  "error_proxy_certificate_invalid": {
+    "message": "A kò lè jẹ́rìí sí ààbò apèsè náà. A ti dá ìsopọ̀ náà dúró."
+  },
+  "error_proxy_controlled_by_extension": {
+    "message": "Àfikún mìíràn ló ń ṣàkóso proxy aṣàwákiri báyìí."
+  },
+  "error_proxy_controlled_by_policy": {
+    "message": "Ìlànà alábòójútó kan ń dí FuzeVPN lọ́wọ́ láti yí proxy padà."
+  },
+  "error_proxy_authentication_failed": {
+    "message": "Apèsè náà kò gba ìsopọ̀ náà. Gbìyànjú láti sopọ̀ lẹ́ẹ̀kan sí i."
+  },
+  "error_session_expired": {
+    "message": "Ìsopọ̀ ààbò rẹ ti parí. Tún sopọ̀."
+  },
+  "error_email_delivery_unavailable": {
+    "message": "A kò lè fi ímeèlì náà ránṣẹ́ báyìí."
+  },
+  "error_unknown_error": {
+    "message": "Àṣìṣe àìròtẹ́lẹ̀ kan ṣẹlẹ̀. Tún gbìyànjú."
+  },
+  "actionBlocked": {
+    "message": "FuzeVPN — A ti dí ìwákiri"
+  },
+  "statusBlockedRetry": {
+    "message": "Ìwákiri dúró díẹ̀ — ń tún sopọ̀"
+  },
+  "statusBlockedAction": {
+    "message": "Ìwákiri dúró díẹ̀ — ṣàyẹ̀wò ìsopọ̀"
+  },
+  "statusProtectionUnavailable": {
+    "message": "Ààbò kò sí — a kò dí ìwákiri"
+  },
+  "recoveryHelp": {
+    "message": "Tún gbìyànjú láti tẹ̀síwájú ààbò. Gígé ìsopọ̀ jẹ́ kí o wákiri láìsí FuzeVPN."
+  },
+  "retryConnection": {
+    "message": "Tún gbìyànjú"
+  },
+  "killSwitch": {
+    "message": "Ìdádúró pàjáwìrì"
+  },
+  "killSwitchHelp": {
+    "message": "Ó ń dí àwọn ìbéèrè wẹ́ẹ̀bù tuntun tí ìsopọ̀ VPN bá já. Àwọn ojú-òpó tí a yọ sílẹ̀ ṣì wà ní àrọ́wọ́tó lẹ́yìn òde VPN."
+  },
+  "webRtcProtection": {
+    "message": "Ààbò WebRTC"
+  },
+  "webRtcHelp": {
+    "message": "Ó ń ṣèrànwọ́ láti pa àdírẹ́sì IP rẹ mọ́ ní àṣírí nígbà ìpè wẹ́ẹ̀bù. Àwọn ìpè kan lè má ṣiṣẹ́. Pípa èyí lè ṣí àdírẹ́sì IP gidi rẹ payá."
+  },
+  "securityEffectiveState": {
+    "message": "$1 · $2"
+  },
+  "securityBlocked": {
+    "message": "A ti dí ìwákiri"
+  },
+  "securityNotBlocked": {
+    "message": "A kò dí ìwákiri"
+  },
+  "securityWebRtcActive": {
+    "message": "Ìdíwọ́ WebRTC ń ṣiṣẹ́"
+  },
+  "securityWebRtcInactive": {
+    "message": "Ìdíwọ́ WebRTC kò ṣiṣẹ́"
+  },
+  "localNetworkHelp": {
+    "message": "A ń dí àwọn àdírẹ́sì IP agbègbè àti àwọn orúkọ agbègbè tó wọ́pọ̀ nígbà ààbò. Dòméènì tí a yọ sílẹ̀ ṣì lè fúnni ní ààyè sí nẹ́tíwọ̀ọ̀kì agbègbè. Ètò IPv6 ti sístẹ́mù kò yí padà."
+  },
+  "securityLimits": {
+    "message": "Nípa ààbò yìí"
+  },
+  "killSwitchLimits": {
+    "message": "Aṣàwákiri yìí nìkan: àwọn ìsopọ̀ tó wà tẹ́lẹ̀ àti àwọn ìbánisọ̀rọ̀ inú aṣàwákiri tàbí ti àwọn àfikún mìíràn lè máa bá a lọ. Àfikún mìíràn tàbí ìlànà kan lè rọ́pò proxy kí FuzeVPN tó fèsì. Pípa àfikún náà yóò mú ààbò kúrò. Kò sí ìdínà jákèjádò sístẹ́mù."
+  },
+  "error_traffic_guard_failed": {
+    "message": "A kò lè jẹ́rìí sí ìdínà ìwákiri. A kò lè fọwọ́ sọ̀yà ààbò. Ṣàyẹ̀wò àwọn àṣẹ àfikún náà."
+  },
+  "error_webrtc_control_unavailable": {
+    "message": "A kò lè lo ìdíwọ́ WebRTC. Ṣàyẹ̀wò ètò rẹ, àwọn àfikún mìíràn tàbí ìlànà alábòójútó."
+  },
+  "language": {
+    "message": "Èdè"
+  },
+  "languageAutomatic": {
+    "message": "Aládàáṣe — èdè aṣàwákiri"
+  },
+  "languageHelp": {
+    "message": "Àwọn àyípadà ń ṣiṣẹ́ lẹ́sẹ̀kẹsẹ̀. Aládàáṣe ń tẹ̀lé èdè aṣàwákiri, èyí tó lè yàtọ̀ sí èdè sístẹ́mù."
+  },
+  "languageSaveError": {
+    "message": "A kò lè fi èdè náà pamọ́. A ti pa yíyàn rẹ àtẹ̀yìnwá mọ́. Tún gbìyànjú."
+  },
+  "publicIp": {
+    "message": "IP gbangba"
+  },
+  "vpnIp": {
+    "message": "IP VPN"
+  },
+  "ipChecking": {
+    "message": "Ń ṣàyẹ̀wò…"
+  },
+  "ipUnavailable": {
+    "message": "Kò sí"
+  },
+  "ipLookupExplanation": {
+    "message": "A ṣàyẹ̀wò IP pẹ̀lú ipify, tàbí icanhazip gẹ́gẹ́ bí àfidípò, nípa lílo ìsopọ̀ rẹ lọ́wọ́lọ́wọ́. A kò fi ìtàn ìwákiri ránṣẹ́."
+  },
+  "automaticLocation": {
+    "message": "Aládàáṣe"
+  },
+  "automaticLocationHelp": {
+    "message": "Àkókò ìdáhùn tó dára jù láìpẹ́ yìí, tàbí ibùdó rẹ tó kẹ́yìn."
+  },
+  "automaticLocationName": {
+    "message": "Aládàáṣe · $1"
+  },
+  "searchLocations": {
+    "message": "Wá orílẹ̀-èdè tàbí ìlú"
+  },
+  "locationFilters": {
+    "message": "Ṣẹ́ àwọn ibùdó"
+  },
+  "allLocations": {
+    "message": "Gbogbo"
+  },
+  "favoriteLocations": {
+    "message": "Àwọn àyànfẹ́"
+  },
+  "recentLocations": {
+    "message": "Àìpẹ́ yìí"
+  },
+  "noMatchingLocations": {
+    "message": "Kò sí ibùdó tó bá ìwádìí rẹ mu."
+  },
+  "noFavoriteLocations": {
+    "message": "Fi ìràwọ̀ sí i láti tọ́jú àwọn ibùdó àyànfẹ́ rẹ síbí."
+  },
+  "noRecentLocations": {
+    "message": "Àwọn ibùdó tí o sopọ̀ mọ́ láìpẹ́ yóò hàn níbí."
+  },
+  "addFavorite": {
+    "message": "Fi kún àwọn àyànfẹ́: $1"
+  },
+  "removeFavorite": {
+    "message": "Yọ kúrò nínú àwọn àyànfẹ́: $1"
+  },
+  "unavailableFavoriteLocation": {
+    "message": "Àyànfẹ́ tí kò sí: $1"
+  },
+  "locationSaveError": {
+    "message": "A kò lè parí àyípadà náà. Ó ṣeé ṣe kí a ti fi àwọn ètò kan pamọ́. Ṣàyẹ̀wò yíyàn tí a fihàn kí o tó tún gbìyànjú."
+  },
+  "siteExclusions": {
+    "message": "Àwọn ojú-òpó tí a yọ sílẹ̀"
+  },
+  "siteExclusionsHelp": {
+    "message": "Àwọn ojú-òpó yìí ń lo ìsopọ̀ rẹ láìsí FuzeVPN, kódà tí VPN bá já."
+  },
+  "siteExclusionsEnabled": {
+    "message": "Tan àwọn ìyàsọ́tọ̀"
+  },
+  "siteExclusionInput": {
+    "message": "Dòméènì tàbí URL"
+  },
+  "siteExclusionPlaceholder": {
+    "message": "example.com"
+  },
+  "siteExclusionPreview": {
+    "message": "Dòméènì tí a yàn: $1"
+  },
+  "siteExclusionSubdomains": {
+    "message": "Fi àwọn dòméènì abẹ́ kún un"
+  },
+  "siteExclusionAdd": {
+    "message": "Fi ojú-òpó kún un"
+  },
+  "siteExclusionsEmpty": {
+    "message": "Kò sí ojú-òpó tí a yọ sílẹ̀. Fi kìkì àwọn ojú-òpó tí o fẹ́ lò láìsí VPN kún un."
+  },
+  "siteExclusionsCount": {
+    "message": "Ojú-òpó $1 / 100"
+  },
+  "siteExclusionScopeSubdomains": {
+    "message": "Dòméènì àti àwọn dòméènì abẹ́"
+  },
+  "siteExclusionScopeExact": {
+    "message": "Dòméènì náà gẹ́lẹ́ nìkan"
+  },
+  "siteExclusionRemove": {
+    "message": "Yọ $1 kúrò"
+  },
+  "siteExclusionsDetails": {
+    "message": "Báwo ni àwọn ìyàsọ́tọ̀ ṣe ń ṣiṣẹ́?"
+  },
+  "siteExclusionsResources": {
+    "message": "Àwọn ohun èlò láti àwọn dòméènì mìíràn ṣì wà ní ààbò. Yíyọ ojú-ìwé kan sílẹ̀ kò yọ àwọn àkóónú rẹ̀ mìíràn sílẹ̀ láìfọwọ́yí."
+  },
+  "siteExclusionsReload": {
+    "message": "Tún ojú-òpó náà gbé lẹ́yìn àyípadà. Àwọn ìsopọ̀ tó wà tẹ́lẹ̀ lè máa lo ọ̀nà wọn àtẹ̀yìnwá."
+  },
+  "siteExclusionsWebRtc": {
+    "message": "Ààbò WebRTC ṣì jẹ́ ètò gbogbogbò, títí kan fún àwọn ojú-òpó tí a yọ sílẹ̀."
+  },
+  "siteExclusionsLocal": {
+    "message": "A fi pamọ́ sínú aṣàwákiri yìí nìkan, a sì ń pa á mọ́ lẹ́yìn tí o bá jáde kúrò nínú àkọọ́lẹ̀ rẹ."
+  },
+  "siteExclusionsOn": {
+    "message": "A ti tan àwọn ìyàsọ́tọ̀"
+  },
+  "siteExclusionsOff": {
+    "message": "A ti pa àwọn ìyàsọ́tọ̀"
+  },
+  "siteExclusionsSummary": {
+    "message": "Ojú-òpó $1 lẹ́yìn òde VPN"
+  },
+  "siteExclusionsPending": {
+    "message": "Ń lo àwọn ìyàsọ́tọ̀…"
+  },
+  "siteExclusionsInterrupted": {
+    "message": "Àyípadà dáwọ́ dúró. Ààbò onígbà díẹ̀ ṣì wà níbẹ̀."
+  },
+  "siteExclusionsSaveError": {
+    "message": "A kò lè parí àyípadà náà. Ṣàyẹ̀wò ètò rẹ kí o sì tún gbìyànjú."
+  },
+  "siteExclusionsRetry": {
+    "message": "Tún gbìyànjú"
+  },
+  "siteExclusionInvalid": {
+    "message": "Tẹ dòméènì gbangba tó tọ́. A kò gba IP, orúkọ agbègbè, àmì wildcard, àwọn ìparí dòméènì gbangba àti àwọn dòméènì àkànṣe."
+  },
+  "siteExclusionDuplicate": {
+    "message": "Dòméènì yìí ti wà nínú àkójọ náà tẹ́lẹ̀."
+  },
+  "siteExclusionsLimit": {
+    "message": "O ti dé òpin ojú-òpó 100. Yọ ojú-òpó kan kúrò láti fi òmíràn kún un."
+  },
+  "statusProtectedExceptions": {
+    "message": "VPN ń ṣiṣẹ́ · ìyàsọ́tọ̀ $1"
+  },
+  "statusBlockedExceptions": {
+    "message": "Kìkì àwọn ojú-òpó tí a yọ sílẹ̀ ló ṣì wà ní àrọ́wọ́tó"
+  },
+  "securityBlockedExceptions": {
+    "message": "A ti dí ìwákiri àyàfi àwọn ojú-òpó tí a yọ sílẹ̀"
+  },
+  "securityBlockUnverified": {
+    "message": "A kò tíì jẹ́rìí sí ìdínà"
+  },
+  "logoutLocalComplete": {
+    "message": "Ìjáde lórí ẹ̀rọ yìí ti parí."
+  },
+  "logoutApiSession": {
+    "message": "Ìgbà ìlò àkọọ́lẹ̀ lọ́wọ́lọ́wọ́"
+  },
+  "logoutProxySessions": {
+    "message": "Àwọn ìgbà ìlò VPN tí a mọ̀"
+  },
+  "logoutRevocationPending": {
+    "message": "Ìfagilé ń lọ lọ́wọ́…"
+  },
+  "logoutRevocationConfirmed": {
+    "message": "A ti fìdí ìfagilé múlẹ̀"
+  },
+  "logoutRevocationUnconfirmed": {
+    "message": "A kò tíì fìdí ìfagilé múlẹ̀"
+  },
+  "logoutUnconfirmedHelp": {
+    "message": "Àwọn ìgbà ìlò kan ní ọ̀nà jíjìn lè máa ṣiṣẹ́ títí wọn yóò fi parí."
+  },
+  "deviceQuotaLoading": {
+    "message": "Ń gbé òpin ẹ̀rọ wọlé…"
+  },
+  "deviceQuotaUnknown": {
+    "message": "Òpin ẹ̀rọ kò sí"
+  },
+  "error_proxy_creation_uncertain": {
+    "message": "Apèsè náà kò fìdí ìṣẹ̀dá ìsopọ̀ tuntun náà múlẹ̀. Ìtúnsopọ̀ aládàáṣe ti dúró díẹ̀."
+  },
+  "siteExclusionsPreferencesReset": {
+    "message": "A ti tún àwọn ìyàsọ́tọ̀ ojú-òpó tí o fi pamọ́ tò nítorí pé a kò lè kà wọ́n. Tún fi àwọn ojú-òpó tí o fẹ́ yọ sílẹ̀ kún un."
+  },
+  "siteExclusionsConflict": {
+    "message": "Àkójọ àwọn ojú-òpó tí a yọ sílẹ̀ ti yí padà. Ṣàyẹ̀wò rẹ̀, lẹ́yìn náà tún gbìyànjú àyípadà rẹ."
+  },
+  "unavailableLocation": {
+    "message": "Ibùdó kò sí"
+  },
+  "verificationSending": {
+    "message": "Ń fi ímeèlì ìjẹ́rìísí ránṣẹ́…"
+  },
+  "verificationSent": {
+    "message": "A ti fi ímeèlì ìjẹ́rìísí ránṣẹ́. Ṣàyẹ̀wò àpótí ìwọlé rẹ àti fódà spam."
+  },
+  "error_login_requires_disconnect": {
+    "message": "Ge ìsopọ̀ VPN lọ́wọ́lọ́wọ́ kí o tó wọlé sí àkọọ́lẹ̀ mìíràn."
+  },
+  "error_storage_unavailable": {
+    "message": "Ètò àkọọ́lẹ̀ lórí ẹ̀rọ yìí kò sí. Tún gbìyànjú nígbà tí ibi ìpamọ́ aṣàwákiri bá wà; a ti pa àkọọ́lẹ̀ rẹ tí o fi pamọ́ mọ́."
+  },
+  "diagnosticsAssistance": {
+    "message": "Ìrànlọ́wọ́"
+  },
+  "diagnosticsTitle": {
+    "message": "Àyẹ̀wò ìṣòro"
+  },
+  "diagnosticsIntro": {
+    "message": "Ṣàyẹ̀wò FuzeVPN àti ìsopọ̀ lọ́wọ́lọ́wọ́ láìyí ààbò rẹ padà."
+  },
+  "diagnosticsPrivacyTitle": {
+    "message": "Dátà rẹ"
+  },
+  "diagnosticsPrivacy": {
+    "message": "JSON ìjábọ̀ náà ní àwọn ipò ìmọ̀-ẹ̀rọ àti kóòdù àṣìṣe, láìsí ọ̀rọ̀ aṣínà, tókìnì, àdírẹ́sì ímeèlì, àdírẹ́sì IP, URL tí o ṣàbẹ̀wò tàbí àwọn dòméènì tí a yọ sílẹ̀. Fífiránṣẹ́ ní ìjẹ́rìísí, ó sì so ìjábọ̀ náà mọ́ àkọọ́lẹ̀ rẹ. Wo ìkéde náà fún dátà nẹ́tíwọ̀ọ̀kì."
+  },
+  "diagnosticsAuto": {
+    "message": "Fi àwọn ìjábọ̀ àṣìṣe pàtàkì ránṣẹ́ láìfọwọ́yí"
+  },
+  "diagnosticsAutoHelp": {
+    "message": "Ó wà ní pípa ní àkọ́kọ́. Títan èyí ń fi àwọn ìjábọ̀ ìmọ̀-ẹ̀rọ rírọrùn ránṣẹ́ fún àkọọ́lẹ̀ yìí, láìsí ìtàn ìwákiri. Pa á níbí láti dá fífiránṣẹ́ láìfọwọ́yí dúró kí o sì yọ àwọn ìjábọ̀ aládàáṣe tó ń dúró kúrò."
+  },
+  "diagnosticsHistoryHelp": {
+    "message": "Ìtàn ìmọ̀-ẹ̀rọ ń wà lórí ẹ̀rọ yìí: tó ìṣẹ̀lẹ̀ 200 fún àkọsílẹ̀ kọ̀ọ̀kan láàrin ìṣẹ́jú 10, kódà nígbà tí fífiránṣẹ́ láìfọwọ́yí bá wà ní pípa. Kò ní ìtàn ìwákiri nínú, a sì ń pa á rẹ́ pẹ̀lú ọwọ́, nígbà tí aṣàwákiri bá pa dé tàbí nígbà tí àkọọ́lẹ̀ bá yí padà."
+  },
+  "diagnosticsHistoryCount": {
+    "message": "Ìṣẹ̀lẹ̀ ìmọ̀-ẹ̀rọ lórí ẹ̀rọ yìí: $1"
+  },
+  "diagnosticsConnectionLog": {
+    "message": "Gbé àkọsílẹ̀ ìsopọ̀ jáde"
+  },
+  "diagnosticsAccountRequired": {
+    "message": "Wọlé láti tan fífiránṣẹ́. O ṣì lè wo ìjábọ̀ kí o sì gbé e jáde láìsí àkọọ́lẹ̀."
+  },
+  "diagnosticsRun": {
+    "message": "Ṣe àyẹ̀wò ìṣòro"
+  },
+  "diagnosticsClearHistory": {
+    "message": "Pa ìtàn orí ẹ̀rọ rẹ́"
+  },
+  "diagnosticsPreparing": {
+    "message": "Ń pèsè ìjábọ̀ náà…"
+  },
+  "diagnosticsReports": {
+    "message": "Àwọn ìjábọ̀"
+  },
+  "diagnosticsEmpty": {
+    "message": "Kò tíì sí ìjábọ̀ lórí ẹ̀rọ yìí."
+  },
+  "diagnosticsChooseReport": {
+    "message": "Yan ìjábọ̀ kan"
+  },
+  "diagnosticsReportLabel": {
+    "message": "$1 · $2 · $3"
+  },
+  "diagnosticsTypeFull": {
+    "message": "Ìjábọ̀ kíkún"
+  },
+  "diagnosticsTypeSimple": {
+    "message": "Ìjábọ̀ àṣìṣe"
+  },
+  "diagnosticsSummary": {
+    "message": "Ọjọ́ ìkójọ: $1. Ẹ̀yà FuzeVPN: $2."
+  },
+  "diagnosticsJson": {
+    "message": "Wo àkóónú ìjábọ̀ náà (JSON)"
+  },
+  "diagnosticsExport": {
+    "message": "Gbé ìjábọ̀ jáde"
+  },
+  "diagnosticsDelete": {
+    "message": "Pa ìjábọ̀ orí ẹ̀rọ rẹ́"
+  },
+  "diagnosticsRetention": {
+    "message": "Àwọn ìjábọ̀ orí ẹ̀rọ ń parí lẹ́yìn wákàtí 24. Pípa rẹ́ níbí kò pa ìjábọ̀ tí iṣẹ́ náà ti gbà tẹ́lẹ̀ rẹ́. Wo ìkéde náà fún ìpamọ́ lórí apèsè àti àwọn ìbéèrè ìparẹ́."
+  },
+  "diagnosticsConsent": {
+    "message": "Fi ìjábọ̀ àyẹ̀wò ìṣòro yìí ránṣẹ́ sí FuzeVPN"
+  },
+  "diagnosticsDataCollectionRequired": {
+    "message": "Firefox gbọ́dọ̀ gba ìkójọ dátà ìmọ̀-ẹ̀rọ láàyè láti fi àyẹ̀wò ìṣòro ránṣẹ́. Tún gbìyànjú kí o sì fún un ní àṣẹ yìí."
+  },
+  "diagnosticsSendHelp": {
+    "message": "Fífiránṣẹ́ jẹ́ àṣàyàn. Lẹ́yìn tí o bá fọwọ́ sí i, ó lè tún gbìyànjú fún tó wákàtí 24 pẹ̀lú ìgbà ìlò tó wúlò fún àkọọ́lẹ̀ kan náà. O lè fagi lé àwọn ìgbìyànjú mìíràn. Fífagilé pẹ́ kò fọwọ́ sọ̀yà pé apèsè kò tíì gba ìjábọ̀ náà."
+  },
+  "diagnosticsSend": {
+    "message": "Fi ìjábọ̀ ránṣẹ́"
+  },
+  "diagnosticsCancel": {
+    "message": "Fagi lé fífiránṣẹ́"
+  },
+  "diagnosticsReload": {
+    "message": "Tún ojú-ìwé yìí gbé"
+  },
+  "diagnosticsUnavailable": {
+    "message": "Àyẹ̀wò ìṣòro kò sí. Tún FuzeVPN gbé láti inú alákòóso àfikún aṣàwákiri, lẹ́yìn náà tún ojú-ìwé yìí ṣí. VPN rẹ kò yí padà."
+  },
+  "diagnosticsQueueFull": {
+    "message": "Ìlà fífiránṣẹ́ ti kún. Pa ìjábọ̀ orí ẹ̀rọ kan rẹ́ tàbí dúró kí ìjábọ̀ tó ń dúró parí."
+  },
+  "diagnosticsContentUnavailable": {
+    "message": "Àkóónú ìjábọ̀ náà kò sí. Gbé ìjábọ̀ orí ẹ̀rọ jáde tí ó bá wà, kí o sì kàn sí ìrànlọ́wọ́."
+  },
+  "diagnosticsFailure": {
+    "message": "A kò lè parí ìgbésẹ̀ àyẹ̀wò ìṣòro náà. VPN rẹ kò yí padà."
+  },
+  "diagnosticsChecks": {
+    "message": "Àwọn àyẹ̀wò"
+  },
+  "diagnosticsCheckFallback": {
+    "message": "Àyẹ̀wò ìmọ̀-ẹ̀rọ: $1"
+  },
+  "diagnosticsCheckLine": {
+    "message": "$1 — $2"
+  },
+  "diagnosticsProxy": {
+    "message": "Proxy aṣàwákiri"
+  },
+  "diagnosticsStorage": {
+    "message": "Ibi ìpamọ́ orí ẹ̀rọ"
+  },
+  "diagnosticsNetwork": {
+    "message": "Ìsopọ̀ nẹ́tíwọ̀ọ̀kì"
+  },
+  "diagnosticsCleanup": {
+    "message": "Ìfọmọ́ ìgbà ìlò"
+  },
+  "diagnosticsResult_passed": {
+    "message": "Ó yege"
+  },
+  "diagnosticsResult_failed": {
+    "message": "Ó kùnà"
+  },
+  "diagnosticsResult_skipped": {
+    "message": "A kò ṣe é"
+  },
+  "diagnosticsResult_unknown": {
+    "message": "A kò mọ̀"
+  },
+  "diagnosticsStatus_ready": {
+    "message": "Ó ti ṣetán lórí ẹ̀rọ yìí"
+  },
+  "diagnosticsStatus_pending": {
+    "message": "Ó ń dúró de fífiránṣẹ́"
+  },
+  "diagnosticsStatus_sending": {
+    "message": "Ń fi ránṣẹ́…"
+  },
+  "diagnosticsStatus_session_required": {
+    "message": "Ó ń dúró de ìgbà ìlò tó wúlò fún àkọọ́lẹ̀ kan náà"
+  },
+  "diagnosticsStatus_received": {
+    "message": "Iṣẹ́ náà ti gbà á"
+  },
+  "diagnosticsStatus_failed": {
+    "message": "Fífiránṣẹ́ kùnà"
+  },
+  "diagnosticsStatus_cancelled": {
+    "message": "A ti fagi lé fífiránṣẹ́"
+  },
+  "diagnosticsStatus_expired": {
+    "message": "Àkókò fífiránṣẹ́ ti kọjá"
+  },
+  "diagnosticsReceivedAt": {
+    "message": "A gbà á: $1"
+  },
+  "error_private_browsing_required": {
+    "message": "Firefox nílò àṣẹ yìí láti ṣètò VPN, kódà nínú àwọn fèrèsé lásán. Ṣí about:addons → FuzeVPN, gbà á láàyè láti ṣiṣẹ́ nínú àwọn fèrèsé àṣírí, lẹ́yìn náà tún gbìyànjú."
+  },
+  "error_host_permissions_required": {
+    "message": "Nínú Firefox, ṣí about:addons → FuzeVPN → Àwọn àṣẹ (Permissions) kí o sì gba ààyè sí gbogbo ojú-òpó wẹ́ẹ̀bù láàyè, lẹ́yìn náà tún gbìyànjú."
+  },
+  "cancelAction": {
+    "message": "Fagi lé"
+  },
+  "refreshLocations": {
+    "message": "Sọ àwọn ibùdó dọ̀tun"
+  },
+  "refreshingLocations": {
+    "message": "Ń sọ àwọn ibùdó dọ̀tun…"
+  },
+  "locationsRefreshError": {
+    "message": "A kò lè sọ àkójọ àwọn ibùdó dọ̀tun. Jọ̀wọ́ tún gbìyànjú."
+  },
+  "error_device_revoked_limit": {
+    "message": "A ti fagi lé ẹ̀rọ yìí. O ti dé òpin iye ẹ̀rọ: jọ̀wọ́ yọ ẹ̀rọ kan kúrò."
+  },
+  "noAvailableLocations": {
+    "message": "Kò sí ibùdó kankan báyìí. Jọ̀wọ́ tún gbìyànjú láìpẹ́."
+  },
+  "noAvailableFavoriteLocations": {
+    "message": "Àwọn ibùdó àyànfẹ́ rẹ kò sí fún ìgbà díẹ̀."
+  },
+  "error_location_favorites_limit": {
+    "message": "O ti dé òpin àyànfẹ́ 100. Yọ àyànfẹ́ kan kúrò láti fi òmíràn kún un."
+  },
+  "error_server_full": {
+    "message": "Apèsè yìí ti kún. Yan ibùdó mìíràn."
+  },
+  "error_capacity_unavailable": {
+    "message": "A kò lè fìdí wíwà apèsè yìí múlẹ̀ báyìí. Jọ̀wọ́ tún gbìyànjú láìpẹ́."
+  },
+  "locationHierarchyHelp": {
+    "message": "Orúkọ náà ń yan apèsè; ọfà náà ń fi àlàyé hàn."
+  },
+  "locationCountrySelect": {
+    "message": "Yan apèsè tó wà: $1"
+  },
+  "locationCitySelect": {
+    "message": "Yan apèsè tó wà: $1"
+  },
+  "locationShowCities": {
+    "message": "Fi àwọn ìlú hàn: $1"
+  },
+  "locationHideCities": {
+    "message": "Fi àwọn ìlú pamọ́: $1"
+  },
+  "locationShowServers": {
+    "message": "Fi àwọn apèsè hàn: $1"
+  },
+  "locationHideServers": {
+    "message": "Fi àwọn apèsè pamọ́: $1"
+  },
+  "locationAvailableServers": {
+    "message": "Àwọn apèsè tó wà: $1"
+  },
+  "legalInformation": {
+    "message": "Ìwífún òfin"
+  },
+  "privacyPolicy": {
+    "message": "Ìkéde àṣírí àfikún"
+  },
+  "termsAndConditions": {
+    "message": "Àwọn òfin lílò àti títà"
+  },
+  "legalNotice": {
+    "message": "Ìkéde òfin"
+  },
+  "contactSupport": {
+    "message": "Kàn sí ìrànlọ́wọ́"
+  },
+  "webSignIn": {
+    "message": "Wọlé sí FuzeVPN"
+  },
+  "webSignInDisconnect": {
+    "message": "Ge ìsopọ̀ kí o sì wọlé"
+  },
+  "webSignInPending": {
+    "message": "Ìwọlé ń lọ lọ́wọ́…"
+  },
+  "webSignInHelp": {
+    "message": "Wọlé tàbí ṣẹ̀dá àkọọ́lẹ̀ pẹ̀lú Google tàbí ímeèlì ní agbègbè oníbàárà FuzeVPN."
+  },
+  "webSignInDisconnectHelp": {
+    "message": "Bọ́tìnnì yìí ń dá ààbò aṣàwákiri dúró kí o lè wọlé pẹ̀lú Google tàbí ímeèlì. Ìwákiri rẹ kò ní ní ààbò nígbà ìwọlé."
+  },
+  "webSignInStatus": {
+    "message": "Tẹ̀síwájú nínú fèrèsé ìwọlé FuzeVPN. Àfikún náà yóò ṣe ìmúdójúìwọ̀n fúnra rẹ̀ nígbà tí o bá parí. Pa fèrèsé náà dé láti fagi lé."
+  },
+  "error_web_login_cancelled": {
+    "message": "A ti fagi lé ìwọlé. Tún gbìyànjú."
+  },
+  "error_web_login_timeout": {
+    "message": "Ìwọlé pẹ́ jù. Tún gbìyànjú."
+  },
+  "error_web_login_unavailable": {
+    "message": "Ìwọlé wẹ́ẹ̀bù kò sí. Tún gbìyànjú nígbà mìíràn."
+  },
+  "error_web_login_invalid_callback": {
+    "message": "A kò lè jẹ́rìí sí ìwọlé. Tún bẹ̀rẹ̀ láti inú àfikún náà."
+  },
+  "error_web_login_denied": {
+    "message": "A kò fún ìwọlé ní àṣẹ. Tún gbìyànjú."
+  },
+  "error_web_login_busy": {
+    "message": "Pa fèrèsé ìwọlé tó ti ṣí sílẹ̀ dé kí o tó tún gbìyànjú."
+  },
+  "deviceKindFirefox": {
+    "message": "Aṣàwákiri Firefox"
+  },
+  "generalPrivacyPolicy": {
+    "message": "Ìlànà àṣírí gbogbogbò"
+  },
+  "privacyNoticeTitle": {
+    "message": "Àṣírí nínú àfikún FuzeVPN"
+  },
+  "privacyNoticeIntro": {
+    "message": "Ìkéde yìí ṣàlàyé dátà tí àfikún yìí ń lò. Ó ṣe àfikún sí ìlànà àṣírí gbogbogbò ti FuzeVPN, tí ìjápọ̀ rẹ̀ wà nísàlẹ̀. Fífi àyẹ̀wò ìṣòro ránṣẹ́, tí ó jẹ́ àṣàyàn, yàtọ̀ sí dátà tí a nílò láti wọlé àti láti lo VPN."
+  },
+  "privacyNoticeUpdated": {
+    "message": "A ṣe ìmúdójúìwọ̀n ìkéde yìí ní 19 Oṣù Kẹwàá 2026"
+  },
+  "privacyNoticeServiceTitle": {
+    "message": "Àkọọ́lẹ̀ àti iṣẹ́ VPN"
+  },
+  "privacyNoticeService": {
+    "message": "Àfikún náà ń pààrọ̀ dátà ìjẹ́rìísí, àkọọ́lẹ̀, àsansílẹ̀, ẹ̀rọ àti ìgbà ìlò proxy pẹ̀lú api.fuzevpn.com. Proxy VPN ń gbé ìrìnà dátà tí a darí gbà á kọjá. Àwọn ìsopọ̀ wọ̀nyí ń ṣí mẹ́tádátà nẹ́tíwọ̀ọ̀kì payá fún iṣẹ́ tó ń gbà á; ìkéde yìí kò ṣe ìlérí ọ̀tọ̀ kankan nípa àkọsílẹ̀ apèsè."
+  },
+  "privacyNoticeLocalTitle": {
+    "message": "Dátà tí a fi pamọ́ sínú aṣàwákiri rẹ"
+  },
+  "privacyNoticeLocal": {
+    "message": "Ibi ìpamọ́ aṣàwákiri ń tọ́jú ìgbà ìlò rẹ, àlàyé àkọọ́lẹ̀, àwọn ààyò, àwọn ìyàsọ́tọ̀ ojú-òpó àti ìdánimọ̀ ẹ̀rọ. A ń tọ́jú àwọn àkọsílẹ̀ ìmọ̀-ẹ̀rọ sórí ẹ̀rọ yìí fún tó ìṣẹ́jú 10, kódà nígbà tí ìjábọ̀ aládàáṣe bá wà ní pípa. Àwọn ìjábọ̀ àyẹ̀wò ìṣòro tí a kò tíì parí àti àwọn ìjábọ̀ tó wà nínú ìlà ń parí lórí ẹ̀rọ lẹ́yìn wákàtí 24; ìfọmọ́ ń ṣẹlẹ̀ nígbà tí àfikún náà bá lè ṣiṣẹ́."
+  },
+  "privacyNoticeIpTitle": {
+    "message": "Àyẹ̀wò IP gbangba àti àwọn ẹgbẹ́ kẹta"
+  },
+  "privacyNoticeIp": {
+    "message": "Ìfihàn IP àti àyẹ̀wò ìṣòro nẹ́tíwọ̀ọ̀kì ń kàn sí api.ipify.org. Ìfihàn IP lè lo ipv4.icanhazip.com gẹ́gẹ́ bí àfidípò. Olùpèsè náà ń gba IP ìsopọ̀ àti mẹ́tádátà ìbéèrè lásán: IP gbangba rẹ ní ipò tààrà, tàbí IP ìjáde VPN nígbà tí ó bá gba proxy kọjá. Àwọn ìbéèrè wọ̀nyí kò ní kúkì tàbí referrer, wọn kò sì fi tókìnì àkọọ́lẹ̀ tàbí ìtàn ìwákiri ránṣẹ́."
+  },
+  "privacyNoticeReportsTitle": {
+    "message": "Ohun tí àwọn ìjábọ̀ àyẹ̀wò ìṣòro ní nínú"
+  },
+  "privacyNoticeReports": {
+    "message": "Àwọn ìjábọ̀ lè ní ìdánimọ̀ ìjábọ̀ àdábọ̀, àmì àkókò, ẹ̀yà àfikún àti aṣàwákiri, ìdílé àti àgbékalẹ̀ ètò ìṣiṣẹ́, ipò ìsopọ̀ àti ààbò, kóòdù àṣìṣe, iye, gígùn àkókò àti àbájáde àyẹ̀wò. Àwọn ìjábọ̀ kíkún lè ní àwọn ìṣẹ̀lẹ̀ ìmọ̀-ẹ̀rọ àìpẹ́ yìí. JSON wọn kò ní ọ̀rọ̀ aṣínà, tókìnì ìjẹ́rìísí, àdírẹ́sì ímeèlì, àdírẹ́sì IP, URL tí o ṣàbẹ̀wò àti àwọn dòméènì tí a yọ sílẹ̀. O lè ṣàyẹ̀wò kí o sì gbé ìjábọ̀ kíkún jáde kí o tó fi ránṣẹ́."
+  },
+  "privacyNoticeAccountTitle": {
+    "message": "Olùgbà àti ìsopọ̀ mọ́ àkọọ́lẹ̀"
+  },
+  "privacyNoticeAccount": {
+    "message": "A ń fi àwọn ìjábọ̀ ránṣẹ́ sí FuzeVPN ní api.fuzevpn.com/v1/diagnostics lórí ìsopọ̀ tí a ti jẹ́rìí sí. Ìsopọ̀ API yìí ń yẹ proxy VPN sílẹ̀: FuzeVPN ń gba IP gbangba tààrà rẹ kódà nígbà tí VPN ń ṣiṣẹ́. A ń so àwọn ìjábọ̀ mọ́ àkọọ́lẹ̀ tí ó wọlé, wọn kì í ṣe àìlórúkọ. Àkọlé ìjẹ́rìísí àti IP yàtọ̀ sí JSON ìjábọ̀ náà. Ìgbà àṣeyọrí ń fìdí rẹ̀ múlẹ̀ pé ojú-ìpẹ̀kun yẹn ti gbà á, kì í ṣe pé aṣojú ìrànlọ́wọ́ ti ka ìjábọ̀ náà."
+  },
+  "privacyNoticeChoiceTitle": {
+    "message": "Fífiránṣẹ́ àṣàyàn àti yíyọ ìfọwọ́sí kúrò"
+  },
+  "privacyNoticeChoice": {
+    "message": "Fífiránṣẹ́ láìfọwọ́yí wà ní pípa ní àkọ́kọ́. Títàn án ń gba àwọn ìjábọ̀ àṣìṣe rírọrùn láàyè fún àkọọ́lẹ̀ náà. Fífi ìjábọ̀ kíkún ránṣẹ́ pẹ̀lú ọwọ́ nílò àpótí àyẹ̀wò fífiránṣẹ́. Firefox tún nílò àṣẹ àṣàyàn rẹ̀ fún dátà ìmọ̀-ẹ̀rọ. Pa fífiránṣẹ́ láìfọwọ́yí láti dá a dúró kí o sì yọ àwọn ìjábọ̀ aládàáṣe tó ń dúró kúrò; fagi lé àwọn fífiránṣẹ́ mìíràn tó ń dúró lọ́kọ̀ọ̀kan. Kíkọ̀ fífi àyẹ̀wò ìṣòro ránṣẹ́ kò dí lílo VPN lọ́wọ́."
+  },
+  "privacyNoticeDeleteTitle": {
+    "message": "Ìparẹ́ lórí ẹ̀rọ àti àwọn fáìlì tí a gbà sílẹ̀"
+  },
+  "privacyNoticeDelete": {
+    "message": "Nínú Àyẹ̀wò ìṣòro, pa ìtàn ìmọ̀-ẹ̀rọ rẹ́ tàbí pa ìjábọ̀ orí ẹ̀rọ kan rẹ́. Pípa ìtàn rẹ́ kò pa àwọn ẹ̀dà ìjábọ̀ tó wà tẹ́lẹ̀ rẹ́. Fífagilé tàbí pípa rẹ́ lórí ẹ̀rọ kò lè dá dátà tí iṣẹ́ náà ti gbà tẹ́lẹ̀ padà, títí kan ìgbésókè tó dé kí ìfagilé tó ṣẹlẹ̀. Àwọn fáìlì tí a gbé jáde tí a gbà sílẹ̀ jẹ́ fáìlì ọ̀tọ̀ tí o gbọ́dọ̀ pa rẹ́ fúnra rẹ."
+  },
+  "privacyNoticeServerTitle": {
+    "message": "Ìpamọ́ lórí apèsè àti àwọn ìbéèrè"
+  },
+  "privacyNoticeServer": {
+    "message": "Àfikún yìí kò ṣàkóso tàbí jẹ́rìí sí ìpamọ́ lórí apèsè tàbí ìparẹ́ ní ẹ̀gbẹ́ apèsè. Fún àkókò ìpamọ́ tí FuzeVPN ń lò àti àwọn ìbéèrè nípa àwọn ìjábọ̀ tí a ti fi ránṣẹ́, wo ìlànà àṣírí gbogbogbò tàbí kàn sí FuzeVPN. Ìkéde yìí kò fọwọ́ sọ̀yà àkókò ìpamọ́ apèsè kan pàtó."
+  },
+  "privacyNoticeSupportTitle": {
+    "message": "Àyẹ̀wò ìṣòro àti ìrànlọ́wọ́ yàtọ̀ síra"
+  },
+  "privacyNoticeSupport": {
+    "message": "Fífi ìjábọ̀ àyẹ̀wò ìṣòro ránṣẹ́ fúnra rẹ̀ kò fi ọ̀rọ̀ ránṣẹ́ sí ìrànlọ́wọ́ láti inú àfikún náà. Láti ṣàlàyé ìṣòro tàbí béèrè ìparẹ́ ìjábọ̀ tí a ti gbà, lo ọ̀nà ìkànsí FuzeVPN nísàlẹ̀. Tí o bá yàn láti pín fáìlì tí a gbé jáde nípasẹ̀ ọ̀nà mìíràn, kọ́kọ́ ṣàyẹ̀wò àkóónú rẹ̀."
+  },
+  "privacyNoticeManage": {
+    "message": "Ṣí Àyẹ̀wò ìṣòro"
+  },
+  "privacyNoticeLinksTitle": {
+    "message": "Ìlànà iṣẹ́ àti ìkànsí"
+  },
+  "theme": {
+    "message": "Àkòrí"
+  },
+  "themeSystem": {
+    "message": "Sístẹ́mù"
+  },
+  "themeLight": {
+    "message": "Ìmọ́lẹ̀"
+  },
+  "themeDark": {
+    "message": "Òkùnkùn"
+  },
+  "switchToDarkTheme": {
+    "message": "Yí padà sí àkòrí òkùnkùn"
+  },
+  "switchToLightTheme": {
+    "message": "Yí padà sí àkòrí ìmọ́lẹ̀"
+  }
+}

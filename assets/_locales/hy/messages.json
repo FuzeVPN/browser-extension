@@ -1,0 +1,929 @@
+{
+  "extensionName": {
+    "message": "FuzeVPN"
+  },
+  "extensionDescription": {
+    "message": "Պահպանեք ձեր գաղտնիությունը և ուժեղացրեք անվտանգությունը մեկ սեղմումով։"
+  },
+  "siteExclusionsReloadRequired": {
+    "message": "Վերաբեռնեք FuzeVPN-ը դիտարկիչի ընդլայնումների կառավարիչից՝ թարմացումն ավարտելու և բացառված կայքերից օգտվելու համար։"
+  },
+  "extensionCommunicationError": {
+    "message": "Ընդլայնումը չի պատասխանում։ Փակեք այս պատուհանը, ապա վերաբեռնեք FuzeVPN-ը դիտարկիչի ընդլայնումների կառավարիչից։"
+  },
+  "actionDisconnected": {
+    "message": "FuzeVPN — Անջատված է"
+  },
+  "actionConnected": {
+    "message": "FuzeVPN — Պաշտպանված է այս դիտարկիչում"
+  },
+  "actionReconnecting": {
+    "message": "FuzeVPN — Վերամիացում"
+  },
+  "actionError": {
+    "message": "FuzeVPN — Պահանջվում է ուշադրություն"
+  },
+  "browserProtection": {
+    "message": "Դիտարկիչի պաշտպանություն"
+  },
+  "loginTitle": {
+    "message": "Բարի գալուստ FuzeVPN"
+  },
+  "loginSubtitle": {
+    "message": "Մուտք գործեք՝ այս դիտարկիչում ձեր դիտարկումը պաշտպանելու համար։"
+  },
+  "email": {
+    "message": "Էլ. փոստի հասցե"
+  },
+  "emailPlaceholder": {
+    "message": "you@example.com"
+  },
+  "password": {
+    "message": "Գաղտնաբառ"
+  },
+  "signIn": {
+    "message": "Մուտք գործել"
+  },
+  "signingIn": {
+    "message": "Մուտք է կատարվում…"
+  },
+  "forgotPassword": {
+    "message": "Մոռացե՞լ եք գաղտնաբառը"
+  },
+  "createAccount": {
+    "message": "Ստեղծել հաշիվ"
+  },
+  "settings": {
+    "message": "Կարգավորումներ"
+  },
+  "close": {
+    "message": "Փակել"
+  },
+  "statusDisconnected": {
+    "message": "Անջատված է"
+  },
+  "statusConnecting": {
+    "message": "Միացում…"
+  },
+  "statusChanging": {
+    "message": "Տեղադրության փոփոխում…"
+  },
+  "statusProtected": {
+    "message": "Պաշտպանված է այս դիտարկիչում"
+  },
+  "statusRefreshing": {
+    "message": "Անվտանգ թարմացում…"
+  },
+  "statusDisconnecting": {
+    "message": "Անջատում…"
+  },
+  "statusError": {
+    "message": "Պաշտպանությունը դադարեցվել է"
+  },
+  "browserOnlyDetail": {
+    "message": "Պաշտպանություն այս դիտարկիչի համար։"
+  },
+  "location": {
+    "message": "Տեղադրություն"
+  },
+  "change": {
+    "message": "Փոխել"
+  },
+  "noLocation": {
+    "message": "Հասանելի տեղադրություն չկա"
+  },
+  "protectBrowser": {
+    "message": "Պաշտպանել դիտարկիչը"
+  },
+  "disconnect": {
+    "message": "Անջատել"
+  },
+  "subscription": {
+    "message": "Բաժանորդագրություն"
+  },
+  "refreshSubscription": {
+    "message": "Թարմացնել բաժանորդագրությունը"
+  },
+  "refreshingSubscription": {
+    "message": "Բաժանորդագրության թարմացում…"
+  },
+  "subscriptionActive": {
+    "message": "Ակտիվ"
+  },
+  "subscriptionInactive": {
+    "message": "Ոչ ակտիվ"
+  },
+  "expiresOn": {
+    "message": "Ժամկետը լրանում է՝ $1"
+  },
+  "noExpiry": {
+    "message": "Առանց ժամկետի ավարտի"
+  },
+  "browserOnlyNotice": {
+    "message": "Միայն այս դիտարկիչը։ Այլ հավելվածներն ու դիտարկիչները պաշտպանված չեն։"
+  },
+  "resendVerification": {
+    "message": "Կրկին ուղարկել նամակը"
+  },
+  "incognitoHelp": {
+    "message": "Գաղտնի դիտարկումն օգտագործում է նույն պաշտպանությունը միայն այն դեպքում, երբ դիտարկիչի կարգավորումներում ընդլայնումը թույլատրված է գաղտնի ռեժիմում։"
+  },
+  "manageAccount": {
+    "message": "Կառավարել իմ հաշիվը"
+  },
+  "account": {
+    "message": "Հաշիվ"
+  },
+  "devices": {
+    "message": "Սարքեր"
+  },
+  "manageDevices": {
+    "message": "Կառավարել սարքերը"
+  },
+  "refreshDevices": {
+    "message": "Թարմացնել սարքերը"
+  },
+  "deviceCount": {
+    "message": "Սարքեր՝ $1 / $2"
+  },
+  "loadingDevices": {
+    "message": "Սարքերի բեռնում…"
+  },
+  "noDevices": {
+    "message": "Ակտիվ սարքեր չկան։"
+  },
+  "currentDevice": {
+    "message": "Այս սարքը"
+  },
+  "deviceKindBrowser": {
+    "message": "Դիտարկիչի ընդլայնում"
+  },
+  "deviceKindVpn": {
+    "message": "VPN սարք"
+  },
+  "profile_browser_proxy": {
+    "message": "Դիտարկիչի պրոքսի"
+  },
+  "profile_wireguard": {
+    "message": "WireGuard"
+  },
+  "profile_openvpn": {
+    "message": "OpenVPN"
+  },
+  "none": {
+    "message": "չկա"
+  },
+  "deviceCreatedOn": {
+    "message": "Ստեղծվել է՝ $1"
+  },
+  "deleteDevice": {
+    "message": "Ջնջել սարքը"
+  },
+  "deleteDeviceNamed": {
+    "message": "Ջնջել սարքը՝ $1"
+  },
+  "confirmDeleteDevice": {
+    "message": "Հեռացնե՞լ «$1» սարքը։ Նրա VPN միացումները կդադարեն, իսկ պրոֆիլները կհեռացվեն։"
+  },
+  "resetDevice": {
+    "message": "Վերակայել սարքը"
+  },
+  "confirmResetDevice": {
+    "message": "Վերակայե՞լ այս ընդլայնումը։ Հաջորդ օգտագործման ժամանակ այն կգրանցվի որպես նոր սարք։"
+  },
+  "signOutAccount": {
+    "message": "Դուրս գալ հաշվից"
+  },
+  "chooseLocation": {
+    "message": "Ընտրեք տեղադրություն"
+  },
+  "error_invalid_credentials": {
+    "message": "Էլ. փոստի հասցեն կամ գաղտնաբառը սխալ է։"
+  },
+  "error_unauthorized": {
+    "message": "Ձեր սեանսի ժամկետը լրացել է։ Խնդրում ենք կրկին մուտք գործել։"
+  },
+  "error_email_verification_required": {
+    "message": "Հաստատեք ձեր էլ. փոստի հասցեն՝ նախքան պաշտպանությունը միացնելը։"
+  },
+  "errorVerificationCooldown": {
+    "message": "Նոր նամակ կարող եք պահանջել $1 վայրկյանից։"
+  },
+  "error_verification_email_cooldown": {
+    "message": "Խնդրում ենք սպասել՝ նախքան նոր նամակ պահանջելը։"
+  },
+  "error_subscription_required": {
+    "message": "Այս դիտարկիչը պաշտպանելու համար անհրաժեշտ է ակտիվ բաժանորդագրություն։"
+  },
+  "error_device_limit": {
+    "message": "Սարքերի սահմանաչափը սպառված է։ Խնդրում ենք հեռացնել որևէ սարք։"
+  },
+  "error_device_identity_revoked": {
+    "message": "Այս սարքն այլևս լիազորված չէ։ Փորձեք կրկին միանալ։"
+  },
+  "error_device_proof_invalid": {
+    "message": "Չհաջողվեց ստուգել այս սարքը։ Ստուգեք համակարգչի ամսաթիվը և ժամը, ապա կրկին փորձեք։"
+  },
+  "error_device_proof_replayed": {
+    "message": "Այս հարցումն արդեն մշակվել է։ Կրկին փորձեք։"
+  },
+  "error_invalid_device": {
+    "message": "Այս սարքը չճանաչվեց։ Փորձեք կրկին միանալ։"
+  },
+  "error_device_exists": {
+    "message": "Սարքի այս նույնականացուցիչն արդեն կապված է այլ հաշվի հետ։"
+  },
+  "error_not_found": {
+    "message": "Այս գործողությունն այլևս հասանելի չէ։ Կրկին փորձեք։"
+  },
+  "error_invalid_location": {
+    "message": "Այս տեղադրությունը հասանելի չէ։ Ընտրեք մեկ այլը։"
+  },
+  "error_rate_limited": {
+    "message": "Չափազանց շատ փորձեր։ Մի պահ սպասեք և կրկին փորձեք։"
+  },
+  "error_proxy_unavailable": {
+    "message": "Այս սերվերը ժամանակավորապես հասանելի չէ։ Մի փոքր հետո կրկին փորձեք։"
+  },
+  "error_api_token_expired": {
+    "message": "Ձեր հաշվի սեանսի ժամկետը լրացել է։ Խնդրում ենք կրկին մուտք գործել։"
+  },
+  "error_network_error": {
+    "message": "Ցանցը հասանելի չէ։ Ստուգեք ինտերնետ կապը։"
+  },
+  "error_request_timeout": {
+    "message": "Ծառայությունը չափազանց երկար էր պատասխանում։ Կրկին փորձեք։"
+  },
+  "error_invalid_response": {
+    "message": "Ծառայությունը վերադարձրեց անսպասելի պատասխան։"
+  },
+  "error_proxy_certificate_invalid": {
+    "message": "Չհաջողվեց ստուգել սերվերի անվտանգությունը։ Միացումը դադարեցվել է։"
+  },
+  "error_proxy_controlled_by_extension": {
+    "message": "Այլ ընդլայնում այժմ կառավարում է դիտարկիչի պրոքսին։"
+  },
+  "error_proxy_controlled_by_policy": {
+    "message": "Ադմինիստրատորի քաղաքականությունը թույլ չի տալիս FuzeVPN-ին փոխել պրոքսին։"
+  },
+  "error_proxy_authentication_failed": {
+    "message": "Սերվերը չընդունեց միացումը։ Փորձեք կրկին միանալ։"
+  },
+  "error_session_expired": {
+    "message": "Ձեր պաշտպանված միացման ժամկետը լրացել է։ Միացեք կրկին։"
+  },
+  "error_email_delivery_unavailable": {
+    "message": "Նամակն այս պահին հնարավոր չէ ուղարկել։"
+  },
+  "error_unknown_error": {
+    "message": "Տեղի ունեցավ անսպասելի սխալ։ Կրկին փորձեք։"
+  },
+  "actionBlocked": {
+    "message": "FuzeVPN — Դիտարկումն արգելափակված է"
+  },
+  "statusBlockedRetry": {
+    "message": "Դիտարկումը դադարեցված է — վերամիացում"
+  },
+  "statusBlockedAction": {
+    "message": "Դիտարկումը դադարեցված է — ստուգեք կապը"
+  },
+  "statusProtectionUnavailable": {
+    "message": "Պաշտպանությունը հասանելի չէ — դիտարկումն արգելափակված չէ"
+  },
+  "recoveryHelp": {
+    "message": "Կրկին փորձեք՝ պաշտպանությունը վերսկսելու համար։ «Անջատել» կոճակը թույլ է տալիս դիտարկել առանց FuzeVPN-ի։"
+  },
+  "retryConnection": {
+    "message": "Կրկին փորձել"
+  },
+  "killSwitch": {
+    "message": "Արտակարգ արգելափակում"
+  },
+  "killSwitchHelp": {
+    "message": "Արգելափակում է նոր վեբ հարցումները, եթե VPN միացումն ընդհատվի։ Բացառված կայքերը հասանելի են մնում VPN-ից դուրս։"
+  },
+  "webRtcProtection": {
+    "message": "WebRTC պաշտպանություն"
+  },
+  "webRtcHelp": {
+    "message": "Օգնում է գաղտնի պահել ձեր IP հասցեն վեբ զանգերի ժամանակ։ Որոշ զանգեր կարող են չաշխատել։ Անջատելը կարող է բացահայտել ձեր իրական IP հասցեն։"
+  },
+  "securityEffectiveState": {
+    "message": "$1 · $2"
+  },
+  "securityBlocked": {
+    "message": "Դիտարկումն արգելափակված է"
+  },
+  "securityNotBlocked": {
+    "message": "Դիտարկումն արգելափակված չէ"
+  },
+  "securityWebRtcActive": {
+    "message": "WebRTC սահմանափակումն ակտիվ է"
+  },
+  "securityWebRtcInactive": {
+    "message": "WebRTC սահմանափակումն ակտիվ չէ"
+  },
+  "localNetworkHelp": {
+    "message": "Պաշտպանության ընթացքում տեղային IP հասցեները և տարածված տեղային անուններն արգելափակվում են։ Բացառված տիրույթը դեռ կարող է մուտք տալ տեղային ցանց։ Համակարգի IPv6 կարգավորումները չեն փոխվում։"
+  },
+  "securityLimits": {
+    "message": "Այս պաշտպանության մասին"
+  },
+  "killSwitchLimits": {
+    "message": "Միայն այս դիտարկիչը՝ առկա միացումները և դիտարկիչի կամ այլ ընդլայնումների որոշ ներքին հաղորդակցություններ կարող են շարունակվել։ Այլ ընդլայնումը կամ քաղաքականությունը կարող է փոխարինել պրոքսին, նախքան FuzeVPN-ը կարձագանքի։ Ընդլայնումն անջատելը հեռացնում է պաշտպանությունը։ Համակարգային մակարդակի արգելափակում չկա։"
+  },
+  "error_traffic_guard_failed": {
+    "message": "Չհաջողվեց ստուգել դիտարկման արգելափակումը։ Պաշտպանությունը երաշխավորված չէ։ Ստուգեք ընդլայնման թույլտվությունները։"
+  },
+  "error_webrtc_control_unavailable": {
+    "message": "Չհաջողվեց կիրառել WebRTC սահմանափակումը։ Ստուգեք կարգավորումները, այլ ընդլայնումները կամ ադմինիստրատորի քաղաքականությունը։"
+  },
+  "language": {
+    "message": "Լեզու"
+  },
+  "languageAutomatic": {
+    "message": "Ավտոմատ — դիտարկիչի լեզուն"
+  },
+  "languageHelp": {
+    "message": "Փոփոխությունները կիրառվում են անմիջապես։ «Ավտոմատ» ռեժիմը հետևում է դիտարկիչի լեզվին, որը կարող է տարբերվել համակարգի լեզվից։"
+  },
+  "languageSaveError": {
+    "message": "Չհաջողվեց պահել լեզուն։ Ձեր նախորդ ընտրությունը պահպանված է։ Կրկին փորձեք։"
+  },
+  "publicIp": {
+    "message": "Հանրային IP"
+  },
+  "vpnIp": {
+    "message": "VPN IP"
+  },
+  "ipChecking": {
+    "message": "Ստուգում…"
+  },
+  "ipUnavailable": {
+    "message": "Հասանելի չէ"
+  },
+  "ipLookupExplanation": {
+    "message": "IP-ն ստուգվում է ipify-ով, իսկ որպես պահուստ՝ icanhazip-ով, ձեր ընթացիկ միացման միջոցով։ Դիտարկման պատմություն չի ուղարկվում։"
+  },
+  "automaticLocation": {
+    "message": "Ավտոմատ"
+  },
+  "automaticLocationHelp": {
+    "message": "Վերջին լավագույն արձագանքման ժամանակը կամ ձեր վերջին տեղադրությունը։"
+  },
+  "automaticLocationName": {
+    "message": "Ավտոմատ · $1"
+  },
+  "searchLocations": {
+    "message": "Որոնել երկիր կամ քաղաք"
+  },
+  "locationFilters": {
+    "message": "Զտել տեղադրությունները"
+  },
+  "allLocations": {
+    "message": "Բոլորը"
+  },
+  "favoriteLocations": {
+    "message": "Ընտրյալներ"
+  },
+  "recentLocations": {
+    "message": "Վերջինները"
+  },
+  "noMatchingLocations": {
+    "message": "Ձեր որոնմանը համապատասխանող տեղադրություն չկա։"
+  },
+  "noFavoriteLocations": {
+    "message": "Աստղանիշ ավելացրեք՝ ձեր ընտրյալ տեղադրություններն այստեղ պահելու համար։"
+  },
+  "noRecentLocations": {
+    "message": "Վերջերս միացված տեղադրություններն այստեղ կհայտնվեն։"
+  },
+  "addFavorite": {
+    "message": "Ավելացնել ընտրյալներում՝ $1"
+  },
+  "removeFavorite": {
+    "message": "Հեռացնել ընտրյալներից՝ $1"
+  },
+  "unavailableFavoriteLocation": {
+    "message": "Անհասանելի ընտրյալ՝ $1"
+  },
+  "locationSaveError": {
+    "message": "Չհաջողվեց ավարտել փոփոխությունը։ Որոշ կարգավորումներ կարող են պահված լինել։ Ստուգեք ցուցադրված ընտրությունը՝ նախքան կրկին փորձելը։"
+  },
+  "siteExclusions": {
+    "message": "Բացառված կայքեր"
+  },
+  "siteExclusionsHelp": {
+    "message": "Այս կայքերն օգտագործում են ձեր կապն առանց FuzeVPN-ի, նույնիսկ եթե VPN-ն անջատվի։"
+  },
+  "siteExclusionsEnabled": {
+    "message": "Միացնել բացառությունները"
+  },
+  "siteExclusionInput": {
+    "message": "Տիրույթ կամ URL"
+  },
+  "siteExclusionPlaceholder": {
+    "message": "example.com"
+  },
+  "siteExclusionPreview": {
+    "message": "Ընտրված տիրույթ՝ $1"
+  },
+  "siteExclusionSubdomains": {
+    "message": "Ներառել ենթատիրույթները"
+  },
+  "siteExclusionAdd": {
+    "message": "Ավելացնել կայք"
+  },
+  "siteExclusionsEmpty": {
+    "message": "Բացառված կայքեր չկան։ Ավելացրեք միայն այն կայքերը, որոնցից ցանկանում եք օգտվել առանց VPN-ի։"
+  },
+  "siteExclusionsCount": {
+    "message": "Կայքեր՝ $1 / 100"
+  },
+  "siteExclusionScopeSubdomains": {
+    "message": "Տիրույթ և ենթատիրույթներ"
+  },
+  "siteExclusionScopeExact": {
+    "message": "Միայն ճշգրիտ տիրույթը"
+  },
+  "siteExclusionRemove": {
+    "message": "Հեռացնել՝ $1"
+  },
+  "siteExclusionsDetails": {
+    "message": "Ինչպե՞ս են աշխատում բացառությունները"
+  },
+  "siteExclusionsResources": {
+    "message": "Այլ տիրույթների ռեսուրսները մնում են պաշտպանված։ Էջը բացառելն ավտոմատ կերպով չի բացառում դրա մյուս բովանդակությունը։"
+  },
+  "siteExclusionsReload": {
+    "message": "Փոփոխությունից հետո վերաբեռնեք կայքը։ Առկա միացումները կարող են պահպանել իրենց նախորդ երթուղին։"
+  },
+  "siteExclusionsWebRtc": {
+    "message": "WebRTC պաշտպանությունը մնում է ընդհանուր կարգավորում, այդ թվում՝ բացառված կայքերի համար։"
+  },
+  "siteExclusionsLocal": {
+    "message": "Պահվում է միայն այս դիտարկիչում և պահպանվում է հաշվից դուրս գալուց հետո։"
+  },
+  "siteExclusionsOn": {
+    "message": "Բացառությունները միացված են"
+  },
+  "siteExclusionsOff": {
+    "message": "Բացառություններն անջատված են"
+  },
+  "siteExclusionsSummary": {
+    "message": "VPN-ից դուրս կայքեր՝ $1"
+  },
+  "siteExclusionsPending": {
+    "message": "Բացառությունների կիրառում…"
+  },
+  "siteExclusionsInterrupted": {
+    "message": "Փոփոխությունն ընդհատվեց։ Ժամանակավոր պաշտպանությունը մնում է ուժի մեջ։"
+  },
+  "siteExclusionsSaveError": {
+    "message": "Չհաջողվեց ավարտել փոփոխությունը։ Ստուգեք կարգավորումները և կրկին փորձեք։"
+  },
+  "siteExclusionsRetry": {
+    "message": "Կրկին փորձել"
+  },
+  "siteExclusionInvalid": {
+    "message": "Մուտքագրեք վավեր հանրային տիրույթ։ IP հասցեները, տեղային անունները, ձևանմուշային նշանները (wildcard), հանրային վերջածանցները և պահուստավորված տիրույթները չեն ընդունվում։"
+  },
+  "siteExclusionDuplicate": {
+    "message": "Այս տիրույթն արդեն ցանկում է։"
+  },
+  "siteExclusionsLimit": {
+    "message": "100 կայքի սահմանաչափը սպառված է։ Հեռացրեք կայք՝ մեկ այլ կայք ավելացնելու համար։"
+  },
+  "statusProtectedExceptions": {
+    "message": "VPN-ն ակտիվ է · բացառություններ՝ $1"
+  },
+  "statusBlockedExceptions": {
+    "message": "Հասանելի են մնում միայն բացառված կայքերը"
+  },
+  "securityBlockedExceptions": {
+    "message": "Դիտարկումն արգելափակված է, բացի բացառված կայքերից"
+  },
+  "securityBlockUnverified": {
+    "message": "Արգելափակումը ստուգված չէ"
+  },
+  "logoutLocalComplete": {
+    "message": "Տեղային ելքն ավարտված է։"
+  },
+  "logoutApiSession": {
+    "message": "Հաշվի ընթացիկ սեանս"
+  },
+  "logoutProxySessions": {
+    "message": "Հայտնի VPN սեանսներ"
+  },
+  "logoutRevocationPending": {
+    "message": "Չեղարկումն ընթացքում է…"
+  },
+  "logoutRevocationConfirmed": {
+    "message": "Չեղարկումը հաստատված է"
+  },
+  "logoutRevocationUnconfirmed": {
+    "message": "Չեղարկումը հաստատված չէ"
+  },
+  "logoutUnconfirmedHelp": {
+    "message": "Որոշ հեռակա սեանսներ կարող են ակտիվ մնալ մինչև դրանց ժամկետի ավարտը։"
+  },
+  "deviceQuotaLoading": {
+    "message": "Սարքերի սահմանաչափի բեռնում…"
+  },
+  "deviceQuotaUnknown": {
+    "message": "Սարքերի սահմանաչափը հասանելի չէ"
+  },
+  "error_proxy_creation_uncertain": {
+    "message": "Սերվերը չհաստատեց նոր միացման ստեղծումը։ Ավտոմատ վերամիացումը դադարեցված է։"
+  },
+  "siteExclusionsPreferencesReset": {
+    "message": "Պահված կայքերի բացառությունները վերակայվել են, քանի որ հնարավոր չէր կարդալ դրանք։ Կրկին ավելացրեք այն կայքերը, որոնք ցանկանում եք բացառել։"
+  },
+  "siteExclusionsConflict": {
+    "message": "Բացառված կայքերի ցանկը փոխվել է։ Վերանայեք այն, ապա կրկին կատարեք փոփոխությունը։"
+  },
+  "unavailableLocation": {
+    "message": "Տեղադրությունը հասանելի չէ"
+  },
+  "verificationSending": {
+    "message": "Հաստատման նամակի ուղարկում…"
+  },
+  "verificationSent": {
+    "message": "Հաստատման նամակն ուղարկված է։ Ստուգեք մուտքային արկղը և սպամի թղթապանակը։"
+  },
+  "error_login_requires_disconnect": {
+    "message": "Անջատեք ընթացիկ VPN միացումը՝ նախքան այլ հաշիվ մուտք գործելը։"
+  },
+  "error_storage_unavailable": {
+    "message": "Հաշվի տեղային կարգավորումները հասանելի չեն։ Կրկին փորձեք, երբ դիտարկիչի պահոցը հասանելի լինի։ Ձեր պահված հաշիվը պահպանված է։"
+  },
+  "diagnosticsAssistance": {
+    "message": "Աջակցություն"
+  },
+  "diagnosticsTitle": {
+    "message": "Ախտորոշում"
+  },
+  "diagnosticsIntro": {
+    "message": "Ստուգեք FuzeVPN-ը և ընթացիկ միացումը՝ առանց ձեր պաշտպանությունը փոխելու։"
+  },
+  "diagnosticsPrivacyTitle": {
+    "message": "Ձեր տվյալները"
+  },
+  "diagnosticsPrivacy": {
+    "message": "Հաշվետվության JSON-ը պարունակում է տեխնիկական վիճակներ և սխալների կոդեր՝ առանց գաղտնաբառերի, տոկենների, էլ. փոստի հասցեների, IP հասցեների, այցելած URL-ների կամ բացառված տիրույթների։ Ուղարկումը նույնականացված է և հաշվետվությունը կապում է ձեր հաշվի հետ։ Ցանցային տվյալների մասին տե՛ս ծանուցումը։"
+  },
+  "diagnosticsAuto": {
+    "message": "Ավտոմատ ուղարկել կարևոր սխալների հաշվետվությունները"
+  },
+  "diagnosticsAutoHelp": {
+    "message": "Լռելյայն անջատված է։ Միացնելու դեպքում այս հաշվի համար ուղարկվում են պարզ տեխնիկական հաշվետվություններ՝ առանց դիտարկման պատմության։ Անջատեք այստեղ՝ ավտոմատ ուղարկումը դադարեցնելու և սպասող ավտոմատ հաշվետվությունները հեռացնելու համար։"
+  },
+  "diagnosticsHistoryHelp": {
+    "message": "Տեխնիկական պատմությունը մնում է տեղային՝ մինչև 200 իրադարձություն յուրաքանչյուր մատյանում 10 րոպեի ընթացքում, նույնիսկ երբ ավտոմատ ուղարկումն անջատված է։ Այն չի պարունակում դիտարկման պատմություն և մաքրվում է ձեռքով, դիտարկիչը փակելիս կամ հաշիվը փոխելիս։"
+  },
+  "diagnosticsHistoryCount": {
+    "message": "Տեղային տեխնիկական իրադարձություններ՝ $1"
+  },
+  "diagnosticsConnectionLog": {
+    "message": "Արտահանել միացման մատյանը"
+  },
+  "diagnosticsAccountRequired": {
+    "message": "Մուտք գործեք՝ ուղարկումը միացնելու համար։ Առանց հաշվի էլ կարող եք դիտել և արտահանել հաշվետվությունը։"
+  },
+  "diagnosticsRun": {
+    "message": "Գործարկել ախտորոշումը"
+  },
+  "diagnosticsClearHistory": {
+    "message": "Մաքրել տեղային պատմությունը"
+  },
+  "diagnosticsPreparing": {
+    "message": "Հաշվետվության պատրաստում…"
+  },
+  "diagnosticsReports": {
+    "message": "Հաշվետվություններ"
+  },
+  "diagnosticsEmpty": {
+    "message": "Տեղային հաշվետվություններ դեռ չկան։"
+  },
+  "diagnosticsChooseReport": {
+    "message": "Ընտրեք հաշվետվություն"
+  },
+  "diagnosticsReportLabel": {
+    "message": "$1 · $2 · $3"
+  },
+  "diagnosticsTypeFull": {
+    "message": "Ամբողջական հաշվետվություն"
+  },
+  "diagnosticsTypeSimple": {
+    "message": "Սխալի հաշվետվություն"
+  },
+  "diagnosticsSummary": {
+    "message": "Հավաքվել է՝ $1։ FuzeVPN-ի տարբերակ՝ $2։"
+  },
+  "diagnosticsJson": {
+    "message": "Դիտել հաշվետվության բովանդակությունը (JSON)"
+  },
+  "diagnosticsExport": {
+    "message": "Արտահանել հաշվետվությունը"
+  },
+  "diagnosticsDelete": {
+    "message": "Ջնջել տեղային հաշվետվությունը"
+  },
+  "diagnosticsRetention": {
+    "message": "Տեղային հաշվետվությունների ժամկետը լրանում է 24 ժամ անց։ Այստեղ ջնջելը չի ջնջում ծառայության կողմից արդեն ստացված հաշվետվությունը։ Սերվերում պահպանման և ջնջման հարցումների մասին տե՛ս ծանուցումը։"
+  },
+  "diagnosticsConsent": {
+    "message": "Ուղարկել այս ախտորոշման հաշվետվությունը FuzeVPN-ին"
+  },
+  "diagnosticsDataCollectionRequired": {
+    "message": "Ախտորոշում ուղարկելու համար Firefox-ը պետք է թույլատրի տեխնիկական տվյալների հավաքումը։ Կրկին փորձեք և տրամադրեք այդ թույլտվությունը։"
+  },
+  "diagnosticsSendHelp": {
+    "message": "Ուղարկումը կամընտիր է։ Հաստատվելուց հետո այն կարող է կրկին փորձվել մինչև 24 ժամ՝ նույն հաշվի վավեր սեանսով։ Կարող եք չեղարկել հետագա փորձերը։ Ուշ չեղարկումը չի երաշխավորում, որ սերվերն արդեն չի ստացել հաշվետվությունը։"
+  },
+  "diagnosticsSend": {
+    "message": "Ուղարկել հաշվետվությունը"
+  },
+  "diagnosticsCancel": {
+    "message": "Չեղարկել ուղարկումը"
+  },
+  "diagnosticsReload": {
+    "message": "Վերաբեռնել այս էջը"
+  },
+  "diagnosticsUnavailable": {
+    "message": "Ախտորոշումը հասանելի չէ։ Վերաբեռնեք FuzeVPN-ը դիտարկիչի ընդլայնումների կառավարիչից, ապա կրկին բացեք այս էջը։ Ձեր VPN-ը չի փոխվել։"
+  },
+  "diagnosticsQueueFull": {
+    "message": "Ուղարկման հերթը լիքն է։ Ջնջեք տեղային հաշվետվություն կամ սպասեք, մինչև սպասող հաշվետվության ուղարկումն ավարտվի։"
+  },
+  "diagnosticsContentUnavailable": {
+    "message": "Հաշվետվության բովանդակությունը հասանելի չէ։ Արտահանեք տեղային հաշվետվությունը, եթե այն հասանելի է, և կապվեք աջակցության հետ։"
+  },
+  "diagnosticsFailure": {
+    "message": "Չհաջողվեց ավարտել ախտորոշման գործողությունը։ Ձեր VPN-ը չի փոխվել։"
+  },
+  "diagnosticsChecks": {
+    "message": "Ստուգումներ"
+  },
+  "diagnosticsCheckFallback": {
+    "message": "Տեխնիկական ստուգում՝ $1"
+  },
+  "diagnosticsCheckLine": {
+    "message": "$1 — $2"
+  },
+  "diagnosticsProxy": {
+    "message": "Դիտարկիչի պրոքսի"
+  },
+  "diagnosticsStorage": {
+    "message": "Տեղային պահոց"
+  },
+  "diagnosticsNetwork": {
+    "message": "Ցանցային միացում"
+  },
+  "diagnosticsCleanup": {
+    "message": "Սեանսների մաքրում"
+  },
+  "diagnosticsResult_passed": {
+    "message": "Հաջողվեց"
+  },
+  "diagnosticsResult_failed": {
+    "message": "Ձախողվեց"
+  },
+  "diagnosticsResult_skipped": {
+    "message": "Չի կատարվել"
+  },
+  "diagnosticsResult_unknown": {
+    "message": "Անհայտ"
+  },
+  "diagnosticsStatus_ready": {
+    "message": "Պատրաստ է այս սարքում"
+  },
+  "diagnosticsStatus_pending": {
+    "message": "Սպասում է ուղարկման"
+  },
+  "diagnosticsStatus_sending": {
+    "message": "Ուղարկում…"
+  },
+  "diagnosticsStatus_session_required": {
+    "message": "Սպասում է նույն հաշվի վավեր սեանսի"
+  },
+  "diagnosticsStatus_received": {
+    "message": "Ստացվել է ծառայության կողմից"
+  },
+  "diagnosticsStatus_failed": {
+    "message": "Ուղարկումը ձախողվեց"
+  },
+  "diagnosticsStatus_cancelled": {
+    "message": "Ուղարկումը չեղարկվեց"
+  },
+  "diagnosticsStatus_expired": {
+    "message": "Ուղարկման ժամկետը լրացել է"
+  },
+  "diagnosticsReceivedAt": {
+    "message": "Ստացվել է՝ $1"
+  },
+  "error_private_browsing_required": {
+    "message": "Firefox-ը պահանջում է այս թույլտվությունը VPN-ը կարգավորելու համար, նույնիսկ սովորական պատուհաններում։ Բացեք about:addons → FuzeVPN, թույլատրեք աշխատել գաղտնի պատուհաններում, ապա կրկին փորձեք։"
+  },
+  "error_host_permissions_required": {
+    "message": "Firefox-ում բացեք about:addons → FuzeVPN → Թույլտվություններ և թույլատրեք մուտքը բոլոր կայքեր, ապա կրկին փորձեք։"
+  },
+  "cancelAction": {
+    "message": "Չեղարկել"
+  },
+  "refreshLocations": {
+    "message": "Թարմացնել տեղադրությունները"
+  },
+  "refreshingLocations": {
+    "message": "Տեղադրությունների թարմացում…"
+  },
+  "locationsRefreshError": {
+    "message": "Չհաջողվեց թարմացնել տեղադրությունների ցանկը։ Խնդրում ենք կրկին փորձել։"
+  },
+  "error_device_revoked_limit": {
+    "message": "Այս սարքը չեղարկվել է։ Սարքերի սահմանաչափը սպառված է։ Խնդրում ենք հեռացնել որևէ սարք։"
+  },
+  "noAvailableLocations": {
+    "message": "Այս պահին հասանելի տեղադրություններ չկան։ Խնդրում ենք շուտով կրկին փորձել։"
+  },
+  "noAvailableFavoriteLocations": {
+    "message": "Ձեր ընտրյալ տեղադրությունները ժամանակավորապես հասանելի չեն։"
+  },
+  "error_location_favorites_limit": {
+    "message": "100 ընտրյալի սահմանաչափը սպառված է։ Հեռացրեք ընտրյալներից մեկը՝ նորն ավելացնելու համար։"
+  },
+  "error_server_full": {
+    "message": "Այս սերվերը լիքն է։ Ընտրեք այլ տեղադրություն։"
+  },
+  "error_capacity_unavailable": {
+    "message": "Այս պահին հնարավոր չէ հաստատել այս սերվերի հասանելիությունը։ Խնդրում ենք շուտով կրկին փորձել։"
+  },
+  "locationHierarchyHelp": {
+    "message": "Անունն ընտրում է սերվեր, իսկ սլաքը ցույց է տալիս մանրամասները։"
+  },
+  "locationCountrySelect": {
+    "message": "Ընտրել հասանելի սերվեր՝ $1"
+  },
+  "locationCitySelect": {
+    "message": "Ընտրել հասանելի սերվեր՝ $1"
+  },
+  "locationShowCities": {
+    "message": "Ցույց տալ քաղաքները՝ $1"
+  },
+  "locationHideCities": {
+    "message": "Թաքցնել քաղաքները՝ $1"
+  },
+  "locationShowServers": {
+    "message": "Ցույց տալ սերվերները՝ $1"
+  },
+  "locationHideServers": {
+    "message": "Թաքցնել սերվերները՝ $1"
+  },
+  "locationAvailableServers": {
+    "message": "Հասանելի սերվերներ՝ $1"
+  },
+  "legalInformation": {
+    "message": "Իրավական տեղեկատվություն"
+  },
+  "privacyPolicy": {
+    "message": "Ընդլայնման գաղտնիության ծանուցում"
+  },
+  "termsAndConditions": {
+    "message": "Օգտագործման և վաճառքի պայմաններ"
+  },
+  "legalNotice": {
+    "message": "Իրավական ծանուցում"
+  },
+  "contactSupport": {
+    "message": "Կապվել աջակցության հետ"
+  },
+  "webSignIn": {
+    "message": "Մուտք գործել FuzeVPN"
+  },
+  "webSignInDisconnect": {
+    "message": "Անջատել և մուտք գործել"
+  },
+  "webSignInPending": {
+    "message": "Մուտքն ընթացքում է…"
+  },
+  "webSignInHelp": {
+    "message": "Մուտք գործեք կամ ստեղծեք հաշիվ Google-ի կամ էլ. փոստի միջոցով FuzeVPN-ի հաճախորդի բաժնում։"
+  },
+  "webSignInDisconnectHelp": {
+    "message": "Այս կոճակը դադարեցնում է դիտարկիչի պաշտպանությունը, որպեսզի կարողանաք մուտք գործել Google-ի կամ էլ. փոստի միջոցով։ Մուտքի ընթացքում ձեր դիտարկումը պաշտպանված չի լինի։"
+  },
+  "webSignInStatus": {
+    "message": "Շարունակեք FuzeVPN-ի մուտքի պատուհանում։ Ավարտելուց հետո ընդլայնումն ավտոմատ կթարմացվի։ Չեղարկելու համար փակեք այդ պատուհանը։"
+  },
+  "error_web_login_cancelled": {
+    "message": "Մուտքը չեղարկվեց։ Կրկին փորձեք։"
+  },
+  "error_web_login_timeout": {
+    "message": "Մուտքը չափազանց երկար տևեց։ Կրկին փորձեք։"
+  },
+  "error_web_login_unavailable": {
+    "message": "Վեբ մուտքը հասանելի չէ։ Կրկին փորձեք ավելի ուշ։"
+  },
+  "error_web_login_invalid_callback": {
+    "message": "Չհաջողվեց ստուգել մուտքը։ Սկսեք նորից ընդլայնումից։"
+  },
+  "error_web_login_denied": {
+    "message": "Մուտքը չթույլատրվեց։ Կրկին փորձեք։"
+  },
+  "error_web_login_busy": {
+    "message": "Փակեք արդեն բացված մուտքի պատուհանը՝ նախքան կրկին փորձելը։"
+  },
+  "deviceKindFirefox": {
+    "message": "Firefox դիտարկիչ"
+  },
+  "generalPrivacyPolicy": {
+    "message": "Գաղտնիության ընդհանուր քաղաքականություն"
+  },
+  "privacyNoticeTitle": {
+    "message": "Գաղտնիությունը FuzeVPN ընդլայնումում"
+  },
+  "privacyNoticeIntro": {
+    "message": "Այս ծանուցումը նկարագրում է այս ընդլայնման օգտագործած տվյալները։ Այն լրացնում է FuzeVPN-ի գաղտնիության ընդհանուր քաղաքականությունը, որի հղումը ներքևում է։ Ախտորոշման կամընտիր ուղարկումն առանձին է մուտք գործելու և VPN-ն օգտագործելու համար անհրաժեշտ տվյալներից։"
+  },
+  "privacyNoticeUpdated": {
+    "message": "Ծանուցումը թարմացվել է 2026 թ. հոկտեմբերի 19-ին"
+  },
+  "privacyNoticeServiceTitle": {
+    "message": "Հաշիվ և VPN ծառայություն"
+  },
+  "privacyNoticeService": {
+    "message": "Ընդլայնումը api.fuzevpn.com-ի հետ փոխանակում է նույնականացման, հաշվի, բաժանորդագրության, սարքի և պրոքսի սեանսի տվյալներ։ VPN պրոքսին փոխանցում է իր միջով ուղղորդվող երթևեկը։ Այս միացումները ցանցային մետատվյալներ են բացահայտում ստացող ծառայությանը։ Այս ծանուցումը սերվերային մատյանավորման վերաբերյալ առանձին խոստում չի տալիս։"
+  },
+  "privacyNoticeLocalTitle": {
+    "message": "Ձեր դիտարկիչում պահվող տվյալներ"
+  },
+  "privacyNoticeLocal": {
+    "message": "Դիտարկիչի պահոցում պահվում են ձեր սեանսը, հաշվի տվյալները, նախընտրությունները, կայքերի բացառությունները և սարքի նույնականացուցիչը։ Տեխնիկական մատյանները տեղային պահվում են մինչև 10 րոպե, նույնիսկ երբ ավտոմատ հաշվետվությունն անջատված է։ Ախտորոշման սևագրերի և հերթում գտնվող հաշվետվությունների ժամկետը տեղային լրանում է 24 ժամ անց։ Մաքրումը կատարվում է, երբ ընդլայնումը կարող է աշխատել։"
+  },
+  "privacyNoticeIpTitle": {
+    "message": "Հանրային IP-ի ստուգումներ և երրորդ կողմեր"
+  },
+  "privacyNoticeIp": {
+    "message": "IP-ի ցուցադրումը և ցանցային ախտորոշումը դիմում են api.ipify.org-ին։ IP-ի ցուցադրումը որպես պահուստ կարող է օգտագործել ipv4.icanhazip.com-ը։ Մատակարարը ստանում է միացման IP-ն և հարցման սովորական մետատվյալները՝ ձեր հանրային IP-ն ուղիղ ռեժիմում կամ VPN-ի ելքային IP-ն՝ պրոքսիի միջոցով աշխատելիս։ Այս հարցումները չեն ներառում թխուկներ և ուղղորդողի (referrer) տվյալներ, ինչպես նաև չեն ուղարկում հաշվի տոկեն կամ դիտարկման պատմություն։"
+  },
+  "privacyNoticeReportsTitle": {
+    "message": "Ինչ են պարունակում ախտորոշման հաշվետվությունները"
+  },
+  "privacyNoticeReports": {
+    "message": "Հաշվետվությունները կարող են ներառել հաշվետվության պատահական նույնականացուցիչ, ժամանակադրոշմներ, ընդլայնման և դիտարկիչի տարբերակները, օպերացիոն համակարգի ընտանիքը և ճարտարապետությունը, միացման և պաշտպանության վիճակները, սխալների կոդեր, քանակներ, տևողություններ և ստուգումների արդյունքներ։ Ամբողջական հաշվետվությունները կարող են ներառել վերջին տեխնիկական իրադարձությունները։ Դրանց JSON-ը չի ներառում գաղտնաբառեր, նույնականացման տոկեններ, էլ. փոստի հասցեներ, IP հասցեներ, այցելած URL-ներ և բացառված տիրույթներ։ Ուղարկելուց առաջ կարող եք դիտել և արտահանել ամբողջական հաշվետվությունը։"
+  },
+  "privacyNoticeAccountTitle": {
+    "message": "Ստացողը և կապը հաշվի հետ"
+  },
+  "privacyNoticeAccount": {
+    "message": "Հաշվետվություններն ուղարկվում են FuzeVPN-ին api.fuzevpn.com/v1/diagnostics հասցեով՝ նույնականացված միացման միջոցով։ Այս API միացումը շրջանցում է VPN պրոքսին, ուստի FuzeVPN-ը ստանում է ձեր ուղիղ հանրային IP-ն, նույնիսկ երբ VPN-ն ակտիվ է։ Հաշվետվությունները կապվում են մուտք գործած հաշվի հետ և անանուն չեն։ Նույնականացման գլխագիրը և IP-ն առանձին են հաշվետվության JSON-ից։ Ստացման հաջող հաստատումը վկայում է, որ այդ վերջնակետն ընդունել է հաշվետվությունը, այլ ոչ թե աջակցության աշխատակիցը կարդացել է այն։"
+  },
+  "privacyNoticeChoiceTitle": {
+    "message": "Կամընտիր ուղարկում և համաձայնության հետկանչ"
+  },
+  "privacyNoticeChoice": {
+    "message": "Ավտոմատ ուղարկումը լռելյայն անջատված է։ Այն միացնելը թույլ է տալիս պարզ սխալների հաշվետվություններ այդ հաշվի համար։ Ամբողջական հաշվետվության ձեռքով ուղարկումը պահանջում է նշել ուղարկման վանդակը։ Firefox-ը նաև պահանջում է տեխնիկական տվյալների իր կամընտիր թույլտվությունը։ Անջատեք ավտոմատ ուղարկումը՝ այն դադարեցնելու և սպասող ավտոմատ հաշվետվությունները հեռացնելու համար։ Սպասող մյուս ուղարկումները չեղարկեք առանձին։ Ախտորոշման ուղարկումից հրաժարվելը չի խանգարում VPN-ի օգտագործմանը։"
+  },
+  "privacyNoticeDeleteTitle": {
+    "message": "Տեղային ջնջում և ներբեռնված ֆայլեր"
+  },
+  "privacyNoticeDelete": {
+    "message": "«Ախտորոշում» բաժնում մաքրեք տեխնիկական պատմությունը կամ ջնջեք առանձին տեղային հաշվետվություն։ Պատմությունը մաքրելը չի ջնջում հաշվետվությունների առկա պատճենները։ Տեղային չեղարկումը կամ ջնջումը չի կարող հետ կանչել ծառայության կողմից արդեն ստացված տվյալները, այդ թվում՝ չեղարկումից առաջ հասած վերբեռնումը։ Ներբեռնված արտահանումներն առանձին ֆայլեր են, որոնք պետք է ինքներդ ջնջեք։"
+  },
+  "privacyNoticeServerTitle": {
+    "message": "Պահպանում սերվերում և հարցումներ"
+  },
+  "privacyNoticeServer": {
+    "message": "Այս ընդլայնումը չի վերահսկում և չի ստուգում սերվերում պահպանումը կամ սերվերի կողմից ջնջումը։ FuzeVPN-ի կիրառած պահպանման ժամկետի և արդեն ուղարկված հաշվետվությունների վերաբերյալ հարցումների համար տե՛ս գաղտնիության ընդհանուր քաղաքականությունը կամ կապվեք FuzeVPN-ի հետ։ Այս ծանուցումը սերվերում պահպանման որևէ ֆիքսված ժամկետ չի երաշխավորում։"
+  },
+  "privacyNoticeSupportTitle": {
+    "message": "Ախտորոշումը և աջակցությունն առանձին են"
+  },
+  "privacyNoticeSupport": {
+    "message": "Ախտորոշման հաշվետվություն ուղարկելն ինքնին ընդլայնումից աջակցության հաղորդագրություն չի ուղարկում։ Խնդիրը բացատրելու կամ ստացված հաշվետվության ջնջում պահանջելու համար օգտվեք ստորև նշված FuzeVPN-ի կապի ալիքից։ Եթե որոշեք արտահանված ֆայլով կիսվել այլ ալիքով, նախ ստուգեք դրա բովանդակությունը։"
+  },
+  "privacyNoticeManage": {
+    "message": "Բացել Ախտորոշումը"
+  },
+  "privacyNoticeLinksTitle": {
+    "message": "Ծառայության քաղաքականություն և կապ"
+  },
+  "theme": {
+    "message": "Թեմա"
+  },
+  "themeSystem": {
+    "message": "Համակարգային"
+  },
+  "themeLight": {
+    "message": "Բաց"
+  },
+  "themeDark": {
+    "message": "Մուգ"
+  },
+  "switchToDarkTheme": {
+    "message": "Անցնել մուգ թեմայի"
+  },
+  "switchToLightTheme": {
+    "message": "Անցնել բաց թեմայի"
+  }
+}

@@ -1,0 +1,929 @@
+{
+  "extensionName": {
+    "message": "FuzeVPN"
+  },
+  "extensionDescription": {
+    "message": "Rinda ubuzima bwawe bwite kandi wongere umutekano wawe ukanze rimwe gusa."
+  },
+  "siteExclusionsReloadRequired": {
+    "message": "Ongera utangize FuzeVPN uhereye ku micungire y'imigereka ya mushakisha kugira ngo urangize ivugurura kandi ukoreshe imbuga zisonewe."
+  },
+  "extensionCommunicationError": {
+    "message": "Umugereka ntusubiza. Funga iri dirishya, hanyuma wongere utangize FuzeVPN uhereye ku micungire y'imigereka ya mushakisha."
+  },
+  "actionDisconnected": {
+    "message": "FuzeVPN — Ntibihujwe"
+  },
+  "actionConnected": {
+    "message": "FuzeVPN — Birinzwe muri iyi mushakisha"
+  },
+  "actionReconnecting": {
+    "message": "FuzeVPN — Irongera guhuza"
+  },
+  "actionError": {
+    "message": "FuzeVPN — Bisaba kwitabwaho"
+  },
+  "browserProtection": {
+    "message": "Kurinda mushakisha"
+  },
+  "loginTitle": {
+    "message": "Murakaza neza kuri FuzeVPN"
+  },
+  "loginSubtitle": {
+    "message": "Injira kugira ngo urinde uko usura imbuga muri iyi mushakisha."
+  },
+  "email": {
+    "message": "Aderesi ya imeri"
+  },
+  "emailPlaceholder": {
+    "message": "you@example.com"
+  },
+  "password": {
+    "message": "Ijambobanga"
+  },
+  "signIn": {
+    "message": "Injira"
+  },
+  "signingIn": {
+    "message": "Kwinjira…"
+  },
+  "forgotPassword": {
+    "message": "Wibagiwe ijambobanga?"
+  },
+  "createAccount": {
+    "message": "Fungura konti"
+  },
+  "settings": {
+    "message": "Igenamiterere"
+  },
+  "close": {
+    "message": "Funga"
+  },
+  "statusDisconnected": {
+    "message": "Ntibihujwe"
+  },
+  "statusConnecting": {
+    "message": "Guhuza…"
+  },
+  "statusChanging": {
+    "message": "Guhindura ahantu…"
+  },
+  "statusProtected": {
+    "message": "Birinzwe muri iyi mushakisha"
+  },
+  "statusRefreshing": {
+    "message": "Kuvugurura mu mutekano…"
+  },
+  "statusDisconnecting": {
+    "message": "Guhagarika guhuza…"
+  },
+  "statusError": {
+    "message": "Uburinzi bwahagaze"
+  },
+  "browserOnlyDetail": {
+    "message": "Uburinzi bw'iyi mushakisha."
+  },
+  "location": {
+    "message": "Ahantu"
+  },
+  "change": {
+    "message": "Hindura"
+  },
+  "noLocation": {
+    "message": "Nta hantu haboneka"
+  },
+  "protectBrowser": {
+    "message": "Rinda mushakisha"
+  },
+  "disconnect": {
+    "message": "Hagarika guhuza"
+  },
+  "subscription": {
+    "message": "Ifatabuguzi"
+  },
+  "refreshSubscription": {
+    "message": "Vugurura ifatabuguzi"
+  },
+  "refreshingSubscription": {
+    "message": "Kuvugurura ifatabuguzi…"
+  },
+  "subscriptionActive": {
+    "message": "Rirakora"
+  },
+  "subscriptionInactive": {
+    "message": "Ntirikora"
+  },
+  "expiresOn": {
+    "message": "Itariki y'irangira: $1"
+  },
+  "noExpiry": {
+    "message": "Nta tariki y'irangira"
+  },
+  "browserOnlyNotice": {
+    "message": "Iyi mushakisha gusa. Izindi porogaramu na mushakisha ntibirindwa."
+  },
+  "resendVerification": {
+    "message": "Ongera wohereze imeri"
+  },
+  "incognitoHelp": {
+    "message": "Gusura imbuga mu ibanga bikoresha ubu burinzi gusa iyo umugereka wemerewe gukora mu buryo bw'ibanga mu igenamiterere rya mushakisha."
+  },
+  "manageAccount": {
+    "message": "Cunga konti yanjye"
+  },
+  "account": {
+    "message": "Konti"
+  },
+  "devices": {
+    "message": "Ibikoresho"
+  },
+  "manageDevices": {
+    "message": "Cunga ibikoresho"
+  },
+  "refreshDevices": {
+    "message": "Vugurura ibikoresho"
+  },
+  "deviceCount": {
+    "message": "Ibikoresho: $1 / $2"
+  },
+  "loadingDevices": {
+    "message": "Kuzana ibikoresho…"
+  },
+  "noDevices": {
+    "message": "Nta bikoresho bikora."
+  },
+  "currentDevice": {
+    "message": "Iki gikoresho"
+  },
+  "deviceKindBrowser": {
+    "message": "Umugereka wa mushakisha"
+  },
+  "deviceKindVpn": {
+    "message": "Igikoresho cya VPN"
+  },
+  "profile_browser_proxy": {
+    "message": "Porokisi ya mushakisha"
+  },
+  "profile_wireguard": {
+    "message": "WireGuard"
+  },
+  "profile_openvpn": {
+    "message": "OpenVPN"
+  },
+  "none": {
+    "message": "nta na kimwe"
+  },
+  "deviceCreatedOn": {
+    "message": "Itariki cyakoreweho: $1"
+  },
+  "deleteDevice": {
+    "message": "Siba igikoresho"
+  },
+  "deleteDeviceNamed": {
+    "message": "Siba igikoresho: $1"
+  },
+  "confirmDeleteDevice": {
+    "message": "Ukuraho “$1”? Guhuza kwacyo kwa VPN kuzahagarara kandi porofayili zacyo zizakurwaho."
+  },
+  "resetDevice": {
+    "message": "Subiza igikoresho ku ntangiriro"
+  },
+  "confirmResetDevice": {
+    "message": "Usubiza uyu mugereka ku ntangiriro? Uzandikwa nk'igikoresho gishya ubutaha uwukoresheje."
+  },
+  "signOutAccount": {
+    "message": "Sohoka muri konti"
+  },
+  "chooseLocation": {
+    "message": "Hitamo ahantu"
+  },
+  "error_invalid_credentials": {
+    "message": "Aderesi ya imeri cyangwa ijambobanga si byo."
+  },
+  "error_unauthorized": {
+    "message": "Isesiyo yawe yarangiye. Ongera winjire."
+  },
+  "error_email_verification_required": {
+    "message": "Emeza aderesi ya imeri yawe mbere yo gutangiza uburinzi."
+  },
+  "errorVerificationCooldown": {
+    "message": "Imeri nshya ishobora gusabwa nyuma y'amasegonda $1."
+  },
+  "error_verification_email_cooldown": {
+    "message": "Tegereza gato mbere yo gusaba indi imeri."
+  },
+  "error_subscription_required": {
+    "message": "Ifatabuguzi rikora rirakenewe kugira ngo urinde iyi mushakisha."
+  },
+  "error_device_limit": {
+    "message": "Umubare ntarengwa w'ibikoresho wagezweho. Kuraho igikoresho kimwe."
+  },
+  "error_device_identity_revoked": {
+    "message": "Iki gikoresho nticyemerewe ukundi. Ongera ugerageze guhuza."
+  },
+  "error_device_proof_invalid": {
+    "message": "Ntitwashoboye kwemeza iki gikoresho. Reba itariki n'isaha bya mudasobwa yawe, hanyuma wongere ugerageze."
+  },
+  "error_device_proof_replayed": {
+    "message": "Iki cyifuzo cyamaze gukorwa. Ongera ugerageze."
+  },
+  "error_invalid_device": {
+    "message": "Iki gikoresho nticyamenyekanye. Ongera ugerageze guhuza."
+  },
+  "error_device_exists": {
+    "message": "Umwirondoro w'iki gikoresho usanzwe uhujwe n'indi konti."
+  },
+  "error_not_found": {
+    "message": "Iki gikorwa ntikikiboneka. Ongera ugerageze."
+  },
+  "error_invalid_location": {
+    "message": "Aha hantu ntihaboneka. Hitamo ahandi."
+  },
+  "error_rate_limited": {
+    "message": "Wagerageje inshuro nyinshi cyane. Tegereza gato wongere ugerageze."
+  },
+  "error_proxy_unavailable": {
+    "message": "Iyi seriveri ntiboneka by'agateganyo. Ongera ugerageze mu kanya."
+  },
+  "error_api_token_expired": {
+    "message": "Isesiyo ya konti yawe yarangiye. Ongera winjire."
+  },
+  "error_network_error": {
+    "message": "Umuyoboro ntuboneka. Reba uko uhujwe na interineti."
+  },
+  "error_request_timeout": {
+    "message": "Serivisi yatinze gusubiza. Ongera ugerageze."
+  },
+  "error_invalid_response": {
+    "message": "Serivisi yatanze igisubizo kitari cyitezwe."
+  },
+  "error_proxy_certificate_invalid": {
+    "message": "Ntitwashoboye kwemeza umutekano wa seriveri. Guhuza kwahagaritswe."
+  },
+  "error_proxy_controlled_by_extension": {
+    "message": "Undi mugereka ni wo ugenzura porokisi ya mushakisha ubu."
+  },
+  "error_proxy_controlled_by_policy": {
+    "message": "Politiki y'umuyobozi ibuza FuzeVPN guhindura porokisi."
+  },
+  "error_proxy_authentication_failed": {
+    "message": "Seriveri ntiyemeye guhuza. Ongera ugerageze guhuza."
+  },
+  "error_session_expired": {
+    "message": "Guhuza kwawe kurinzwe kwarangiye. Ongera uhuze."
+  },
+  "error_email_delivery_unavailable": {
+    "message": "Imeri ntishobora koherezwa ubu."
+  },
+  "error_unknown_error": {
+    "message": "Habaye ikosa ritunguranye. Ongera ugerageze."
+  },
+  "actionBlocked": {
+    "message": "FuzeVPN — Gusura imbuga byahagaritswe"
+  },
+  "statusBlockedRetry": {
+    "message": "Gusura imbuga byahagaritswe by'akanya — irongera guhuza"
+  },
+  "statusBlockedAction": {
+    "message": "Gusura imbuga byahagaritswe by'akanya — reba guhuza"
+  },
+  "statusProtectionUnavailable": {
+    "message": "Uburinzi ntibuboneka — gusura imbuga ntibyahagaritswe"
+  },
+  "recoveryHelp": {
+    "message": "Ongera ugerageze kugira ngo uburinzi bukomeze. Guhagarika guhuza bigufasha gusura imbuga udakoresheje FuzeVPN."
+  },
+  "retryConnection": {
+    "message": "Ongera ugerageze"
+  },
+  "killSwitch": {
+    "message": "Guhagarika byihutirwa"
+  },
+  "killSwitchHelp": {
+    "message": "Ihagarika ibyifuzo bishya byo kuri interineti iyo guhuza kwa VPN gucitse. Imbuga zisonewe zikomeza kugerwaho hanze ya VPN."
+  },
+  "webRtcProtection": {
+    "message": "Uburinzi bwa WebRTC"
+  },
+  "webRtcHelp": {
+    "message": "Bifasha kugira aderesi yawe ya IP ibanga mu gihe cy'amahamagara yo kuri interineti. Amahamagara amwe ashobora kudakora. Kuzimya ibi bishobora kugaragaza aderesi yawe nyakuri ya IP."
+  },
+  "securityEffectiveState": {
+    "message": "$1 · $2"
+  },
+  "securityBlocked": {
+    "message": "Gusura imbuga byahagaritswe"
+  },
+  "securityNotBlocked": {
+    "message": "Gusura imbuga ntibyahagaritswe"
+  },
+  "securityWebRtcActive": {
+    "message": "Igabanya rya WebRTC rirakora"
+  },
+  "securityWebRtcInactive": {
+    "message": "Igabanya rya WebRTC ntirikora"
+  },
+  "localNetworkHelp": {
+    "message": "Mu gihe cy'uburinzi, aderesi za IP zo hafi n'amazina asanzwe yo hafi birahagarikwa. Domeni isonewe ishobora gukomeza gutanga uburyo bwo kugera ku muyoboro wo hafi. Igenamiterere rya IPv6 rya sisitemu ntirihinduka."
+  },
+  "securityLimits": {
+    "message": "Ibyerekeye ubu burinzi"
+  },
+  "killSwitchLimits": {
+    "message": "Iyi mushakisha gusa: guhuza gusanzweho n'itumanaho rimwe ry'imbere muri mushakisha cyangwa ry'indi migereka bishobora gukomeza. Undi mugereka cyangwa politiki bishobora gusimbuza porokisi mbere y'uko FuzeVPN igira icyo ikora. Kuzimya umugereka bikuraho uburinzi. Nta guhagarika ku rwego rwa sisitemu yose."
+  },
+  "error_traffic_guard_failed": {
+    "message": "Guhagarika gusura imbuga ntibyashoboye kwemezwa. Uburinzi ntibwizewe. Reba uruhushya rw'umugereka."
+  },
+  "error_webrtc_control_unavailable": {
+    "message": "Igabanya rya WebRTC ntiryashoboye gushyirwaho. Reba igenamiterere ryawe, indi migereka cyangwa politiki y'umuyobozi."
+  },
+  "language": {
+    "message": "Ururimi"
+  },
+  "languageAutomatic": {
+    "message": "Byikora — ururimi rwa mushakisha"
+  },
+  "languageHelp": {
+    "message": "Impinduka zihita zikurikizwa. Uburyo bwikora bukurikiza ururimi rwa mushakisha, rushobora gutandukana n'ururimi rwa sisitemu."
+  },
+  "languageSaveError": {
+    "message": "Ururimi ntirwashoboye kubikwa. Amahitamo yawe ya mbere yagumyeho. Ongera ugerageze."
+  },
+  "publicIp": {
+    "message": "IP rusange"
+  },
+  "vpnIp": {
+    "message": "IP ya VPN"
+  },
+  "ipChecking": {
+    "message": "Kugenzura…"
+  },
+  "ipUnavailable": {
+    "message": "Ntiboneka"
+  },
+  "ipLookupExplanation": {
+    "message": "IP igenzurwa hakoreshejwe ipify, cyangwa icanhazip nk'insimburabuzi, binyuze mu guhuza kwawe kw'ubu. Nta mateka yo gusura imbuga yoherezwa."
+  },
+  "automaticLocation": {
+    "message": "Byikora"
+  },
+  "automaticLocationHelp": {
+    "message": "Igihe cyiza cyo gusubiza giheruka, cyangwa ahantu waherukaga."
+  },
+  "automaticLocationName": {
+    "message": "Byikora · $1"
+  },
+  "searchLocations": {
+    "message": "Shakisha igihugu cyangwa umujyi"
+  },
+  "locationFilters": {
+    "message": "Shungura ahantu"
+  },
+  "allLocations": {
+    "message": "Byose"
+  },
+  "favoriteLocations": {
+    "message": "Ibyo ukunda"
+  },
+  "recentLocations": {
+    "message": "Ibiheruka"
+  },
+  "noMatchingLocations": {
+    "message": "Nta hantu hahuye n'ibyo washakishije."
+  },
+  "noFavoriteLocations": {
+    "message": "Shyiraho inyenyeri kugira ngo ahantu ukunda habe hano."
+  },
+  "noRecentLocations": {
+    "message": "Ahantu uheruka guhuzaho hazagaragara hano."
+  },
+  "addFavorite": {
+    "message": "Ongera mu byo ukunda: $1"
+  },
+  "removeFavorite": {
+    "message": "Kura mu byo ukunda: $1"
+  },
+  "unavailableFavoriteLocation": {
+    "message": "Ahantu ukunda hataboneka: $1"
+  },
+  "locationSaveError": {
+    "message": "Impinduka ntizashoboye kurangira. Igenamiterere rimwe rishobora kuba ryabitswe. Reba amahitamo agaragara mbere yo kongera kugerageza."
+  },
+  "siteExclusions": {
+    "message": "Imbuga zisonewe"
+  },
+  "siteExclusionsHelp": {
+    "message": "Izi mbuga zikoresha guhuza kwawe zidakoresheje FuzeVPN, kabone n'iyo VPN yaba yahagaze."
+  },
+  "siteExclusionsEnabled": {
+    "message": "Tangiza isonerwa"
+  },
+  "siteExclusionInput": {
+    "message": "Domeni cyangwa URL"
+  },
+  "siteExclusionPlaceholder": {
+    "message": "example.com"
+  },
+  "siteExclusionPreview": {
+    "message": "Domeni yatoranyijwe: $1"
+  },
+  "siteExclusionSubdomains": {
+    "message": "Shyiramo domeni ziyishamikiyeho"
+  },
+  "siteExclusionAdd": {
+    "message": "Ongeraho urubuga"
+  },
+  "siteExclusionsEmpty": {
+    "message": "Nta mbuga zisonewe. Ongeraho gusa imbuga ushaka gukoresha udakoresheje VPN."
+  },
+  "siteExclusionsCount": {
+    "message": "Imbuga: $1 / 100"
+  },
+  "siteExclusionScopeSubdomains": {
+    "message": "Domeni n'iziyishamikiyeho"
+  },
+  "siteExclusionScopeExact": {
+    "message": "Domeni nyirizina gusa"
+  },
+  "siteExclusionRemove": {
+    "message": "Kuraho: $1"
+  },
+  "siteExclusionsDetails": {
+    "message": "Isonerwa rikora rite?"
+  },
+  "siteExclusionsResources": {
+    "message": "Ibiri kuri domeni zindi bikomeza kurindwa. Gusonera paji ntibisonera mu buryo bwikora ibindi biyirimo."
+  },
+  "siteExclusionsReload": {
+    "message": "Ongera ufungure urubuga nyuma y'impinduka. Guhuza gusanzweho gushobora gukomeza kunyura mu nzira ya mbere."
+  },
+  "siteExclusionsWebRtc": {
+    "message": "Uburinzi bwa WebRTC bukomeza kuba igenamiterere rusange, harimo no ku mbuga zisonewe."
+  },
+  "siteExclusionsLocal": {
+    "message": "Bibikwa muri iyi mushakisha gusa kandi bigumaho nyuma yo gusohoka muri konti yawe."
+  },
+  "siteExclusionsOn": {
+    "message": "Isonerwa rirakora"
+  },
+  "siteExclusionsOff": {
+    "message": "Isonerwa ntirikora"
+  },
+  "siteExclusionsSummary": {
+    "message": "Imbuga ziri hanze ya VPN: $1"
+  },
+  "siteExclusionsPending": {
+    "message": "Gushyiraho isonerwa…"
+  },
+  "siteExclusionsInterrupted": {
+    "message": "Impinduka yahagaritswe. Uburinzi bw'agateganyo buracyariho."
+  },
+  "siteExclusionsSaveError": {
+    "message": "Impinduka ntiyashoboye kurangira. Reba igenamiterere ryawe wongere ugerageze."
+  },
+  "siteExclusionsRetry": {
+    "message": "Ongera ugerageze"
+  },
+  "siteExclusionInvalid": {
+    "message": "Andika domeni rusange yemewe. Aderesi za IP, amazina yo hafi, ibimenyetso bisimbura (wildcards), imisozo rusange ya domeni na domeni zigenewe ibindi ntibyemerwa."
+  },
+  "siteExclusionDuplicate": {
+    "message": "Iyi domeni isanzwe iri ku rutonde."
+  },
+  "siteExclusionsLimit": {
+    "message": "Umubare ntarengwa w'imbuga 100 wagezweho. Kuraho urubuga kugira ngo wongereho urundi."
+  },
+  "statusProtectedExceptions": {
+    "message": "VPN irakora · isonerwa: $1"
+  },
+  "statusBlockedExceptions": {
+    "message": "Imbuga zisonewe ni zo zonyine zigerwaho"
+  },
+  "securityBlockedExceptions": {
+    "message": "Gusura imbuga byahagaritswe uretse imbuga zisonewe"
+  },
+  "securityBlockUnverified": {
+    "message": "Guhagarika ntibyemejwe"
+  },
+  "logoutLocalComplete": {
+    "message": "Gusohoka kuri iki gikoresho byarangiye."
+  },
+  "logoutApiSession": {
+    "message": "Isesiyo ya konti y'ubu"
+  },
+  "logoutProxySessions": {
+    "message": "Amasesiyo ya VPN azwi"
+  },
+  "logoutRevocationPending": {
+    "message": "Gutesha agaciro…"
+  },
+  "logoutRevocationConfirmed": {
+    "message": "Gutesha agaciro byemejwe"
+  },
+  "logoutRevocationUnconfirmed": {
+    "message": "Gutesha agaciro ntibyemejwe"
+  },
+  "logoutUnconfirmedHelp": {
+    "message": "Amasesiyo amwe ya kure ashobora gukomeza gukora kugeza igihe cyayo kirangiye."
+  },
+  "deviceQuotaLoading": {
+    "message": "Kuzana umubare ntarengwa w'ibikoresho…"
+  },
+  "deviceQuotaUnknown": {
+    "message": "Umubare ntarengwa w'ibikoresho ntuboneka"
+  },
+  "error_proxy_creation_uncertain": {
+    "message": "Seriveri ntiyemeje ishyirwaho ry'uguhuza gushya. Kongera guhuza byikora byahagaritswe by'agateganyo."
+  },
+  "siteExclusionsPreferencesReset": {
+    "message": "Imbuga zisonewe wari wabitse zasubijwe ku ntangiriro kuko zitashoboye gusomwa. Ongera ushyiremo imbuga ushaka gusonera."
+  },
+  "siteExclusionsConflict": {
+    "message": "Urutonde rw'imbuga zisonewe rwahindutse. Rusuzume, hanyuma wongere ugerageze impinduka yawe."
+  },
+  "unavailableLocation": {
+    "message": "Ahantu ntihaboneka"
+  },
+  "verificationSending": {
+    "message": "Kohereza imeri yo kwemeza…"
+  },
+  "verificationSent": {
+    "message": "Imeri yo kwemeza yoherejwe. Reba mu bubiko bw'imeri zinjira no mu bubiko bwa spam."
+  },
+  "error_login_requires_disconnect": {
+    "message": "Hagarika guhuza kwa VPN kw'ubu mbere yo kwinjira mu yindi konti."
+  },
+  "error_storage_unavailable": {
+    "message": "Igenamiterere rya konti ribitswe hano ntiriboneka. Ongera ugerageze ububiko bwa mushakisha nibuboneka; konti yawe yabitswe ntiyakozweho."
+  },
+  "diagnosticsAssistance": {
+    "message": "Ubufasha"
+  },
+  "diagnosticsTitle": {
+    "message": "Isuzuma"
+  },
+  "diagnosticsIntro": {
+    "message": "Genzura FuzeVPN n'uguhuza kw'ubu utahinduye uburinzi bwawe."
+  },
+  "diagnosticsPrivacyTitle": {
+    "message": "Amakuru yawe"
+  },
+  "diagnosticsPrivacy": {
+    "message": "JSON ya raporo ikubiyemo imiterere ya tekiniki na kode z'amakosa, nta magambobanga, tokeni, aderesi za imeri, aderesi za IP, URL zasuwe cyangwa domeni zisonewe. Kohereza bikorwa hemejwe umwirondoro kandi bihuza raporo na konti yawe. Reba itangazo ku byerekeye amakuru y'umuyoboro."
+  },
+  "diagnosticsAuto": {
+    "message": "Ohereza raporo z'amakosa akomeye mu buryo bwikora"
+  },
+  "diagnosticsAutoHelp": {
+    "message": "Ntibikora ku buryo busanzwe. Kubitangiza byohereza raporo za tekiniki zoroheje z'iyi konti, nta mateka yo gusura imbuga. Bizimye hano kugira ngo uhagarike kohereza byikora kandi usibe raporo zikora zitegereje koherezwa."
+  },
+  "diagnosticsHistoryHelp": {
+    "message": "Amateka ya tekiniki agumaho kuri iki gikoresho: kugeza ku bikorwa 200 kuri buri gitabo mu minota 10, kabone n'iyo kohereza byikora bizimye. Nta mateka yo gusura imbuga arimo kandi asibwa n'intoki, iyo mushakisha ifunzwe cyangwa iyo konti ihindutse."
+  },
+  "diagnosticsHistoryCount": {
+    "message": "Ibikorwa bya tekiniki bibitswe hano: $1"
+  },
+  "diagnosticsConnectionLog": {
+    "message": "Ohereza hanze igitabo cy'uguhuza"
+  },
+  "diagnosticsAccountRequired": {
+    "message": "Injira kugira ngo ushobore kohereza. Ushobora kureba no kohereza hanze raporo nta konti."
+  },
+  "diagnosticsRun": {
+    "message": "Tangiza isuzuma"
+  },
+  "diagnosticsClearHistory": {
+    "message": "Siba amateka abitswe hano"
+  },
+  "diagnosticsPreparing": {
+    "message": "Gutegura raporo…"
+  },
+  "diagnosticsReports": {
+    "message": "Raporo"
+  },
+  "diagnosticsEmpty": {
+    "message": "Nta raporo ibitswe hano kugeza ubu."
+  },
+  "diagnosticsChooseReport": {
+    "message": "Hitamo raporo"
+  },
+  "diagnosticsReportLabel": {
+    "message": "$1 · $2 · $3"
+  },
+  "diagnosticsTypeFull": {
+    "message": "Raporo yuzuye"
+  },
+  "diagnosticsTypeSimple": {
+    "message": "Raporo y'ikosa"
+  },
+  "diagnosticsSummary": {
+    "message": "Yakusanyijwe ku wa: $1. Verisiyo ya FuzeVPN: $2."
+  },
+  "diagnosticsJson": {
+    "message": "Reba ibikubiye muri raporo (JSON)"
+  },
+  "diagnosticsExport": {
+    "message": "Ohereza raporo hanze"
+  },
+  "diagnosticsDelete": {
+    "message": "Siba raporo ibitswe hano"
+  },
+  "diagnosticsRetention": {
+    "message": "Raporo zibitswe hano zirangira nyuma y'amasaha 24. Gusiba hano ntibisiba raporo serivisi yamaze kwakira. Reba itangazo ku byerekeye ibikwa kuri seriveri n'ibyifuzo byo gusiba."
+  },
+  "diagnosticsConsent": {
+    "message": "Ohereza iyi raporo y'isuzuma kuri FuzeVPN"
+  },
+  "diagnosticsDataCollectionRequired": {
+    "message": "Firefox igomba kwemera ikusanywa ry'amakuru ya tekiniki kugira ngo isuzuma ryoherezwe. Ongera ugerageze kandi utange uru ruhushya."
+  },
+  "diagnosticsSendHelp": {
+    "message": "Kohereza ni ku bushake. Bimaze kwemezwa, bishobora kongera kugeragezwa mu gihe kigera ku masaha 24 hakoreshejwe isesiyo yemewe ya konti imwe. Ushobora guhagarika ibindi bigeragezo. Guhagarika utinze ntibyemeza ko seriveri itaramaze kwakira raporo."
+  },
+  "diagnosticsSend": {
+    "message": "Ohereza raporo"
+  },
+  "diagnosticsCancel": {
+    "message": "Hagarika kohereza"
+  },
+  "diagnosticsReload": {
+    "message": "Ongera ufungure iyi paji"
+  },
+  "diagnosticsUnavailable": {
+    "message": "Isuzuma ntiriboneka. Ongera utangize FuzeVPN uhereye ku micungire y'imigereka ya mushakisha, hanyuma wongere ufungure iyi paji. VPN yawe ntiyahindutse."
+  },
+  "diagnosticsQueueFull": {
+    "message": "Umurongo wo kohereza wuzuye. Siba raporo ibitswe hano cyangwa utegereze ko raporo itegereje irangira."
+  },
+  "diagnosticsContentUnavailable": {
+    "message": "Ibikubiye muri raporo ntibiboneka. Ohereza hanze raporo ibitswe hano niba iboneka, hanyuma uvugane n'ubufasha."
+  },
+  "diagnosticsFailure": {
+    "message": "Igikorwa cy'isuzuma ntigishoboye kurangira. VPN yawe ntiyahindutse."
+  },
+  "diagnosticsChecks": {
+    "message": "Igenzura"
+  },
+  "diagnosticsCheckFallback": {
+    "message": "Igenzura rya tekiniki: $1"
+  },
+  "diagnosticsCheckLine": {
+    "message": "$1 — $2"
+  },
+  "diagnosticsProxy": {
+    "message": "Porokisi ya mushakisha"
+  },
+  "diagnosticsStorage": {
+    "message": "Ububiko bwo kuri iki gikoresho"
+  },
+  "diagnosticsNetwork": {
+    "message": "Guhuza n'umuyoboro"
+  },
+  "diagnosticsCleanup": {
+    "message": "Isukura ry'isesiyo"
+  },
+  "diagnosticsResult_passed": {
+    "message": "Byagenze neza"
+  },
+  "diagnosticsResult_failed": {
+    "message": "Byanze"
+  },
+  "diagnosticsResult_skipped": {
+    "message": "Ntibyakozwe"
+  },
+  "diagnosticsResult_unknown": {
+    "message": "Ntibizwi"
+  },
+  "diagnosticsStatus_ready": {
+    "message": "Yiteguye kuri iki gikoresho"
+  },
+  "diagnosticsStatus_pending": {
+    "message": "Itegereje koherezwa"
+  },
+  "diagnosticsStatus_sending": {
+    "message": "Kohereza…"
+  },
+  "diagnosticsStatus_session_required": {
+    "message": "Itegereje isesiyo yemewe ya konti imwe"
+  },
+  "diagnosticsStatus_received": {
+    "message": "Yakiriwe na serivisi"
+  },
+  "diagnosticsStatus_failed": {
+    "message": "Kohereza byanze"
+  },
+  "diagnosticsStatus_cancelled": {
+    "message": "Kohereza byahagaritswe"
+  },
+  "diagnosticsStatus_expired": {
+    "message": "Igihe cyo kohereza cyarangiye"
+  },
+  "diagnosticsReceivedAt": {
+    "message": "Yakiriwe ku wa: $1"
+  },
+  "error_private_browsing_required": {
+    "message": "Firefox isaba uru ruhushya kugira ngo itunganye VPN, ndetse no mu madirishya asanzwe. Fungura about:addons → FuzeVPN, uyemerere gukora mu madirishya y'ibanga, hanyuma wongere ugerageze."
+  },
+  "error_host_permissions_required": {
+    "message": "Muri Firefox, fungura about:addons → FuzeVPN → Uburenganzira, wemere kugera ku mbuga zose, hanyuma wongere ugerageze."
+  },
+  "cancelAction": {
+    "message": "Hagarika"
+  },
+  "refreshLocations": {
+    "message": "Vugurura ahantu"
+  },
+  "refreshingLocations": {
+    "message": "Kuvugurura ahantu…"
+  },
+  "locationsRefreshError": {
+    "message": "Urutonde rw'ahantu ntirwashoboye kuvugururwa. Ongera ugerageze."
+  },
+  "error_device_revoked_limit": {
+    "message": "Iki gikoresho cyambuwe uburenganzira. Umubare ntarengwa w'ibikoresho wagezweho: kuraho igikoresho kimwe."
+  },
+  "noAvailableLocations": {
+    "message": "Nta hantu haboneka ubu. Ongera ugerageze mu kanya."
+  },
+  "noAvailableFavoriteLocations": {
+    "message": "Ahantu ukunda ntihaboneka by'agateganyo."
+  },
+  "error_location_favorites_limit": {
+    "message": "Umubare ntarengwa w'ahantu 100 ukunda wagezweho. Kuraho kimwe mu byo ukunda kugira ngo wongereho ikindi."
+  },
+  "error_server_full": {
+    "message": "Iyi seriveri yuzuye. Hitamo ahandi."
+  },
+  "error_capacity_unavailable": {
+    "message": "Kuboneka kw'iyi seriveri ntigushobora kwemezwa ubu. Ongera ugerageze mu kanya."
+  },
+  "locationHierarchyHelp": {
+    "message": "Izina rihitamo seriveri; akambi kerekana ibisobanuro."
+  },
+  "locationCountrySelect": {
+    "message": "Hitamo seriveri iboneka: $1"
+  },
+  "locationCitySelect": {
+    "message": "Hitamo seriveri iboneka: $1"
+  },
+  "locationShowCities": {
+    "message": "Erekana imijyi: $1"
+  },
+  "locationHideCities": {
+    "message": "Hisha imijyi: $1"
+  },
+  "locationShowServers": {
+    "message": "Erekana seriveri: $1"
+  },
+  "locationHideServers": {
+    "message": "Hisha seriveri: $1"
+  },
+  "locationAvailableServers": {
+    "message": "Seriveri ziboneka: $1"
+  },
+  "legalInformation": {
+    "message": "Amakuru y'amategeko"
+  },
+  "privacyPolicy": {
+    "message": "Itangazo ry'ubuzima bwite ry'umugereka"
+  },
+  "termsAndConditions": {
+    "message": "Amabwiriza yo gukoresha no kugurisha"
+  },
+  "legalNotice": {
+    "message": "Itangazo ry'amategeko"
+  },
+  "contactSupport": {
+    "message": "Vugana n'ubufasha"
+  },
+  "webSignIn": {
+    "message": "Injira muri FuzeVPN"
+  },
+  "webSignInDisconnect": {
+    "message": "Hagarika guhuza hanyuma winjire"
+  },
+  "webSignInPending": {
+    "message": "Kwinjira biri gukorwa…"
+  },
+  "webSignInHelp": {
+    "message": "Injira cyangwa ufungure konti ukoresheje Google cyangwa imeri mu gice cy'abakiriya cya FuzeVPN."
+  },
+  "webSignInDisconnectHelp": {
+    "message": "Iyi buto ihagarika uburinzi bwa mushakisha kugira ngo ushobore kwinjira ukoresheje Google cyangwa imeri. Gusura imbuga kwawe ntikuzaba kurinzwe mu gihe cyo kwinjira."
+  },
+  "webSignInStatus": {
+    "message": "Komereza mu idirishya ryo kwinjira rya FuzeVPN. Umugereka uzivugurura ubwawo nurangiza. Funga iryo dirishya kugira ngo uhagarike."
+  },
+  "error_web_login_cancelled": {
+    "message": "Kwinjira byahagaritswe. Ongera ugerageze."
+  },
+  "error_web_login_timeout": {
+    "message": "Kwinjira byatwaye igihe kirekire cyane. Ongera ugerageze."
+  },
+  "error_web_login_unavailable": {
+    "message": "Kwinjira unyuze ku rubuga ntibiboneka. Ongera ugerageze nyuma."
+  },
+  "error_web_login_invalid_callback": {
+    "message": "Kwinjira ntibyashoboye kwemezwa. Ongera utangire uhereye ku mugereka."
+  },
+  "error_web_login_denied": {
+    "message": "Kwinjira ntibyemewe. Ongera ugerageze."
+  },
+  "error_web_login_busy": {
+    "message": "Funga idirishya ryo kwinjira risanzwe rifunguye mbere yo kongera kugerageza."
+  },
+  "deviceKindFirefox": {
+    "message": "Mushakisha ya Firefox"
+  },
+  "generalPrivacyPolicy": {
+    "message": "Politiki rusange y'ubuzima bwite"
+  },
+  "privacyNoticeTitle": {
+    "message": "Ubuzima bwite mu mugereka wa FuzeVPN"
+  },
+  "privacyNoticeIntro": {
+    "message": "Iri tangazo risobanura amakuru akoreshwa n'uyu mugereka. Ryuzuza politiki rusange y'ubuzima bwite ya FuzeVPN, ihuza ryayo riri hepfo. Kohereza isuzuma ku bushake bitandukanye n'amakuru akenewe kugira ngo winjire kandi ukoreshe VPN."
+  },
+  "privacyNoticeUpdated": {
+    "message": "Itangazo ryavuguruwe ku wa 19 Ukwakira 2026"
+  },
+  "privacyNoticeServiceTitle": {
+    "message": "Konti na serivisi ya VPN"
+  },
+  "privacyNoticeService": {
+    "message": "Umugereka uhererekanya na api.fuzevpn.com amakuru yo kwemeza umwirondoro, aya konti, ay'ifatabuguzi, ay'igikoresho n'ay'isesiyo ya porokisi. Porokisi ya VPN itwara urujya n'uruza rw'amakuru rucishwamo. Uku guhuza kugaragariza serivisi yakira metadata y'umuyoboro; iri tangazo nta sezerano ryihariye ritanga ku bijyanye n'ibitabo bya seriveri."
+  },
+  "privacyNoticeLocalTitle": {
+    "message": "Amakuru abitswe muri mushakisha yawe"
+  },
+  "privacyNoticeLocal": {
+    "message": "Ububiko bwa mushakisha bubika isesiyo yawe, amakuru ya konti, ibyo wahisemo, imbuga zisonewe n'umwirondoro w'igikoresho. Ibitabo bya tekiniki bibikwa kuri iki gikoresho mu gihe kigera ku minota 10, kabone n'iyo kohereza raporo byikora bizimye. Inyandiko z'agateganyo z'isuzuma na raporo zitegereje koherezwa zirangira hano nyuma y'amasaha 24; isukura rikorwa iyo umugereka ushoboye gukora."
+  },
+  "privacyNoticeIpTitle": {
+    "message": "Igenzura rya IP rusange n'ibigo by'abandi"
+  },
+  "privacyNoticeIp": {
+    "message": "Kwerekana IP n'isuzuma ry'umuyoboro bivugana na api.ipify.org. Kwerekana IP bishobora gukoresha ipv4.icanhazip.com nk'insimburabuzi. Utanga serivisi yakira IP y'uguhuza n'amakuru asanzwe y'icyifuzo (metadata): IP yawe rusange mu buryo butaziguye, cyangwa IP isohokeramo ya VPN iyo hakoreshejwe porokisi. Ibi byifuzo ntibirimo cookies cyangwa referrer kandi ntibyohereza tokeni ya konti cyangwa amateka yo gusura imbuga."
+  },
+  "privacyNoticeReportsTitle": {
+    "message": "Ibikubiye muri raporo z'isuzuma"
+  },
+  "privacyNoticeReports": {
+    "message": "Raporo zishobora kubamo ikiranga raporo cyakozwe ku buryo bw'impanuka, ibihe byanditswe, verisiyo z'umugereka na mushakisha, ubwoko n'imiterere bya sisitemu y'imikorere, imiterere y'uguhuza n'uburinzi, kode z'amakosa, imibare, igihe byatwaye n'ibisubizo by'igenzura. Raporo zuzuye zishobora kubamo ibikorwa bya tekiniki biheruka. JSON yazo ntirimo amagambobanga, tokeni zo kwemeza, aderesi za imeri, aderesi za IP, URL zasuwe cyangwa domeni zisonewe. Ushobora gusuzuma no kohereza hanze raporo yuzuye mbere yo kuyohereza."
+  },
+  "privacyNoticeAccountTitle": {
+    "message": "Uwakira n'ihuzwa na konti"
+  },
+  "privacyNoticeAccount": {
+    "message": "Raporo zoherezwa kuri FuzeVPN kuri api.fuzevpn.com/v1/diagnostics binyuze mu guhuza kwemejwe. Uku guhuza kwa API ntikunyura muri porokisi ya VPN: FuzeVPN yakira IP yawe rusange itaziguye kabone n'iyo VPN ikora. Raporo zihuzwa na konti yinjiyemo, ntabwo zihishe nyirazo. Umutwe wo kwemeza umwirondoro na IP bitandukanye na JSON ya raporo. Kwakira neza byemeza gusa ko iyo aderesi ya API yemeye raporo, si uko umukozi w'ubufasha yayisomye."
+  },
+  "privacyNoticeChoiceTitle": {
+    "message": "Kohereza ku bushake no kwisubiraho"
+  },
+  "privacyNoticeChoice": {
+    "message": "Kohereza byikora ntibikora ku buryo busanzwe. Kubitangiza byemerera raporo z'amakosa zoroheje z'iyo konti. Kohereza raporo yuzuye n'intoki bisaba kuranga agasanduku ko kohereza. Firefox nayo isaba uruhushya rwayo rw'amakuru ya tekiniki rutari itegeko. Zimya kohereza byikora kugira ngo ubihagarike kandi usibe raporo zikora zitegereje; hagarika ukwabyo buri kohereza gutegereje. Kwanga kohereza isuzuma ntibikubuza gukoresha VPN."
+  },
+  "privacyNoticeDeleteTitle": {
+    "message": "Gusiba hano na dosiye zakuruwe"
+  },
+  "privacyNoticeDelete": {
+    "message": "Mu Isuzuma, siba amateka ya tekiniki cyangwa usibe raporo imwe ibitswe hano. Gusiba amateka ntibisiba kopi za raporo zisanzweho. Guhagarika cyangwa gusiba hano ntibishobora kugarura amakuru serivisi yamaze kwakira, harimo n'ayoherejwe mbere y'uko uhagarika. Dosiye zakuruwe ni dosiye zitandukanye ugomba kwisibira ubwawe."
+  },
+  "privacyNoticeServerTitle": {
+    "message": "Kubika kuri seriveri n'ibyifuzo"
+  },
+  "privacyNoticeServer": {
+    "message": "Uyu mugereka ntugenzura kandi ntiwemeza ibikwa kuri seriveri cyangwa isiba rikorerwa kuri seriveri. Ku gihe cyo kubika gikoreshwa na FuzeVPN no ku byifuzo bijyanye na raporo zamaze koherezwa, reba politiki rusange y'ubuzima bwite cyangwa uvugane na FuzeVPN. Iri tangazo ntiryemeza igihe ntakuka cyo kubika kuri seriveri."
+  },
+  "privacyNoticeSupportTitle": {
+    "message": "Isuzuma n'ubufasha ni ibintu bitandukanye"
+  },
+  "privacyNoticeSupport": {
+    "message": "Kohereza raporo y'isuzuma ubwabyo ntibyohereza ubutumwa ku bufasha buvuye mu mugereka. Kugira ngo usobanure ikibazo cyangwa usabe gusiba raporo yakiriwe, koresha uburyo bwo kuvugana na FuzeVPN buri hepfo. Niba uhisemo gusangiza dosiye yoherejwe hanze unyuze mu bundi buryo, banza urebe ibiyirimo."
+  },
+  "privacyNoticeManage": {
+    "message": "Fungura Isuzuma"
+  },
+  "privacyNoticeLinksTitle": {
+    "message": "Politiki ya serivisi no kuvugana"
+  },
+  "theme": {
+    "message": "Insanganyamatsiko"
+  },
+  "themeSystem": {
+    "message": "Sisitemu"
+  },
+  "themeLight": {
+    "message": "Urumuri"
+  },
+  "themeDark": {
+    "message": "Umwijima"
+  },
+  "switchToDarkTheme": {
+    "message": "Hindukira ku nsanganyamatsiko y'umwijima"
+  },
+  "switchToLightTheme": {
+    "message": "Hindukira ku nsanganyamatsiko y'urumuri"
+  }
+}

@@ -694,7 +694,7 @@ async function verifyBuiltApplication() {
     );
     await popup.keyboard.press("Escape");
     record(
-      `Fifty languages render with localized legal links, no horizontal overflow or VPN operations: ${state}`,
+      `Seventy languages render with localized legal links, no horizontal overflow or VPN operations: ${state}`,
     );
   }
   let worker = await launch(extensionPath, "application-profile");

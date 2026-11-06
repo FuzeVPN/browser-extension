@@ -28,15 +28,15 @@ function deferred<T>() {
 const english = { greeting: { message: "Hello $1" } };
 
 describe("language selection", () => {
-  it("uses RTL only for Arabic, Persian, Urdu and Hebrew", () => {
+  it("uses RTL only for Arabic, Persian, Urdu, Hebrew and Pashto", () => {
     const directions = Object.keys(LANGUAGE_NAMES).map((language) => [
       language,
       languageDirection(language as keyof typeof LANGUAGE_NAMES),
     ]);
     expect(
       directions.filter(([, direction]) => direction === "rtl").map(([language]) => language),
-    ).toEqual(["ar", "fa", "ur", "he"]);
-    expect(directions.filter(([, direction]) => direction === "ltr")).toHaveLength(46);
+    ).toEqual(["ar", "fa", "ur", "he", "ps"]);
+    expect(directions.filter(([, direction]) => direction === "ltr")).toHaveLength(65);
   });
   it.each([
     ["en-GB", "en"],
@@ -100,11 +100,34 @@ describe("language selection", () => {
     ["sw-KE", "sw"],
     ["ta-IN", "ta"],
     ["te-IN", "te"],
+    ["sq-AL", "sq"],
+    ["hy-AM", "hy"],
+    ["az-AZ", "az"],
+    ["az-Latn-AZ", "az"],
+    ["my-MM", "my"],
+    ["si-LK", "si"],
+    ["ka-GE", "ka"],
+    ["ha-NG", "ha"],
+    ["ig-NG", "ig"],
+    ["kk-KZ", "kk"],
+    ["km-KH", "km"],
+    ["rw-RW", "rw"],
+    ["lo-LA", "lo"],
+    ["mg-MG", "mg"],
+    ["ne-NP", "ne"],
+    ["or-IN", "or"],
+    ["uz-UZ", "uz"],
+    ["uz-Latn-UZ", "uz"],
+    ["ps-AF", "ps"],
+    ["pa-IN", "pa"],
+    ["pa-Guru-IN", "pa"],
+    ["so-SO", "so"],
+    ["yo-NG", "yo"],
     ["", "en"],
   ])("resolves automatic %s to %s", (browser, expected) => {
     expect(resolveLanguage("auto", browser)).toBe(expected);
   });
-  it("exposes the fifty supported languages in the requested order", () => {
+  it("exposes the seventy supported languages in the requested order", () => {
     expect(Object.keys(LANGUAGE_NAMES)).toEqual([
       "en",
       "es",
@@ -156,6 +179,26 @@ describe("language selection", () => {
       "sw",
       "ta",
       "te",
+      "sq",
+      "hy",
+      "az",
+      "my",
+      "si",
+      "ka",
+      "ha",
+      "ig",
+      "kk",
+      "km",
+      "rw",
+      "lo",
+      "mg",
+      "ne",
+      "or",
+      "uz",
+      "ps",
+      "pa",
+      "so",
+      "yo",
     ]);
   });
   it.each([

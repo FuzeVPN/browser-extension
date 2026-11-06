@@ -1,0 +1,929 @@
+{
+  "extensionName": {
+    "message": "FuzeVPN"
+  },
+  "extensionDescription": {
+    "message": "Ruani privatësinë dhe forconi sigurinë tuaj me një klikim."
+  },
+  "siteExclusionsReloadRequired": {
+    "message": "Ringarkoni FuzeVPN nga menaxheri i shtesave të shfletuesit për të përfunduar përditësimin dhe për të përdorur sajtet e përjashtuara."
+  },
+  "extensionCommunicationError": {
+    "message": "Shtesa nuk përgjigjet. Mbyllni këtë dritare, pastaj ringarkoni FuzeVPN nga menaxheri i shtesave të shfletuesit."
+  },
+  "actionDisconnected": {
+    "message": "FuzeVPN — I shkëputur"
+  },
+  "actionConnected": {
+    "message": "FuzeVPN — I mbrojtur në këtë shfletues"
+  },
+  "actionReconnecting": {
+    "message": "FuzeVPN — Duke u rilidhur"
+  },
+  "actionError": {
+    "message": "FuzeVPN — Kërkohet vëmendje"
+  },
+  "browserProtection": {
+    "message": "Mbrojtja e shfletuesit"
+  },
+  "loginTitle": {
+    "message": "Mirë se vini në FuzeVPN"
+  },
+  "loginSubtitle": {
+    "message": "Hyni për të mbrojtur shfletimin tuaj në këtë shfletues."
+  },
+  "email": {
+    "message": "Adresa e email-it"
+  },
+  "emailPlaceholder": {
+    "message": "you@example.com"
+  },
+  "password": {
+    "message": "Fjalëkalimi"
+  },
+  "signIn": {
+    "message": "Hyr"
+  },
+  "signingIn": {
+    "message": "Duke hyrë…"
+  },
+  "forgotPassword": {
+    "message": "Keni harruar fjalëkalimin?"
+  },
+  "createAccount": {
+    "message": "Krijoni një llogari"
+  },
+  "settings": {
+    "message": "Cilësimet"
+  },
+  "close": {
+    "message": "Mbyll"
+  },
+  "statusDisconnected": {
+    "message": "I shkëputur"
+  },
+  "statusConnecting": {
+    "message": "Duke u lidhur…"
+  },
+  "statusChanging": {
+    "message": "Duke ndryshuar vendndodhjen…"
+  },
+  "statusProtected": {
+    "message": "I mbrojtur në këtë shfletues"
+  },
+  "statusRefreshing": {
+    "message": "Duke rinovuar në mënyrë të sigurt…"
+  },
+  "statusDisconnecting": {
+    "message": "Duke u shkëputur…"
+  },
+  "statusError": {
+    "message": "Mbrojtja u ndal"
+  },
+  "browserOnlyDetail": {
+    "message": "Mbrojtje për këtë shfletues."
+  },
+  "location": {
+    "message": "Vendndodhja"
+  },
+  "change": {
+    "message": "Ndrysho"
+  },
+  "noLocation": {
+    "message": "Asnjë vendndodhje e disponueshme"
+  },
+  "protectBrowser": {
+    "message": "Mbro shfletuesin"
+  },
+  "disconnect": {
+    "message": "Shkëput"
+  },
+  "subscription": {
+    "message": "Abonimi"
+  },
+  "refreshSubscription": {
+    "message": "Rifresko abonimin"
+  },
+  "refreshingSubscription": {
+    "message": "Duke rifreskuar abonimin…"
+  },
+  "subscriptionActive": {
+    "message": "Aktiv"
+  },
+  "subscriptionInactive": {
+    "message": "Joaktiv"
+  },
+  "expiresOn": {
+    "message": "Skadon më: $1"
+  },
+  "noExpiry": {
+    "message": "Pa datë skadimi"
+  },
+  "browserOnlyNotice": {
+    "message": "Vetëm ky shfletues. Aplikacionet dhe shfletuesit e tjerë nuk mbulohen."
+  },
+  "resendVerification": {
+    "message": "Ridërgo email-in"
+  },
+  "incognitoHelp": {
+    "message": "Shfletimi privat përdor të njëjtën mbrojtje vetëm kur shtesa lejohet në modalitetin privat te cilësimet e shfletuesit."
+  },
+  "manageAccount": {
+    "message": "Menaxho llogarinë time"
+  },
+  "account": {
+    "message": "Llogaria"
+  },
+  "devices": {
+    "message": "Pajisjet"
+  },
+  "manageDevices": {
+    "message": "Menaxho pajisjet"
+  },
+  "refreshDevices": {
+    "message": "Rifresko pajisjet"
+  },
+  "deviceCount": {
+    "message": "Pajisje: $1 / $2"
+  },
+  "loadingDevices": {
+    "message": "Duke ngarkuar pajisjet…"
+  },
+  "noDevices": {
+    "message": "Asnjë pajisje aktive."
+  },
+  "currentDevice": {
+    "message": "Kjo pajisje"
+  },
+  "deviceKindBrowser": {
+    "message": "Shtesë shfletuesi"
+  },
+  "deviceKindVpn": {
+    "message": "Pajisje VPN"
+  },
+  "profile_browser_proxy": {
+    "message": "Proxy i shfletuesit"
+  },
+  "profile_wireguard": {
+    "message": "WireGuard"
+  },
+  "profile_openvpn": {
+    "message": "OpenVPN"
+  },
+  "none": {
+    "message": "asnjë"
+  },
+  "deviceCreatedOn": {
+    "message": "Krijuar më: $1"
+  },
+  "deleteDevice": {
+    "message": "Fshi pajisjen"
+  },
+  "deleteDeviceNamed": {
+    "message": "Fshi pajisjen: $1"
+  },
+  "confirmDeleteDevice": {
+    "message": "Të hiqet «$1»? Lidhjet e saj VPN do të ndalen dhe profilet e saj do të hiqen."
+  },
+  "resetDevice": {
+    "message": "Rivendos pajisjen"
+  },
+  "confirmResetDevice": {
+    "message": "Të rivendoset kjo shtesë? Herën tjetër që do ta përdorni, do të regjistrohet si pajisje e re."
+  },
+  "signOutAccount": {
+    "message": "Dil nga llogaria"
+  },
+  "chooseLocation": {
+    "message": "Zgjidhni një vendndodhje"
+  },
+  "error_invalid_credentials": {
+    "message": "Adresa e email-it ose fjalëkalimi është i pasaktë."
+  },
+  "error_unauthorized": {
+    "message": "Sesioni juaj ka skaduar. Ju lutemi, hyni përsëri."
+  },
+  "error_email_verification_required": {
+    "message": "Verifikoni adresën e email-it përpara se të aktivizoni mbrojtjen."
+  },
+  "errorVerificationCooldown": {
+    "message": "Një email i ri mund të kërkohet pas $1 sek."
+  },
+  "error_verification_email_cooldown": {
+    "message": "Ju lutemi, prisni përpara se të kërkoni një email tjetër."
+  },
+  "error_subscription_required": {
+    "message": "Për të mbrojtur këtë shfletues nevojitet një abonim aktiv."
+  },
+  "error_device_limit": {
+    "message": "U arrit kufiri i pajisjeve. Ju lutemi, hiqni një pajisje."
+  },
+  "error_device_identity_revoked": {
+    "message": "Kjo pajisje nuk është më e autorizuar. Provoni të lidheni përsëri."
+  },
+  "error_device_proof_invalid": {
+    "message": "Nuk mundëm ta verifikonim këtë pajisje. Kontrolloni datën dhe orën e kompjuterit, pastaj provoni përsëri."
+  },
+  "error_device_proof_replayed": {
+    "message": "Kjo kërkesë është përpunuar tashmë. Provoni përsëri."
+  },
+  "error_invalid_device": {
+    "message": "Kjo pajisje nuk u njoh. Provoni të lidheni përsëri."
+  },
+  "error_device_exists": {
+    "message": "Ky identitet pajisjeje është lidhur tashmë me një llogari tjetër."
+  },
+  "error_not_found": {
+    "message": "Ky veprim nuk është më i disponueshëm. Provoni përsëri."
+  },
+  "error_invalid_location": {
+    "message": "Kjo vendndodhje nuk është e disponueshme. Zgjidhni një tjetër."
+  },
+  "error_rate_limited": {
+    "message": "Shumë përpjekje. Prisni pak dhe provoni përsëri."
+  },
+  "error_proxy_unavailable": {
+    "message": "Ky server nuk është i disponueshëm përkohësisht. Provoni përsëri pas pak."
+  },
+  "error_api_token_expired": {
+    "message": "Sesioni i llogarisë suaj ka skaduar. Ju lutemi, hyni përsëri."
+  },
+  "error_network_error": {
+    "message": "Rrjeti nuk është i disponueshëm. Kontrolloni lidhjen me internetin."
+  },
+  "error_request_timeout": {
+    "message": "Shërbimit iu desh shumë kohë për t’u përgjigjur. Provoni përsëri."
+  },
+  "error_invalid_response": {
+    "message": "Shërbimi ktheu një përgjigje të papritur."
+  },
+  "error_proxy_certificate_invalid": {
+    "message": "Nuk mundëm të verifikonim sigurinë e serverit. Lidhja u ndal."
+  },
+  "error_proxy_controlled_by_extension": {
+    "message": "Një shtesë tjetër po kontrollon aktualisht proxy-n e shfletuesit."
+  },
+  "error_proxy_controlled_by_policy": {
+    "message": "Një politikë e administratorit e pengon FuzeVPN të ndryshojë proxy-n."
+  },
+  "error_proxy_authentication_failed": {
+    "message": "Serveri nuk e pranoi lidhjen. Provoni të lidheni përsëri."
+  },
+  "error_session_expired": {
+    "message": "Lidhja juaj e mbrojtur ka skaduar. Lidhuni përsëri."
+  },
+  "error_email_delivery_unavailable": {
+    "message": "Email-i nuk mund të dërgohet tani."
+  },
+  "error_unknown_error": {
+    "message": "Ndodhi një gabim i papritur. Provoni përsëri."
+  },
+  "actionBlocked": {
+    "message": "FuzeVPN — Shfletimi u bllokua"
+  },
+  "statusBlockedRetry": {
+    "message": "Shfletimi në pauzë — duke u rilidhur"
+  },
+  "statusBlockedAction": {
+    "message": "Shfletimi në pauzë — kontrolloni lidhjen"
+  },
+  "statusProtectionUnavailable": {
+    "message": "Mbrojtja e padisponueshme — shfletimi nuk është bllokuar"
+  },
+  "recoveryHelp": {
+    "message": "Provoni përsëri për të rifilluar mbrojtjen. «Shkëput» ju lejon të shfletoni pa FuzeVPN."
+  },
+  "retryConnection": {
+    "message": "Provo përsëri"
+  },
+  "killSwitch": {
+    "message": "Bllokimi urgjent"
+  },
+  "killSwitchHelp": {
+    "message": "Bllokon kërkesat e reja në web nëse lidhja VPN bie. Sajtet e përjashtuara mbeten të aksesueshme jashtë VPN-së."
+  },
+  "webRtcProtection": {
+    "message": "Mbrojtja WebRTC"
+  },
+  "webRtcHelp": {
+    "message": "Ndihmon ta mbani private adresën tuaj IP gjatë thirrjeve në web. Disa thirrje mund të mos funksionojnë. Çaktivizimi mund ta zbulojë adresën tuaj të vërtetë IP."
+  },
+  "securityEffectiveState": {
+    "message": "$1 · $2"
+  },
+  "securityBlocked": {
+    "message": "Shfletimi i bllokuar"
+  },
+  "securityNotBlocked": {
+    "message": "Shfletimi i pabllokuar"
+  },
+  "securityWebRtcActive": {
+    "message": "Kufizimi WebRTC aktiv"
+  },
+  "securityWebRtcInactive": {
+    "message": "Kufizimi WebRTC joaktiv"
+  },
+  "localNetworkHelp": {
+    "message": "Adresat IP lokale dhe emrat e zakonshëm lokalë bllokohen gjatë mbrojtjes. Një domen i përjashtuar mund të japë ende qasje në rrjetin lokal. Cilësimet IPv6 të sistemit mbeten të pandryshuara."
+  },
+  "securityLimits": {
+    "message": "Rreth kësaj mbrojtjeje"
+  },
+  "killSwitchLimits": {
+    "message": "Vetëm ky shfletues: lidhjet ekzistuese dhe disa komunikime të brendshme të shfletuesit ose të shtesave të tjera mund të vazhdojnë. Një shtesë tjetër ose një politikë mund ta zëvendësojë proxy-n përpara se FuzeVPN të reagojë. Çaktivizimi i shtesës e heq mbrojtjen. Nuk ka bllokim në nivel sistemi."
+  },
+  "error_traffic_guard_failed": {
+    "message": "Bllokimi i shfletimit nuk mund të verifikohej. Mbrojtja nuk garantohet. Kontrolloni lejet e shtesës."
+  },
+  "error_webrtc_control_unavailable": {
+    "message": "Kufizimi WebRTC nuk mund të zbatohej. Kontrolloni cilësimet, shtesat e tjera ose politikën e administratorit."
+  },
+  "language": {
+    "message": "Gjuha"
+  },
+  "languageAutomatic": {
+    "message": "Automatike — gjuha e shfletuesit"
+  },
+  "languageHelp": {
+    "message": "Ndryshimet zbatohen menjëherë. «Automatike» ndjek gjuhën e shfletuesit, e cila mund të ndryshojë nga gjuha e sistemit."
+  },
+  "languageSaveError": {
+    "message": "Gjuha nuk mund të ruhej. Zgjedhja juaj e mëparshme mbetet. Provoni përsëri."
+  },
+  "publicIp": {
+    "message": "IP publike"
+  },
+  "vpnIp": {
+    "message": "IP e VPN-së"
+  },
+  "ipChecking": {
+    "message": "Duke kontrolluar…"
+  },
+  "ipUnavailable": {
+    "message": "E padisponueshme"
+  },
+  "ipLookupExplanation": {
+    "message": "IP kontrollohet me ipify, ose me icanhazip si rezervë, përmes lidhjes suaj aktuale. Nuk dërgohet asnjë histori shfletimi."
+  },
+  "automaticLocation": {
+    "message": "Automatike"
+  },
+  "automaticLocationHelp": {
+    "message": "Koha më e mirë e fundit e përgjigjes, ose vendndodhja juaj e fundit."
+  },
+  "automaticLocationName": {
+    "message": "Automatike · $1"
+  },
+  "searchLocations": {
+    "message": "Kërkoni shtet ose qytet"
+  },
+  "locationFilters": {
+    "message": "Filtro vendndodhjet"
+  },
+  "allLocations": {
+    "message": "Të gjitha"
+  },
+  "favoriteLocations": {
+    "message": "Të preferuarat"
+  },
+  "recentLocations": {
+    "message": "Së fundmi"
+  },
+  "noMatchingLocations": {
+    "message": "Asnjë vendndodhje nuk përputhet me kërkimin tuaj."
+  },
+  "noFavoriteLocations": {
+    "message": "Shtoni një yll për t’i mbajtur këtu vendndodhjet tuaja të preferuara."
+  },
+  "noRecentLocations": {
+    "message": "Vendndodhjet ku jeni lidhur së fundmi do të shfaqen këtu."
+  },
+  "addFavorite": {
+    "message": "Shto te të preferuarat: $1"
+  },
+  "removeFavorite": {
+    "message": "Hiq nga të preferuarat: $1"
+  },
+  "unavailableFavoriteLocation": {
+    "message": "E preferuar e padisponueshme: $1"
+  },
+  "locationSaveError": {
+    "message": "Ndryshimi nuk mund të përfundohej. Disa cilësime mund të jenë ruajtur. Kontrolloni zgjedhjen e shfaqur përpara se të provoni përsëri."
+  },
+  "siteExclusions": {
+    "message": "Sajtet e përjashtuara"
+  },
+  "siteExclusionsHelp": {
+    "message": "Këta sajte përdorin lidhjen tuaj pa FuzeVPN, edhe nëse VPN-ja bie."
+  },
+  "siteExclusionsEnabled": {
+    "message": "Aktivizo përjashtimet"
+  },
+  "siteExclusionInput": {
+    "message": "Domen ose URL"
+  },
+  "siteExclusionPlaceholder": {
+    "message": "example.com"
+  },
+  "siteExclusionPreview": {
+    "message": "Domeni i zgjedhur: $1"
+  },
+  "siteExclusionSubdomains": {
+    "message": "Përfshi nëndomenet"
+  },
+  "siteExclusionAdd": {
+    "message": "Shto sajtin"
+  },
+  "siteExclusionsEmpty": {
+    "message": "Asnjë sajt i përjashtuar. Shtoni vetëm sajtet që doni t’i përdorni pa VPN."
+  },
+  "siteExclusionsCount": {
+    "message": "Sajte: $1 / 100"
+  },
+  "siteExclusionScopeSubdomains": {
+    "message": "Domeni dhe nëndomenet"
+  },
+  "siteExclusionScopeExact": {
+    "message": "Vetëm domeni i saktë"
+  },
+  "siteExclusionRemove": {
+    "message": "Hiq: $1"
+  },
+  "siteExclusionsDetails": {
+    "message": "Si funksionojnë përjashtimet?"
+  },
+  "siteExclusionsResources": {
+    "message": "Burimet nga domene të tjera mbeten të mbrojtura. Përjashtimi i një faqeje nuk përjashton automatikisht përmbajtjen e saj tjetër."
+  },
+  "siteExclusionsReload": {
+    "message": "Ringarkoni sajtin pas një ndryshimi. Lidhjet ekzistuese mund të ruajnë rrugën e mëparshme."
+  },
+  "siteExclusionsWebRtc": {
+    "message": "Mbrojtja WebRTC mbetet cilësim global, edhe për sajtet e përjashtuara."
+  },
+  "siteExclusionsLocal": {
+    "message": "Ruhet vetëm në këtë shfletues dhe mbahet edhe pas daljes nga llogaria."
+  },
+  "siteExclusionsOn": {
+    "message": "Përjashtimet aktive"
+  },
+  "siteExclusionsOff": {
+    "message": "Përjashtimet joaktive"
+  },
+  "siteExclusionsSummary": {
+    "message": "Sajte jashtë VPN-së: $1"
+  },
+  "siteExclusionsPending": {
+    "message": "Duke zbatuar përjashtimet…"
+  },
+  "siteExclusionsInterrupted": {
+    "message": "Ndryshimi u ndërpre. Mbrojtja e përkohshme mbetet në fuqi."
+  },
+  "siteExclusionsSaveError": {
+    "message": "Ndryshimi nuk mund të përfundohej. Kontrolloni cilësimet dhe provoni përsëri."
+  },
+  "siteExclusionsRetry": {
+    "message": "Provo përsëri"
+  },
+  "siteExclusionInvalid": {
+    "message": "Vendosni një domen publik të vlefshëm. Nuk pranohen IP, emra lokalë, shenja zëvendësuese (wildcard), prapashtesa publike dhe domene të rezervuara."
+  },
+  "siteExclusionDuplicate": {
+    "message": "Ky domen është tashmë në listë."
+  },
+  "siteExclusionsLimit": {
+    "message": "U arrit kufiri prej 100 sajtesh. Hiqni një sajt për të shtuar një tjetër."
+  },
+  "statusProtectedExceptions": {
+    "message": "VPN aktive · përjashtime: $1"
+  },
+  "statusBlockedExceptions": {
+    "message": "Vetëm sajtet e përjashtuara mbeten të aksesueshme"
+  },
+  "securityBlockedExceptions": {
+    "message": "Shfletimi i bllokuar, përveç sajteve të përjashtuara"
+  },
+  "securityBlockUnverified": {
+    "message": "Bllokimi i paverifikuar"
+  },
+  "logoutLocalComplete": {
+    "message": "Dalja lokale përfundoi."
+  },
+  "logoutApiSession": {
+    "message": "Sesioni aktual i llogarisë"
+  },
+  "logoutProxySessions": {
+    "message": "Sesionet e njohura VPN"
+  },
+  "logoutRevocationPending": {
+    "message": "Revokimi në vazhdim…"
+  },
+  "logoutRevocationConfirmed": {
+    "message": "Revokimi u konfirmua"
+  },
+  "logoutRevocationUnconfirmed": {
+    "message": "Revokimi nuk u konfirmua"
+  },
+  "logoutUnconfirmedHelp": {
+    "message": "Disa sesione në distancë mund të mbeten aktive deri në skadimin e tyre."
+  },
+  "deviceQuotaLoading": {
+    "message": "Duke ngarkuar kufirin e pajisjeve…"
+  },
+  "deviceQuotaUnknown": {
+    "message": "Kufiri i pajisjeve i padisponueshëm"
+  },
+  "error_proxy_creation_uncertain": {
+    "message": "Serveri nuk konfirmoi krijimin e lidhjes së re. Rilidhja automatike është pezulluar."
+  },
+  "siteExclusionsPreferencesReset": {
+    "message": "Përjashtimet e ruajtura të sajteve u rivendosën, sepse nuk mund të lexoheshin. Shtoni përsëri sajtet që doni të përjashtoni."
+  },
+  "siteExclusionsConflict": {
+    "message": "Lista e sajteve të përjashtuara ka ndryshuar. Rishikojeni, pastaj provoni përsëri ndryshimin."
+  },
+  "unavailableLocation": {
+    "message": "Vendndodhje e padisponueshme"
+  },
+  "verificationSending": {
+    "message": "Duke dërguar email-in e verifikimit…"
+  },
+  "verificationSent": {
+    "message": "Email-i i verifikimit u dërgua. Kontrolloni kutinë hyrëse dhe dosjen e postës së padëshiruar."
+  },
+  "error_login_requires_disconnect": {
+    "message": "Shkëputni lidhjen aktuale VPN përpara se të hyni në një llogari tjetër."
+  },
+  "error_storage_unavailable": {
+    "message": "Cilësimet lokale të llogarisë nuk janë të disponueshme. Provoni përsëri kur hapësira ruajtëse e shfletuesit të jetë e disponueshme; llogaria juaj e ruajtur mbetet e paprekur."
+  },
+  "diagnosticsAssistance": {
+    "message": "Mbështetja"
+  },
+  "diagnosticsTitle": {
+    "message": "Diagnostikimi"
+  },
+  "diagnosticsIntro": {
+    "message": "Kontrolloni FuzeVPN dhe lidhjen aktuale pa ndryshuar mbrojtjen tuaj."
+  },
+  "diagnosticsPrivacyTitle": {
+    "message": "Të dhënat tuaja"
+  },
+  "diagnosticsPrivacy": {
+    "message": "JSON-i i raportit përmban gjendje teknike dhe kode gabimesh, pa fjalëkalime, tokena, adresa email-i, adresa IP, URL të vizituara apo domene të përjashtuara. Dërgimi është i autentikuar dhe e lidh raportin me llogarinë tuaj. Shihni njoftimin për të dhënat e rrjetit."
+  },
+  "diagnosticsAuto": {
+    "message": "Dërgo automatikisht raportet e gabimeve të rëndësishme"
+  },
+  "diagnosticsAutoHelp": {
+    "message": "Joaktiv si parazgjedhje. Aktivizimi dërgon raporte teknike të thjeshta për këtë llogari, pa historinë e shfletimit. Çaktivizojeni këtu për të ndalur dërgimin automatik dhe për të hequr raportet automatike në pritje."
+  },
+  "diagnosticsHistoryHelp": {
+    "message": "Historia teknike mbetet lokale: deri në 200 ngjarje për regjistër brenda 10 minutash, edhe kur dërgimi automatik është joaktiv. Nuk përmban historinë e shfletimit dhe pastrohet manualisht, kur mbyllet shfletuesi ose kur ndryshon llogaria."
+  },
+  "diagnosticsHistoryCount": {
+    "message": "Ngjarje teknike lokale: $1"
+  },
+  "diagnosticsConnectionLog": {
+    "message": "Eksporto regjistrin e lidhjes"
+  },
+  "diagnosticsAccountRequired": {
+    "message": "Hyni për të aktivizuar dërgimin. Mund ta shihni dhe ta eksportoni një raport edhe pa llogari."
+  },
+  "diagnosticsRun": {
+    "message": "Kryej diagnostikimin"
+  },
+  "diagnosticsClearHistory": {
+    "message": "Pastro historinë lokale"
+  },
+  "diagnosticsPreparing": {
+    "message": "Duke përgatitur raportin…"
+  },
+  "diagnosticsReports": {
+    "message": "Raportet"
+  },
+  "diagnosticsEmpty": {
+    "message": "Ende asnjë raport lokal."
+  },
+  "diagnosticsChooseReport": {
+    "message": "Zgjidhni një raport"
+  },
+  "diagnosticsReportLabel": {
+    "message": "$1 · $2 · $3"
+  },
+  "diagnosticsTypeFull": {
+    "message": "Raport i plotë"
+  },
+  "diagnosticsTypeSimple": {
+    "message": "Raport gabimi"
+  },
+  "diagnosticsSummary": {
+    "message": "Mbledhur më: $1. Versioni i FuzeVPN: $2."
+  },
+  "diagnosticsJson": {
+    "message": "Shiko përmbajtjen e raportit (JSON)"
+  },
+  "diagnosticsExport": {
+    "message": "Eksporto raportin"
+  },
+  "diagnosticsDelete": {
+    "message": "Fshi raportin lokal"
+  },
+  "diagnosticsRetention": {
+    "message": "Raportet lokale skadojnë pas 24 orësh. Fshirja këtu nuk fshin një raport që shërbimi e ka marrë tashmë. Shihni njoftimin për ruajtjen në server dhe kërkesat për fshirje."
+  },
+  "diagnosticsConsent": {
+    "message": "Dërgo këtë raport diagnostikimi te FuzeVPN"
+  },
+  "diagnosticsDataCollectionRequired": {
+    "message": "Firefox duhet të lejojë mbledhjen e të dhënave teknike për të dërguar diagnostikime. Provoni përsëri dhe jepni këtë leje."
+  },
+  "diagnosticsSendHelp": {
+    "message": "Dërgimi është opsional. Pasi të miratohet, mund të riprovohet deri në 24 orë me një sesion të vlefshëm për të njëjtën llogari. Mund t’i anuloni përpjekjet e mëtejshme. Anulimi i vonuar nuk garanton që serveri nuk e ka marrë tashmë raportin."
+  },
+  "diagnosticsSend": {
+    "message": "Dërgo raportin"
+  },
+  "diagnosticsCancel": {
+    "message": "Anulo dërgimin"
+  },
+  "diagnosticsReload": {
+    "message": "Ringarko këtë faqe"
+  },
+  "diagnosticsUnavailable": {
+    "message": "Diagnostikimi nuk është i disponueshëm. Ringarkoni FuzeVPN nga menaxheri i shtesave të shfletuesit, pastaj rihapni këtë faqe. VPN-ja juaj mbetet e pandryshuar."
+  },
+  "diagnosticsQueueFull": {
+    "message": "Radha e dërgimit është plot. Fshini një raport lokal ose prisni që të përfundojë një raport në pritje."
+  },
+  "diagnosticsContentUnavailable": {
+    "message": "Përmbajtja e raportit nuk është e disponueshme. Eksportoni raportin lokal nëse është i disponueshëm dhe kontaktoni mbështetjen."
+  },
+  "diagnosticsFailure": {
+    "message": "Veprimi i diagnostikimit nuk mund të përfundohej. VPN-ja juaj mbetet e pandryshuar."
+  },
+  "diagnosticsChecks": {
+    "message": "Kontrollet"
+  },
+  "diagnosticsCheckFallback": {
+    "message": "Kontroll teknik: $1"
+  },
+  "diagnosticsCheckLine": {
+    "message": "$1 — $2"
+  },
+  "diagnosticsProxy": {
+    "message": "Proxy i shfletuesit"
+  },
+  "diagnosticsStorage": {
+    "message": "Hapësira ruajtëse lokale"
+  },
+  "diagnosticsNetwork": {
+    "message": "Lidhja e rrjetit"
+  },
+  "diagnosticsCleanup": {
+    "message": "Pastrimi i sesioneve"
+  },
+  "diagnosticsResult_passed": {
+    "message": "Kaloi"
+  },
+  "diagnosticsResult_failed": {
+    "message": "Dështoi"
+  },
+  "diagnosticsResult_skipped": {
+    "message": "Nuk u krye"
+  },
+  "diagnosticsResult_unknown": {
+    "message": "I panjohur"
+  },
+  "diagnosticsStatus_ready": {
+    "message": "Gati në këtë pajisje"
+  },
+  "diagnosticsStatus_pending": {
+    "message": "Në pritje të dërgimit"
+  },
+  "diagnosticsStatus_sending": {
+    "message": "Duke dërguar…"
+  },
+  "diagnosticsStatus_session_required": {
+    "message": "Në pritje të një sesioni të vlefshëm për të njëjtën llogari"
+  },
+  "diagnosticsStatus_received": {
+    "message": "Marrë nga shërbimi"
+  },
+  "diagnosticsStatus_failed": {
+    "message": "Dërgimi dështoi"
+  },
+  "diagnosticsStatus_cancelled": {
+    "message": "Dërgimi u anulua"
+  },
+  "diagnosticsStatus_expired": {
+    "message": "Afati i dërgimit skadoi"
+  },
+  "diagnosticsReceivedAt": {
+    "message": "Marrë më: $1"
+  },
+  "error_private_browsing_required": {
+    "message": "Firefox e kërkon këtë leje për të konfiguruar VPN-në, edhe në dritaret normale. Hapni about:addons → FuzeVPN, lejoni që të funksionojë në dritaret private, pastaj provoni përsëri."
+  },
+  "error_host_permissions_required": {
+    "message": "Në Firefox, hapni about:addons → FuzeVPN → Leje dhe lejoni qasjen në të gjitha sajtet, pastaj provoni përsëri."
+  },
+  "cancelAction": {
+    "message": "Anulo"
+  },
+  "refreshLocations": {
+    "message": "Rifresko vendndodhjet"
+  },
+  "refreshingLocations": {
+    "message": "Duke rifreskuar vendndodhjet…"
+  },
+  "locationsRefreshError": {
+    "message": "Lista e vendndodhjeve nuk mund të rifreskohej. Ju lutemi, provoni përsëri."
+  },
+  "error_device_revoked_limit": {
+    "message": "Kjo pajisje është revokuar. U arrit kufiri i pajisjeve: ju lutemi, hiqni një pajisje."
+  },
+  "noAvailableLocations": {
+    "message": "Aktualisht nuk ka vendndodhje të disponueshme. Ju lutemi, provoni përsëri pas pak."
+  },
+  "noAvailableFavoriteLocations": {
+    "message": "Vendndodhjet tuaja të preferuara janë përkohësisht të padisponueshme."
+  },
+  "error_location_favorites_limit": {
+    "message": "U arrit kufiri prej 100 të preferuarash. Hiqni një të preferuar për të shtuar një tjetër."
+  },
+  "error_server_full": {
+    "message": "Ky server është plot. Zgjidhni një vendndodhje tjetër."
+  },
+  "error_capacity_unavailable": {
+    "message": "Disponueshmëria e këtij serveri nuk mund të konfirmohet tani. Ju lutemi, provoni përsëri pas pak."
+  },
+  "locationHierarchyHelp": {
+    "message": "Emri zgjedh një server; shigjeta shfaq detajet."
+  },
+  "locationCountrySelect": {
+    "message": "Zgjidhni një server të disponueshëm: $1"
+  },
+  "locationCitySelect": {
+    "message": "Zgjidhni një server të disponueshëm: $1"
+  },
+  "locationShowCities": {
+    "message": "Shfaq qytetet: $1"
+  },
+  "locationHideCities": {
+    "message": "Fshih qytetet: $1"
+  },
+  "locationShowServers": {
+    "message": "Shfaq serverët: $1"
+  },
+  "locationHideServers": {
+    "message": "Fshih serverët: $1"
+  },
+  "locationAvailableServers": {
+    "message": "Serverë të disponueshëm: $1"
+  },
+  "legalInformation": {
+    "message": "Informacion ligjor"
+  },
+  "privacyPolicy": {
+    "message": "Njoftimi i privatësisë së shtesës"
+  },
+  "termsAndConditions": {
+    "message": "Kushtet e përdorimit dhe të shitjes"
+  },
+  "legalNotice": {
+    "message": "Njoftim ligjor"
+  },
+  "contactSupport": {
+    "message": "Kontaktoni mbështetjen"
+  },
+  "webSignIn": {
+    "message": "Hyni në FuzeVPN"
+  },
+  "webSignInDisconnect": {
+    "message": "Shkëput dhe hyr"
+  },
+  "webSignInPending": {
+    "message": "Hyrja në vazhdim…"
+  },
+  "webSignInHelp": {
+    "message": "Hyni ose krijoni një llogari me Google ose me email në zonën e klientit të FuzeVPN."
+  },
+  "webSignInDisconnectHelp": {
+    "message": "Ky buton ndalon mbrojtjen e shfletuesit që të mund të hyni me Google ose me email. Shfletimi juaj do të jetë i pambrojtur gjatë hyrjes."
+  },
+  "webSignInStatus": {
+    "message": "Vazhdoni në dritaren e hyrjes së FuzeVPN. Shtesa përditësohet automatikisht kur të përfundoni. Mbyllni atë dritare për ta anuluar."
+  },
+  "error_web_login_cancelled": {
+    "message": "Hyrja u anulua. Provoni përsëri."
+  },
+  "error_web_login_timeout": {
+    "message": "Hyrja zgjati shumë. Provoni përsëri."
+  },
+  "error_web_login_unavailable": {
+    "message": "Hyrja në web nuk është e disponueshme. Provoni përsëri më vonë."
+  },
+  "error_web_login_invalid_callback": {
+    "message": "Hyrja nuk mund të verifikohej. Filloni përsëri nga shtesa."
+  },
+  "error_web_login_denied": {
+    "message": "Hyrja nuk u autorizua. Provoni përsëri."
+  },
+  "error_web_login_busy": {
+    "message": "Mbyllni dritaren e hyrjes që është tashmë e hapur përpara se të provoni përsëri."
+  },
+  "deviceKindFirefox": {
+    "message": "Shfletuesi Firefox"
+  },
+  "generalPrivacyPolicy": {
+    "message": "Politika e përgjithshme e privatësisë"
+  },
+  "privacyNoticeTitle": {
+    "message": "Privatësia në shtesën FuzeVPN"
+  },
+  "privacyNoticeIntro": {
+    "message": "Ky njoftim përshkruan të dhënat që përdor kjo shtesë. Ai plotëson politikën e përgjithshme të privatësisë së FuzeVPN, të lidhur më poshtë. Dërgimi opsional i diagnostikimeve është i ndarë nga të dhënat e nevojshme për të hyrë dhe për të përdorur VPN-në."
+  },
+  "privacyNoticeUpdated": {
+    "message": "Njoftimi u përditësua më 19 tetor 2026"
+  },
+  "privacyNoticeServiceTitle": {
+    "message": "Llogaria dhe shërbimi VPN"
+  },
+  "privacyNoticeService": {
+    "message": "Shtesa shkëmben me api.fuzevpn.com të dhëna për autentikimin, llogarinë, abonimin, pajisjen dhe sesionin e proxy-t. Proxy-i VPN bart trafikun që kalon përmes tij. Këto lidhje i ekspozojnë metadatat e rrjetit shërbimit marrës; ky njoftim nuk jep ndonjë premtim të veçantë për regjistrimin në server."
+  },
+  "privacyNoticeLocalTitle": {
+    "message": "Të dhënat e ruajtura në shfletues"
+  },
+  "privacyNoticeLocal": {
+    "message": "Hapësira ruajtëse e shfletuesit mban sesionin tuaj, të dhënat e llogarisë, preferencat, përjashtimet e sajteve dhe identitetin e pajisjes. Regjistrat teknikë mbahen lokalisht deri në 10 minuta, edhe kur raportimi automatik është joaktiv. Draftet e diagnostikimit dhe raportet në radhë skadojnë lokalisht pas 24 orësh; pastrimi kryhet kur shtesa mund të ekzekutohet."
+  },
+  "privacyNoticeIpTitle": {
+    "message": "Kontrollet e IP-së publike dhe palët e treta"
+  },
+  "privacyNoticeIp": {
+    "message": "Shfaqja e IP-së dhe diagnostikimet e rrjetit kontaktojnë api.ipify.org. Shfaqja e IP-së mund të përdorë ipv4.icanhazip.com si rezervë. Ofruesi merr IP-në e lidhjes dhe metadatat e zakonshme të kërkesës: IP-në tuaj publike në modalitetin e drejtpërdrejtë, ose IP-në e daljes së VPN-së kur kërkesa kalon përmes proxy-t. Këto kërkesa nuk përfshijnë cookies dhe referues dhe nuk dërgojnë asnjë token llogarie apo histori shfletimi."
+  },
+  "privacyNoticeReportsTitle": {
+    "message": "Çfarë përmbajnë raportet e diagnostikimit"
+  },
+  "privacyNoticeReports": {
+    "message": "Raportet mund të përfshijnë një identifikues të rastësishëm raporti, vula kohore, versionet e shtesës dhe të shfletuesit, familjen dhe arkitekturën e sistemit operativ, gjendjet e lidhjes dhe të mbrojtjes, kode gabimesh, numërime, kohëzgjatje dhe rezultate kontrollesh. Raportet e plota mund të përfshijnë ngjarje teknike të fundit. JSON-i i tyre përjashton fjalëkalimet, tokenat e autentikimit, adresat e email-it, adresat IP, URL-të e vizituara dhe domenet e përjashtuara. Mund ta shqyrtoni dhe ta eksportoni një raport të plotë përpara se ta dërgoni."
+  },
+  "privacyNoticeAccountTitle": {
+    "message": "Marrësi dhe lidhja me llogarinë"
+  },
+  "privacyNoticeAccount": {
+    "message": "Raportet i dërgohen FuzeVPN në api.fuzevpn.com/v1/diagnostics përmes një lidhjeje të autentikuar. Kjo lidhje API e anashkalon proxy-n VPN: FuzeVPN merr IP-në tuaj publike të drejtpërdrejtë edhe kur VPN-ja është aktive. Raportet lidhen me llogarinë e identifikuar dhe nuk janë anonime. Koka e autentikimit dhe IP-ja janë të ndara nga JSON-i i raportit. Një konfirmim i suksesshëm marrjeje vërteton pranimin nga ajo pikë fundore, jo që një agjent mbështetjeje e ka lexuar raportin."
+  },
+  "privacyNoticeChoiceTitle": {
+    "message": "Dërgimi opsional dhe tërheqja e pëlqimit"
+  },
+  "privacyNoticeChoice": {
+    "message": "Dërgimi automatik është joaktiv si parazgjedhje. Aktivizimi i tij lejon raporte të thjeshta gabimesh për atë llogari. Dërgimi manual i një raporti të plotë kërkon kutizën e dërgimit. Firefox kërkon gjithashtu lejen e tij opsionale për të dhënat teknike. Çaktivizoni dërgimin automatik për ta ndalur dhe për të hequr raportet automatike në pritje; anuloni veçmas dërgimet individuale në pritje. Refuzimi i dërgimit të diagnostikimeve nuk e pengon përdorimin e VPN-së."
+  },
+  "privacyNoticeDeleteTitle": {
+    "message": "Fshirja lokale dhe skedarët e shkarkuar"
+  },
+  "privacyNoticeDelete": {
+    "message": "Te Diagnostikimi, pastroni historinë teknike ose fshini një raport lokal individual. Pastrimi i historisë nuk fshin kopjet ekzistuese të raporteve. Anulimi ose fshirja lokale nuk mund t’i tërheqë të dhënat që shërbimi i ka marrë tashmë, përfshirë një ngarkim që arriti përpara anulimit. Eksportet e shkarkuara janë skedarë të veçantë që duhet t’i fshini vetë."
+  },
+  "privacyNoticeServerTitle": {
+    "message": "Ruajtja në server dhe kërkesat"
+  },
+  "privacyNoticeServer": {
+    "message": "Kjo shtesë nuk e kontrollon dhe nuk e verifikon ruajtjen në server ose fshirjen në anën e serverit. Për periudhën e ruajtjes që zbaton FuzeVPN dhe për kërkesat në lidhje me raportet e dërguara tashmë, konsultoni politikën e përgjithshme të privatësisë ose kontaktoni FuzeVPN. Ky njoftim nuk garanton asnjë periudhë fikse ruajtjeje në server."
+  },
+  "privacyNoticeSupportTitle": {
+    "message": "Diagnostikimi dhe mbështetja janë të ndara"
+  },
+  "privacyNoticeSupport": {
+    "message": "Dërgimi i një raporti diagnostikimi nuk dërgon vetvetiu një mesazh mbështetjeje nga shtesa. Për të shpjeguar një problem ose për të kërkuar fshirjen e një raporti të marrë, përdorni kanalin e kontaktit të FuzeVPN më poshtë. Nëse zgjidhni ta ndani një skedar të eksportuar përmes një kanali tjetër, kontrolloni më parë përmbajtjen e tij."
+  },
+  "privacyNoticeManage": {
+    "message": "Hap Diagnostikimin"
+  },
+  "privacyNoticeLinksTitle": {
+    "message": "Politika e shërbimit dhe kontakti"
+  },
+  "theme": {
+    "message": "Tema"
+  },
+  "themeSystem": {
+    "message": "Sistemi"
+  },
+  "themeLight": {
+    "message": "E çelët"
+  },
+  "themeDark": {
+    "message": "E errët"
+  },
+  "switchToDarkTheme": {
+    "message": "Kalo te tema e errët"
+  },
+  "switchToLightTheme": {
+    "message": "Kalo te tema e çelët"
+  }
+}

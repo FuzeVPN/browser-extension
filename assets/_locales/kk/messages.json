@@ -1,0 +1,929 @@
+{
+  "extensionName": {
+    "message": "FuzeVPN"
+  },
+  "extensionDescription": {
+    "message": "Құпиялылығыңызды сақтап, қауіпсіздігіңізді бір рет басу арқылы күшейтіңіз."
+  },
+  "siteExclusionsReloadRequired": {
+    "message": "Жаңартуды аяқтап, сайт ерекшеліктерін пайдалану үшін FuzeVPN кеңейтімін браузердің кеңейтімдер басқарушысынан қайта жүктеңіз."
+  },
+  "extensionCommunicationError": {
+    "message": "Кеңейтім жауап бермей тұр. Осы терезені жауып, FuzeVPN кеңейтімін браузердің кеңейтімдер басқарушысынан қайта жүктеңіз."
+  },
+  "actionDisconnected": {
+    "message": "FuzeVPN — Ажыратылған"
+  },
+  "actionConnected": {
+    "message": "FuzeVPN — Осы браузерде қорғалған"
+  },
+  "actionReconnecting": {
+    "message": "FuzeVPN — Қайта қосылуда"
+  },
+  "actionError": {
+    "message": "FuzeVPN — Назар аудару қажет"
+  },
+  "browserProtection": {
+    "message": "Браузерді қорғау"
+  },
+  "loginTitle": {
+    "message": "FuzeVPN қызметіне қош келдіңіз"
+  },
+  "loginSubtitle": {
+    "message": "Осы браузердегі шолуыңызды қорғау үшін кіріңіз."
+  },
+  "email": {
+    "message": "Электрондық пошта мекенжайы"
+  },
+  "emailPlaceholder": {
+    "message": "you@example.com"
+  },
+  "password": {
+    "message": "Құпиясөз"
+  },
+  "signIn": {
+    "message": "Кіру"
+  },
+  "signingIn": {
+    "message": "Кіру орындалуда…"
+  },
+  "forgotPassword": {
+    "message": "Құпиясөзді ұмыттыңыз ба?"
+  },
+  "createAccount": {
+    "message": "Тіркелгі жасау"
+  },
+  "settings": {
+    "message": "Параметрлер"
+  },
+  "close": {
+    "message": "Жабу"
+  },
+  "statusDisconnected": {
+    "message": "Ажыратылған"
+  },
+  "statusConnecting": {
+    "message": "Қосылуда…"
+  },
+  "statusChanging": {
+    "message": "Орналасқан жер өзгертілуде…"
+  },
+  "statusProtected": {
+    "message": "Осы браузерде қорғалған"
+  },
+  "statusRefreshing": {
+    "message": "Қауіпсіз жаңартылуда…"
+  },
+  "statusDisconnecting": {
+    "message": "Ажыратылуда…"
+  },
+  "statusError": {
+    "message": "Қорғаныс тоқтады"
+  },
+  "browserOnlyDetail": {
+    "message": "Осы браузерге арналған қорғаныс."
+  },
+  "location": {
+    "message": "Орналасқан жер"
+  },
+  "change": {
+    "message": "Өзгерту"
+  },
+  "noLocation": {
+    "message": "Қолжетімді орналасқан жер жоқ"
+  },
+  "protectBrowser": {
+    "message": "Браузерді қорғау"
+  },
+  "disconnect": {
+    "message": "Ажырату"
+  },
+  "subscription": {
+    "message": "Жазылым"
+  },
+  "refreshSubscription": {
+    "message": "Жазылымды жаңарту"
+  },
+  "refreshingSubscription": {
+    "message": "Жазылым жаңартылуда…"
+  },
+  "subscriptionActive": {
+    "message": "Белсенді"
+  },
+  "subscriptionInactive": {
+    "message": "Белсенді емес"
+  },
+  "expiresOn": {
+    "message": "Аяқталу күні: $1"
+  },
+  "noExpiry": {
+    "message": "Аяқталу күні жоқ"
+  },
+  "browserOnlyNotice": {
+    "message": "Тек осы браузер. Басқа қолданбалар мен браузерлер қамтылмайды."
+  },
+  "resendVerification": {
+    "message": "Хатты қайта жіберу"
+  },
+  "incognitoHelp": {
+    "message": "Жеке шолу режимі дәл осындай қорғанысты браузер параметрлерінде кеңейтімге жеке режимде жұмыс істеуге рұқсат берілгенде ғана пайдаланады."
+  },
+  "manageAccount": {
+    "message": "Тіркелгімді басқару"
+  },
+  "account": {
+    "message": "Тіркелгі"
+  },
+  "devices": {
+    "message": "Құрылғылар"
+  },
+  "manageDevices": {
+    "message": "Құрылғыларды басқару"
+  },
+  "refreshDevices": {
+    "message": "Құрылғыларды жаңарту"
+  },
+  "deviceCount": {
+    "message": "Құрылғылар: $1 / $2"
+  },
+  "loadingDevices": {
+    "message": "Құрылғылар жүктелуде…"
+  },
+  "noDevices": {
+    "message": "Белсенді құрылғылар жоқ."
+  },
+  "currentDevice": {
+    "message": "Осы құрылғы"
+  },
+  "deviceKindBrowser": {
+    "message": "Браузер кеңейтімі"
+  },
+  "deviceKindVpn": {
+    "message": "VPN құрылғысы"
+  },
+  "profile_browser_proxy": {
+    "message": "Браузер проксиі"
+  },
+  "profile_wireguard": {
+    "message": "WireGuard"
+  },
+  "profile_openvpn": {
+    "message": "OpenVPN"
+  },
+  "none": {
+    "message": "жоқ"
+  },
+  "deviceCreatedOn": {
+    "message": "Жасалған күні: $1"
+  },
+  "deleteDevice": {
+    "message": "Құрылғыны жою"
+  },
+  "deleteDeviceNamed": {
+    "message": "Құрылғыны жою: $1"
+  },
+  "confirmDeleteDevice": {
+    "message": "«$1» жойылсын ба? Оның VPN қосылымдары тоқтап, профильдері жойылады."
+  },
+  "resetDevice": {
+    "message": "Құрылғыны ысыру"
+  },
+  "confirmResetDevice": {
+    "message": "Бұл кеңейтім ысырылсын ба? Келесі жолы пайдаланғанда ол жаңа құрылғы ретінде тіркеледі."
+  },
+  "signOutAccount": {
+    "message": "Тіркелгіден шығу"
+  },
+  "chooseLocation": {
+    "message": "Орналасқан жерді таңдаңыз"
+  },
+  "error_invalid_credentials": {
+    "message": "Электрондық пошта мекенжайы немесе құпиясөз қате."
+  },
+  "error_unauthorized": {
+    "message": "Сеансыңыздың мерзімі өтті. Қайта кіріңіз."
+  },
+  "error_email_verification_required": {
+    "message": "Қорғанысты қоспас бұрын электрондық пошта мекенжайыңызды растаңыз."
+  },
+  "errorVerificationCooldown": {
+    "message": "Жаңа хатты $1 секундтан кейін сұрауға болады."
+  },
+  "error_verification_email_cooldown": {
+    "message": "Басқа хат сұрамас бұрын біраз күтіңіз."
+  },
+  "error_subscription_required": {
+    "message": "Осы браузерді қорғау үшін белсенді жазылым қажет."
+  },
+  "error_device_limit": {
+    "message": "Құрылғылар шегіне жетті. Бір құрылғыны жойыңыз."
+  },
+  "error_device_identity_revoked": {
+    "message": "Бұл құрылғыға енді рұқсат жоқ. Қайта қосылып көріңіз."
+  },
+  "error_device_proof_invalid": {
+    "message": "Бұл құрылғыны растау мүмкін болмады. Компьютеріңіздің күні мен уақытын тексеріп, әрекетті қайталаңыз."
+  },
+  "error_device_proof_replayed": {
+    "message": "Бұл сұрау әлдеқашан өңделген. Қайталап көріңіз."
+  },
+  "error_invalid_device": {
+    "message": "Бұл құрылғы танылмады. Қайта қосылып көріңіз."
+  },
+  "error_device_exists": {
+    "message": "Бұл құрылғы сәйкестендіргіші басқа тіркелгіге байланыстырылған."
+  },
+  "error_not_found": {
+    "message": "Бұл әрекет енді қолжетімсіз. Қайталап көріңіз."
+  },
+  "error_invalid_location": {
+    "message": "Бұл орналасқан жер қолжетімсіз. Басқасын таңдаңыз."
+  },
+  "error_rate_limited": {
+    "message": "Әрекеттер тым көп. Біраз күтіп, қайталап көріңіз."
+  },
+  "error_proxy_unavailable": {
+    "message": "Бұл сервер уақытша қолжетімсіз. Сәлден соң қайталап көріңіз."
+  },
+  "error_api_token_expired": {
+    "message": "Тіркелгі сеансының мерзімі өтті. Қайта кіріңіз."
+  },
+  "error_network_error": {
+    "message": "Желі қолжетімсіз. Интернет қосылымыңызды тексеріңіз."
+  },
+  "error_request_timeout": {
+    "message": "Қызмет тым ұзақ жауап бермеді. Қайталап көріңіз."
+  },
+  "error_invalid_response": {
+    "message": "Қызмет күтпеген жауап қайтарды."
+  },
+  "error_proxy_certificate_invalid": {
+    "message": "Сервер қауіпсіздігін растау мүмкін болмады. Қосылым тоқтатылды."
+  },
+  "error_proxy_controlled_by_extension": {
+    "message": "Браузер проксиін қазір басқа кеңейтім басқарып тұр."
+  },
+  "error_proxy_controlled_by_policy": {
+    "message": "Әкімші саясаты FuzeVPN кеңейтіміне проксиді өзгертуге жол бермейді."
+  },
+  "error_proxy_authentication_failed": {
+    "message": "Сервер қосылымды қабылдамады. Қайта қосылып көріңіз."
+  },
+  "error_session_expired": {
+    "message": "Қорғалған қосылымның мерзімі өтті. Қайта қосылыңыз."
+  },
+  "error_email_delivery_unavailable": {
+    "message": "Хатты қазір жіберу мүмкін емес."
+  },
+  "error_unknown_error": {
+    "message": "Күтпеген қате орын алды. Қайталап көріңіз."
+  },
+  "actionBlocked": {
+    "message": "FuzeVPN — Шолу бұғатталды"
+  },
+  "statusBlockedRetry": {
+    "message": "Шолу кідіртілді — қайта қосылуда"
+  },
+  "statusBlockedAction": {
+    "message": "Шолу кідіртілді — қосылымды тексеріңіз"
+  },
+  "statusProtectionUnavailable": {
+    "message": "Қорғаныс қолжетімсіз — шолу бұғатталмаған"
+  },
+  "recoveryHelp": {
+    "message": "Қорғанысты жалғастыру үшін әрекетті қайталаңыз. Ажыратсаңыз, FuzeVPN қолданбай шолуға болады."
+  },
+  "retryConnection": {
+    "message": "Қайталау"
+  },
+  "killSwitch": {
+    "message": "Авариялық ажыратқыш"
+  },
+  "killSwitchHelp": {
+    "message": "VPN қосылымы үзілсе, жаңа веб-сұрауларды бұғаттайды. Ерекшелік сайттары VPN-нен тыс қолжетімді болып қала береді."
+  },
+  "webRtcProtection": {
+    "message": "WebRTC қорғанысы"
+  },
+  "webRtcHelp": {
+    "message": "Веб-қоңыраулар кезінде IP мекенжайыңызды жасырын ұстауға көмектеседі. Кейбір қоңыраулар жұмыс істемеуі мүмкін. Мұны өшірсеңіз, нақты IP мекенжайыңыз ашылуы мүмкін."
+  },
+  "securityEffectiveState": {
+    "message": "$1 · $2"
+  },
+  "securityBlocked": {
+    "message": "Шолу бұғатталған"
+  },
+  "securityNotBlocked": {
+    "message": "Шолу бұғатталмаған"
+  },
+  "securityWebRtcActive": {
+    "message": "WebRTC шектеуі белсенді"
+  },
+  "securityWebRtcInactive": {
+    "message": "WebRTC шектеуі белсенді емес"
+  },
+  "localNetworkHelp": {
+    "message": "Қорғаныс кезінде жергілікті IP мекенжайлары мен жиі қолданылатын жергілікті атаулар бұғатталады. Ерекшелік домені бәрібір жергілікті желіге қол жеткізуге мүмкіндік беруі мүмкін. Жүйенің IPv6 параметрлері өзгертілмейді."
+  },
+  "securityLimits": {
+    "message": "Бұл қорғаныс туралы"
+  },
+  "killSwitchLimits": {
+    "message": "Тек осы браузер: бар қосылымдар мен браузердің кейбір ішкі байланыстары немесе басқа кеңейтімдердің байланыстары жалғаса беруі мүмкін. FuzeVPN әрекет етпей тұрып, басқа кеңейтім немесе саясат проксиді ауыстыруы мүмкін. Кеңейтімді өшіру қорғанысты алып тастайды. Бүкіл жүйені бұғаттау жоқ."
+  },
+  "error_traffic_guard_failed": {
+    "message": "Шолуды бұғаттауды растау мүмкін болмады. Қорғанысқа кепілдік берілмейді. Кеңейтім рұқсаттарын тексеріңіз."
+  },
+  "error_webrtc_control_unavailable": {
+    "message": "WebRTC шектеуін қолдану мүмкін болмады. Параметрлеріңізді, басқа кеңейтімдерді немесе әкімші саясатын тексеріңіз."
+  },
+  "language": {
+    "message": "Тіл"
+  },
+  "languageAutomatic": {
+    "message": "Автоматты — браузер тілі"
+  },
+  "languageHelp": {
+    "message": "Өзгерістер бірден қолданылады. Автоматты режим браузер тілін ұстанады, ол жүйе тілінен өзгеше болуы мүмкін."
+  },
+  "languageSaveError": {
+    "message": "Тілді сақтау мүмкін болмады. Алдыңғы таңдауыңыз сақталды. Қайталап көріңіз."
+  },
+  "publicIp": {
+    "message": "Жария IP"
+  },
+  "vpnIp": {
+    "message": "VPN IP"
+  },
+  "ipChecking": {
+    "message": "Тексерілуде…"
+  },
+  "ipUnavailable": {
+    "message": "Қолжетімсіз"
+  },
+  "ipLookupExplanation": {
+    "message": "IP ағымдағы қосылымыңыз арқылы ipify қызметімен, ал қосалқы ретінде icanhazip қызметімен тексеріледі. Шолу тарихы жіберілмейді."
+  },
+  "automaticLocation": {
+    "message": "Автоматты"
+  },
+  "automaticLocationHelp": {
+    "message": "Соңғы ең жақсы жауап уақыты немесе соңғы орналасқан жеріңіз."
+  },
+  "automaticLocationName": {
+    "message": "Автоматты · $1"
+  },
+  "searchLocations": {
+    "message": "Елді немесе қаланы іздеу"
+  },
+  "locationFilters": {
+    "message": "Орналасқан жерлерді сүзу"
+  },
+  "allLocations": {
+    "message": "Барлығы"
+  },
+  "favoriteLocations": {
+    "message": "Таңдаулылар"
+  },
+  "recentLocations": {
+    "message": "Соңғылар"
+  },
+  "noMatchingLocations": {
+    "message": "Іздеуіңізге сәйкес орналасқан жер жоқ."
+  },
+  "noFavoriteLocations": {
+    "message": "Таңдаулы орналасқан жерлерді осында сақтау үшін жұлдызша қойыңыз."
+  },
+  "noRecentLocations": {
+    "message": "Жақында қосылған орналасқан жерлеріңіз осында көрсетіледі."
+  },
+  "addFavorite": {
+    "message": "Таңдаулыларға қосу: $1"
+  },
+  "removeFavorite": {
+    "message": "Таңдаулылардан алып тастау: $1"
+  },
+  "unavailableFavoriteLocation": {
+    "message": "Қолжетімсіз таңдаулы: $1"
+  },
+  "locationSaveError": {
+    "message": "Өзгерісті аяқтау мүмкін болмады. Кейбір параметрлер сақталған болуы мүмкін. Қайталамас бұрын көрсетілген таңдауды тексеріңіз."
+  },
+  "siteExclusions": {
+    "message": "Ерекшелік сайттары"
+  },
+  "siteExclusionsHelp": {
+    "message": "Бұл сайттар VPN үзілсе де, қосылымыңызды FuzeVPN қолданбай пайдаланады."
+  },
+  "siteExclusionsEnabled": {
+    "message": "Ерекшеліктерді қосу"
+  },
+  "siteExclusionInput": {
+    "message": "Домен немесе URL"
+  },
+  "siteExclusionPlaceholder": {
+    "message": "example.com"
+  },
+  "siteExclusionPreview": {
+    "message": "Таңдалған домен: $1"
+  },
+  "siteExclusionSubdomains": {
+    "message": "Ішкі домендерді қамту"
+  },
+  "siteExclusionAdd": {
+    "message": "Сайт қосу"
+  },
+  "siteExclusionsEmpty": {
+    "message": "Ерекшелік сайттары жоқ. Тек VPN-сіз пайдаланғыңыз келетін сайттарды қосыңыз."
+  },
+  "siteExclusionsCount": {
+    "message": "Сайттар: $1 / 100"
+  },
+  "siteExclusionScopeSubdomains": {
+    "message": "Домен және ішкі домендер"
+  },
+  "siteExclusionScopeExact": {
+    "message": "Тек нақты домен"
+  },
+  "siteExclusionRemove": {
+    "message": "Алып тастау: $1"
+  },
+  "siteExclusionsDetails": {
+    "message": "Ерекшеліктер қалай жұмыс істейді?"
+  },
+  "siteExclusionsResources": {
+    "message": "Басқа домендердегі ресурстар қорғалған күйде қалады. Бетті ерекшелікке қосу оның басқа мазмұнын автоматты түрде ерекшелікке қоспайды."
+  },
+  "siteExclusionsReload": {
+    "message": "Өзгерістен кейін сайтты қайта жүктеңіз. Бар қосылымдар алдыңғы бағытын сақтауы мүмкін."
+  },
+  "siteExclusionsWebRtc": {
+    "message": "WebRTC қорғанысы жалпы параметр болып қалады, ерекшелік сайттары үшін де."
+  },
+  "siteExclusionsLocal": {
+    "message": "Тек осы браузерде сақталады және тіркелгіден шыққаннан кейін де сақталып қалады."
+  },
+  "siteExclusionsOn": {
+    "message": "Ерекшеліктер қосулы"
+  },
+  "siteExclusionsOff": {
+    "message": "Ерекшеліктер өшірулі"
+  },
+  "siteExclusionsSummary": {
+    "message": "VPN-нен тыс сайттар: $1"
+  },
+  "siteExclusionsPending": {
+    "message": "Ерекшеліктер қолданылуда…"
+  },
+  "siteExclusionsInterrupted": {
+    "message": "Өзгеріс үзілді. Уақытша қорғаныс күшінде қалады."
+  },
+  "siteExclusionsSaveError": {
+    "message": "Өзгерісті аяқтау мүмкін болмады. Параметрлеріңізді тексеріп, қайталап көріңіз."
+  },
+  "siteExclusionsRetry": {
+    "message": "Қайталау"
+  },
+  "siteExclusionInvalid": {
+    "message": "Жарамды жария доменді енгізіңіз. IP мекенжайлары, жергілікті атаулар, қойылмалы таңбалар, жария жұрнақтар және резервтелген домендер қабылданбайды."
+  },
+  "siteExclusionDuplicate": {
+    "message": "Бұл домен тізімде бар."
+  },
+  "siteExclusionsLimit": {
+    "message": "100 сайт шегіне жетті. Басқасын қосу үшін бір сайтты алып тастаңыз."
+  },
+  "statusProtectedExceptions": {
+    "message": "VPN белсенді · ерекшеліктер: $1"
+  },
+  "statusBlockedExceptions": {
+    "message": "Тек ерекшелік сайттары қолжетімді"
+  },
+  "securityBlockedExceptions": {
+    "message": "Ерекшелік сайттарынан басқасына шолу бұғатталған"
+  },
+  "securityBlockUnverified": {
+    "message": "Бұғаттау расталмаған"
+  },
+  "logoutLocalComplete": {
+    "message": "Осы құрылғыдан шығу аяқталды."
+  },
+  "logoutApiSession": {
+    "message": "Ағымдағы тіркелгі сеансы"
+  },
+  "logoutProxySessions": {
+    "message": "Белгілі VPN сеанстары"
+  },
+  "logoutRevocationPending": {
+    "message": "Күшін жою орындалуда…"
+  },
+  "logoutRevocationConfirmed": {
+    "message": "Күшін жою расталды"
+  },
+  "logoutRevocationUnconfirmed": {
+    "message": "Күшін жою расталмады"
+  },
+  "logoutUnconfirmedHelp": {
+    "message": "Кейбір қашықтағы сеанстар мерзімі біткенше белсенді болып қалуы мүмкін."
+  },
+  "deviceQuotaLoading": {
+    "message": "Құрылғылар шегі жүктелуде…"
+  },
+  "deviceQuotaUnknown": {
+    "message": "Құрылғылар шегі қолжетімсіз"
+  },
+  "error_proxy_creation_uncertain": {
+    "message": "Сервер жаңа қосылымның жасалғанын растамады. Автоматты қайта қосылу кідіртілді."
+  },
+  "siteExclusionsPreferencesReset": {
+    "message": "Сақталған сайт ерекшеліктерін оқу мүмкін болмағандықтан, олар ысырылды. Ерекшелікке қосқыңыз келетін сайттарды қайта қосыңыз."
+  },
+  "siteExclusionsConflict": {
+    "message": "Ерекшелік сайттарының тізімі өзгерді. Оны қарап шығып, өзгерісті қайталап көріңіз."
+  },
+  "unavailableLocation": {
+    "message": "Орналасқан жер қолжетімсіз"
+  },
+  "verificationSending": {
+    "message": "Растау хаты жіберілуде…"
+  },
+  "verificationSent": {
+    "message": "Растау хаты жіберілді. Кіріс жәшігіңіз бен спам қалтасын тексеріңіз."
+  },
+  "error_login_requires_disconnect": {
+    "message": "Басқа тіркелгіге кірмес бұрын ағымдағы VPN қосылымын ажыратыңыз."
+  },
+  "error_storage_unavailable": {
+    "message": "Тіркелгінің жергілікті параметрлері қолжетімсіз. Браузер жады қолжетімді болғанда қайталаңыз; сақталған тіркелгіңіз жойылған жоқ."
+  },
+  "diagnosticsAssistance": {
+    "message": "Қолдау"
+  },
+  "diagnosticsTitle": {
+    "message": "Диагностика"
+  },
+  "diagnosticsIntro": {
+    "message": "Қорғанысыңызды өзгертпей FuzeVPN мен ағымдағы қосылымды тексеріңіз."
+  },
+  "diagnosticsPrivacyTitle": {
+    "message": "Деректеріңіз"
+  },
+  "diagnosticsPrivacy": {
+    "message": "Есептің JSON мазмұнында техникалық күйлер мен қате кодтары бар; құпиясөздер, токендер, электрондық пошта мекенжайлары, IP мекенжайлары, кірген URL мекенжайлары және ерекшелік домендері қамтылмайды. Жіберу аутентификациямен орындалады және есепті тіркелгіңізге байланыстырады. Желі деректері туралы ақпаратты хабарламадан қараңыз."
+  },
+  "diagnosticsAuto": {
+    "message": "Маңызды қате есептерін автоматты түрде жіберу"
+  },
+  "diagnosticsAutoHelp": {
+    "message": "Әдепкі бойынша өшірулі. Қосылса, осы тіркелгі үшін шолу тарихынсыз қарапайым техникалық есептер жіберіледі. Автоматты жіберуді тоқтатып, күтудегі автоматты есептерді жою үшін мұны осы жерде өшіріңіз."
+  },
+  "diagnosticsHistoryHelp": {
+    "message": "Техникалық тарих жергілікті сақталады: әр журналда 10 минут ішінде 200 оқиғаға дейін, автоматты жіберу өшірулі болса да. Онда шолу тарихы жоқ және ол қолмен, браузер жабылғанда немесе тіркелгі ауысқанда тазартылады."
+  },
+  "diagnosticsHistoryCount": {
+    "message": "Жергілікті техникалық оқиғалар: $1"
+  },
+  "diagnosticsConnectionLog": {
+    "message": "Қосылым журналын экспорттау"
+  },
+  "diagnosticsAccountRequired": {
+    "message": "Жіберуді қосу үшін кіріңіз. Есепті тіркелгісіз де көріп, экспорттай аласыз."
+  },
+  "diagnosticsRun": {
+    "message": "Диагностиканы іске қосу"
+  },
+  "diagnosticsClearHistory": {
+    "message": "Жергілікті тарихты тазарту"
+  },
+  "diagnosticsPreparing": {
+    "message": "Есеп дайындалуда…"
+  },
+  "diagnosticsReports": {
+    "message": "Есептер"
+  },
+  "diagnosticsEmpty": {
+    "message": "Әзірге жергілікті есеп жоқ."
+  },
+  "diagnosticsChooseReport": {
+    "message": "Есепті таңдаңыз"
+  },
+  "diagnosticsReportLabel": {
+    "message": "$1 · $2 · $3"
+  },
+  "diagnosticsTypeFull": {
+    "message": "Толық есеп"
+  },
+  "diagnosticsTypeSimple": {
+    "message": "Қате туралы есеп"
+  },
+  "diagnosticsSummary": {
+    "message": "Жиналған күні: $1. FuzeVPN нұсқасы: $2."
+  },
+  "diagnosticsJson": {
+    "message": "Есеп мазмұнын көру (JSON)"
+  },
+  "diagnosticsExport": {
+    "message": "Есепті экспорттау"
+  },
+  "diagnosticsDelete": {
+    "message": "Жергілікті есепті жою"
+  },
+  "diagnosticsRetention": {
+    "message": "Жергілікті есептердің мерзімі 24 сағаттан кейін бітеді. Мұнда жою қызмет әлдеқашан алған есепті жоймайды. Серверде сақтау және жою сұраулары туралы хабарламаны қараңыз."
+  },
+  "diagnosticsConsent": {
+    "message": "Осы диагностикалық есепті FuzeVPN қызметіне жіберу"
+  },
+  "diagnosticsDataCollectionRequired": {
+    "message": "Диагностиканы жіберу үшін Firefox техникалық деректерді жинауға рұқсат беруі керек. Қайталап, осы рұқсатты беріңіз."
+  },
+  "diagnosticsSendHelp": {
+    "message": "Жіберу міндетті емес. Мақұлданғаннан кейін, сол тіркелгінің жарамды сеансы болса, ол 24 сағатқа дейін қайталануы мүмкін. Келесі әрекеттерден бас тартуға болады. Кеш бас тарту сервердің есепті әлі алмағанына кепілдік бермейді."
+  },
+  "diagnosticsSend": {
+    "message": "Есепті жіберу"
+  },
+  "diagnosticsCancel": {
+    "message": "Жіберуден бас тарту"
+  },
+  "diagnosticsReload": {
+    "message": "Бұл бетті қайта жүктеу"
+  },
+  "diagnosticsUnavailable": {
+    "message": "Диагностика қолжетімсіз. FuzeVPN кеңейтімін браузердің кеңейтімдер басқарушысынан қайта жүктеп, осы бетті қайта ашыңыз. VPN өзгерген жоқ."
+  },
+  "diagnosticsQueueFull": {
+    "message": "Жіберу кезегі толы. Жергілікті есепті жойыңыз немесе күтудегі есептің аяқталуын күтіңіз."
+  },
+  "diagnosticsContentUnavailable": {
+    "message": "Есеп мазмұны қолжетімсіз. Жергілікті есеп қолжетімді болса, оны экспорттап, қолдау қызметіне хабарласыңыз."
+  },
+  "diagnosticsFailure": {
+    "message": "Диагностикалық әрекетті аяқтау мүмкін болмады. VPN өзгерген жоқ."
+  },
+  "diagnosticsChecks": {
+    "message": "Тексерулер"
+  },
+  "diagnosticsCheckFallback": {
+    "message": "Техникалық тексеру: $1"
+  },
+  "diagnosticsCheckLine": {
+    "message": "$1 — $2"
+  },
+  "diagnosticsProxy": {
+    "message": "Браузер проксиі"
+  },
+  "diagnosticsStorage": {
+    "message": "Жергілікті жад"
+  },
+  "diagnosticsNetwork": {
+    "message": "Желі қосылымы"
+  },
+  "diagnosticsCleanup": {
+    "message": "Сеансты тазарту"
+  },
+  "diagnosticsResult_passed": {
+    "message": "Өтті"
+  },
+  "diagnosticsResult_failed": {
+    "message": "Сәтсіз"
+  },
+  "diagnosticsResult_skipped": {
+    "message": "Орындалмады"
+  },
+  "diagnosticsResult_unknown": {
+    "message": "Белгісіз"
+  },
+  "diagnosticsStatus_ready": {
+    "message": "Осы құрылғыда дайын"
+  },
+  "diagnosticsStatus_pending": {
+    "message": "Жіберуді күтуде"
+  },
+  "diagnosticsStatus_sending": {
+    "message": "Жіберілуде…"
+  },
+  "diagnosticsStatus_session_required": {
+    "message": "Сол тіркелгінің жарамды сеансы күтілуде"
+  },
+  "diagnosticsStatus_received": {
+    "message": "Қызмет қабылдады"
+  },
+  "diagnosticsStatus_failed": {
+    "message": "Жіберу сәтсіз аяқталды"
+  },
+  "diagnosticsStatus_cancelled": {
+    "message": "Жіберуден бас тартылды"
+  },
+  "diagnosticsStatus_expired": {
+    "message": "Жіберу мерзімі өтті"
+  },
+  "diagnosticsReceivedAt": {
+    "message": "Қабылданған күні: $1"
+  },
+  "error_private_browsing_required": {
+    "message": "Firefox VPN-ді баптау үшін бұл рұқсатты тіпті қалыпты терезелерде де талап етеді. about:addons → FuzeVPN бөлімін ашып, жеке терезелерде іске қосуға рұқсат беріңіз, содан кейін қайталаңыз."
+  },
+  "error_host_permissions_required": {
+    "message": "Firefox ішінде about:addons → FuzeVPN → Рұқсаттар бөлімін ашып, барлық веб-сайттарға қол жеткізуге рұқсат беріңіз, содан кейін қайталаңыз."
+  },
+  "cancelAction": {
+    "message": "Бас тарту"
+  },
+  "refreshLocations": {
+    "message": "Орналасқан жерлерді жаңарту"
+  },
+  "refreshingLocations": {
+    "message": "Орналасқан жерлер жаңартылуда…"
+  },
+  "locationsRefreshError": {
+    "message": "Орналасқан жерлер тізімін жаңарту мүмкін болмады. Қайталап көріңіз."
+  },
+  "error_device_revoked_limit": {
+    "message": "Бұл құрылғының рұқсаты кері қайтарылды. Құрылғылар шегіне жетті: бір құрылғыны жойыңыз."
+  },
+  "noAvailableLocations": {
+    "message": "Қазір қолжетімді орналасқан жер жоқ. Сәлден соң қайталап көріңіз."
+  },
+  "noAvailableFavoriteLocations": {
+    "message": "Таңдаулы орналасқан жерлеріңіз уақытша қолжетімсіз."
+  },
+  "error_location_favorites_limit": {
+    "message": "100 таңдаулы шегіне жетті. Басқасын қосу үшін бір таңдаулыны алып тастаңыз."
+  },
+  "error_server_full": {
+    "message": "Бұл сервер толы. Басқа орналасқан жерді таңдаңыз."
+  },
+  "error_capacity_unavailable": {
+    "message": "Бұл сервердің қолжетімділігін қазір растау мүмкін емес. Сәлден соң қайталап көріңіз."
+  },
+  "locationHierarchyHelp": {
+    "message": "Атауы серверді таңдайды; көрсеткі мәліметтерді көрсетеді."
+  },
+  "locationCountrySelect": {
+    "message": "Қолжетімді серверді таңдау: $1"
+  },
+  "locationCitySelect": {
+    "message": "Қолжетімді серверді таңдау: $1"
+  },
+  "locationShowCities": {
+    "message": "Қалаларды көрсету: $1"
+  },
+  "locationHideCities": {
+    "message": "Қалаларды жасыру: $1"
+  },
+  "locationShowServers": {
+    "message": "Серверлерді көрсету: $1"
+  },
+  "locationHideServers": {
+    "message": "Серверлерді жасыру: $1"
+  },
+  "locationAvailableServers": {
+    "message": "Қолжетімді серверлер: $1"
+  },
+  "legalInformation": {
+    "message": "Құқықтық ақпарат"
+  },
+  "privacyPolicy": {
+    "message": "Кеңейтімнің құпиялылық хабарламасы"
+  },
+  "termsAndConditions": {
+    "message": "Пайдалану және сату шарттары"
+  },
+  "legalNotice": {
+    "message": "Құқықтық ескертпе"
+  },
+  "contactSupport": {
+    "message": "Қолдау қызметіне хабарласу"
+  },
+  "webSignIn": {
+    "message": "FuzeVPN тіркелгісіне кіру"
+  },
+  "webSignInDisconnect": {
+    "message": "Ажыратып, кіру"
+  },
+  "webSignInPending": {
+    "message": "Кіру орындалуда…"
+  },
+  "webSignInHelp": {
+    "message": "FuzeVPN жеке кабинетінде Google немесе электрондық пошта арқылы кіріңіз не тіркелгі жасаңыз."
+  },
+  "webSignInDisconnectHelp": {
+    "message": "Бұл түйме Google немесе электрондық пошта арқылы кіре алуыңыз үшін браузер қорғанысын тоқтатады. Кіру кезінде шолуыңыз қорғалмайды."
+  },
+  "webSignInStatus": {
+    "message": "FuzeVPN кіру терезесінде жалғастырыңыз. Аяқтаған кезде кеңейтім автоматты түрде жаңартылады. Бас тарту үшін сол терезені жабыңыз."
+  },
+  "error_web_login_cancelled": {
+    "message": "Кіруден бас тартылды. Қайталап көріңіз."
+  },
+  "error_web_login_timeout": {
+    "message": "Кіру тым ұзаққа созылды. Қайталап көріңіз."
+  },
+  "error_web_login_unavailable": {
+    "message": "Веб арқылы кіру қолжетімсіз. Кейінірек қайталап көріңіз."
+  },
+  "error_web_login_invalid_callback": {
+    "message": "Кіруді растау мүмкін болмады. Кеңейтімнен қайта бастаңыз."
+  },
+  "error_web_login_denied": {
+    "message": "Кіруге рұқсат берілмеді. Қайталап көріңіз."
+  },
+  "error_web_login_busy": {
+    "message": "Қайталамас бұрын ашық тұрған кіру терезесін жабыңыз."
+  },
+  "deviceKindFirefox": {
+    "message": "Firefox браузері"
+  },
+  "generalPrivacyPolicy": {
+    "message": "Жалпы құпиялылық саясаты"
+  },
+  "privacyNoticeTitle": {
+    "message": "FuzeVPN кеңейтіміндегі құпиялылық"
+  },
+  "privacyNoticeIntro": {
+    "message": "Бұл хабарлама осы кеңейтім пайдаланатын деректерді сипаттайды. Ол төменде сілтемесі берілген FuzeVPN жалпы құпиялылық саясатын толықтырады. Міндетті емес диагностикалық жіберу кіру және VPN пайдалану үшін қажет деректерден бөлек."
+  },
+  "privacyNoticeUpdated": {
+    "message": "Хабарлама 2026 жылғы 19 қазанда жаңартылды"
+  },
+  "privacyNoticeServiceTitle": {
+    "message": "Тіркелгі және VPN қызметі"
+  },
+  "privacyNoticeService": {
+    "message": "Кеңейтім api.fuzevpn.com қызметімен аутентификация, тіркелгі, жазылым, құрылғы және прокси сеансы деректерімен алмасады. VPN проксиі өзі арқылы бағытталған трафикті тасымалдайды. Бұл қосылымдар қабылдаушы қызметке желі метадеректерін ашады; бұл хабарлама сервер журналдары туралы бөлек уәде бермейді."
+  },
+  "privacyNoticeLocalTitle": {
+    "message": "Браузеріңізде сақталатын деректер"
+  },
+  "privacyNoticeLocal": {
+    "message": "Браузер жадында сеансыңыз, тіркелгі мәліметтері, параметрлер, сайт ерекшеліктері және құрылғы сәйкестендіргіші сақталады. Техникалық журналдар автоматты есеп жіберу өшірулі болса да, жергілікті түрде 10 минутқа дейін сақталады. Диагностикалық жобалар мен кезектегі есептердің жергілікті мерзімі 24 сағаттан кейін бітеді; тазарту кеңейтім іске қосыла алған кезде орындалады."
+  },
+  "privacyNoticeIpTitle": {
+    "message": "Жария IP тексерулері және үшінші тараптар"
+  },
+  "privacyNoticeIp": {
+    "message": "IP көрсету және желі диагностикасы api.ipify.org қызметіне жүгінеді. IP көрсету қосалқы ретінде ipv4.icanhazip.com қызметін пайдалануы мүмкін. Провайдер қосылым IP мекенжайын және әдеттегі сұрау метадеректерін алады: тікелей режимде жария IP мекенжайыңызды, ал прокси арқылы VPN шығыс IP мекенжайын. Бұл сұрауларда cookie файлдары мен referrer жоқ, тіркелгі токені немесе шолу тарихы жіберілмейді."
+  },
+  "privacyNoticeReportsTitle": {
+    "message": "Диагностикалық есептерде не бар"
+  },
+  "privacyNoticeReports": {
+    "message": "Есептерде кездейсоқ есеп идентификаторы, уақыт белгілері, кеңейтім мен браузер нұсқалары, операциялық жүйе тобы мен архитектурасы, қосылым мен қорғаныс күйлері, қате кодтары, сандар, ұзақтықтар және тексеру нәтижелері болуы мүмкін. Толық есептерде соңғы техникалық оқиғалар болуы мүмкін. Олардың JSON мазмұнына құпиясөздер, аутентификация токендері, электрондық пошта мекенжайлары, IP мекенжайлары, кірген URL мекенжайлары және ерекшелік домендері кірмейді. Толық есепті жібермес бұрын қарап шығып, экспорттай аласыз."
+  },
+  "privacyNoticeAccountTitle": {
+    "message": "Алушы және тіркелгіге байланыстыру"
+  },
+  "privacyNoticeAccount": {
+    "message": "Есептер аутентификацияланған қосылым арқылы api.fuzevpn.com/v1/diagnostics мекенжайындағы FuzeVPN қызметіне жіберіледі. Бұл API қосылымы VPN проксиін айналып өтеді: VPN белсенді болса да, FuzeVPN тікелей жария IP мекенжайыңызды алады. Есептер жүйеге кірген тіркелгіге байланыстырылады, олар анонимді емес. Аутентификация тақырыбы мен IP мекенжайы есептің JSON мазмұнынан бөлек. Сәтті қабылдау есепті сол соңғы нүкте қабылдағанын ғана растайды, қолдау қызметі маманы оны оқығанын емес."
+  },
+  "privacyNoticeChoiceTitle": {
+    "message": "Міндетті емес жіберу және келісімді қайтарып алу"
+  },
+  "privacyNoticeChoice": {
+    "message": "Автоматты жіберу әдепкі бойынша өшірулі. Оны қосу сол тіркелгі үшін қарапайым қате есептерін жіберуге рұқсат береді. Толық есепті қолмен жіберу үшін жіберу құсбелгісін қою қажет. Firefox сонымен қатар өзінің міндетті емес техникалық деректер рұқсатын талап етеді. Автоматты жіберуді тоқтатып, күтудегі автоматты есептерді жою үшін оны өшіріңіз; күтудегі жеке жіберулерден бөлек бас тартыңыз. Диагностикалық жіберуден бас тарту VPN пайдалануға кедергі келтірмейді."
+  },
+  "privacyNoticeDeleteTitle": {
+    "message": "Жергілікті жою және жүктеп алынған файлдар"
+  },
+  "privacyNoticeDelete": {
+    "message": "Диагностика бөлімінде техникалық тарихты тазартыңыз немесе жеке жергілікті есепті жойыңыз. Тарихты тазарту бар есеп көшірмелерін өшірмейді. Жергілікті бас тарту немесе жою қызмет әлдеқашан алған деректерді, соның ішінде бас тартуға дейін жеткен жүктеп салуды қайтара алмайды. Жүктеп алынған экспорттар — өзіңіз жоюыңыз керек бөлек файлдар."
+  },
+  "privacyNoticeServerTitle": {
+    "message": "Серверде сақтау және сұраулар"
+  },
+  "privacyNoticeServer": {
+    "message": "Бұл кеңейтім серверде сақтауды немесе сервер жағындағы жоюды басқармайды және тексермейді. FuzeVPN қолданатын сақтау мерзімі және жіберілген есептерге қатысты сұраулар үшін жалпы құпиялылық саясатын қараңыз немесе FuzeVPN қызметіне хабарласыңыз. Бұл хабарлама серверде сақтаудың белгіленген мерзіміне кепілдік бермейді."
+  },
+  "privacyNoticeSupportTitle": {
+    "message": "Диагностика мен қолдау бөлек"
+  },
+  "privacyNoticeSupport": {
+    "message": "Диагностикалық есепті жіберудің өзі кеңейтімнен қолдау қызметіне хабарлама жібермейді. Мәселені түсіндіру немесе алынған есепті жоюды сұрау үшін төмендегі FuzeVPN байланыс арнасын пайдаланыңыз. Экспортталған файлды басқа арна арқылы бөлісуді шешсеңіз, алдымен оның мазмұнын тексеріңіз."
+  },
+  "privacyNoticeManage": {
+    "message": "Диагностиканы ашу"
+  },
+  "privacyNoticeLinksTitle": {
+    "message": "Қызмет саясаты және байланыс"
+  },
+  "theme": {
+    "message": "Тақырып"
+  },
+  "themeSystem": {
+    "message": "Жүйелік"
+  },
+  "themeLight": {
+    "message": "Ашық"
+  },
+  "themeDark": {
+    "message": "Қараңғы"
+  },
+  "switchToDarkTheme": {
+    "message": "Қараңғы тақырыпқа ауысу"
+  },
+  "switchToLightTheme": {
+    "message": "Ашық тақырыпқа ауысу"
+  }
+}

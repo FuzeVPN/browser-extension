@@ -1,0 +1,929 @@
+{
+  "extensionName": {
+    "message": "FuzeVPN"
+  },
+  "extensionDescription": {
+    "message": "Maxfiyligingizni saqlang va xavfsizligingizni bir bosishda kuchaytiring."
+  },
+  "siteExclusionsReloadRequired": {
+    "message": "Yangilanishni yakunlash va sayt istisnolaridan foydalanish uchun FuzeVPN kengaytmasini brauzerning kengaytmalar boshqaruvchisidan qayta yuklang."
+  },
+  "extensionCommunicationError": {
+    "message": "Kengaytma javob bermayapti. Bu oynani yoping, soʻng FuzeVPN kengaytmasini brauzerning kengaytmalar boshqaruvchisidan qayta yuklang."
+  },
+  "actionDisconnected": {
+    "message": "FuzeVPN — Uzilgan"
+  },
+  "actionConnected": {
+    "message": "FuzeVPN — Bu brauzerda himoyalangan"
+  },
+  "actionReconnecting": {
+    "message": "FuzeVPN — Qayta ulanmoqda"
+  },
+  "actionError": {
+    "message": "FuzeVPN — Eʼtibor talab etiladi"
+  },
+  "browserProtection": {
+    "message": "Brauzer himoyasi"
+  },
+  "loginTitle": {
+    "message": "FuzeVPN xizmatiga xush kelibsiz"
+  },
+  "loginSubtitle": {
+    "message": "Bu brauzerda veb-kezishni himoya qilish uchun hisobingizga kiring."
+  },
+  "email": {
+    "message": "Elektron pochta manzili"
+  },
+  "emailPlaceholder": {
+    "message": "you@example.com"
+  },
+  "password": {
+    "message": "Parol"
+  },
+  "signIn": {
+    "message": "Kirish"
+  },
+  "signingIn": {
+    "message": "Kirilmoqda…"
+  },
+  "forgotPassword": {
+    "message": "Parolni unutdingizmi?"
+  },
+  "createAccount": {
+    "message": "Hisob yaratish"
+  },
+  "settings": {
+    "message": "Sozlamalar"
+  },
+  "close": {
+    "message": "Yopish"
+  },
+  "statusDisconnected": {
+    "message": "Uzilgan"
+  },
+  "statusConnecting": {
+    "message": "Ulanmoqda…"
+  },
+  "statusChanging": {
+    "message": "Joylashuv oʻzgartirilmoqda…"
+  },
+  "statusProtected": {
+    "message": "Bu brauzerda himoyalangan"
+  },
+  "statusRefreshing": {
+    "message": "Xavfsiz yangilanmoqda…"
+  },
+  "statusDisconnecting": {
+    "message": "Uzilmoqda…"
+  },
+  "statusError": {
+    "message": "Himoya toʻxtadi"
+  },
+  "browserOnlyDetail": {
+    "message": "Bu brauzer uchun himoya."
+  },
+  "location": {
+    "message": "Joylashuv"
+  },
+  "change": {
+    "message": "Oʻzgartirish"
+  },
+  "noLocation": {
+    "message": "Mavjud joylashuv yoʻq"
+  },
+  "protectBrowser": {
+    "message": "Brauzerni himoyalash"
+  },
+  "disconnect": {
+    "message": "Uzish"
+  },
+  "subscription": {
+    "message": "Obuna"
+  },
+  "refreshSubscription": {
+    "message": "Obunani yangilash"
+  },
+  "refreshingSubscription": {
+    "message": "Obuna yangilanmoqda…"
+  },
+  "subscriptionActive": {
+    "message": "Faol"
+  },
+  "subscriptionInactive": {
+    "message": "Nofaol"
+  },
+  "expiresOn": {
+    "message": "Amal qilish muddati: $1"
+  },
+  "noExpiry": {
+    "message": "Amal qilish muddati yoʻq"
+  },
+  "browserOnlyNotice": {
+    "message": "Faqat shu brauzer. Boshqa ilovalar va brauzerlar qamrab olinmaydi."
+  },
+  "resendVerification": {
+    "message": "Xatni qayta yuborish"
+  },
+  "incognitoHelp": {
+    "message": "Maxfiy rejim xuddi shu himoyadan faqat brauzer sozlamalarida kengaytmaga maxfiy rejimda ishlashga ruxsat berilganda foydalanadi."
+  },
+  "manageAccount": {
+    "message": "Hisobimni boshqarish"
+  },
+  "account": {
+    "message": "Hisob"
+  },
+  "devices": {
+    "message": "Qurilmalar"
+  },
+  "manageDevices": {
+    "message": "Qurilmalarni boshqarish"
+  },
+  "refreshDevices": {
+    "message": "Qurilmalarni yangilash"
+  },
+  "deviceCount": {
+    "message": "Qurilmalar: $1 / $2"
+  },
+  "loadingDevices": {
+    "message": "Qurilmalar yuklanmoqda…"
+  },
+  "noDevices": {
+    "message": "Faol qurilmalar yoʻq."
+  },
+  "currentDevice": {
+    "message": "Shu qurilma"
+  },
+  "deviceKindBrowser": {
+    "message": "Brauzer kengaytmasi"
+  },
+  "deviceKindVpn": {
+    "message": "VPN qurilmasi"
+  },
+  "profile_browser_proxy": {
+    "message": "Brauzer proksisi"
+  },
+  "profile_wireguard": {
+    "message": "WireGuard"
+  },
+  "profile_openvpn": {
+    "message": "OpenVPN"
+  },
+  "none": {
+    "message": "yoʻq"
+  },
+  "deviceCreatedOn": {
+    "message": "Yaratilgan sana: $1"
+  },
+  "deleteDevice": {
+    "message": "Qurilmani oʻchirish"
+  },
+  "deleteDeviceNamed": {
+    "message": "Qurilmani oʻchirish: $1"
+  },
+  "confirmDeleteDevice": {
+    "message": "“$1” oʻchirilsinmi? Uning VPN ulanishlari toʻxtaydi va profillari oʻchiriladi."
+  },
+  "resetDevice": {
+    "message": "Qurilmani asliga qaytarish"
+  },
+  "confirmResetDevice": {
+    "message": "Bu kengaytma asliga qaytarilsinmi? Keyingi safar foydalanganingizda u yangi qurilma sifatida roʻyxatdan oʻtkaziladi."
+  },
+  "signOutAccount": {
+    "message": "Hisobdan chiqish"
+  },
+  "chooseLocation": {
+    "message": "Joylashuvni tanlang"
+  },
+  "error_invalid_credentials": {
+    "message": "Elektron pochta manzili yoki parol notoʻgʻri."
+  },
+  "error_unauthorized": {
+    "message": "Seansingiz muddati tugadi. Qaytadan kiring."
+  },
+  "error_email_verification_required": {
+    "message": "Himoyani yoqishdan oldin elektron pochta manzilingizni tasdiqlang."
+  },
+  "errorVerificationCooldown": {
+    "message": "Yangi xatni $1 soniyadan keyin soʻrash mumkin."
+  },
+  "error_verification_email_cooldown": {
+    "message": "Yana xat soʻrashdan oldin biroz kuting."
+  },
+  "error_subscription_required": {
+    "message": "Bu brauzerni himoyalash uchun faol obuna kerak."
+  },
+  "error_device_limit": {
+    "message": "Qurilmalar chegarasiga yetildi. Bitta qurilmani oʻchiring."
+  },
+  "error_device_identity_revoked": {
+    "message": "Bu qurilma endi ruxsatga ega emas. Qayta ulanib koʻring."
+  },
+  "error_device_proof_invalid": {
+    "message": "Bu qurilmani tasdiqlab boʻlmadi. Kompyuteringizdagi sana va vaqtni tekshiring, soʻng qayta urinib koʻring."
+  },
+  "error_device_proof_replayed": {
+    "message": "Bu soʻrov allaqachon bajarilgan. Qayta urinib koʻring."
+  },
+  "error_invalid_device": {
+    "message": "Bu qurilma tanilmadi. Qayta ulanib koʻring."
+  },
+  "error_device_exists": {
+    "message": "Bu qurilma identifikatori boshqa hisobga bogʻlangan."
+  },
+  "error_not_found": {
+    "message": "Bu amal endi mavjud emas. Qayta urinib koʻring."
+  },
+  "error_invalid_location": {
+    "message": "Bu joylashuv mavjud emas. Boshqasini tanlang."
+  },
+  "error_rate_limited": {
+    "message": "Urinishlar juda koʻp. Biroz kuting va qayta urinib koʻring."
+  },
+  "error_proxy_unavailable": {
+    "message": "Bu server vaqtincha ishlamayapti. Birozdan soʻng qayta urinib koʻring."
+  },
+  "error_api_token_expired": {
+    "message": "Hisob seansi muddati tugadi. Qaytadan kiring."
+  },
+  "error_network_error": {
+    "message": "Tarmoq mavjud emas. Internet ulanishingizni tekshiring."
+  },
+  "error_request_timeout": {
+    "message": "Xizmat juda uzoq javob bermadi. Qayta urinib koʻring."
+  },
+  "error_invalid_response": {
+    "message": "Xizmat kutilmagan javob qaytardi."
+  },
+  "error_proxy_certificate_invalid": {
+    "message": "Server xavfsizligini tasdiqlab boʻlmadi. Ulanish toʻxtatildi."
+  },
+  "error_proxy_controlled_by_extension": {
+    "message": "Hozirda brauzer proksisini boshqa kengaytma boshqarmoqda."
+  },
+  "error_proxy_controlled_by_policy": {
+    "message": "Administrator siyosati FuzeVPN kengaytmasiga proksini oʻzgartirishga yoʻl qoʻymaydi."
+  },
+  "error_proxy_authentication_failed": {
+    "message": "Server ulanishni qabul qilmadi. Qayta ulanib koʻring."
+  },
+  "error_session_expired": {
+    "message": "Himoyalangan ulanish muddati tugadi. Qayta ulaning."
+  },
+  "error_email_delivery_unavailable": {
+    "message": "Hozir xatni yuborib boʻlmaydi."
+  },
+  "error_unknown_error": {
+    "message": "Kutilmagan xatolik yuz berdi. Qayta urinib koʻring."
+  },
+  "actionBlocked": {
+    "message": "FuzeVPN — Veb-kezish bloklandi"
+  },
+  "statusBlockedRetry": {
+    "message": "Veb-kezish toʻxtatildi — qayta ulanmoqda"
+  },
+  "statusBlockedAction": {
+    "message": "Veb-kezish toʻxtatildi — ulanishni tekshiring"
+  },
+  "statusProtectionUnavailable": {
+    "message": "Himoya mavjud emas — veb-kezish bloklanmagan"
+  },
+  "recoveryHelp": {
+    "message": "Himoyani tiklash uchun qayta urinib koʻring. Uzish tugmasi FuzeVPN ishlatmasdan veb-kezish imkonini beradi."
+  },
+  "retryConnection": {
+    "message": "Qayta urinish"
+  },
+  "killSwitch": {
+    "message": "Favqulodda oʻchirgich"
+  },
+  "killSwitchHelp": {
+    "message": "VPN ulanishi uzilsa, yangi veb-soʻrovlarni bloklaydi. Istisno saytlar VPN tashqarisida ochiq qoladi."
+  },
+  "webRtcProtection": {
+    "message": "WebRTC himoyasi"
+  },
+  "webRtcHelp": {
+    "message": "Veb-qoʻngʻiroqlar paytida IP manzilingizni maxfiy saqlashga yordam beradi. Baʼzi qoʻngʻiroqlar ishlamasligi mumkin. Buni oʻchirish haqiqiy IP manzilingizni oshkor qilishi mumkin."
+  },
+  "securityEffectiveState": {
+    "message": "$1 · $2"
+  },
+  "securityBlocked": {
+    "message": "Veb-kezish bloklangan"
+  },
+  "securityNotBlocked": {
+    "message": "Veb-kezish bloklanmagan"
+  },
+  "securityWebRtcActive": {
+    "message": "WebRTC cheklovi faol"
+  },
+  "securityWebRtcInactive": {
+    "message": "WebRTC cheklovi nofaol"
+  },
+  "localNetworkHelp": {
+    "message": "Himoya davomida mahalliy IP manzillar va keng tarqalgan mahalliy nomlar bloklanadi. Istisno qilingan domen baribir mahalliy tarmoqqa kirish imkonini berishi mumkin. Tizimning IPv6 sozlamalari oʻzgartirilmaydi."
+  },
+  "securityLimits": {
+    "message": "Bu himoya haqida"
+  },
+  "killSwitchLimits": {
+    "message": "Faqat shu brauzer: mavjud ulanishlar hamda brauzerning baʼzi ichki yoki boshqa kengaytmalar aloqalari davom etishi mumkin. FuzeVPN javob berishidan oldin boshqa kengaytma yoki siyosat proksini almashtirishi mumkin. Kengaytmani oʻchirib qoʻyish himoyani olib tashlaydi. Butun tizim boʻylab bloklash yoʻq."
+  },
+  "error_traffic_guard_failed": {
+    "message": "Veb-kezish blokini tasdiqlab boʻlmadi. Himoya kafolatlanmaydi. Kengaytma ruxsatlarini tekshiring."
+  },
+  "error_webrtc_control_unavailable": {
+    "message": "WebRTC cheklovini qoʻllab boʻlmadi. Sozlamalaringizni, boshqa kengaytmalarni yoki administrator siyosatini tekshiring."
+  },
+  "language": {
+    "message": "Til"
+  },
+  "languageAutomatic": {
+    "message": "Avtomatik — brauzer tili"
+  },
+  "languageHelp": {
+    "message": "Oʻzgarishlar darhol qoʻllanadi. Avtomatik rejim brauzer tiliga amal qiladi, u tizim tilidan farq qilishi mumkin."
+  },
+  "languageSaveError": {
+    "message": "Tilni saqlab boʻlmadi. Avvalgi tanlovingiz saqlanib qoldi. Qayta urinib koʻring."
+  },
+  "publicIp": {
+    "message": "Ommaviy IP"
+  },
+  "vpnIp": {
+    "message": "VPN IP"
+  },
+  "ipChecking": {
+    "message": "Tekshirilmoqda…"
+  },
+  "ipUnavailable": {
+    "message": "Mavjud emas"
+  },
+  "ipLookupExplanation": {
+    "message": "IP joriy ulanishingiz orqali ipify yoki zaxira sifatida icanhazip yordamida tekshiriladi. Veb-kezish tarixi yuborilmaydi."
+  },
+  "automaticLocation": {
+    "message": "Avtomatik"
+  },
+  "automaticLocationHelp": {
+    "message": "Yaqindagi eng yaxshi javob vaqti yoki oxirgi joylashuvingiz."
+  },
+  "automaticLocationName": {
+    "message": "Avtomatik · $1"
+  },
+  "searchLocations": {
+    "message": "Mamlakat yoki shaharni qidirish"
+  },
+  "locationFilters": {
+    "message": "Joylashuvlarni filtrlash"
+  },
+  "allLocations": {
+    "message": "Hammasi"
+  },
+  "favoriteLocations": {
+    "message": "Sevimlilar"
+  },
+  "recentLocations": {
+    "message": "Soʻnggilar"
+  },
+  "noMatchingLocations": {
+    "message": "Qidiruvingizga mos joylashuv topilmadi."
+  },
+  "noFavoriteLocations": {
+    "message": "Sevimli joylashuvlaringizni shu yerda saqlash uchun yulduzcha qoʻying."
+  },
+  "noRecentLocations": {
+    "message": "Yaqinda ulangan joylashuvlaringiz shu yerda koʻrinadi."
+  },
+  "addFavorite": {
+    "message": "Sevimlilarga qoʻshish: $1"
+  },
+  "removeFavorite": {
+    "message": "Sevimlilardan olib tashlash: $1"
+  },
+  "unavailableFavoriteLocation": {
+    "message": "Mavjud boʻlmagan sevimli: $1"
+  },
+  "locationSaveError": {
+    "message": "Oʻzgarishni yakunlab boʻlmadi. Baʼzi sozlamalar saqlangan boʻlishi mumkin. Qayta urinishdan oldin koʻrsatilgan tanlovni tekshiring."
+  },
+  "siteExclusions": {
+    "message": "Istisno saytlar"
+  },
+  "siteExclusionsHelp": {
+    "message": "Bu saytlar VPN uzilgan taqdirda ham ulanishingizdan FuzeVPN ishlatmasdan foydalanadi."
+  },
+  "siteExclusionsEnabled": {
+    "message": "Istisnolarni yoqish"
+  },
+  "siteExclusionInput": {
+    "message": "Domen yoki URL"
+  },
+  "siteExclusionPlaceholder": {
+    "message": "example.com"
+  },
+  "siteExclusionPreview": {
+    "message": "Tanlangan domen: $1"
+  },
+  "siteExclusionSubdomains": {
+    "message": "Subdomenlarni qoʻshish"
+  },
+  "siteExclusionAdd": {
+    "message": "Sayt qoʻshish"
+  },
+  "siteExclusionsEmpty": {
+    "message": "Istisno saytlar yoʻq. Faqat VPN ishlatmasdan foydalanmoqchi boʻlgan saytlarni qoʻshing."
+  },
+  "siteExclusionsCount": {
+    "message": "Saytlar: $1 / 100"
+  },
+  "siteExclusionScopeSubdomains": {
+    "message": "Domen va subdomenlar"
+  },
+  "siteExclusionScopeExact": {
+    "message": "Faqat aniq domen"
+  },
+  "siteExclusionRemove": {
+    "message": "Olib tashlash: $1"
+  },
+  "siteExclusionsDetails": {
+    "message": "Istisnolar qanday ishlaydi?"
+  },
+  "siteExclusionsResources": {
+    "message": "Boshqa domenlardagi resurslar himoyalangan holda qoladi. Sahifani istisno qilish uning boshqa kontentini avtomatik ravishda istisno qilmaydi."
+  },
+  "siteExclusionsReload": {
+    "message": "Oʻzgarishdan keyin saytni qayta yuklang. Mavjud ulanishlar avvalgi yoʻnalishini saqlab qolishi mumkin."
+  },
+  "siteExclusionsWebRtc": {
+    "message": "WebRTC himoyasi umumiy sozlama boʻlib qoladi, jumladan istisno saytlar uchun ham."
+  },
+  "siteExclusionsLocal": {
+    "message": "Faqat shu brauzerda saqlanadi va hisobdan chiqqaningizdan keyin ham saqlanib qoladi."
+  },
+  "siteExclusionsOn": {
+    "message": "Istisnolar yoqilgan"
+  },
+  "siteExclusionsOff": {
+    "message": "Istisnolar oʻchirilgan"
+  },
+  "siteExclusionsSummary": {
+    "message": "VPN tashqarisidagi saytlar: $1"
+  },
+  "siteExclusionsPending": {
+    "message": "Istisnolar qoʻllanmoqda…"
+  },
+  "siteExclusionsInterrupted": {
+    "message": "Oʻzgarish toʻxtatildi. Vaqtinchalik himoya oʻz kuchida qoladi."
+  },
+  "siteExclusionsSaveError": {
+    "message": "Oʻzgarishni yakunlab boʻlmadi. Sozlamalaringizni tekshiring va qayta urinib koʻring."
+  },
+  "siteExclusionsRetry": {
+    "message": "Qayta urinish"
+  },
+  "siteExclusionInvalid": {
+    "message": "Yaroqli ommaviy domen kiriting. IP manzillar, mahalliy nomlar, umumlashtiruvchi belgilar, ommaviy qoʻshimchalar va zaxiralangan domenlar qabul qilinmaydi."
+  },
+  "siteExclusionDuplicate": {
+    "message": "Bu domen roʻyxatda allaqachon bor."
+  },
+  "siteExclusionsLimit": {
+    "message": "100 ta sayt chegarasiga yetildi. Boshqasini qoʻshish uchun bitta saytni olib tashlang."
+  },
+  "statusProtectedExceptions": {
+    "message": "VPN faol · istisnolar: $1"
+  },
+  "statusBlockedExceptions": {
+    "message": "Faqat istisno saytlar ochiq qoladi"
+  },
+  "securityBlockedExceptions": {
+    "message": "Istisno saytlardan tashqari veb-kezish bloklangan"
+  },
+  "securityBlockUnverified": {
+    "message": "Bloklash tasdiqlanmagan"
+  },
+  "logoutLocalComplete": {
+    "message": "Shu qurilmada chiqish yakunlandi."
+  },
+  "logoutApiSession": {
+    "message": "Joriy hisob seansi"
+  },
+  "logoutProxySessions": {
+    "message": "Maʼlum VPN seanslari"
+  },
+  "logoutRevocationPending": {
+    "message": "Bekor qilinmoqda…"
+  },
+  "logoutRevocationConfirmed": {
+    "message": "Bekor qilish tasdiqlandi"
+  },
+  "logoutRevocationUnconfirmed": {
+    "message": "Bekor qilish tasdiqlanmadi"
+  },
+  "logoutUnconfirmedHelp": {
+    "message": "Baʼzi masofaviy seanslar muddati tugaguncha faol qolishi mumkin."
+  },
+  "deviceQuotaLoading": {
+    "message": "Qurilmalar chegarasi yuklanmoqda…"
+  },
+  "deviceQuotaUnknown": {
+    "message": "Qurilmalar chegarasi mavjud emas"
+  },
+  "error_proxy_creation_uncertain": {
+    "message": "Server yangi ulanish yaratilganini tasdiqlamadi. Avtomatik qayta ulanish toʻxtatildi."
+  },
+  "siteExclusionsPreferencesReset": {
+    "message": "Saqlangan sayt istisnolarini oʻqib boʻlmagani uchun ular asliga qaytarildi. Istisno qilmoqchi boʻlgan saytlarni qaytadan qoʻshing."
+  },
+  "siteExclusionsConflict": {
+    "message": "Istisno saytlar roʻyxati oʻzgardi. Uni koʻrib chiqing, soʻng oʻzgarishingizni qayta bajarib koʻring."
+  },
+  "unavailableLocation": {
+    "message": "Joylashuv mavjud emas"
+  },
+  "verificationSending": {
+    "message": "Tasdiqlash xati yuborilmoqda…"
+  },
+  "verificationSent": {
+    "message": "Tasdiqlash xati yuborildi. Kiruvchi xatlar va spam jildini tekshiring."
+  },
+  "error_login_requires_disconnect": {
+    "message": "Boshqa hisobga kirishdan oldin joriy VPN ulanishini uzing."
+  },
+  "error_storage_unavailable": {
+    "message": "Mahalliy hisob sozlamalari mavjud emas. Brauzer xotirasi mavjud boʻlganda qayta urinib koʻring; saqlangan hisobingiz oʻchirilmadi."
+  },
+  "diagnosticsAssistance": {
+    "message": "Yordam"
+  },
+  "diagnosticsTitle": {
+    "message": "Diagnostika"
+  },
+  "diagnosticsIntro": {
+    "message": "Himoyangizni oʻzgartirmasdan FuzeVPN va joriy ulanishni tekshiring."
+  },
+  "diagnosticsPrivacyTitle": {
+    "message": "Maʼlumotlaringiz"
+  },
+  "diagnosticsPrivacy": {
+    "message": "Hisobotning JSON mazmunida texnik holatlar va xatolik kodlari bor; parollar, tokenlar, elektron pochta manzillari, IP manzillar, tashrif buyurilgan URL manzillar va istisno domenlar kiritilmaydi. Yuborish autentifikatsiya bilan amalga oshiriladi va hisobotni hisobingizga bogʻlaydi. Tarmoq maʼlumotlari haqida bildirishnomaga qarang."
+  },
+  "diagnosticsAuto": {
+    "message": "Muhim xatolik hisobotlarini avtomatik yuborish"
+  },
+  "diagnosticsAutoHelp": {
+    "message": "Standart holatda oʻchiq. Yoqilsa, bu hisob uchun veb-kezish tarixisiz oddiy texnik hisobotlar yuboriladi. Avtomatik yuborishni toʻxtatish va kutilayotgan avtomatik hisobotlarni oʻchirish uchun buni shu yerda oʻchiring."
+  },
+  "diagnosticsHistoryHelp": {
+    "message": "Texnik tarix qurilmada saqlanadi: har bir jurnalda 10 daqiqa ichida 200 tagacha hodisa, avtomatik yuborish oʻchiq boʻlsa ham. Unda veb-kezish tarixi yoʻq va u qoʻlda, brauzer yopilganda yoki hisob almashganda tozalanadi."
+  },
+  "diagnosticsHistoryCount": {
+    "message": "Mahalliy texnik hodisalar: $1"
+  },
+  "diagnosticsConnectionLog": {
+    "message": "Ulanish jurnalini eksport qilish"
+  },
+  "diagnosticsAccountRequired": {
+    "message": "Yuborishni yoqish uchun hisobingizga kiring. Hisobotni hisobsiz ham koʻrishingiz va eksport qilishingiz mumkin."
+  },
+  "diagnosticsRun": {
+    "message": "Diagnostikani boshlash"
+  },
+  "diagnosticsClearHistory": {
+    "message": "Mahalliy tarixni tozalash"
+  },
+  "diagnosticsPreparing": {
+    "message": "Hisobot tayyorlanmoqda…"
+  },
+  "diagnosticsReports": {
+    "message": "Hisobotlar"
+  },
+  "diagnosticsEmpty": {
+    "message": "Hozircha mahalliy hisobot yoʻq."
+  },
+  "diagnosticsChooseReport": {
+    "message": "Hisobotni tanlang"
+  },
+  "diagnosticsReportLabel": {
+    "message": "$1 · $2 · $3"
+  },
+  "diagnosticsTypeFull": {
+    "message": "Toʻliq hisobot"
+  },
+  "diagnosticsTypeSimple": {
+    "message": "Xatolik hisoboti"
+  },
+  "diagnosticsSummary": {
+    "message": "Toʻplangan sana: $1. FuzeVPN versiyasi: $2."
+  },
+  "diagnosticsJson": {
+    "message": "Hisobot mazmunini koʻrish (JSON)"
+  },
+  "diagnosticsExport": {
+    "message": "Hisobotni eksport qilish"
+  },
+  "diagnosticsDelete": {
+    "message": "Mahalliy hisobotni oʻchirish"
+  },
+  "diagnosticsRetention": {
+    "message": "Mahalliy hisobotlarning muddati 24 soatdan keyin tugaydi. Bu yerda oʻchirish xizmat allaqachon qabul qilgan hisobotni oʻchirmaydi. Serverda saqlash va oʻchirish soʻrovlari haqida bildirishnomaga qarang."
+  },
+  "diagnosticsConsent": {
+    "message": "Ushbu diagnostika hisobotini FuzeVPN xizmatiga yuborish"
+  },
+  "diagnosticsDataCollectionRequired": {
+    "message": "Diagnostikani yuborish uchun Firefox texnik maʼlumotlar toʻplashga ruxsat berishi kerak. Qayta urinib koʻring va bu ruxsatni bering."
+  },
+  "diagnosticsSendHelp": {
+    "message": "Yuborish ixtiyoriy. Tasdiqlangandan soʻng, xuddi shu hisob uchun yaroqli seans mavjud boʻlsa, u 24 soatgacha qayta urinishi mumkin. Keyingi urinishlarni bekor qilishingiz mumkin. Kech bekor qilish server hisobotni allaqachon qabul qilmaganini kafolatlamaydi."
+  },
+  "diagnosticsSend": {
+    "message": "Hisobotni yuborish"
+  },
+  "diagnosticsCancel": {
+    "message": "Yuborishni bekor qilish"
+  },
+  "diagnosticsReload": {
+    "message": "Bu sahifani qayta yuklash"
+  },
+  "diagnosticsUnavailable": {
+    "message": "Diagnostika mavjud emas. FuzeVPN kengaytmasini brauzerning kengaytmalar boshqaruvchisidan qayta yuklang, soʻng bu sahifani qayta oching. VPN oʻzgarmagan."
+  },
+  "diagnosticsQueueFull": {
+    "message": "Yuborish navbati toʻla. Mahalliy hisobotni oʻchiring yoki kutilayotgan hisobot yakunlanishini kuting."
+  },
+  "diagnosticsContentUnavailable": {
+    "message": "Hisobot mazmuni mavjud emas. Agar mahalliy hisobot mavjud boʻlsa, uni eksport qiling va yordam xizmatiga murojaat qiling."
+  },
+  "diagnosticsFailure": {
+    "message": "Diagnostika amalini yakunlab boʻlmadi. VPN oʻzgarmagan."
+  },
+  "diagnosticsChecks": {
+    "message": "Tekshiruvlar"
+  },
+  "diagnosticsCheckFallback": {
+    "message": "Texnik tekshiruv: $1"
+  },
+  "diagnosticsCheckLine": {
+    "message": "$1 — $2"
+  },
+  "diagnosticsProxy": {
+    "message": "Brauzer proksisi"
+  },
+  "diagnosticsStorage": {
+    "message": "Mahalliy xotira"
+  },
+  "diagnosticsNetwork": {
+    "message": "Tarmoq ulanishi"
+  },
+  "diagnosticsCleanup": {
+    "message": "Seansni tozalash"
+  },
+  "diagnosticsResult_passed": {
+    "message": "Muvaffaqiyatli"
+  },
+  "diagnosticsResult_failed": {
+    "message": "Muvaffaqiyatsiz"
+  },
+  "diagnosticsResult_skipped": {
+    "message": "Bajarilmadi"
+  },
+  "diagnosticsResult_unknown": {
+    "message": "Nomaʼlum"
+  },
+  "diagnosticsStatus_ready": {
+    "message": "Shu qurilmada tayyor"
+  },
+  "diagnosticsStatus_pending": {
+    "message": "Yuborish kutilmoqda"
+  },
+  "diagnosticsStatus_sending": {
+    "message": "Yuborilmoqda…"
+  },
+  "diagnosticsStatus_session_required": {
+    "message": "Xuddi shu hisob uchun yaroqli seans kutilmoqda"
+  },
+  "diagnosticsStatus_received": {
+    "message": "Xizmat qabul qildi"
+  },
+  "diagnosticsStatus_failed": {
+    "message": "Yuborib boʻlmadi"
+  },
+  "diagnosticsStatus_cancelled": {
+    "message": "Yuborish bekor qilindi"
+  },
+  "diagnosticsStatus_expired": {
+    "message": "Yuborish muddati tugadi"
+  },
+  "diagnosticsReceivedAt": {
+    "message": "Qabul qilingan sana: $1"
+  },
+  "error_private_browsing_required": {
+    "message": "VPN sozlash uchun Firefox oddiy oynalarda ham bu ruxsatni talab qiladi. about:addons → FuzeVPN sahifasini oching, maxfiy oynalarda ishlashga ruxsat bering, soʻng qayta urinib koʻring."
+  },
+  "error_host_permissions_required": {
+    "message": "Firefox brauzerida about:addons → FuzeVPN → Ruxsatlar boʻlimini oching va barcha veb-saytlarga kirishga ruxsat bering, soʻng qayta urinib koʻring."
+  },
+  "cancelAction": {
+    "message": "Bekor qilish"
+  },
+  "refreshLocations": {
+    "message": "Joylashuvlarni yangilash"
+  },
+  "refreshingLocations": {
+    "message": "Joylashuvlar yangilanmoqda…"
+  },
+  "locationsRefreshError": {
+    "message": "Joylashuvlar roʻyxatini yangilab boʻlmadi. Qayta urinib koʻring."
+  },
+  "error_device_revoked_limit": {
+    "message": "Bu qurilmaning ruxsati bekor qilindi. Qurilmalar chegarasiga yetildi: bitta qurilmani oʻchiring."
+  },
+  "noAvailableLocations": {
+    "message": "Hozircha mavjud joylashuvlar yoʻq. Birozdan soʻng qayta urinib koʻring."
+  },
+  "noAvailableFavoriteLocations": {
+    "message": "Sevimli joylashuvlaringiz vaqtincha mavjud emas."
+  },
+  "error_location_favorites_limit": {
+    "message": "100 ta sevimli chegarasiga yetildi. Boshqasini qoʻshish uchun bitta sevimlini olib tashlang."
+  },
+  "error_server_full": {
+    "message": "Bu server toʻla. Boshqa joylashuvni tanlang."
+  },
+  "error_capacity_unavailable": {
+    "message": "Bu serverning mavjudligini hozir tasdiqlab boʻlmaydi. Birozdan soʻng qayta urinib koʻring."
+  },
+  "locationHierarchyHelp": {
+    "message": "Nom serverni tanlaydi; strelka tafsilotlarni koʻrsatadi."
+  },
+  "locationCountrySelect": {
+    "message": "Mavjud serverni tanlash: $1"
+  },
+  "locationCitySelect": {
+    "message": "Mavjud serverni tanlash: $1"
+  },
+  "locationShowCities": {
+    "message": "Shaharlarni koʻrsatish: $1"
+  },
+  "locationHideCities": {
+    "message": "Shaharlarni yashirish: $1"
+  },
+  "locationShowServers": {
+    "message": "Serverlarni koʻrsatish: $1"
+  },
+  "locationHideServers": {
+    "message": "Serverlarni yashirish: $1"
+  },
+  "locationAvailableServers": {
+    "message": "Mavjud serverlar: $1"
+  },
+  "legalInformation": {
+    "message": "Huquqiy maʼlumotlar"
+  },
+  "privacyPolicy": {
+    "message": "Kengaytma maxfiylik bildirishnomasi"
+  },
+  "termsAndConditions": {
+    "message": "Foydalanish va sotish shartlari"
+  },
+  "legalNotice": {
+    "message": "Huquqiy eslatma"
+  },
+  "contactSupport": {
+    "message": "Yordam xizmatiga murojaat qilish"
+  },
+  "webSignIn": {
+    "message": "FuzeVPN hisobiga kirish"
+  },
+  "webSignInDisconnect": {
+    "message": "Uzish va kirish"
+  },
+  "webSignInPending": {
+    "message": "Kirish jarayonda…"
+  },
+  "webSignInHelp": {
+    "message": "FuzeVPN mijoz kabinetida Google yoki elektron pochta orqali kiring yoki hisob yarating."
+  },
+  "webSignInDisconnectHelp": {
+    "message": "Bu tugma Google yoki elektron pochta orqali kirishingiz uchun brauzer himoyasini toʻxtatadi. Kirish vaqtida veb-kezishingiz himoyalanmaydi."
+  },
+  "webSignInStatus": {
+    "message": "FuzeVPN kirish oynasida davom eting. Tugatganingizda kengaytma avtomatik yangilanadi. Bekor qilish uchun oʻsha oynani yoping."
+  },
+  "error_web_login_cancelled": {
+    "message": "Kirish bekor qilindi. Qayta urinib koʻring."
+  },
+  "error_web_login_timeout": {
+    "message": "Kirish juda uzoq davom etdi. Qayta urinib koʻring."
+  },
+  "error_web_login_unavailable": {
+    "message": "Veb orqali kirish mavjud emas. Keyinroq qayta urinib koʻring."
+  },
+  "error_web_login_invalid_callback": {
+    "message": "Kirishni tasdiqlab boʻlmadi. Kengaytmadan qaytadan boshlang."
+  },
+  "error_web_login_denied": {
+    "message": "Kirishga ruxsat berilmadi. Qayta urinib koʻring."
+  },
+  "error_web_login_busy": {
+    "message": "Qayta urinishdan oldin ochiq turgan kirish oynasini yoping."
+  },
+  "deviceKindFirefox": {
+    "message": "Firefox brauzeri"
+  },
+  "generalPrivacyPolicy": {
+    "message": "Umumiy maxfiylik siyosati"
+  },
+  "privacyNoticeTitle": {
+    "message": "FuzeVPN kengaytmasida maxfiylik"
+  },
+  "privacyNoticeIntro": {
+    "message": "Ushbu bildirishnoma kengaytma foydalanadigan maʼlumotlarni tavsiflaydi. U quyida havolasi berilgan umumiy FuzeVPN maxfiylik siyosatini toʻldiradi. Ixtiyoriy diagnostika yuborish hisobga kirish va VPN ishlatish uchun zarur maʼlumotlardan alohida."
+  },
+  "privacyNoticeUpdated": {
+    "message": "Bildirishnoma 2026-yil 19-oktabrda yangilangan"
+  },
+  "privacyNoticeServiceTitle": {
+    "message": "Hisob va VPN xizmati"
+  },
+  "privacyNoticeService": {
+    "message": "Kengaytma api.fuzevpn.com bilan autentifikatsiya, hisob, obuna, qurilma va proksi seansi maʼlumotlarini almashadi. VPN proksisi u orqali yoʻnaltirilgan trafikni uzatadi. Bu ulanishlar qabul qiluvchi xizmatga tarmoq metamaʼlumotlarini oshkor qiladi; ushbu bildirishnoma server jurnallari haqida alohida vaʼda bermaydi."
+  },
+  "privacyNoticeLocalTitle": {
+    "message": "Brauzeringizda saqlanadigan maʼlumotlar"
+  },
+  "privacyNoticeLocal": {
+    "message": "Brauzer xotirasida seansingiz, hisob maʼlumotlari, sozlamalar, sayt istisnolari va qurilma identifikatori saqlanadi. Texnik jurnallar avtomatik hisobot yuborish oʻchiq boʻlsa ham, qurilmada 10 daqiqagacha saqlanadi. Diagnostika qoralamalari va navbatdagi hisobotlarning mahalliy muddati 24 soatdan keyin tugaydi; tozalash kengaytma ishga tusha olganda bajariladi."
+  },
+  "privacyNoticeIpTitle": {
+    "message": "Ommaviy IP tekshiruvlari va uchinchi tomonlar"
+  },
+  "privacyNoticeIp": {
+    "message": "IP koʻrsatish va tarmoq diagnostikasi api.ipify.org bilan bogʻlanadi. IP koʻrsatish zaxira sifatida ipv4.icanhazip.com xizmatidan foydalanishi mumkin. Provayder ulanish IP manzilini va odatiy soʻrov metamaʼlumotlarini oladi: toʻgʻridan-toʻgʻri rejimda ommaviy IP manzilingizni yoki proksi orqali VPN chiqish IP manzilini. Bu soʻrovlarda cookie fayllari va referrer boʻlmaydi, hisob tokeni yoki veb-kezish tarixi yuborilmaydi."
+  },
+  "privacyNoticeReportsTitle": {
+    "message": "Diagnostika hisobotlarida nimalar bor"
+  },
+  "privacyNoticeReports": {
+    "message": "Hisobotlarda tasodifiy hisobot identifikatori, vaqt belgilari, kengaytma va brauzer versiyalari, operatsion tizim oilasi va arxitekturasi, ulanish va himoya holatlari, xatolik kodlari, sanoqlar, davomiyliklar va tekshiruv natijalari boʻlishi mumkin. Toʻliq hisobotlarda soʻnggi texnik hodisalar boʻlishi mumkin. Ularning JSON mazmuniga parollar, autentifikatsiya tokenlari, elektron pochta manzillari, IP manzillar, tashrif buyurilgan URL manzillar va istisno domenlar kirmaydi. Toʻliq hisobotni yuborishdan oldin koʻrib chiqishingiz va eksport qilishingiz mumkin."
+  },
+  "privacyNoticeAccountTitle": {
+    "message": "Qabul qiluvchi va hisobga bogʻlash"
+  },
+  "privacyNoticeAccount": {
+    "message": "Hisobotlar autentifikatsiyalangan ulanish orqali api.fuzevpn.com/v1/diagnostics manzilidagi FuzeVPN xizmatiga yuboriladi. Bu API ulanishi VPN proksisini chetlab oʻtadi: VPN faol boʻlsa ham, FuzeVPN toʻgʻridan-toʻgʻri ommaviy IP manzilingizni oladi. Hisobotlar tizimga kirgan hisobga bogʻlanadi, ular anonim emas. Autentifikatsiya sarlavhasi va IP manzil hisobotning JSON mazmunidan alohida. Muvaffaqiyatli qabul faqat oʻsha API manzili hisobotni qabul qilganini tasdiqlaydi, yordam xizmati xodimi uni oʻqiganini emas."
+  },
+  "privacyNoticeChoiceTitle": {
+    "message": "Ixtiyoriy yuborish va rozilikni qaytarib olish"
+  },
+  "privacyNoticeChoice": {
+    "message": "Avtomatik yuborish standart holatda oʻchiq. Uni yoqish oʻsha hisob uchun oddiy xatolik hisobotlarini yuborishga ruxsat beradi. Toʻliq hisobotni qoʻlda yuborish uchun yuborish katakchasini belgilash kerak. Firefox bundan tashqari oʻzining ixtiyoriy texnik maʼlumotlar ruxsatini talab qiladi. Avtomatik yuborishni toʻxtatish va kutilayotgan avtomatik hisobotlarni oʻchirish uchun uni oʻchiring; kutilayotgan alohida yuborishlarni alohida bekor qiling. Diagnostika yuborishni rad etish VPN ishlatishga toʻsqinlik qilmaydi."
+  },
+  "privacyNoticeDeleteTitle": {
+    "message": "Mahalliy oʻchirish va yuklab olingan fayllar"
+  },
+  "privacyNoticeDelete": {
+    "message": "Diagnostika boʻlimida texnik tarixni tozalang yoki alohida mahalliy hisobotni oʻchiring. Tarixni tozalash mavjud hisobot nusxalarini oʻchirmaydi. Mahalliy bekor qilish yoki oʻchirish xizmat allaqachon qabul qilgan maʼlumotlarni, jumladan bekor qilishdan oldin yetib kelgan yuklashni qaytarib ololmaydi. Yuklab olingan eksportlar — oʻzingiz oʻchirishingiz kerak boʻlgan alohida fayllar."
+  },
+  "privacyNoticeServerTitle": {
+    "message": "Serverda saqlash va soʻrovlar"
+  },
+  "privacyNoticeServer": {
+    "message": "Bu kengaytma serverda saqlashni yoki server tomonida oʻchirishni boshqarmaydi va tekshirmaydi. FuzeVPN qoʻllaydigan saqlash muddati va allaqachon yuborilgan hisobotlarga oid soʻrovlar uchun umumiy maxfiylik siyosatiga qarang yoki FuzeVPN bilan bogʻlaning. Ushbu bildirishnoma serverda saqlashning belgilangan muddatini kafolatlamaydi."
+  },
+  "privacyNoticeSupportTitle": {
+    "message": "Diagnostika va yordam alohida"
+  },
+  "privacyNoticeSupport": {
+    "message": "Diagnostika hisobotini yuborishning oʻzi kengaytmadan yordam xizmatiga xabar yubormaydi. Muammoni tushuntirish yoki qabul qilingan hisobotni oʻchirishni soʻrash uchun quyidagi FuzeVPN aloqa kanalidan foydalaning. Eksport qilingan faylni boshqa kanal orqali ulashmoqchi boʻlsangiz, avval uning mazmunini tekshiring."
+  },
+  "privacyNoticeManage": {
+    "message": "Diagnostikani ochish"
+  },
+  "privacyNoticeLinksTitle": {
+    "message": "Xizmat siyosati va aloqa"
+  },
+  "theme": {
+    "message": "Mavzu"
+  },
+  "themeSystem": {
+    "message": "Tizim"
+  },
+  "themeLight": {
+    "message": "Yorugʻ"
+  },
+  "themeDark": {
+    "message": "Qorongʻi"
+  },
+  "switchToDarkTheme": {
+    "message": "Qorongʻi mavzuga oʻtish"
+  },
+  "switchToLightTheme": {
+    "message": "Yorugʻ mavzuga oʻtish"
+  }
+}

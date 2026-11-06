@@ -1,0 +1,929 @@
+{
+  "extensionName": {
+    "message": "FuzeVPN"
+  },
+  "extensionDescription": {
+    "message": "დაიცავით კონფიდენციალურობა და გააძლიერეთ უსაფრთხოება ერთი დაწკაპუნებით."
+  },
+  "siteExclusionsReloadRequired": {
+    "message": "განახლების დასასრულებლად და გამორიცხული საიტების გამოსაყენებლად ხელახლა ჩატვირთეთ FuzeVPN ბრაუზერის გაფართოებების მენეჯერიდან."
+  },
+  "extensionCommunicationError": {
+    "message": "გაფართოება არ პასუხობს. დახურეთ ეს ფანჯარა, შემდეგ ხელახლა ჩატვირთეთ FuzeVPN ბრაუზერის გაფართოებების მენეჯერიდან."
+  },
+  "actionDisconnected": {
+    "message": "FuzeVPN — გათიშულია"
+  },
+  "actionConnected": {
+    "message": "FuzeVPN — დაცულია ამ ბრაუზერში"
+  },
+  "actionReconnecting": {
+    "message": "FuzeVPN — ხელახლა დაკავშირება"
+  },
+  "actionError": {
+    "message": "FuzeVPN — საჭიროა ყურადღება"
+  },
+  "browserProtection": {
+    "message": "ბრაუზერის დაცვა"
+  },
+  "loginTitle": {
+    "message": "მოგესალმებათ FuzeVPN"
+  },
+  "loginSubtitle": {
+    "message": "შედით, რათა დაიცვათ ვებ-დათვალიერება ამ ბრაუზერში."
+  },
+  "email": {
+    "message": "ელფოსტის მისამართი"
+  },
+  "emailPlaceholder": {
+    "message": "you@example.com"
+  },
+  "password": {
+    "message": "პაროლი"
+  },
+  "signIn": {
+    "message": "შესვლა"
+  },
+  "signingIn": {
+    "message": "მიმდინარეობს შესვლა…"
+  },
+  "forgotPassword": {
+    "message": "დაგავიწყდათ პაროლი?"
+  },
+  "createAccount": {
+    "message": "ანგარიშის შექმნა"
+  },
+  "settings": {
+    "message": "პარამეტრები"
+  },
+  "close": {
+    "message": "დახურვა"
+  },
+  "statusDisconnected": {
+    "message": "გათიშულია"
+  },
+  "statusConnecting": {
+    "message": "დაკავშირება…"
+  },
+  "statusChanging": {
+    "message": "მდებარეობის შეცვლა…"
+  },
+  "statusProtected": {
+    "message": "დაცულია ამ ბრაუზერში"
+  },
+  "statusRefreshing": {
+    "message": "უსაფრთხო განახლება…"
+  },
+  "statusDisconnecting": {
+    "message": "გათიშვა…"
+  },
+  "statusError": {
+    "message": "დაცვა შეჩერდა"
+  },
+  "browserOnlyDetail": {
+    "message": "დაცვა ამ ბრაუზერისთვის."
+  },
+  "location": {
+    "message": "მდებარეობა"
+  },
+  "change": {
+    "message": "შეცვლა"
+  },
+  "noLocation": {
+    "message": "ხელმისაწვდომი მდებარეობა არ არის"
+  },
+  "protectBrowser": {
+    "message": "ბრაუზერის დაცვის ჩართვა"
+  },
+  "disconnect": {
+    "message": "გათიშვა"
+  },
+  "subscription": {
+    "message": "გამოწერა"
+  },
+  "refreshSubscription": {
+    "message": "გამოწერის განახლება"
+  },
+  "refreshingSubscription": {
+    "message": "გამოწერა ახლდება…"
+  },
+  "subscriptionActive": {
+    "message": "აქტიური"
+  },
+  "subscriptionInactive": {
+    "message": "არააქტიური"
+  },
+  "expiresOn": {
+    "message": "ვადა იწურება: $1"
+  },
+  "noExpiry": {
+    "message": "ვადის გასვლის თარიღი არ არის"
+  },
+  "browserOnlyNotice": {
+    "message": "მხოლოდ ეს ბრაუზერი. სხვა აპები და ბრაუზერები დაცული არ არის."
+  },
+  "resendVerification": {
+    "message": "წერილის ხელახლა გაგზავნა"
+  },
+  "incognitoHelp": {
+    "message": "პირადი დათვალიერება იმავე დაცვას იყენებს მხოლოდ მაშინ, თუ ბრაუზერის პარამეტრებში გაფართოებას პირად რეჟიმში მუშაობის ნებართვა აქვს."
+  },
+  "manageAccount": {
+    "message": "ჩემი ანგარიშის მართვა"
+  },
+  "account": {
+    "message": "ანგარიში"
+  },
+  "devices": {
+    "message": "მოწყობილობები"
+  },
+  "manageDevices": {
+    "message": "მოწყობილობების მართვა"
+  },
+  "refreshDevices": {
+    "message": "მოწყობილობების განახლება"
+  },
+  "deviceCount": {
+    "message": "მოწყობილობები: $1 / $2"
+  },
+  "loadingDevices": {
+    "message": "მოწყობილობები იტვირთება…"
+  },
+  "noDevices": {
+    "message": "აქტიური მოწყობილობები არ არის."
+  },
+  "currentDevice": {
+    "message": "ეს მოწყობილობა"
+  },
+  "deviceKindBrowser": {
+    "message": "ბრაუზერის გაფართოება"
+  },
+  "deviceKindVpn": {
+    "message": "VPN მოწყობილობა"
+  },
+  "profile_browser_proxy": {
+    "message": "ბრაუზერის პროქსი"
+  },
+  "profile_wireguard": {
+    "message": "WireGuard"
+  },
+  "profile_openvpn": {
+    "message": "OpenVPN"
+  },
+  "none": {
+    "message": "არცერთი"
+  },
+  "deviceCreatedOn": {
+    "message": "შექმნის თარიღი: $1"
+  },
+  "deleteDevice": {
+    "message": "მოწყობილობის წაშლა"
+  },
+  "deleteDeviceNamed": {
+    "message": "მოწყობილობის წაშლა: $1"
+  },
+  "confirmDeleteDevice": {
+    "message": "წაიშალოს „$1“? მისი VPN კავშირები შეწყდება, ხოლო პროფილები წაიშლება."
+  },
+  "resetDevice": {
+    "message": "მოწყობილობის ჩამოყრა"
+  },
+  "confirmResetDevice": {
+    "message": "ჩამოიყაროს ეს გაფართოება? შემდეგი გამოყენებისას ის ახალ მოწყობილობად დარეგისტრირდება."
+  },
+  "signOutAccount": {
+    "message": "ანგარიშიდან გასვლა"
+  },
+  "chooseLocation": {
+    "message": "აირჩიეთ მდებარეობა"
+  },
+  "error_invalid_credentials": {
+    "message": "ელფოსტის მისამართი ან პაროლი არასწორია."
+  },
+  "error_unauthorized": {
+    "message": "სესიის ვადა ამოიწურა. გთხოვთ, ხელახლა შეხვიდეთ."
+  },
+  "error_email_verification_required": {
+    "message": "დაცვის ჩართვამდე დაადასტურეთ ელფოსტის მისამართი."
+  },
+  "errorVerificationCooldown": {
+    "message": "ახალი წერილის მოთხოვნა შესაძლებელი იქნება $1 წამში."
+  },
+  "error_verification_email_cooldown": {
+    "message": "გთხოვთ, მოიცადოთ ახალი წერილის მოთხოვნამდე."
+  },
+  "error_subscription_required": {
+    "message": "ამ ბრაუზერის დასაცავად საჭიროა აქტიური გამოწერა."
+  },
+  "error_device_limit": {
+    "message": "მოწყობილობების ლიმიტი ამოწურულია. გთხოვთ, წაშალოთ ერთი მოწყობილობა."
+  },
+  "error_device_identity_revoked": {
+    "message": "ეს მოწყობილობა აღარ არის ავტორიზებული. სცადეთ ხელახლა დაკავშირება."
+  },
+  "error_device_proof_invalid": {
+    "message": "ამ მოწყობილობის დადასტურება ვერ მოხერხდა. შეამოწმეთ კომპიუტერის თარიღი და დრო, შემდეგ სცადეთ ხელახლა."
+  },
+  "error_device_proof_replayed": {
+    "message": "ეს მოთხოვნა უკვე დამუშავებულია. სცადეთ ხელახლა."
+  },
+  "error_invalid_device": {
+    "message": "ეს მოწყობილობა ვერ იქნა ამოცნობილი. სცადეთ ხელახლა დაკავშირება."
+  },
+  "error_device_exists": {
+    "message": "მოწყობილობის ეს იდენტიფიკატორი უკვე დაკავშირებულია სხვა ანგარიშთან."
+  },
+  "error_not_found": {
+    "message": "ეს ოპერაცია აღარ არის ხელმისაწვდომი. სცადეთ ხელახლა."
+  },
+  "error_invalid_location": {
+    "message": "ეს მდებარეობა მიუწვდომელია. აირჩიეთ სხვა."
+  },
+  "error_rate_limited": {
+    "message": "ძალიან ბევრი მცდელობა. მოიცადეთ ცოტა ხანს და სცადეთ ხელახლა."
+  },
+  "error_proxy_unavailable": {
+    "message": "ეს სერვერი დროებით მიუწვდომელია. სცადეთ ცოტა ხანში."
+  },
+  "error_api_token_expired": {
+    "message": "ანგარიშის სესიის ვადა ამოიწურა. გთხოვთ, ხელახლა შეხვიდეთ."
+  },
+  "error_network_error": {
+    "message": "ქსელი მიუწვდომელია. შეამოწმეთ ინტერნეტთან კავშირი."
+  },
+  "error_request_timeout": {
+    "message": "სერვისი ძალიან დიდხანს პასუხობდა. სცადეთ ხელახლა."
+  },
+  "error_invalid_response": {
+    "message": "სერვისმა მოულოდნელი პასუხი დააბრუნა."
+  },
+  "error_proxy_certificate_invalid": {
+    "message": "სერვერის უსაფრთხოების დადასტურება ვერ მოხერხდა. კავშირი შეწყდა."
+  },
+  "error_proxy_controlled_by_extension": {
+    "message": "ბრაუზერის პროქსის ამჟამად სხვა გაფართოება მართავს."
+  },
+  "error_proxy_controlled_by_policy": {
+    "message": "ადმინისტრატორის პოლიტიკა FuzeVPN-ს პროქსის შეცვლის საშუალებას არ აძლევს."
+  },
+  "error_proxy_authentication_failed": {
+    "message": "სერვერმა კავშირი არ მიიღო. სცადეთ ხელახლა დაკავშირება."
+  },
+  "error_session_expired": {
+    "message": "დაცული კავშირის ვადა ამოიწურა. დაუკავშირდით ხელახლა."
+  },
+  "error_email_delivery_unavailable": {
+    "message": "წერილის გაგზავნა ახლა შეუძლებელია."
+  },
+  "error_unknown_error": {
+    "message": "მოულოდნელი შეცდომა მოხდა. სცადეთ ხელახლა."
+  },
+  "actionBlocked": {
+    "message": "FuzeVPN — დათვალიერება დაბლოკილია"
+  },
+  "statusBlockedRetry": {
+    "message": "დათვალიერება შეჩერებულია — ხელახლა დაკავშირება"
+  },
+  "statusBlockedAction": {
+    "message": "დათვალიერება შეჩერებულია — შეამოწმეთ კავშირი"
+  },
+  "statusProtectionUnavailable": {
+    "message": "დაცვა მიუწვდომელია — დათვალიერება არ არის დაბლოკილი"
+  },
+  "recoveryHelp": {
+    "message": "დაცვის განსაახლებლად სცადეთ ხელახლა. „გათიშვა“ საშუალებას გაძლევთ, დაათვალიეროთ ვები FuzeVPN-ის გარეშე."
+  },
+  "retryConnection": {
+    "message": "ხელახლა ცდა"
+  },
+  "killSwitch": {
+    "message": "საგანგებო ბლოკირება"
+  },
+  "killSwitchHelp": {
+    "message": "ბლოკავს ახალ ვებ-მოთხოვნებს, თუ VPN კავშირი გაწყდება. გამორიცხული საიტები ხელმისაწვდომი რჩება VPN-ის გარეთ."
+  },
+  "webRtcProtection": {
+    "message": "WebRTC დაცვა"
+  },
+  "webRtcHelp": {
+    "message": "გეხმარებათ IP მისამართის კონფიდენციალურობის შენარჩუნებაში ვებ-ზარების დროს. ზოგიერთმა ზარმა შეიძლება არ იმუშაოს. ამის გამორთვამ შეიძლება გაამჟღავნოს თქვენი რეალური IP მისამართი."
+  },
+  "securityEffectiveState": {
+    "message": "$1 · $2"
+  },
+  "securityBlocked": {
+    "message": "დათვალიერება დაბლოკილია"
+  },
+  "securityNotBlocked": {
+    "message": "დათვალიერება არ არის დაბლოკილი"
+  },
+  "securityWebRtcActive": {
+    "message": "WebRTC შეზღუდვა აქტიურია"
+  },
+  "securityWebRtcInactive": {
+    "message": "WebRTC შეზღუდვა არააქტიურია"
+  },
+  "localNetworkHelp": {
+    "message": "დაცვის დროს ლოკალური IP მისამართები და გავრცელებული ლოკალური სახელები იბლოკება. გამორიცხულმა დომენმა მაინც შეიძლება მისცეს წვდომა ლოკალურ ქსელზე. სისტემის IPv6 პარამეტრები არ იცვლება."
+  },
+  "securityLimits": {
+    "message": "ამ დაცვის შესახებ"
+  },
+  "killSwitchLimits": {
+    "message": "მხოლოდ ეს ბრაუზერი: არსებული კავშირები და ბრაუზერის ან სხვა გაფართოებების ზოგიერთი შიდა კომუნიკაცია შეიძლება გაგრძელდეს. სხვა გაფართოებამ ან პოლიტიკამ შეიძლება პროქსი ჩაანაცვლოს, სანამ FuzeVPN რეაგირებას მოახდენს. გაფართოების გამორთვა დაცვას აუქმებს. სისტემური დაბლოკვა არ ხორციელდება."
+  },
+  "error_traffic_guard_failed": {
+    "message": "დათვალიერების ბლოკირების დადასტურება ვერ მოხერხდა. დაცვა არ არის გარანტირებული. შეამოწმეთ გაფართოების ნებართვები."
+  },
+  "error_webrtc_control_unavailable": {
+    "message": "WebRTC შეზღუდვის გამოყენება ვერ მოხერხდა. შეამოწმეთ პარამეტრები, სხვა გაფართოებები ან ადმინისტრატორის პოლიტიკა."
+  },
+  "language": {
+    "message": "ენა"
+  },
+  "languageAutomatic": {
+    "message": "ავტომატური — ბრაუზერის ენა"
+  },
+  "languageHelp": {
+    "message": "ცვლილებები მაშინვე ამოქმედდება. „ავტომატური“ მიჰყვება ბრაუზერის ენას, რომელიც შეიძლება განსხვავდებოდეს სისტემის ენისგან."
+  },
+  "languageSaveError": {
+    "message": "ენის შენახვა ვერ მოხერხდა. თქვენი წინა არჩევანი შენარჩუნებულია. სცადეთ ხელახლა."
+  },
+  "publicIp": {
+    "message": "საჯარო IP"
+  },
+  "vpnIp": {
+    "message": "VPN IP"
+  },
+  "ipChecking": {
+    "message": "მოწმდება…"
+  },
+  "ipUnavailable": {
+    "message": "მიუწვდომელია"
+  },
+  "ipLookupExplanation": {
+    "message": "IP მოწმდება ipify-ით, ან სარეზერვოდ icanhazip-ით, თქვენი მიმდინარე კავშირის გამოყენებით. დათვალიერების ისტორია არ იგზავნება."
+  },
+  "automaticLocation": {
+    "message": "ავტომატური"
+  },
+  "automaticLocationHelp": {
+    "message": "საუკეთესო ბოლოდროინდელი პასუხის დრო, ან თქვენი ბოლო მდებარეობა."
+  },
+  "automaticLocationName": {
+    "message": "ავტომატური · $1"
+  },
+  "searchLocations": {
+    "message": "ქვეყნის ან ქალაქის ძიება"
+  },
+  "locationFilters": {
+    "message": "მდებარეობების ფილტრი"
+  },
+  "allLocations": {
+    "message": "ყველა"
+  },
+  "favoriteLocations": {
+    "message": "რჩეულები"
+  },
+  "recentLocations": {
+    "message": "ბოლოდროინდელი"
+  },
+  "noMatchingLocations": {
+    "message": "თქვენს ძიებას არცერთი მდებარეობა არ შეესაბამება."
+  },
+  "noFavoriteLocations": {
+    "message": "მონიშნეთ ვარსკვლავით, რომ რჩეული მდებარეობები აქ შეინახოთ."
+  },
+  "noRecentLocations": {
+    "message": "ბოლოს გამოყენებული მდებარეობები აქ გამოჩნდება."
+  },
+  "addFavorite": {
+    "message": "რჩეულებში დამატება: $1"
+  },
+  "removeFavorite": {
+    "message": "რჩეულებიდან წაშლა: $1"
+  },
+  "unavailableFavoriteLocation": {
+    "message": "მიუწვდომელი რჩეული: $1"
+  },
+  "locationSaveError": {
+    "message": "ცვლილების დასრულება ვერ მოხერხდა. ზოგიერთი პარამეტრი შეიძლება შენახული იყოს. ხელახლა ცდამდე შეამოწმეთ ნაჩვენები არჩევანი."
+  },
+  "siteExclusions": {
+    "message": "გამორიცხული საიტები"
+  },
+  "siteExclusionsHelp": {
+    "message": "ეს საიტები თქვენს კავშირს FuzeVPN-ის გარეშე იყენებს, მაშინაც კი, თუ VPN გაითიშება."
+  },
+  "siteExclusionsEnabled": {
+    "message": "გამონაკლისების ჩართვა"
+  },
+  "siteExclusionInput": {
+    "message": "დომენი ან URL"
+  },
+  "siteExclusionPlaceholder": {
+    "message": "example.com"
+  },
+  "siteExclusionPreview": {
+    "message": "არჩეული დომენი: $1"
+  },
+  "siteExclusionSubdomains": {
+    "message": "ქვედომენების ჩათვლით"
+  },
+  "siteExclusionAdd": {
+    "message": "საიტის დამატება"
+  },
+  "siteExclusionsEmpty": {
+    "message": "გამორიცხული საიტები არ არის. დაამატეთ მხოლოდ ის საიტები, რომელთა გამოყენებაც გსურთ VPN-ის გარეშე."
+  },
+  "siteExclusionsCount": {
+    "message": "საიტები: $1 / 100"
+  },
+  "siteExclusionScopeSubdomains": {
+    "message": "დომენი და ქვედომენები"
+  },
+  "siteExclusionScopeExact": {
+    "message": "მხოლოდ ზუსტი დომენი"
+  },
+  "siteExclusionRemove": {
+    "message": "წაშლა: $1"
+  },
+  "siteExclusionsDetails": {
+    "message": "როგორ მუშაობს გამონაკლისები?"
+  },
+  "siteExclusionsResources": {
+    "message": "სხვა დომენების რესურსები დაცული რჩება. გვერდის გამორიცხვა ავტომატურად არ გამორიცხავს მის სხვა შიგთავსს."
+  },
+  "siteExclusionsReload": {
+    "message": "ცვლილების შემდეგ ხელახლა ჩატვირთეთ საიტი. არსებულმა კავშირებმა შეიძლება შეინარჩუნონ წინა მარშრუტი."
+  },
+  "siteExclusionsWebRtc": {
+    "message": "WebRTC დაცვა რჩება გლობალურ პარამეტრად, მათ შორის გამორიცხული საიტებისთვისაც."
+  },
+  "siteExclusionsLocal": {
+    "message": "ინახება მხოლოდ ამ ბრაუზერში და რჩება ანგარიშიდან გასვლის შემდეგაც."
+  },
+  "siteExclusionsOn": {
+    "message": "გამონაკლისები ჩართულია"
+  },
+  "siteExclusionsOff": {
+    "message": "გამონაკლისები გამორთულია"
+  },
+  "siteExclusionsSummary": {
+    "message": "საიტები VPN-ის გარეთ: $1"
+  },
+  "siteExclusionsPending": {
+    "message": "გამონაკლისები გამოიყენება…"
+  },
+  "siteExclusionsInterrupted": {
+    "message": "ცვლილება შეწყდა. დროებითი დაცვა ძალაში რჩება."
+  },
+  "siteExclusionsSaveError": {
+    "message": "ცვლილების დასრულება ვერ მოხერხდა. შეამოწმეთ პარამეტრები და სცადეთ ხელახლა."
+  },
+  "siteExclusionsRetry": {
+    "message": "ხელახლა ცდა"
+  },
+  "siteExclusionInvalid": {
+    "message": "შეიყვანეთ სწორი საჯარო დომენი. IP მისამართები, ლოკალური სახელები, შაბლონური სიმბოლოები (wildcard), საჯარო სუფიქსები და დაჯავშნული დომენები არ მიიღება."
+  },
+  "siteExclusionDuplicate": {
+    "message": "ეს დომენი უკვე სიაშია."
+  },
+  "siteExclusionsLimit": {
+    "message": "100 საიტის ლიმიტი ამოწურულია. სხვის დასამატებლად წაშალეთ ერთი საიტი."
+  },
+  "statusProtectedExceptions": {
+    "message": "VPN აქტიურია · გამონაკლისები: $1"
+  },
+  "statusBlockedExceptions": {
+    "message": "ხელმისაწვდომი რჩება მხოლოდ გამორიცხული საიტები"
+  },
+  "securityBlockedExceptions": {
+    "message": "დათვალიერება დაბლოკილია, გამორიცხული საიტების გარდა"
+  },
+  "securityBlockUnverified": {
+    "message": "ბლოკირება დაუდასტურებელია"
+  },
+  "logoutLocalComplete": {
+    "message": "ლოკალური გასვლა დასრულდა."
+  },
+  "logoutApiSession": {
+    "message": "ანგარიშის მიმდინარე სესია"
+  },
+  "logoutProxySessions": {
+    "message": "ცნობილი VPN სესიები"
+  },
+  "logoutRevocationPending": {
+    "message": "მიმდინარეობს გაუქმება…"
+  },
+  "logoutRevocationConfirmed": {
+    "message": "გაუქმება დადასტურდა"
+  },
+  "logoutRevocationUnconfirmed": {
+    "message": "გაუქმება არ დადასტურდა"
+  },
+  "logoutUnconfirmedHelp": {
+    "message": "ზოგიერთი დისტანციური სესია შეიძლება აქტიური დარჩეს ვადის ამოწურვამდე."
+  },
+  "deviceQuotaLoading": {
+    "message": "მოწყობილობების ლიმიტი იტვირთება…"
+  },
+  "deviceQuotaUnknown": {
+    "message": "მოწყობილობების ლიმიტი მიუწვდომელია"
+  },
+  "error_proxy_creation_uncertain": {
+    "message": "სერვერმა არ დაადასტურა ახალი კავშირის შექმნა. ავტომატური ხელახლა დაკავშირება შეჩერებულია."
+  },
+  "siteExclusionsPreferencesReset": {
+    "message": "შენახული საიტების გამონაკლისები ჩამოიყარა, რადგან მათი წაკითხვა ვერ მოხერხდა. ხელახლა დაამატეთ საიტები, რომელთა გამორიცხვაც გსურთ."
+  },
+  "siteExclusionsConflict": {
+    "message": "გამორიცხული საიტების სია შეიცვალა. გადახედეთ მას, შემდეგ ხელახლა სცადეთ ცვლილება."
+  },
+  "unavailableLocation": {
+    "message": "მდებარეობა მიუწვდომელია"
+  },
+  "verificationSending": {
+    "message": "დადასტურების წერილი იგზავნება…"
+  },
+  "verificationSent": {
+    "message": "დადასტურების წერილი გაიგზავნა. შეამოწმეთ შემოსულები და სპამის საქაღალდე."
+  },
+  "error_login_requires_disconnect": {
+    "message": "სხვა ანგარიშში შესვლამდე გათიშეთ მიმდინარე VPN კავშირი."
+  },
+  "error_storage_unavailable": {
+    "message": "ანგარიშის ლოკალური პარამეტრები მიუწვდომელია. სცადეთ ხელახლა, როცა ბრაუზერის მეხსიერება ხელმისაწვდომი იქნება; თქვენი შენახული ანგარიში შენარჩუნებულია."
+  },
+  "diagnosticsAssistance": {
+    "message": "მხარდაჭერა"
+  },
+  "diagnosticsTitle": {
+    "message": "დიაგნოსტიკა"
+  },
+  "diagnosticsIntro": {
+    "message": "შეამოწმეთ FuzeVPN და მიმდინარე კავშირი დაცვის შეცვლის გარეშე."
+  },
+  "diagnosticsPrivacyTitle": {
+    "message": "თქვენი მონაცემები"
+  },
+  "diagnosticsPrivacy": {
+    "message": "მოხსენების JSON შეიცავს ტექნიკურ მდგომარეობებსა და შეცდომების კოდებს, პაროლების, ტოკენების, ელფოსტის მისამართების, IP მისამართების, მონახულებული URL-ებისა და გამორიცხული დომენების გარეშე. გაგზავნა ავთენტიფიცირებულია და მოხსენებას თქვენს ანგარიშს უკავშირებს. ქსელის მონაცემების შესახებ იხილეთ შეტყობინება."
+  },
+  "diagnosticsAuto": {
+    "message": "მნიშვნელოვანი შეცდომების მოხსენებების ავტომატური გაგზავნა"
+  },
+  "diagnosticsAutoHelp": {
+    "message": "ნაგულისხმევად გამორთულია. ჩართვის შემთხვევაში ამ ანგარიშისთვის იგზავნება მარტივი ტექნიკური მოხსენებები, დათვალიერების ისტორიის გარეშე. ავტომატური გაგზავნის შესაწყვეტად და მომლოდინე ავტომატური მოხსენებების წასაშლელად გამორთეთ ის აქ."
+  },
+  "diagnosticsHistoryHelp": {
+    "message": "ტექნიკური ისტორია ლოკალურად რჩება: თითო ჟურნალში მაქსიმუმ 200 მოვლენა 10 წუთის განმავლობაში, მაშინაც კი, როცა ავტომატური გაგზავნა გამორთულია. ის არ შეიცავს დათვალიერების ისტორიას და იშლება ხელით, ბრაუზერის დახურვისას ან ანგარიშის შეცვლისას."
+  },
+  "diagnosticsHistoryCount": {
+    "message": "ლოკალური ტექნიკური მოვლენები: $1"
+  },
+  "diagnosticsConnectionLog": {
+    "message": "კავშირის ჟურნალის ექსპორტი"
+  },
+  "diagnosticsAccountRequired": {
+    "message": "გაგზავნის ჩასართავად შედით ანგარიშში. მოხსენების ნახვა და ექსპორტი ანგარიშის გარეშეც შეგიძლიათ."
+  },
+  "diagnosticsRun": {
+    "message": "დიაგნოსტიკის გაშვება"
+  },
+  "diagnosticsClearHistory": {
+    "message": "ლოკალური ისტორიის გასუფთავება"
+  },
+  "diagnosticsPreparing": {
+    "message": "მოხსენება მზადდება…"
+  },
+  "diagnosticsReports": {
+    "message": "მოხსენებები"
+  },
+  "diagnosticsEmpty": {
+    "message": "ლოკალური მოხსენებები ჯერ არ არის."
+  },
+  "diagnosticsChooseReport": {
+    "message": "აირჩიეთ მოხსენება"
+  },
+  "diagnosticsReportLabel": {
+    "message": "$1 · $2 · $3"
+  },
+  "diagnosticsTypeFull": {
+    "message": "სრული მოხსენება"
+  },
+  "diagnosticsTypeSimple": {
+    "message": "შეცდომის მოხსენება"
+  },
+  "diagnosticsSummary": {
+    "message": "შეგროვების თარიღი: $1. FuzeVPN-ის ვერსია: $2."
+  },
+  "diagnosticsJson": {
+    "message": "მოხსენების შიგთავსის ნახვა (JSON)"
+  },
+  "diagnosticsExport": {
+    "message": "მოხსენების ექსპორტი"
+  },
+  "diagnosticsDelete": {
+    "message": "ლოკალური მოხსენების წაშლა"
+  },
+  "diagnosticsRetention": {
+    "message": "ლოკალურ მოხსენებებს ვადა 24 საათის შემდეგ გასდით. აქ წაშლა არ შლის სერვისის მიერ უკვე მიღებულ მოხსენებას. სერვერზე შენახვისა და წაშლის მოთხოვნების შესახებ იხილეთ შეტყობინება."
+  },
+  "diagnosticsConsent": {
+    "message": "ამ დიაგნოსტიკური მოხსენების გაგზავნა FuzeVPN-ისთვის"
+  },
+  "diagnosticsDataCollectionRequired": {
+    "message": "დიაგნოსტიკის გასაგზავნად Firefox-მა უნდა დაუშვას ტექნიკური მონაცემების შეგროვება. სცადეთ ხელახლა და გასცეთ ეს ნებართვა."
+  },
+  "diagnosticsSendHelp": {
+    "message": "გაგზავნა არასავალდებულოა. დამტკიცების შემდეგ მცდელობები შეიძლება განმეორდეს 24 საათის განმავლობაში, იმავე ანგარიშის მოქმედი სესიით. შეგიძლიათ შემდგომი მცდელობების გაუქმება. დაგვიანებული გაუქმება არ იძლევა გარანტიას, რომ სერვერს მოხსენება უკვე არ მიუღია."
+  },
+  "diagnosticsSend": {
+    "message": "მოხსენების გაგზავნა"
+  },
+  "diagnosticsCancel": {
+    "message": "გაგზავნის გაუქმება"
+  },
+  "diagnosticsReload": {
+    "message": "ამ გვერდის ხელახლა ჩატვირთვა"
+  },
+  "diagnosticsUnavailable": {
+    "message": "დიაგნოსტიკა მიუწვდომელია. ხელახლა ჩატვირთეთ FuzeVPN ბრაუზერის გაფართოებების მენეჯერიდან, შემდეგ ხელახლა გახსენით ეს გვერდი. თქვენი VPN არ შეცვლილა."
+  },
+  "diagnosticsQueueFull": {
+    "message": "გაგზავნის რიგი სავსეა. წაშალეთ ლოკალური მოხსენება ან დაელოდეთ მომლოდინე მოხსენების გაგზავნის დასრულებას."
+  },
+  "diagnosticsContentUnavailable": {
+    "message": "მოხსენების შიგთავსი მიუწვდომელია. თუ ლოკალური მოხსენება ხელმისაწვდომია, მოახდინეთ მისი ექსპორტი და დაუკავშირდით მხარდაჭერას."
+  },
+  "diagnosticsFailure": {
+    "message": "დიაგნოსტიკური მოქმედების დასრულება ვერ მოხერხდა. თქვენი VPN არ შეცვლილა."
+  },
+  "diagnosticsChecks": {
+    "message": "შემოწმებები"
+  },
+  "diagnosticsCheckFallback": {
+    "message": "ტექნიკური შემოწმება: $1"
+  },
+  "diagnosticsCheckLine": {
+    "message": "$1 — $2"
+  },
+  "diagnosticsProxy": {
+    "message": "ბრაუზერის პროქსი"
+  },
+  "diagnosticsStorage": {
+    "message": "ლოკალური მეხსიერება"
+  },
+  "diagnosticsNetwork": {
+    "message": "ქსელური კავშირი"
+  },
+  "diagnosticsCleanup": {
+    "message": "სესიების გასუფთავება"
+  },
+  "diagnosticsResult_passed": {
+    "message": "წარმატებული"
+  },
+  "diagnosticsResult_failed": {
+    "message": "წარუმატებელი"
+  },
+  "diagnosticsResult_skipped": {
+    "message": "არ შესრულებულა"
+  },
+  "diagnosticsResult_unknown": {
+    "message": "უცნობი"
+  },
+  "diagnosticsStatus_ready": {
+    "message": "მზადაა ამ მოწყობილობაზე"
+  },
+  "diagnosticsStatus_pending": {
+    "message": "ელოდება გაგზავნას"
+  },
+  "diagnosticsStatus_sending": {
+    "message": "იგზავნება…"
+  },
+  "diagnosticsStatus_session_required": {
+    "message": "ელოდება იმავე ანგარიშის მოქმედ სესიას"
+  },
+  "diagnosticsStatus_received": {
+    "message": "მიღებულია სერვისის მიერ"
+  },
+  "diagnosticsStatus_failed": {
+    "message": "გაგზავნა ვერ მოხერხდა"
+  },
+  "diagnosticsStatus_cancelled": {
+    "message": "გაგზავნა გაუქმდა"
+  },
+  "diagnosticsStatus_expired": {
+    "message": "გაგზავნის ვადა ამოიწურა"
+  },
+  "diagnosticsReceivedAt": {
+    "message": "მიღების თარიღი: $1"
+  },
+  "error_private_browsing_required": {
+    "message": "Firefox-ს VPN-ის კონფიგურაციისთვის ეს ნებართვა სჭირდება, ჩვეულებრივ ფანჯრებშიც კი. გახსენით about:addons → FuzeVPN, დაუშვით პირად ფანჯრებში მუშაობა, შემდეგ სცადეთ ხელახლა."
+  },
+  "error_host_permissions_required": {
+    "message": "Firefox-ში გახსენით about:addons → FuzeVPN → ნებართვები და დაუშვით წვდომა ყველა ვებსაიტზე, შემდეგ სცადეთ ხელახლა."
+  },
+  "cancelAction": {
+    "message": "გაუქმება"
+  },
+  "refreshLocations": {
+    "message": "მდებარეობების განახლება"
+  },
+  "refreshingLocations": {
+    "message": "მდებარეობები ახლდება…"
+  },
+  "locationsRefreshError": {
+    "message": "მდებარეობების სიის განახლება ვერ მოხერხდა. გთხოვთ, სცადოთ ხელახლა."
+  },
+  "error_device_revoked_limit": {
+    "message": "ეს მოწყობილობა გაუქმებულია. მოწყობილობების ლიმიტი ამოწურულია: გთხოვთ, წაშალოთ ერთი მოწყობილობა."
+  },
+  "noAvailableLocations": {
+    "message": "ამჟამად ხელმისაწვდომი მდებარეობები არ არის. გთხოვთ, ცოტა ხანში სცადოთ ხელახლა."
+  },
+  "noAvailableFavoriteLocations": {
+    "message": "თქვენი რჩეული მდებარეობები დროებით მიუწვდომელია."
+  },
+  "error_location_favorites_limit": {
+    "message": "100 რჩეულის ლიმიტი ამოწურულია. სხვის დასამატებლად წაშალეთ ერთი რჩეული."
+  },
+  "error_server_full": {
+    "message": "ეს სერვერი სავსეა. აირჩიეთ სხვა მდებარეობა."
+  },
+  "error_capacity_unavailable": {
+    "message": "ამ სერვერის ხელმისაწვდომობის დადასტურება ახლა შეუძლებელია. გთხოვთ, ცოტა ხანში სცადოთ ხელახლა."
+  },
+  "locationHierarchyHelp": {
+    "message": "სახელი ირჩევს სერვერს; ისარი დეტალებს აჩვენებს."
+  },
+  "locationCountrySelect": {
+    "message": "ხელმისაწვდომი სერვერის არჩევა: $1"
+  },
+  "locationCitySelect": {
+    "message": "ხელმისაწვდომი სერვერის არჩევა: $1"
+  },
+  "locationShowCities": {
+    "message": "ქალაქების ჩვენება: $1"
+  },
+  "locationHideCities": {
+    "message": "ქალაქების დამალვა: $1"
+  },
+  "locationShowServers": {
+    "message": "სერვერების ჩვენება: $1"
+  },
+  "locationHideServers": {
+    "message": "სერვერების დამალვა: $1"
+  },
+  "locationAvailableServers": {
+    "message": "ხელმისაწვდომი სერვერები: $1"
+  },
+  "legalInformation": {
+    "message": "სამართლებრივი ინფორმაცია"
+  },
+  "privacyPolicy": {
+    "message": "გაფართოების კონფიდენციალურობის შეტყობინება"
+  },
+  "termsAndConditions": {
+    "message": "გამოყენებისა და გაყიდვის პირობები"
+  },
+  "legalNotice": {
+    "message": "სამართლებრივი შეტყობინება"
+  },
+  "contactSupport": {
+    "message": "მხარდაჭერასთან დაკავშირება"
+  },
+  "webSignIn": {
+    "message": "FuzeVPN-ში შესვლა"
+  },
+  "webSignInDisconnect": {
+    "message": "გათიშვა და შესვლა"
+  },
+  "webSignInPending": {
+    "message": "მიმდინარეობს შესვლა…"
+  },
+  "webSignInHelp": {
+    "message": "შედით ან შექმენით ანგარიში Google-ით ან ელფოსტით FuzeVPN-ის კლიენტის სივრცეში."
+  },
+  "webSignInDisconnectHelp": {
+    "message": "ეს ღილაკი აჩერებს ბრაუზერის დაცვას, რათა შეძლოთ Google-ით ან ელფოსტით შესვლა. შესვლის დროს თქვენი დათვალიერება დაუცველი იქნება."
+  },
+  "webSignInStatus": {
+    "message": "გააგრძელეთ FuzeVPN-ის შესვლის ფანჯარაში. დასრულების შემდეგ გაფართოება ავტომატურად განახლდება. გასაუქმებლად დახურეთ ის ფანჯარა."
+  },
+  "error_web_login_cancelled": {
+    "message": "შესვლა გაუქმდა. სცადეთ ხელახლა."
+  },
+  "error_web_login_timeout": {
+    "message": "შესვლას ძალიან დიდი დრო დასჭირდა. სცადეთ ხელახლა."
+  },
+  "error_web_login_unavailable": {
+    "message": "ვებით შესვლა მიუწვდომელია. სცადეთ მოგვიანებით."
+  },
+  "error_web_login_invalid_callback": {
+    "message": "შესვლის დადასტურება ვერ მოხერხდა. დაიწყეთ თავიდან გაფართოებიდან."
+  },
+  "error_web_login_denied": {
+    "message": "შესვლა არ იქნა ავტორიზებული. სცადეთ ხელახლა."
+  },
+  "error_web_login_busy": {
+    "message": "ხელახლა ცდამდე დახურეთ უკვე გახსნილი შესვლის ფანჯარა."
+  },
+  "deviceKindFirefox": {
+    "message": "Firefox ბრაუზერი"
+  },
+  "generalPrivacyPolicy": {
+    "message": "კონფიდენციალურობის ზოგადი პოლიტიკა"
+  },
+  "privacyNoticeTitle": {
+    "message": "კონფიდენციალურობა FuzeVPN გაფართოებაში"
+  },
+  "privacyNoticeIntro": {
+    "message": "ეს შეტყობინება აღწერს ამ გაფართოების მიერ გამოყენებულ მონაცემებს. ის ავსებს FuzeVPN-ის კონფიდენციალურობის ზოგად პოლიტიკას, რომლის ბმულიც ქვემოთაა. დიაგნოსტიკის არასავალდებულო გაგზავნა გამიჯნულია ანგარიშში შესვლისა და VPN-ის გამოსაყენებლად საჭირო მონაცემებისგან."
+  },
+  "privacyNoticeUpdated": {
+    "message": "შეტყობინება განახლდა 2026 წლის 19 ოქტომბერს"
+  },
+  "privacyNoticeServiceTitle": {
+    "message": "ანგარიში და VPN სერვისი"
+  },
+  "privacyNoticeService": {
+    "message": "გაფართოება api.fuzevpn.com-თან ცვლის ავთენტიფიკაციის, ანგარიშის, გამოწერის, მოწყობილობისა და პროქსი-სესიის მონაცემებს. VPN პროქსი გადასცემს მასზე გადამისამართებულ ტრაფიკს. ეს კავშირები ქსელის მეტამონაცემებს მიმღებ სერვისს უხსნის; ეს შეტყობინება სერვერზე ჟურნალირების შესახებ ცალკე დაპირებას არ იძლევა."
+  },
+  "privacyNoticeLocalTitle": {
+    "message": "ბრაუზერში შენახული მონაცემები"
+  },
+  "privacyNoticeLocal": {
+    "message": "ბრაუზერის მეხსიერებაში ინახება თქვენი სესია, ანგარიშის მონაცემები, პარამეტრები, საიტების გამონაკლისები და მოწყობილობის იდენტიფიკატორი. ტექნიკური ჟურნალები ლოკალურად ინახება მაქსიმუმ 10 წუთით, მაშინაც კი, როცა ავტომატური მოხსენება გამორთულია. დიაგნოსტიკის მონახაზებსა და რიგში მდგომ მოხსენებებს ლოკალურად ვადა 24 საათის შემდეგ გასდით; გასუფთავება სრულდება, როცა გაფართოებას მუშაობა შეუძლია."
+  },
+  "privacyNoticeIpTitle": {
+    "message": "საჯარო IP-ის შემოწმება და მესამე მხარეები"
+  },
+  "privacyNoticeIp": {
+    "message": "IP-ის ჩვენება და ქსელის დიაგნოსტიკა უკავშირდება api.ipify.org-ს. IP-ის ჩვენებამ სარეზერვოდ შეიძლება გამოიყენოს ipv4.icanhazip.com. მომწოდებელი იღებს კავშირის IP-ს და მოთხოვნის ჩვეულებრივ მეტამონაცემებს: თქვენს საჯარო IP-ს პირდაპირ რეჟიმში, ან VPN-ის გამავალ IP-ს პროქსის გამოყენებისას. ეს მოთხოვნები არ შეიცავს ქუქი-ფაილებს და წყაროს მისამართს (referrer) და არ აგზავნის ანგარიშის ტოკენს ან დათვალიერების ისტორიას."
+  },
+  "privacyNoticeReportsTitle": {
+    "message": "რას შეიცავს დიაგნოსტიკური მოხსენებები"
+  },
+  "privacyNoticeReports": {
+    "message": "მოხსენებები შეიძლება შეიცავდეს მოხსენების შემთხვევით იდენტიფიკატორს, დროის ნიშნულებს, გაფართოებისა და ბრაუზერის ვერსიებს, ოპერაციული სისტემის ოჯახსა და არქიტექტურას, კავშირისა და დაცვის მდგომარეობებს, შეცდომების კოდებს, რაოდენობებს, ხანგრძლივობებს და შემოწმების შედეგებს. სრული მოხსენებები შეიძლება შეიცავდეს ბოლოდროინდელ ტექნიკურ მოვლენებს. მათი JSON არ შეიცავს პაროლებს, ავთენტიფიკაციის ტოკენებს, ელფოსტის მისამართებს, IP მისამართებს, მონახულებულ URL-ებს და გამორიცხულ დომენებს. სრული მოხსენების გაგზავნამდე შეგიძლიათ მისი დათვალიერება და ექსპორტი."
+  },
+  "privacyNoticeAccountTitle": {
+    "message": "მიმღები და ანგარიშთან კავშირი"
+  },
+  "privacyNoticeAccount": {
+    "message": "მოხსენებები იგზავნება FuzeVPN-ში მისამართზე api.fuzevpn.com/v1/diagnostics ავთენტიფიცირებული კავშირით. ეს API კავშირი VPN პროქსის გვერდს უვლის: FuzeVPN იღებს თქვენს პირდაპირ საჯარო IP-ს მაშინაც კი, როცა VPN აქტიურია. მოხსენებები დაკავშირებულია ავტორიზებულ ანგარიშთან და ანონიმური არ არის. ავთენტიფიკაციის სათაური და IP გამიჯნულია მოხსენების JSON-ისგან. მიღების წარმატებული დადასტურება ნიშნავს, რომ ამ საბოლოო წერტილმა მოხსენება მიიღო, და არა იმას, რომ მხარდაჭერის თანამშრომელმა ის წაიკითხა."
+  },
+  "privacyNoticeChoiceTitle": {
+    "message": "არასავალდებულო გაგზავნა და თანხმობის გაწვევა"
+  },
+  "privacyNoticeChoice": {
+    "message": "ავტომატური გაგზავნა ნაგულისხმევად გამორთულია. მისი ჩართვა ამ ანგარიშისთვის შეცდომების მარტივი მოხსენებების გაგზავნის ნებას რთავს. სრული მოხსენების ხელით გაგზავნისთვის საჭიროა გაგზავნის ველის მონიშვნა. Firefox ასევე ითხოვს ტექნიკური მონაცემების საკუთარ არასავალდებულო ნებართვას. ავტომატური გაგზავნის შესაწყვეტად და მომლოდინე ავტომატური მოხსენებების წასაშლელად გამორთეთ ის; ცალკეული მომლოდინე გაგზავნები ცალკე გააუქმეთ. დიაგნოსტიკის გაგზავნაზე უარის თქმა VPN-ის გამოყენებას ხელს არ უშლის."
+  },
+  "privacyNoticeDeleteTitle": {
+    "message": "ლოკალური წაშლა და ჩამოტვირთული ფაილები"
+  },
+  "privacyNoticeDelete": {
+    "message": "დიაგნოსტიკის განყოფილებაში გაასუფთავეთ ტექნიკური ისტორია ან წაშალეთ ცალკეული ლოკალური მოხსენება. ისტორიის გასუფთავება არ შლის მოხსენებების არსებულ ასლებს. ლოკალური გაუქმება ან წაშლა ვერ დააბრუნებს სერვისის მიერ უკვე მიღებულ მონაცემებს, მათ შორის გაუქმებამდე მისულ ატვირთვას. ჩამოტვირთული ექსპორტები ცალკე ფაილებია, რომლებიც თავად უნდა წაშალოთ."
+  },
+  "privacyNoticeServerTitle": {
+    "message": "სერვერზე შენახვა და მოთხოვნები"
+  },
+  "privacyNoticeServer": {
+    "message": "ეს გაფართოება არ აკონტროლებს და არ ამოწმებს სერვერზე შენახვას ან სერვერის მხარეს წაშლას. FuzeVPN-ის მიერ გამოყენებული შენახვის ვადისა და უკვე გაგზავნილ მოხსენებებთან დაკავშირებული მოთხოვნებისთვის გაეცანით კონფიდენციალურობის ზოგად პოლიტიკას ან დაუკავშირდით FuzeVPN-ს. ეს შეტყობინება სერვერზე შენახვის რაიმე ფიქსირებულ ვადაზე გარანტიას არ იძლევა."
+  },
+  "privacyNoticeSupportTitle": {
+    "message": "დიაგნოსტიკა და მხარდაჭერა ცალ-ცალკეა"
+  },
+  "privacyNoticeSupport": {
+    "message": "დიაგნოსტიკური მოხსენების გაგზავნა თავისთავად არ აგზავნის მხარდაჭერის შეტყობინებას გაფართოებიდან. პრობლემის ასახსნელად ან მიღებული მოხსენების წაშლის მოსათხოვად გამოიყენეთ FuzeVPN-ის საკონტაქტო არხი ქვემოთ. თუ ექსპორტირებული ფაილის სხვა არხით გაზიარებას გადაწყვეტთ, ჯერ შეამოწმეთ მისი შიგთავსი."
+  },
+  "privacyNoticeManage": {
+    "message": "დიაგნოსტიკის გახსნა"
+  },
+  "privacyNoticeLinksTitle": {
+    "message": "სერვისის პოლიტიკა და კონტაქტი"
+  },
+  "theme": {
+    "message": "თემა"
+  },
+  "themeSystem": {
+    "message": "სისტემური"
+  },
+  "themeLight": {
+    "message": "ღია"
+  },
+  "themeDark": {
+    "message": "მუქი"
+  },
+  "switchToDarkTheme": {
+    "message": "მუქ თემაზე გადართვა"
+  },
+  "switchToLightTheme": {
+    "message": "ღია თემაზე გადართვა"
+  }
+}

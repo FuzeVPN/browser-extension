@@ -1262,7 +1262,7 @@ try {
   }
   report.checks.push({
     passed: true,
-    name: "Remote logout uncertainty is localized in fifty languages without horizontal overflow",
+    name: "Remote logout uncertainty is localized in seventy languages without horizontal overflow",
   });
   await page.evaluate(() => {
     const stale = structuredClone(window.fixture.snapshot);

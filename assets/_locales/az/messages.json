@@ -1,0 +1,929 @@
+{
+  "extensionName": {
+    "message": "FuzeVPN"
+  },
+  "extensionDescription": {
+    "message": "Bir kliklə məxfiliyinizi qoruyun və təhlükəsizliyinizi gücləndirin."
+  },
+  "siteExclusionsReloadRequired": {
+    "message": "Yeniləməni tamamlamaq və istisna saytlardan istifadə etmək üçün FuzeVPN-i brauzerin genişləndirmə menecerindən yenidən yükləyin."
+  },
+  "extensionCommunicationError": {
+    "message": "Genişləndirmə cavab vermir. Bu pəncərəni bağlayın, sonra FuzeVPN-i brauzerin genişləndirmə menecerindən yenidən yükləyin."
+  },
+  "actionDisconnected": {
+    "message": "FuzeVPN — Bağlantı kəsilib"
+  },
+  "actionConnected": {
+    "message": "FuzeVPN — Bu brauzerdə qorunur"
+  },
+  "actionReconnecting": {
+    "message": "FuzeVPN — Yenidən qoşulur"
+  },
+  "actionError": {
+    "message": "FuzeVPN — Diqqət tələb olunur"
+  },
+  "browserProtection": {
+    "message": "Brauzer qoruması"
+  },
+  "loginTitle": {
+    "message": "FuzeVPN-ə xoş gəlmisiniz"
+  },
+  "loginSubtitle": {
+    "message": "Bu brauzerdə veb-gəzintinizi qorumaq üçün daxil olun."
+  },
+  "email": {
+    "message": "E-poçt ünvanı"
+  },
+  "emailPlaceholder": {
+    "message": "you@example.com"
+  },
+  "password": {
+    "message": "Parol"
+  },
+  "signIn": {
+    "message": "Daxil ol"
+  },
+  "signingIn": {
+    "message": "Daxil olunur…"
+  },
+  "forgotPassword": {
+    "message": "Parolu unutmusunuz?"
+  },
+  "createAccount": {
+    "message": "Hesab yaradın"
+  },
+  "settings": {
+    "message": "Parametrlər"
+  },
+  "close": {
+    "message": "Bağla"
+  },
+  "statusDisconnected": {
+    "message": "Bağlantı kəsilib"
+  },
+  "statusConnecting": {
+    "message": "Qoşulur…"
+  },
+  "statusChanging": {
+    "message": "Məkan dəyişdirilir…"
+  },
+  "statusProtected": {
+    "message": "Bu brauzerdə qorunur"
+  },
+  "statusRefreshing": {
+    "message": "Təhlükəsiz yenilənir…"
+  },
+  "statusDisconnecting": {
+    "message": "Bağlantı kəsilir…"
+  },
+  "statusError": {
+    "message": "Qoruma dayandı"
+  },
+  "browserOnlyDetail": {
+    "message": "Bu brauzer üçün qoruma."
+  },
+  "location": {
+    "message": "Məkan"
+  },
+  "change": {
+    "message": "Dəyiş"
+  },
+  "noLocation": {
+    "message": "Əlçatan məkan yoxdur"
+  },
+  "protectBrowser": {
+    "message": "Brauzeri qoru"
+  },
+  "disconnect": {
+    "message": "Bağlantını kəs"
+  },
+  "subscription": {
+    "message": "Abunə"
+  },
+  "refreshSubscription": {
+    "message": "Abunəni yenilə"
+  },
+  "refreshingSubscription": {
+    "message": "Abunə yenilənir…"
+  },
+  "subscriptionActive": {
+    "message": "Aktiv"
+  },
+  "subscriptionInactive": {
+    "message": "Qeyri-aktiv"
+  },
+  "expiresOn": {
+    "message": "Bitmə tarixi: $1"
+  },
+  "noExpiry": {
+    "message": "Bitmə tarixi yoxdur"
+  },
+  "browserOnlyNotice": {
+    "message": "Yalnız bu brauzer. Digər tətbiqlər və brauzerlər əhatə olunmur."
+  },
+  "resendVerification": {
+    "message": "E-poçtu yenidən göndər"
+  },
+  "incognitoHelp": {
+    "message": "Məxfi rejim yalnız brauzer parametrlərində genişləndirməyə məxfi rejimdə işləməyə icazə verildikdə eyni qorumadan istifadə edir."
+  },
+  "manageAccount": {
+    "message": "Hesabımı idarə et"
+  },
+  "account": {
+    "message": "Hesab"
+  },
+  "devices": {
+    "message": "Cihazlar"
+  },
+  "manageDevices": {
+    "message": "Cihazları idarə et"
+  },
+  "refreshDevices": {
+    "message": "Cihazları yenilə"
+  },
+  "deviceCount": {
+    "message": "Cihazlar: $1 / $2"
+  },
+  "loadingDevices": {
+    "message": "Cihazlar yüklənir…"
+  },
+  "noDevices": {
+    "message": "Aktiv cihaz yoxdur."
+  },
+  "currentDevice": {
+    "message": "Bu cihaz"
+  },
+  "deviceKindBrowser": {
+    "message": "Brauzer genişləndirməsi"
+  },
+  "deviceKindVpn": {
+    "message": "VPN cihazı"
+  },
+  "profile_browser_proxy": {
+    "message": "Brauzer proksisi"
+  },
+  "profile_wireguard": {
+    "message": "WireGuard"
+  },
+  "profile_openvpn": {
+    "message": "OpenVPN"
+  },
+  "none": {
+    "message": "yoxdur"
+  },
+  "deviceCreatedOn": {
+    "message": "Yaradılma tarixi: $1"
+  },
+  "deleteDevice": {
+    "message": "Cihazı sil"
+  },
+  "deleteDeviceNamed": {
+    "message": "Cihazı sil: $1"
+  },
+  "confirmDeleteDevice": {
+    "message": "«$1» silinsin? Onun VPN bağlantıları dayanacaq və profilləri silinəcək."
+  },
+  "resetDevice": {
+    "message": "Cihazı sıfırla"
+  },
+  "confirmResetDevice": {
+    "message": "Bu genişləndirmə sıfırlansın? Növbəti istifadədə o, yeni cihaz kimi qeydiyyatdan keçəcək."
+  },
+  "signOutAccount": {
+    "message": "Hesabdan çıx"
+  },
+  "chooseLocation": {
+    "message": "Məkan seçin"
+  },
+  "error_invalid_credentials": {
+    "message": "E-poçt ünvanı və ya parol yanlışdır."
+  },
+  "error_unauthorized": {
+    "message": "Sessiyanızın müddəti bitib. Zəhmət olmasa, yenidən daxil olun."
+  },
+  "error_email_verification_required": {
+    "message": "Qorumanı aktivləşdirməzdən əvvəl e-poçt ünvanınızı təsdiqləyin."
+  },
+  "errorVerificationCooldown": {
+    "message": "Yeni e-poçtu $1 saniyədən sonra tələb etmək olar."
+  },
+  "error_verification_email_cooldown": {
+    "message": "Başqa e-poçt tələb etməzdən əvvəl bir az gözləyin."
+  },
+  "error_subscription_required": {
+    "message": "Bu brauzeri qorumaq üçün aktiv abunə tələb olunur."
+  },
+  "error_device_limit": {
+    "message": "Cihaz limitinə çatılıb. Zəhmət olmasa, bir cihazı silin."
+  },
+  "error_device_identity_revoked": {
+    "message": "Bu cihaz artıq səlahiyyətli deyil. Yenidən qoşulmağa çalışın."
+  },
+  "error_device_proof_invalid": {
+    "message": "Bu cihazı təsdiqləmək mümkün olmadı. Kompüterinizin tarix və saatını yoxlayın, sonra yenidən cəhd edin."
+  },
+  "error_device_proof_replayed": {
+    "message": "Bu sorğu artıq emal edilib. Yenidən cəhd edin."
+  },
+  "error_invalid_device": {
+    "message": "Bu cihaz tanınmadı. Yenidən qoşulmağa çalışın."
+  },
+  "error_device_exists": {
+    "message": "Bu cihaz identifikatoru artıq başqa hesabla əlaqələndirilib."
+  },
+  "error_not_found": {
+    "message": "Bu əməliyyat artıq mövcud deyil. Yenidən cəhd edin."
+  },
+  "error_invalid_location": {
+    "message": "Bu məkan əlçatan deyil. Başqasını seçin."
+  },
+  "error_rate_limited": {
+    "message": "Həddindən çox cəhd. Bir az gözləyin və yenidən cəhd edin."
+  },
+  "error_proxy_unavailable": {
+    "message": "Bu server müvəqqəti olaraq əlçatan deyil. Bir azdan yenidən cəhd edin."
+  },
+  "error_api_token_expired": {
+    "message": "Hesab sessiyanızın müddəti bitib. Zəhmət olmasa, yenidən daxil olun."
+  },
+  "error_network_error": {
+    "message": "Şəbəkə əlçatan deyil. İnternet bağlantınızı yoxlayın."
+  },
+  "error_request_timeout": {
+    "message": "Xidmət çox gec cavab verdi. Yenidən cəhd edin."
+  },
+  "error_invalid_response": {
+    "message": "Xidmət gözlənilməz cavab qaytardı."
+  },
+  "error_proxy_certificate_invalid": {
+    "message": "Serverin təhlükəsizliyini təsdiqləmək mümkün olmadı. Bağlantı dayandırıldı."
+  },
+  "error_proxy_controlled_by_extension": {
+    "message": "Hazırda brauzerin proksisini başqa genişləndirmə idarə edir."
+  },
+  "error_proxy_controlled_by_policy": {
+    "message": "Administrator siyasəti FuzeVPN-in proksini dəyişməsinə mane olur."
+  },
+  "error_proxy_authentication_failed": {
+    "message": "Server bağlantını qəbul etmədi. Yenidən qoşulmağa çalışın."
+  },
+  "error_session_expired": {
+    "message": "Qorunan bağlantınızın müddəti bitib. Yenidən qoşulun."
+  },
+  "error_email_delivery_unavailable": {
+    "message": "E-poçtu hazırda göndərmək mümkün deyil."
+  },
+  "error_unknown_error": {
+    "message": "Gözlənilməz xəta baş verdi. Yenidən cəhd edin."
+  },
+  "actionBlocked": {
+    "message": "FuzeVPN — Veb-gəzinti bloklanıb"
+  },
+  "statusBlockedRetry": {
+    "message": "Veb-gəzinti dayandırılıb — yenidən qoşulur"
+  },
+  "statusBlockedAction": {
+    "message": "Veb-gəzinti dayandırılıb — bağlantını yoxlayın"
+  },
+  "statusProtectionUnavailable": {
+    "message": "Qoruma əlçatan deyil — veb-gəzinti bloklanmayıb"
+  },
+  "recoveryHelp": {
+    "message": "Qorumanı bərpa etmək üçün yenidən cəhd edin. «Bağlantını kəs» FuzeVPN olmadan internetdən istifadə etməyə imkan verir."
+  },
+  "retryConnection": {
+    "message": "Yenidən cəhd et"
+  },
+  "killSwitch": {
+    "message": "Təcili bloklama"
+  },
+  "killSwitchHelp": {
+    "message": "VPN bağlantısı kəsilərsə, yeni veb sorğularını bloklayır. İstisna saytlar VPN-dən kənarda əlçatan qalır."
+  },
+  "webRtcProtection": {
+    "message": "WebRTC qoruması"
+  },
+  "webRtcHelp": {
+    "message": "Veb zənglər zamanı IP ünvanınızı gizli saxlamağa kömək edir. Bəzi zənglər işləməyə bilər. Bunu söndürmək real IP ünvanınızı aşkar edə bilər."
+  },
+  "securityEffectiveState": {
+    "message": "$1 · $2"
+  },
+  "securityBlocked": {
+    "message": "Veb-gəzinti bloklanıb"
+  },
+  "securityNotBlocked": {
+    "message": "Veb-gəzinti bloklanmayıb"
+  },
+  "securityWebRtcActive": {
+    "message": "WebRTC məhdudiyyəti aktivdir"
+  },
+  "securityWebRtcInactive": {
+    "message": "WebRTC məhdudiyyəti deaktivdir"
+  },
+  "localNetworkHelp": {
+    "message": "Qoruma zamanı lokal IP ünvanları və geniş yayılmış lokal adlar bloklanır. İstisna edilmiş domen yenə də lokal şəbəkəyə giriş verə bilər. Sistemin IPv6 parametrləri dəyişmir."
+  },
+  "securityLimits": {
+    "message": "Bu qoruma haqqında"
+  },
+  "killSwitchLimits": {
+    "message": "Yalnız bu brauzer: mövcud bağlantılar və brauzerin və ya digər genişləndirmələrin bəzi daxili əlaqələri davam edə bilər. FuzeVPN reaksiya verməzdən əvvəl başqa genişləndirmə və ya siyasət proksini əvəz edə bilər. Genişləndirməni deaktiv etmək qorumanı aradan qaldırır. Sistem səviyyəsində bloklama yoxdur."
+  },
+  "error_traffic_guard_failed": {
+    "message": "Veb-gəzinti blokunu təsdiqləmək mümkün olmadı. Qoruma zəmanətli deyil. Genişləndirmənin icazələrini yoxlayın."
+  },
+  "error_webrtc_control_unavailable": {
+    "message": "WebRTC məhdudiyyətini tətbiq etmək mümkün olmadı. Parametrlərinizi, digər genişləndirmələri və ya administrator siyasətini yoxlayın."
+  },
+  "language": {
+    "message": "Dil"
+  },
+  "languageAutomatic": {
+    "message": "Avtomatik — brauzerin dili"
+  },
+  "languageHelp": {
+    "message": "Dəyişikliklər dərhal tətbiq olunur. «Avtomatik» brauzerin dilini izləyir, bu isə sistem dilindən fərqli ola bilər."
+  },
+  "languageSaveError": {
+    "message": "Dili yadda saxlamaq mümkün olmadı. Əvvəlki seçiminiz saxlanılır. Yenidən cəhd edin."
+  },
+  "publicIp": {
+    "message": "İctimai IP"
+  },
+  "vpnIp": {
+    "message": "VPN IP-si"
+  },
+  "ipChecking": {
+    "message": "Yoxlanılır…"
+  },
+  "ipUnavailable": {
+    "message": "Əlçatan deyil"
+  },
+  "ipLookupExplanation": {
+    "message": "IP cari bağlantınız vasitəsilə ipify, ehtiyat olaraq isə icanhazip ilə yoxlanılır. Heç bir brauzer tarixçəsi göndərilmir."
+  },
+  "automaticLocation": {
+    "message": "Avtomatik"
+  },
+  "automaticLocationHelp": {
+    "message": "Ən yaxşı son cavab müddəti və ya son məkanınız."
+  },
+  "automaticLocationName": {
+    "message": "Avtomatik · $1"
+  },
+  "searchLocations": {
+    "message": "Ölkə və ya şəhər axtarın"
+  },
+  "locationFilters": {
+    "message": "Məkanları filtrlə"
+  },
+  "allLocations": {
+    "message": "Hamısı"
+  },
+  "favoriteLocations": {
+    "message": "Seçilmişlər"
+  },
+  "recentLocations": {
+    "message": "Sonuncular"
+  },
+  "noMatchingLocations": {
+    "message": "Axtarışınıza uyğun məkan yoxdur."
+  },
+  "noFavoriteLocations": {
+    "message": "Seçilmiş məkanlarınızı burada saxlamaq üçün ulduz əlavə edin."
+  },
+  "noRecentLocations": {
+    "message": "Son qoşulduğunuz məkanlar burada görünəcək."
+  },
+  "addFavorite": {
+    "message": "Seçilmişlərə əlavə et: $1"
+  },
+  "removeFavorite": {
+    "message": "Seçilmişlərdən sil: $1"
+  },
+  "unavailableFavoriteLocation": {
+    "message": "Əlçatan olmayan seçilmiş: $1"
+  },
+  "locationSaveError": {
+    "message": "Dəyişikliyi tamamlamaq mümkün olmadı. Bəzi parametrlər yadda saxlanılmış ola bilər. Yenidən cəhd etməzdən əvvəl göstərilən seçimi yoxlayın."
+  },
+  "siteExclusions": {
+    "message": "İstisna saytlar"
+  },
+  "siteExclusionsHelp": {
+    "message": "Bu saytlar VPN kəsilsə belə, bağlantınızdan FuzeVPN olmadan istifadə edir."
+  },
+  "siteExclusionsEnabled": {
+    "message": "İstisnaları aktivləşdir"
+  },
+  "siteExclusionInput": {
+    "message": "Domen və ya URL"
+  },
+  "siteExclusionPlaceholder": {
+    "message": "example.com"
+  },
+  "siteExclusionPreview": {
+    "message": "Seçilmiş domen: $1"
+  },
+  "siteExclusionSubdomains": {
+    "message": "Alt domenləri daxil et"
+  },
+  "siteExclusionAdd": {
+    "message": "Sayt əlavə et"
+  },
+  "siteExclusionsEmpty": {
+    "message": "İstisna sayt yoxdur. Yalnız VPN-siz istifadə etmək istədiyiniz saytları əlavə edin."
+  },
+  "siteExclusionsCount": {
+    "message": "Saytlar: $1 / 100"
+  },
+  "siteExclusionScopeSubdomains": {
+    "message": "Domen və alt domenlər"
+  },
+  "siteExclusionScopeExact": {
+    "message": "Yalnız dəqiq domen"
+  },
+  "siteExclusionRemove": {
+    "message": "Sil: $1"
+  },
+  "siteExclusionsDetails": {
+    "message": "İstisnalar necə işləyir?"
+  },
+  "siteExclusionsResources": {
+    "message": "Digər domenlərdən gələn resurslar qorunmaqda davam edir. Səhifəni istisna etmək onun digər məzmununu avtomatik istisna etmir."
+  },
+  "siteExclusionsReload": {
+    "message": "Dəyişiklikdən sonra saytı yenidən yükləyin. Mövcud bağlantılar əvvəlki marşrutunu saxlaya bilər."
+  },
+  "siteExclusionsWebRtc": {
+    "message": "WebRTC qoruması, istisna saytlar da daxil olmaqla, ümumi parametr olaraq qalır."
+  },
+  "siteExclusionsLocal": {
+    "message": "Yalnız bu brauzerdə saxlanılır və hesabdan çıxdıqdan sonra da qalır."
+  },
+  "siteExclusionsOn": {
+    "message": "İstisnalar aktivdir"
+  },
+  "siteExclusionsOff": {
+    "message": "İstisnalar deaktivdir"
+  },
+  "siteExclusionsSummary": {
+    "message": "VPN-dən kənar saytlar: $1"
+  },
+  "siteExclusionsPending": {
+    "message": "İstisnalar tətbiq olunur…"
+  },
+  "siteExclusionsInterrupted": {
+    "message": "Dəyişiklik yarımçıq qaldı. Müvəqqəti qoruma qüvvədə qalır."
+  },
+  "siteExclusionsSaveError": {
+    "message": "Dəyişikliyi tamamlamaq mümkün olmadı. Parametrlərinizi yoxlayın və yenidən cəhd edin."
+  },
+  "siteExclusionsRetry": {
+    "message": "Yenidən cəhd et"
+  },
+  "siteExclusionInvalid": {
+    "message": "Etibarlı ictimai domen daxil edin. IP-lər, lokal adlar, şablon simvollar (wildcard), ictimai suffikslər və rezerv edilmiş domenlər qəbul edilmir."
+  },
+  "siteExclusionDuplicate": {
+    "message": "Bu domen artıq siyahıdadır."
+  },
+  "siteExclusionsLimit": {
+    "message": "100 sayt limitinə çatılıb. Başqasını əlavə etmək üçün bir saytı silin."
+  },
+  "statusProtectedExceptions": {
+    "message": "VPN aktivdir · istisnalar: $1"
+  },
+  "statusBlockedExceptions": {
+    "message": "Yalnız istisna saytlar əlçatan qalır"
+  },
+  "securityBlockedExceptions": {
+    "message": "İstisna saytlardan başqa veb-gəzinti bloklanıb"
+  },
+  "securityBlockUnverified": {
+    "message": "Bloklama təsdiqlənməyib"
+  },
+  "logoutLocalComplete": {
+    "message": "Lokal çıxış tamamlandı."
+  },
+  "logoutApiSession": {
+    "message": "Cari hesab sessiyası"
+  },
+  "logoutProxySessions": {
+    "message": "Məlum VPN sessiyaları"
+  },
+  "logoutRevocationPending": {
+    "message": "Ləğvetmə davam edir…"
+  },
+  "logoutRevocationConfirmed": {
+    "message": "Ləğvetmə təsdiqləndi"
+  },
+  "logoutRevocationUnconfirmed": {
+    "message": "Ləğvetmə təsdiqlənmədi"
+  },
+  "logoutUnconfirmedHelp": {
+    "message": "Bəzi uzaq sessiyalar müddəti bitənə qədər aktiv qala bilər."
+  },
+  "deviceQuotaLoading": {
+    "message": "Cihaz limiti yüklənir…"
+  },
+  "deviceQuotaUnknown": {
+    "message": "Cihaz limiti əlçatan deyil"
+  },
+  "error_proxy_creation_uncertain": {
+    "message": "Server yeni bağlantının yaradılmasını təsdiqləmədi. Avtomatik yenidən qoşulma dayandırılıb."
+  },
+  "siteExclusionsPreferencesReset": {
+    "message": "Yadda saxlanılmış sayt istisnaları oxuna bilmədiyi üçün sıfırlandı. İstisna etmək istədiyiniz saytları yenidən əlavə edin."
+  },
+  "siteExclusionsConflict": {
+    "message": "İstisna saytlar siyahısı dəyişib. Onu nəzərdən keçirin, sonra dəyişikliyi yenidən edin."
+  },
+  "unavailableLocation": {
+    "message": "Məkan əlçatan deyil"
+  },
+  "verificationSending": {
+    "message": "Təsdiq e-poçtu göndərilir…"
+  },
+  "verificationSent": {
+    "message": "Təsdiq e-poçtu göndərildi. Gələnlər qutusunu və spam qovluğunu yoxlayın."
+  },
+  "error_login_requires_disconnect": {
+    "message": "Başqa hesaba daxil olmazdan əvvəl cari VPN bağlantısını kəsin."
+  },
+  "error_storage_unavailable": {
+    "message": "Lokal hesab parametrləri əlçatan deyil. Brauzer yaddaşı əlçatan olduqda yenidən cəhd edin; yadda saxlanılmış hesabınız qorunub saxlanılıb."
+  },
+  "diagnosticsAssistance": {
+    "message": "Dəstək"
+  },
+  "diagnosticsTitle": {
+    "message": "Diaqnostika"
+  },
+  "diagnosticsIntro": {
+    "message": "Qorumanızı dəyişmədən FuzeVPN-i və cari bağlantını yoxlayın."
+  },
+  "diagnosticsPrivacyTitle": {
+    "message": "Məlumatlarınız"
+  },
+  "diagnosticsPrivacy": {
+    "message": "Hesabat JSON-u parollar, tokenlər, e-poçt ünvanları, IP ünvanları, ziyarət edilmiş URL-lər və ya istisna domenlər olmadan texniki vəziyyətləri və xəta kodlarını ehtiva edir. Göndərmə autentifikasiya olunur və hesabatı hesabınızla əlaqələndirir. Şəbəkə məlumatları üçün bildirişə baxın."
+  },
+  "diagnosticsAuto": {
+    "message": "Vacib xəta hesabatlarını avtomatik göndər"
+  },
+  "diagnosticsAutoHelp": {
+    "message": "Defolt olaraq söndürülüb. Aktivləşdirildikdə bu hesab üçün brauzer tarixçəsi olmadan sadə texniki hesabatlar göndərilir. Avtomatik göndərməni dayandırmaq və gözləyən avtomatik hesabatları silmək üçün onu burada söndürün."
+  },
+  "diagnosticsHistoryHelp": {
+    "message": "Texniki tarixçə lokal qalır: avtomatik göndərmə söndürülü olsa belə, hər jurnal üzrə 10 dəqiqə ərzində 200-ə qədər hadisə. Brauzer tarixçəsini ehtiva etmir və əl ilə, brauzer bağlandıqda və ya hesab dəyişdikdə silinir."
+  },
+  "diagnosticsHistoryCount": {
+    "message": "Lokal texniki hadisələr: $1"
+  },
+  "diagnosticsConnectionLog": {
+    "message": "Bağlantı jurnalını ixrac et"
+  },
+  "diagnosticsAccountRequired": {
+    "message": "Göndərməni aktivləşdirmək üçün daxil olun. Hesab olmadan da hesabata baxa və onu ixrac edə bilərsiniz."
+  },
+  "diagnosticsRun": {
+    "message": "Diaqnostikanı başlat"
+  },
+  "diagnosticsClearHistory": {
+    "message": "Lokal tarixçəni təmizlə"
+  },
+  "diagnosticsPreparing": {
+    "message": "Hesabat hazırlanır…"
+  },
+  "diagnosticsReports": {
+    "message": "Hesabatlar"
+  },
+  "diagnosticsEmpty": {
+    "message": "Hələ lokal hesabat yoxdur."
+  },
+  "diagnosticsChooseReport": {
+    "message": "Hesabat seçin"
+  },
+  "diagnosticsReportLabel": {
+    "message": "$1 · $2 · $3"
+  },
+  "diagnosticsTypeFull": {
+    "message": "Tam hesabat"
+  },
+  "diagnosticsTypeSimple": {
+    "message": "Xəta hesabatı"
+  },
+  "diagnosticsSummary": {
+    "message": "Toplanma tarixi: $1. FuzeVPN versiyası: $2."
+  },
+  "diagnosticsJson": {
+    "message": "Hesabatın məzmununa bax (JSON)"
+  },
+  "diagnosticsExport": {
+    "message": "Hesabatı ixrac et"
+  },
+  "diagnosticsDelete": {
+    "message": "Lokal hesabatı sil"
+  },
+  "diagnosticsRetention": {
+    "message": "Lokal hesabatların müddəti 24 saatdan sonra bitir. Burada silmək xidmətin artıq aldığı hesabatı silmir. Serverdə saxlama və silinmə sorğuları üçün bildirişə baxın."
+  },
+  "diagnosticsConsent": {
+    "message": "Bu diaqnostika hesabatını FuzeVPN-ə göndər"
+  },
+  "diagnosticsDataCollectionRequired": {
+    "message": "Diaqnostika göndərmək üçün Firefox texniki məlumatların toplanmasına icazə verməlidir. Yenidən cəhd edin və bu icazəni verin."
+  },
+  "diagnosticsSendHelp": {
+    "message": "Göndərmə könüllüdür. Təsdiqləndikdən sonra eyni hesab üçün etibarlı sessiya ilə 24 saata qədər təkrar cəhd edilə bilər. Sonrakı cəhdləri ləğv edə bilərsiniz. Gec ləğv etmək serverin hesabatı artıq almadığına zəmanət vermir."
+  },
+  "diagnosticsSend": {
+    "message": "Hesabatı göndər"
+  },
+  "diagnosticsCancel": {
+    "message": "Göndərməni ləğv et"
+  },
+  "diagnosticsReload": {
+    "message": "Bu səhifəni yenidən yüklə"
+  },
+  "diagnosticsUnavailable": {
+    "message": "Diaqnostika əlçatan deyil. FuzeVPN-i brauzerin genişləndirmə menecerindən yenidən yükləyin, sonra bu səhifəni yenidən açın. VPN-iniz dəyişməyib."
+  },
+  "diagnosticsQueueFull": {
+    "message": "Göndərmə növbəsi doludur. Lokal hesabatı silin və ya gözləyən hesabatın tamamlanmasını gözləyin."
+  },
+  "diagnosticsContentUnavailable": {
+    "message": "Hesabatın məzmunu əlçatan deyil. Əgər mövcuddursa, lokal hesabatı ixrac edin və dəstəklə əlaqə saxlayın."
+  },
+  "diagnosticsFailure": {
+    "message": "Diaqnostika əməliyyatını tamamlamaq mümkün olmadı. VPN-iniz dəyişməyib."
+  },
+  "diagnosticsChecks": {
+    "message": "Yoxlamalar"
+  },
+  "diagnosticsCheckFallback": {
+    "message": "Texniki yoxlama: $1"
+  },
+  "diagnosticsCheckLine": {
+    "message": "$1 — $2"
+  },
+  "diagnosticsProxy": {
+    "message": "Brauzer proksisi"
+  },
+  "diagnosticsStorage": {
+    "message": "Lokal yaddaş"
+  },
+  "diagnosticsNetwork": {
+    "message": "Şəbəkə bağlantısı"
+  },
+  "diagnosticsCleanup": {
+    "message": "Sessiyaların təmizlənməsi"
+  },
+  "diagnosticsResult_passed": {
+    "message": "Uğurlu"
+  },
+  "diagnosticsResult_failed": {
+    "message": "Uğursuz"
+  },
+  "diagnosticsResult_skipped": {
+    "message": "İcra edilmədi"
+  },
+  "diagnosticsResult_unknown": {
+    "message": "Naməlum"
+  },
+  "diagnosticsStatus_ready": {
+    "message": "Bu cihazda hazırdır"
+  },
+  "diagnosticsStatus_pending": {
+    "message": "Göndərilməyi gözləyir"
+  },
+  "diagnosticsStatus_sending": {
+    "message": "Göndərilir…"
+  },
+  "diagnosticsStatus_session_required": {
+    "message": "Eyni hesab üçün etibarlı sessiya gözlənilir"
+  },
+  "diagnosticsStatus_received": {
+    "message": "Xidmət tərəfindən alındı"
+  },
+  "diagnosticsStatus_failed": {
+    "message": "Göndərmə uğursuz oldu"
+  },
+  "diagnosticsStatus_cancelled": {
+    "message": "Göndərmə ləğv edildi"
+  },
+  "diagnosticsStatus_expired": {
+    "message": "Göndərmə müddəti bitdi"
+  },
+  "diagnosticsReceivedAt": {
+    "message": "Alınma tarixi: $1"
+  },
+  "error_private_browsing_required": {
+    "message": "Firefox VPN-i konfiqurasiya etmək üçün, hətta adi pəncərələrdə də, bu icazəni tələb edir. about:addons → FuzeVPN bölməsini açın, məxfi pəncərələrdə işləməyə icazə verin, sonra yenidən cəhd edin."
+  },
+  "error_host_permissions_required": {
+    "message": "Firefox-da about:addons → FuzeVPN → İcazələr bölməsini açın və bütün saytlara girişə icazə verin, sonra yenidən cəhd edin."
+  },
+  "cancelAction": {
+    "message": "Ləğv et"
+  },
+  "refreshLocations": {
+    "message": "Məkanları yenilə"
+  },
+  "refreshingLocations": {
+    "message": "Məkanlar yenilənir…"
+  },
+  "locationsRefreshError": {
+    "message": "Məkan siyahısını yeniləmək mümkün olmadı. Zəhmət olmasa, yenidən cəhd edin."
+  },
+  "error_device_revoked_limit": {
+    "message": "Bu cihaz ləğv edilib. Cihaz limitinə çatılıb: zəhmət olmasa, bir cihazı silin."
+  },
+  "noAvailableLocations": {
+    "message": "Hazırda əlçatan məkan yoxdur. Zəhmət olmasa, bir azdan yenidən cəhd edin."
+  },
+  "noAvailableFavoriteLocations": {
+    "message": "Seçilmiş məkanlarınız müvəqqəti olaraq əlçatan deyil."
+  },
+  "error_location_favorites_limit": {
+    "message": "100 seçilmiş limitinə çatılıb. Başqasını əlavə etmək üçün bir seçilmişi silin."
+  },
+  "error_server_full": {
+    "message": "Bu server doludur. Başqa məkan seçin."
+  },
+  "error_capacity_unavailable": {
+    "message": "Bu serverin əlçatanlığını hazırda təsdiqləmək mümkün deyil. Zəhmət olmasa, bir azdan yenidən cəhd edin."
+  },
+  "locationHierarchyHelp": {
+    "message": "Ad serveri seçir; ox təfərrüatları göstərir."
+  },
+  "locationCountrySelect": {
+    "message": "Əlçatan server seçin: $1"
+  },
+  "locationCitySelect": {
+    "message": "Əlçatan server seçin: $1"
+  },
+  "locationShowCities": {
+    "message": "Şəhərləri göstər: $1"
+  },
+  "locationHideCities": {
+    "message": "Şəhərləri gizlət: $1"
+  },
+  "locationShowServers": {
+    "message": "Serverləri göstər: $1"
+  },
+  "locationHideServers": {
+    "message": "Serverləri gizlət: $1"
+  },
+  "locationAvailableServers": {
+    "message": "Əlçatan serverlər: $1"
+  },
+  "legalInformation": {
+    "message": "Hüquqi məlumat"
+  },
+  "privacyPolicy": {
+    "message": "Genişləndirmənin məxfilik bildirişi"
+  },
+  "termsAndConditions": {
+    "message": "İstifadə və satış şərtləri"
+  },
+  "legalNotice": {
+    "message": "Hüquqi bildiriş"
+  },
+  "contactSupport": {
+    "message": "Dəstəklə əlaqə"
+  },
+  "webSignIn": {
+    "message": "FuzeVPN-ə daxil ol"
+  },
+  "webSignInDisconnect": {
+    "message": "Bağlantını kəs və daxil ol"
+  },
+  "webSignInPending": {
+    "message": "Giriş davam edir…"
+  },
+  "webSignInHelp": {
+    "message": "FuzeVPN müştəri bölməsində Google və ya e-poçt ilə daxil olun və ya hesab yaradın."
+  },
+  "webSignInDisconnectHelp": {
+    "message": "Bu düymə Google və ya e-poçt ilə daxil ola bilməniz üçün brauzer qorumasını dayandırır. Giriş zamanı veb-gəzintiniz qorunmayacaq."
+  },
+  "webSignInStatus": {
+    "message": "FuzeVPN giriş pəncərəsində davam edin. Bitirdikdən sonra genişləndirmə avtomatik yenilənir. Ləğv etmək üçün həmin pəncərəni bağlayın."
+  },
+  "error_web_login_cancelled": {
+    "message": "Giriş ləğv edildi. Yenidən cəhd edin."
+  },
+  "error_web_login_timeout": {
+    "message": "Giriş çox uzun çəkdi. Yenidən cəhd edin."
+  },
+  "error_web_login_unavailable": {
+    "message": "Veb girişi əlçatan deyil. Sonra yenidən cəhd edin."
+  },
+  "error_web_login_invalid_callback": {
+    "message": "Girişi təsdiqləmək mümkün olmadı. Genişləndirmədən yenidən başlayın."
+  },
+  "error_web_login_denied": {
+    "message": "Girişə icazə verilmədi. Yenidən cəhd edin."
+  },
+  "error_web_login_busy": {
+    "message": "Yenidən cəhd etməzdən əvvəl artıq açıq olan giriş pəncərəsini bağlayın."
+  },
+  "deviceKindFirefox": {
+    "message": "Firefox brauzeri"
+  },
+  "generalPrivacyPolicy": {
+    "message": "Ümumi məxfilik siyasəti"
+  },
+  "privacyNoticeTitle": {
+    "message": "FuzeVPN genişləndirməsində məxfilik"
+  },
+  "privacyNoticeIntro": {
+    "message": "Bu bildiriş genişləndirmənin istifadə etdiyi məlumatları təsvir edir. O, aşağıda keçidi verilmiş ümumi FuzeVPN məxfilik siyasətini tamamlayır. Diaqnostikanın könüllü göndərilməsi daxil olmaq və VPN-dən istifadə etmək üçün lazım olan məlumatlardan ayrıdır."
+  },
+  "privacyNoticeUpdated": {
+    "message": "Bildiriş 19 oktyabr 2026-cı il tarixində yeniləndi"
+  },
+  "privacyNoticeServiceTitle": {
+    "message": "Hesab və VPN xidməti"
+  },
+  "privacyNoticeService": {
+    "message": "Genişləndirmə api.fuzevpn.com ilə autentifikasiya, hesab, abunə, cihaz və proksi sessiyası məlumatlarını mübadilə edir. VPN proksisi onun üzərindən yönləndirilən trafiki ötürür. Bu bağlantılar şəbəkə metaməlumatlarını qəbul edən xidmətə açır; bu bildiriş server jurnallaşdırması barədə ayrıca vəd vermir."
+  },
+  "privacyNoticeLocalTitle": {
+    "message": "Brauzerinizdə saxlanılan məlumatlar"
+  },
+  "privacyNoticeLocal": {
+    "message": "Brauzer yaddaşında sessiyanız, hesab məlumatlarınız, seçimləriniz, sayt istisnaları və cihaz identifikatoru saxlanılır. Avtomatik hesabat söndürülü olsa belə, texniki jurnallar lokal olaraq 10 dəqiqəyə qədər saxlanılır. Diaqnostika qaralamalarının və növbədəki hesabatların müddəti lokal olaraq 24 saatdan sonra bitir; təmizləmə genişləndirmə işləyə bildikdə həyata keçirilir."
+  },
+  "privacyNoticeIpTitle": {
+    "message": "İctimai IP yoxlamaları və üçüncü tərəflər"
+  },
+  "privacyNoticeIp": {
+    "message": "IP-nin göstərilməsi və şəbəkə diaqnostikası api.ipify.org ilə əlaqə saxlayır. IP-nin göstərilməsi ehtiyat olaraq ipv4.icanhazip.com-dan istifadə edə bilər. Provayder bağlantı IP-sini və adi sorğu metaməlumatlarını alır: birbaşa rejimdə ictimai IP-nizi, proksi vasitəsilə isə VPN çıxış IP-sini. Bu sorğulara kukilər və referer məlumatı daxil edilmir, hesab tokeni və ya brauzer tarixçəsi göndərilmir."
+  },
+  "privacyNoticeReportsTitle": {
+    "message": "Diaqnostika hesabatlarında nə var"
+  },
+  "privacyNoticeReports": {
+    "message": "Hesabatlarda təsadüfi hesabat identifikatoru, vaxt nişanları, genişləndirmə və brauzer versiyaları, əməliyyat sisteminin ailəsi və arxitekturası, bağlantı və qoruma vəziyyətləri, xəta kodları, saylar, müddətlər və yoxlama nəticələri ola bilər. Tam hesabatlara son texniki hadisələr daxil ola bilər. Onların JSON-una parollar, autentifikasiya tokenləri, e-poçt ünvanları, IP ünvanları, ziyarət edilmiş URL-lər və istisna domenlər daxil edilmir. Tam hesabatı göndərməzdən əvvəl ona baxa və onu ixrac edə bilərsiniz."
+  },
+  "privacyNoticeAccountTitle": {
+    "message": "Alıcı və hesabla əlaqə"
+  },
+  "privacyNoticeAccount": {
+    "message": "Hesabatlar autentifikasiyalı bağlantı ilə api.fuzevpn.com/v1/diagnostics ünvanında FuzeVPN-ə göndərilir. Bu API bağlantısı VPN proksisindən yan keçir: VPN aktiv olsa belə, FuzeVPN birbaşa ictimai IP-nizi alır. Hesabatlar daxil olmuş hesabla əlaqələndirilir və anonim deyil. Autentifikasiya başlığı və IP hesabat JSON-undan ayrıdır. Uğurlu qəbul təsdiqi həmin son nöqtənin hesabatı qəbul etdiyini göstərir, dəstək əməkdaşının onu oxuduğunu yox."
+  },
+  "privacyNoticeChoiceTitle": {
+    "message": "Könüllü göndərmə və razılığın geri götürülməsi"
+  },
+  "privacyNoticeChoice": {
+    "message": "Avtomatik göndərmə defolt olaraq söndürülüb. Onu aktivləşdirmək həmin hesab üçün sadə xəta hesabatlarına icazə verir. Tam hesabatın əl ilə göndərilməsi üçün göndərmə qutusu işarələnməlidir. Firefox həmçinin öz könüllü texniki məlumat icazəsini tələb edir. Avtomatik göndərməni dayandırmaq və gözləyən avtomatik hesabatları silmək üçün onu söndürün; ayrı-ayrı gözləyən göndərmələri ayrıca ləğv edin. Diaqnostika göndərməkdən imtina VPN istifadəsinə mane olmur."
+  },
+  "privacyNoticeDeleteTitle": {
+    "message": "Lokal silmə və endirilmiş fayllar"
+  },
+  "privacyNoticeDelete": {
+    "message": "Diaqnostika bölməsində texniki tarixçəni təmizləyin və ya ayrıca lokal hesabatı silin. Tarixçəni təmizləmək mövcud hesabat nüsxələrini silmir. Lokal ləğvetmə və ya silmə xidmətin artıq aldığı məlumatları, o cümlədən ləğvdən əvvəl çatmış yükləməni geri qaytara bilmir. Endirilmiş ixrac faylları ayrıca fayllardır və onları özünüz silməlisiniz."
+  },
+  "privacyNoticeServerTitle": {
+    "message": "Serverdə saxlama və sorğular"
+  },
+  "privacyNoticeServer": {
+    "message": "Bu genişləndirmə serverdə saxlamanı və ya server tərəfində silinməni idarə etmir və yoxlamır. FuzeVPN-in tətbiq etdiyi saxlama müddəti və artıq göndərilmiş hesabatlarla bağlı sorğular üçün ümumi məxfilik siyasətinə baxın və ya FuzeVPN ilə əlaqə saxlayın. Bu bildiriş serverdə heç bir sabit saxlama müddətinə zəmanət vermir."
+  },
+  "privacyNoticeSupportTitle": {
+    "message": "Diaqnostika və dəstək ayrıdır"
+  },
+  "privacyNoticeSupport": {
+    "message": "Diaqnostika hesabatının göndərilməsi özlüyündə genişləndirmədən dəstək mesajı göndərmir. Problemi izah etmək və ya alınmış hesabatın silinməsini tələb etmək üçün aşağıdakı FuzeVPN əlaqə kanalından istifadə edin. İxrac edilmiş faylı başqa kanal vasitəsilə paylaşmağı seçsəniz, əvvəlcə onun məzmununu yoxlayın."
+  },
+  "privacyNoticeManage": {
+    "message": "Diaqnostikanı aç"
+  },
+  "privacyNoticeLinksTitle": {
+    "message": "Xidmət siyasəti və əlaqə"
+  },
+  "theme": {
+    "message": "Mövzu"
+  },
+  "themeSystem": {
+    "message": "Sistem"
+  },
+  "themeLight": {
+    "message": "Açıq"
+  },
+  "themeDark": {
+    "message": "Tünd"
+  },
+  "switchToDarkTheme": {
+    "message": "Tünd mövzuya keç"
+  },
+  "switchToLightTheme": {
+    "message": "Açıq mövzuya keç"
+  }
+}

@@ -51,13 +51,31 @@ export const LANGUAGE_NAMES = {
   sw: "Kiswahili",
   ta: "தமிழ்",
   te: "తెలుగు",
+  sq: "Shqip",
+  hy: "Հայերեն",
+  az: "Azərbaycan",
+  my: "မြန်မာ",
+  si: "සිංහල",
+  ka: "ქართული",
+  ha: "Hausa",
+  ig: "Igbo",
+  kk: "Қазақ тілі",
+  km: "ខ្មែរ",
+  rw: "Kinyarwanda",
+  lo: "ລາວ",
+  mg: "Malagasy",
+  ne: "नेपाली",
+  or: "ଓଡ଼ିଆ",
+  uz: "Oʻzbek",
+  ps: "پښتو",
+  pa: "ਪੰਜਾਬੀ",
+  so: "Soomaali",
+  yo: "Yorùbá",
 } as const;
 
 export type Language = keyof typeof LANGUAGE_NAMES;
 export function languageDirection(language: Language): "ltr" | "rtl" {
-  return language === "ar" || language === "fa" || language === "ur" || language === "he"
-    ? "rtl"
-    : "ltr";
+  return ["ar", "fa", "ur", "he", "ps"].includes(language) ? "rtl" : "ltr";
 }
 
 export type LanguagePreference = "auto" | Language;

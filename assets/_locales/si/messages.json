@@ -1,0 +1,929 @@
+{
+  "extensionName": {
+    "message": "FuzeVPN"
+  },
+  "extensionDescription": {
+    "message": "එක් ක්ලික් කිරීමකින් ඔබේ පෞද්ගලිකත්වය රැක ආරක්ෂාව ශක්තිමත් කරන්න."
+  },
+  "siteExclusionsReloadRequired": {
+    "message": "යාවත්කාලීන කිරීම අවසන් කර බැහැර කළ අඩවි භාවිතා කිරීමට, බ්‍රවුසරයේ දිගු කළමනාකරුවෙන් FuzeVPN යළි පූරණය කරන්න."
+  },
+  "extensionCommunicationError": {
+    "message": "දිගුව ප්‍රතිචාර නොදක්වයි. මෙම කවුළුව වසා, බ්‍රවුසරයේ දිගු කළමනාකරුවෙන් FuzeVPN යළි පූරණය කරන්න."
+  },
+  "actionDisconnected": {
+    "message": "FuzeVPN — විසන්ධි කර ඇත"
+  },
+  "actionConnected": {
+    "message": "FuzeVPN — මෙම බ්‍රවුසරයේ ආරක්ෂිතයි"
+  },
+  "actionReconnecting": {
+    "message": "FuzeVPN — නැවත සම්බන්ධ වෙමින්"
+  },
+  "actionError": {
+    "message": "FuzeVPN — අවධානය අවශ්‍යයි"
+  },
+  "browserProtection": {
+    "message": "බ්‍රවුසර ආරක්ෂාව"
+  },
+  "loginTitle": {
+    "message": "FuzeVPN වෙත සාදරයෙන් පිළිගනිමු"
+  },
+  "loginSubtitle": {
+    "message": "මෙම බ්‍රවුසරයේ ඔබේ බ්‍රවුස් කිරීම ආරක්ෂා කිරීමට පුරන්න."
+  },
+  "email": {
+    "message": "ඊමේල් ලිපිනය"
+  },
+  "emailPlaceholder": {
+    "message": "you@example.com"
+  },
+  "password": {
+    "message": "මුරපදය"
+  },
+  "signIn": {
+    "message": "පුරන්න"
+  },
+  "signingIn": {
+    "message": "පුරනය වෙමින්…"
+  },
+  "forgotPassword": {
+    "message": "මුරපදය අමතකද?"
+  },
+  "createAccount": {
+    "message": "ගිණුමක් සාදන්න"
+  },
+  "settings": {
+    "message": "සැකසීම්"
+  },
+  "close": {
+    "message": "වසන්න"
+  },
+  "statusDisconnected": {
+    "message": "විසන්ධි කර ඇත"
+  },
+  "statusConnecting": {
+    "message": "සම්බන්ධ වෙමින්…"
+  },
+  "statusChanging": {
+    "message": "ස්ථානය වෙනස් කරමින්…"
+  },
+  "statusProtected": {
+    "message": "මෙම බ්‍රවුසරයේ ආරක්ෂිතයි"
+  },
+  "statusRefreshing": {
+    "message": "ආරක්ෂිතව අලුත් කරමින්…"
+  },
+  "statusDisconnecting": {
+    "message": "විසන්ධි කරමින්…"
+  },
+  "statusError": {
+    "message": "ආරක්ෂාව නතර විය"
+  },
+  "browserOnlyDetail": {
+    "message": "මෙම බ්‍රවුසරය සඳහා ආරක්ෂාව."
+  },
+  "location": {
+    "message": "ස්ථානය"
+  },
+  "change": {
+    "message": "වෙනස් කරන්න"
+  },
+  "noLocation": {
+    "message": "ලබා ගත හැකි ස්ථානයක් නැත"
+  },
+  "protectBrowser": {
+    "message": "බ්‍රවුසරය ආරක්ෂා කරන්න"
+  },
+  "disconnect": {
+    "message": "විසන්ධි කරන්න"
+  },
+  "subscription": {
+    "message": "දායකත්වය"
+  },
+  "refreshSubscription": {
+    "message": "දායකත්වය නැවුම් කරන්න"
+  },
+  "refreshingSubscription": {
+    "message": "දායකත්වය නැවුම් කරමින්…"
+  },
+  "subscriptionActive": {
+    "message": "සක්‍රියයි"
+  },
+  "subscriptionInactive": {
+    "message": "අක්‍රියයි"
+  },
+  "expiresOn": {
+    "message": "කල් ඉකුත් වන දිනය: $1"
+  },
+  "noExpiry": {
+    "message": "කල් ඉකුත් වන දිනයක් නැත"
+  },
+  "browserOnlyNotice": {
+    "message": "මෙම බ්‍රවුසරය පමණි. වෙනත් යෙදුම් සහ බ්‍රවුසර ආවරණය නොවේ."
+  },
+  "resendVerification": {
+    "message": "ඊමේලය නැවත යවන්න"
+  },
+  "incognitoHelp": {
+    "message": "පුද්ගලික බ්‍රවුස් කිරීම එම ආරක්ෂාවම භාවිතා කරන්නේ, බ්‍රවුසරයේ සැකසීම්වල පුද්ගලික ප්‍රකාරයේදී දිගුවට ඉඩ දී ඇත්නම් පමණි."
+  },
+  "manageAccount": {
+    "message": "මගේ ගිණුම කළමනාකරණය කරන්න"
+  },
+  "account": {
+    "message": "ගිණුම"
+  },
+  "devices": {
+    "message": "උපාංග"
+  },
+  "manageDevices": {
+    "message": "උපාංග කළමනාකරණය කරන්න"
+  },
+  "refreshDevices": {
+    "message": "උපාංග නැවුම් කරන්න"
+  },
+  "deviceCount": {
+    "message": "උපාංග $1 / $2"
+  },
+  "loadingDevices": {
+    "message": "උපාංග පූරණය වෙමින්…"
+  },
+  "noDevices": {
+    "message": "සක්‍රිය උපාංග නැත."
+  },
+  "currentDevice": {
+    "message": "මෙම උපාංගය"
+  },
+  "deviceKindBrowser": {
+    "message": "බ්‍රවුසර දිගුව"
+  },
+  "deviceKindVpn": {
+    "message": "VPN උපාංගය"
+  },
+  "profile_browser_proxy": {
+    "message": "බ්‍රවුසර ප්‍රොක්සිය"
+  },
+  "profile_wireguard": {
+    "message": "WireGuard"
+  },
+  "profile_openvpn": {
+    "message": "OpenVPN"
+  },
+  "none": {
+    "message": "කිසිවක් නැත"
+  },
+  "deviceCreatedOn": {
+    "message": "සෑදූ දිනය: $1"
+  },
+  "deleteDevice": {
+    "message": "උපාංගය මකන්න"
+  },
+  "deleteDeviceNamed": {
+    "message": "උපාංගය මකන්න: $1"
+  },
+  "confirmDeleteDevice": {
+    "message": "“$1” ඉවත් කරන්නද? එහි VPN සම්බන්ධතා නතර වන අතර එහි පැතිකඩ ඉවත් කෙරේ."
+  },
+  "resetDevice": {
+    "message": "උපාංගය යළි සකසන්න"
+  },
+  "confirmResetDevice": {
+    "message": "මෙම දිගුව යළි සකසන්නද? ඊළඟ වතාවේ ඔබ එය භාවිතා කරන විට එය නව උපාංගයක් ලෙස ලියාපදිංචි වේ."
+  },
+  "signOutAccount": {
+    "message": "ගිණුමෙන් වරන්න"
+  },
+  "chooseLocation": {
+    "message": "ස්ථානයක් තෝරන්න"
+  },
+  "error_invalid_credentials": {
+    "message": "ඊමේල් ලිපිනය හෝ මුරපදය වැරදියි."
+  },
+  "error_unauthorized": {
+    "message": "ඔබේ සැසිය කල් ඉකුත් වී ඇත. කරුණාකර නැවත පුරන්න."
+  },
+  "error_email_verification_required": {
+    "message": "ආරක්ෂාව සක්‍රිය කිරීමට පෙර ඔබේ ඊමේල් ලිපිනය තහවුරු කරන්න."
+  },
+  "errorVerificationCooldown": {
+    "message": "තත්පර $1කින් නව ඊමේලයක් ඉල්ලිය හැක."
+  },
+  "error_verification_email_cooldown": {
+    "message": "තවත් ඊමේලයක් ඉල්ලීමට පෙර කරුණාකර රැඳී සිටින්න."
+  },
+  "error_subscription_required": {
+    "message": "මෙම බ්‍රවුසරය ආරක්ෂා කිරීමට සක්‍රිය දායකත්වයක් අවශ්‍යයි."
+  },
+  "error_device_limit": {
+    "message": "උපාංග සීමාවට ළඟා විය. කරුණාකර උපාංගයක් ඉවත් කරන්න."
+  },
+  "error_device_identity_revoked": {
+    "message": "මෙම උපාංගයට තවදුරටත් අවසර නැත. නැවත සම්බන්ධ වීමට උත්සාහ කරන්න."
+  },
+  "error_device_proof_invalid": {
+    "message": "අපට මෙම උපාංගය තහවුරු කළ නොහැකි විය. ඔබේ පරිගණකයේ දිනය සහ වේලාව පරීක්ෂා කර නැවත උත්සාහ කරන්න."
+  },
+  "error_device_proof_replayed": {
+    "message": "මෙම ඉල්ලීම දැනටමත් සකසා ඇත. නැවත උත්සාහ කරන්න."
+  },
+  "error_invalid_device": {
+    "message": "මෙම උපාංගය හඳුනා නොගැනුණි. නැවත සම්බන්ධ වීමට උත්සාහ කරන්න."
+  },
+  "error_device_exists": {
+    "message": "මෙම උපාංග අනන්‍යතාව දැනටමත් වෙනත් ගිණුමකට සම්බන්ධ කර ඇත."
+  },
+  "error_not_found": {
+    "message": "මෙම මෙහෙයුම තවදුරටත් ලබා ගත නොහැක. නැවත උත්සාහ කරන්න."
+  },
+  "error_invalid_location": {
+    "message": "මෙම ස්ථානය ලබා ගත නොහැක. වෙනත් එකක් තෝරන්න."
+  },
+  "error_rate_limited": {
+    "message": "උත්සාහයන් බොහෝ වැඩියි. මොහොතක් රැඳී සිට නැවත උත්සාහ කරන්න."
+  },
+  "error_proxy_unavailable": {
+    "message": "මෙම සේවාදායකය තාවකාලිකව ලබා ගත නොහැක. මොහොතකින් නැවත උත්සාහ කරන්න."
+  },
+  "error_api_token_expired": {
+    "message": "ඔබේ ගිණුම් සැසිය කල් ඉකුත් වී ඇත. කරුණාකර නැවත පුරන්න."
+  },
+  "error_network_error": {
+    "message": "ජාලය ලබා ගත නොහැක. ඔබේ අන්තර්ජාල සම්බන්ධතාව පරීක්ෂා කරන්න."
+  },
+  "error_request_timeout": {
+    "message": "සේවාවට ප්‍රතිචාර දැක්වීමට වැඩි කාලයක් ගත විය. නැවත උත්සාහ කරන්න."
+  },
+  "error_invalid_response": {
+    "message": "සේවාව අනපේක්ෂිත ප්‍රතිචාරයක් ලබා දුන්නේය."
+  },
+  "error_proxy_certificate_invalid": {
+    "message": "අපට සේවාදායකයේ ආරක්ෂාව තහවුරු කළ නොහැකි විය. සම්බන්ධතාව නතර කර ඇත."
+  },
+  "error_proxy_controlled_by_extension": {
+    "message": "වෙනත් දිගුවක් දැනට බ්‍රවුසරයේ ප්‍රොක්සිය පාලනය කරයි."
+  },
+  "error_proxy_controlled_by_policy": {
+    "message": "පරිපාලක ප්‍රතිපත්තියක් මඟින් FuzeVPN හට ප්‍රොක්සිය වෙනස් කිරීම වළක්වා ඇත."
+  },
+  "error_proxy_authentication_failed": {
+    "message": "සේවාදායකය සම්බන්ධතාව පිළිගත්තේ නැත. නැවත සම්බන්ධ වීමට උත්සාහ කරන්න."
+  },
+  "error_session_expired": {
+    "message": "ඔබේ ආරක්ෂිත සම්බන්ධතාව කල් ඉකුත් වී ඇත. නැවත සම්බන්ධ වන්න."
+  },
+  "error_email_delivery_unavailable": {
+    "message": "මේ මොහොතේ ඊමේලය යැවිය නොහැක."
+  },
+  "error_unknown_error": {
+    "message": "අනපේක්ෂිත දෝෂයක් සිදු විය. නැවත උත්සාහ කරන්න."
+  },
+  "actionBlocked": {
+    "message": "FuzeVPN — බ්‍රවුස් කිරීම අවහිරයි"
+  },
+  "statusBlockedRetry": {
+    "message": "බ්‍රවුස් කිරීම විරාම කර ඇත — නැවත සම්බන්ධ වෙමින්"
+  },
+  "statusBlockedAction": {
+    "message": "බ්‍රවුස් කිරීම විරාම කර ඇත — සම්බන්ධතාව පරීක්ෂා කරන්න"
+  },
+  "statusProtectionUnavailable": {
+    "message": "ආරක්ෂාව ලබා ගත නොහැක — බ්‍රවුස් කිරීම අවහිර නැත"
+  },
+  "recoveryHelp": {
+    "message": "ආරක්ෂාව යළි ආරම්භ කිරීමට නැවත උත්සාහ කරන්න. විසන්ධි කිරීමෙන් FuzeVPN නොමැතිව බ්‍රවුස් කළ හැක."
+  },
+  "retryConnection": {
+    "message": "නැවත උත්සාහ කරන්න"
+  },
+  "killSwitch": {
+    "message": "කිල් ස්විචය"
+  },
+  "killSwitchHelp": {
+    "message": "VPN සම්බන්ධතාව බිඳ වැටුණහොත් නව වෙබ් ඉල්ලීම් අවහිර කරයි. බැහැර කළ අඩවි VPN වලින් පිටත දිගටම ප්‍රවේශ විය හැක."
+  },
+  "webRtcProtection": {
+    "message": "WebRTC ආරක්ෂාව"
+  },
+  "webRtcHelp": {
+    "message": "වෙබ් ඇමතුම් අතරතුර ඔබේ IP ලිපිනය පුද්ගලිකව තබා ගැනීමට උදවු කරයි. සමහර ඇමතුම් ක්‍රියා නොකළ හැක. මෙය අක්‍රිය කිරීමෙන් ඔබේ සැබෑ IP ලිපිනය හෙළි විය හැක."
+  },
+  "securityEffectiveState": {
+    "message": "$1 · $2"
+  },
+  "securityBlocked": {
+    "message": "බ්‍රවුස් කිරීම අවහිරයි"
+  },
+  "securityNotBlocked": {
+    "message": "බ්‍රවුස් කිරීම අවහිර නැත"
+  },
+  "securityWebRtcActive": {
+    "message": "WebRTC සීමාව සක්‍රියයි"
+  },
+  "securityWebRtcInactive": {
+    "message": "WebRTC සීමාව අක්‍රියයි"
+  },
+  "localNetworkHelp": {
+    "message": "ආරක්ෂාව අතරතුර ස්ථානීය IP ලිපින සහ පොදු ස්ථානීය නම් අවහිර කෙරේ. බැහැර කළ වසමකින් තවමත් ස්ථානීය ජාලයට ප්‍රවේශය ලැබිය හැක. පද්ධතියේ IPv6 සැකසීම් වෙනස් නොකෙරේ."
+  },
+  "securityLimits": {
+    "message": "මෙම ආරක්ෂාව ගැන"
+  },
+  "killSwitchLimits": {
+    "message": "මෙම බ්‍රවුසරය පමණි: පවතින සම්බන්ධතා සහ බ්‍රවුසරයේ හෝ වෙනත් දිගුවල සමහර අභ්‍යන්තර සන්නිවේදන දිගටම පැවතිය හැක. FuzeVPN ප්‍රතිචාර දැක්වීමට පෙර වෙනත් දිගුවක් හෝ ප්‍රතිපත්තියක් ප්‍රොක්සිය ප්‍රතිස්ථාපනය කළ හැක. දිගුව අක්‍රිය කිරීමෙන් ආරක්ෂාව ඉවත් වේ. පද්ධතිය පුරා අවහිර කිරීමක් නැත."
+  },
+  "error_traffic_guard_failed": {
+    "message": "බ්‍රවුස් කිරීමේ අවහිරය තහවුරු කළ නොහැකි විය. ආරක්ෂාව සහතික නොවේ. දිගුවේ අවසර පරීක්ෂා කරන්න."
+  },
+  "error_webrtc_control_unavailable": {
+    "message": "WebRTC සීමාව යෙදිය නොහැකි විය. ඔබේ සැකසීම්, වෙනත් දිගු හෝ පරිපාලක ප්‍රතිපත්තිය පරීක්ෂා කරන්න."
+  },
+  "language": {
+    "message": "භාෂාව"
+  },
+  "languageAutomatic": {
+    "message": "ස්වයංක්‍රීය — බ්‍රවුසරයේ භාෂාව"
+  },
+  "languageHelp": {
+    "message": "වෙනස්කම් වහාම ක්‍රියාත්මක වේ. ස්වයංක්‍රීය විකල්පය බ්‍රවුසරයේ භාෂාව අනුගමනය කරන අතර, එය පද්ධති භාෂාවට වඩා වෙනස් විය හැක."
+  },
+  "languageSaveError": {
+    "message": "භාෂාව සුරැකිය නොහැකි විය. ඔබේ පෙර තේරීම රඳවා ඇත. නැවත උත්සාහ කරන්න."
+  },
+  "publicIp": {
+    "message": "පොදු IP"
+  },
+  "vpnIp": {
+    "message": "VPN IP ලිපිනය"
+  },
+  "ipChecking": {
+    "message": "පරීක්ෂා කරමින්…"
+  },
+  "ipUnavailable": {
+    "message": "ලබා ගත නොහැක"
+  },
+  "ipLookupExplanation": {
+    "message": "ඔබේ වත්මන් සම්බන්ධතාව භාවිතයෙන් ipify මඟින්, නැතහොත් විකල්පයක් ලෙස icanhazip මඟින් IP පරීක්ෂා කෙරේ. බ්‍රවුස් කිරීමේ ඉතිහාසයක් යවනු නොලැබේ."
+  },
+  "automaticLocation": {
+    "message": "ස්වයංක්‍රීය"
+  },
+  "automaticLocationHelp": {
+    "message": "මෑත හොඳම ප්‍රතිචාර කාලය, නැතහොත් ඔබේ අවසන් ස්ථානය."
+  },
+  "automaticLocationName": {
+    "message": "ස්වයංක්‍රීය · $1"
+  },
+  "searchLocations": {
+    "message": "රට හෝ නගරය සොයන්න"
+  },
+  "locationFilters": {
+    "message": "ස්ථාන පෙරහන් කරන්න"
+  },
+  "allLocations": {
+    "message": "සියල්ල"
+  },
+  "favoriteLocations": {
+    "message": "ප්‍රියතම"
+  },
+  "recentLocations": {
+    "message": "මෑත"
+  },
+  "noMatchingLocations": {
+    "message": "ඔබේ සෙවුමට ගැළපෙන ස්ථාන නැත."
+  },
+  "noFavoriteLocations": {
+    "message": "ඔබේ ප්‍රියතම ස්ථාන මෙහි තබා ගැනීමට තරුවක් එක් කරන්න."
+  },
+  "noRecentLocations": {
+    "message": "ඔබ මෑතකදී සම්බන්ධ වූ ස්ථාන මෙහි දිස් වේ."
+  },
+  "addFavorite": {
+    "message": "$1 ප්‍රියතම වෙත එක් කරන්න"
+  },
+  "removeFavorite": {
+    "message": "$1 ප්‍රියතම වෙතින් ඉවත් කරන්න"
+  },
+  "unavailableFavoriteLocation": {
+    "message": "ලබා ගත නොහැකි ප්‍රියතමය: $1"
+  },
+  "locationSaveError": {
+    "message": "වෙනස් කිරීම සම්පූර්ණ කළ නොහැකි විය. සමහර සැකසීම් සුරැකී තිබිය හැක. නැවත උත්සාහ කිරීමට පෙර පෙන්වා ඇති තේරීම පරීක්ෂා කරන්න."
+  },
+  "siteExclusions": {
+    "message": "බැහැර කළ අඩවි"
+  },
+  "siteExclusionsHelp": {
+    "message": "VPN බිඳ වැටුණත්, මෙම අඩවි FuzeVPN නොමැතිව ඔබේ සම්බන්ධතාව භාවිතා කරයි."
+  },
+  "siteExclusionsEnabled": {
+    "message": "ව්‍යතිරේක සබල කරන්න"
+  },
+  "siteExclusionInput": {
+    "message": "වසම හෝ URL"
+  },
+  "siteExclusionPlaceholder": {
+    "message": "example.com"
+  },
+  "siteExclusionPreview": {
+    "message": "තෝරාගත් වසම: $1"
+  },
+  "siteExclusionSubdomains": {
+    "message": "උප වසම් ඇතුළත් කරන්න"
+  },
+  "siteExclusionAdd": {
+    "message": "අඩවිය එක් කරන්න"
+  },
+  "siteExclusionsEmpty": {
+    "message": "බැහැර කළ අඩවි නැත. VPN නොමැතිව භාවිතා කිරීමට ඔබට අවශ්‍ය අඩවි පමණක් එක් කරන්න."
+  },
+  "siteExclusionsCount": {
+    "message": "අඩවි $1 / 100"
+  },
+  "siteExclusionScopeSubdomains": {
+    "message": "වසම සහ උප වසම්"
+  },
+  "siteExclusionScopeExact": {
+    "message": "නිශ්චිත වසම පමණි"
+  },
+  "siteExclusionRemove": {
+    "message": "ඉවත් කරන්න: $1"
+  },
+  "siteExclusionsDetails": {
+    "message": "ව්‍යතිරේක ක්‍රියා කරන්නේ කෙසේද?"
+  },
+  "siteExclusionsResources": {
+    "message": "වෙනත් වසම්වලින් ලැබෙන සම්පත් ආරක්ෂිතව පවතී. පිටුවක් බැහැර කිරීමෙන් එහි අනෙකුත් අන්තර්ගතය ස්වයංක්‍රීයව බැහැර නොවේ."
+  },
+  "siteExclusionsReload": {
+    "message": "වෙනස් කිරීමකින් පසු අඩවිය යළි පූරණය කරන්න. පවතින සම්බන්ධතා ඒවායේ පෙර මාර්ගය තබා ගත හැක."
+  },
+  "siteExclusionsWebRtc": {
+    "message": "බැහැර කළ අඩවි ද ඇතුළුව, WebRTC ආරක්ෂාව ගෝලීය සැකසීමක් ලෙස පවතී."
+  },
+  "siteExclusionsLocal": {
+    "message": "මෙම බ්‍රවුසරයේ පමණක් සුරකින අතර ඔබේ ගිණුමෙන් වැරීමෙන් පසුවත් රඳවා ගනී."
+  },
+  "siteExclusionsOn": {
+    "message": "ව්‍යතිරේක සබලයි"
+  },
+  "siteExclusionsOff": {
+    "message": "ව්‍යතිරේක අබලයි"
+  },
+  "siteExclusionsSummary": {
+    "message": "VPN වලින් පිටත අඩවි $1"
+  },
+  "siteExclusionsPending": {
+    "message": "ව්‍යතිරේක යොදමින්…"
+  },
+  "siteExclusionsInterrupted": {
+    "message": "වෙනස් කිරීමට බාධා විය. තාවකාලික ආරක්ෂණය තවමත් ක්‍රියාත්මකයි."
+  },
+  "siteExclusionsSaveError": {
+    "message": "වෙනස් කිරීම අවසන් කළ නොහැකි විය. ඔබේ සැකසීම් පරීක්ෂා කර නැවත උත්සාහ කරන්න."
+  },
+  "siteExclusionsRetry": {
+    "message": "නැවත උත්සාහ කරන්න"
+  },
+  "siteExclusionInvalid": {
+    "message": "වලංගු පොදු වසමක් ඇතුළත් කරන්න. IP, ස්ථානීය නම්, වයිල්ඩ්කාඩ්, පොදු ප්‍රත්‍යය සහ වෙන් කළ වසම් පිළිගනු නොලැබේ."
+  },
+  "siteExclusionDuplicate": {
+    "message": "මෙම වසම දැනටමත් ලැයිස්තුවේ ඇත."
+  },
+  "siteExclusionsLimit": {
+    "message": "අඩවි 100ක සීමාවට ළඟා විය. තවත් එකක් එක් කිරීමට අඩවියක් ඉවත් කරන්න."
+  },
+  "statusProtectedExceptions": {
+    "message": "VPN සක්‍රියයි · ව්‍යතිරේක $1"
+  },
+  "statusBlockedExceptions": {
+    "message": "බැහැර කළ අඩවි පමණක් ප්‍රවේශ විය හැක"
+  },
+  "securityBlockedExceptions": {
+    "message": "බැහැර කළ අඩවි හැර බ්‍රවුස් කිරීම අවහිරයි"
+  },
+  "securityBlockUnverified": {
+    "message": "අවහිර කිරීම තහවුරු කර නැත"
+  },
+  "logoutLocalComplete": {
+    "message": "ස්ථානීය වැරීම සම්පූර්ණයි."
+  },
+  "logoutApiSession": {
+    "message": "වත්මන් ගිණුම් සැසිය"
+  },
+  "logoutProxySessions": {
+    "message": "දන්නා VPN සැසි"
+  },
+  "logoutRevocationPending": {
+    "message": "අවලංගු කරමින්…"
+  },
+  "logoutRevocationConfirmed": {
+    "message": "අවලංගු කිරීම තහවුරුයි"
+  },
+  "logoutRevocationUnconfirmed": {
+    "message": "අවලංගු කිරීම තහවුරු කර නැත"
+  },
+  "logoutUnconfirmedHelp": {
+    "message": "සමහර දුරස්ථ සැසි කල් ඉකුත් වන තුරු සක්‍රියව පැවතිය හැක."
+  },
+  "deviceQuotaLoading": {
+    "message": "උපාංග සීමාව පූරණය වෙමින්…"
+  },
+  "deviceQuotaUnknown": {
+    "message": "උපාංග සීමාව ලබා ගත නොහැක"
+  },
+  "error_proxy_creation_uncertain": {
+    "message": "නව සම්බන්ධතාව සෑදීම සේවාදායකය තහවුරු කළේ නැත. ස්වයංක්‍රීය නැවත සම්බන්ධ වීම විරාම කර ඇත."
+  },
+  "siteExclusionsPreferencesReset": {
+    "message": "ඔබ සුරැකි අඩවි ව්‍යතිරේක කියවිය නොහැකි වූ නිසා ඒවා යළි සකසා ඇත. බැහැර කිරීමට අවශ්‍ය අඩවි නැවත එක් කරන්න."
+  },
+  "siteExclusionsConflict": {
+    "message": "බැහැර කළ අඩවි ලැයිස්තුව වෙනස් වී ඇත. එය සමාලෝචනය කර ඔබේ වෙනස් කිරීම නැවත උත්සාහ කරන්න."
+  },
+  "unavailableLocation": {
+    "message": "ස්ථානය ලබා ගත නොහැක"
+  },
+  "verificationSending": {
+    "message": "තහවුරු කිරීමේ ඊමේලය යවමින්…"
+  },
+  "verificationSent": {
+    "message": "තහවුරු කිරීමේ ඊමේලය යවන ලදී. ඔබේ එන ලිපි සහ ස්පෑම් ෆෝල්ඩරය පරීක්ෂා කරන්න."
+  },
+  "error_login_requires_disconnect": {
+    "message": "වෙනත් ගිණුමකට පුරනය වීමට පෙර වත්මන් VPN සම්බන්ධතාව විසන්ධි කරන්න."
+  },
+  "error_storage_unavailable": {
+    "message": "ස්ථානීය ගිණුම් සැකසීම් ලබා ගත නොහැක. බ්‍රවුසර ආචයනය ලබා ගත හැකි විට නැවත උත්සාහ කරන්න; ඔබ සුරැකි ගිණුම රඳවා ඇත."
+  },
+  "diagnosticsAssistance": {
+    "message": "සහාය"
+  },
+  "diagnosticsTitle": {
+    "message": "දෝෂ නිර්ණය"
+  },
+  "diagnosticsIntro": {
+    "message": "ඔබේ ආරක්ෂාව වෙනස් නොකර FuzeVPN සහ වත්මන් සම්බන්ධතාව පරීක්ෂා කරන්න."
+  },
+  "diagnosticsPrivacyTitle": {
+    "message": "ඔබේ දත්ත"
+  },
+  "diagnosticsPrivacy": {
+    "message": "වාර්තාවේ JSON හි තාක්ෂණික තත්ත්ව සහ දෝෂ කේත අඩංගු වන අතර, මුරපද, ටෝකන, ඊමේල් ලිපින, IP ලිපින, පිවිසි URL හෝ බැහැර කළ වසම් අඩංගු නොවේ. යැවීම සත්‍යාපනය කර ඇති අතර වාර්තාව ඔබේ ගිණුමට සම්බන්ධ කරයි. ජාල දත්ත සඳහා දැන්වීම බලන්න."
+  },
+  "diagnosticsAuto": {
+    "message": "වැදගත් දෝෂ වාර්තා ස්වයංක්‍රීයව යවන්න"
+  },
+  "diagnosticsAutoHelp": {
+    "message": "පෙරනිමියෙන් අක්‍රියයි. මෙය සබල කිරීමෙන් බ්‍රවුස් කිරීමේ ඉතිහාසය නොමැතිව, මෙම ගිණුම සඳහා සරල තාක්ෂණික වාර්තා යවයි. ස්වයංක්‍රීය යැවීම නැවැත්වීමට සහ පොරොත්තු ස්වයංක්‍රීය වාර්තා ඉවත් කිරීමට එය මෙහි අක්‍රිය කරන්න."
+  },
+  "diagnosticsHistoryHelp": {
+    "message": "තාක්ෂණික ඉතිහාසය ස්ථානීයව පවතී: ස්වයංක්‍රීය යැවීම අක්‍රිය වුවද, විනාඩි 10ක් තුළ එක් ලොගයකට සිදුවීම් 200ක් දක්වා. එහි බ්‍රවුස් කිරීමේ ඉතිහාසයක් අඩංගු නොවන අතර, ඔබ අතින් හිස් කළ විට, බ්‍රවුසරය වසන විට හෝ ගිණුම වෙනස් වන විට එය හිස් වේ."
+  },
+  "diagnosticsHistoryCount": {
+    "message": "ස්ථානීය තාක්ෂණික සිදුවීම් $1"
+  },
+  "diagnosticsConnectionLog": {
+    "message": "සම්බන්ධතා ලොගය නිර්‍යාත කරන්න"
+  },
+  "diagnosticsAccountRequired": {
+    "message": "යැවීම සබල කිරීමට පුරන්න. ගිණුමක් නොමැතිව වුවද ඔබට වාර්තාවක් බැලීමට සහ නිර්‍යාත කිරීමට හැක."
+  },
+  "diagnosticsRun": {
+    "message": "දෝෂ නිර්ණය ධාවනය කරන්න"
+  },
+  "diagnosticsClearHistory": {
+    "message": "ස්ථානීය ඉතිහාසය හිස් කරන්න"
+  },
+  "diagnosticsPreparing": {
+    "message": "වාර්තාව සූදානම් කරමින්…"
+  },
+  "diagnosticsReports": {
+    "message": "වාර්තා"
+  },
+  "diagnosticsEmpty": {
+    "message": "තවම ස්ථානීය වාර්තාවක් නැත."
+  },
+  "diagnosticsChooseReport": {
+    "message": "වාර්තාවක් තෝරන්න"
+  },
+  "diagnosticsReportLabel": {
+    "message": "$1 · $2 · $3"
+  },
+  "diagnosticsTypeFull": {
+    "message": "සම්පූර්ණ වාර්තාව"
+  },
+  "diagnosticsTypeSimple": {
+    "message": "දෝෂ වාර්තාව"
+  },
+  "diagnosticsSummary": {
+    "message": "එකතු කළ දිනය: $1. FuzeVPN අනුවාදය $2."
+  },
+  "diagnosticsJson": {
+    "message": "වාර්තාවේ අන්තර්ගතය බලන්න (JSON)"
+  },
+  "diagnosticsExport": {
+    "message": "වාර්තාව නිර්‍යාත කරන්න"
+  },
+  "diagnosticsDelete": {
+    "message": "ස්ථානීය වාර්තාව මකන්න"
+  },
+  "diagnosticsRetention": {
+    "message": "ස්ථානීය වාර්තා පැය 24කට පසු කල් ඉකුත් වේ. මෙහි මැකීමෙන් සේවාවට දැනටමත් ලැබී ඇති වාර්තාවක් මැකෙන්නේ නැත. සේවාදායක රඳවා තබා ගැනීම සහ මැකීමේ ඉල්ලීම් සඳහා දැන්වීම බලන්න."
+  },
+  "diagnosticsConsent": {
+    "message": "මෙම දෝෂ නිර්ණය වාර්තාව FuzeVPN වෙත යවන්න"
+  },
+  "diagnosticsDataCollectionRequired": {
+    "message": "දෝෂ නිර්ණය යැවීමට Firefox තාක්ෂණික දත්ත එකතු කිරීමට ඉඩ දිය යුතුය. නැවත උත්සාහ කර මෙම අවසරය ලබා දෙන්න."
+  },
+  "diagnosticsSendHelp": {
+    "message": "යැවීම විකල්පයකි. අනුමත කළ පසු, එම ගිණුම සඳහා වලංගු සැසියක් සමඟ පැය 24ක් දක්වා එය නැවත උත්සාහ කළ හැක. ඔබට ඉදිරි උත්සාහයන් අවලංගු කළ හැක. ප්‍රමාද වී අවලංගු කිරීමෙන්, සේවාදායකයට වාර්තාව දැනටමත් ලැබී නැති බව සහතික නොවේ."
+  },
+  "diagnosticsSend": {
+    "message": "වාර්තාව යවන්න"
+  },
+  "diagnosticsCancel": {
+    "message": "යැවීම අවලංගු කරන්න"
+  },
+  "diagnosticsReload": {
+    "message": "මෙම පිටුව යළි පූරණය කරන්න"
+  },
+  "diagnosticsUnavailable": {
+    "message": "දෝෂ නිර්ණය ලබා ගත නොහැක. බ්‍රවුසරයේ දිගු කළමනාකරුවෙන් FuzeVPN යළි පූරණය කර මෙම පිටුව නැවත විවෘත කරන්න. ඔබේ VPN වෙනස් වී නැත."
+  },
+  "diagnosticsQueueFull": {
+    "message": "යැවීමේ පෝලිම පිරී ඇත. ස්ථානීය වාර්තාවක් මකන්න හෝ පොරොත්තු වාර්තාවක් අවසන් වන තෙක් රැඳී සිටින්න."
+  },
+  "diagnosticsContentUnavailable": {
+    "message": "වාර්තාවේ අන්තර්ගතය ලබා ගත නොහැක. ස්ථානීය වාර්තාව තිබේ නම් එය නිර්‍යාත කර සහාය අමතන්න."
+  },
+  "diagnosticsFailure": {
+    "message": "දෝෂ නිර්ණය ක්‍රියාව සම්පූර්ණ කළ නොහැකි විය. ඔබේ VPN වෙනස් වී නැත."
+  },
+  "diagnosticsChecks": {
+    "message": "පරීක්ෂා"
+  },
+  "diagnosticsCheckFallback": {
+    "message": "තාක්ෂණික පරීක්ෂාව: $1"
+  },
+  "diagnosticsCheckLine": {
+    "message": "$1 — $2"
+  },
+  "diagnosticsProxy": {
+    "message": "බ්‍රවුසර ප්‍රොක්සිය"
+  },
+  "diagnosticsStorage": {
+    "message": "ස්ථානීය ආචයනය"
+  },
+  "diagnosticsNetwork": {
+    "message": "ජාල සම්බන්ධතාව"
+  },
+  "diagnosticsCleanup": {
+    "message": "සැසි පිරිසිදු කිරීම"
+  },
+  "diagnosticsResult_passed": {
+    "message": "සමත්"
+  },
+  "diagnosticsResult_failed": {
+    "message": "අසමත්"
+  },
+  "diagnosticsResult_skipped": {
+    "message": "සිදු කර නැත"
+  },
+  "diagnosticsResult_unknown": {
+    "message": "නොදනී"
+  },
+  "diagnosticsStatus_ready": {
+    "message": "මෙම උපාංගයේ සූදානම්"
+  },
+  "diagnosticsStatus_pending": {
+    "message": "යැවීමට පොරොත්තුවෙන්"
+  },
+  "diagnosticsStatus_sending": {
+    "message": "යවමින්…"
+  },
+  "diagnosticsStatus_session_required": {
+    "message": "එම ගිණුම සඳහා වලංගු සැසියක් එනතුරු රැඳී සිටිමින්"
+  },
+  "diagnosticsStatus_received": {
+    "message": "සේවාවට ලැබිණි"
+  },
+  "diagnosticsStatus_failed": {
+    "message": "යැවීම අසාර්ථකයි"
+  },
+  "diagnosticsStatus_cancelled": {
+    "message": "යැවීම අවලංගු කළා"
+  },
+  "diagnosticsStatus_expired": {
+    "message": "යැවීමේ කාල සීමාව ඉකුත් විය"
+  },
+  "diagnosticsReceivedAt": {
+    "message": "ලැබුණු දිනය: $1"
+  },
+  "error_private_browsing_required": {
+    "message": "සාමාන්‍ය කවුළුවල වුවද, VPN වින්‍යාස කිරීමට Firefox හට මෙම අවසරය අවශ්‍යයි. about:addons → FuzeVPN විවෘත කර, පුද්ගලික කවුළුවල ධාවනය වීමට ඉඩ දී නැවත උත්සාහ කරන්න."
+  },
+  "error_host_permissions_required": {
+    "message": "Firefox හි, about:addons → FuzeVPN → අවසර විවෘත කර සියලු වෙබ් අඩවිවලට ප්‍රවේශයට ඉඩ දී නැවත උත්සාහ කරන්න."
+  },
+  "cancelAction": {
+    "message": "අවලංගු කරන්න"
+  },
+  "refreshLocations": {
+    "message": "ස්ථාන නැවුම් කරන්න"
+  },
+  "refreshingLocations": {
+    "message": "ස්ථාන නැවුම් කරමින්…"
+  },
+  "locationsRefreshError": {
+    "message": "ස්ථාන ලැයිස්තුව නැවුම් කළ නොහැකි විය. කරුණාකර නැවත උත්සාහ කරන්න."
+  },
+  "error_device_revoked_limit": {
+    "message": "මෙම උපාංගය අවලංගු කර ඇත. උපාංග සීමාවට ළඟා විය: කරුණාකර උපාංගයක් ඉවත් කරන්න."
+  },
+  "noAvailableLocations": {
+    "message": "දැනට ලබා ගත හැකි ස්ථාන නැත. කරුණාකර ඉක්මනින් නැවත උත්සාහ කරන්න."
+  },
+  "noAvailableFavoriteLocations": {
+    "message": "ඔබේ ප්‍රියතම ස්ථාන තාවකාලිකව ලබා ගත නොහැක."
+  },
+  "error_location_favorites_limit": {
+    "message": "ප්‍රියතම 100ක සීමාවට ළඟා විය. තවත් එකක් එක් කිරීමට ප්‍රියතමයක් ඉවත් කරන්න."
+  },
+  "error_server_full": {
+    "message": "මෙම සේවාදායකය පිරී ඇත. වෙනත් ස්ථානයක් තෝරන්න."
+  },
+  "error_capacity_unavailable": {
+    "message": "මෙම සේවාදායකයේ ලබා ගැනීමේ හැකියාව දැන් තහවුරු කළ නොහැක. කරුණාකර ඉක්මනින් නැවත උත්සාහ කරන්න."
+  },
+  "locationHierarchyHelp": {
+    "message": "නම සේවාදායකයක් තෝරයි; ඊතලය විස්තර පෙන්වයි."
+  },
+  "locationCountrySelect": {
+    "message": "ලබා ගත හැකි සේවාදායකයක් තෝරන්න: $1"
+  },
+  "locationCitySelect": {
+    "message": "ලබා ගත හැකි සේවාදායකයක් තෝරන්න: $1"
+  },
+  "locationShowCities": {
+    "message": "නගර පෙන්වන්න: $1"
+  },
+  "locationHideCities": {
+    "message": "නගර සඟවන්න: $1"
+  },
+  "locationShowServers": {
+    "message": "සේවාදායක පෙන්වන්න: $1"
+  },
+  "locationHideServers": {
+    "message": "සේවාදායක සඟවන්න: $1"
+  },
+  "locationAvailableServers": {
+    "message": "ලබා ගත හැකි සේවාදායක: $1"
+  },
+  "legalInformation": {
+    "message": "නීතිමය තොරතුරු"
+  },
+  "privacyPolicy": {
+    "message": "දිගුවේ පෞද්ගලිකත්ව දැන්වීම"
+  },
+  "termsAndConditions": {
+    "message": "භාවිත සහ විකුණුම් කොන්දේසි"
+  },
+  "legalNotice": {
+    "message": "නීතිමය දැන්වීම"
+  },
+  "contactSupport": {
+    "message": "සහාය අමතන්න"
+  },
+  "webSignIn": {
+    "message": "FuzeVPN වෙත පුරන්න"
+  },
+  "webSignInDisconnect": {
+    "message": "විසන්ධි කර පුරන්න"
+  },
+  "webSignInPending": {
+    "message": "පුරනය වෙමින්…"
+  },
+  "webSignInHelp": {
+    "message": "FuzeVPN පාරිභෝගික ප්‍රදේශයේ Google හෝ ඊමේල් සමඟ පුරන්න හෝ ගිණුමක් සාදන්න."
+  },
+  "webSignInDisconnectHelp": {
+    "message": "ඔබට Google හෝ ඊමේල් සමඟ පුරනය වීමට හැකි වන පරිදි මෙම බොත්තම බ්‍රවුසර ආරක්ෂාව නතර කරයි. පුරනය වන අතරතුර ඔබේ බ්‍රවුස් කිරීම ආරක්ෂා නොවේ."
+  },
+  "webSignInStatus": {
+    "message": "FuzeVPN පුරනය වීමේ කවුළුවේ දිගටම කරගෙන යන්න. ඔබ අවසන් කළ විට දිගුව ස්වයංක්‍රීයව යාවත්කාලීන වේ. අවලංගු කිරීමට එම කවුළුව වසන්න."
+  },
+  "error_web_login_cancelled": {
+    "message": "පුරනය වීම අවලංගු කරන ලදී. නැවත උත්සාහ කරන්න."
+  },
+  "error_web_login_timeout": {
+    "message": "පුරනය වීමට වැඩි කාලයක් ගත විය. නැවත උත්සාහ කරන්න."
+  },
+  "error_web_login_unavailable": {
+    "message": "වෙබ් පුරනය ලබා ගත නොහැක. පසුව නැවත උත්සාහ කරන්න."
+  },
+  "error_web_login_invalid_callback": {
+    "message": "පුරනය වීම තහවුරු කළ නොහැකි විය. දිගුවෙන් නැවත අරඹන්න."
+  },
+  "error_web_login_denied": {
+    "message": "පුරනය වීමට අවසර ලැබුණේ නැත. නැවත උත්සාහ කරන්න."
+  },
+  "error_web_login_busy": {
+    "message": "නැවත උත්සාහ කිරීමට පෙර දැනටමත් විවෘත පුරනය වීමේ කවුළුව වසන්න."
+  },
+  "deviceKindFirefox": {
+    "message": "Firefox බ්‍රවුසරය"
+  },
+  "generalPrivacyPolicy": {
+    "message": "සාමාන්‍ය පෞද්ගලිකත්ව ප්‍රතිපත්තිය"
+  },
+  "privacyNoticeTitle": {
+    "message": "FuzeVPN දිගුවේ පෞද්ගලිකත්වය"
+  },
+  "privacyNoticeIntro": {
+    "message": "මෙම දැන්වීම මෙම දිගුව භාවිතා කරන දත්ත විස්තර කරයි. එය පහත සබැඳිය ඇති FuzeVPN සාමාන්‍ය පෞද්ගලිකත්ව ප්‍රතිපත්තියට අනුපූරක වේ. විකල්ප දෝෂ නිර්ණය යැවීම, පුරනය වීමට සහ VPN භාවිතා කිරීමට අවශ්‍ය දත්තවලින් වෙන්ව පවතී."
+  },
+  "privacyNoticeUpdated": {
+    "message": "දැන්වීම 2026 ඔක්තෝබර් 19 දින යාවත්කාලීන කරන ලදී"
+  },
+  "privacyNoticeServiceTitle": {
+    "message": "ගිණුම සහ VPN සේවාව"
+  },
+  "privacyNoticeService": {
+    "message": "දිගුව සත්‍යාපන, ගිණුම්, දායකත්ව, උපාංග සහ ප්‍රොක්සි සැසි දත්ත api.fuzevpn.com සමඟ හුවමාරු කරයි. VPN ප්‍රොක්සිය එය හරහා යොමු කරන ජාල ගමනාගමනය රැගෙන යයි. මෙම සම්බන්ධතා ලබන සේවාවට ජාල පාරදත්ත හෙළි කරයි; සේවාදායක ලොග් කිරීම ගැන මෙම දැන්වීම වෙනම පොරොන්දුවක් නොදෙයි."
+  },
+  "privacyNoticeLocalTitle": {
+    "message": "ඔබේ බ්‍රවුසරයේ ගබඩා කළ දත්ත"
+  },
+  "privacyNoticeLocal": {
+    "message": "බ්‍රවුසර ආචයනයේ ඔබේ සැසිය, ගිණුම් විස්තර, මනාප, අඩවි බැහැර කිරීම් සහ උපාංග අනන්‍යතාව රඳවා ගනී. ස්වයංක්‍රීය වාර්තාකරණය අක්‍රිය වුවද, තාක්ෂණික ලොග විනාඩි 10ක් දක්වා ස්ථානීයව තබා ගනී. දෝෂ නිර්ණය කෙටුම්පත් සහ පෝලිමේ ඇති වාර්තා පැය 24කට පසු ස්ථානීයව කල් ඉකුත් වේ; දිගුවට ක්‍රියාත්මක විය හැකි විට පිරිසිදු කිරීම සිදු වේ."
+  },
+  "privacyNoticeIpTitle": {
+    "message": "පොදු IP පරීක්ෂා සහ තෙවන පාර්ශ්ව"
+  },
+  "privacyNoticeIp": {
+    "message": "IP සංදර්ශනය සහ ජාල දෝෂ නිර්ණය api.ipify.org අමතයි. IP සංදර්ශනය විකල්පයක් ලෙස ipv4.icanhazip.com භාවිතා කළ හැක. සපයන්නාට සම්බන්ධතා IP සහ සාමාන්‍ය ඉල්ලීම් පාරදත්ත ලැබේ: සෘජු ප්‍රකාරයේදී ඔබේ පොදු IP, නැතහොත් ප්‍රොක්සි හරහා යන විට VPN නික්මුම් IP. මෙම ඉල්ලීම්වල කුකී සහ යොමු කරන්නා (referrer) අඩංගු නොවන අතර ගිණුම් ටෝකනයක් හෝ බ්‍රවුස් කිරීමේ ඉතිහාසයක් නොයවයි."
+  },
+  "privacyNoticeReportsTitle": {
+    "message": "දෝෂ නිර්ණය වාර්තාවල අඩංගු දේ"
+  },
+  "privacyNoticeReports": {
+    "message": "වාර්තාවල අහඹු වාර්තා හඳුනාගැනීමක්, වේලා මුද්දර, දිගුවේ සහ බ්‍රවුසරයේ අනුවාද, මෙහෙයුම් පද්ධතියේ පවුල සහ ගෘහ නිර්මාණ ශිල්පය, සම්බන්ධතා සහ ආරක්ෂණ තත්ත්ව, දෝෂ කේත, ගණන්, කාල පරාස සහ පරීක්ෂා ප්‍රතිඵල ඇතුළත් විය හැක. සම්පූර්ණ වාර්තාවල මෑත තාක්ෂණික සිදුවීම් ඇතුළත් විය හැක. ඒවායේ JSON හි මුරපද, සත්‍යාපන ටෝකන, ඊමේල් ලිපින, IP ලිපින, පිවිසි URL සහ බැහැර කළ වසම් ඇතුළත් නොවේ. යැවීමට පෙර ඔබට සම්පූර්ණ වාර්තාවක් පරීක්ෂා කර නිර්‍යාත කළ හැක."
+  },
+  "privacyNoticeAccountTitle": {
+    "message": "ලබන්නා සහ ගිණුමට සම්බන්ධ කිරීම"
+  },
+  "privacyNoticeAccount": {
+    "message": "වාර්තා සත්‍යාපිත සම්බන්ධතාවක් හරහා api.fuzevpn.com/v1/diagnostics හි FuzeVPN වෙත යවනු ලැබේ. මෙම API සම්බන්ධතාව VPN ප්‍රොක්සිය මඟ හරියි: VPN සක්‍රිය වුවද FuzeVPN හට ඔබේ සෘජු පොදු IP ලැබේ. වාර්තා පුරනය වූ ගිණුමට සම්බන්ධ කර ඇති අතර නිර්නාමික නොවේ. සත්‍යාපන ශීර්ෂය සහ IP වාර්තාවේ JSON වලින් වෙන්ව පවතී. සාර්ථක ලැබීමක් තහවුරු කරන්නේ එම සේවාව එය පිළිගත් බව මිස, සහාය නියෝජිතයෙකු වාර්තාව කියවූ බව නොවේ."
+  },
+  "privacyNoticeChoiceTitle": {
+    "message": "විකල්ප යැවීම සහ කැමැත්ත ඉල්ලා අස්කර ගැනීම"
+  },
+  "privacyNoticeChoice": {
+    "message": "ස්වයංක්‍රීය යැවීම පෙරනිමියෙන් අක්‍රියයි. එය සබල කිරීමෙන් එම ගිණුම සඳහා සරල දෝෂ වාර්තාවලට ඉඩ දෙයි. සම්පූර්ණ වාර්තාවක් අතින් යැවීමට යැවීමේ පිරික්සුම් කොටුව සලකුණු කළ යුතුය. Firefox හට එහි විකල්ප තාක්ෂණික දත්ත අවසරය ද අවශ්‍යයි. ස්වයංක්‍රීය යැවීම නැවැත්වීමට සහ පොරොත්තු ස්වයංක්‍රීය වාර්තා ඉවත් කිරීමට එය අක්‍රිය කරන්න; එක් එක් පොරොත්තු යැවීම් වෙන වෙනම අවලංගු කරන්න. දෝෂ නිර්ණය යැවීම ප්‍රතික්ෂේප කිරීමෙන් VPN භාවිතය වළක්වන්නේ නැත."
+  },
+  "privacyNoticeDeleteTitle": {
+    "message": "ස්ථානීය මැකීම සහ බාගත් ගොනු"
+  },
+  "privacyNoticeDelete": {
+    "message": "දෝෂ නිර්ණය තුළ, තාක්ෂණික ඉතිහාසය හිස් කරන්න හෝ තනි ස්ථානීය වාර්තාවක් මකන්න. ඉතිහාසය හිස් කිරීමෙන් පවතින වාර්තා පිටපත් මැකෙන්නේ නැත. ස්ථානීයව අවලංගු කිරීම හෝ මැකීම මඟින්, අවලංගු කිරීමට පෙර පැමිණි උඩුගත කිරීමක් ඇතුළුව, සේවාවට දැනටමත් ලැබී ඇති දත්ත ආපසු ගත නොහැක. බාගත් නිර්‍යාත ඔබ විසින්ම මැකිය යුතු වෙනම ගොනු වේ."
+  },
+  "privacyNoticeServerTitle": {
+    "message": "සේවාදායක රඳවා තබා ගැනීම සහ ඉල්ලීම්"
+  },
+  "privacyNoticeServer": {
+    "message": "මෙම දිගුව සේවාදායක රඳවා තබා ගැනීම හෝ සේවාදායක පැත්තේ මැකීම පාලනය හෝ තහවුරු නොකරයි. FuzeVPN යොදන රඳවා තබා ගැනීමේ කාලය සහ දැනටමත් යැවූ වාර්තා පිළිබඳ ඉල්ලීම් සඳහා, සාමාන්‍ය පෞද්ගලිකත්ව ප්‍රතිපත්තිය බලන්න හෝ FuzeVPN අමතන්න. මෙම දැන්වීම මඟින් ස්ථාවර සේවාදායක රඳවා තබා ගැනීමේ කාලයක් සහතික නොකෙරේ."
+  },
+  "privacyNoticeSupportTitle": {
+    "message": "දෝෂ නිර්ණය සහ සහාය වෙනම වේ"
+  },
+  "privacyNoticeSupport": {
+    "message": "දෝෂ නිර්ණය වාර්තාවක් යැවීමෙන් දිගුවෙන් සහාය පණිවිඩයක් ඉබේ යැවෙන්නේ නැත. ගැටලුවක් පැහැදිලි කිරීමට හෝ ලැබුණු වාර්තාවක් මැකීමට ඉල්ලීමට, පහත FuzeVPN සම්බන්ධතා මාර්ගය භාවිතා කරන්න. නිර්‍යාත කළ ගොනුවක් වෙනත් මාර්ගයකින් බෙදා ගැනීමට ඔබ තීරණය කරන්නේ නම්, පළමුව එහි අන්තර්ගතය පරීක්ෂා කරන්න."
+  },
+  "privacyNoticeManage": {
+    "message": "දෝෂ නිර්ණය විවෘත කරන්න"
+  },
+  "privacyNoticeLinksTitle": {
+    "message": "සේවා ප්‍රතිපත්තිය සහ සම්බන්ධතා"
+  },
+  "theme": {
+    "message": "තේමාව"
+  },
+  "themeSystem": {
+    "message": "පද්ධතිය"
+  },
+  "themeLight": {
+    "message": "ආලෝක"
+  },
+  "themeDark": {
+    "message": "අඳුරු"
+  },
+  "switchToDarkTheme": {
+    "message": "අඳුරු තේමාවට මාරු වන්න"
+  },
+  "switchToLightTheme": {
+    "message": "ආලෝක තේමාවට මාරු වන්න"
+  }
+}

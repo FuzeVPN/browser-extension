@@ -1,0 +1,929 @@
+{
+  "extensionName": {
+    "message": "FuzeVPN"
+  },
+  "extensionDescription": {
+    "message": "Kare sirrinka kuma ƙarfafa tsaronka da danna guda ɗaya."
+  },
+  "siteExclusionsReloadRequired": {
+    "message": "Sake loda FuzeVPN daga manajan ƙari na burauza don kammala sabuntawa da amfani da shafukan da aka keɓe."
+  },
+  "extensionCommunicationError": {
+    "message": "Ƙarin ba ya amsawa. Rufe wannan taga, sannan ka sake loda FuzeVPN daga manajan ƙari na burauza."
+  },
+  "actionDisconnected": {
+    "message": "FuzeVPN — An cire haɗi"
+  },
+  "actionConnected": {
+    "message": "FuzeVPN — Ana kariya a wannan burauza"
+  },
+  "actionReconnecting": {
+    "message": "FuzeVPN — Ana sake haɗawa"
+  },
+  "actionError": {
+    "message": "FuzeVPN — Ana buƙatar kulawa"
+  },
+  "browserProtection": {
+    "message": "Kariyar burauza"
+  },
+  "loginTitle": {
+    "message": "Barka da zuwa FuzeVPN"
+  },
+  "loginSubtitle": {
+    "message": "Shiga don kare bincikenka a wannan burauza."
+  },
+  "email": {
+    "message": "Adireshin imel"
+  },
+  "emailPlaceholder": {
+    "message": "you@example.com"
+  },
+  "password": {
+    "message": "Kalmar sirri"
+  },
+  "signIn": {
+    "message": "Shiga"
+  },
+  "signingIn": {
+    "message": "Ana shiga…"
+  },
+  "forgotPassword": {
+    "message": "Ka manta kalmar sirri?"
+  },
+  "createAccount": {
+    "message": "Ƙirƙiri asusu"
+  },
+  "settings": {
+    "message": "Saituna"
+  },
+  "close": {
+    "message": "Rufe"
+  },
+  "statusDisconnected": {
+    "message": "An cire haɗi"
+  },
+  "statusConnecting": {
+    "message": "Ana haɗawa…"
+  },
+  "statusChanging": {
+    "message": "Ana canza wuri…"
+  },
+  "statusProtected": {
+    "message": "Ana kariya a wannan burauza"
+  },
+  "statusRefreshing": {
+    "message": "Ana sabuntawa cikin aminci…"
+  },
+  "statusDisconnecting": {
+    "message": "Ana cire haɗi…"
+  },
+  "statusError": {
+    "message": "Kariya ta tsaya"
+  },
+  "browserOnlyDetail": {
+    "message": "Kariya don wannan burauza."
+  },
+  "location": {
+    "message": "Wuri"
+  },
+  "change": {
+    "message": "Canza"
+  },
+  "noLocation": {
+    "message": "Babu wurin da ake samu"
+  },
+  "protectBrowser": {
+    "message": "Kare burauza"
+  },
+  "disconnect": {
+    "message": "Cire haɗi"
+  },
+  "subscription": {
+    "message": "Biyan kuɗi"
+  },
+  "refreshSubscription": {
+    "message": "Sabunta biyan kuɗi"
+  },
+  "refreshingSubscription": {
+    "message": "Ana sabunta biyan kuɗi…"
+  },
+  "subscriptionActive": {
+    "message": "Yana aiki"
+  },
+  "subscriptionInactive": {
+    "message": "Ba ya aiki"
+  },
+  "expiresOn": {
+    "message": "Zai ƙare: $1"
+  },
+  "noExpiry": {
+    "message": "Babu ranar ƙarewa"
+  },
+  "browserOnlyNotice": {
+    "message": "Wannan burauza kaɗai. Sauran manhajoji da burauzoji ba sa cikin kariya."
+  },
+  "resendVerification": {
+    "message": "Sake aika imel"
+  },
+  "incognitoHelp": {
+    "message": "Binciken sirri yana amfani da kariya iri ɗaya ne kawai idan an ba ƙarin izinin aiki a yanayin sirri a cikin saitunan burauza."
+  },
+  "manageAccount": {
+    "message": "Sarrafa asusuna"
+  },
+  "account": {
+    "message": "Asusu"
+  },
+  "devices": {
+    "message": "Na'urori"
+  },
+  "manageDevices": {
+    "message": "Sarrafa na'urori"
+  },
+  "refreshDevices": {
+    "message": "Sabunta na'urori"
+  },
+  "deviceCount": {
+    "message": "Na'urori $1 / $2"
+  },
+  "loadingDevices": {
+    "message": "Ana loda na'urori…"
+  },
+  "noDevices": {
+    "message": "Babu na'urori masu aiki."
+  },
+  "currentDevice": {
+    "message": "Wannan na'ura"
+  },
+  "deviceKindBrowser": {
+    "message": "Ƙarin burauza"
+  },
+  "deviceKindVpn": {
+    "message": "Na'urar VPN"
+  },
+  "profile_browser_proxy": {
+    "message": "Proxy na burauza"
+  },
+  "profile_wireguard": {
+    "message": "WireGuard"
+  },
+  "profile_openvpn": {
+    "message": "OpenVPN"
+  },
+  "none": {
+    "message": "babu"
+  },
+  "deviceCreatedOn": {
+    "message": "An ƙirƙira: $1"
+  },
+  "deleteDevice": {
+    "message": "Share na'ura"
+  },
+  "deleteDeviceNamed": {
+    "message": "Share na'ura: $1"
+  },
+  "confirmDeleteDevice": {
+    "message": "A cire “$1”? Haɗin VPN ɗinta za su tsaya kuma za a cire bayanan martabarta."
+  },
+  "resetDevice": {
+    "message": "Sake saita na'ura"
+  },
+  "confirmResetDevice": {
+    "message": "A sake saita wannan ƙarin? Za a yi masa rajista a matsayin sabuwar na'ura a lokaci na gaba da ka yi amfani da shi."
+  },
+  "signOutAccount": {
+    "message": "Fita daga asusu"
+  },
+  "chooseLocation": {
+    "message": "Zaɓi wuri"
+  },
+  "error_invalid_credentials": {
+    "message": "Adireshin imel ko kalmar sirri ba daidai ba ne."
+  },
+  "error_unauthorized": {
+    "message": "Zamanka ya ƙare. Da fatan za ka sake shiga."
+  },
+  "error_email_verification_required": {
+    "message": "Tabbatar da adireshin imel ɗinka kafin kunna kariya."
+  },
+  "errorVerificationCooldown": {
+    "message": "Za a iya neman sabon imel bayan daƙiƙa $1."
+  },
+  "error_verification_email_cooldown": {
+    "message": "Da fatan za ka jira kafin neman wani imel."
+  },
+  "error_subscription_required": {
+    "message": "Ana buƙatar biyan kuɗi mai aiki don kare wannan burauza."
+  },
+  "error_device_limit": {
+    "message": "An kai iyakar na'urori. Da fatan za ka cire na'ura."
+  },
+  "error_device_identity_revoked": {
+    "message": "Wannan na'ura ba ta da izini kuma. Sake gwada haɗawa."
+  },
+  "error_device_proof_invalid": {
+    "message": "Ba mu iya tabbatar da wannan na'ura ba. Duba kwanan wata da lokacin kwamfutarka, sannan ka sake gwadawa."
+  },
+  "error_device_proof_replayed": {
+    "message": "An riga an sarrafa wannan buƙata. Sake gwadawa."
+  },
+  "error_invalid_device": {
+    "message": "Ba a gane wannan na'ura ba. Sake gwada haɗawa."
+  },
+  "error_device_exists": {
+    "message": "Shaidar wannan na'ura tana da alaƙa da wani asusu tuni."
+  },
+  "error_not_found": {
+    "message": "Wannan aiki ba ya samuwa kuma. Sake gwadawa."
+  },
+  "error_invalid_location": {
+    "message": "Wannan wuri ba ya samuwa. Zaɓi wani."
+  },
+  "error_rate_limited": {
+    "message": "Ƙoƙari ya yi yawa. Jira ɗan lokaci sannan ka sake gwadawa."
+  },
+  "error_proxy_unavailable": {
+    "message": "Wannan sabar ba ta samuwa na ɗan lokaci. Sake gwadawa nan ba da jimawa ba."
+  },
+  "error_api_token_expired": {
+    "message": "Zaman asusunka ya ƙare. Da fatan za ka sake shiga."
+  },
+  "error_network_error": {
+    "message": "Hanyar sadarwa ba ta samuwa. Duba haɗin intanet ɗinka."
+  },
+  "error_request_timeout": {
+    "message": "Sabis ɗin ya ɗauki lokaci mai tsawo kafin ya amsa. Sake gwadawa."
+  },
+  "error_invalid_response": {
+    "message": "Sabis ɗin ya dawo da amsar da ba a zata ba."
+  },
+  "error_proxy_certificate_invalid": {
+    "message": "Ba mu iya tabbatar da tsaron sabar ba. An dakatar da haɗin."
+  },
+  "error_proxy_controlled_by_extension": {
+    "message": "Wani ƙari yana sarrafa proxy na burauza a yanzu."
+  },
+  "error_proxy_controlled_by_policy": {
+    "message": "Wata manufar mai gudanarwa tana hana FuzeVPN canza proxy."
+  },
+  "error_proxy_authentication_failed": {
+    "message": "Sabar ba ta karɓi haɗin ba. Sake gwada haɗawa."
+  },
+  "error_session_expired": {
+    "message": "Haɗinka mai kariya ya ƙare. Sake haɗawa."
+  },
+  "error_email_delivery_unavailable": {
+    "message": "Ba za a iya aika imel ɗin yanzu ba."
+  },
+  "error_unknown_error": {
+    "message": "Wani kuskure da ba a zata ba ya faru. Sake gwadawa."
+  },
+  "actionBlocked": {
+    "message": "FuzeVPN — An toshe bincike"
+  },
+  "statusBlockedRetry": {
+    "message": "An dakatar da bincike — ana sake haɗawa"
+  },
+  "statusBlockedAction": {
+    "message": "An dakatar da bincike — duba haɗi"
+  },
+  "statusProtectionUnavailable": {
+    "message": "Babu kariya — ba a toshe bincike ba"
+  },
+  "recoveryHelp": {
+    "message": "Sake gwadawa don ci gaba da kariya. Cire haɗi yana ba ka damar bincike ba tare da FuzeVPN ba."
+  },
+  "retryConnection": {
+    "message": "Sake gwadawa"
+  },
+  "killSwitch": {
+    "message": "Maɓallin katsewa"
+  },
+  "killSwitchHelp": {
+    "message": "Yana toshe sabbin buƙatun yanar gizo idan haɗin VPN ya katse. Shafukan da aka keɓe suna ci gaba da buɗewa a wajen VPN."
+  },
+  "webRtcProtection": {
+    "message": "Kariyar WebRTC"
+  },
+  "webRtcHelp": {
+    "message": "Yana taimakawa wajen ɓoye adireshin IP ɗinka yayin kiran yanar gizo. Wasu kira ba za su yi aiki ba. Kashe wannan na iya bayyana ainihin adireshin IP ɗinka."
+  },
+  "securityEffectiveState": {
+    "message": "$1 · $2"
+  },
+  "securityBlocked": {
+    "message": "An toshe bincike"
+  },
+  "securityNotBlocked": {
+    "message": "Ba a toshe bincike ba"
+  },
+  "securityWebRtcActive": {
+    "message": "Takunkumin WebRTC yana aiki"
+  },
+  "securityWebRtcInactive": {
+    "message": "Takunkumin WebRTC ba ya aiki"
+  },
+  "localNetworkHelp": {
+    "message": "Ana toshe adiresoshin IP na gida da sunayen gida na yau da kullum yayin kariya. Yankin da aka keɓe na iya ba da damar shiga hanyar sadarwa ta gida. Ba a canza saitunan IPv6 na tsarin ba."
+  },
+  "securityLimits": {
+    "message": "Game da wannan kariya"
+  },
+  "killSwitchLimits": {
+    "message": "Wannan burauza kaɗai: haɗin da ke akwai da wasu sadarwar cikin burauza ko ta wasu ƙari na iya ci gaba. Wani ƙari ko wata manufa na iya maye gurbin proxy kafin FuzeVPN ya mayar da martani. Kashe ƙarin yana cire kariya. Babu toshewa a duk tsarin."
+  },
+  "error_traffic_guard_failed": {
+    "message": "Ba a iya tabbatar da toshe bincike ba. Ba a ba da tabbacin kariya ba. Duba izinin ƙarin."
+  },
+  "error_webrtc_control_unavailable": {
+    "message": "Ba a iya aiwatar da takunkumin WebRTC ba. Duba saitunanka, sauran ƙari ko manufar mai gudanarwa."
+  },
+  "language": {
+    "message": "Harshe"
+  },
+  "languageAutomatic": {
+    "message": "Atomatik — harshen burauza"
+  },
+  "languageHelp": {
+    "message": "Canje-canje suna aiki nan take. Atomatik yana bin harshen burauza, wanda zai iya bambanta da harshen tsarin."
+  },
+  "languageSaveError": {
+    "message": "Ba a iya ajiye harshen ba. An riƙe zaɓinka na baya. Sake gwadawa."
+  },
+  "publicIp": {
+    "message": "IP na jama'a"
+  },
+  "vpnIp": {
+    "message": "IP na VPN"
+  },
+  "ipChecking": {
+    "message": "Ana dubawa…"
+  },
+  "ipUnavailable": {
+    "message": "Babu"
+  },
+  "ipLookupExplanation": {
+    "message": "An duba IP da ipify, ko icanhazip a madadin, ta amfani da haɗinka na yanzu. Ba a aika tarihin bincike ba."
+  },
+  "automaticLocation": {
+    "message": "Atomatik"
+  },
+  "automaticLocationHelp": {
+    "message": "Mafi kyawun lokacin amsa na kwanan nan, ko wurinka na ƙarshe."
+  },
+  "automaticLocationName": {
+    "message": "Atomatik · $1"
+  },
+  "searchLocations": {
+    "message": "Nemi ƙasa ko birni"
+  },
+  "locationFilters": {
+    "message": "Tace wurare"
+  },
+  "allLocations": {
+    "message": "Duka"
+  },
+  "favoriteLocations": {
+    "message": "Waɗanda aka fi so"
+  },
+  "recentLocations": {
+    "message": "Na kwanan nan"
+  },
+  "noMatchingLocations": {
+    "message": "Babu wurin da ya dace da bincikenka."
+  },
+  "noFavoriteLocations": {
+    "message": "Sanya tauraro don adana wuraren da ka fi so a nan."
+  },
+  "noRecentLocations": {
+    "message": "Wuraren da ka haɗa da su kwanan nan za su bayyana a nan."
+  },
+  "addFavorite": {
+    "message": "Ƙara cikin waɗanda aka fi so: $1"
+  },
+  "removeFavorite": {
+    "message": "Cire daga waɗanda aka fi so: $1"
+  },
+  "unavailableFavoriteLocation": {
+    "message": "Wanda aka fi so ba ya samuwa: $1"
+  },
+  "locationSaveError": {
+    "message": "Ba a iya kammala canjin ba. Wataƙila an ajiye wasu saituna. Duba zaɓin da aka nuna kafin sake gwadawa."
+  },
+  "siteExclusions": {
+    "message": "Shafukan da aka keɓe"
+  },
+  "siteExclusionsHelp": {
+    "message": "Waɗannan shafuka suna amfani da haɗinka ba tare da FuzeVPN ba, ko da VPN ya katse."
+  },
+  "siteExclusionsEnabled": {
+    "message": "Kunna keɓancewa"
+  },
+  "siteExclusionInput": {
+    "message": "Yanki ko URL"
+  },
+  "siteExclusionPlaceholder": {
+    "message": "example.com"
+  },
+  "siteExclusionPreview": {
+    "message": "Yankin da aka zaɓa: $1"
+  },
+  "siteExclusionSubdomains": {
+    "message": "Haɗa da ƙananan yankuna"
+  },
+  "siteExclusionAdd": {
+    "message": "Ƙara shafi"
+  },
+  "siteExclusionsEmpty": {
+    "message": "Babu shafukan da aka keɓe. Ƙara shafukan da kake so ka yi amfani da su ba tare da VPN ba kawai."
+  },
+  "siteExclusionsCount": {
+    "message": "Shafuka $1 / 100"
+  },
+  "siteExclusionScopeSubdomains": {
+    "message": "Yanki da ƙananan yankuna"
+  },
+  "siteExclusionScopeExact": {
+    "message": "Ainihin yanki kawai"
+  },
+  "siteExclusionRemove": {
+    "message": "Cire $1"
+  },
+  "siteExclusionsDetails": {
+    "message": "Yaya keɓancewa ke aiki?"
+  },
+  "siteExclusionsResources": {
+    "message": "Albarkatu daga wasu yankuna suna ci gaba da samun kariya. Keɓe shafi ba ya keɓe sauran abubuwan da ke cikinsa kai tsaye."
+  },
+  "siteExclusionsReload": {
+    "message": "Sake loda shafin bayan canji. Haɗin da ke akwai na iya riƙe hanyarsu ta baya."
+  },
+  "siteExclusionsWebRtc": {
+    "message": "Kariyar WebRTC tana nan a matsayin saitin gaba ɗaya, har da shafukan da aka keɓe."
+  },
+  "siteExclusionsLocal": {
+    "message": "An ajiye a wannan burauza kawai kuma ana riƙe shi bayan fita daga asusunka."
+  },
+  "siteExclusionsOn": {
+    "message": "An kunna keɓancewa"
+  },
+  "siteExclusionsOff": {
+    "message": "An kashe keɓancewa"
+  },
+  "siteExclusionsSummary": {
+    "message": "Shafuka $1 a wajen VPN"
+  },
+  "siteExclusionsPending": {
+    "message": "Ana aiwatar da keɓancewa…"
+  },
+  "siteExclusionsInterrupted": {
+    "message": "An katse canjin. Kariyar wucin gadi tana nan a wurinta."
+  },
+  "siteExclusionsSaveError": {
+    "message": "Ba a iya kammala canjin ba. Duba saitunanka kuma sake gwadawa."
+  },
+  "siteExclusionsRetry": {
+    "message": "Sake gwadawa"
+  },
+  "siteExclusionInvalid": {
+    "message": "Shigar da ingantaccen yanki na jama'a. Ba a karɓar IP, sunayen gida, alamomin wildcard, ƙarshen yanki na jama'a da yankunan da aka tanada."
+  },
+  "siteExclusionDuplicate": {
+    "message": "Wannan yanki yana cikin jerin tuni."
+  },
+  "siteExclusionsLimit": {
+    "message": "An kai iyakar shafuka 100. Cire shafi don ƙara wani."
+  },
+  "statusProtectedExceptions": {
+    "message": "VPN yana aiki · keɓancewa $1"
+  },
+  "statusBlockedExceptions": {
+    "message": "Shafukan da aka keɓe kawai ake iya shiga"
+  },
+  "securityBlockedExceptions": {
+    "message": "An toshe bincike sai shafukan da aka keɓe"
+  },
+  "securityBlockUnverified": {
+    "message": "Ba a tabbatar da toshewa ba"
+  },
+  "logoutLocalComplete": {
+    "message": "An kammala fita a wannan na'ura."
+  },
+  "logoutApiSession": {
+    "message": "Zaman asusu na yanzu"
+  },
+  "logoutProxySessions": {
+    "message": "Sanannun zaman VPN"
+  },
+  "logoutRevocationPending": {
+    "message": "Ana soke izini…"
+  },
+  "logoutRevocationConfirmed": {
+    "message": "An tabbatar da sokewa"
+  },
+  "logoutRevocationUnconfirmed": {
+    "message": "Ba a tabbatar da sokewa ba"
+  },
+  "logoutUnconfirmedHelp": {
+    "message": "Wasu zaman nesa na iya kasancewa a aiki har sai sun ƙare."
+  },
+  "deviceQuotaLoading": {
+    "message": "Ana loda iyakar na'urori…"
+  },
+  "deviceQuotaUnknown": {
+    "message": "Ba a samu iyakar na'urori ba"
+  },
+  "error_proxy_creation_uncertain": {
+    "message": "Sabar ba ta tabbatar da ƙirƙirar sabon haɗin ba. An dakatar da sake haɗawa ta atomatik."
+  },
+  "siteExclusionsPreferencesReset": {
+    "message": "An sake saita shafukan da ka keɓe saboda ba a iya karanta su ba. Sake ƙara shafukan da kake so ka keɓe."
+  },
+  "siteExclusionsConflict": {
+    "message": "Jerin shafukan da aka keɓe ya canza. Duba shi, sannan ka sake gwada canjinka."
+  },
+  "unavailableLocation": {
+    "message": "Wuri ba ya samuwa"
+  },
+  "verificationSending": {
+    "message": "Ana aika imel na tabbatarwa…"
+  },
+  "verificationSent": {
+    "message": "An aika imel na tabbatarwa. Duba akwatin saƙonka da babban fayil na spam."
+  },
+  "error_login_requires_disconnect": {
+    "message": "Cire haɗin VPN na yanzu kafin shiga wani asusu."
+  },
+  "error_storage_unavailable": {
+    "message": "Saitunan asusu na gida ba sa samuwa. Sake gwadawa idan ma'ajiyar burauza ta samu; an adana asusunka da aka ajiye."
+  },
+  "diagnosticsAssistance": {
+    "message": "Tallafi"
+  },
+  "diagnosticsTitle": {
+    "message": "Binciken matsala"
+  },
+  "diagnosticsIntro": {
+    "message": "Duba FuzeVPN da haɗin yanzu ba tare da canza kariyarka ba."
+  },
+  "diagnosticsPrivacyTitle": {
+    "message": "Bayananka"
+  },
+  "diagnosticsPrivacy": {
+    "message": "JSON na rahoton yana ƙunshe da yanayin fasaha da lambobin kuskure, ba tare da kalmomin sirri, tokens, adiresoshin imel, adiresoshin IP, URL da aka ziyarta ko yankunan da aka keɓe ba. Ana tantance aikawa kuma tana haɗa rahoton da asusunka. Duba sanarwar don bayanan hanyar sadarwa."
+  },
+  "diagnosticsAuto": {
+    "message": "Aika muhimman rahotannin kuskure ta atomatik"
+  },
+  "diagnosticsAutoHelp": {
+    "message": "A kashe yake ta asali. Kunna wannan yana aika rahotannin fasaha masu sauƙi don wannan asusu, ba tare da tarihin bincike ba. Kashe shi a nan don dakatar da aikawa ta atomatik da cire rahotannin atomatik da ke jira."
+  },
+  "diagnosticsHistoryHelp": {
+    "message": "Tarihin fasaha yana zama a gida: har zuwa abubuwa 200 a kowane rajista cikin mintuna 10, ko da an kashe aikawa ta atomatik. Ba ya ƙunshe da tarihin bincike kuma ana share shi da hannu, idan an rufe burauza ko idan asusu ya canza."
+  },
+  "diagnosticsHistoryCount": {
+    "message": "Abubuwan fasaha na gida: $1"
+  },
+  "diagnosticsConnectionLog": {
+    "message": "Fitar da rajistar haɗi"
+  },
+  "diagnosticsAccountRequired": {
+    "message": "Shiga don kunna aikawa. Kana iya dubawa da fitar da rahoto ba tare da asusu ba."
+  },
+  "diagnosticsRun": {
+    "message": "Gudanar da bincike"
+  },
+  "diagnosticsClearHistory": {
+    "message": "Share tarihin gida"
+  },
+  "diagnosticsPreparing": {
+    "message": "Ana shirya rahoton…"
+  },
+  "diagnosticsReports": {
+    "message": "Rahotanni"
+  },
+  "diagnosticsEmpty": {
+    "message": "Babu rahoton gida tukuna."
+  },
+  "diagnosticsChooseReport": {
+    "message": "Zaɓi rahoto"
+  },
+  "diagnosticsReportLabel": {
+    "message": "$1 · $2 · $3"
+  },
+  "diagnosticsTypeFull": {
+    "message": "Cikakken rahoto"
+  },
+  "diagnosticsTypeSimple": {
+    "message": "Rahoton kuskure"
+  },
+  "diagnosticsSummary": {
+    "message": "An tattara: $1. Sigar FuzeVPN: $2."
+  },
+  "diagnosticsJson": {
+    "message": "Duba abin da rahoton ya ƙunsa (JSON)"
+  },
+  "diagnosticsExport": {
+    "message": "Fitar da rahoto"
+  },
+  "diagnosticsDelete": {
+    "message": "Share rahoton gida"
+  },
+  "diagnosticsRetention": {
+    "message": "Rahotannin gida suna ƙarewa bayan awa 24. Share su a nan ba ya share rahoton da sabis ɗin ya riga ya karɓa. Duba sanarwar don riƙe bayanai a sabar da buƙatun sharewa."
+  },
+  "diagnosticsConsent": {
+    "message": "Aika wannan rahoton binciken matsala zuwa FuzeVPN"
+  },
+  "diagnosticsDataCollectionRequired": {
+    "message": "Dole Firefox ya ba da izinin tattara bayanan fasaha don aika binciken matsala. Sake gwadawa kuma ka ba da wannan izini."
+  },
+  "diagnosticsSendHelp": {
+    "message": "Aikawa zaɓi ne. Da zarar an amince, za a iya sake gwadawa har zuwa awa 24 tare da ingantaccen zama na asusu ɗaya. Kana iya soke ƙarin ƙoƙari. Soke wa a makare ba ya tabbatar da cewa sabar ba ta riga ta karɓi rahoton ba."
+  },
+  "diagnosticsSend": {
+    "message": "Aika rahoto"
+  },
+  "diagnosticsCancel": {
+    "message": "Soke aikawa"
+  },
+  "diagnosticsReload": {
+    "message": "Sake loda wannan shafi"
+  },
+  "diagnosticsUnavailable": {
+    "message": "Binciken matsala ba ya samuwa. Sake loda FuzeVPN daga manajan ƙari na burauza, sannan ka sake buɗe wannan shafi. Ba a canza VPN ɗinka ba."
+  },
+  "diagnosticsQueueFull": {
+    "message": "Layin aikawa ya cika. Share rahoton gida ko jira rahoton da ke jira ya kammala."
+  },
+  "diagnosticsContentUnavailable": {
+    "message": "Abin da rahoton ya ƙunsa ba ya samuwa. Fitar da rahoton gida idan yana samuwa kuma tuntuɓi tallafi."
+  },
+  "diagnosticsFailure": {
+    "message": "Ba a iya kammala aikin binciken matsala ba. Ba a canza VPN ɗinka ba."
+  },
+  "diagnosticsChecks": {
+    "message": "Dubawa"
+  },
+  "diagnosticsCheckFallback": {
+    "message": "Dubawar fasaha: $1"
+  },
+  "diagnosticsCheckLine": {
+    "message": "$1 — $2"
+  },
+  "diagnosticsProxy": {
+    "message": "Proxy na burauza"
+  },
+  "diagnosticsStorage": {
+    "message": "Ma'ajiyar gida"
+  },
+  "diagnosticsNetwork": {
+    "message": "Haɗin hanyar sadarwa"
+  },
+  "diagnosticsCleanup": {
+    "message": "Tsabtace zama"
+  },
+  "diagnosticsResult_passed": {
+    "message": "Ya wuce"
+  },
+  "diagnosticsResult_failed": {
+    "message": "Ya gaza"
+  },
+  "diagnosticsResult_skipped": {
+    "message": "Ba a yi ba"
+  },
+  "diagnosticsResult_unknown": {
+    "message": "Ba a sani ba"
+  },
+  "diagnosticsStatus_ready": {
+    "message": "A shirye a wannan na'ura"
+  },
+  "diagnosticsStatus_pending": {
+    "message": "Yana jiran aikawa"
+  },
+  "diagnosticsStatus_sending": {
+    "message": "Ana aikawa…"
+  },
+  "diagnosticsStatus_session_required": {
+    "message": "Ana jiran ingantaccen zama na asusu ɗaya"
+  },
+  "diagnosticsStatus_received": {
+    "message": "Sabis ya karɓa"
+  },
+  "diagnosticsStatus_failed": {
+    "message": "Aikawa ya gaza"
+  },
+  "diagnosticsStatus_cancelled": {
+    "message": "An soke aikawa"
+  },
+  "diagnosticsStatus_expired": {
+    "message": "Wa'adin aikawa ya ƙare"
+  },
+  "diagnosticsReceivedAt": {
+    "message": "An karɓa: $1"
+  },
+  "error_private_browsing_required": {
+    "message": "Firefox yana buƙatar wannan izini don saita VPN, har ma a tagogi na yau da kullum. Buɗe about:addons → FuzeVPN, ba shi izinin aiki a tagogin sirri, sannan ka sake gwadawa."
+  },
+  "error_host_permissions_required": {
+    "message": "A Firefox, buɗe about:addons → FuzeVPN → Izini (Permissions) kuma ba da damar shiga duk gidajen yanar gizo, sannan ka sake gwadawa."
+  },
+  "cancelAction": {
+    "message": "Soke"
+  },
+  "refreshLocations": {
+    "message": "Sabunta wurare"
+  },
+  "refreshingLocations": {
+    "message": "Ana sabunta wurare…"
+  },
+  "locationsRefreshError": {
+    "message": "Ba a iya sabunta jerin wurare ba. Da fatan za ka sake gwadawa."
+  },
+  "error_device_revoked_limit": {
+    "message": "An soke wannan na'ura. An kai iyakar na'urori: da fatan za ka cire na'ura."
+  },
+  "noAvailableLocations": {
+    "message": "Babu wuraren da ake samu a yanzu. Da fatan za ka sake gwadawa nan ba da jimawa ba."
+  },
+  "noAvailableFavoriteLocations": {
+    "message": "Wuraren da ka fi so ba sa samuwa na ɗan lokaci."
+  },
+  "error_location_favorites_limit": {
+    "message": "An kai iyakar waɗanda aka fi so 100. Cire ɗaya don ƙara wani."
+  },
+  "error_server_full": {
+    "message": "Wannan sabar ta cika. Zaɓi wani wuri."
+  },
+  "error_capacity_unavailable": {
+    "message": "Ba za a iya tabbatar da samuwar wannan sabar a yanzu ba. Da fatan za ka sake gwadawa nan ba da jimawa ba."
+  },
+  "locationHierarchyHelp": {
+    "message": "Sunan yana zaɓar sabar; kibiyar tana nuna bayanai."
+  },
+  "locationCountrySelect": {
+    "message": "Zaɓi sabar da ake samu: $1"
+  },
+  "locationCitySelect": {
+    "message": "Zaɓi sabar da ake samu: $1"
+  },
+  "locationShowCities": {
+    "message": "Nuna birane: $1"
+  },
+  "locationHideCities": {
+    "message": "Ɓoye birane: $1"
+  },
+  "locationShowServers": {
+    "message": "Nuna sabobi: $1"
+  },
+  "locationHideServers": {
+    "message": "Ɓoye sabobi: $1"
+  },
+  "locationAvailableServers": {
+    "message": "Sabobin da ake samu: $1"
+  },
+  "legalInformation": {
+    "message": "Bayanan shari'a"
+  },
+  "privacyPolicy": {
+    "message": "Sanarwar sirri ta ƙarin"
+  },
+  "termsAndConditions": {
+    "message": "Sharuɗɗan amfani da sayarwa"
+  },
+  "legalNotice": {
+    "message": "Sanarwar shari'a"
+  },
+  "contactSupport": {
+    "message": "Tuntuɓi tallafi"
+  },
+  "webSignIn": {
+    "message": "Shiga FuzeVPN"
+  },
+  "webSignInDisconnect": {
+    "message": "Cire haɗi kuma shiga"
+  },
+  "webSignInPending": {
+    "message": "Ana ci gaba da shiga…"
+  },
+  "webSignInHelp": {
+    "message": "Shiga ko ƙirƙiri asusu da Google ko imel a yankin abokin ciniki na FuzeVPN."
+  },
+  "webSignInDisconnectHelp": {
+    "message": "Wannan maɓalli yana dakatar da kariyar burauza don ka iya shiga da Google ko imel. Bincikenka ba zai sami kariya ba yayin shiga."
+  },
+  "webSignInStatus": {
+    "message": "Ci gaba a cikin tagar shiga ta FuzeVPN. Ƙarin zai sabunta kansa idan ka gama. Rufe wannan taga don sokewa."
+  },
+  "error_web_login_cancelled": {
+    "message": "An soke shiga. Sake gwadawa."
+  },
+  "error_web_login_timeout": {
+    "message": "Shiga ya ɗauki lokaci mai tsawo. Sake gwadawa."
+  },
+  "error_web_login_unavailable": {
+    "message": "Shiga ta yanar gizo ba ya samuwa. Sake gwadawa daga baya."
+  },
+  "error_web_login_invalid_callback": {
+    "message": "Ba a iya tabbatar da shiga ba. Sake farawa daga ƙarin."
+  },
+  "error_web_login_denied": {
+    "message": "Ba a ba da izinin shiga ba. Sake gwadawa."
+  },
+  "error_web_login_busy": {
+    "message": "Rufe tagar shiga da ke buɗe tuni kafin sake gwadawa."
+  },
+  "deviceKindFirefox": {
+    "message": "Burauzar Firefox"
+  },
+  "generalPrivacyPolicy": {
+    "message": "Manufar sirri ta gaba ɗaya"
+  },
+  "privacyNoticeTitle": {
+    "message": "Sirri a ƙarin FuzeVPN"
+  },
+  "privacyNoticeIntro": {
+    "message": "Wannan sanarwa tana bayyana bayanan da wannan ƙari ke amfani da su. Tana ƙara wa manufar sirri ta gaba ɗaya ta FuzeVPN, wadda mahaɗinta ke ƙasa. Aika binciken matsala na zaɓi ya bambanta da bayanan da ake buƙata don shiga da amfani da VPN."
+  },
+  "privacyNoticeUpdated": {
+    "message": "An sabunta sanarwar a ranar 19 ga Oktoba 2026"
+  },
+  "privacyNoticeServiceTitle": {
+    "message": "Asusu da sabis na VPN"
+  },
+  "privacyNoticeService": {
+    "message": "Ƙarin yana musayar bayanan tantancewa, asusu, biyan kuɗi, na'ura da zaman proxy tare da api.fuzevpn.com. Proxy na VPN yana ɗaukar zirga-zirgar da aka tura ta cikinsa. Waɗannan haɗin suna bayyana metadata na hanyar sadarwa ga sabis ɗin da ke karɓa; wannan sanarwa ba ta yi wani alkawari na daban game da rajistar sabar ba."
+  },
+  "privacyNoticeLocalTitle": {
+    "message": "Bayanan da aka ajiye a burauzarka"
+  },
+  "privacyNoticeLocal": {
+    "message": "Ma'ajiyar burauza tana riƙe da zamanka, bayanan asusu, zaɓuɓɓukanka, keɓancewar shafuka da shaidar na'ura. Ana riƙe rajistar fasaha a gida har zuwa mintuna 10, ko da an kashe aika rahoto ta atomatik. Daftarorin binciken matsala da rahotannin da ke layi suna ƙarewa a gida bayan awa 24; ana tsabtacewa idan ƙarin yana iya aiki."
+  },
+  "privacyNoticeIpTitle": {
+    "message": "Duba IP na jama'a da ɓangarori na uku"
+  },
+  "privacyNoticeIp": {
+    "message": "Nuna IP da binciken hanyar sadarwa suna tuntuɓar api.ipify.org. Nuna IP na iya amfani da ipv4.icanhazip.com a madadin. Mai bayarwa yana karɓar IP na haɗin da metadata na buƙata na yau da kullum: IP ɗinka na jama'a a yanayin kai tsaye, ko IP na fitar VPN idan ta hanyar proxy. Waɗannan buƙatun ba sa ɗauke da kukis ko referrer kuma ba sa aika token na asusu ko tarihin bincike."
+  },
+  "privacyNoticeReportsTitle": {
+    "message": "Abin da rahotannin binciken matsala suka ƙunsa"
+  },
+  "privacyNoticeReports": {
+    "message": "Rahotanni na iya haɗawa da lambar shaidar rahoto ta bazuwar, tamburan lokaci, sigogin ƙarin da burauza, nau'i da tsarin gine-ginen tsarin aiki, yanayin haɗi da kariya, lambobin kuskure, ƙididdiga, tsawon lokaci da sakamakon dubawa. Cikakkun rahotanni na iya haɗawa da abubuwan fasaha na kwanan nan. JSON ɗinsu ba ya ƙunshe da kalmomin sirri, tokens na tantancewa, adiresoshin imel, adiresoshin IP, URL da aka ziyarta da yankunan da aka keɓe. Kana iya dubawa da fitar da cikakken rahoto kafin aika shi."
+  },
+  "privacyNoticeAccountTitle": {
+    "message": "Mai karɓa da danganta wa asusu"
+  },
+  "privacyNoticeAccount": {
+    "message": "Ana aika rahotanni zuwa FuzeVPN a api.fuzevpn.com/v1/diagnostics ta hanyar haɗin da aka tantance. Wannan haɗin API yana kewaye proxy na VPN: FuzeVPN yana karɓar IP ɗinka na jama'a kai tsaye ko da VPN yana aiki. Ana danganta rahotanni da asusun da aka shiga, ba na ɓoye suna ba ne. Kanun tantancewa da IP sun bambanta da JSON na rahoto. Karɓa cikin nasara yana tabbatar da cewa wannan wurin karɓa ya amince, ba cewa wakilin tallafi ya karanta rahoton ba."
+  },
+  "privacyNoticeChoiceTitle": {
+    "message": "Aikawa na zaɓi da janyewa"
+  },
+  "privacyNoticeChoice": {
+    "message": "Aikawa ta atomatik a kashe take ta asali. Kunna ta yana ba da damar rahotannin kuskure masu sauƙi don wannan asusu. Aika cikakken rahoto da hannu yana buƙatar akwatin zaɓin aikawa. Firefox kuma yana buƙatar izininsa na zaɓi na bayanan fasaha. Kashe aikawa ta atomatik don dakatar da ita da cire rahotannin atomatik da ke jira; soke kowane aikawa da ke jira daban. Ƙin aika binciken matsala ba ya hana amfani da VPN."
+  },
+  "privacyNoticeDeleteTitle": {
+    "message": "Sharewa a gida da fayilolin da aka sauke"
+  },
+  "privacyNoticeDelete": {
+    "message": "A cikin Binciken matsala, share tarihin fasaha ko share rahoton gida ɗaya. Share tarihi ba ya goge kwafin rahotanni da ke akwai. Sokewa ko sharewa a gida ba zai iya dawo da bayanan da sabis ya riga ya karɓa ba, har da lodawar da ta isa kafin sokewa. Fayilolin da aka fitar aka sauke fayiloli ne daban waɗanda dole ka share da kanka."
+  },
+  "privacyNoticeServerTitle": {
+    "message": "Riƙe bayanai a sabar da buƙatu"
+  },
+  "privacyNoticeServer": {
+    "message": "Wannan ƙari ba ya sarrafawa ko tabbatar da riƙe bayanai a sabar ko sharewa a ɓangaren sabar. Don tsawon lokacin riƙewa da FuzeVPN ke amfani da shi da buƙatu game da rahotannin da aka riga aka aika, duba manufar sirri ta gaba ɗaya ko tuntuɓi FuzeVPN. Wannan sanarwa ba ta ba da tabbacin ƙayyadadden lokacin riƙewa a sabar ba."
+  },
+  "privacyNoticeSupportTitle": {
+    "message": "Binciken matsala da tallafi sun bambanta"
+  },
+  "privacyNoticeSupport": {
+    "message": "Aika rahoton binciken matsala ba ya aika saƙon tallafi daga ƙarin da kansa. Don bayyana matsala ko neman share rahoton da aka karɓa, yi amfani da hanyar tuntuɓar FuzeVPN da ke ƙasa. Idan ka zaɓi raba fayil da aka fitar ta wata hanya, duba abin da ya ƙunsa da farko."
+  },
+  "privacyNoticeManage": {
+    "message": "Buɗe Binciken matsala"
+  },
+  "privacyNoticeLinksTitle": {
+    "message": "Manufar sabis da tuntuɓa"
+  },
+  "theme": {
+    "message": "Jigo"
+  },
+  "themeSystem": {
+    "message": "Tsarin"
+  },
+  "themeLight": {
+    "message": "Haske"
+  },
+  "themeDark": {
+    "message": "Duhu"
+  },
+  "switchToDarkTheme": {
+    "message": "Canza zuwa jigon duhu"
+  },
+  "switchToLightTheme": {
+    "message": "Canza zuwa jigon haske"
+  }
+}

@@ -1,0 +1,929 @@
+{
+  "extensionName": {
+    "message": "FuzeVPN"
+  },
+  "extensionDescription": {
+    "message": "រក្សាឯកជនភាព និងពង្រឹងសុវត្ថិភាពរបស់អ្នក ដោយចុចតែម្ដង។"
+  },
+  "siteExclusionsReloadRequired": {
+    "message": "ផ្ទុក FuzeVPN ឡើងវិញពីកម្មវិធីគ្រប់គ្រងកម្មវិធីបន្ថែមរបស់កម្មវិធីរុករក ដើម្បីបញ្ចប់ការធ្វើបច្ចុប្បន្នភាព និងប្រើគេហទំព័រដែលបានដកចេញ។"
+  },
+  "extensionCommunicationError": {
+    "message": "កម្មវិធីបន្ថែមមិនឆ្លើយតបទេ។ បិទផ្ទាំងនេះ រួចផ្ទុក FuzeVPN ឡើងវិញពីកម្មវិធីគ្រប់គ្រងកម្មវិធីបន្ថែមរបស់កម្មវិធីរុករក។"
+  },
+  "actionDisconnected": {
+    "message": "FuzeVPN — បានផ្ដាច់"
+  },
+  "actionConnected": {
+    "message": "FuzeVPN — បានការពារក្នុងកម្មវិធីរុករកនេះ"
+  },
+  "actionReconnecting": {
+    "message": "FuzeVPN — កំពុងភ្ជាប់ឡើងវិញ"
+  },
+  "actionError": {
+    "message": "FuzeVPN — ត្រូវការការយកចិត្តទុកដាក់"
+  },
+  "browserProtection": {
+    "message": "ការការពារកម្មវិធីរុករក"
+  },
+  "loginTitle": {
+    "message": "សូមស្វាគមន៍មកកាន់ FuzeVPN"
+  },
+  "loginSubtitle": {
+    "message": "ចូលគណនី ដើម្បីការពារការរុករករបស់អ្នកក្នុងកម្មវិធីរុករកនេះ។"
+  },
+  "email": {
+    "message": "អាសយដ្ឋានអ៊ីមែល"
+  },
+  "emailPlaceholder": {
+    "message": "you@example.com"
+  },
+  "password": {
+    "message": "ពាក្យសម្ងាត់"
+  },
+  "signIn": {
+    "message": "ចូល"
+  },
+  "signingIn": {
+    "message": "កំពុងចូល…"
+  },
+  "forgotPassword": {
+    "message": "ភ្លេចពាក្យសម្ងាត់?"
+  },
+  "createAccount": {
+    "message": "បង្កើតគណនី"
+  },
+  "settings": {
+    "message": "ការកំណត់"
+  },
+  "close": {
+    "message": "បិទ"
+  },
+  "statusDisconnected": {
+    "message": "បានផ្ដាច់"
+  },
+  "statusConnecting": {
+    "message": "កំពុងភ្ជាប់…"
+  },
+  "statusChanging": {
+    "message": "កំពុងប្ដូរទីតាំង…"
+  },
+  "statusProtected": {
+    "message": "បានការពារក្នុងកម្មវិធីរុករកនេះ"
+  },
+  "statusRefreshing": {
+    "message": "កំពុងបន្តដោយសុវត្ថិភាព…"
+  },
+  "statusDisconnecting": {
+    "message": "កំពុងផ្ដាច់…"
+  },
+  "statusError": {
+    "message": "ការការពារបានឈប់"
+  },
+  "browserOnlyDetail": {
+    "message": "ការការពារសម្រាប់កម្មវិធីរុករកនេះ។"
+  },
+  "location": {
+    "message": "ទីតាំង"
+  },
+  "change": {
+    "message": "ប្ដូរ"
+  },
+  "noLocation": {
+    "message": "គ្មានទីតាំងទេ"
+  },
+  "protectBrowser": {
+    "message": "ការពារកម្មវិធីរុករក"
+  },
+  "disconnect": {
+    "message": "ផ្ដាច់"
+  },
+  "subscription": {
+    "message": "ការជាវ"
+  },
+  "refreshSubscription": {
+    "message": "ធ្វើបច្ចុប្បន្នភាពការជាវ"
+  },
+  "refreshingSubscription": {
+    "message": "កំពុងធ្វើបច្ចុប្បន្នភាពការជាវ…"
+  },
+  "subscriptionActive": {
+    "message": "សកម្ម"
+  },
+  "subscriptionInactive": {
+    "message": "អសកម្ម"
+  },
+  "expiresOn": {
+    "message": "ផុតកំណត់៖ $1"
+  },
+  "noExpiry": {
+    "message": "គ្មានកាលបរិច្ឆេទផុតកំណត់"
+  },
+  "browserOnlyNotice": {
+    "message": "តែកម្មវិធីរុករកនេះប៉ុណ្ណោះ។ កម្មវិធី និងកម្មវិធីរុករកផ្សេងទៀតមិនត្រូវបានការពារទេ។"
+  },
+  "resendVerification": {
+    "message": "ផ្ញើអ៊ីមែលម្ដងទៀត"
+  },
+  "incognitoHelp": {
+    "message": "ការរុករកឯកជនប្រើការការពារដូចគ្នា លុះត្រាតែកម្មវិធីបន្ថែមត្រូវបានអនុញ្ញាតក្នុងមុខងារឯកជន នៅក្នុងការកំណត់របស់កម្មវិធីរុករក។"
+  },
+  "manageAccount": {
+    "message": "គ្រប់គ្រងគណនីរបស់ខ្ញុំ"
+  },
+  "account": {
+    "message": "គណនី"
+  },
+  "devices": {
+    "message": "ឧបករណ៍"
+  },
+  "manageDevices": {
+    "message": "គ្រប់គ្រងឧបករណ៍"
+  },
+  "refreshDevices": {
+    "message": "ធ្វើបច្ចុប្បន្នភាពឧបករណ៍"
+  },
+  "deviceCount": {
+    "message": "ឧបករណ៍ $1 / $2"
+  },
+  "loadingDevices": {
+    "message": "កំពុងផ្ទុកឧបករណ៍…"
+  },
+  "noDevices": {
+    "message": "គ្មានឧបករណ៍សកម្មទេ។"
+  },
+  "currentDevice": {
+    "message": "ឧបករណ៍នេះ"
+  },
+  "deviceKindBrowser": {
+    "message": "កម្មវិធីបន្ថែមកម្មវិធីរុករក"
+  },
+  "deviceKindVpn": {
+    "message": "ឧបករណ៍ VPN"
+  },
+  "profile_browser_proxy": {
+    "message": "ប្រូកស៊ីកម្មវិធីរុករក"
+  },
+  "profile_wireguard": {
+    "message": "WireGuard"
+  },
+  "profile_openvpn": {
+    "message": "OpenVPN"
+  },
+  "none": {
+    "message": "គ្មាន"
+  },
+  "deviceCreatedOn": {
+    "message": "បានបង្កើត៖ $1"
+  },
+  "deleteDevice": {
+    "message": "លុបឧបករណ៍"
+  },
+  "deleteDeviceNamed": {
+    "message": "លុបឧបករណ៍ $1"
+  },
+  "confirmDeleteDevice": {
+    "message": "ដក “$1” ចេញ? ការតភ្ជាប់ VPN របស់វានឹងឈប់ ហើយប្រូហ្វាល់របស់វានឹងត្រូវបានដកចេញ។"
+  },
+  "resetDevice": {
+    "message": "កំណត់ឧបករណ៍ឡើងវិញ"
+  },
+  "confirmResetDevice": {
+    "message": "កំណត់កម្មវិធីបន្ថែមនេះឡើងវិញ? វានឹងត្រូវបានចុះឈ្មោះជាឧបករណ៍ថ្មី នៅពេលអ្នកប្រើវាលើកក្រោយ។"
+  },
+  "signOutAccount": {
+    "message": "ចេញពីគណនី"
+  },
+  "chooseLocation": {
+    "message": "ជ្រើសរើសទីតាំង"
+  },
+  "error_invalid_credentials": {
+    "message": "អាសយដ្ឋានអ៊ីមែល ឬពាក្យសម្ងាត់មិនត្រឹមត្រូវ។"
+  },
+  "error_unauthorized": {
+    "message": "វគ្គរបស់អ្នកបានផុតកំណត់។ សូមចូលម្ដងទៀត។"
+  },
+  "error_email_verification_required": {
+    "message": "ផ្ទៀងផ្ទាត់អាសយដ្ឋានអ៊ីមែលរបស់អ្នក មុនពេលបើកការការពារ។"
+  },
+  "errorVerificationCooldown": {
+    "message": "អាចស្នើសុំអ៊ីមែលថ្មីបានក្នុងរយៈពេល $1 វិនាទីទៀត។"
+  },
+  "error_verification_email_cooldown": {
+    "message": "សូមរង់ចាំ មុនពេលស្នើសុំអ៊ីមែលមួយទៀត។"
+  },
+  "error_subscription_required": {
+    "message": "ត្រូវការការជាវសកម្ម ដើម្បីការពារកម្មវិធីរុករកនេះ។"
+  },
+  "error_device_limit": {
+    "message": "បានដល់ចំនួនឧបករណ៍អតិបរមា។ សូមដកឧបករណ៍មួយចេញ។"
+  },
+  "error_device_identity_revoked": {
+    "message": "ឧបករណ៍នេះលែងត្រូវបានអនុញ្ញាតទៀតហើយ។ សូមព្យាយាមភ្ជាប់ម្ដងទៀត។"
+  },
+  "error_device_proof_invalid": {
+    "message": "យើងមិនអាចផ្ទៀងផ្ទាត់ឧបករណ៍នេះបានទេ។ ពិនិត្យកាលបរិច្ឆេទ និងម៉ោងនៃកុំព្យូទ័ររបស់អ្នក រួចព្យាយាមម្ដងទៀត។"
+  },
+  "error_device_proof_replayed": {
+    "message": "សំណើនេះត្រូវបានដំណើរការរួចហើយ។ សូមព្យាយាមម្ដងទៀត។"
+  },
+  "error_invalid_device": {
+    "message": "មិនស្គាល់ឧបករណ៍នេះទេ។ សូមព្យាយាមភ្ជាប់ម្ដងទៀត។"
+  },
+  "error_device_exists": {
+    "message": "អត្តសញ្ញាណឧបករណ៍នេះត្រូវបានភ្ជាប់ជាមួយគណនីផ្សេងរួចហើយ។"
+  },
+  "error_not_found": {
+    "message": "ប្រតិបត្តិការនេះលែងមានទៀតហើយ។ សូមព្យាយាមម្ដងទៀត។"
+  },
+  "error_invalid_location": {
+    "message": "ទីតាំងនេះមិនអាចប្រើបានទេ។ សូមជ្រើសរើសទីតាំងផ្សេង។"
+  },
+  "error_rate_limited": {
+    "message": "ព្យាយាមច្រើនដងពេក។ សូមរង់ចាំបន្តិច រួចព្យាយាមម្ដងទៀត។"
+  },
+  "error_proxy_unavailable": {
+    "message": "ម៉ាស៊ីនមេនេះមិនអាចប្រើបានជាបណ្ដោះអាសន្ន។ សូមព្យាយាមម្ដងទៀតបន្តិចទៀត។"
+  },
+  "error_api_token_expired": {
+    "message": "វគ្គគណនីរបស់អ្នកបានផុតកំណត់។ សូមចូលម្ដងទៀត។"
+  },
+  "error_network_error": {
+    "message": "បណ្ដាញមិនអាចប្រើបានទេ។ សូមពិនិត្យការតភ្ជាប់អ៊ីនធឺណិតរបស់អ្នក។"
+  },
+  "error_request_timeout": {
+    "message": "សេវាកម្មចំណាយពេលយូរពេកក្នុងការឆ្លើយតប។ សូមព្យាយាមម្ដងទៀត។"
+  },
+  "error_invalid_response": {
+    "message": "សេវាកម្មបានផ្ដល់ការឆ្លើយតបដែលមិនរំពឹងទុក។"
+  },
+  "error_proxy_certificate_invalid": {
+    "message": "យើងមិនអាចផ្ទៀងផ្ទាត់សុវត្ថិភាពរបស់ម៉ាស៊ីនមេបានទេ។ ការតភ្ជាប់ត្រូវបានបញ្ឈប់។"
+  },
+  "error_proxy_controlled_by_extension": {
+    "message": "កម្មវិធីបន្ថែមផ្សេងទៀតកំពុងគ្រប់គ្រងប្រូកស៊ីរបស់កម្មវិធីរុករក។"
+  },
+  "error_proxy_controlled_by_policy": {
+    "message": "គោលការណ៍អ្នកគ្រប់គ្រងរារាំង FuzeVPN មិនឱ្យប្ដូរប្រូកស៊ី។"
+  },
+  "error_proxy_authentication_failed": {
+    "message": "ម៉ាស៊ីនមេមិនបានទទួលយកការតភ្ជាប់ទេ។ សូមព្យាយាមភ្ជាប់ម្ដងទៀត។"
+  },
+  "error_session_expired": {
+    "message": "ការតភ្ជាប់ដែលបានការពាររបស់អ្នកបានផុតកំណត់។ សូមភ្ជាប់ម្ដងទៀត។"
+  },
+  "error_email_delivery_unavailable": {
+    "message": "មិនអាចផ្ញើអ៊ីមែលបាននៅពេលនេះទេ។"
+  },
+  "error_unknown_error": {
+    "message": "មានកំហុសដែលមិនរំពឹងទុកបានកើតឡើង។ សូមព្យាយាមម្ដងទៀត។"
+  },
+  "actionBlocked": {
+    "message": "FuzeVPN — ការរុករកត្រូវបានរារាំង"
+  },
+  "statusBlockedRetry": {
+    "message": "ការរុករកត្រូវបានផ្អាក — កំពុងភ្ជាប់ឡើងវិញ"
+  },
+  "statusBlockedAction": {
+    "message": "ការរុករកត្រូវបានផ្អាក — ពិនិត្យការតភ្ជាប់"
+  },
+  "statusProtectionUnavailable": {
+    "message": "ការការពារមិនអាចប្រើបាន — ការរុករកមិនត្រូវបានរារាំង"
+  },
+  "recoveryHelp": {
+    "message": "ព្យាយាមម្ដងទៀត ដើម្បីបន្តការការពារ។ ការផ្ដាច់អនុញ្ញាតឱ្យអ្នករុករកដោយគ្មាន FuzeVPN។"
+  },
+  "retryConnection": {
+    "message": "ព្យាយាមម្ដងទៀត"
+  },
+  "killSwitch": {
+    "message": "កុងតាក់បិទបន្ទាន់"
+  },
+  "killSwitchHelp": {
+    "message": "រារាំងសំណើវេបថ្មីៗ ប្រសិនបើការតភ្ជាប់ VPN ដាច់។ គេហទំព័រដែលបានដកចេញនៅតែអាចចូលប្រើបាននៅខាងក្រៅ VPN។"
+  },
+  "webRtcProtection": {
+    "message": "ការការពារ WebRTC"
+  },
+  "webRtcHelp": {
+    "message": "ជួយរក្សាអាសយដ្ឋាន IP របស់អ្នកជាឯកជន ក្នុងអំឡុងពេលហៅតាមវេប។ ការហៅខ្លះអាចមិនដំណើរការ។ ការបិទមុខងារនេះអាចបង្ហាញអាសយដ្ឋាន IP ពិតរបស់អ្នក។"
+  },
+  "securityEffectiveState": {
+    "message": "$1 · $2"
+  },
+  "securityBlocked": {
+    "message": "ការរុករកត្រូវបានរារាំង"
+  },
+  "securityNotBlocked": {
+    "message": "ការរុករកមិនត្រូវបានរារាំង"
+  },
+  "securityWebRtcActive": {
+    "message": "ការដាក់កំហិត WebRTC សកម្ម"
+  },
+  "securityWebRtcInactive": {
+    "message": "ការដាក់កំហិត WebRTC អសកម្ម"
+  },
+  "localNetworkHelp": {
+    "message": "អាសយដ្ឋាន IP មូលដ្ឋាន និងឈ្មោះមូលដ្ឋានទូទៅត្រូវបានរារាំង ក្នុងអំឡុងពេលការពារ។ ដែនដែលបានដកចេញអាចនៅតែផ្ដល់សិទ្ធិចូលប្រើបណ្ដាញមូលដ្ឋាន។ ការកំណត់ IPv6 របស់ប្រព័ន្ធមិនត្រូវបានផ្លាស់ប្ដូរទេ។"
+  },
+  "securityLimits": {
+    "message": "អំពីការការពារនេះ"
+  },
+  "killSwitchLimits": {
+    "message": "តែកម្មវិធីរុករកនេះប៉ុណ្ណោះ៖ ការតភ្ជាប់ដែលមានស្រាប់ និងការទំនាក់ទំនងខាងក្នុងខ្លះរបស់កម្មវិធីរុករក ឬកម្មវិធីបន្ថែមផ្សេងទៀតអាចបន្ត។ កម្មវិធីបន្ថែមផ្សេង ឬគោលការណ៍មួយអាចជំនួសប្រូកស៊ី មុនពេល FuzeVPN ឆ្លើយតប។ ការបិទកម្មវិធីបន្ថែមនឹងដកការការពារចេញ។ គ្មានការរារាំងលើប្រព័ន្ធទាំងមូលទេ។"
+  },
+  "error_traffic_guard_failed": {
+    "message": "មិនអាចផ្ទៀងផ្ទាត់ការរារាំងការរុករកបានទេ។ មិនធានាការការពារទេ។ សូមពិនិត្យការអនុញ្ញាតរបស់កម្មវិធីបន្ថែម។"
+  },
+  "error_webrtc_control_unavailable": {
+    "message": "មិនអាចអនុវត្តការដាក់កំហិត WebRTC បានទេ។ សូមពិនិត្យការកំណត់របស់អ្នក កម្មវិធីបន្ថែមផ្សេងទៀត ឬគោលការណ៍អ្នកគ្រប់គ្រង។"
+  },
+  "language": {
+    "message": "ភាសា"
+  },
+  "languageAutomatic": {
+    "message": "ស្វ័យប្រវត្តិ — ភាសាកម្មវិធីរុករក"
+  },
+  "languageHelp": {
+    "message": "ការផ្លាស់ប្ដូរមានប្រសិទ្ធភាពភ្លាមៗ។ ស្វ័យប្រវត្តិធ្វើតាមភាសារបស់កម្មវិធីរុករក ដែលអាចខុសពីភាសាប្រព័ន្ធ។"
+  },
+  "languageSaveError": {
+    "message": "មិនអាចរក្សាទុកភាសាបានទេ។ ជម្រើសមុនរបស់អ្នកត្រូវបានរក្សាទុក។ សូមព្យាយាមម្ដងទៀត។"
+  },
+  "publicIp": {
+    "message": "IP សាធារណៈ"
+  },
+  "vpnIp": {
+    "message": "IP របស់ VPN"
+  },
+  "ipChecking": {
+    "message": "កំពុងពិនិត្យ…"
+  },
+  "ipUnavailable": {
+    "message": "មិនអាចប្រើបាន"
+  },
+  "ipLookupExplanation": {
+    "message": "IP ត្រូវបានពិនិត្យដោយ ipify ឬ icanhazip ជាជម្រើសបម្រុង តាមរយៈការតភ្ជាប់បច្ចុប្បន្នរបស់អ្នក។ មិនផ្ញើប្រវត្តិរុករកទេ។"
+  },
+  "automaticLocation": {
+    "message": "ស្វ័យប្រវត្តិ"
+  },
+  "automaticLocationHelp": {
+    "message": "ពេលវេលាឆ្លើយតបល្អបំផុតថ្មីៗ ឬទីតាំងចុងក្រោយរបស់អ្នក។"
+  },
+  "automaticLocationName": {
+    "message": "ស្វ័យប្រវត្តិ · $1"
+  },
+  "searchLocations": {
+    "message": "ស្វែងរកប្រទេស ឬទីក្រុង"
+  },
+  "locationFilters": {
+    "message": "តម្រងទីតាំង"
+  },
+  "allLocations": {
+    "message": "ទាំងអស់"
+  },
+  "favoriteLocations": {
+    "message": "ចំណូលចិត្ត"
+  },
+  "recentLocations": {
+    "message": "ថ្មីៗ"
+  },
+  "noMatchingLocations": {
+    "message": "គ្មានទីតាំងត្រូវនឹងការស្វែងរករបស់អ្នកទេ។"
+  },
+  "noFavoriteLocations": {
+    "message": "ដាក់ផ្កាយ ដើម្បីរក្សាទីតាំងចំណូលចិត្តរបស់អ្នកនៅទីនេះ។"
+  },
+  "noRecentLocations": {
+    "message": "ទីតាំងដែលអ្នកបានភ្ជាប់ថ្មីៗនឹងបង្ហាញនៅទីនេះ។"
+  },
+  "addFavorite": {
+    "message": "បន្ថែម $1 ទៅចំណូលចិត្ត"
+  },
+  "removeFavorite": {
+    "message": "ដក $1 ចេញពីចំណូលចិត្ត"
+  },
+  "unavailableFavoriteLocation": {
+    "message": "ចំណូលចិត្តមិនអាចប្រើបាន៖ $1"
+  },
+  "locationSaveError": {
+    "message": "មិនអាចបញ្ចប់ការផ្លាស់ប្ដូរបានទេ។ ការកំណត់ខ្លះប្រហែលជាត្រូវបានរក្សាទុក។ សូមពិនិត្យជម្រើសដែលបានបង្ហាញ មុនពេលព្យាយាមម្ដងទៀត។"
+  },
+  "siteExclusions": {
+    "message": "គេហទំព័រដែលបានដកចេញ"
+  },
+  "siteExclusionsHelp": {
+    "message": "គេហទំព័រទាំងនេះប្រើការតភ្ជាប់របស់អ្នកដោយគ្មាន FuzeVPN ទោះបីជា VPN ដាច់ក៏ដោយ។"
+  },
+  "siteExclusionsEnabled": {
+    "message": "បើកករណីលើកលែង"
+  },
+  "siteExclusionInput": {
+    "message": "ដែន ឬ URL"
+  },
+  "siteExclusionPlaceholder": {
+    "message": "example.com"
+  },
+  "siteExclusionPreview": {
+    "message": "ដែនដែលបានជ្រើស៖ $1"
+  },
+  "siteExclusionSubdomains": {
+    "message": "រួមបញ្ចូលដែនរង"
+  },
+  "siteExclusionAdd": {
+    "message": "បន្ថែមគេហទំព័រ"
+  },
+  "siteExclusionsEmpty": {
+    "message": "គ្មានគេហទំព័រដែលបានដកចេញទេ។ បន្ថែមតែគេហទំព័រដែលអ្នកចង់ប្រើដោយគ្មាន VPN ប៉ុណ្ណោះ។"
+  },
+  "siteExclusionsCount": {
+    "message": "គេហទំព័រ $1 / 100"
+  },
+  "siteExclusionScopeSubdomains": {
+    "message": "ដែន និងដែនរង"
+  },
+  "siteExclusionScopeExact": {
+    "message": "តែដែននេះប៉ុណ្ណោះ"
+  },
+  "siteExclusionRemove": {
+    "message": "ដក $1 ចេញ"
+  },
+  "siteExclusionsDetails": {
+    "message": "តើករណីលើកលែងដំណើរការយ៉ាងដូចម្ដេច?"
+  },
+  "siteExclusionsResources": {
+    "message": "ធនធានពីដែនផ្សេងទៀតនៅតែត្រូវបានការពារ។ ការដកទំព័រមួយចេញ មិនដកខ្លឹមសារផ្សេងទៀតរបស់វាចេញដោយស្វ័យប្រវត្តិទេ។"
+  },
+  "siteExclusionsReload": {
+    "message": "ផ្ទុកគេហទំព័រឡើងវិញបន្ទាប់ពីការផ្លាស់ប្ដូរ។ ការតភ្ជាប់ដែលមានស្រាប់អាចរក្សាផ្លូវមុនរបស់វា។"
+  },
+  "siteExclusionsWebRtc": {
+    "message": "ការការពារ WebRTC នៅតែជាការកំណត់សកល រួមទាំងសម្រាប់គេហទំព័រដែលបានដកចេញ។"
+  },
+  "siteExclusionsLocal": {
+    "message": "រក្សាទុកតែក្នុងកម្មវិធីរុករកនេះ ហើយនៅតែមានបន្ទាប់ពីចេញពីគណនីរបស់អ្នក។"
+  },
+  "siteExclusionsOn": {
+    "message": "បានបើកករណីលើកលែង"
+  },
+  "siteExclusionsOff": {
+    "message": "បានបិទករណីលើកលែង"
+  },
+  "siteExclusionsSummary": {
+    "message": "គេហទំព័រ $1 នៅក្រៅ VPN"
+  },
+  "siteExclusionsPending": {
+    "message": "កំពុងអនុវត្តករណីលើកលែង…"
+  },
+  "siteExclusionsInterrupted": {
+    "message": "ការផ្លាស់ប្ដូរត្រូវបានរំខាន។ ការការពារបណ្ដោះអាសន្ននៅតែដំណើរការ។"
+  },
+  "siteExclusionsSaveError": {
+    "message": "មិនអាចបញ្ចប់ការផ្លាស់ប្ដូរបានទេ។ សូមពិនិត្យការកំណត់របស់អ្នក រួចព្យាយាមម្ដងទៀត។"
+  },
+  "siteExclusionsRetry": {
+    "message": "ព្យាយាមម្ដងទៀត"
+  },
+  "siteExclusionInvalid": {
+    "message": "បញ្ចូលដែនសាធារណៈដែលត្រឹមត្រូវ។ IP ឈ្មោះមូលដ្ឋាន តួអក្សរជំនួស បច្ច័យសាធារណៈ និងដែនដែលបានបម្រុងទុក មិនត្រូវបានទទួលយកទេ។"
+  },
+  "siteExclusionDuplicate": {
+    "message": "ដែននេះមាននៅក្នុងបញ្ជីរួចហើយ។"
+  },
+  "siteExclusionsLimit": {
+    "message": "បានដល់ដែនកំណត់ 100 គេហទំព័រ។ ដកគេហទំព័រមួយចេញ ដើម្បីបន្ថែមមួយទៀត។"
+  },
+  "statusProtectedExceptions": {
+    "message": "VPN សកម្ម · ករណីលើកលែង $1"
+  },
+  "statusBlockedExceptions": {
+    "message": "មានតែគេហទំព័រដែលបានដកចេញប៉ុណ្ណោះដែលអាចចូលប្រើបាន"
+  },
+  "securityBlockedExceptions": {
+    "message": "ការរុករកត្រូវបានរារាំង លើកលែងតែគេហទំព័រដែលបានដកចេញ"
+  },
+  "securityBlockUnverified": {
+    "message": "ការរារាំងមិនទាន់បានផ្ទៀងផ្ទាត់"
+  },
+  "logoutLocalComplete": {
+    "message": "ការចេញក្នុងមូលដ្ឋានបានបញ្ចប់។"
+  },
+  "logoutApiSession": {
+    "message": "វគ្គគណនីបច្ចុប្បន្ន"
+  },
+  "logoutProxySessions": {
+    "message": "វគ្គ VPN ដែលស្គាល់"
+  },
+  "logoutRevocationPending": {
+    "message": "កំពុងដកហូត…"
+  },
+  "logoutRevocationConfirmed": {
+    "message": "ការដកហូតត្រូវបានបញ្ជាក់"
+  },
+  "logoutRevocationUnconfirmed": {
+    "message": "ការដកហូតមិនទាន់បានបញ្ជាក់"
+  },
+  "logoutUnconfirmedHelp": {
+    "message": "វគ្គពីចម្ងាយខ្លះអាចនៅតែសកម្មរហូតដល់ពួកវាផុតកំណត់។"
+  },
+  "deviceQuotaLoading": {
+    "message": "កំពុងផ្ទុកដែនកំណត់ឧបករណ៍…"
+  },
+  "deviceQuotaUnknown": {
+    "message": "ដែនកំណត់ឧបករណ៍មិនអាចប្រើបាន"
+  },
+  "error_proxy_creation_uncertain": {
+    "message": "ម៉ាស៊ីនមេមិនបានបញ្ជាក់ការបង្កើតការតភ្ជាប់ថ្មីទេ។ ការភ្ជាប់ឡើងវិញដោយស្វ័យប្រវត្តិត្រូវបានផ្អាក។"
+  },
+  "siteExclusionsPreferencesReset": {
+    "message": "ករណីលើកលែងគេហទំព័រដែលបានរក្សាទុករបស់អ្នកត្រូវបានកំណត់ឡើងវិញ ដោយសារមិនអាចអានបាន។ សូមបន្ថែមគេហទំព័រដែលអ្នកចង់ដកចេញម្ដងទៀត។"
+  },
+  "siteExclusionsConflict": {
+    "message": "បញ្ជីគេហទំព័រដែលបានដកចេញបានផ្លាស់ប្ដូរ។ សូមពិនិត្យវា រួចធ្វើការផ្លាស់ប្ដូររបស់អ្នកម្ដងទៀត។"
+  },
+  "unavailableLocation": {
+    "message": "ទីតាំងមិនអាចប្រើបាន"
+  },
+  "verificationSending": {
+    "message": "កំពុងផ្ញើអ៊ីមែលផ្ទៀងផ្ទាត់…"
+  },
+  "verificationSent": {
+    "message": "បានផ្ញើអ៊ីមែលផ្ទៀងផ្ទាត់។ សូមពិនិត្យប្រអប់សំបុត្រចូល និងថតសារឥតបានការរបស់អ្នក។"
+  },
+  "error_login_requires_disconnect": {
+    "message": "ផ្ដាច់ការតភ្ជាប់ VPN បច្ចុប្បន្ន មុនពេលចូលគណនីផ្សេង។"
+  },
+  "error_storage_unavailable": {
+    "message": "ការកំណត់គណនីក្នុងមូលដ្ឋានមិនអាចប្រើបានទេ។ សូមព្យាយាមម្ដងទៀត នៅពេលឃ្លាំងផ្ទុករបស់កម្មវិធីរុករកអាចប្រើបាន។ គណនីដែលបានរក្សាទុករបស់អ្នកនៅតែមាន។"
+  },
+  "diagnosticsAssistance": {
+    "message": "ជំនួយ"
+  },
+  "diagnosticsTitle": {
+    "message": "រោគវិនិច្ឆ័យ"
+  },
+  "diagnosticsIntro": {
+    "message": "ពិនិត្យ FuzeVPN និងការតភ្ជាប់បច្ចុប្បន្ន ដោយមិនផ្លាស់ប្ដូរការការពាររបស់អ្នក។"
+  },
+  "diagnosticsPrivacyTitle": {
+    "message": "ទិន្នន័យរបស់អ្នក"
+  },
+  "diagnosticsPrivacy": {
+    "message": "JSON នៃរបាយការណ៍មានស្ថានភាពបច្ចេកទេស និងលេខកូដកំហុស ដោយគ្មានពាក្យសម្ងាត់ ថូខឹន អាសយដ្ឋានអ៊ីមែល អាសយដ្ឋាន IP URL ដែលបានចូលមើល ឬដែនដែលបានដកចេញ។ ការផ្ញើត្រូវបានផ្ទៀងផ្ទាត់ ហើយភ្ជាប់របាយការណ៍ទៅនឹងគណនីរបស់អ្នក។ សូមមើលសេចក្ដីជូនដំណឹងសម្រាប់ទិន្នន័យបណ្ដាញ។"
+  },
+  "diagnosticsAuto": {
+    "message": "ផ្ញើរបាយការណ៍កំហុសសំខាន់ៗដោយស្វ័យប្រវត្តិ"
+  },
+  "diagnosticsAutoHelp": {
+    "message": "បិទតាមលំនាំដើម។ ការបើកមុខងារនេះនឹងផ្ញើរបាយការណ៍បច្ចេកទេសសាមញ្ញសម្រាប់គណនីនេះ ដោយគ្មានប្រវត្តិរុករក។ បិទវានៅទីនេះ ដើម្បីបញ្ឈប់ការផ្ញើដោយស្វ័យប្រវត្តិ និងដករបាយការណ៍ស្វ័យប្រវត្តិដែលកំពុងរង់ចាំចេញ។"
+  },
+  "diagnosticsHistoryHelp": {
+    "message": "ប្រវត្តិបច្ចេកទេសនៅតែក្នុងមូលដ្ឋាន៖ រហូតដល់ 200 ព្រឹត្តិការណ៍ក្នុងមួយកំណត់ហេតុ ក្នុងរយៈពេល 10 នាទី ទោះបីជាការផ្ញើដោយស្វ័យប្រវត្តិត្រូវបានបិទក៏ដោយ។ វាគ្មានប្រវត្តិរុករកទេ ហើយត្រូវបានសម្អាតនៅពេលអ្នកសម្អាតដោយដៃ នៅពេលបិទកម្មវិធីរុករក ឬនៅពេលប្ដូរគណនី។"
+  },
+  "diagnosticsHistoryCount": {
+    "message": "ព្រឹត្តិការណ៍បច្ចេកទេសក្នុងមូលដ្ឋាន $1"
+  },
+  "diagnosticsConnectionLog": {
+    "message": "នាំចេញកំណត់ហេតុការតភ្ជាប់"
+  },
+  "diagnosticsAccountRequired": {
+    "message": "ចូលគណនី ដើម្បីបើកការផ្ញើ។ អ្នកនៅតែអាចមើល និងនាំចេញរបាយការណ៍ដោយគ្មានគណនី។"
+  },
+  "diagnosticsRun": {
+    "message": "ដំណើរការរោគវិនិច្ឆ័យ"
+  },
+  "diagnosticsClearHistory": {
+    "message": "សម្អាតប្រវត្តិក្នុងមូលដ្ឋាន"
+  },
+  "diagnosticsPreparing": {
+    "message": "កំពុងរៀបចំរបាយការណ៍…"
+  },
+  "diagnosticsReports": {
+    "message": "របាយការណ៍"
+  },
+  "diagnosticsEmpty": {
+    "message": "មិនទាន់មានរបាយការណ៍ក្នុងមូលដ្ឋានទេ។"
+  },
+  "diagnosticsChooseReport": {
+    "message": "ជ្រើសរើសរបាយការណ៍"
+  },
+  "diagnosticsReportLabel": {
+    "message": "$1 · $2 · $3"
+  },
+  "diagnosticsTypeFull": {
+    "message": "របាយការណ៍ពេញលេញ"
+  },
+  "diagnosticsTypeSimple": {
+    "message": "របាយការណ៍កំហុស"
+  },
+  "diagnosticsSummary": {
+    "message": "ប្រមូលនៅ $1។ FuzeVPN កំណែ $2។"
+  },
+  "diagnosticsJson": {
+    "message": "មើលខ្លឹមសាររបាយការណ៍ (JSON)"
+  },
+  "diagnosticsExport": {
+    "message": "នាំចេញរបាយការណ៍"
+  },
+  "diagnosticsDelete": {
+    "message": "លុបរបាយការណ៍ក្នុងមូលដ្ឋាន"
+  },
+  "diagnosticsRetention": {
+    "message": "របាយការណ៍ក្នុងមូលដ្ឋានផុតកំណត់បន្ទាប់ពី 24 ម៉ោង។ ការលុបនៅទីនេះមិនលុបរបាយការណ៍ដែលសេវាកម្មបានទទួលរួចហើយទេ។ សូមមើលសេចក្ដីជូនដំណឹងសម្រាប់ការរក្សាទុកលើម៉ាស៊ីនមេ និងសំណើលុប។"
+  },
+  "diagnosticsConsent": {
+    "message": "ផ្ញើរបាយការណ៍រោគវិនិច្ឆ័យនេះទៅ FuzeVPN"
+  },
+  "diagnosticsDataCollectionRequired": {
+    "message": "Firefox ត្រូវតែអនុញ្ញាតការប្រមូលទិន្នន័យបច្ចេកទេស ដើម្បីផ្ញើរោគវិនិច្ឆ័យ។ សូមព្យាយាមម្ដងទៀត ហើយផ្ដល់ការអនុញ្ញាតនេះ។"
+  },
+  "diagnosticsSendHelp": {
+    "message": "ការផ្ញើគឺស្រេចចិត្ត។ នៅពេលបានយល់ព្រម វាអាចព្យាយាមម្ដងទៀតរហូតដល់ 24 ម៉ោង ជាមួយវគ្គត្រឹមត្រូវសម្រាប់គណនីដដែល។ អ្នកអាចបោះបង់ការព្យាយាមបន្ទាប់។ ការបោះបង់យឺត មិនធានាថាម៉ាស៊ីនមេមិនទាន់បានទទួលរបាយការណ៍ទេ។"
+  },
+  "diagnosticsSend": {
+    "message": "ផ្ញើរបាយការណ៍"
+  },
+  "diagnosticsCancel": {
+    "message": "បោះបង់ការផ្ញើ"
+  },
+  "diagnosticsReload": {
+    "message": "ផ្ទុកទំព័រនេះឡើងវិញ"
+  },
+  "diagnosticsUnavailable": {
+    "message": "រោគវិនិច្ឆ័យមិនអាចប្រើបានទេ។ ផ្ទុក FuzeVPN ឡើងវិញពីកម្មវិធីគ្រប់គ្រងកម្មវិធីបន្ថែមរបស់កម្មវិធីរុករក រួចបើកទំព័រនេះម្ដងទៀត។ VPN របស់អ្នកមិនផ្លាស់ប្ដូរទេ។"
+  },
+  "diagnosticsQueueFull": {
+    "message": "ជួរផ្ញើពេញហើយ។ លុបរបាយការណ៍ក្នុងមូលដ្ឋានមួយ ឬរង់ចាំរបាយការណ៍ដែលកំពុងរង់ចាំបញ្ចប់។"
+  },
+  "diagnosticsContentUnavailable": {
+    "message": "ខ្លឹមសាររបាយការណ៍មិនអាចប្រើបានទេ។ នាំចេញរបាយការណ៍ក្នុងមូលដ្ឋាន ប្រសិនបើមាន ហើយទាក់ទងផ្នែកជំនួយ។"
+  },
+  "diagnosticsFailure": {
+    "message": "មិនអាចបញ្ចប់សកម្មភាពរោគវិនិច្ឆ័យបានទេ។ VPN របស់អ្នកមិនផ្លាស់ប្ដូរទេ។"
+  },
+  "diagnosticsChecks": {
+    "message": "ការត្រួតពិនិត្យ"
+  },
+  "diagnosticsCheckFallback": {
+    "message": "ការត្រួតពិនិត្យបច្ចេកទេស៖ $1"
+  },
+  "diagnosticsCheckLine": {
+    "message": "$1 — $2"
+  },
+  "diagnosticsProxy": {
+    "message": "ប្រូកស៊ីកម្មវិធីរុករក"
+  },
+  "diagnosticsStorage": {
+    "message": "ឃ្លាំងផ្ទុកក្នុងមូលដ្ឋាន"
+  },
+  "diagnosticsNetwork": {
+    "message": "ការតភ្ជាប់បណ្ដាញ"
+  },
+  "diagnosticsCleanup": {
+    "message": "ការសម្អាតវគ្គ"
+  },
+  "diagnosticsResult_passed": {
+    "message": "ជោគជ័យ"
+  },
+  "diagnosticsResult_failed": {
+    "message": "បរាជ័យ"
+  },
+  "diagnosticsResult_skipped": {
+    "message": "មិនបានអនុវត្ត"
+  },
+  "diagnosticsResult_unknown": {
+    "message": "មិនស្គាល់"
+  },
+  "diagnosticsStatus_ready": {
+    "message": "រួចរាល់នៅលើឧបករណ៍នេះ"
+  },
+  "diagnosticsStatus_pending": {
+    "message": "កំពុងរង់ចាំផ្ញើ"
+  },
+  "diagnosticsStatus_sending": {
+    "message": "កំពុងផ្ញើ…"
+  },
+  "diagnosticsStatus_session_required": {
+    "message": "កំពុងរង់ចាំវគ្គត្រឹមត្រូវសម្រាប់គណនីដដែល"
+  },
+  "diagnosticsStatus_received": {
+    "message": "សេវាកម្មបានទទួល"
+  },
+  "diagnosticsStatus_failed": {
+    "message": "ការផ្ញើបរាជ័យ"
+  },
+  "diagnosticsStatus_cancelled": {
+    "message": "ការផ្ញើត្រូវបានបោះបង់"
+  },
+  "diagnosticsStatus_expired": {
+    "message": "ផុតកំណត់ពេលផ្ញើ"
+  },
+  "diagnosticsReceivedAt": {
+    "message": "បានទទួល៖ $1"
+  },
+  "error_private_browsing_required": {
+    "message": "Firefox ត្រូវការការអនុញ្ញាតនេះ ដើម្បីកំណត់រចនាសម្ព័ន្ធ VPN សូម្បីតែក្នុងផ្ទាំងធម្មតា។ បើក about:addons → FuzeVPN អនុញ្ញាតឱ្យវាដំណើរការក្នុងផ្ទាំងឯកជន រួចព្យាយាមម្ដងទៀត។"
+  },
+  "error_host_permissions_required": {
+    "message": "ក្នុង Firefox សូមបើក about:addons → FuzeVPN → ការអនុញ្ញាត ហើយអនុញ្ញាតឱ្យចូលប្រើគេហទំព័រទាំងអស់ រួចព្យាយាមម្ដងទៀត។"
+  },
+  "cancelAction": {
+    "message": "បោះបង់"
+  },
+  "refreshLocations": {
+    "message": "ធ្វើបច្ចុប្បន្នភាពទីតាំង"
+  },
+  "refreshingLocations": {
+    "message": "កំពុងធ្វើបច្ចុប្បន្នភាពទីតាំង…"
+  },
+  "locationsRefreshError": {
+    "message": "មិនអាចធ្វើបច្ចុប្បន្នភាពបញ្ជីទីតាំងបានទេ។ សូមព្យាយាមម្ដងទៀត។"
+  },
+  "error_device_revoked_limit": {
+    "message": "ឧបករណ៍នេះត្រូវបានដកហូតសិទ្ធិ។ បានដល់ចំនួនឧបករណ៍អតិបរមា៖ សូមដកឧបករណ៍មួយចេញ។"
+  },
+  "noAvailableLocations": {
+    "message": "បច្ចុប្បន្នគ្មានទីតាំងដែលអាចប្រើបានទេ។ សូមព្យាយាមម្ដងទៀតបន្តិចទៀត។"
+  },
+  "noAvailableFavoriteLocations": {
+    "message": "ទីតាំងចំណូលចិត្តរបស់អ្នកមិនអាចប្រើបានជាបណ្ដោះអាសន្ន។"
+  },
+  "error_location_favorites_limit": {
+    "message": "បានដល់ដែនកំណត់ 100 ចំណូលចិត្ត។ ដកចំណូលចិត្តមួយចេញ ដើម្បីបន្ថែមមួយទៀត។"
+  },
+  "error_server_full": {
+    "message": "ម៉ាស៊ីនមេនេះពេញហើយ។ សូមជ្រើសរើសទីតាំងផ្សេង។"
+  },
+  "error_capacity_unavailable": {
+    "message": "មិនអាចបញ្ជាក់ភាពអាចប្រើបានរបស់ម៉ាស៊ីនមេនេះនៅពេលនេះទេ។ សូមព្យាយាមម្ដងទៀតបន្តិចទៀត។"
+  },
+  "locationHierarchyHelp": {
+    "message": "ឈ្មោះជ្រើសរើសម៉ាស៊ីនមេ ព្រួញបង្ហាញព័ត៌មានលម្អិត។"
+  },
+  "locationCountrySelect": {
+    "message": "ជ្រើសរើសម៉ាស៊ីនមេដែលអាចប្រើបាន៖ $1"
+  },
+  "locationCitySelect": {
+    "message": "ជ្រើសរើសម៉ាស៊ីនមេដែលអាចប្រើបាន៖ $1"
+  },
+  "locationShowCities": {
+    "message": "បង្ហាញទីក្រុង៖ $1"
+  },
+  "locationHideCities": {
+    "message": "លាក់ទីក្រុង៖ $1"
+  },
+  "locationShowServers": {
+    "message": "បង្ហាញម៉ាស៊ីនមេ៖ $1"
+  },
+  "locationHideServers": {
+    "message": "លាក់ម៉ាស៊ីនមេ៖ $1"
+  },
+  "locationAvailableServers": {
+    "message": "ម៉ាស៊ីនមេដែលអាចប្រើបាន៖ $1"
+  },
+  "legalInformation": {
+    "message": "ព័ត៌មានផ្លូវច្បាប់"
+  },
+  "privacyPolicy": {
+    "message": "សេចក្ដីជូនដំណឹងអំពីឯកជនភាពរបស់កម្មវិធីបន្ថែម"
+  },
+  "termsAndConditions": {
+    "message": "លក្ខខណ្ឌប្រើប្រាស់ និងលក់"
+  },
+  "legalNotice": {
+    "message": "សេចក្ដីជូនដំណឹងផ្លូវច្បាប់"
+  },
+  "contactSupport": {
+    "message": "ទាក់ទងផ្នែកជំនួយ"
+  },
+  "webSignIn": {
+    "message": "ចូល FuzeVPN"
+  },
+  "webSignInDisconnect": {
+    "message": "ផ្ដាច់ ហើយចូល"
+  },
+  "webSignInPending": {
+    "message": "កំពុងចូល…"
+  },
+  "webSignInHelp": {
+    "message": "ចូល ឬបង្កើតគណនីដោយប្រើ Google ឬអ៊ីមែល នៅក្នុងតំបន់អតិថិជន FuzeVPN។"
+  },
+  "webSignInDisconnectHelp": {
+    "message": "ប៊ូតុងនេះបញ្ឈប់ការការពារកម្មវិធីរុករក ដើម្បីឱ្យអ្នកអាចចូលដោយប្រើ Google ឬអ៊ីមែល។ ការរុករករបស់អ្នកនឹងមិនត្រូវបានការពារ ក្នុងអំឡុងពេលចូលទេ។"
+  },
+  "webSignInStatus": {
+    "message": "បន្តនៅក្នុងផ្ទាំងចូល FuzeVPN។ កម្មវិធីបន្ថែមនឹងធ្វើបច្ចុប្បន្នភាពដោយស្វ័យប្រវត្តិ នៅពេលអ្នកបញ្ចប់។ បិទផ្ទាំងនោះ ដើម្បីបោះបង់។"
+  },
+  "error_web_login_cancelled": {
+    "message": "ការចូលត្រូវបានបោះបង់។ សូមព្យាយាមម្ដងទៀត។"
+  },
+  "error_web_login_timeout": {
+    "message": "ការចូលចំណាយពេលយូរពេក។ សូមព្យាយាមម្ដងទៀត។"
+  },
+  "error_web_login_unavailable": {
+    "message": "ការចូលតាមវេបមិនអាចប្រើបានទេ។ សូមព្យាយាមម្ដងទៀតនៅពេលក្រោយ។"
+  },
+  "error_web_login_invalid_callback": {
+    "message": "មិនអាចផ្ទៀងផ្ទាត់ការចូលបានទេ។ សូមចាប់ផ្ដើមម្ដងទៀតពីកម្មវិធីបន្ថែម។"
+  },
+  "error_web_login_denied": {
+    "message": "ការចូលមិនត្រូវបានអនុញ្ញាតទេ។ សូមព្យាយាមម្ដងទៀត។"
+  },
+  "error_web_login_busy": {
+    "message": "បិទផ្ទាំងចូលដែលបានបើករួច មុនពេលព្យាយាមម្ដងទៀត។"
+  },
+  "deviceKindFirefox": {
+    "message": "កម្មវិធីរុករក Firefox"
+  },
+  "generalPrivacyPolicy": {
+    "message": "គោលការណ៍ឯកជនភាពទូទៅ"
+  },
+  "privacyNoticeTitle": {
+    "message": "ឯកជនភាពក្នុងកម្មវិធីបន្ថែម FuzeVPN"
+  },
+  "privacyNoticeIntro": {
+    "message": "សេចក្ដីជូនដំណឹងនេះពិពណ៌នាអំពីទិន្នន័យដែលកម្មវិធីបន្ថែមនេះប្រើ។ វាបំពេញបន្ថែមលើគោលការណ៍ឯកជនភាពទូទៅរបស់ FuzeVPN ដែលមានតំណខាងក្រោម។ ការផ្ញើរោគវិនិច្ឆ័យដែលជាជម្រើស គឺដាច់ដោយឡែកពីទិន្នន័យដែលត្រូវការសម្រាប់ចូលគណនី និងប្រើ VPN។"
+  },
+  "privacyNoticeUpdated": {
+    "message": "សេចក្ដីជូនដំណឹងបានធ្វើបច្ចុប្បន្នភាពនៅថ្ងៃទី 19 ខែតុលា ឆ្នាំ 2026"
+  },
+  "privacyNoticeServiceTitle": {
+    "message": "គណនី និងសេវាកម្ម VPN"
+  },
+  "privacyNoticeService": {
+    "message": "កម្មវិធីបន្ថែមផ្លាស់ប្ដូរទិន្នន័យផ្ទៀងផ្ទាត់ គណនី ការជាវ ឧបករណ៍ និងវគ្គប្រូកស៊ី ជាមួយ api.fuzevpn.com។ ប្រូកស៊ី VPN ដឹកចរាចរណ៍ដែលបានបញ្ជូនតាមរយៈវា។ ការតភ្ជាប់ទាំងនេះបង្ហាញទិន្នន័យមេតាបណ្ដាញដល់សេវាកម្មដែលទទួល។ សេចក្ដីជូនដំណឹងនេះមិនធ្វើការសន្យាដាច់ដោយឡែកអំពីការកត់ត្រាលើម៉ាស៊ីនមេទេ។"
+  },
+  "privacyNoticeLocalTitle": {
+    "message": "ទិន្នន័យដែលបានរក្សាទុកក្នុងកម្មវិធីរុករករបស់អ្នក"
+  },
+  "privacyNoticeLocal": {
+    "message": "ឃ្លាំងផ្ទុករបស់កម្មវិធីរុករករក្សាទុកវគ្គ ព័ត៌មានលម្អិតគណនី ការកំណត់ផ្ទាល់ខ្លួន ការដកគេហទំព័រចេញ និងអត្តសញ្ញាណឧបករណ៍របស់អ្នក។ កំណត់ហេតុបច្ចេកទេសត្រូវបានរក្សាទុកក្នុងមូលដ្ឋានរហូតដល់ 10 នាទី ទោះបីជាការរាយការណ៍ដោយស្វ័យប្រវត្តិត្រូវបានបិទក៏ដោយ។ សេចក្ដីព្រាងរោគវិនិច្ឆ័យ និងរបាយការណ៍ក្នុងជួរ ផុតកំណត់ក្នុងមូលដ្ឋានបន្ទាប់ពី 24 ម៉ោង។ ការសម្អាតដំណើរការនៅពេលកម្មវិធីបន្ថែមអាចដំណើរការបាន។"
+  },
+  "privacyNoticeIpTitle": {
+    "message": "ការពិនិត្យ IP សាធារណៈ និងភាគីទីបី"
+  },
+  "privacyNoticeIp": {
+    "message": "ការបង្ហាញ IP និងរោគវិនិច្ឆ័យបណ្ដាញទាក់ទងទៅ api.ipify.org។ ការបង្ហាញ IP អាចប្រើ ipv4.icanhazip.com ជាជម្រើសបម្រុង។ អ្នកផ្ដល់សេវាទទួលបាន IP នៃការតភ្ជាប់ និងទិន្នន័យមេតាសំណើធម្មតា៖ IP សាធារណៈរបស់អ្នកក្នុងមុខងារផ្ទាល់ ឬ IP ចេញរបស់ VPN នៅពេលឆ្លងកាត់ប្រូកស៊ី។ សំណើទាំងនេះមិនរួមបញ្ចូលខូគី និងព័ត៌មានទំព័រយោង (referrer) ហើយមិនផ្ញើថូខឹនគណនី ឬប្រវត្តិរុករកទេ។"
+  },
+  "privacyNoticeReportsTitle": {
+    "message": "អ្វីដែលរបាយការណ៍រោគវិនិច្ឆ័យមាន"
+  },
+  "privacyNoticeReports": {
+    "message": "របាយការណ៍អាចរួមបញ្ចូលលេខសម្គាល់របាយការណ៍ចៃដន្យ ត្រាពេលវេលា កំណែកម្មវិធីបន្ថែម និងកម្មវិធីរុករក ប្រភេទ និងស្ថាបត្យកម្មប្រព័ន្ធប្រតិបត្តិការ ស្ថានភាពការតភ្ជាប់ និងការការពារ លេខកូដកំហុស ចំនួនរាប់ រយៈពេល និងលទ្ធផលត្រួតពិនិត្យ។ របាយការណ៍ពេញលេញអាចរួមបញ្ចូលព្រឹត្តិការណ៍បច្ចេកទេសថ្មីៗ។ JSON របស់វាមិនរួមបញ្ចូលពាក្យសម្ងាត់ ថូខឹនផ្ទៀងផ្ទាត់ អាសយដ្ឋានអ៊ីមែល អាសយដ្ឋាន IP URL ដែលបានចូលមើល និងដែនដែលបានដកចេញទេ។ អ្នកអាចពិនិត្យ និងនាំចេញរបាយការណ៍ពេញលេញ មុនពេលផ្ញើវា។"
+  },
+  "privacyNoticeAccountTitle": {
+    "message": "អ្នកទទួល និងការភ្ជាប់ទៅគណនី"
+  },
+  "privacyNoticeAccount": {
+    "message": "របាយការណ៍ត្រូវបានផ្ញើទៅ FuzeVPN នៅ api.fuzevpn.com/v1/diagnostics តាមរយៈការតភ្ជាប់ដែលបានផ្ទៀងផ្ទាត់។ ការតភ្ជាប់ API នេះរំលងប្រូកស៊ី VPN៖ FuzeVPN ទទួលបាន IP សាធារណៈផ្ទាល់របស់អ្នក សូម្បីតែពេល VPN សកម្ម។ របាយការណ៍ត្រូវបានភ្ជាប់ទៅគណនីដែលបានចូល មិនមែនអនាមិកទេ។ ក្បាលផ្ទៀងផ្ទាត់ និង IP គឺដាច់ដោយឡែកពី JSON នៃរបាយការណ៍។ ការទទួលបានជោគជ័យបញ្ជាក់ថាសេវាកម្មនោះបានទទួលយក មិនមែនថាភ្នាក់ងារជំនួយបានអានរបាយការណ៍នោះទេ។"
+  },
+  "privacyNoticeChoiceTitle": {
+    "message": "ការផ្ញើជាជម្រើស និងការដកការយល់ព្រម"
+  },
+  "privacyNoticeChoice": {
+    "message": "ការផ្ញើដោយស្វ័យប្រវត្តិត្រូវបានបិទតាមលំនាំដើម។ ការបើកវាអនុញ្ញាតរបាយការណ៍កំហុសសាមញ្ញសម្រាប់គណនីនោះ។ ការផ្ញើរបាយការណ៍ពេញលេញដោយដៃ តម្រូវឱ្យធីកប្រអប់ផ្ញើ។ Firefox ក៏តម្រូវឱ្យមានការអនុញ្ញាតទិន្នន័យបច្ចេកទេសជាជម្រើសរបស់វាដែរ។ បិទការផ្ញើដោយស្វ័យប្រវត្តិ ដើម្បីបញ្ឈប់វា និងដករបាយការណ៍ស្វ័យប្រវត្តិដែលកំពុងរង់ចាំចេញ។ បោះបង់ការផ្ញើដែលកំពុងរង់ចាំនីមួយៗដាច់ដោយឡែក។ ការបដិសេធការផ្ញើរោគវិនិច្ឆ័យ មិនរារាំងការប្រើ VPN ទេ។"
+  },
+  "privacyNoticeDeleteTitle": {
+    "message": "ការលុបក្នុងមូលដ្ឋាន និងឯកសារដែលបានទាញយក"
+  },
+  "privacyNoticeDelete": {
+    "message": "នៅក្នុងរោគវិនិច្ឆ័យ សូមសម្អាតប្រវត្តិបច្ចេកទេស ឬលុបរបាយការណ៍ក្នុងមូលដ្ឋាននីមួយៗ។ ការសម្អាតប្រវត្តិមិនលុបច្បាប់ចម្លងរបាយការណ៍ដែលមានស្រាប់ទេ។ ការបោះបង់ ឬលុបក្នុងមូលដ្ឋាន មិនអាចទាញយកទិន្នន័យដែលសេវាកម្មបានទទួលរួចមកវិញបានទេ រួមទាំងការផ្ទុកឡើងដែលបានមកដល់មុនការបោះបង់។ ឯកសារនាំចេញដែលបានទាញយក គឺជាឯកសារដាច់ដោយឡែកដែលអ្នកត្រូវលុបដោយខ្លួនឯង។"
+  },
+  "privacyNoticeServerTitle": {
+    "message": "ការរក្សាទុកលើម៉ាស៊ីនមេ និងសំណើ"
+  },
+  "privacyNoticeServer": {
+    "message": "កម្មវិធីបន្ថែមនេះមិនគ្រប់គ្រង ឬផ្ទៀងផ្ទាត់ការរក្សាទុក ឬការលុបនៅលើម៉ាស៊ីនមេទេ។ សម្រាប់រយៈពេលរក្សាទុកដែល FuzeVPN អនុវត្ត និងសំណើទាក់ទងនឹងរបាយការណ៍ដែលបានផ្ញើរួច សូមមើលគោលការណ៍ឯកជនភាពទូទៅ ឬទាក់ទង FuzeVPN។ សេចក្ដីជូនដំណឹងនេះមិនធានារយៈពេលរក្សាទុកថេរលើម៉ាស៊ីនមេទេ។"
+  },
+  "privacyNoticeSupportTitle": {
+    "message": "រោគវិនិច្ឆ័យ និងជំនួយគឺដាច់ដោយឡែកពីគ្នា"
+  },
+  "privacyNoticeSupport": {
+    "message": "ការផ្ញើរបាយការណ៍រោគវិនិច្ឆ័យ មិនផ្ញើសារជំនួយពីកម្មវិធីបន្ថែមដោយខ្លួនវាទេ។ ដើម្បីពន្យល់បញ្ហា ឬស្នើសុំលុបរបាយការណ៍ដែលបានទទួល សូមប្រើបណ្ដាញទំនាក់ទំនង FuzeVPN ខាងក្រោម។ ប្រសិនបើអ្នកជ្រើសរើសចែករំលែកឯកសារដែលបាននាំចេញតាមបណ្ដាញផ្សេង សូមពិនិត្យខ្លឹមសាររបស់វាជាមុនសិន។"
+  },
+  "privacyNoticeManage": {
+    "message": "បើករោគវិនិច្ឆ័យ"
+  },
+  "privacyNoticeLinksTitle": {
+    "message": "គោលការណ៍សេវាកម្ម និងទំនាក់ទំនង"
+  },
+  "theme": {
+    "message": "រូបរាង"
+  },
+  "themeSystem": {
+    "message": "ប្រព័ន្ធ"
+  },
+  "themeLight": {
+    "message": "ភ្លឺ"
+  },
+  "themeDark": {
+    "message": "ងងឹត"
+  },
+  "switchToDarkTheme": {
+    "message": "ប្ដូរទៅរូបរាងងងឹត"
+  },
+  "switchToLightTheme": {
+    "message": "ប្ដូរទៅរូបរាងភ្លឺ"
+  }
+}
