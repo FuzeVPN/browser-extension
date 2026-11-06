@@ -67,7 +67,7 @@ export function existingFirefoxToolchain(environment) {
   );
   const expected = {
     node: commonPin.node,
-    firefox: "158.0.1",
+    firefox: "159.0.1",
     geckodriver: "0.37.1",
     python: commonPin.python,
     cryptography: commonPin.cryptography,
