@@ -72,7 +72,7 @@ describe("source package audit", () => {
     expect(manifest.version).toBe(packageInfo.version);
   });
 
-  it("ships thirty complete catalogs with preserved substitutions and localized descriptions", async () => {
+  it("ships fifty complete catalogs with preserved substitutions and localized descriptions", async () => {
     const languages = [
       "en",
       "es",
@@ -104,6 +104,26 @@ describe("source package audit", () => {
       "da",
       "no",
       "el",
+      "am",
+      "bn",
+      "bg",
+      "hr",
+      "et",
+      "fi",
+      "gu",
+      "he",
+      "hu",
+      "kn",
+      "lv",
+      "lt",
+      "ml",
+      "mr",
+      "sr",
+      "sk",
+      "sl",
+      "sw",
+      "ta",
+      "te",
     ];
     const source = await locale("en");
     for (const language of languages) {

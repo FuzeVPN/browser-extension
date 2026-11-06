@@ -1,0 +1,929 @@
+{
+  "extensionName": {
+    "message": "FuzeVPN"
+  },
+  "extensionDescription": {
+    "message": "Apsaugokite savo privatumą ir sustiprinkite saugumą vienu paspaudimu."
+  },
+  "siteExclusionsReloadRequired": {
+    "message": "Iš naujo įkelkite FuzeVPN naršyklės plėtinių tvarkytuvėje, kad užbaigtumėte naujinimą ir galėtumėte naudoti svetainių išimtis."
+  },
+  "extensionCommunicationError": {
+    "message": "Plėtinys neatsako. Uždarykite šį langą, tada iš naujo įkelkite FuzeVPN naršyklės plėtinių tvarkytuvėje."
+  },
+  "actionDisconnected": {
+    "message": "FuzeVPN — Atjungta"
+  },
+  "actionConnected": {
+    "message": "FuzeVPN — Apsaugota šioje naršyklėje"
+  },
+  "actionReconnecting": {
+    "message": "FuzeVPN — Jungiamasi iš naujo"
+  },
+  "actionError": {
+    "message": "FuzeVPN — Reikia jūsų dėmesio"
+  },
+  "browserProtection": {
+    "message": "Naršyklės apsauga"
+  },
+  "loginTitle": {
+    "message": "Sveiki atvykę į FuzeVPN"
+  },
+  "loginSubtitle": {
+    "message": "Prisijunkite, kad apsaugotumėte naršymą šioje naršyklėje."
+  },
+  "email": {
+    "message": "El. pašto adresas"
+  },
+  "emailPlaceholder": {
+    "message": "you@example.com"
+  },
+  "password": {
+    "message": "Slaptažodis"
+  },
+  "signIn": {
+    "message": "Prisijungti"
+  },
+  "signingIn": {
+    "message": "Prisijungiama…"
+  },
+  "forgotPassword": {
+    "message": "Pamiršote slaptažodį?"
+  },
+  "createAccount": {
+    "message": "Sukurti paskyrą"
+  },
+  "settings": {
+    "message": "Nustatymai"
+  },
+  "close": {
+    "message": "Uždaryti"
+  },
+  "statusDisconnected": {
+    "message": "Atjungta"
+  },
+  "statusConnecting": {
+    "message": "Jungiamasi…"
+  },
+  "statusChanging": {
+    "message": "Keičiama vieta…"
+  },
+  "statusProtected": {
+    "message": "Apsaugota šioje naršyklėje"
+  },
+  "statusRefreshing": {
+    "message": "Saugiai atnaujinama…"
+  },
+  "statusDisconnecting": {
+    "message": "Atjungiama…"
+  },
+  "statusError": {
+    "message": "Apsauga sustabdyta"
+  },
+  "browserOnlyDetail": {
+    "message": "Šios naršyklės apsauga."
+  },
+  "location": {
+    "message": "Vieta"
+  },
+  "change": {
+    "message": "Keisti"
+  },
+  "noLocation": {
+    "message": "Nėra prieinamų vietų"
+  },
+  "protectBrowser": {
+    "message": "Apsaugoti naršyklę"
+  },
+  "disconnect": {
+    "message": "Atjungti"
+  },
+  "subscription": {
+    "message": "Prenumerata"
+  },
+  "refreshSubscription": {
+    "message": "Atnaujinti prenumeratos duomenis"
+  },
+  "refreshingSubscription": {
+    "message": "Atnaujinami prenumeratos duomenys…"
+  },
+  "subscriptionActive": {
+    "message": "Aktyvi"
+  },
+  "subscriptionInactive": {
+    "message": "Neaktyvi"
+  },
+  "expiresOn": {
+    "message": "Galioja iki: $1"
+  },
+  "noExpiry": {
+    "message": "Be galiojimo pabaigos datos"
+  },
+  "browserOnlyNotice": {
+    "message": "Tik ši naršyklė. Kitos programos ir naršyklės neapsaugomos."
+  },
+  "resendVerification": {
+    "message": "Siųsti el. laišką dar kartą"
+  },
+  "incognitoHelp": {
+    "message": "Privatus naršymas naudoja tą pačią apsaugą tik tada, kai naršyklės nustatymuose plėtiniui leista veikti privačiuoju režimu."
+  },
+  "manageAccount": {
+    "message": "Tvarkyti paskyrą"
+  },
+  "account": {
+    "message": "Paskyra"
+  },
+  "devices": {
+    "message": "Įrenginiai"
+  },
+  "manageDevices": {
+    "message": "Tvarkyti įrenginius"
+  },
+  "refreshDevices": {
+    "message": "Atnaujinti įrenginius"
+  },
+  "deviceCount": {
+    "message": "Įrenginiai: $1 / $2"
+  },
+  "loadingDevices": {
+    "message": "Įkeliami įrenginiai…"
+  },
+  "noDevices": {
+    "message": "Nėra aktyvių įrenginių."
+  },
+  "currentDevice": {
+    "message": "Šis įrenginys"
+  },
+  "deviceKindBrowser": {
+    "message": "Naršyklės plėtinys"
+  },
+  "deviceKindVpn": {
+    "message": "VPN įrenginys"
+  },
+  "profile_browser_proxy": {
+    "message": "Naršyklės tarpinis serveris"
+  },
+  "profile_wireguard": {
+    "message": "WireGuard"
+  },
+  "profile_openvpn": {
+    "message": "OpenVPN"
+  },
+  "none": {
+    "message": "nėra"
+  },
+  "deviceCreatedOn": {
+    "message": "Sukurta: $1"
+  },
+  "deleteDevice": {
+    "message": "Ištrinti įrenginį"
+  },
+  "deleteDeviceNamed": {
+    "message": "Ištrinti įrenginį $1"
+  },
+  "confirmDeleteDevice": {
+    "message": "Pašalinti „$1“? Jo VPN ryšiai bus nutraukti, o profiliai pašalinti."
+  },
+  "resetDevice": {
+    "message": "Nustatyti įrenginį iš naujo"
+  },
+  "confirmResetDevice": {
+    "message": "Nustatyti šį plėtinį iš naujo? Kitą kartą jį naudojant, jis bus užregistruotas kaip naujas įrenginys."
+  },
+  "signOutAccount": {
+    "message": "Atsijungti nuo paskyros"
+  },
+  "chooseLocation": {
+    "message": "Pasirinkite vietą"
+  },
+  "error_invalid_credentials": {
+    "message": "Neteisingas el. pašto adresas arba slaptažodis."
+  },
+  "error_unauthorized": {
+    "message": "Jūsų sesija baigėsi. Prisijunkite dar kartą."
+  },
+  "error_email_verification_required": {
+    "message": "Prieš įjungdami apsaugą, patvirtinkite savo el. pašto adresą."
+  },
+  "errorVerificationCooldown": {
+    "message": "Naujo el. laiško galėsite paprašyti po $1 s."
+  },
+  "error_verification_email_cooldown": {
+    "message": "Palaukite prieš prašydami kito el. laiško."
+  },
+  "error_subscription_required": {
+    "message": "Norint apsaugoti šią naršyklę, reikia aktyvios prenumeratos."
+  },
+  "error_device_limit": {
+    "message": "Pasiektas įrenginių limitas. Pašalinkite įrenginį."
+  },
+  "error_device_identity_revoked": {
+    "message": "Šis įrenginys nebėra įgaliotas. Pabandykite vėl užmegzti ryšį."
+  },
+  "error_device_proof_invalid": {
+    "message": "Nepavyko patvirtinti šio įrenginio. Patikrinkite kompiuterio datą ir laiką, tada bandykite dar kartą."
+  },
+  "error_device_proof_replayed": {
+    "message": "Ši užklausa jau apdorota. Bandykite dar kartą."
+  },
+  "error_invalid_device": {
+    "message": "Šis įrenginys neatpažintas. Pabandykite vėl užmegzti ryšį."
+  },
+  "error_device_exists": {
+    "message": "Šio įrenginio tapatybė jau susieta su kita paskyra."
+  },
+  "error_not_found": {
+    "message": "Ši operacija nebepasiekiama. Bandykite dar kartą."
+  },
+  "error_invalid_location": {
+    "message": "Ši vieta nepasiekiama. Pasirinkite kitą."
+  },
+  "error_rate_limited": {
+    "message": "Per daug bandymų. Šiek tiek palaukite ir bandykite dar kartą."
+  },
+  "error_proxy_unavailable": {
+    "message": "Šis serveris laikinai nepasiekiamas. Netrukus bandykite dar kartą."
+  },
+  "error_api_token_expired": {
+    "message": "Jūsų paskyros sesija baigėsi. Prisijunkite dar kartą."
+  },
+  "error_network_error": {
+    "message": "Tinklas nepasiekiamas. Patikrinkite interneto ryšį."
+  },
+  "error_request_timeout": {
+    "message": "Paslauga per ilgai neatsakė. Bandykite dar kartą."
+  },
+  "error_invalid_response": {
+    "message": "Paslauga grąžino netikėtą atsakymą."
+  },
+  "error_proxy_certificate_invalid": {
+    "message": "Nepavyko patvirtinti serverio saugumo. Ryšys nutrauktas."
+  },
+  "error_proxy_controlled_by_extension": {
+    "message": "Naršyklės tarpinį serverį šiuo metu valdo kitas plėtinys."
+  },
+  "error_proxy_controlled_by_policy": {
+    "message": "Administratoriaus politika neleidžia FuzeVPN keisti tarpinio serverio."
+  },
+  "error_proxy_authentication_failed": {
+    "message": "Serveris nepriėmė ryšio. Pabandykite vėl užmegzti ryšį."
+  },
+  "error_session_expired": {
+    "message": "Jūsų apsaugoto ryšio galiojimas baigėsi. Užmegzkite ryšį iš naujo."
+  },
+  "error_email_delivery_unavailable": {
+    "message": "Šiuo metu el. laiško išsiųsti negalima."
+  },
+  "error_unknown_error": {
+    "message": "Įvyko netikėta klaida. Bandykite dar kartą."
+  },
+  "actionBlocked": {
+    "message": "FuzeVPN — Naršymas užblokuotas"
+  },
+  "statusBlockedRetry": {
+    "message": "Naršymas pristabdytas — jungiamasi iš naujo"
+  },
+  "statusBlockedAction": {
+    "message": "Naršymas pristabdytas — patikrinkite ryšį"
+  },
+  "statusProtectionUnavailable": {
+    "message": "Apsauga nepasiekiama — naršymas neblokuojamas"
+  },
+  "recoveryHelp": {
+    "message": "Spustelėkite „Bandyti dar kartą“, kad atnaujintumėte apsaugą. „Atjungti“ leidžia naršyti be FuzeVPN."
+  },
+  "retryConnection": {
+    "message": "Bandyti dar kartą"
+  },
+  "killSwitch": {
+    "message": "Avarinis išjungiklis"
+  },
+  "killSwitchHelp": {
+    "message": "Blokuoja naujas žiniatinklio užklausas, jei nutrūksta VPN ryšys. Neįtrauktos svetainės lieka pasiekiamos ne per VPN."
+  },
+  "webRtcProtection": {
+    "message": "WebRTC apsauga"
+  },
+  "webRtcHelp": {
+    "message": "Padeda išlaikyti jūsų IP adresą privatų per internetinius skambučius. Kai kurie skambučiai gali neveikti. Tai išjungus, gali būti atskleistas tikrasis jūsų IP adresas."
+  },
+  "securityEffectiveState": {
+    "message": "$1 · $2"
+  },
+  "securityBlocked": {
+    "message": "Naršymas blokuojamas"
+  },
+  "securityNotBlocked": {
+    "message": "Naršymas neblokuojamas"
+  },
+  "securityWebRtcActive": {
+    "message": "WebRTC apribojimas aktyvus"
+  },
+  "securityWebRtcInactive": {
+    "message": "WebRTC apribojimas neaktyvus"
+  },
+  "localNetworkHelp": {
+    "message": "Apsaugos metu vietiniai IP adresai ir įprasti vietiniai pavadinimai blokuojami. Neįtrauktas domenas vis tiek gali suteikti prieigą prie vietinio tinklo. Sistemos IPv6 nustatymai nekeičiami."
+  },
+  "securityLimits": {
+    "message": "Apie šią apsaugą"
+  },
+  "killSwitchLimits": {
+    "message": "Tik ši naršyklė: esami ryšiai ir kai kurie vidiniai naršyklės ar kitų plėtinių ryšiai gali tęstis. Kitas plėtinys arba politika gali pakeisti tarpinį serverį, kol FuzeVPN dar nesureagavo. Išjungus plėtinį, apsauga pašalinama. Jokio blokavimo visos sistemos mastu."
+  },
+  "error_traffic_guard_failed": {
+    "message": "Nepavyko patikrinti naršymo blokavimo. Apsauga negarantuojama. Patikrinkite plėtinio leidimus."
+  },
+  "error_webrtc_control_unavailable": {
+    "message": "Nepavyko pritaikyti WebRTC apribojimo. Patikrinkite nustatymus, kitus plėtinius arba administratoriaus politiką."
+  },
+  "language": {
+    "message": "Kalba"
+  },
+  "languageAutomatic": {
+    "message": "Automatiškai — naršyklės kalba"
+  },
+  "languageHelp": {
+    "message": "Pakeitimai taikomi iš karto. Automatinis režimas naudoja naršyklės kalbą, kuri gali skirtis nuo sistemos kalbos."
+  },
+  "languageSaveError": {
+    "message": "Nepavyko išsaugoti kalbos. Paliktas ankstesnis pasirinkimas. Bandykite dar kartą."
+  },
+  "publicIp": {
+    "message": "Viešasis IP"
+  },
+  "vpnIp": {
+    "message": "VPN IP"
+  },
+  "ipChecking": {
+    "message": "Tikrinama…"
+  },
+  "ipUnavailable": {
+    "message": "Nepasiekiamas"
+  },
+  "ipLookupExplanation": {
+    "message": "IP tikrinamas per ipify arba, jei nepavyksta, per icanhazip, naudojant dabartinį ryšį. Naršymo istorija nesiunčiama."
+  },
+  "automaticLocation": {
+    "message": "Automatiškai"
+  },
+  "automaticLocationHelp": {
+    "message": "Geriausias pastarojo meto atsako laikas arba paskutinė jūsų vieta."
+  },
+  "automaticLocationName": {
+    "message": "Automatiškai · $1"
+  },
+  "searchLocations": {
+    "message": "Ieškoti šalies ar miesto"
+  },
+  "locationFilters": {
+    "message": "Filtruoti vietas"
+  },
+  "allLocations": {
+    "message": "Visos"
+  },
+  "favoriteLocations": {
+    "message": "Mėgstamos"
+  },
+  "recentLocations": {
+    "message": "Naujausios"
+  },
+  "noMatchingLocations": {
+    "message": "Paiešką atitinkančių vietų nėra."
+  },
+  "noFavoriteLocations": {
+    "message": "Pažymėkite žvaigždute, kad mėgstamos vietos būtų rodomos čia."
+  },
+  "noRecentLocations": {
+    "message": "Čia bus rodomos vietos, prie kurių neseniai jungėtės."
+  },
+  "addFavorite": {
+    "message": "Įtraukti į mėgstamas: $1"
+  },
+  "removeFavorite": {
+    "message": "Pašalinti iš mėgstamų: $1"
+  },
+  "unavailableFavoriteLocation": {
+    "message": "Nepasiekiama mėgstama vieta: $1"
+  },
+  "locationSaveError": {
+    "message": "Nepavyko užbaigti pakeitimo. Kai kurie nustatymai galėjo būti išsaugoti. Prieš bandydami dar kartą, patikrinkite rodomą pasirinkimą."
+  },
+  "siteExclusions": {
+    "message": "Neįtrauktos svetainės"
+  },
+  "siteExclusionsHelp": {
+    "message": "Šios svetainės naudoja jūsų ryšį be FuzeVPN, net jei VPN nutrūksta."
+  },
+  "siteExclusionsEnabled": {
+    "message": "Įjungti išimtis"
+  },
+  "siteExclusionInput": {
+    "message": "Domenas arba URL"
+  },
+  "siteExclusionPlaceholder": {
+    "message": "example.com"
+  },
+  "siteExclusionPreview": {
+    "message": "Pasirinktas domenas: $1"
+  },
+  "siteExclusionSubdomains": {
+    "message": "Įtraukti subdomenus"
+  },
+  "siteExclusionAdd": {
+    "message": "Pridėti svetainę"
+  },
+  "siteExclusionsEmpty": {
+    "message": "Neįtrauktų svetainių nėra. Pridėkite tik tas svetaines, kurias norite naudoti be VPN."
+  },
+  "siteExclusionsCount": {
+    "message": "Svetainės: $1 / 100"
+  },
+  "siteExclusionScopeSubdomains": {
+    "message": "Domenas ir subdomenai"
+  },
+  "siteExclusionScopeExact": {
+    "message": "Tik tikslus domenas"
+  },
+  "siteExclusionRemove": {
+    "message": "Pašalinti: $1"
+  },
+  "siteExclusionsDetails": {
+    "message": "Kaip veikia išimtys?"
+  },
+  "siteExclusionsResources": {
+    "message": "Kitų domenų ištekliai lieka apsaugoti. Neįtraukus puslapio, kitas jo turinys automatiškai neišskiriamas."
+  },
+  "siteExclusionsReload": {
+    "message": "Po pakeitimo iš naujo įkelkite svetainę. Esami ryšiai gali išlaikyti ankstesnį maršrutą."
+  },
+  "siteExclusionsWebRtc": {
+    "message": "WebRTC apsauga lieka visuotinis nustatymas, taip pat ir neįtrauktoms svetainėms."
+  },
+  "siteExclusionsLocal": {
+    "message": "Saugoma tik šioje naršyklėje ir išlieka atsijungus nuo paskyros."
+  },
+  "siteExclusionsOn": {
+    "message": "Išimtys įjungtos"
+  },
+  "siteExclusionsOff": {
+    "message": "Išimtys išjungtos"
+  },
+  "siteExclusionsSummary": {
+    "message": "Svetainės ne per VPN: $1"
+  },
+  "siteExclusionsPending": {
+    "message": "Taikomos išimtys…"
+  },
+  "siteExclusionsInterrupted": {
+    "message": "Pakeitimas nutrauktas. Laikinoji apsauga tebegalioja."
+  },
+  "siteExclusionsSaveError": {
+    "message": "Nepavyko užbaigti pakeitimo. Patikrinkite nustatymus ir bandykite dar kartą."
+  },
+  "siteExclusionsRetry": {
+    "message": "Bandyti dar kartą"
+  },
+  "siteExclusionInvalid": {
+    "message": "Įveskite galiojantį viešąjį domeną. IP adresai, vietiniai pavadinimai, pakaitos simboliai, viešosios galūnės ir rezervuoti domenai nepriimami."
+  },
+  "siteExclusionDuplicate": {
+    "message": "Šis domenas jau yra sąraše."
+  },
+  "siteExclusionsLimit": {
+    "message": "Pasiektas 100 svetainių limitas. Pašalinkite svetainę, kad galėtumėte pridėti kitą."
+  },
+  "statusProtectedExceptions": {
+    "message": "VPN aktyvus · išimtys: $1"
+  },
+  "statusBlockedExceptions": {
+    "message": "Pasiekiamos tik neįtrauktos svetainės"
+  },
+  "securityBlockedExceptions": {
+    "message": "Naršymas blokuojamas, išskyrus neįtrauktas svetaines"
+  },
+  "securityBlockUnverified": {
+    "message": "Blokavimas nepatikrintas"
+  },
+  "logoutLocalComplete": {
+    "message": "Vietinis atsijungimas baigtas."
+  },
+  "logoutApiSession": {
+    "message": "Dabartinė paskyros sesija"
+  },
+  "logoutProxySessions": {
+    "message": "Žinomos VPN sesijos"
+  },
+  "logoutRevocationPending": {
+    "message": "Atšaukiama…"
+  },
+  "logoutRevocationConfirmed": {
+    "message": "Atšaukimas patvirtintas"
+  },
+  "logoutRevocationUnconfirmed": {
+    "message": "Atšaukimas nepatvirtintas"
+  },
+  "logoutUnconfirmedHelp": {
+    "message": "Kai kurios nuotolinės sesijos gali likti aktyvios, kol baigsis jų galiojimas."
+  },
+  "deviceQuotaLoading": {
+    "message": "Įkeliamas įrenginių limitas…"
+  },
+  "deviceQuotaUnknown": {
+    "message": "Įrenginių limitas nepasiekiamas"
+  },
+  "error_proxy_creation_uncertain": {
+    "message": "Serveris nepatvirtino, kad naujas ryšys sukurtas. Automatinis pakartotinis jungimasis pristabdytas."
+  },
+  "siteExclusionsPreferencesReset": {
+    "message": "Išsaugotos svetainių išimtys buvo išvalytos, nes jų nepavyko nuskaityti. Iš naujo pridėkite svetaines, kurias norite neįtraukti."
+  },
+  "siteExclusionsConflict": {
+    "message": "Neįtrauktų svetainių sąrašas pasikeitė. Peržiūrėkite jį ir pakartokite pakeitimą."
+  },
+  "unavailableLocation": {
+    "message": "Vieta nepasiekiama"
+  },
+  "verificationSending": {
+    "message": "Siunčiamas patvirtinimo el. laiškas…"
+  },
+  "verificationSent": {
+    "message": "Patvirtinimo el. laiškas išsiųstas. Patikrinkite gautuosius ir šlamšto aplanką."
+  },
+  "error_login_requires_disconnect": {
+    "message": "Prieš prisijungdami prie kitos paskyros, nutraukite dabartinį VPN ryšį."
+  },
+  "error_storage_unavailable": {
+    "message": "Vietiniai paskyros nustatymai nepasiekiami. Bandykite dar kartą, kai naršyklės saugykla bus pasiekiama; išsaugota paskyra išlaikyta."
+  },
+  "diagnosticsAssistance": {
+    "message": "Pagalba"
+  },
+  "diagnosticsTitle": {
+    "message": "Diagnostika"
+  },
+  "diagnosticsIntro": {
+    "message": "Patikrinkite FuzeVPN ir dabartinį ryšį nekeisdami apsaugos."
+  },
+  "diagnosticsPrivacyTitle": {
+    "message": "Jūsų duomenys"
+  },
+  "diagnosticsPrivacy": {
+    "message": "Ataskaitos JSON pateikiamos techninės būsenos ir klaidų kodai, be slaptažodžių, prieigos raktų, el. pašto adresų, IP adresų, lankytų URL ar neįtrauktų domenų. Siuntimas autentifikuojamas, o ataskaita susiejama su jūsų paskyra. Apie tinklo duomenis skaitykite pranešime."
+  },
+  "diagnosticsAuto": {
+    "message": "Automatiškai siųsti svarbių klaidų ataskaitas"
+  },
+  "diagnosticsAutoHelp": {
+    "message": "Pagal numatytuosius nustatymus išjungta. Tai įjungus, siunčiamos paprastos šios paskyros techninės ataskaitos be naršymo istorijos. Išjunkite čia, kad sustabdytumėte automatinį siuntimą ir pašalintumėte laukiančias automatines ataskaitas."
+  },
+  "diagnosticsHistoryHelp": {
+    "message": "Techninė istorija saugoma vietoje: iki 200 įvykių viename žurnale per 10 minučių, net kai automatinis siuntimas išjungtas. Joje nėra naršymo istorijos; ji išvaloma rankiniu būdu, uždarius naršyklę arba pasikeitus paskyrai."
+  },
+  "diagnosticsHistoryCount": {
+    "message": "Vietiniai techniniai įvykiai: $1"
+  },
+  "diagnosticsConnectionLog": {
+    "message": "Eksportuoti ryšio žurnalą"
+  },
+  "diagnosticsAccountRequired": {
+    "message": "Prisijunkite, kad įjungtumėte siuntimą. Ataskaitą peržiūrėti ir eksportuoti galite ir be paskyros."
+  },
+  "diagnosticsRun": {
+    "message": "Vykdyti diagnostiką"
+  },
+  "diagnosticsClearHistory": {
+    "message": "Išvalyti vietinę istoriją"
+  },
+  "diagnosticsPreparing": {
+    "message": "Rengiama ataskaita…"
+  },
+  "diagnosticsReports": {
+    "message": "Ataskaitos"
+  },
+  "diagnosticsEmpty": {
+    "message": "Vietinių ataskaitų dar nėra."
+  },
+  "diagnosticsChooseReport": {
+    "message": "Pasirinkite ataskaitą"
+  },
+  "diagnosticsReportLabel": {
+    "message": "$1 · $2 · $3"
+  },
+  "diagnosticsTypeFull": {
+    "message": "Išsami ataskaita"
+  },
+  "diagnosticsTypeSimple": {
+    "message": "Klaidos ataskaita"
+  },
+  "diagnosticsSummary": {
+    "message": "Surinkta: $1. FuzeVPN versija $2."
+  },
+  "diagnosticsJson": {
+    "message": "Peržiūrėti ataskaitos turinį (JSON)"
+  },
+  "diagnosticsExport": {
+    "message": "Eksportuoti ataskaitą"
+  },
+  "diagnosticsDelete": {
+    "message": "Ištrinti vietinę ataskaitą"
+  },
+  "diagnosticsRetention": {
+    "message": "Vietinių ataskaitų galiojimas baigiasi po 24 valandų. Ištrynus čia, paslaugos jau gauta ataskaita neištrinama. Apie saugojimą serveryje ir ištrynimo prašymus skaitykite pranešime."
+  },
+  "diagnosticsConsent": {
+    "message": "Siųsti šią diagnostikos ataskaitą FuzeVPN"
+  },
+  "diagnosticsDataCollectionRequired": {
+    "message": "Kad būtų galima siųsti diagnostiką, Firefox turi leisti techninių duomenų rinkimą. Bandykite dar kartą ir suteikite šį leidimą."
+  },
+  "diagnosticsSendHelp": {
+    "message": "Siuntimas neprivalomas. Patvirtinus, jis gali būti kartojamas iki 24 valandų, jei yra galiojanti tos pačios paskyros sesija. Tolesnius bandymus galite atšaukti. Pavėluotas atšaukimas negarantuoja, kad serveris dar negavo ataskaitos."
+  },
+  "diagnosticsSend": {
+    "message": "Siųsti ataskaitą"
+  },
+  "diagnosticsCancel": {
+    "message": "Atšaukti siuntimą"
+  },
+  "diagnosticsReload": {
+    "message": "Iš naujo įkelti šį puslapį"
+  },
+  "diagnosticsUnavailable": {
+    "message": "Diagnostika nepasiekiama. Iš naujo įkelkite FuzeVPN naršyklės plėtinių tvarkytuvėje, tada vėl atidarykite šį puslapį. Jūsų VPN nepakeistas."
+  },
+  "diagnosticsQueueFull": {
+    "message": "Siuntimo eilė pilna. Ištrinkite vietinę ataskaitą arba palaukite, kol bus baigta siųsti laukianti ataskaita."
+  },
+  "diagnosticsContentUnavailable": {
+    "message": "Ataskaitos turinys nepasiekiamas. Jei įmanoma, eksportuokite vietinę ataskaitą ir susisiekite su pagalbos tarnyba."
+  },
+  "diagnosticsFailure": {
+    "message": "Nepavyko atlikti diagnostikos veiksmo. Jūsų VPN nepakeistas."
+  },
+  "diagnosticsChecks": {
+    "message": "Patikros"
+  },
+  "diagnosticsCheckFallback": {
+    "message": "Techninė patikra: $1"
+  },
+  "diagnosticsCheckLine": {
+    "message": "$1 — $2"
+  },
+  "diagnosticsProxy": {
+    "message": "Naršyklės tarpinis serveris"
+  },
+  "diagnosticsStorage": {
+    "message": "Vietinė saugykla"
+  },
+  "diagnosticsNetwork": {
+    "message": "Tinklo ryšys"
+  },
+  "diagnosticsCleanup": {
+    "message": "Sesijos išvalymas"
+  },
+  "diagnosticsResult_passed": {
+    "message": "Sėkminga"
+  },
+  "diagnosticsResult_failed": {
+    "message": "Nesėkminga"
+  },
+  "diagnosticsResult_skipped": {
+    "message": "Neatlikta"
+  },
+  "diagnosticsResult_unknown": {
+    "message": "Nežinoma"
+  },
+  "diagnosticsStatus_ready": {
+    "message": "Paruošta šiame įrenginyje"
+  },
+  "diagnosticsStatus_pending": {
+    "message": "Laukia siuntimo"
+  },
+  "diagnosticsStatus_sending": {
+    "message": "Siunčiama…"
+  },
+  "diagnosticsStatus_session_required": {
+    "message": "Laukiama galiojančios tos pačios paskyros sesijos"
+  },
+  "diagnosticsStatus_received": {
+    "message": "Paslauga gavo"
+  },
+  "diagnosticsStatus_failed": {
+    "message": "Siųsti nepavyko"
+  },
+  "diagnosticsStatus_cancelled": {
+    "message": "Siuntimas atšauktas"
+  },
+  "diagnosticsStatus_expired": {
+    "message": "Siuntimo terminas pasibaigė"
+  },
+  "diagnosticsReceivedAt": {
+    "message": "Gauta: $1"
+  },
+  "error_private_browsing_required": {
+    "message": "Firefox reikia šio leidimo VPN konfigūruoti, net ir įprastuose languose. Atidarykite about:addons → FuzeVPN, leiskite veikti privačiuose languose ir bandykite dar kartą."
+  },
+  "error_host_permissions_required": {
+    "message": "Naršyklėje Firefox atidarykite about:addons → FuzeVPN → Leidimai, leiskite prieigą prie visų svetainių ir bandykite dar kartą."
+  },
+  "cancelAction": {
+    "message": "Atšaukti"
+  },
+  "refreshLocations": {
+    "message": "Atnaujinti vietas"
+  },
+  "refreshingLocations": {
+    "message": "Atnaujinamos vietos…"
+  },
+  "locationsRefreshError": {
+    "message": "Nepavyko atnaujinti vietų sąrašo. Bandykite dar kartą."
+  },
+  "error_device_revoked_limit": {
+    "message": "Šis įrenginys atšauktas. Pasiektas įrenginių limitas: pašalinkite įrenginį."
+  },
+  "noAvailableLocations": {
+    "message": "Šiuo metu nėra prieinamų vietų. Netrukus bandykite dar kartą."
+  },
+  "noAvailableFavoriteLocations": {
+    "message": "Jūsų mėgstamos vietos laikinai nepasiekiamos."
+  },
+  "error_location_favorites_limit": {
+    "message": "Pasiektas 100 mėgstamų vietų limitas. Pašalinkite vieną mėgstamą vietą, kad galėtumėte pridėti kitą."
+  },
+  "error_server_full": {
+    "message": "Šis serveris pilnas. Pasirinkite kitą vietą."
+  },
+  "error_capacity_unavailable": {
+    "message": "Šiuo metu nepavyksta patvirtinti šio serverio pasiekiamumo. Netrukus bandykite dar kartą."
+  },
+  "locationHierarchyHelp": {
+    "message": "Pavadinimas pasirenka serverį; rodyklė parodo išsamią informaciją."
+  },
+  "locationCountrySelect": {
+    "message": "Pasirinkti pasiekiamą serverį: $1"
+  },
+  "locationCitySelect": {
+    "message": "Pasirinkti pasiekiamą serverį: $1"
+  },
+  "locationShowCities": {
+    "message": "Rodyti miestus: $1"
+  },
+  "locationHideCities": {
+    "message": "Slėpti miestus: $1"
+  },
+  "locationShowServers": {
+    "message": "Rodyti serverius: $1"
+  },
+  "locationHideServers": {
+    "message": "Slėpti serverius: $1"
+  },
+  "locationAvailableServers": {
+    "message": "Pasiekiami serveriai: $1"
+  },
+  "legalInformation": {
+    "message": "Teisinė informacija"
+  },
+  "privacyPolicy": {
+    "message": "Plėtinio privatumo pranešimas"
+  },
+  "termsAndConditions": {
+    "message": "Naudojimo ir pardavimo sąlygos"
+  },
+  "legalNotice": {
+    "message": "Teisinis pranešimas"
+  },
+  "contactSupport": {
+    "message": "Susisiekti su pagalbos tarnyba"
+  },
+  "webSignIn": {
+    "message": "Prisijungti prie FuzeVPN"
+  },
+  "webSignInDisconnect": {
+    "message": "Atjungti ir prisijungti"
+  },
+  "webSignInPending": {
+    "message": "Prisijungiama…"
+  },
+  "webSignInHelp": {
+    "message": "Prisijunkite arba sukurkite paskyrą naudodami Google ar el. paštą FuzeVPN klientų zonoje."
+  },
+  "webSignInDisconnectHelp": {
+    "message": "Šis mygtukas sustabdo naršyklės apsaugą, kad galėtumėte prisijungti per Google ar el. paštu. Prisijungimo metu naršymas nebus apsaugotas."
+  },
+  "webSignInStatus": {
+    "message": "Tęskite FuzeVPN prisijungimo lange. Kai baigsite, plėtinys atsinaujins automatiškai. Norėdami atšaukti, uždarykite tą langą."
+  },
+  "error_web_login_cancelled": {
+    "message": "Prisijungimas atšauktas. Bandykite dar kartą."
+  },
+  "error_web_login_timeout": {
+    "message": "Prisijungimas užtruko per ilgai. Bandykite dar kartą."
+  },
+  "error_web_login_unavailable": {
+    "message": "Prisijungimas per žiniatinklį nepasiekiamas. Bandykite vėliau."
+  },
+  "error_web_login_invalid_callback": {
+    "message": "Nepavyko patvirtinti prisijungimo. Pradėkite iš naujo plėtinyje."
+  },
+  "error_web_login_denied": {
+    "message": "Prisijungimas neleistas. Bandykite dar kartą."
+  },
+  "error_web_login_busy": {
+    "message": "Prieš bandydami dar kartą, uždarykite jau atidarytą prisijungimo langą."
+  },
+  "deviceKindFirefox": {
+    "message": "Naršyklė Firefox"
+  },
+  "generalPrivacyPolicy": {
+    "message": "Bendroji privatumo politika"
+  },
+  "privacyNoticeTitle": {
+    "message": "Privatumas FuzeVPN plėtinyje"
+  },
+  "privacyNoticeIntro": {
+    "message": "Šiame pranešime aprašomi šio plėtinio naudojami duomenys. Jis papildo toliau nurodytą bendrąją FuzeVPN privatumo politiką. Pasirenkamas diagnostikos siuntimas yra atskirtas nuo duomenų, reikalingų prisijungti ir naudoti VPN."
+  },
+  "privacyNoticeUpdated": {
+    "message": "Pranešimas atnaujintas 2026 m. spalio 19 d."
+  },
+  "privacyNoticeServiceTitle": {
+    "message": "Paskyra ir VPN paslauga"
+  },
+  "privacyNoticeService": {
+    "message": "Plėtinys keičiasi autentifikavimo, paskyros, prenumeratos, įrenginio ir tarpinio serverio sesijos duomenimis su api.fuzevpn.com. VPN tarpinis serveris perduoda per jį nukreiptą srautą. Šie ryšiai atskleidžia tinklo metaduomenis juos gaunančiai paslaugai; šiame pranešime neduodama jokio atskiro pažado dėl serverio žurnalų."
+  },
+  "privacyNoticeLocalTitle": {
+    "message": "Naršyklėje saugomi duomenys"
+  },
+  "privacyNoticeLocal": {
+    "message": "Naršyklės saugykloje laikoma jūsų sesija, paskyros duomenys, nuostatos, neįtrauktos svetainės ir įrenginio tapatybė. Techniniai žurnalai vietoje saugomi iki 10 minučių, net kai automatinis ataskaitų siuntimas išjungtas. Diagnostikos juodraščių ir eilėje laukiančių ataskaitų galiojimas vietoje baigiasi po 24 valandų; valymas atliekamas, kai plėtinys gali veikti."
+  },
+  "privacyNoticeIpTitle": {
+    "message": "Viešojo IP tikrinimas ir trečiosios šalys"
+  },
+  "privacyNoticeIp": {
+    "message": "IP rodymas ir tinklo diagnostika kreipiasi į api.ipify.org. IP rodymui atsarginiu variantu gali būti naudojamas ipv4.icanhazip.com. Teikėjas gauna ryšio IP ir įprastus užklausos metaduomenis: tiesioginiu režimu – jūsų viešąjį IP, o naudojant tarpinį serverį – VPN išėjimo IP. Šiose užklausose nėra slapukų ir nukreipimo adresų, nesiunčiamas joks paskyros prieigos raktas ar naršymo istorija."
+  },
+  "privacyNoticeReportsTitle": {
+    "message": "Ką apima diagnostikos ataskaitos"
+  },
+  "privacyNoticeReports": {
+    "message": "Ataskaitose gali būti atsitiktinis ataskaitos identifikatorius, laiko žymos, plėtinio ir naršyklės versijos, operacinės sistemos šeima ir architektūra, ryšio ir apsaugos būsenos, klaidų kodai, skaičiai, trukmės ir patikrų rezultatai. Išsamiose ataskaitose gali būti naujausi techniniai įvykiai. Jų JSON neapima slaptažodžių, autentifikavimo prieigos raktų, el. pašto adresų, IP adresų, lankytų URL ir neįtrauktų domenų. Prieš siųsdami išsamią ataskaitą, galite ją peržiūrėti ir eksportuoti."
+  },
+  "privacyNoticeAccountTitle": {
+    "message": "Gavėjas ir susiejimas su paskyra"
+  },
+  "privacyNoticeAccount": {
+    "message": "Ataskaitos siunčiamos FuzeVPN adresu api.fuzevpn.com/v1/diagnostics autentifikuotu ryšiu. Šis API ryšys apeina VPN tarpinį serverį: FuzeVPN gauna jūsų tiesioginį viešąjį IP, net kai VPN aktyvus. Ataskaitos susiejamos su prisijungusia paskyra ir nėra anoniminės. Autentifikavimo antraštė ir IP yra atskirti nuo ataskaitos JSON. Sėkmingas gavimas patvirtina tik tai, kad ataskaitą priėmė tas galinis taškas, o ne tai, kad ją perskaitė pagalbos tarnybos darbuotojas."
+  },
+  "privacyNoticeChoiceTitle": {
+    "message": "Pasirenkamas siuntimas ir sutikimo atšaukimas"
+  },
+  "privacyNoticeChoice": {
+    "message": "Automatinis siuntimas pagal numatytuosius nustatymus išjungtas. Jį įjungus leidžiama siųsti paprastas tos paskyros klaidų ataskaitas. Norint rankiniu būdu išsiųsti išsamią ataskaitą, reikia pažymėti siuntimo žymimąjį langelį. Firefox taip pat reikalauja savo pasirenkamo techninių duomenų leidimo. Išjunkite automatinį siuntimą, kad jį sustabdytumėte ir pašalintumėte laukiančias automatines ataskaitas; atskirus laukiančius siuntimus atšaukite atskirai. Atsisakius diagnostikos siuntimo, VPN naudotis vis tiek galima."
+  },
+  "privacyNoticeDeleteTitle": {
+    "message": "Vietinis ištrynimas ir atsisiųsti failai"
+  },
+  "privacyNoticeDelete": {
+    "message": "Skiltyje „Diagnostika“ išvalykite techninę istoriją arba ištrinkite atskirą vietinę ataskaitą. Išvalius istoriją, esamos ataskaitų kopijos neištrinamos. Atšaukus ar ištrynus vietoje, negalima atšaukti paslaugos jau gautų duomenų, įskaitant įkėlimą, kuris pasiekė serverį prieš atšaukimą. Atsisiųsti eksporto failai yra atskiri failai, kuriuos turite ištrinti patys."
+  },
+  "privacyNoticeServerTitle": {
+    "message": "Saugojimas serveryje ir prašymai"
+  },
+  "privacyNoticeServer": {
+    "message": "Šis plėtinys nekontroliuoja ir netikrina saugojimo serveryje ar ištrynimo serverio pusėje. Apie FuzeVPN taikomą saugojimo laikotarpį ir prašymus dėl jau išsiųstų ataskaitų skaitykite bendrojoje privatumo politikoje arba susisiekite su FuzeVPN. Šiame pranešime negarantuojamas joks fiksuotas saugojimo serveryje laikotarpis."
+  },
+  "privacyNoticeSupportTitle": {
+    "message": "Diagnostika ir pagalba yra atskiros"
+  },
+  "privacyNoticeSupport": {
+    "message": "Išsiuntus diagnostikos ataskaitą, iš plėtinio savaime nesiunčiama jokia žinutė pagalbos tarnybai. Norėdami paaiškinti problemą arba paprašyti ištrinti gautą ataskaitą, naudokite toliau nurodytą FuzeVPN kontaktinį kanalą. Jei nuspręsite eksportuotu failu pasidalyti kitu kanalu, pirmiausia patikrinkite jo turinį."
+  },
+  "privacyNoticeManage": {
+    "message": "Atidaryti diagnostiką"
+  },
+  "privacyNoticeLinksTitle": {
+    "message": "Paslaugos politika ir kontaktai"
+  },
+  "theme": {
+    "message": "Tema"
+  },
+  "themeSystem": {
+    "message": "Sistemos"
+  },
+  "themeLight": {
+    "message": "Šviesi"
+  },
+  "themeDark": {
+    "message": "Tamsi"
+  },
+  "switchToDarkTheme": {
+    "message": "Perjungti į tamsią temą"
+  },
+  "switchToLightTheme": {
+    "message": "Perjungti į šviesią temą"
+  }
+}

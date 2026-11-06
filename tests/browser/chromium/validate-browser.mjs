@@ -35,7 +35,7 @@ const suites = [
     script: "browser-diagnostics-check.mjs",
     output: "DIAGNOSTICS_OUTPUT",
     report: "report.json",
-    scope: "Built diagnostics page; synthetic runtime, thirty locales and JSON download",
+    scope: "Built diagnostics page; synthetic runtime, fifty locales and JSON download",
   },
   {
     name: "diagnostics-integration",
@@ -104,7 +104,7 @@ const suites = [
     output: "WEB_LOGIN_UI_OUTPUT",
     report: "report.json",
     scope:
-      "Built popup; centralized web login, explicit protection release, thirty locales and synthetic runtime",
+      "Built popup; centralized web login, explicit protection release, fifty locales and synthetic runtime",
   },
   {
     name: "web-auth-integration",
@@ -161,7 +161,7 @@ const suites = [
     output: "LOCATION_HIERARCHY_OUTPUT",
     report: "report.json",
     scope:
-      "Built popup; country and city selection, disclosure, keyboard, refresh and thirty locales",
+      "Built popup; country and city selection, disclosure, keyboard, refresh and fifty locales",
   },
 ];
 const args = process.argv.slice(2);

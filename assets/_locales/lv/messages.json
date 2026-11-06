@@ -1,0 +1,929 @@
+{
+  "extensionName": {
+    "message": "FuzeVPN"
+  },
+  "extensionDescription": {
+    "message": "Saglabājiet privātumu un stipriniet drošību ar vienu klikšķi."
+  },
+  "siteExclusionsReloadRequired": {
+    "message": "Lai pabeigtu atjaunināšanu un izmantotu vietņu izņēmumus, atkārtoti ielādējiet FuzeVPN pārlūka paplašinājumu pārvaldniekā."
+  },
+  "extensionCommunicationError": {
+    "message": "Paplašinājums nereaģē. Aizveriet šo logu un atkārtoti ielādējiet FuzeVPN pārlūka paplašinājumu pārvaldniekā."
+  },
+  "actionDisconnected": {
+    "message": "FuzeVPN — Atvienots"
+  },
+  "actionConnected": {
+    "message": "FuzeVPN — Aizsargāts šajā pārlūkā"
+  },
+  "actionReconnecting": {
+    "message": "FuzeVPN — Atkārtota savienošana"
+  },
+  "actionError": {
+    "message": "FuzeVPN — Nepieciešama uzmanība"
+  },
+  "browserProtection": {
+    "message": "Pārlūka aizsardzība"
+  },
+  "loginTitle": {
+    "message": "Laipni lūdzam FuzeVPN"
+  },
+  "loginSubtitle": {
+    "message": "Pierakstieties, lai aizsargātu pārlūkošanu šajā pārlūkā."
+  },
+  "email": {
+    "message": "E-pasta adrese"
+  },
+  "emailPlaceholder": {
+    "message": "vards@example.com"
+  },
+  "password": {
+    "message": "Parole"
+  },
+  "signIn": {
+    "message": "Pierakstīties"
+  },
+  "signingIn": {
+    "message": "Notiek pierakstīšanās…"
+  },
+  "forgotPassword": {
+    "message": "Aizmirsāt paroli?"
+  },
+  "createAccount": {
+    "message": "Izveidot kontu"
+  },
+  "settings": {
+    "message": "Iestatījumi"
+  },
+  "close": {
+    "message": "Aizvērt"
+  },
+  "statusDisconnected": {
+    "message": "Atvienots"
+  },
+  "statusConnecting": {
+    "message": "Notiek savienošana…"
+  },
+  "statusChanging": {
+    "message": "Notiek atrašanās vietas maiņa…"
+  },
+  "statusProtected": {
+    "message": "Aizsargāts šajā pārlūkā"
+  },
+  "statusRefreshing": {
+    "message": "Notiek droša atjaunošana…"
+  },
+  "statusDisconnecting": {
+    "message": "Notiek atvienošana…"
+  },
+  "statusError": {
+    "message": "Aizsardzība apturēta"
+  },
+  "browserOnlyDetail": {
+    "message": "Aizsardzība šim pārlūkam."
+  },
+  "location": {
+    "message": "Atrašanās vieta"
+  },
+  "change": {
+    "message": "Mainīt"
+  },
+  "noLocation": {
+    "message": "Nav pieejamu atrašanās vietu"
+  },
+  "protectBrowser": {
+    "message": "Aizsargāt pārlūku"
+  },
+  "disconnect": {
+    "message": "Atvienot"
+  },
+  "subscription": {
+    "message": "Abonements"
+  },
+  "refreshSubscription": {
+    "message": "Atsvaidzināt abonementu"
+  },
+  "refreshingSubscription": {
+    "message": "Notiek abonementa atsvaidzināšana…"
+  },
+  "subscriptionActive": {
+    "message": "Aktīvs"
+  },
+  "subscriptionInactive": {
+    "message": "Neaktīvs"
+  },
+  "expiresOn": {
+    "message": "Derīgs līdz: $1"
+  },
+  "noExpiry": {
+    "message": "Nav derīguma beigu datuma"
+  },
+  "browserOnlyNotice": {
+    "message": "Tikai šis pārlūks. Citas lietotnes un pārlūki netiek aizsargāti."
+  },
+  "resendVerification": {
+    "message": "Sūtīt e-pastu vēlreiz"
+  },
+  "incognitoHelp": {
+    "message": "Privātā pārlūkošana izmanto to pašu aizsardzību tikai tad, ja pārlūka iestatījumos paplašinājumam ir atļauts darboties privātajā režīmā."
+  },
+  "manageAccount": {
+    "message": "Pārvaldīt manu kontu"
+  },
+  "account": {
+    "message": "Konts"
+  },
+  "devices": {
+    "message": "Ierīces"
+  },
+  "manageDevices": {
+    "message": "Pārvaldīt ierīces"
+  },
+  "refreshDevices": {
+    "message": "Atsvaidzināt ierīces"
+  },
+  "deviceCount": {
+    "message": "Ierīces: $1 / $2"
+  },
+  "loadingDevices": {
+    "message": "Notiek ierīču ielāde…"
+  },
+  "noDevices": {
+    "message": "Nav aktīvu ierīču."
+  },
+  "currentDevice": {
+    "message": "Šī ierīce"
+  },
+  "deviceKindBrowser": {
+    "message": "Pārlūka paplašinājums"
+  },
+  "deviceKindVpn": {
+    "message": "VPN ierīce"
+  },
+  "profile_browser_proxy": {
+    "message": "Pārlūka starpniekserveris"
+  },
+  "profile_wireguard": {
+    "message": "WireGuard"
+  },
+  "profile_openvpn": {
+    "message": "OpenVPN"
+  },
+  "none": {
+    "message": "nav"
+  },
+  "deviceCreatedOn": {
+    "message": "Izveidots: $1"
+  },
+  "deleteDevice": {
+    "message": "Dzēst ierīci"
+  },
+  "deleteDeviceNamed": {
+    "message": "Dzēst ierīci $1"
+  },
+  "confirmDeleteDevice": {
+    "message": "Vai noņemt “$1”? Tās VPN savienojumi tiks pārtraukti un profili noņemti."
+  },
+  "resetDevice": {
+    "message": "Atiestatīt ierīci"
+  },
+  "confirmResetDevice": {
+    "message": "Vai atiestatīt šo paplašinājumu? Nākamajā lietošanas reizē tas tiks reģistrēts kā jauna ierīce."
+  },
+  "signOutAccount": {
+    "message": "Izrakstīties no konta"
+  },
+  "chooseLocation": {
+    "message": "Izvēlieties atrašanās vietu"
+  },
+  "error_invalid_credentials": {
+    "message": "E-pasta adrese vai parole nav pareiza."
+  },
+  "error_unauthorized": {
+    "message": "Jūsu sesija ir beigusies. Lūdzu, pierakstieties vēlreiz."
+  },
+  "error_email_verification_required": {
+    "message": "Pirms aizsardzības ieslēgšanas apstipriniet savu e-pasta adresi."
+  },
+  "errorVerificationCooldown": {
+    "message": "Jaunu e-pastu varēs pieprasīt pēc $1 s."
+  },
+  "error_verification_email_cooldown": {
+    "message": "Lūdzu, uzgaidiet, pirms pieprasāt vēl vienu e-pastu."
+  },
+  "error_subscription_required": {
+    "message": "Lai aizsargātu šo pārlūku, nepieciešams aktīvs abonements."
+  },
+  "error_device_limit": {
+    "message": "Sasniegts ierīču limits. Lūdzu, noņemiet kādu ierīci."
+  },
+  "error_device_identity_revoked": {
+    "message": "Šī ierīce vairs nav autorizēta. Mēģiniet savienoties vēlreiz."
+  },
+  "error_device_proof_invalid": {
+    "message": "Neizdevās verificēt šo ierīci. Pārbaudiet datora datumu un laiku un mēģiniet vēlreiz."
+  },
+  "error_device_proof_replayed": {
+    "message": "Šis pieprasījums jau ir apstrādāts. Mēģiniet vēlreiz."
+  },
+  "error_invalid_device": {
+    "message": "Šī ierīce netika atpazīta. Mēģiniet savienoties vēlreiz."
+  },
+  "error_device_exists": {
+    "message": "Šīs ierīces identitāte jau ir saistīta ar citu kontu."
+  },
+  "error_not_found": {
+    "message": "Šī darbība vairs nav pieejama. Mēģiniet vēlreiz."
+  },
+  "error_invalid_location": {
+    "message": "Šī atrašanās vieta nav pieejama. Izvēlieties citu."
+  },
+  "error_rate_limited": {
+    "message": "Pārāk daudz mēģinājumu. Uzgaidiet brīdi un mēģiniet vēlreiz."
+  },
+  "error_proxy_unavailable": {
+    "message": "Šis serveris īslaicīgi nav pieejams. Mēģiniet vēlreiz pēc brīža."
+  },
+  "error_api_token_expired": {
+    "message": "Jūsu konta sesija ir beigusies. Lūdzu, pierakstieties vēlreiz."
+  },
+  "error_network_error": {
+    "message": "Tīkls nav pieejams. Pārbaudiet interneta savienojumu."
+  },
+  "error_request_timeout": {
+    "message": "Pakalpojums atbildēja pārāk ilgi. Mēģiniet vēlreiz."
+  },
+  "error_invalid_response": {
+    "message": "Pakalpojums sniedza neparedzētu atbildi."
+  },
+  "error_proxy_certificate_invalid": {
+    "message": "Neizdevās verificēt servera drošību. Savienojums ir apturēts."
+  },
+  "error_proxy_controlled_by_extension": {
+    "message": "Pārlūka starpniekserveri pašlaik pārvalda cits paplašinājums."
+  },
+  "error_proxy_controlled_by_policy": {
+    "message": "Administratora politika neļauj FuzeVPN mainīt starpniekserveri."
+  },
+  "error_proxy_authentication_failed": {
+    "message": "Serveris nepieņēma savienojumu. Mēģiniet savienoties vēlreiz."
+  },
+  "error_session_expired": {
+    "message": "Jūsu aizsargātā savienojuma derīgums ir beidzies. Savienojieties vēlreiz."
+  },
+  "error_email_delivery_unavailable": {
+    "message": "E-pastu pašlaik nevar nosūtīt."
+  },
+  "error_unknown_error": {
+    "message": "Radās neparedzēta kļūda. Mēģiniet vēlreiz."
+  },
+  "actionBlocked": {
+    "message": "FuzeVPN — Pārlūkošana bloķēta"
+  },
+  "statusBlockedRetry": {
+    "message": "Pārlūkošana pauzēta — notiek atkārtota savienošana"
+  },
+  "statusBlockedAction": {
+    "message": "Pārlūkošana pauzēta — pārbaudiet savienojumu"
+  },
+  "statusProtectionUnavailable": {
+    "message": "Aizsardzība nav pieejama — pārlūkošana netiek bloķēta"
+  },
+  "recoveryHelp": {
+    "message": "Mēģiniet vēlreiz, lai atsāktu aizsardzību. Atvienojoties varat pārlūkot bez FuzeVPN."
+  },
+  "retryConnection": {
+    "message": "Mēģināt vēlreiz"
+  },
+  "killSwitch": {
+    "message": "Avārijas slēdzis"
+  },
+  "killSwitchHelp": {
+    "message": "Bloķē jaunus tīmekļa pieprasījumus, ja VPN savienojums pārtrūkst. Izslēgtās vietnes paliek pieejamas ārpus VPN."
+  },
+  "webRtcProtection": {
+    "message": "WebRTC aizsardzība"
+  },
+  "webRtcHelp": {
+    "message": "Palīdz saglabāt jūsu IP adresi privātu tīmekļa zvanu laikā. Daži zvani var nedarboties. Izslēdzot šo funkciju, var tikt atklāta jūsu īstā IP adrese."
+  },
+  "securityEffectiveState": {
+    "message": "$1 · $2"
+  },
+  "securityBlocked": {
+    "message": "Pārlūkošana bloķēta"
+  },
+  "securityNotBlocked": {
+    "message": "Pārlūkošana nav bloķēta"
+  },
+  "securityWebRtcActive": {
+    "message": "WebRTC ierobežojums aktīvs"
+  },
+  "securityWebRtcInactive": {
+    "message": "WebRTC ierobežojums neaktīvs"
+  },
+  "localNetworkHelp": {
+    "message": "Aizsardzības laikā tiek bloķētas lokālās IP adreses un izplatītie lokālie nosaukumi. Izslēgts domēns tomēr var nodrošināt piekļuvi lokālajam tīklam. Sistēmas IPv6 iestatījumi netiek mainīti."
+  },
+  "securityLimits": {
+    "message": "Par šo aizsardzību"
+  },
+  "killSwitchLimits": {
+    "message": "Tikai šis pārlūks: esošie savienojumi un daļa pārlūka iekšējās vai citu paplašinājumu saziņas var turpināties. Cits paplašinājums vai politika var aizstāt starpniekserveri, pirms FuzeVPN reaģē. Atspējojot paplašinājumu, aizsardzība tiek noņemta. Nav visas sistēmas bloķēšanas."
+  },
+  "error_traffic_guard_failed": {
+    "message": "Neizdevās verificēt pārlūkošanas bloķēšanu. Aizsardzība netiek garantēta. Pārbaudiet paplašinājuma atļaujas."
+  },
+  "error_webrtc_control_unavailable": {
+    "message": "Neizdevās piemērot WebRTC ierobežojumu. Pārbaudiet iestatījumus, citus paplašinājumus vai administratora politiku."
+  },
+  "language": {
+    "message": "Valoda"
+  },
+  "languageAutomatic": {
+    "message": "Automātiski — pārlūka valoda"
+  },
+  "languageHelp": {
+    "message": "Izmaiņas stājas spēkā nekavējoties. Automātiskais režīms izmanto pārlūka valodu, kas var atšķirties no sistēmas valodas."
+  },
+  "languageSaveError": {
+    "message": "Neizdevās saglabāt valodu. Iepriekšējā izvēle ir saglabāta. Mēģiniet vēlreiz."
+  },
+  "publicIp": {
+    "message": "Publiskā IP"
+  },
+  "vpnIp": {
+    "message": "VPN IP adrese"
+  },
+  "ipChecking": {
+    "message": "Notiek pārbaude…"
+  },
+  "ipUnavailable": {
+    "message": "Nav pieejams"
+  },
+  "ipLookupExplanation": {
+    "message": "IP tiek pārbaudīta caur jūsu pašreizējo savienojumu, izmantojot ipify vai rezerves pakalpojumu icanhazip. Pārlūkošanas vēsture netiek sūtīta."
+  },
+  "automaticLocation": {
+    "message": "Automātiski"
+  },
+  "automaticLocationHelp": {
+    "message": "Labākais nesenais atbildes laiks vai jūsu pēdējā atrašanās vieta."
+  },
+  "automaticLocationName": {
+    "message": "Automātiski · $1"
+  },
+  "searchLocations": {
+    "message": "Meklēt valsti vai pilsētu"
+  },
+  "locationFilters": {
+    "message": "Filtrēt atrašanās vietas"
+  },
+  "allLocations": {
+    "message": "Visas"
+  },
+  "favoriteLocations": {
+    "message": "Izlase"
+  },
+  "recentLocations": {
+    "message": "Nesenās"
+  },
+  "noMatchingLocations": {
+    "message": "Meklēšanas vaicājumam neatbilst neviena atrašanās vieta."
+  },
+  "noFavoriteLocations": {
+    "message": "Atzīmējiet ar zvaigznīti, lai šeit glabātu iecienītās atrašanās vietas."
+  },
+  "noRecentLocations": {
+    "message": "Šeit tiks rādītas nesen izmantotās atrašanās vietas."
+  },
+  "addFavorite": {
+    "message": "Pievienot izlasei: $1"
+  },
+  "removeFavorite": {
+    "message": "Noņemt no izlases: $1"
+  },
+  "unavailableFavoriteLocation": {
+    "message": "Izlases vieta nav pieejama: $1"
+  },
+  "locationSaveError": {
+    "message": "Izmaiņas neizdevās pabeigt. Daži iestatījumi var būt saglabāti. Pirms mēģināt vēlreiz, pārbaudiet attēloto izvēli."
+  },
+  "siteExclusions": {
+    "message": "Izslēgtās vietnes"
+  },
+  "siteExclusionsHelp": {
+    "message": "Šīs vietnes izmanto jūsu savienojumu bez FuzeVPN, pat ja VPN pārtrūkst."
+  },
+  "siteExclusionsEnabled": {
+    "message": "Iespējot izņēmumus"
+  },
+  "siteExclusionInput": {
+    "message": "Domēns vai URL"
+  },
+  "siteExclusionPlaceholder": {
+    "message": "example.com"
+  },
+  "siteExclusionPreview": {
+    "message": "Atlasītais domēns: $1"
+  },
+  "siteExclusionSubdomains": {
+    "message": "Iekļaut apakšdomēnus"
+  },
+  "siteExclusionAdd": {
+    "message": "Pievienot vietni"
+  },
+  "siteExclusionsEmpty": {
+    "message": "Nav izslēgtu vietņu. Pievienojiet tikai tās vietnes, kuras vēlaties izmantot bez VPN."
+  },
+  "siteExclusionsCount": {
+    "message": "Vietnes: $1 / 100"
+  },
+  "siteExclusionScopeSubdomains": {
+    "message": "Domēns un apakšdomēni"
+  },
+  "siteExclusionScopeExact": {
+    "message": "Tikai precīzs domēns"
+  },
+  "siteExclusionRemove": {
+    "message": "Noņemt $1"
+  },
+  "siteExclusionsDetails": {
+    "message": "Kā darbojas izņēmumi?"
+  },
+  "siteExclusionsResources": {
+    "message": "Resursi no citiem domēniem paliek aizsargāti. Lapas izslēgšana automātiski neizslēdz tās pārējo saturu."
+  },
+  "siteExclusionsReload": {
+    "message": "Pēc izmaiņām atkārtoti ielādējiet vietni. Esošie savienojumi var saglabāt iepriekšējo maršrutu."
+  },
+  "siteExclusionsWebRtc": {
+    "message": "WebRTC aizsardzība paliek globāls iestatījums, arī izslēgtajām vietnēm."
+  },
+  "siteExclusionsLocal": {
+    "message": "Tiek saglabāts tikai šajā pārlūkā un paliek arī pēc izrakstīšanās no konta."
+  },
+  "siteExclusionsOn": {
+    "message": "Izņēmumi iespējoti"
+  },
+  "siteExclusionsOff": {
+    "message": "Izņēmumi atspējoti"
+  },
+  "siteExclusionsSummary": {
+    "message": "Vietnes ārpus VPN: $1"
+  },
+  "siteExclusionsPending": {
+    "message": "Notiek izņēmumu piemērošana…"
+  },
+  "siteExclusionsInterrupted": {
+    "message": "Izmaiņas tika pārtrauktas. Pagaidu aizsardzība paliek spēkā."
+  },
+  "siteExclusionsSaveError": {
+    "message": "Neizdevās pabeigt izmaiņas. Pārbaudiet iestatījumus un mēģiniet vēlreiz."
+  },
+  "siteExclusionsRetry": {
+    "message": "Mēģināt vēlreiz"
+  },
+  "siteExclusionInvalid": {
+    "message": "Ievadiet derīgu publisku domēnu. IP adreses, lokālie nosaukumi, aizstājējzīmes, publiskie sufiksi un rezervētie domēni netiek pieņemti."
+  },
+  "siteExclusionDuplicate": {
+    "message": "Šis domēns jau ir sarakstā."
+  },
+  "siteExclusionsLimit": {
+    "message": "Sasniegts 100 vietņu limits. Lai pievienotu citu, noņemiet kādu vietni."
+  },
+  "statusProtectedExceptions": {
+    "message": "VPN aktīvs · izņēmumi: $1"
+  },
+  "statusBlockedExceptions": {
+    "message": "Pieejamas ir tikai izslēgtās vietnes"
+  },
+  "securityBlockedExceptions": {
+    "message": "Pārlūkošana bloķēta, izņemot izslēgtās vietnes"
+  },
+  "securityBlockUnverified": {
+    "message": "Bloķēšana nav verificēta"
+  },
+  "logoutLocalComplete": {
+    "message": "Lokālā izrakstīšanās pabeigta."
+  },
+  "logoutApiSession": {
+    "message": "Pašreizējā konta sesija"
+  },
+  "logoutProxySessions": {
+    "message": "Zināmās VPN sesijas"
+  },
+  "logoutRevocationPending": {
+    "message": "Notiek atsaukšana…"
+  },
+  "logoutRevocationConfirmed": {
+    "message": "Atsaukšana apstiprināta"
+  },
+  "logoutRevocationUnconfirmed": {
+    "message": "Atsaukšana nav apstiprināta"
+  },
+  "logoutUnconfirmedHelp": {
+    "message": "Dažas attālās sesijas var palikt aktīvas līdz to derīguma beigām."
+  },
+  "deviceQuotaLoading": {
+    "message": "Notiek ierīču limita ielāde…"
+  },
+  "deviceQuotaUnknown": {
+    "message": "Ierīču limits nav pieejams"
+  },
+  "error_proxy_creation_uncertain": {
+    "message": "Serveris neapstiprināja jaunā savienojuma izveidi. Automātiskā atkārtotā savienošana ir apturēta."
+  },
+  "siteExclusionsPreferencesReset": {
+    "message": "Jūsu saglabātie vietņu izņēmumi tika atiestatīti, jo tos neizdevās nolasīt. Pievienojiet izslēdzamās vietnes vēlreiz."
+  },
+  "siteExclusionsConflict": {
+    "message": "Izslēgto vietņu saraksts ir mainījies. Pārskatiet to un mēģiniet veikt izmaiņas vēlreiz."
+  },
+  "unavailableLocation": {
+    "message": "Atrašanās vieta nav pieejama"
+  },
+  "verificationSending": {
+    "message": "Notiek verifikācijas e-pasta sūtīšana…"
+  },
+  "verificationSent": {
+    "message": "Verifikācijas e-pasts nosūtīts. Pārbaudiet iesūtni un mēstuļu mapi."
+  },
+  "error_login_requires_disconnect": {
+    "message": "Pirms pierakstīšanās citā kontā atvienojiet pašreizējo VPN savienojumu."
+  },
+  "error_storage_unavailable": {
+    "message": "Lokālie konta iestatījumi nav pieejami. Mēģiniet vēlreiz, kad pārlūka krātuve būs pieejama; jūsu saglabātais konts nav zudis."
+  },
+  "diagnosticsAssistance": {
+    "message": "Atbalsts"
+  },
+  "diagnosticsTitle": {
+    "message": "Diagnostika"
+  },
+  "diagnosticsIntro": {
+    "message": "Pārbaudiet FuzeVPN un pašreizējo savienojumu, nemainot aizsardzību."
+  },
+  "diagnosticsPrivacyTitle": {
+    "message": "Jūsu dati"
+  },
+  "diagnosticsPrivacy": {
+    "message": "Ziņojuma JSON satur tehniskos stāvokļus un kļūdu kodus bez parolēm, marķieriem, e-pasta adresēm, IP adresēm, apmeklētajiem URL un izslēgtajiem domēniem. Sūtīšana ir autentificēta un sasaista ziņojumu ar jūsu kontu. Informāciju par tīkla datiem skatiet privātuma paziņojumā."
+  },
+  "diagnosticsAuto": {
+    "message": "Automātiski sūtīt svarīgus kļūdu ziņojumus"
+  },
+  "diagnosticsAutoHelp": {
+    "message": "Pēc noklusējuma izslēgts. Ieslēdzot šo opciju, par šo kontu tiek sūtīti vienkārši tehniski ziņojumi bez pārlūkošanas vēstures. Izslēdziet to šeit, lai pārtrauktu automātisko sūtīšanu un noņemtu gaidošos automātiskos ziņojumus."
+  },
+  "diagnosticsHistoryHelp": {
+    "message": "Tehniskā vēsture paliek lokāli: līdz 200 notikumiem katrā žurnālā par pēdējām 10 minūtēm, pat ja automātiskā sūtīšana ir izslēgta. Tā nesatur pārlūkošanas vēsturi un tiek notīrīta manuāli, aizverot pārlūku vai mainot kontu."
+  },
+  "diagnosticsHistoryCount": {
+    "message": "Lokālie tehniskie notikumi: $1"
+  },
+  "diagnosticsConnectionLog": {
+    "message": "Eksportēt savienojuma žurnālu"
+  },
+  "diagnosticsAccountRequired": {
+    "message": "Pierakstieties, lai iespējotu sūtīšanu. Ziņojumu varat skatīt un eksportēt arī bez konta."
+  },
+  "diagnosticsRun": {
+    "message": "Palaist diagnostiku"
+  },
+  "diagnosticsClearHistory": {
+    "message": "Notīrīt lokālo vēsturi"
+  },
+  "diagnosticsPreparing": {
+    "message": "Notiek ziņojuma sagatavošana…"
+  },
+  "diagnosticsReports": {
+    "message": "Ziņojumi"
+  },
+  "diagnosticsEmpty": {
+    "message": "Vēl nav lokālu ziņojumu."
+  },
+  "diagnosticsChooseReport": {
+    "message": "Izvēlieties ziņojumu"
+  },
+  "diagnosticsReportLabel": {
+    "message": "$1 · $2 · $3"
+  },
+  "diagnosticsTypeFull": {
+    "message": "Pilns ziņojums"
+  },
+  "diagnosticsTypeSimple": {
+    "message": "Kļūdas ziņojums"
+  },
+  "diagnosticsSummary": {
+    "message": "Savākts: $1. FuzeVPN versija $2."
+  },
+  "diagnosticsJson": {
+    "message": "Skatīt ziņojuma saturu (JSON)"
+  },
+  "diagnosticsExport": {
+    "message": "Eksportēt ziņojumu"
+  },
+  "diagnosticsDelete": {
+    "message": "Dzēst lokālo ziņojumu"
+  },
+  "diagnosticsRetention": {
+    "message": "Lokālo ziņojumu derīgums beidzas pēc 24 stundām. Dzēšana šeit neizdzēš ziņojumu, ko pakalpojums jau ir saņēmis. Informāciju par glabāšanu serverī un dzēšanas pieprasījumiem skatiet privātuma paziņojumā."
+  },
+  "diagnosticsConsent": {
+    "message": "Sūtīt šo diagnostikas ziņojumu uz FuzeVPN"
+  },
+  "diagnosticsDataCollectionRequired": {
+    "message": "Lai sūtītu diagnostiku, Firefox ir jāatļauj tehnisko datu vākšana. Mēģiniet vēlreiz un piešķiriet šo atļauju."
+  },
+  "diagnosticsSendHelp": {
+    "message": "Sūtīšana nav obligāta. Pēc apstiprināšanas sūtīšanu var mēģināt atkārtot līdz 24 stundām ar derīgu tā paša konta sesiju. Turpmākos mēģinājumus varat atcelt. Vēla atcelšana negarantē, ka serveris vēl nav saņēmis ziņojumu."
+  },
+  "diagnosticsSend": {
+    "message": "Sūtīt ziņojumu"
+  },
+  "diagnosticsCancel": {
+    "message": "Atcelt sūtīšanu"
+  },
+  "diagnosticsReload": {
+    "message": "Atkārtoti ielādēt šo lapu"
+  },
+  "diagnosticsUnavailable": {
+    "message": "Diagnostika nav pieejama. Atkārtoti ielādējiet FuzeVPN pārlūka paplašinājumu pārvaldniekā un pēc tam atkal atveriet šo lapu. Jūsu VPN netiek mainīts."
+  },
+  "diagnosticsQueueFull": {
+    "message": "Sūtīšanas rinda ir pilna. Izdzēsiet kādu lokālo ziņojumu vai uzgaidiet, līdz gaidošais ziņojums tiks nosūtīts."
+  },
+  "diagnosticsContentUnavailable": {
+    "message": "Ziņojuma saturs nav pieejams. Eksportējiet lokālo ziņojumu, ja tas ir pieejams, un sazinieties ar atbalsta dienestu."
+  },
+  "diagnosticsFailure": {
+    "message": "Diagnostikas darbību neizdevās pabeigt. Jūsu VPN netiek mainīts."
+  },
+  "diagnosticsChecks": {
+    "message": "Pārbaudes"
+  },
+  "diagnosticsCheckFallback": {
+    "message": "Tehniskā pārbaude: $1"
+  },
+  "diagnosticsCheckLine": {
+    "message": "$1 — $2"
+  },
+  "diagnosticsProxy": {
+    "message": "Pārlūka starpniekserveris"
+  },
+  "diagnosticsStorage": {
+    "message": "Lokālā krātuve"
+  },
+  "diagnosticsNetwork": {
+    "message": "Tīkla savienojums"
+  },
+  "diagnosticsCleanup": {
+    "message": "Sesiju tīrīšana"
+  },
+  "diagnosticsResult_passed": {
+    "message": "Izdevās"
+  },
+  "diagnosticsResult_failed": {
+    "message": "Neizdevās"
+  },
+  "diagnosticsResult_skipped": {
+    "message": "Netika veikta"
+  },
+  "diagnosticsResult_unknown": {
+    "message": "Nezināms"
+  },
+  "diagnosticsStatus_ready": {
+    "message": "Gatavs šajā ierīcē"
+  },
+  "diagnosticsStatus_pending": {
+    "message": "Gaida sūtīšanu"
+  },
+  "diagnosticsStatus_sending": {
+    "message": "Notiek sūtīšana…"
+  },
+  "diagnosticsStatus_session_required": {
+    "message": "Gaida derīgu tā paša konta sesiju"
+  },
+  "diagnosticsStatus_received": {
+    "message": "Pakalpojums saņēma"
+  },
+  "diagnosticsStatus_failed": {
+    "message": "Sūtīšana neizdevās"
+  },
+  "diagnosticsStatus_cancelled": {
+    "message": "Sūtīšana atcelta"
+  },
+  "diagnosticsStatus_expired": {
+    "message": "Sūtīšanas termiņš beidzies"
+  },
+  "diagnosticsReceivedAt": {
+    "message": "Saņemts: $1"
+  },
+  "error_private_browsing_required": {
+    "message": "Firefox pieprasa šo atļauju, lai konfigurētu VPN, arī parastajos logos. Atveriet about:addons → FuzeVPN, atļaujiet tam darboties privātajos logos un mēģiniet vēlreiz."
+  },
+  "error_host_permissions_required": {
+    "message": "Pārlūkā Firefox atveriet about:addons → FuzeVPN → Atļaujas, atļaujiet piekļuvi visām vietnēm un mēģiniet vēlreiz."
+  },
+  "cancelAction": {
+    "message": "Atcelt"
+  },
+  "refreshLocations": {
+    "message": "Atsvaidzināt atrašanās vietas"
+  },
+  "refreshingLocations": {
+    "message": "Notiek atrašanās vietu atsvaidzināšana…"
+  },
+  "locationsRefreshError": {
+    "message": "Atrašanās vietu sarakstu neizdevās atsvaidzināt. Lūdzu, mēģiniet vēlreiz."
+  },
+  "error_device_revoked_limit": {
+    "message": "Šīs ierīces atļauja ir atsaukta. Sasniegts ierīču limits: lūdzu, noņemiet kādu ierīci."
+  },
+  "noAvailableLocations": {
+    "message": "Pašlaik nav pieejamu atrašanās vietu. Lūdzu, drīz mēģiniet vēlreiz."
+  },
+  "noAvailableFavoriteLocations": {
+    "message": "Jūsu izlases atrašanās vietas īslaicīgi nav pieejamas."
+  },
+  "error_location_favorites_limit": {
+    "message": "Sasniegts 100 izlases vietu limits. Lai pievienotu citu, noņemiet kādu no izlases."
+  },
+  "error_server_full": {
+    "message": "Šis serveris ir pilns. Izvēlieties citu atrašanās vietu."
+  },
+  "error_capacity_unavailable": {
+    "message": "Šī servera pieejamību pašlaik nevar apstiprināt. Lūdzu, drīz mēģiniet vēlreiz."
+  },
+  "locationHierarchyHelp": {
+    "message": "Nosaukums atlasa serveri; bultiņa parāda detalizētu informāciju."
+  },
+  "locationCountrySelect": {
+    "message": "Atlasīt pieejamu serveri: $1"
+  },
+  "locationCitySelect": {
+    "message": "Atlasīt pieejamu serveri: $1"
+  },
+  "locationShowCities": {
+    "message": "Rādīt pilsētas: $1"
+  },
+  "locationHideCities": {
+    "message": "Paslēpt pilsētas: $1"
+  },
+  "locationShowServers": {
+    "message": "Rādīt serverus: $1"
+  },
+  "locationHideServers": {
+    "message": "Paslēpt serverus: $1"
+  },
+  "locationAvailableServers": {
+    "message": "Pieejamie serveri: $1"
+  },
+  "legalInformation": {
+    "message": "Juridiskā informācija"
+  },
+  "privacyPolicy": {
+    "message": "Paplašinājuma privātuma paziņojums"
+  },
+  "termsAndConditions": {
+    "message": "Lietošanas un pārdošanas noteikumi"
+  },
+  "legalNotice": {
+    "message": "Juridiskais paziņojums"
+  },
+  "contactSupport": {
+    "message": "Sazināties ar atbalsta dienestu"
+  },
+  "webSignIn": {
+    "message": "Pierakstīties FuzeVPN"
+  },
+  "webSignInDisconnect": {
+    "message": "Atvienot un pierakstīties"
+  },
+  "webSignInPending": {
+    "message": "Notiek pierakstīšanās…"
+  },
+  "webSignInHelp": {
+    "message": "Pierakstieties vai izveidojiet kontu ar Google vai e-pastu FuzeVPN klientu zonā."
+  },
+  "webSignInDisconnectHelp": {
+    "message": "Šī poga aptur pārlūka aizsardzību, lai jūs varētu pierakstīties ar Google vai e-pastu. Pierakstīšanās laikā jūsu pārlūkošana nebūs aizsargāta."
+  },
+  "webSignInStatus": {
+    "message": "Turpiniet FuzeVPN pierakstīšanās logā. Kad pierakstīšanās būs pabeigta, paplašinājums tiks automātiski atjaunināts. Lai atceltu, aizveriet šo logu."
+  },
+  "error_web_login_cancelled": {
+    "message": "Pierakstīšanās tika atcelta. Mēģiniet vēlreiz."
+  },
+  "error_web_login_timeout": {
+    "message": "Pierakstīšanās ilga pārāk ilgi. Mēģiniet vēlreiz."
+  },
+  "error_web_login_unavailable": {
+    "message": "Tīmekļa pierakstīšanās nav pieejama. Mēģiniet vēlreiz vēlāk."
+  },
+  "error_web_login_invalid_callback": {
+    "message": "Pierakstīšanos neizdevās verificēt. Sāciet no jauna paplašinājumā."
+  },
+  "error_web_login_denied": {
+    "message": "Pierakstīšanās netika autorizēta. Mēģiniet vēlreiz."
+  },
+  "error_web_login_busy": {
+    "message": "Pirms mēģināt vēlreiz, aizveriet jau atvērto pierakstīšanās logu."
+  },
+  "deviceKindFirefox": {
+    "message": "Firefox pārlūks"
+  },
+  "generalPrivacyPolicy": {
+    "message": "Vispārējā privātuma politika"
+  },
+  "privacyNoticeTitle": {
+    "message": "Privātums FuzeVPN paplašinājumā"
+  },
+  "privacyNoticeIntro": {
+    "message": "Šajā paziņojumā aprakstīti dati, ko izmanto šis paplašinājums. Tas papildina FuzeVPN vispārējo privātuma politiku, kuras saite ir norādīta tālāk. Neobligātā diagnostikas sūtīšana ir nodalīta no datiem, kas nepieciešami, lai pierakstītos un izmantotu VPN."
+  },
+  "privacyNoticeUpdated": {
+    "message": "Paziņojums atjaunināts 2026. gada 19. oktobrī"
+  },
+  "privacyNoticeServiceTitle": {
+    "message": "Konts un VPN pakalpojums"
+  },
+  "privacyNoticeService": {
+    "message": "Paplašinājums apmainās ar autentifikācijas, konta, abonementa, ierīces un starpniekservera sesijas datiem ar api.fuzevpn.com. VPN starpniekserveris pārraida caur to novirzīto datplūsmu. Šie savienojumi atklāj tīkla metadatus saņēmējam pakalpojumam; šis paziņojums nesniedz atsevišķu solījumu par servera žurnālošanu."
+  },
+  "privacyNoticeLocalTitle": {
+    "message": "Pārlūkā saglabātie dati"
+  },
+  "privacyNoticeLocal": {
+    "message": "Pārlūka krātuvē tiek glabāta jūsu sesija, konta informācija, preferences, vietņu izņēmumi un ierīces identitāte. Tehniskie žurnāli tiek glabāti lokāli līdz 10 minūtēm, pat ja automātiskā ziņošana ir izslēgta. Diagnostikas melnraksti un rindā esošie ziņojumi lokāli zaudē derīgumu pēc 24 stundām; tīrīšana notiek, kad paplašinājums var darboties."
+  },
+  "privacyNoticeIpTitle": {
+    "message": "Publiskās IP pārbaudes un trešās puses"
+  },
+  "privacyNoticeIp": {
+    "message": "IP attēlošana un tīkla diagnostika sazinās ar api.ipify.org. IP attēlošanai rezerves variantā var tikt izmantots ipv4.icanhazip.com. Pakalpojuma sniedzējs saņem savienojuma IP un parastos pieprasījuma metadatus: tiešajā režīmā jūsu publisko IP, bet, izmantojot starpniekserveri, VPN izejas IP. Šie pieprasījumi neietver sīkfailus un novirzītājus un nesūta konta marķieri vai pārlūkošanas vēsturi."
+  },
+  "privacyNoticeReportsTitle": {
+    "message": "Ko satur diagnostikas ziņojumi"
+  },
+  "privacyNoticeReports": {
+    "message": "Ziņojumos var būt nejaušs ziņojuma identifikators, laikspiedoli, paplašinājuma un pārlūka versijas, operētājsistēmas saime un arhitektūra, savienojuma un aizsardzības stāvokļi, kļūdu kodi, skaitītāji, ilgumi un pārbaužu rezultāti. Pilnos ziņojumos var būt iekļauti nesenie tehniskie notikumi. To JSON neietver paroles, autentifikācijas marķierus, e-pasta adreses, IP adreses, apmeklētos URL un izslēgtos domēnus. Pirms sūtīšanas varat pārskatīt un eksportēt pilnu ziņojumu."
+  },
+  "privacyNoticeAccountTitle": {
+    "message": "Saņēmējs un piesaiste kontam"
+  },
+  "privacyNoticeAccount": {
+    "message": "Ziņojumi tiek sūtīti uzņēmumam FuzeVPN uz api.fuzevpn.com/v1/diagnostics, izmantojot autentificētu savienojumu. Šis API savienojums apiet VPN starpniekserveri: FuzeVPN saņem jūsu tiešo publisko IP pat tad, ja VPN ir aktīvs. Ziņojumi ir piesaistīti kontam, kurā esat pierakstījies, un nav anonīmi. Autentifikācijas galvene un IP ir nodalīti no ziņojuma JSON. Veiksmīga saņemšana apstiprina, ka šis galapunkts ziņojumu ir pieņēmis, nevis to, ka atbalsta darbinieks to ir izlasījis."
+  },
+  "privacyNoticeChoiceTitle": {
+    "message": "Neobligāta sūtīšana un atsaukšana"
+  },
+  "privacyNoticeChoice": {
+    "message": "Automātiskā sūtīšana pēc noklusējuma ir izslēgta. Ieslēdzot to, tiek atļauti vienkārši kļūdu ziņojumi par šo kontu. Pilna ziņojuma manuālai sūtīšanai jāatzīmē sūtīšanas izvēles rūtiņa. Firefox papildus pieprasa savu neobligāto tehnisko datu atļauju. Izslēdziet automātisko sūtīšanu, lai to apturētu un noņemtu gaidošos automātiskos ziņojumus; atsevišķas gaidošās sūtīšanas atceliet atsevišķi. Atteikšanās no diagnostikas sūtīšanas neliedz izmantot VPN."
+  },
+  "privacyNoticeDeleteTitle": {
+    "message": "Lokālā dzēšana un lejupielādētie faili"
+  },
+  "privacyNoticeDelete": {
+    "message": "Sadaļā Diagnostika varat notīrīt tehnisko vēsturi vai izdzēst atsevišķu lokālo ziņojumu. Vēstures notīrīšana neizdzēš esošās ziņojumu kopijas. Lokāla atcelšana vai dzēšana nevar atsaukt datus, ko pakalpojums jau ir saņēmis, tostarp augšupielādi, kas pienāca pirms atcelšanas. Lejupielādētie eksporti ir atsevišķi faili, kas jums jāizdzēš pašiem."
+  },
+  "privacyNoticeServerTitle": {
+    "message": "Glabāšana serverī un pieprasījumi"
+  },
+  "privacyNoticeServer": {
+    "message": "Šis paplašinājums nekontrolē un nepārbauda glabāšanu serverī vai dzēšanu servera pusē. Par FuzeVPN piemēroto glabāšanas periodu un pieprasījumiem saistībā ar jau nosūtītiem ziņojumiem skatiet vispārējo privātuma politiku vai sazinieties ar FuzeVPN. Šis paziņojums negarantē noteiktu glabāšanas periodu serverī."
+  },
+  "privacyNoticeSupportTitle": {
+    "message": "Diagnostika un atbalsts ir nodalīti"
+  },
+  "privacyNoticeSupport": {
+    "message": "Diagnostikas ziņojuma nosūtīšana pati par sevi nenosūta atbalsta pieprasījumu no paplašinājuma. Lai izskaidrotu problēmu vai pieprasītu saņemta ziņojuma dzēšanu, izmantojiet tālāk norādīto FuzeVPN saziņas kanālu. Ja izvēlaties kopīgot eksportētu failu, izmantojot citu kanālu, vispirms pārbaudiet tā saturu."
+  },
+  "privacyNoticeManage": {
+    "message": "Atvērt diagnostiku"
+  },
+  "privacyNoticeLinksTitle": {
+    "message": "Pakalpojuma politika un saziņa"
+  },
+  "theme": {
+    "message": "Motīvs"
+  },
+  "themeSystem": {
+    "message": "Sistēmas"
+  },
+  "themeLight": {
+    "message": "Gaišs"
+  },
+  "themeDark": {
+    "message": "Tumšs"
+  },
+  "switchToDarkTheme": {
+    "message": "Pārslēgt uz tumšo motīvu"
+  },
+  "switchToLightTheme": {
+    "message": "Pārslēgt uz gaišo motīvu"
+  }
+}

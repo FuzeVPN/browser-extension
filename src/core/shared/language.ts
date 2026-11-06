@@ -31,11 +31,33 @@ export const LANGUAGE_NAMES = {
   da: "Dansk",
   no: "Norsk",
   el: "Ελληνικά",
+  am: "አማርኛ",
+  bn: "বাংলা",
+  bg: "Български",
+  hr: "Hrvatski",
+  et: "Eesti",
+  fi: "Suomi",
+  gu: "ગુજરાતી",
+  he: "עברית",
+  hu: "Magyar",
+  kn: "ಕನ್ನಡ",
+  lv: "Latviešu",
+  lt: "Lietuvių",
+  ml: "മലയാളം",
+  mr: "मराठी",
+  sr: "Српски",
+  sk: "Slovenčina",
+  sl: "Slovenščina",
+  sw: "Kiswahili",
+  ta: "தமிழ்",
+  te: "తెలుగు",
 } as const;
 
 export type Language = keyof typeof LANGUAGE_NAMES;
 export function languageDirection(language: Language): "ltr" | "rtl" {
-  return language === "ar" || language === "fa" || language === "ur" ? "rtl" : "ltr";
+  return language === "ar" || language === "fa" || language === "ur" || language === "he"
+    ? "rtl"
+    : "ltr";
 }
 
 export type LanguagePreference = "auto" | Language;
@@ -60,6 +82,7 @@ export function resolveLanguage(preference: LanguagePreference, browserLanguage:
   if (base === "nb" || base === "nn") return "no";
   if (base === "tl") return "fil";
   if (base === "in") return "id";
+  if (base === "iw") return "he";
   return base && Object.hasOwn(LANGUAGE_NAMES, base) ? (base as Language) : "en";
 }
 

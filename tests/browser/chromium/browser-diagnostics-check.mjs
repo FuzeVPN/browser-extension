@@ -593,7 +593,7 @@ try {
     );
     assert.equal(await page.locator("h1").textContent(), translated.diagnosticsTitle.message);
     await verifyLegalLinks(page, code, translated);
-    const rtl = ["ar", "fa", "ur"].includes(code);
+    const rtl = ["ar", "fa", "ur", "he"].includes(code);
     const direction = await page.evaluate(() => {
       const check = document.querySelector("label.check");
       const input = check.querySelector("input").getBoundingClientRect();
@@ -631,7 +631,7 @@ try {
     await page.screenshot({ path: join(output, `diagnostics-${directory}.png`), fullPage: true });
   }
   record(
-    "Diagnostics, consent, delivery and localized legal links cover all thirty languages without horizontal overflow at 360 px",
+    "Diagnostics, consent, delivery and localized legal links cover all fifty languages without horizontal overflow at 360 px",
   );
   record("Diagnostic layouts follow RTL and return to LTR while exported JSON remains LTR");
   await page.close();

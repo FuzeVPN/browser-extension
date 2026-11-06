@@ -564,7 +564,7 @@ try {
         controlsOverlap: refresh.left < close.right && close.left < refresh.right,
       };
     });
-    assert.equal(layout.dir, ["ar", "fa", "ur"].includes(language) ? "rtl" : "ltr");
+    assert.equal(layout.dir, ["ar", "fa", "ur", "he"].includes(language) ? "rtl" : "ltr");
     assert.ok(layout.overflow <= 1, JSON.stringify({ language, layout }));
     assert.ok(layout.bodyOverflow <= 1, JSON.stringify({ language, layout }));
     assert.ok(layout.refreshWidth >= 30, JSON.stringify({ language, layout }));

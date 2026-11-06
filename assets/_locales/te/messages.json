@@ -1,0 +1,929 @@
+{
+  "extensionName": {
+    "message": "FuzeVPN"
+  },
+  "extensionDescription": {
+    "message": "ఒకే క్లిక్‌తో మీ గోప్యతను కాపాడుకోండి, మీ భద్రతను బలోపేతం చేసుకోండి."
+  },
+  "siteExclusionsReloadRequired": {
+    "message": "అప్‌డేట్‌ను పూర్తి చేసి, సైట్ మినహాయింపులను ఉపయోగించడానికి బ్రౌజర్ ఎక్స్‌టెన్షన్ మేనేజర్ నుండి FuzeVPNను రీలోడ్ చేయండి."
+  },
+  "extensionCommunicationError": {
+    "message": "ఎక్స్‌టెన్షన్ స్పందించడం లేదు. ఈ విండోను మూసివేసి, ఆపై బ్రౌజర్ ఎక్స్‌టెన్షన్ మేనేజర్ నుండి FuzeVPNను రీలోడ్ చేయండి."
+  },
+  "actionDisconnected": {
+    "message": "FuzeVPN — డిస్‌కనెక్ట్ అయింది"
+  },
+  "actionConnected": {
+    "message": "FuzeVPN — ఈ బ్రౌజర్‌లో రక్షించబడింది"
+  },
+  "actionReconnecting": {
+    "message": "FuzeVPN — మళ్లీ కనెక్ట్ అవుతోంది"
+  },
+  "actionError": {
+    "message": "FuzeVPN — మీ శ్రద్ధ అవసరం"
+  },
+  "browserProtection": {
+    "message": "బ్రౌజర్ రక్షణ"
+  },
+  "loginTitle": {
+    "message": "FuzeVPNకు స్వాగతం"
+  },
+  "loginSubtitle": {
+    "message": "ఈ బ్రౌజర్‌లో మీ బ్రౌజింగ్‌ను రక్షించడానికి సైన్ ఇన్ చేయండి."
+  },
+  "email": {
+    "message": "ఈమెయిల్ అడ్రస్"
+  },
+  "emailPlaceholder": {
+    "message": "you@example.com"
+  },
+  "password": {
+    "message": "పాస్‌వర్డ్"
+  },
+  "signIn": {
+    "message": "సైన్ ఇన్ చేయండి"
+  },
+  "signingIn": {
+    "message": "సైన్ ఇన్ చేస్తోంది…"
+  },
+  "forgotPassword": {
+    "message": "పాస్‌వర్డ్ మర్చిపోయారా?"
+  },
+  "createAccount": {
+    "message": "ఖాతాను క్రియేట్ చేయండి"
+  },
+  "settings": {
+    "message": "సెట్టింగ్‌లు"
+  },
+  "close": {
+    "message": "మూసివేయండి"
+  },
+  "statusDisconnected": {
+    "message": "డిస్‌కనెక్ట్ అయింది"
+  },
+  "statusConnecting": {
+    "message": "కనెక్ట్ అవుతోంది…"
+  },
+  "statusChanging": {
+    "message": "లొకేషన్ మారుస్తోంది…"
+  },
+  "statusProtected": {
+    "message": "ఈ బ్రౌజర్‌లో రక్షించబడింది"
+  },
+  "statusRefreshing": {
+    "message": "సురక్షితంగా రెన్యూ చేస్తోంది…"
+  },
+  "statusDisconnecting": {
+    "message": "డిస్‌కనెక్ట్ చేస్తోంది…"
+  },
+  "statusError": {
+    "message": "రక్షణ ఆగిపోయింది"
+  },
+  "browserOnlyDetail": {
+    "message": "ఈ బ్రౌజర్‌కు రక్షణ."
+  },
+  "location": {
+    "message": "లొకేషన్"
+  },
+  "change": {
+    "message": "మార్చండి"
+  },
+  "noLocation": {
+    "message": "లొకేషన్ ఏదీ అందుబాటులో లేదు"
+  },
+  "protectBrowser": {
+    "message": "బ్రౌజర్‌ను రక్షించండి"
+  },
+  "disconnect": {
+    "message": "డిస్‌కనెక్ట్ చేయండి"
+  },
+  "subscription": {
+    "message": "సబ్‌స్క్రిప్షన్"
+  },
+  "refreshSubscription": {
+    "message": "సబ్‌స్క్రిప్షన్‌ను రిఫ్రెష్ చేయండి"
+  },
+  "refreshingSubscription": {
+    "message": "సబ్‌స్క్రిప్షన్‌ను రిఫ్రెష్ చేస్తోంది…"
+  },
+  "subscriptionActive": {
+    "message": "యాక్టివ్"
+  },
+  "subscriptionInactive": {
+    "message": "ఇన్‌యాక్టివ్"
+  },
+  "expiresOn": {
+    "message": "గడువు ముగింపు: $1"
+  },
+  "noExpiry": {
+    "message": "గడువు తేదీ లేదు"
+  },
+  "browserOnlyNotice": {
+    "message": "ఈ బ్రౌజర్ మాత్రమే. ఇతర యాప్‌లు, బ్రౌజర్‌లకు ఇది వర్తించదు."
+  },
+  "resendVerification": {
+    "message": "ఈమెయిల్‌ను మళ్లీ పంపండి"
+  },
+  "incognitoHelp": {
+    "message": "బ్రౌజర్ సెట్టింగ్‌లలో ప్రైవేట్ మోడ్‌లో ఎక్స్‌టెన్షన్‌ను అనుమతించినప్పుడు మాత్రమే ప్రైవేట్ బ్రౌజింగ్ కూడా ఇదే రక్షణను ఉపయోగిస్తుంది."
+  },
+  "manageAccount": {
+    "message": "నా ఖాతాను మేనేజ్ చేయండి"
+  },
+  "account": {
+    "message": "ఖాతా"
+  },
+  "devices": {
+    "message": "పరికరాలు"
+  },
+  "manageDevices": {
+    "message": "పరికరాలను మేనేజ్ చేయండి"
+  },
+  "refreshDevices": {
+    "message": "పరికరాలను రిఫ్రెష్ చేయండి"
+  },
+  "deviceCount": {
+    "message": "పరికరాలు: $1 / $2"
+  },
+  "loadingDevices": {
+    "message": "పరికరాలను లోడ్ చేస్తోంది…"
+  },
+  "noDevices": {
+    "message": "యాక్టివ్ పరికరాలు ఏవీ లేవు."
+  },
+  "currentDevice": {
+    "message": "ఈ పరికరం"
+  },
+  "deviceKindBrowser": {
+    "message": "బ్రౌజర్ ఎక్స్‌టెన్షన్"
+  },
+  "deviceKindVpn": {
+    "message": "VPN పరికరం"
+  },
+  "profile_browser_proxy": {
+    "message": "బ్రౌజర్ ప్రాక్సీ"
+  },
+  "profile_wireguard": {
+    "message": "WireGuard"
+  },
+  "profile_openvpn": {
+    "message": "OpenVPN"
+  },
+  "none": {
+    "message": "ఏదీ లేదు"
+  },
+  "deviceCreatedOn": {
+    "message": "క్రియేట్ చేసిన తేదీ: $1"
+  },
+  "deleteDevice": {
+    "message": "పరికరాన్ని తొలగించండి"
+  },
+  "deleteDeviceNamed": {
+    "message": "పరికరాన్ని తొలగించండి: $1"
+  },
+  "confirmDeleteDevice": {
+    "message": "“$1”ను తీసివేయాలా? దాని VPN కనెక్షన్‌లు ఆగిపోతాయి, దాని ప్రొఫైల్‌లు తీసివేయబడతాయి."
+  },
+  "resetDevice": {
+    "message": "పరికరాన్ని రీసెట్ చేయండి"
+  },
+  "confirmResetDevice": {
+    "message": "ఈ ఎక్స్‌టెన్షన్‌ను రీసెట్ చేయాలా? తదుపరిసారి మీరు దీన్ని ఉపయోగించినప్పుడు ఇది కొత్త పరికరంగా రిజిస్టర్ అవుతుంది."
+  },
+  "signOutAccount": {
+    "message": "ఖాతా నుండి సైన్ అవుట్ చేయండి"
+  },
+  "chooseLocation": {
+    "message": "లొకేషన్‌ను ఎంచుకోండి"
+  },
+  "error_invalid_credentials": {
+    "message": "ఈమెయిల్ అడ్రస్ లేదా పాస్‌వర్డ్ తప్పు."
+  },
+  "error_unauthorized": {
+    "message": "మీ సెషన్ గడువు ముగిసింది. దయచేసి మళ్లీ సైన్ ఇన్ చేయండి."
+  },
+  "error_email_verification_required": {
+    "message": "రక్షణను ఆన్ చేసే ముందు మీ ఈమెయిల్ అడ్రస్‌ను వెరిఫై చేయండి."
+  },
+  "errorVerificationCooldown": {
+    "message": "$1 సెకన్ల తర్వాత కొత్త ఈమెయిల్‌ను అభ్యర్థించవచ్చు."
+  },
+  "error_verification_email_cooldown": {
+    "message": "మరో ఈమెయిల్‌ను అభ్యర్థించే ముందు దయచేసి కొంత సేపు వేచి ఉండండి."
+  },
+  "error_subscription_required": {
+    "message": "ఈ బ్రౌజర్‌ను రక్షించడానికి యాక్టివ్ సబ్‌స్క్రిప్షన్ అవసరం."
+  },
+  "error_device_limit": {
+    "message": "పరికరాల పరిమితి చేరుకుంది. దయచేసి ఒక పరికరాన్ని తీసివేయండి."
+  },
+  "error_device_identity_revoked": {
+    "message": "ఈ పరికరానికి ఇకపై అనుమతి లేదు. మళ్లీ కనెక్ట్ చేయడానికి ట్రై చేయండి."
+  },
+  "error_device_proof_invalid": {
+    "message": "ఈ పరికరాన్ని వెరిఫై చేయలేకపోయాము. మీ కంప్యూటర్ తేదీ, సమయాన్ని చెక్ చేసి, మళ్లీ ట్రై చేయండి."
+  },
+  "error_device_proof_replayed": {
+    "message": "ఈ రిక్వెస్ట్ ఇప్పటికే ప్రాసెస్ చేయబడింది. మళ్లీ ట్రై చేయండి."
+  },
+  "error_invalid_device": {
+    "message": "ఈ పరికరాన్ని గుర్తించలేకపోయాము. మళ్లీ కనెక్ట్ చేయడానికి ట్రై చేయండి."
+  },
+  "error_device_exists": {
+    "message": "ఈ పరికర గుర్తింపు ఇప్పటికే మరో ఖాతాకు లింక్ అయి ఉంది."
+  },
+  "error_not_found": {
+    "message": "ఈ ఆపరేషన్ ఇకపై అందుబాటులో లేదు. మళ్లీ ట్రై చేయండి."
+  },
+  "error_invalid_location": {
+    "message": "ఈ లొకేషన్ అందుబాటులో లేదు. మరొకదాన్ని ఎంచుకోండి."
+  },
+  "error_rate_limited": {
+    "message": "చాలా ఎక్కువ ప్రయత్నాలు. కాసేపు వేచి ఉండి మళ్లీ ట్రై చేయండి."
+  },
+  "error_proxy_unavailable": {
+    "message": "ఈ సర్వర్ తాత్కాలికంగా అందుబాటులో లేదు. కాసేపటి తర్వాత మళ్లీ ట్రై చేయండి."
+  },
+  "error_api_token_expired": {
+    "message": "మీ ఖాతా సెషన్ గడువు ముగిసింది. దయచేసి మళ్లీ సైన్ ఇన్ చేయండి."
+  },
+  "error_network_error": {
+    "message": "నెట్‌వర్క్ అందుబాటులో లేదు. మీ ఇంటర్నెట్ కనెక్షన్‌ను చెక్ చేయండి."
+  },
+  "error_request_timeout": {
+    "message": "సర్వీస్ స్పందించడానికి చాలా ఎక్కువ సమయం తీసుకుంది. మళ్లీ ట్రై చేయండి."
+  },
+  "error_invalid_response": {
+    "message": "సర్వీస్ ఊహించని రెస్పాన్స్‌ను అందించింది."
+  },
+  "error_proxy_certificate_invalid": {
+    "message": "సర్వర్ భద్రతను వెరిఫై చేయలేకపోయాము. కనెక్షన్ ఆపివేయబడింది."
+  },
+  "error_proxy_controlled_by_extension": {
+    "message": "ప్రస్తుతం మరో ఎక్స్‌టెన్షన్ బ్రౌజర్ ప్రాక్సీని నియంత్రిస్తోంది."
+  },
+  "error_proxy_controlled_by_policy": {
+    "message": "అడ్మినిస్ట్రేటర్ పాలసీ కారణంగా FuzeVPN ప్రాక్సీని మార్చలేకపోతోంది."
+  },
+  "error_proxy_authentication_failed": {
+    "message": "సర్వర్ కనెక్షన్‌ను ఆమోదించలేదు. మళ్లీ కనెక్ట్ చేయడానికి ట్రై చేయండి."
+  },
+  "error_session_expired": {
+    "message": "మీ రక్షిత కనెక్షన్ గడువు ముగిసింది. మళ్లీ కనెక్ట్ చేయండి."
+  },
+  "error_email_delivery_unavailable": {
+    "message": "ప్రస్తుతం ఈమెయిల్‌ను పంపడం సాధ్యం కాదు."
+  },
+  "error_unknown_error": {
+    "message": "ఊహించని ఎర్రర్ సంభవించింది. మళ్లీ ట్రై చేయండి."
+  },
+  "actionBlocked": {
+    "message": "FuzeVPN — బ్రౌజింగ్ బ్లాక్ చేయబడింది"
+  },
+  "statusBlockedRetry": {
+    "message": "బ్రౌజింగ్ పాజ్ అయింది — మళ్లీ కనెక్ట్ అవుతోంది"
+  },
+  "statusBlockedAction": {
+    "message": "బ్రౌజింగ్ పాజ్ అయింది — కనెక్షన్‌ను చెక్ చేయండి"
+  },
+  "statusProtectionUnavailable": {
+    "message": "రక్షణ అందుబాటులో లేదు — బ్రౌజింగ్ బ్లాక్ చేయబడలేదు"
+  },
+  "recoveryHelp": {
+    "message": "రక్షణను తిరిగి ప్రారంభించడానికి మళ్లీ ట్రై చేయండి. డిస్‌కనెక్ట్ చేస్తే FuzeVPN లేకుండా బ్రౌజ్ చేయవచ్చు."
+  },
+  "retryConnection": {
+    "message": "మళ్లీ ట్రై చేయండి"
+  },
+  "killSwitch": {
+    "message": "కిల్ స్విచ్"
+  },
+  "killSwitchHelp": {
+    "message": "VPN కనెక్షన్ తెగిపోతే కొత్త వెబ్ రిక్వెస్ట్‌లను బ్లాక్ చేస్తుంది. మినహాయించిన సైట్‌లు VPN వెలుపల అందుబాటులో ఉంటాయి."
+  },
+  "webRtcProtection": {
+    "message": "WebRTC రక్షణ"
+  },
+  "webRtcHelp": {
+    "message": "వెబ్ కాల్స్ సమయంలో మీ IP అడ్రస్‌ను ప్రైవేట్‌గా ఉంచడంలో సహాయపడుతుంది. కొన్ని కాల్స్ పని చేయకపోవచ్చు. దీన్ని ఆఫ్ చేస్తే మీ అసలు IP అడ్రస్ బయటపడవచ్చు."
+  },
+  "securityEffectiveState": {
+    "message": "$1 · $2"
+  },
+  "securityBlocked": {
+    "message": "బ్రౌజింగ్ బ్లాక్ చేయబడింది"
+  },
+  "securityNotBlocked": {
+    "message": "బ్రౌజింగ్ బ్లాక్ చేయబడలేదు"
+  },
+  "securityWebRtcActive": {
+    "message": "WebRTC పరిమితి యాక్టివ్‌గా ఉంది"
+  },
+  "securityWebRtcInactive": {
+    "message": "WebRTC పరిమితి ఇన్‌యాక్టివ్‌గా ఉంది"
+  },
+  "localNetworkHelp": {
+    "message": "రక్షణ సమయంలో లోకల్ IP అడ్రస్‌లు, సాధారణ లోకల్ పేర్లు బ్లాక్ చేయబడతాయి. అయినప్పటికీ, మినహాయించిన డొమైన్ లోకల్ నెట్‌వర్క్‌కు యాక్సెస్ ఇవ్వవచ్చు. సిస్టమ్ IPv6 సెట్టింగ్‌లు మార్చబడవు."
+  },
+  "securityLimits": {
+    "message": "ఈ రక్షణ గురించి"
+  },
+  "killSwitchLimits": {
+    "message": "ఈ బ్రౌజర్ మాత్రమే: ఇప్పటికే ఉన్న కనెక్షన్‌లు, కొన్ని అంతర్గత బ్రౌజర్ కమ్యూనికేషన్‌లు లేదా ఇతర ఎక్స్‌టెన్షన్‌ల కమ్యూనికేషన్‌లు కొనసాగవచ్చు. FuzeVPN స్పందించే లోపే మరో ఎక్స్‌టెన్షన్ లేదా పాలసీ ప్రాక్సీని మార్చవచ్చు. ఎక్స్‌టెన్షన్‌ను డిజేబుల్ చేస్తే రక్షణ తొలగిపోతుంది. సిస్టమ్ అంతటా బ్లాకింగ్ ఉండదు."
+  },
+  "error_traffic_guard_failed": {
+    "message": "బ్రౌజింగ్ బ్లాక్‌ను వెరిఫై చేయలేకపోయాము. రక్షణకు హామీ లేదు. ఎక్స్‌టెన్షన్ అనుమతులను చెక్ చేయండి."
+  },
+  "error_webrtc_control_unavailable": {
+    "message": "WebRTC పరిమితిని వర్తింపజేయలేకపోయాము. మీ సెట్టింగ్‌లు, ఇతర ఎక్స్‌టెన్షన్‌లు లేదా అడ్మినిస్ట్రేటర్ పాలసీని చెక్ చేయండి."
+  },
+  "language": {
+    "message": "భాష"
+  },
+  "languageAutomatic": {
+    "message": "ఆటోమేటిక్ — బ్రౌజర్ భాష"
+  },
+  "languageHelp": {
+    "message": "మార్పులు వెంటనే వర్తిస్తాయి. ఆటోమేటిక్ ఎంపిక బ్రౌజర్ భాషను అనుసరిస్తుంది, ఇది సిస్టమ్ భాషకు భిన్నంగా ఉండవచ్చు."
+  },
+  "languageSaveError": {
+    "message": "భాషను సేవ్ చేయలేకపోయాము. మీ మునుపటి ఎంపిక అలాగే ఉంచబడింది. మళ్లీ ట్రై చేయండి."
+  },
+  "publicIp": {
+    "message": "పబ్లిక్ IP"
+  },
+  "vpnIp": {
+    "message": "VPN IP"
+  },
+  "ipChecking": {
+    "message": "చెక్ చేస్తోంది…"
+  },
+  "ipUnavailable": {
+    "message": "అందుబాటులో లేదు"
+  },
+  "ipLookupExplanation": {
+    "message": "మీ ప్రస్తుత కనెక్షన్‌ను ఉపయోగించి ipify ద్వారా, లేదా ప్రత్యామ్నాయంగా icanhazip ద్వారా IP చెక్ చేయబడుతుంది. బ్రౌజింగ్ హిస్టరీ ఏదీ పంపబడదు."
+  },
+  "automaticLocation": {
+    "message": "ఆటోమేటిక్"
+  },
+  "automaticLocationHelp": {
+    "message": "ఇటీవలి అత్యుత్తమ రెస్పాన్స్ సమయం, లేదా మీ చివరి లొకేషన్."
+  },
+  "automaticLocationName": {
+    "message": "ఆటోమేటిక్ · $1"
+  },
+  "searchLocations": {
+    "message": "దేశం లేదా నగరం కోసం వెతకండి"
+  },
+  "locationFilters": {
+    "message": "లొకేషన్‌లను ఫిల్టర్ చేయండి"
+  },
+  "allLocations": {
+    "message": "అన్నీ"
+  },
+  "favoriteLocations": {
+    "message": "ఇష్టమైనవి"
+  },
+  "recentLocations": {
+    "message": "ఇటీవలివి"
+  },
+  "noMatchingLocations": {
+    "message": "మీ సెర్చ్‌కు సరిపోలే లొకేషన్‌లు ఏవీ లేవు."
+  },
+  "noFavoriteLocations": {
+    "message": "మీకు ఇష్టమైన లొకేషన్‌లను ఇక్కడ ఉంచడానికి స్టార్ జోడించండి."
+  },
+  "noRecentLocations": {
+    "message": "మీరు ఇటీవల కనెక్ట్ చేసిన లొకేషన్‌లు ఇక్కడ కనిపిస్తాయి."
+  },
+  "addFavorite": {
+    "message": "ఇష్టమైనవాటికి జోడించండి: $1"
+  },
+  "removeFavorite": {
+    "message": "ఇష్టమైనవాటి నుండి తీసివేయండి: $1"
+  },
+  "unavailableFavoriteLocation": {
+    "message": "అందుబాటులో లేని ఇష్టమైన లొకేషన్: $1"
+  },
+  "locationSaveError": {
+    "message": "మార్పును పూర్తి చేయలేకపోయాము. కొన్ని సెట్టింగ్‌లు సేవ్ అయి ఉండవచ్చు. మళ్లీ ట్రై చేసే ముందు చూపబడిన ఎంపికను చెక్ చేయండి."
+  },
+  "siteExclusions": {
+    "message": "మినహాయించిన సైట్‌లు"
+  },
+  "siteExclusionsHelp": {
+    "message": "VPN పనిచేయకపోయినా, ఈ సైట్‌లు FuzeVPN లేకుండా మీ కనెక్షన్‌ను ఉపయోగిస్తాయి."
+  },
+  "siteExclusionsEnabled": {
+    "message": "మినహాయింపులను ఆన్ చేయండి"
+  },
+  "siteExclusionInput": {
+    "message": "డొమైన్ లేదా URL"
+  },
+  "siteExclusionPlaceholder": {
+    "message": "example.com"
+  },
+  "siteExclusionPreview": {
+    "message": "ఎంచుకున్న డొమైన్: $1"
+  },
+  "siteExclusionSubdomains": {
+    "message": "సబ్‌డొమైన్‌లను కూడా చేర్చండి"
+  },
+  "siteExclusionAdd": {
+    "message": "సైట్‌ను జోడించండి"
+  },
+  "siteExclusionsEmpty": {
+    "message": "మినహాయించిన సైట్‌లు ఏవీ లేవు. VPN లేకుండా ఉపయోగించాలనుకునే సైట్‌లను మాత్రమే జోడించండి."
+  },
+  "siteExclusionsCount": {
+    "message": "సైట్‌లు: $1 / 100"
+  },
+  "siteExclusionScopeSubdomains": {
+    "message": "డొమైన్, సబ్‌డొమైన్‌లు"
+  },
+  "siteExclusionScopeExact": {
+    "message": "ఖచ్చితమైన డొమైన్ మాత్రమే"
+  },
+  "siteExclusionRemove": {
+    "message": "తీసివేయండి: $1"
+  },
+  "siteExclusionsDetails": {
+    "message": "మినహాయింపులు ఎలా పని చేస్తాయి?"
+  },
+  "siteExclusionsResources": {
+    "message": "ఇతర డొమైన్‌ల నుండి వచ్చే రిసోర్స్‌లు రక్షణలోనే ఉంటాయి. ఒక పేజీని మినహాయించినంత మాత్రాన దానిలోని ఇతర కంటెంట్ ఆటోమేటిక్‌గా మినహాయించబడదు."
+  },
+  "siteExclusionsReload": {
+    "message": "మార్పు చేసిన తర్వాత సైట్‌ను రీలోడ్ చేయండి. ఇప్పటికే ఉన్న కనెక్షన్‌లు వాటి మునుపటి మార్గాన్నే కొనసాగించవచ్చు."
+  },
+  "siteExclusionsWebRtc": {
+    "message": "మినహాయించిన సైట్‌లతో సహా, WebRTC రక్షణ గ్లోబల్ సెట్టింగ్‌గానే ఉంటుంది."
+  },
+  "siteExclusionsLocal": {
+    "message": "ఈ బ్రౌజర్‌లో మాత్రమే సేవ్ చేయబడుతుంది, మీ ఖాతా నుండి సైన్ అవుట్ చేసిన తర్వాత కూడా అలాగే ఉంటుంది."
+  },
+  "siteExclusionsOn": {
+    "message": "మినహాయింపులు ఆన్‌లో ఉన్నాయి"
+  },
+  "siteExclusionsOff": {
+    "message": "మినహాయింపులు ఆఫ్‌లో ఉన్నాయి"
+  },
+  "siteExclusionsSummary": {
+    "message": "VPN వెలుపల ఉన్న సైట్‌లు: $1"
+  },
+  "siteExclusionsPending": {
+    "message": "మినహాయింపులను వర్తింపజేస్తోంది…"
+  },
+  "siteExclusionsInterrupted": {
+    "message": "మార్పుకు అంతరాయం కలిగింది. తాత్కాలిక రక్షణ కొనసాగుతోంది."
+  },
+  "siteExclusionsSaveError": {
+    "message": "మార్పును పూర్తి చేయలేకపోయాము. మీ సెట్టింగ్‌లను చెక్ చేసి, మళ్లీ ట్రై చేయండి."
+  },
+  "siteExclusionsRetry": {
+    "message": "మళ్లీ ట్రై చేయండి"
+  },
+  "siteExclusionInvalid": {
+    "message": "చెల్లుబాటు అయ్యే పబ్లిక్ డొమైన్‌ను ఎంటర్ చేయండి. IP అడ్రస్‌లు, లోకల్ పేర్లు, వైల్డ్‌కార్డ్‌లు, పబ్లిక్ సఫిక్స్‌లు, రిజర్వ్ చేయబడిన డొమైన్‌లు ఆమోదించబడవు."
+  },
+  "siteExclusionDuplicate": {
+    "message": "ఈ డొమైన్ ఇప్పటికే లిస్ట్‌లో ఉంది."
+  },
+  "siteExclusionsLimit": {
+    "message": "100 సైట్‌ల పరిమితి చేరుకుంది. మరొకటి జోడించడానికి ఒక సైట్‌ను తీసివేయండి."
+  },
+  "statusProtectedExceptions": {
+    "message": "VPN యాక్టివ్ · మినహాయింపులు: $1"
+  },
+  "statusBlockedExceptions": {
+    "message": "మినహాయించిన సైట్‌లు మాత్రమే అందుబాటులో ఉన్నాయి"
+  },
+  "securityBlockedExceptions": {
+    "message": "మినహాయించిన సైట్‌లు మినహా బ్రౌజింగ్ బ్లాక్ చేయబడింది"
+  },
+  "securityBlockUnverified": {
+    "message": "బ్లాకింగ్ వెరిఫై కాలేదు"
+  },
+  "logoutLocalComplete": {
+    "message": "లోకల్ సైన్ అవుట్ పూర్తయింది."
+  },
+  "logoutApiSession": {
+    "message": "ప్రస్తుత ఖాతా సెషన్"
+  },
+  "logoutProxySessions": {
+    "message": "తెలిసిన VPN సెషన్‌లు"
+  },
+  "logoutRevocationPending": {
+    "message": "రద్దు ప్రక్రియ కొనసాగుతోంది…"
+  },
+  "logoutRevocationConfirmed": {
+    "message": "రద్దు నిర్ధారించబడింది"
+  },
+  "logoutRevocationUnconfirmed": {
+    "message": "రద్దు నిర్ధారించబడలేదు"
+  },
+  "logoutUnconfirmedHelp": {
+    "message": "కొన్ని రిమోట్ సెషన్‌లు వాటి గడువు ముగిసే వరకు యాక్టివ్‌గా ఉండవచ్చు."
+  },
+  "deviceQuotaLoading": {
+    "message": "పరికరాల పరిమితిని లోడ్ చేస్తోంది…"
+  },
+  "deviceQuotaUnknown": {
+    "message": "పరికరాల పరిమితి అందుబాటులో లేదు"
+  },
+  "error_proxy_creation_uncertain": {
+    "message": "కొత్త కనెక్షన్ క్రియేట్ అయినట్లు సర్వర్ నిర్ధారించలేదు. ఆటోమేటిక్ రీకనెక్షన్ పాజ్ చేయబడింది."
+  },
+  "siteExclusionsPreferencesReset": {
+    "message": "మీరు సేవ్ చేసిన సైట్ మినహాయింపులను చదవలేకపోవడంతో అవి రీసెట్ చేయబడ్డాయి. మీరు మినహాయించాలనుకునే సైట్‌లను మళ్లీ జోడించండి."
+  },
+  "siteExclusionsConflict": {
+    "message": "మినహాయించిన సైట్‌ల లిస్ట్ మారింది. దాన్ని రివ్యూ చేసి, ఆపై మీ మార్పును మళ్లీ ట్రై చేయండి."
+  },
+  "unavailableLocation": {
+    "message": "లొకేషన్ అందుబాటులో లేదు"
+  },
+  "verificationSending": {
+    "message": "వెరిఫికేషన్ ఈమెయిల్‌ను పంపుతోంది…"
+  },
+  "verificationSent": {
+    "message": "వెరిఫికేషన్ ఈమెయిల్ పంపబడింది. మీ ఇన్‌బాక్స్‌ను, స్పామ్ ఫోల్డర్‌ను చెక్ చేయండి."
+  },
+  "error_login_requires_disconnect": {
+    "message": "మరో ఖాతాకు సైన్ ఇన్ చేసే ముందు ప్రస్తుత VPN కనెక్షన్‌ను డిస్‌కనెక్ట్ చేయండి."
+  },
+  "error_storage_unavailable": {
+    "message": "లోకల్ ఖాతా సెట్టింగ్‌లు అందుబాటులో లేవు. బ్రౌజర్ స్టోరేజ్ అందుబాటులోకి వచ్చినప్పుడు మళ్లీ ట్రై చేయండి; మీరు సేవ్ చేసిన ఖాతా భద్రంగా ఉంది."
+  },
+  "diagnosticsAssistance": {
+    "message": "సపోర్ట్"
+  },
+  "diagnosticsTitle": {
+    "message": "డయాగ్నస్టిక్స్"
+  },
+  "diagnosticsIntro": {
+    "message": "మీ రక్షణను మార్చకుండా FuzeVPNను, ప్రస్తుత కనెక్షన్‌ను చెక్ చేయండి."
+  },
+  "diagnosticsPrivacyTitle": {
+    "message": "మీ డేటా"
+  },
+  "diagnosticsPrivacy": {
+    "message": "రిపోర్ట్ JSONలో టెక్నికల్ స్థితులు, ఎర్రర్ కోడ్‌లు ఉంటాయి; పాస్‌వర్డ్‌లు, టోకెన్‌లు, ఈమెయిల్ అడ్రస్‌లు, IP అడ్రస్‌లు, సందర్శించిన URLలు లేదా మినహాయించిన డొమైన్‌లు ఉండవు. పంపడం ప్రామాణీకరించబడుతుంది, రిపోర్ట్ మీ ఖాతాకు లింక్ అవుతుంది. నెట్‌వర్క్ డేటా కోసం నోటీసును చూడండి."
+  },
+  "diagnosticsAuto": {
+    "message": "ముఖ్యమైన ఎర్రర్ రిపోర్ట్‌లను ఆటోమేటిక్‌గా పంపండి"
+  },
+  "diagnosticsAutoHelp": {
+    "message": "డిఫాల్ట్‌గా ఆఫ్‌లో ఉంటుంది. దీన్ని ఆన్ చేస్తే, బ్రౌజింగ్ హిస్టరీ లేకుండా, ఈ ఖాతా కోసం సాధారణ టెక్నికల్ రిపోర్ట్‌లు పంపబడతాయి. ఆటోమేటిక్‌గా పంపడాన్ని ఆపడానికి, పెండింగ్‌లో ఉన్న ఆటోమేటిక్ రిపోర్ట్‌లను తీసివేయడానికి ఇక్కడ ఆఫ్ చేయండి."
+  },
+  "diagnosticsHistoryHelp": {
+    "message": "టెక్నికల్ హిస్టరీ లోకల్‌గానే ఉంటుంది: ఆటోమేటిక్‌గా పంపడం ఆఫ్‌లో ఉన్నా, 10 నిమిషాల వ్యవధిలో ప్రతి జర్నల్‌కు గరిష్ఠంగా 200 ఈవెంట్‌లు. ఇందులో బ్రౌజింగ్ హిస్టరీ ఉండదు; మాన్యువల్‌గా, బ్రౌజర్ మూసివేసినప్పుడు లేదా ఖాతా మారినప్పుడు ఇది క్లియర్ అవుతుంది."
+  },
+  "diagnosticsHistoryCount": {
+    "message": "లోకల్ టెక్నికల్ ఈవెంట్‌లు: $1"
+  },
+  "diagnosticsConnectionLog": {
+    "message": "కనెక్షన్ లాగ్‌ను ఎక్స్‌పోర్ట్ చేయండి"
+  },
+  "diagnosticsAccountRequired": {
+    "message": "పంపడాన్ని ఆన్ చేయడానికి సైన్ ఇన్ చేయండి. ఖాతా లేకుండా కూడా మీరు రిపోర్ట్‌ను చూడవచ్చు, ఎక్స్‌పోర్ట్ చేయవచ్చు."
+  },
+  "diagnosticsRun": {
+    "message": "డయాగ్నస్టిక్స్ రన్ చేయండి"
+  },
+  "diagnosticsClearHistory": {
+    "message": "లోకల్ హిస్టరీని క్లియర్ చేయండి"
+  },
+  "diagnosticsPreparing": {
+    "message": "రిపోర్ట్‌ను సిద్ధం చేస్తోంది…"
+  },
+  "diagnosticsReports": {
+    "message": "రిపోర్ట్‌లు"
+  },
+  "diagnosticsEmpty": {
+    "message": "ఇంకా లోకల్ రిపోర్ట్ ఏదీ లేదు."
+  },
+  "diagnosticsChooseReport": {
+    "message": "రిపోర్ట్‌ను ఎంచుకోండి"
+  },
+  "diagnosticsReportLabel": {
+    "message": "$1 · $2 · $3"
+  },
+  "diagnosticsTypeFull": {
+    "message": "పూర్తి రిపోర్ట్"
+  },
+  "diagnosticsTypeSimple": {
+    "message": "ఎర్రర్ రిపోర్ట్"
+  },
+  "diagnosticsSummary": {
+    "message": "సేకరించిన తేదీ: $1. FuzeVPN వెర్షన్ $2."
+  },
+  "diagnosticsJson": {
+    "message": "రిపోర్ట్ కంటెంట్‌ను చూడండి (JSON)"
+  },
+  "diagnosticsExport": {
+    "message": "రిపోర్ట్‌ను ఎక్స్‌పోర్ట్ చేయండి"
+  },
+  "diagnosticsDelete": {
+    "message": "లోకల్ రిపోర్ట్‌ను తొలగించండి"
+  },
+  "diagnosticsRetention": {
+    "message": "లోకల్ రిపోర్ట్‌ల గడువు 24 గంటల తర్వాత ముగుస్తుంది. ఇక్కడ తొలగించినంత మాత్రాన సర్వీస్‌కు ఇప్పటికే అందిన రిపోర్ట్ తొలగించబడదు. సర్వర్ నిల్వ, తొలగింపు అభ్యర్థనల కోసం నోటీసును చూడండి."
+  },
+  "diagnosticsConsent": {
+    "message": "ఈ డయాగ్నస్టిక్ రిపోర్ట్‌ను FuzeVPNకు పంపండి"
+  },
+  "diagnosticsDataCollectionRequired": {
+    "message": "డయాగ్నస్టిక్స్ పంపడానికి Firefox టెక్నికల్ డేటా సేకరణను అనుమతించాలి. మళ్లీ ట్రై చేసి, ఈ అనుమతిని ఇవ్వండి."
+  },
+  "diagnosticsSendHelp": {
+    "message": "పంపడం ఐచ్ఛికం. ఆమోదించిన తర్వాత, అదే ఖాతా యొక్క చెల్లుబాటు అయ్యే సెషన్‌తో 24 గంటల వరకు ఇది మళ్లీ ప్రయత్నించవచ్చు. తదుపరి ప్రయత్నాలను మీరు రద్దు చేయవచ్చు. ఆలస్యంగా రద్దు చేస్తే, సర్వర్‌కు ఇప్పటికే రిపోర్ట్ అందలేదని హామీ లేదు."
+  },
+  "diagnosticsSend": {
+    "message": "రిపోర్ట్‌ను పంపండి"
+  },
+  "diagnosticsCancel": {
+    "message": "పంపడాన్ని రద్దు చేయండి"
+  },
+  "diagnosticsReload": {
+    "message": "ఈ పేజీని రీలోడ్ చేయండి"
+  },
+  "diagnosticsUnavailable": {
+    "message": "డయాగ్నస్టిక్స్ అందుబాటులో లేవు. బ్రౌజర్ ఎక్స్‌టెన్షన్ మేనేజర్ నుండి FuzeVPNను రీలోడ్ చేసి, ఆపై ఈ పేజీని మళ్లీ తెరవండి. మీ VPNలో మార్పు లేదు."
+  },
+  "diagnosticsQueueFull": {
+    "message": "పంపే క్యూ నిండిపోయింది. లోకల్ రిపోర్ట్‌ను తొలగించండి లేదా పెండింగ్‌లో ఉన్న రిపోర్ట్ పూర్తయ్యే వరకు వేచి ఉండండి."
+  },
+  "diagnosticsContentUnavailable": {
+    "message": "రిపోర్ట్ కంటెంట్ అందుబాటులో లేదు. లోకల్ రిపోర్ట్ అందుబాటులో ఉంటే దాన్ని ఎక్స్‌పోర్ట్ చేసి, సపోర్ట్‌ను సంప్రదించండి."
+  },
+  "diagnosticsFailure": {
+    "message": "డయాగ్నస్టిక్ చర్యను పూర్తి చేయలేకపోయాము. మీ VPNలో మార్పు లేదు."
+  },
+  "diagnosticsChecks": {
+    "message": "చెక్‌లు"
+  },
+  "diagnosticsCheckFallback": {
+    "message": "టెక్నికల్ చెక్: $1"
+  },
+  "diagnosticsCheckLine": {
+    "message": "$1 — $2"
+  },
+  "diagnosticsProxy": {
+    "message": "బ్రౌజర్ ప్రాక్సీ"
+  },
+  "diagnosticsStorage": {
+    "message": "లోకల్ స్టోరేజ్"
+  },
+  "diagnosticsNetwork": {
+    "message": "నెట్‌వర్క్ కనెక్షన్"
+  },
+  "diagnosticsCleanup": {
+    "message": "సెషన్ క్లీనప్"
+  },
+  "diagnosticsResult_passed": {
+    "message": "పాస్ అయింది"
+  },
+  "diagnosticsResult_failed": {
+    "message": "విఫలమైంది"
+  },
+  "diagnosticsResult_skipped": {
+    "message": "నిర్వహించలేదు"
+  },
+  "diagnosticsResult_unknown": {
+    "message": "తెలియదు"
+  },
+  "diagnosticsStatus_ready": {
+    "message": "ఈ పరికరంలో సిద్ధంగా ఉంది"
+  },
+  "diagnosticsStatus_pending": {
+    "message": "పంపడానికి వేచి ఉంది"
+  },
+  "diagnosticsStatus_sending": {
+    "message": "పంపుతోంది…"
+  },
+  "diagnosticsStatus_session_required": {
+    "message": "అదే ఖాతా యొక్క చెల్లుబాటు అయ్యే సెషన్ కోసం వేచి ఉంది"
+  },
+  "diagnosticsStatus_received": {
+    "message": "సర్వీస్‌కు అందింది"
+  },
+  "diagnosticsStatus_failed": {
+    "message": "పంపడం విఫలమైంది"
+  },
+  "diagnosticsStatus_cancelled": {
+    "message": "పంపడం రద్దు చేయబడింది"
+  },
+  "diagnosticsStatus_expired": {
+    "message": "పంపే గడువు ముగిసింది"
+  },
+  "diagnosticsReceivedAt": {
+    "message": "అందిన తేదీ: $1"
+  },
+  "error_private_browsing_required": {
+    "message": "సాధారణ విండోలలో కూడా VPNను కాన్ఫిగర్ చేయడానికి Firefoxకు ఈ అనుమతి అవసరం. about:addons → FuzeVPNను తెరిచి, ప్రైవేట్ విండోలలో రన్ అవ్వడానికి అనుమతించి, ఆపై మళ్లీ ట్రై చేయండి."
+  },
+  "error_host_permissions_required": {
+    "message": "Firefoxలో about:addons → FuzeVPN → అనుమతులు తెరిచి, అన్ని వెబ్‌సైట్‌లకు యాక్సెస్‌ను అనుమతించి, ఆపై మళ్లీ ట్రై చేయండి."
+  },
+  "cancelAction": {
+    "message": "రద్దు చేయండి"
+  },
+  "refreshLocations": {
+    "message": "లొకేషన్‌లను రిఫ్రెష్ చేయండి"
+  },
+  "refreshingLocations": {
+    "message": "లొకేషన్‌లను రిఫ్రెష్ చేస్తోంది…"
+  },
+  "locationsRefreshError": {
+    "message": "లొకేషన్ లిస్ట్‌ను రిఫ్రెష్ చేయలేకపోయాము. దయచేసి మళ్లీ ట్రై చేయండి."
+  },
+  "error_device_revoked_limit": {
+    "message": "ఈ పరికరం అనుమతి రద్దు చేయబడింది. పరికరాల పరిమితి చేరుకుంది: దయచేసి ఒక పరికరాన్ని తీసివేయండి."
+  },
+  "noAvailableLocations": {
+    "message": "ప్రస్తుతం లొకేషన్‌లు ఏవీ అందుబాటులో లేవు. దయచేసి కాసేపటి తర్వాత మళ్లీ ట్రై చేయండి."
+  },
+  "noAvailableFavoriteLocations": {
+    "message": "మీకు ఇష్టమైన లొకేషన్‌లు తాత్కాలికంగా అందుబాటులో లేవు."
+  },
+  "error_location_favorites_limit": {
+    "message": "100 ఇష్టమైనవాటి పరిమితి చేరుకుంది. మరొకటి జోడించడానికి ఒక ఇష్టమైనదాన్ని తీసివేయండి."
+  },
+  "error_server_full": {
+    "message": "ఈ సర్వర్ నిండిపోయింది. మరో లొకేషన్‌ను ఎంచుకోండి."
+  },
+  "error_capacity_unavailable": {
+    "message": "ఈ సర్వర్ అందుబాటును ప్రస్తుతం నిర్ధారించలేము. దయచేసి కాసేపటి తర్వాత మళ్లీ ట్రై చేయండి."
+  },
+  "locationHierarchyHelp": {
+    "message": "పేరు సర్వర్‌ను ఎంచుకుంటుంది; బాణం గుర్తు వివరాలను చూపుతుంది."
+  },
+  "locationCountrySelect": {
+    "message": "అందుబాటులో ఉన్న సర్వర్‌ను ఎంచుకోండి: $1"
+  },
+  "locationCitySelect": {
+    "message": "అందుబాటులో ఉన్న సర్వర్‌ను ఎంచుకోండి: $1"
+  },
+  "locationShowCities": {
+    "message": "నగరాలను చూపండి: $1"
+  },
+  "locationHideCities": {
+    "message": "నగరాలను దాచండి: $1"
+  },
+  "locationShowServers": {
+    "message": "సర్వర్‌లను చూపండి: $1"
+  },
+  "locationHideServers": {
+    "message": "సర్వర్‌లను దాచండి: $1"
+  },
+  "locationAvailableServers": {
+    "message": "అందుబాటులో ఉన్న సర్వర్‌లు: $1"
+  },
+  "legalInformation": {
+    "message": "చట్టపరమైన సమాచారం"
+  },
+  "privacyPolicy": {
+    "message": "ఎక్స్‌టెన్షన్ గోప్యతా నోటీసు"
+  },
+  "termsAndConditions": {
+    "message": "వినియోగ, విక్రయ నిబంధనలు"
+  },
+  "legalNotice": {
+    "message": "చట్టపరమైన నోటీసు"
+  },
+  "contactSupport": {
+    "message": "సపోర్ట్‌ను సంప్రదించండి"
+  },
+  "webSignIn": {
+    "message": "FuzeVPNకు సైన్ ఇన్ చేయండి"
+  },
+  "webSignInDisconnect": {
+    "message": "డిస్‌కనెక్ట్ చేసి సైన్ ఇన్ చేయండి"
+  },
+  "webSignInPending": {
+    "message": "సైన్ ఇన్ కొనసాగుతోంది…"
+  },
+  "webSignInHelp": {
+    "message": "FuzeVPN కస్టమర్ ఏరియాలో Google లేదా ఈమెయిల్‌తో సైన్ ఇన్ చేయండి లేదా ఖాతాను క్రియేట్ చేయండి."
+  },
+  "webSignInDisconnectHelp": {
+    "message": "మీరు Google లేదా ఈమెయిల్‌తో సైన్ ఇన్ చేయడానికి వీలుగా ఈ బటన్ బ్రౌజర్ రక్షణను ఆపివేస్తుంది. సైన్ ఇన్ చేస్తున్నప్పుడు మీ బ్రౌజింగ్‌కు రక్షణ ఉండదు."
+  },
+  "webSignInStatus": {
+    "message": "FuzeVPN సైన్ ఇన్ విండోలో కొనసాగించండి. మీరు పూర్తి చేసినప్పుడు ఎక్స్‌టెన్షన్ ఆటోమేటిక్‌గా అప్‌డేట్ అవుతుంది. రద్దు చేయడానికి ఆ విండోను మూసివేయండి."
+  },
+  "error_web_login_cancelled": {
+    "message": "సైన్ ఇన్ రద్దు చేయబడింది. మళ్లీ ట్రై చేయండి."
+  },
+  "error_web_login_timeout": {
+    "message": "సైన్ ఇన్‌కు చాలా ఎక్కువ సమయం పట్టింది. మళ్లీ ట్రై చేయండి."
+  },
+  "error_web_login_unavailable": {
+    "message": "వెబ్ సైన్ ఇన్ అందుబాటులో లేదు. తర్వాత మళ్లీ ట్రై చేయండి."
+  },
+  "error_web_login_invalid_callback": {
+    "message": "సైన్ ఇన్‌ను వెరిఫై చేయలేకపోయాము. ఎక్స్‌టెన్షన్ నుండి మళ్లీ ప్రారంభించండి."
+  },
+  "error_web_login_denied": {
+    "message": "సైన్ ఇన్‌కు అనుమతి లభించలేదు. మళ్లీ ట్రై చేయండి."
+  },
+  "error_web_login_busy": {
+    "message": "మళ్లీ ట్రై చేసే ముందు, ఇప్పటికే తెరిచి ఉన్న సైన్ ఇన్ విండోను మూసివేయండి."
+  },
+  "deviceKindFirefox": {
+    "message": "Firefox బ్రౌజర్"
+  },
+  "generalPrivacyPolicy": {
+    "message": "సాధారణ గోప్యతా పాలసీ"
+  },
+  "privacyNoticeTitle": {
+    "message": "FuzeVPN ఎక్స్‌టెన్షన్‌లో గోప్యత"
+  },
+  "privacyNoticeIntro": {
+    "message": "ఈ ఎక్స్‌టెన్షన్ ఉపయోగించే డేటాను ఈ నోటీసు వివరిస్తుంది. ఇది కింద లింక్ చేసిన FuzeVPN సాధారణ గోప్యతా పాలసీకి అనుబంధం. ఐచ్ఛిక డయాగ్నస్టిక్ పంపడం అనేది సైన్ ఇన్ చేయడానికి, VPNను ఉపయోగించడానికి అవసరమైన డేటా నుండి వేరుగా ఉంటుంది."
+  },
+  "privacyNoticeUpdated": {
+    "message": "నోటీసు అప్‌డేట్ చేసిన తేదీ: 19 అక్టోబర్ 2026"
+  },
+  "privacyNoticeServiceTitle": {
+    "message": "ఖాతా, VPN సర్వీస్"
+  },
+  "privacyNoticeService": {
+    "message": "ఎక్స్‌టెన్షన్ ప్రామాణీకరణ, ఖాతా, సబ్‌స్క్రిప్షన్, పరికరం, ప్రాక్సీ సెషన్ డేటాను api.fuzevpn.comతో మార్పిడి చేస్తుంది. VPN ప్రాక్సీ దాని ద్వారా రూట్ అయ్యే ట్రాఫిక్‌ను తీసుకువెళుతుంది. ఈ కనెక్షన్‌లు స్వీకరించే సర్వీస్‌కు నెట్‌వర్క్ మెటాడేటాను వెల్లడిస్తాయి; సర్వర్ లాగింగ్ గురించి ఈ నోటీసు ప్రత్యేకంగా ఎలాంటి హామీ ఇవ్వదు."
+  },
+  "privacyNoticeLocalTitle": {
+    "message": "మీ బ్రౌజర్‌లో స్టోర్ చేయబడిన డేటా"
+  },
+  "privacyNoticeLocal": {
+    "message": "బ్రౌజర్ స్టోరేజ్‌లో మీ సెషన్, ఖాతా వివరాలు, ప్రాధాన్యతలు, సైట్ మినహాయింపులు, పరికర గుర్తింపు ఉంటాయి. ఆటోమేటిక్ రిపోర్టింగ్ ఆఫ్‌లో ఉన్నా, టెక్నికల్ జర్నల్‌లు గరిష్ఠంగా 10 నిమిషాల పాటు లోకల్‌గా ఉంచబడతాయి. డయాగ్నస్టిక్ డ్రాఫ్ట్‌లు, క్యూలో ఉన్న రిపోర్ట్‌ల గడువు 24 గంటల తర్వాత లోకల్‌గా ముగుస్తుంది; ఎక్స్‌టెన్షన్ రన్ అవ్వగలిగినప్పుడు క్లీనప్ జరుగుతుంది."
+  },
+  "privacyNoticeIpTitle": {
+    "message": "పబ్లిక్ IP చెక్‌లు, థర్డ్ పార్టీలు"
+  },
+  "privacyNoticeIp": {
+    "message": "IP ప్రదర్శన, నెట్‌వర్క్ డయాగ్నస్టిక్స్ api.ipify.orgను సంప్రదిస్తాయి. IP ప్రదర్శన ప్రత్యామ్నాయంగా ipv4.icanhazip.comను ఉపయోగించవచ్చు. ప్రొవైడర్‌కు కనెక్షన్ IP, సాధారణ రిక్వెస్ట్ మెటాడేటా అందుతాయి: డైరెక్ట్ మోడ్‌లో మీ పబ్లిక్ IP, లేదా ప్రాక్సీ ద్వారా వెళ్లినప్పుడు VPN ఎగ్జిట్ IP. ఈ రిక్వెస్ట్‌లు కుకీలను, రెఫరర్‌లను మినహాయిస్తాయి, ఖాతా టోకెన్‌ను గానీ బ్రౌజింగ్ హిస్టరీని గానీ పంపవు."
+  },
+  "privacyNoticeReportsTitle": {
+    "message": "డయాగ్నస్టిక్ రిపోర్ట్‌లలో ఏమి ఉంటాయి"
+  },
+  "privacyNoticeReports": {
+    "message": "రిపోర్ట్‌లలో యాదృచ్ఛిక రిపోర్ట్ ఐడెంటిఫైయర్, టైమ్‌స్టాంప్‌లు, ఎక్స్‌టెన్షన్, బ్రౌజర్ వెర్షన్‌లు, ఆపరేటింగ్ సిస్టమ్ ఫ్యామిలీ, ఆర్కిటెక్చర్, కనెక్షన్, రక్షణ స్థితులు, ఎర్రర్ కోడ్‌లు, కౌంట్‌లు, వ్యవధులు, చెక్ ఫలితాలు ఉండవచ్చు. పూర్తి రిపోర్ట్‌లలో ఇటీవలి టెక్నికల్ ఈవెంట్‌లు కూడా ఉండవచ్చు. వాటి JSONలో పాస్‌వర్డ్‌లు, ప్రామాణీకరణ టోకెన్‌లు, ఈమెయిల్ అడ్రస్‌లు, IP అడ్రస్‌లు, సందర్శించిన URLలు, మినహాయించిన డొమైన్‌లు ఉండవు. పంపే ముందు మీరు పూర్తి రిపోర్ట్‌ను పరిశీలించి, ఎక్స్‌పోర్ట్ చేయవచ్చు."
+  },
+  "privacyNoticeAccountTitle": {
+    "message": "గ్రహీత, ఖాతాతో అనుసంధానం"
+  },
+  "privacyNoticeAccount": {
+    "message": "రిపోర్ట్‌లు ప్రామాణీకరించబడిన కనెక్షన్ ద్వారా api.fuzevpn.com/v1/diagnostics వద్ద FuzeVPNకు పంపబడతాయి. ఈ API కనెక్షన్ VPN ప్రాక్సీని బైపాస్ చేస్తుంది: VPN యాక్టివ్‌గా ఉన్నప్పుడు కూడా FuzeVPNకు మీ డైరెక్ట్ పబ్లిక్ IP అందుతుంది. రిపోర్ట్‌లు సైన్ ఇన్ చేసిన ఖాతాకు లింక్ అవుతాయి, అనామకంగా ఉండవు. ప్రామాణీకరణ హెడర్, IP అనేవి రిపోర్ట్ JSON నుండి వేరుగా ఉంటాయి. విజయవంతమైన రసీదు ఆ ఎండ్‌పాయింట్ ఆమోదించిందని మాత్రమే నిర్ధారిస్తుంది, సపోర్ట్ ఏజెంట్ రిపోర్ట్‌ను చదివారని కాదు."
+  },
+  "privacyNoticeChoiceTitle": {
+    "message": "ఐచ్ఛిక పంపడం, ఉపసంహరణ"
+  },
+  "privacyNoticeChoice": {
+    "message": "ఆటోమేటిక్‌గా పంపడం డిఫాల్ట్‌గా ఆఫ్‌లో ఉంటుంది. దీన్ని ఆన్ చేస్తే, ఆ ఖాతా కోసం సాధారణ ఎర్రర్ రిపోర్ట్‌లు అనుమతించబడతాయి. పూర్తి రిపోర్ట్‌ను మాన్యువల్‌గా పంపడానికి పంపే చెక్‌బాక్స్‌ను ఎంచుకోవాలి. Firefoxకు దాని ఐచ్ఛిక టెక్నికల్ డేటా అనుమతి కూడా అవసరం. ఆటోమేటిక్‌గా పంపడాన్ని ఆపడానికి, పెండింగ్‌లో ఉన్న ఆటోమేటిక్ రిపోర్ట్‌లను తీసివేయడానికి దాన్ని ఆఫ్ చేయండి; పెండింగ్‌లో ఉన్న ఒక్కో పంపకాన్ని విడిగా రద్దు చేయండి. డయాగ్నస్టిక్స్ పంపడాన్ని నిరాకరించినా VPN వినియోగానికి ఆటంకం ఉండదు."
+  },
+  "privacyNoticeDeleteTitle": {
+    "message": "లోకల్ తొలగింపు, డౌన్‌లోడ్ చేసిన ఫైల్‌లు"
+  },
+  "privacyNoticeDelete": {
+    "message": "డయాగ్నస్టిక్స్‌లో, టెక్నికల్ హిస్టరీని క్లియర్ చేయవచ్చు లేదా ఒక్కో లోకల్ రిపోర్ట్‌ను తొలగించవచ్చు. హిస్టరీని క్లియర్ చేసినంత మాత్రాన ఇప్పటికే ఉన్న రిపోర్ట్ కాపీలు తొలగిపోవు. లోకల్‌గా రద్దు చేసినా లేదా తొలగించినా, రద్దు చేయకముందే చేరిన అప్‌లోడ్‌తో సహా, సర్వీస్‌కు ఇప్పటికే అందిన డేటాను వెనక్కి తీసుకోలేము. డౌన్‌లోడ్ చేసిన ఎక్స్‌పోర్ట్‌లు వేరే ఫైల్‌లు; వాటిని మీరే తొలగించాలి."
+  },
+  "privacyNoticeServerTitle": {
+    "message": "సర్వర్ నిల్వ, అభ్యర్థనలు"
+  },
+  "privacyNoticeServer": {
+    "message": "సర్వర్ నిల్వను గానీ సర్వర్ వైపు తొలగింపును గానీ ఈ ఎక్స్‌టెన్షన్ నియంత్రించదు, వెరిఫై చేయదు. FuzeVPN వర్తింపజేసే నిల్వ వ్యవధి, ఇప్పటికే పంపిన రిపోర్ట్‌లకు సంబంధించిన అభ్యర్థనల కోసం, సాధారణ గోప్యతా పాలసీని చూడండి లేదా FuzeVPNను సంప్రదించండి. ఈ నోటీసు నిర్దిష్ట సర్వర్ నిల్వ వ్యవధికి ఎలాంటి హామీ ఇవ్వదు."
+  },
+  "privacyNoticeSupportTitle": {
+    "message": "డయాగ్నస్టిక్స్, సపోర్ట్ వేర్వేరు"
+  },
+  "privacyNoticeSupport": {
+    "message": "డయాగ్నస్టిక్ రిపోర్ట్‌ను పంపడం వల్ల ఎక్స్‌టెన్షన్ నుండి సపోర్ట్ మెసేజ్ దానంతటదే పంపబడదు. సమస్యను వివరించడానికి లేదా అందిన రిపోర్ట్‌ను తొలగించమని అభ్యర్థించడానికి, కింద ఉన్న FuzeVPN సంప్రదింపు మార్గాన్ని ఉపయోగించండి. ఎక్స్‌పోర్ట్ చేసిన ఫైల్‌ను వేరే మార్గం ద్వారా షేర్ చేయాలని మీరు ఎంచుకుంటే, ముందుగా దాని కంటెంట్‌ను చెక్ చేయండి."
+  },
+  "privacyNoticeManage": {
+    "message": "డయాగ్నస్టిక్స్‌ను తెరవండి"
+  },
+  "privacyNoticeLinksTitle": {
+    "message": "సర్వీస్ పాలసీ, సంప్రదింపు"
+  },
+  "theme": {
+    "message": "థీమ్"
+  },
+  "themeSystem": {
+    "message": "సిస్టమ్"
+  },
+  "themeLight": {
+    "message": "లైట్"
+  },
+  "themeDark": {
+    "message": "డార్క్"
+  },
+  "switchToDarkTheme": {
+    "message": "డార్క్ థీమ్‌కు మారండి"
+  },
+  "switchToLightTheme": {
+    "message": "లైట్ థీమ్‌కు మారండి"
+  }
+}

@@ -1720,7 +1720,7 @@ async function verifyLegalInformation() {
   assert.equal(legalFixtureRequests.length, fixtureStart, "Legal pages are not prefetched");
   assert(!received.api.slice(networkStart).some((request) => request.method !== "GET"));
   record(
-    "Legal links work logged out in all thirty languages without consent or network side effects",
+    "Legal links work logged out in all fifty languages without consent or network side effects",
     { languages: SUPPORTED_LANGUAGES.length },
   );
   await send({ type: "set_language_preference", preference: "fr" });

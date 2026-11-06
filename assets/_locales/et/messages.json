@@ -1,0 +1,929 @@
+{
+  "extensionName": {
+    "message": "FuzeVPN"
+  },
+  "extensionDescription": {
+    "message": "Kaitse oma privaatsust ja tugevda turvalisust ühe klõpsuga."
+  },
+  "siteExclusionsReloadRequired": {
+    "message": "Värskenduse lõpetamiseks ja saidierandite kasutamiseks laadi FuzeVPN brauseri laienduste haldurist uuesti."
+  },
+  "extensionCommunicationError": {
+    "message": "Laiendus ei vasta. Sulge see aken ja laadi FuzeVPN brauseri laienduste haldurist uuesti."
+  },
+  "actionDisconnected": {
+    "message": "FuzeVPN — Ühendus katkestatud"
+  },
+  "actionConnected": {
+    "message": "FuzeVPN — Selles brauseris kaitstud"
+  },
+  "actionReconnecting": {
+    "message": "FuzeVPN — Taasühendamine"
+  },
+  "actionError": {
+    "message": "FuzeVPN — Vajab tähelepanu"
+  },
+  "browserProtection": {
+    "message": "Brauseri kaitse"
+  },
+  "loginTitle": {
+    "message": "Tere tulemast FuzeVPN-i"
+  },
+  "loginSubtitle": {
+    "message": "Logi sisse, et kaitsta oma sirvimist selles brauseris."
+  },
+  "email": {
+    "message": "E-posti aadress"
+  },
+  "emailPlaceholder": {
+    "message": "sina@example.com"
+  },
+  "password": {
+    "message": "Parool"
+  },
+  "signIn": {
+    "message": "Logi sisse"
+  },
+  "signingIn": {
+    "message": "Sisselogimine…"
+  },
+  "forgotPassword": {
+    "message": "Unustasid parooli?"
+  },
+  "createAccount": {
+    "message": "Loo konto"
+  },
+  "settings": {
+    "message": "Seaded"
+  },
+  "close": {
+    "message": "Sulge"
+  },
+  "statusDisconnected": {
+    "message": "Ühendus katkestatud"
+  },
+  "statusConnecting": {
+    "message": "Ühendamine…"
+  },
+  "statusChanging": {
+    "message": "Asukoha vahetamine…"
+  },
+  "statusProtected": {
+    "message": "Selles brauseris kaitstud"
+  },
+  "statusRefreshing": {
+    "message": "Turvaline uuendamine…"
+  },
+  "statusDisconnecting": {
+    "message": "Ühenduse katkestamine…"
+  },
+  "statusError": {
+    "message": "Kaitse peatatud"
+  },
+  "browserOnlyDetail": {
+    "message": "Kaitse selle brauseri jaoks."
+  },
+  "location": {
+    "message": "Asukoht"
+  },
+  "change": {
+    "message": "Muuda"
+  },
+  "noLocation": {
+    "message": "Asukohti pole saadaval"
+  },
+  "protectBrowser": {
+    "message": "Kaitse brauserit"
+  },
+  "disconnect": {
+    "message": "Katkesta ühendus"
+  },
+  "subscription": {
+    "message": "Tellimus"
+  },
+  "refreshSubscription": {
+    "message": "Värskenda tellimust"
+  },
+  "refreshingSubscription": {
+    "message": "Tellimuse värskendamine…"
+  },
+  "subscriptionActive": {
+    "message": "Aktiivne"
+  },
+  "subscriptionInactive": {
+    "message": "Mitteaktiivne"
+  },
+  "expiresOn": {
+    "message": "Aegub: $1"
+  },
+  "noExpiry": {
+    "message": "Aegumiskuupäev puudub"
+  },
+  "browserOnlyNotice": {
+    "message": "Ainult see brauser. Muud rakendused ja brauserid pole kaitstud."
+  },
+  "resendVerification": {
+    "message": "Saada e-kiri uuesti"
+  },
+  "incognitoHelp": {
+    "message": "Privaatne sirvimine kasutab sama kaitset ainult siis, kui laiendus on brauseri seadetes privaatrežiimis lubatud."
+  },
+  "manageAccount": {
+    "message": "Halda kontot"
+  },
+  "account": {
+    "message": "Konto"
+  },
+  "devices": {
+    "message": "Seadmed"
+  },
+  "manageDevices": {
+    "message": "Halda seadmeid"
+  },
+  "refreshDevices": {
+    "message": "Värskenda seadmeid"
+  },
+  "deviceCount": {
+    "message": "Seadmed: $1 / $2"
+  },
+  "loadingDevices": {
+    "message": "Seadmete laadimine…"
+  },
+  "noDevices": {
+    "message": "Aktiivseid seadmeid pole."
+  },
+  "currentDevice": {
+    "message": "See seade"
+  },
+  "deviceKindBrowser": {
+    "message": "Brauseri laiendus"
+  },
+  "deviceKindVpn": {
+    "message": "VPN-seade"
+  },
+  "profile_browser_proxy": {
+    "message": "Brauseri puhverserver"
+  },
+  "profile_wireguard": {
+    "message": "WireGuard"
+  },
+  "profile_openvpn": {
+    "message": "OpenVPN"
+  },
+  "none": {
+    "message": "puudub"
+  },
+  "deviceCreatedOn": {
+    "message": "Loodud: $1"
+  },
+  "deleteDevice": {
+    "message": "Kustuta seade"
+  },
+  "deleteDeviceNamed": {
+    "message": "Kustuta seade $1"
+  },
+  "confirmDeleteDevice": {
+    "message": "Kas eemaldada „$1“? Selle VPN-ühendused katkestatakse ja profiilid eemaldatakse."
+  },
+  "resetDevice": {
+    "message": "Lähtesta seade"
+  },
+  "confirmResetDevice": {
+    "message": "Kas lähtestada see laiendus? Järgmisel kasutamisel registreeritakse see uue seadmena."
+  },
+  "signOutAccount": {
+    "message": "Logi kontolt välja"
+  },
+  "chooseLocation": {
+    "message": "Vali asukoht"
+  },
+  "error_invalid_credentials": {
+    "message": "E-posti aadress või parool on vale."
+  },
+  "error_unauthorized": {
+    "message": "Sinu seanss on aegunud. Logi uuesti sisse."
+  },
+  "error_email_verification_required": {
+    "message": "Enne kaitse lubamist kinnita oma e-posti aadress."
+  },
+  "errorVerificationCooldown": {
+    "message": "Uue e-kirja saab tellida $1 sekundi pärast."
+  },
+  "error_verification_email_cooldown": {
+    "message": "Oota enne uue e-kirja tellimist."
+  },
+  "error_subscription_required": {
+    "message": "Selle brauseri kaitsmiseks on vaja aktiivset tellimust."
+  },
+  "error_device_limit": {
+    "message": "Seadmete limiit on täis. Eemalda mõni seade."
+  },
+  "error_device_identity_revoked": {
+    "message": "See seade pole enam volitatud. Proovi uuesti ühendada."
+  },
+  "error_device_proof_invalid": {
+    "message": "Seda seadet ei õnnestunud kinnitada. Kontrolli arvuti kuupäeva ja kellaaega ning proovi uuesti."
+  },
+  "error_device_proof_replayed": {
+    "message": "See päring on juba töödeldud. Proovi uuesti."
+  },
+  "error_invalid_device": {
+    "message": "Seda seadet ei tuvastatud. Proovi uuesti ühendada."
+  },
+  "error_device_exists": {
+    "message": "Selle seadme identiteet on juba seotud teise kontoga."
+  },
+  "error_not_found": {
+    "message": "See toiming pole enam saadaval. Proovi uuesti."
+  },
+  "error_invalid_location": {
+    "message": "See asukoht pole saadaval. Vali mõni teine."
+  },
+  "error_rate_limited": {
+    "message": "Liiga palju katseid. Oota hetk ja proovi uuesti."
+  },
+  "error_proxy_unavailable": {
+    "message": "See server pole ajutiselt saadaval. Proovi hetke pärast uuesti."
+  },
+  "error_api_token_expired": {
+    "message": "Sinu konto seanss on aegunud. Logi uuesti sisse."
+  },
+  "error_network_error": {
+    "message": "Võrk pole saadaval. Kontrolli internetiühendust."
+  },
+  "error_request_timeout": {
+    "message": "Teenus vastas liiga kaua. Proovi uuesti."
+  },
+  "error_invalid_response": {
+    "message": "Teenus andis ootamatu vastuse."
+  },
+  "error_proxy_certificate_invalid": {
+    "message": "Serveri turvalisust ei õnnestunud kinnitada. Ühendus on peatatud."
+  },
+  "error_proxy_controlled_by_extension": {
+    "message": "Brauseri puhverserverit juhib praegu mõni teine laiendus."
+  },
+  "error_proxy_controlled_by_policy": {
+    "message": "Administraatori poliitika ei luba FuzeVPN-il puhverserverit muuta."
+  },
+  "error_proxy_authentication_failed": {
+    "message": "Server ei aktsepteerinud ühendust. Proovi uuesti ühendada."
+  },
+  "error_session_expired": {
+    "message": "Sinu kaitstud ühendus on aegunud. Ühenda uuesti."
+  },
+  "error_email_delivery_unavailable": {
+    "message": "E-kirja ei saa praegu saata."
+  },
+  "error_unknown_error": {
+    "message": "Ilmnes ootamatu viga. Proovi uuesti."
+  },
+  "actionBlocked": {
+    "message": "FuzeVPN — Sirvimine blokeeritud"
+  },
+  "statusBlockedRetry": {
+    "message": "Sirvimine peatatud — taasühendamine"
+  },
+  "statusBlockedAction": {
+    "message": "Sirvimine peatatud — kontrolli ühendust"
+  },
+  "statusProtectionUnavailable": {
+    "message": "Kaitse pole saadaval — sirvimine pole blokeeritud"
+  },
+  "recoveryHelp": {
+    "message": "Kaitse jätkamiseks proovi uuesti. Ühenduse katkestamisel saad sirvida ilma FuzeVPN-ita."
+  },
+  "retryConnection": {
+    "message": "Proovi uuesti"
+  },
+  "killSwitch": {
+    "message": "Hädalüliti"
+  },
+  "killSwitchHelp": {
+    "message": "Blokeerib uued veebipäringud, kui VPN-ühendus katkeb. Välistatud saidid jäävad VPN-ist väljaspool kättesaadavaks."
+  },
+  "webRtcProtection": {
+    "message": "WebRTC-kaitse"
+  },
+  "webRtcHelp": {
+    "message": "Aitab hoida sinu IP-aadressi veebikõnede ajal privaatsena. Mõni kõne ei pruugi toimida. Selle väljalülitamine võib paljastada sinu tegeliku IP-aadressi."
+  },
+  "securityEffectiveState": {
+    "message": "$1 · $2"
+  },
+  "securityBlocked": {
+    "message": "Sirvimine blokeeritud"
+  },
+  "securityNotBlocked": {
+    "message": "Sirvimine pole blokeeritud"
+  },
+  "securityWebRtcActive": {
+    "message": "WebRTC-piirang on aktiivne"
+  },
+  "securityWebRtcInactive": {
+    "message": "WebRTC-piirang pole aktiivne"
+  },
+  "localNetworkHelp": {
+    "message": "Kaitse ajal blokeeritakse kohalikud IP-aadressid ja levinud kohalikud nimed. Välistatud domeen võib siiski anda juurdepääsu kohtvõrgule. Süsteemi IPv6 seadeid ei muudeta."
+  },
+  "securityLimits": {
+    "message": "Selle kaitse kohta"
+  },
+  "killSwitchLimits": {
+    "message": "Ainult see brauser: olemasolevad ühendused ning osa brauseri sisesest või teiste laienduste suhtlusest võivad jätkuda. Mõni teine laiendus või poliitika võib puhverserveri asendada enne, kui FuzeVPN reageerib. Laienduse keelamine eemaldab kaitse. Kogu süsteemi hõlmavat blokeerimist pole."
+  },
+  "error_traffic_guard_failed": {
+    "message": "Sirvimise blokeeringut ei õnnestunud kinnitada. Kaitse pole tagatud. Kontrolli laienduse õigusi."
+  },
+  "error_webrtc_control_unavailable": {
+    "message": "WebRTC-piirangut ei õnnestunud rakendada. Kontrolli oma seadeid, teisi laiendusi või administraatori poliitikat."
+  },
+  "language": {
+    "message": "Keel"
+  },
+  "languageAutomatic": {
+    "message": "Automaatne — brauseri keel"
+  },
+  "languageHelp": {
+    "message": "Muudatused rakenduvad kohe. Automaatne järgib brauseri keelt, mis võib erineda süsteemi keelest."
+  },
+  "languageSaveError": {
+    "message": "Keelt ei õnnestunud salvestada. Eelmine valik jääb kehtima. Proovi uuesti."
+  },
+  "publicIp": {
+    "message": "Avalik IP"
+  },
+  "vpnIp": {
+    "message": "VPN-i IP"
+  },
+  "ipChecking": {
+    "message": "Kontrollimine…"
+  },
+  "ipUnavailable": {
+    "message": "Pole saadaval"
+  },
+  "ipLookupExplanation": {
+    "message": "IP kontrollitakse praeguse ühenduse kaudu teenusega ipify või varuvariandina teenusega icanhazip. Sirvimisajalugu ei saadeta."
+  },
+  "automaticLocation": {
+    "message": "Automaatne"
+  },
+  "automaticLocationHelp": {
+    "message": "Parim hiljutine vastamisaeg või viimane asukoht."
+  },
+  "automaticLocationName": {
+    "message": "Automaatne · $1"
+  },
+  "searchLocations": {
+    "message": "Otsi riiki või linna"
+  },
+  "locationFilters": {
+    "message": "Filtreeri asukohti"
+  },
+  "allLocations": {
+    "message": "Kõik"
+  },
+  "favoriteLocations": {
+    "message": "Lemmikud"
+  },
+  "recentLocations": {
+    "message": "Hiljutised"
+  },
+  "noMatchingLocations": {
+    "message": "Otsingule vastavaid asukohti pole."
+  },
+  "noFavoriteLocations": {
+    "message": "Lisa tärn, et hoida lemmikasukohti siin."
+  },
+  "noRecentLocations": {
+    "message": "Siin kuvatakse hiljuti ühendatud asukohad."
+  },
+  "addFavorite": {
+    "message": "Lisa lemmikutesse: $1"
+  },
+  "removeFavorite": {
+    "message": "Eemalda lemmikutest: $1"
+  },
+  "unavailableFavoriteLocation": {
+    "message": "Lemmik pole saadaval: $1"
+  },
+  "locationSaveError": {
+    "message": "Muudatust ei õnnestunud lõpule viia. Osa seadeid võis olla salvestatud. Kontrolli kuvatud valikut enne uuesti proovimist."
+  },
+  "siteExclusions": {
+    "message": "Välistatud saidid"
+  },
+  "siteExclusionsHelp": {
+    "message": "Need saidid kasutavad sinu ühendust ilma FuzeVPN-ita, isegi kui VPN katkeb."
+  },
+  "siteExclusionsEnabled": {
+    "message": "Luba erandid"
+  },
+  "siteExclusionInput": {
+    "message": "Domeen või URL"
+  },
+  "siteExclusionPlaceholder": {
+    "message": "example.com"
+  },
+  "siteExclusionPreview": {
+    "message": "Valitud domeen: $1"
+  },
+  "siteExclusionSubdomains": {
+    "message": "Kaasa alamdomeenid"
+  },
+  "siteExclusionAdd": {
+    "message": "Lisa sait"
+  },
+  "siteExclusionsEmpty": {
+    "message": "Välistatud saite pole. Lisa ainult saidid, mida soovid kasutada ilma VPN-ita."
+  },
+  "siteExclusionsCount": {
+    "message": "Saidid: $1 / 100"
+  },
+  "siteExclusionScopeSubdomains": {
+    "message": "Domeen ja alamdomeenid"
+  },
+  "siteExclusionScopeExact": {
+    "message": "Ainult täpne domeen"
+  },
+  "siteExclusionRemove": {
+    "message": "Eemalda $1"
+  },
+  "siteExclusionsDetails": {
+    "message": "Kuidas erandid toimivad?"
+  },
+  "siteExclusionsResources": {
+    "message": "Teiste domeenide ressursid jäävad kaitstuks. Lehe välistamine ei välista automaatselt selle muud sisu."
+  },
+  "siteExclusionsReload": {
+    "message": "Pärast muudatust laadi sait uuesti. Olemasolevad ühendused võivad kasutada endist marsruuti."
+  },
+  "siteExclusionsWebRtc": {
+    "message": "WebRTC-kaitse jääb üldiseks seadeks, ka välistatud saitide puhul."
+  },
+  "siteExclusionsLocal": {
+    "message": "Salvestatakse ainult selles brauseris ja säilib pärast kontolt väljalogimist."
+  },
+  "siteExclusionsOn": {
+    "message": "Erandid lubatud"
+  },
+  "siteExclusionsOff": {
+    "message": "Erandid keelatud"
+  },
+  "siteExclusionsSummary": {
+    "message": "Saidid väljaspool VPN-i: $1"
+  },
+  "siteExclusionsPending": {
+    "message": "Erandite rakendamine…"
+  },
+  "siteExclusionsInterrupted": {
+    "message": "Muudatus katkes. Ajutine kaitse jääb kehtima."
+  },
+  "siteExclusionsSaveError": {
+    "message": "Muudatust ei õnnestunud lõpetada. Kontrolli seadeid ja proovi uuesti."
+  },
+  "siteExclusionsRetry": {
+    "message": "Proovi uuesti"
+  },
+  "siteExclusionInvalid": {
+    "message": "Sisesta kehtiv avalik domeen. IP-aadresse, kohalikke nimesid, metamärke, avalikke sufikseid ja reserveeritud domeene ei aktsepteerita."
+  },
+  "siteExclusionDuplicate": {
+    "message": "See domeen on juba loendis."
+  },
+  "siteExclusionsLimit": {
+    "message": "100 saidi limiit on täis. Uue lisamiseks eemalda mõni sait."
+  },
+  "statusProtectedExceptions": {
+    "message": "VPN aktiivne · erandeid: $1"
+  },
+  "statusBlockedExceptions": {
+    "message": "Kättesaadavad on ainult välistatud saidid"
+  },
+  "securityBlockedExceptions": {
+    "message": "Sirvimine blokeeritud, v.a välistatud saidid"
+  },
+  "securityBlockUnverified": {
+    "message": "Blokeerimist pole kinnitatud"
+  },
+  "logoutLocalComplete": {
+    "message": "Kohalik väljalogimine on lõpetatud."
+  },
+  "logoutApiSession": {
+    "message": "Praegune konto seanss"
+  },
+  "logoutProxySessions": {
+    "message": "Teadaolevad VPN-seansid"
+  },
+  "logoutRevocationPending": {
+    "message": "Tühistamine on pooleli…"
+  },
+  "logoutRevocationConfirmed": {
+    "message": "Tühistamine kinnitatud"
+  },
+  "logoutRevocationUnconfirmed": {
+    "message": "Tühistamist pole kinnitatud"
+  },
+  "logoutUnconfirmedHelp": {
+    "message": "Mõned kaugseansid võivad jääda aktiivseks kuni aegumiseni."
+  },
+  "deviceQuotaLoading": {
+    "message": "Seadmete limiidi laadimine…"
+  },
+  "deviceQuotaUnknown": {
+    "message": "Seadmete limiit pole saadaval"
+  },
+  "error_proxy_creation_uncertain": {
+    "message": "Server ei kinnitanud uue ühenduse loomist. Automaatne taasühendamine on peatatud."
+  },
+  "siteExclusionsPreferencesReset": {
+    "message": "Salvestatud saidierandid lähtestati, sest neid ei õnnestunud lugeda. Lisa välistatavad saidid uuesti."
+  },
+  "siteExclusionsConflict": {
+    "message": "Välistatud saitide loend on muutunud. Vaata see üle ja proovi muudatust uuesti."
+  },
+  "unavailableLocation": {
+    "message": "Asukoht pole saadaval"
+  },
+  "verificationSending": {
+    "message": "Kinnitusmeili saatmine…"
+  },
+  "verificationSent": {
+    "message": "Kinnitusmeil on saadetud. Kontrolli postkasti ja rämpsposti kausta."
+  },
+  "error_login_requires_disconnect": {
+    "message": "Enne teise kontoga sisselogimist katkesta praegune VPN-ühendus."
+  },
+  "error_storage_unavailable": {
+    "message": "Kohalikud kontoseaded pole saadaval. Proovi uuesti, kui brauseri salvestusruum on saadaval; sinu salvestatud konto on alles."
+  },
+  "diagnosticsAssistance": {
+    "message": "Tugi"
+  },
+  "diagnosticsTitle": {
+    "message": "Diagnostika"
+  },
+  "diagnosticsIntro": {
+    "message": "Kontrolli FuzeVPN-i ja praegust ühendust ilma kaitset muutmata."
+  },
+  "diagnosticsPrivacyTitle": {
+    "message": "Sinu andmed"
+  },
+  "diagnosticsPrivacy": {
+    "message": "Aruande JSON sisaldab tehnilisi olekuid ja veakoode, ilma paroolide, tõendite, e-posti aadresside, IP-aadresside, külastatud URL-ide ja välistatud domeenideta. Saatmine on autenditud ja seob aruande sinu kontoga. Võrguandmete kohta vaata privaatsusteadet."
+  },
+  "diagnosticsAuto": {
+    "message": "Saada olulised veaaruanded automaatselt"
+  },
+  "diagnosticsAutoHelp": {
+    "message": "Vaikimisi välja lülitatud. Selle lubamisel saadetakse selle konto kohta lihtsaid tehnilisi aruandeid ilma sirvimisajaloota. Automaatse saatmise peatamiseks ja ootel automaatsete aruannete eemaldamiseks lülita see siin välja."
+  },
+  "diagnosticsHistoryHelp": {
+    "message": "Tehniline ajalugu jääb kohalikuks: kuni 200 sündmust logi kohta 10 minuti jooksul, isegi kui automaatne saatmine on välja lülitatud. See ei sisalda sirvimisajalugu ja kustutatakse käsitsi, brauseri sulgemisel või konto vahetamisel."
+  },
+  "diagnosticsHistoryCount": {
+    "message": "Kohalikke tehnilisi sündmusi: $1"
+  },
+  "diagnosticsConnectionLog": {
+    "message": "Ekspordi ühenduse logi"
+  },
+  "diagnosticsAccountRequired": {
+    "message": "Saatmise lubamiseks logi sisse. Aruannet saad vaadata ja eksportida ka ilma kontota."
+  },
+  "diagnosticsRun": {
+    "message": "Käivita diagnostika"
+  },
+  "diagnosticsClearHistory": {
+    "message": "Tühjenda kohalik ajalugu"
+  },
+  "diagnosticsPreparing": {
+    "message": "Aruande ettevalmistamine…"
+  },
+  "diagnosticsReports": {
+    "message": "Aruanded"
+  },
+  "diagnosticsEmpty": {
+    "message": "Kohalikke aruandeid veel pole."
+  },
+  "diagnosticsChooseReport": {
+    "message": "Vali aruanne"
+  },
+  "diagnosticsReportLabel": {
+    "message": "$1 · $2 · $3"
+  },
+  "diagnosticsTypeFull": {
+    "message": "Täielik aruanne"
+  },
+  "diagnosticsTypeSimple": {
+    "message": "Veaaruanne"
+  },
+  "diagnosticsSummary": {
+    "message": "Kogutud: $1. FuzeVPN-i versioon $2."
+  },
+  "diagnosticsJson": {
+    "message": "Vaata aruande sisu (JSON)"
+  },
+  "diagnosticsExport": {
+    "message": "Ekspordi aruanne"
+  },
+  "diagnosticsDelete": {
+    "message": "Kustuta kohalik aruanne"
+  },
+  "diagnosticsRetention": {
+    "message": "Kohalikud aruanded aeguvad 24 tunni pärast. Siin kustutamine ei kustuta aruannet, mille teenus on juba kätte saanud. Serveripoolse säilitamise ja kustutamistaotluste kohta vaata privaatsusteadet."
+  },
+  "diagnosticsConsent": {
+    "message": "Saada see diagnostikaaruanne FuzeVPN-ile"
+  },
+  "diagnosticsDataCollectionRequired": {
+    "message": "Diagnostika saatmiseks peab Firefox lubama tehniliste andmete kogumise. Proovi uuesti ja anna see luba."
+  },
+  "diagnosticsSendHelp": {
+    "message": "Saatmine on vabatahtlik. Pärast heakskiitu võidakse saatmist korrata kuni 24 tunni jooksul sama konto kehtiva seansiga. Edasised katsed saad tühistada. Hiline tühistamine ei taga, et server pole aruannet juba kätte saanud."
+  },
+  "diagnosticsSend": {
+    "message": "Saada aruanne"
+  },
+  "diagnosticsCancel": {
+    "message": "Tühista saatmine"
+  },
+  "diagnosticsReload": {
+    "message": "Laadi see leht uuesti"
+  },
+  "diagnosticsUnavailable": {
+    "message": "Diagnostika pole saadaval. Laadi FuzeVPN brauseri laienduste haldurist uuesti ja ava see leht uuesti. Sinu VPN jääb muutmata."
+  },
+  "diagnosticsQueueFull": {
+    "message": "Saatmisjärjekord on täis. Kustuta mõni kohalik aruanne või oota, kuni ootel aruande saatmine lõpeb."
+  },
+  "diagnosticsContentUnavailable": {
+    "message": "Aruande sisu pole saadaval. Ekspordi kohalik aruanne, kui see on saadaval, ja võta ühendust toega."
+  },
+  "diagnosticsFailure": {
+    "message": "Diagnostikatoimingut ei õnnestunud lõpule viia. Sinu VPN jääb muutmata."
+  },
+  "diagnosticsChecks": {
+    "message": "Kontrollid"
+  },
+  "diagnosticsCheckFallback": {
+    "message": "Tehniline kontroll: $1"
+  },
+  "diagnosticsCheckLine": {
+    "message": "$1 — $2"
+  },
+  "diagnosticsProxy": {
+    "message": "Brauseri puhverserver"
+  },
+  "diagnosticsStorage": {
+    "message": "Kohalik salvestusruum"
+  },
+  "diagnosticsNetwork": {
+    "message": "Võrguühendus"
+  },
+  "diagnosticsCleanup": {
+    "message": "Seansside puhastus"
+  },
+  "diagnosticsResult_passed": {
+    "message": "Õnnestus"
+  },
+  "diagnosticsResult_failed": {
+    "message": "Ebaõnnestus"
+  },
+  "diagnosticsResult_skipped": {
+    "message": "Ei tehtud"
+  },
+  "diagnosticsResult_unknown": {
+    "message": "Teadmata"
+  },
+  "diagnosticsStatus_ready": {
+    "message": "Selles seadmes valmis"
+  },
+  "diagnosticsStatus_pending": {
+    "message": "Ootab saatmist"
+  },
+  "diagnosticsStatus_sending": {
+    "message": "Saatmine…"
+  },
+  "diagnosticsStatus_session_required": {
+    "message": "Ootab sama konto kehtivat seanssi"
+  },
+  "diagnosticsStatus_received": {
+    "message": "Teenus on kätte saanud"
+  },
+  "diagnosticsStatus_failed": {
+    "message": "Saatmine ebaõnnestus"
+  },
+  "diagnosticsStatus_cancelled": {
+    "message": "Saatmine tühistatud"
+  },
+  "diagnosticsStatus_expired": {
+    "message": "Saatmistähtaeg on möödunud"
+  },
+  "diagnosticsReceivedAt": {
+    "message": "Kätte saadud: $1"
+  },
+  "error_private_browsing_required": {
+    "message": "Firefox nõuab VPN-i seadistamiseks seda luba ka tavalistes akendes. Ava about:addons → FuzeVPN, luba selle käitamine privaatakendes ja proovi uuesti."
+  },
+  "error_host_permissions_required": {
+    "message": "Ava Firefoxis about:addons → FuzeVPN → Õigused ja luba juurdepääs kõigile veebisaitidele, seejärel proovi uuesti."
+  },
+  "cancelAction": {
+    "message": "Tühista"
+  },
+  "refreshLocations": {
+    "message": "Värskenda asukohti"
+  },
+  "refreshingLocations": {
+    "message": "Asukohtade värskendamine…"
+  },
+  "locationsRefreshError": {
+    "message": "Asukohtade loendit ei õnnestunud värskendada. Proovi uuesti."
+  },
+  "error_device_revoked_limit": {
+    "message": "Selle seadme volitus on tühistatud. Seadmete limiit on täis: eemalda mõni seade."
+  },
+  "noAvailableLocations": {
+    "message": "Praegu pole ühtegi asukohta saadaval. Proovi varsti uuesti."
+  },
+  "noAvailableFavoriteLocations": {
+    "message": "Sinu lemmikasukohad pole ajutiselt saadaval."
+  },
+  "error_location_favorites_limit": {
+    "message": "100 lemmiku limiit on täis. Uue lisamiseks eemalda mõni lemmik."
+  },
+  "error_server_full": {
+    "message": "See server on täis. Vali mõni teine asukoht."
+  },
+  "error_capacity_unavailable": {
+    "message": "Selle serveri saadavust ei saa praegu kinnitada. Proovi varsti uuesti."
+  },
+  "locationHierarchyHelp": {
+    "message": "Nimi valib serveri; nool näitab üksikasju."
+  },
+  "locationCountrySelect": {
+    "message": "Vali saadaolev server: $1"
+  },
+  "locationCitySelect": {
+    "message": "Vali saadaolev server: $1"
+  },
+  "locationShowCities": {
+    "message": "Näita linnu: $1"
+  },
+  "locationHideCities": {
+    "message": "Peida linnad: $1"
+  },
+  "locationShowServers": {
+    "message": "Näita servereid: $1"
+  },
+  "locationHideServers": {
+    "message": "Peida serverid: $1"
+  },
+  "locationAvailableServers": {
+    "message": "Saadaolevad serverid: $1"
+  },
+  "legalInformation": {
+    "message": "Juriidiline teave"
+  },
+  "privacyPolicy": {
+    "message": "Laienduse privaatsusteade"
+  },
+  "termsAndConditions": {
+    "message": "Kasutus- ja müügitingimused"
+  },
+  "legalNotice": {
+    "message": "Õiguslik teave"
+  },
+  "contactSupport": {
+    "message": "Võta ühendust toega"
+  },
+  "webSignIn": {
+    "message": "Logi FuzeVPN-i sisse"
+  },
+  "webSignInDisconnect": {
+    "message": "Katkesta ühendus ja logi sisse"
+  },
+  "webSignInPending": {
+    "message": "Sisselogimine on pooleli…"
+  },
+  "webSignInHelp": {
+    "message": "Logi sisse või loo konto Google’i või e-postiga FuzeVPN-i kliendialas."
+  },
+  "webSignInDisconnectHelp": {
+    "message": "See nupp peatab brauseri kaitse, et saaksid Google’i või e-postiga sisse logida. Sisselogimise ajal pole sinu sirvimine kaitstud."
+  },
+  "webSignInStatus": {
+    "message": "Jätka FuzeVPN-i sisselogimisaknas. Laiendus uueneb automaatselt, kui oled lõpetanud. Tühistamiseks sulge see aken."
+  },
+  "error_web_login_cancelled": {
+    "message": "Sisselogimine tühistati. Proovi uuesti."
+  },
+  "error_web_login_timeout": {
+    "message": "Sisselogimine võttis liiga kaua aega. Proovi uuesti."
+  },
+  "error_web_login_unavailable": {
+    "message": "Veebis sisselogimine pole saadaval. Proovi hiljem uuesti."
+  },
+  "error_web_login_invalid_callback": {
+    "message": "Sisselogimist ei õnnestunud kinnitada. Alusta uuesti laiendusest."
+  },
+  "error_web_login_denied": {
+    "message": "Sisselogimist ei volitatud. Proovi uuesti."
+  },
+  "error_web_login_busy": {
+    "message": "Enne uuesti proovimist sulge juba avatud sisselogimisaken."
+  },
+  "deviceKindFirefox": {
+    "message": "Firefoxi brauser"
+  },
+  "generalPrivacyPolicy": {
+    "message": "Üldine privaatsuspoliitika"
+  },
+  "privacyNoticeTitle": {
+    "message": "Privaatsus FuzeVPN-i laienduses"
+  },
+  "privacyNoticeIntro": {
+    "message": "See teade kirjeldab andmeid, mida see laiendus kasutab. See täiendab allpool lingitud FuzeVPN-i üldist privaatsuspoliitikat. Diagnostika vabatahtlik saatmine on eraldi andmetest, mida on vaja sisselogimiseks ja VPN-i kasutamiseks."
+  },
+  "privacyNoticeUpdated": {
+    "message": "Teadet uuendati 19. oktoobril 2026"
+  },
+  "privacyNoticeServiceTitle": {
+    "message": "Konto ja VPN-teenus"
+  },
+  "privacyNoticeService": {
+    "message": "Laiendus vahetab teenusega api.fuzevpn.com autentimis-, konto-, tellimuse-, seadme- ja puhverserveri seansi andmeid. VPN-i puhverserver edastab selle kaudu suunatud liiklust. Need ühendused avaldavad vastuvõtvale teenusele võrgu metaandmeid; see teade ei anna serveri logimise kohta eraldi lubadust."
+  },
+  "privacyNoticeLocalTitle": {
+    "message": "Brauserisse salvestatud andmed"
+  },
+  "privacyNoticeLocal": {
+    "message": "Brauseri salvestusruumis hoitakse sinu seanssi, konto andmeid, eelistusi, saidierandeid ja seadme identiteeti. Tehnilisi logisid hoitakse kohalikult kuni 10 minutit, isegi kui automaatne aruandlus on välja lülitatud. Diagnostika mustandid ja järjekorras aruanded aeguvad kohalikult 24 tunni pärast; puhastus toimub, kui laiendus saab töötada."
+  },
+  "privacyNoticeIpTitle": {
+    "message": "Avaliku IP kontrollid ja kolmandad osapooled"
+  },
+  "privacyNoticeIp": {
+    "message": "IP kuvamine ja võrgudiagnostika võtavad ühendust aadressiga api.ipify.org. IP kuvamine võib varuvariandina kasutada aadressi ipv4.icanhazip.com. Teenusepakkuja saab ühenduse IP ja tavalised päringu metaandmed: otserežiimis sinu avaliku IP, puhverserveri kasutamisel VPN-i väljund-IP. Need päringud ei sisalda küpsiseid ega viitajaid ega saada kontotõendit ega sirvimisajalugu."
+  },
+  "privacyNoticeReportsTitle": {
+    "message": "Mida diagnostikaaruanded sisaldavad"
+  },
+  "privacyNoticeReports": {
+    "message": "Aruanded võivad sisaldada juhuslikku aruande identifikaatorit, ajatempleid, laienduse ja brauseri versioone, operatsioonisüsteemi perekonda ja arhitektuuri, ühenduse ja kaitse olekuid, veakoode, loendureid, kestusi ja kontrollide tulemusi. Täielikud aruanded võivad sisaldada hiljutisi tehnilisi sündmusi. Nende JSON ei sisalda paroole, autentimistõendeid, e-posti aadresse, IP-aadresse, külastatud URL-e ega välistatud domeene. Täieliku aruande saad enne saatmist üle vaadata ja eksportida."
+  },
+  "privacyNoticeAccountTitle": {
+    "message": "Saaja ja kontoga sidumine"
+  },
+  "privacyNoticeAccount": {
+    "message": "Aruanded saadetakse FuzeVPN-ile aadressil api.fuzevpn.com/v1/diagnostics autenditud ühenduse kaudu. See API-ühendus möödub VPN-i puhverserverist: FuzeVPN saab sinu otsese avaliku IP ka siis, kui VPN on aktiivne. Aruanded seotakse sisselogitud kontoga ega ole anonüümsed. Autentimispäis ja IP on aruande JSON-ist eraldi. Edukas kättesaamine kinnitab, et see lõpp-punkt aktsepteeris aruande, mitte seda, et tugiteenuse töötaja on selle läbi lugenud."
+  },
+  "privacyNoticeChoiceTitle": {
+    "message": "Vabatahtlik saatmine ja nõusoleku tagasivõtmine"
+  },
+  "privacyNoticeChoice": {
+    "message": "Automaatne saatmine on vaikimisi välja lülitatud. Selle lubamine võimaldab saata selle konto kohta lihtsaid veaaruandeid. Täieliku aruande käsitsi saatmiseks tuleb märkida saatmise märkeruut. Firefox nõuab lisaks oma valikulist tehniliste andmete luba. Automaatse saatmise peatamiseks ja ootel automaatsete aruannete eemaldamiseks lülita see välja; üksikud ootel saatmised tühista eraldi. Diagnostika saatmisest keeldumine ei takista VPN-i kasutamist."
+  },
+  "privacyNoticeDeleteTitle": {
+    "message": "Kohalik kustutamine ja allalaaditud failid"
+  },
+  "privacyNoticeDelete": {
+    "message": "Jaotises Diagnostika saad tühjendada tehnilise ajaloo või kustutada üksiku kohaliku aruande. Ajaloo tühjendamine ei kustuta olemasolevaid aruannete koopiaid. Kohalik tühistamine või kustutamine ei saa tagasi võtta andmeid, mille teenus on juba kätte saanud, sealhulgas enne tühistamist kohale jõudnud üleslaadimist. Allalaaditud ekspordid on eraldi failid, mille pead ise kustutama."
+  },
+  "privacyNoticeServerTitle": {
+    "message": "Serveripoolne säilitamine ja taotlused"
+  },
+  "privacyNoticeServer": {
+    "message": "See laiendus ei kontrolli ega jälgi serveripoolset säilitamist ega kustutamist. FuzeVPN-i rakendatava säilitusaja ja juba saadetud aruannetega seotud taotluste kohta vaata üldist privaatsuspoliitikat või võta ühendust FuzeVPN-iga. See teade ei taga kindlat serveripoolset säilitusaega."
+  },
+  "privacyNoticeSupportTitle": {
+    "message": "Diagnostika ja tugi on eraldi"
+  },
+  "privacyNoticeSupport": {
+    "message": "Diagnostikaaruande saatmine ei saada laiendusest iseenesest tugiteenusele sõnumit. Probleemi selgitamiseks või kättesaadud aruande kustutamise taotlemiseks kasuta allolevat FuzeVPN-i kontaktikanalit. Kui otsustad eksporditud faili muu kanali kaudu jagada, kontrolli enne selle sisu."
+  },
+  "privacyNoticeManage": {
+    "message": "Ava Diagnostika"
+  },
+  "privacyNoticeLinksTitle": {
+    "message": "Teenuse poliitika ja kontakt"
+  },
+  "theme": {
+    "message": "Teema"
+  },
+  "themeSystem": {
+    "message": "Süsteem"
+  },
+  "themeLight": {
+    "message": "Hele"
+  },
+  "themeDark": {
+    "message": "Tume"
+  },
+  "switchToDarkTheme": {
+    "message": "Lülitu tumedale teemale"
+  },
+  "switchToLightTheme": {
+    "message": "Lülitu heledale teemale"
+  }
+}

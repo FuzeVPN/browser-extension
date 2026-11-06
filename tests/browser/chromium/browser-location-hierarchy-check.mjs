@@ -619,7 +619,7 @@ try {
         expandHeight: expand.height,
       };
     });
-    const rtl = ["ar", "fa", "ur"].includes(language);
+    const rtl = ["ar", "fa", "ur", "he"].includes(language);
     assert.equal(layout.dir, rtl ? "rtl" : "ltr");
     assert.ok(
       layout.overflow <= 1 && layout.bodyOverflow <= 1,

@@ -1,0 +1,929 @@
+{
+  "extensionName": {
+    "message": "FuzeVPN"
+  },
+  "extensionDescription": {
+    "message": "ግላዊነትዎን ይጠብቁ፣ ደህንነትዎንም በአንድ ጠቅታ ያጠናክሩ።"
+  },
+  "siteExclusionsReloadRequired": {
+    "message": "ዝማኔውን ለማጠናቀቅ እና የተገለሉ ጣቢያዎችን ለመጠቀም FuzeVPNን ከአሳሹ የቅጥያ አስተዳዳሪ እንደገና ይጫኑ።"
+  },
+  "extensionCommunicationError": {
+    "message": "ቅጥያው ምላሽ እየሰጠ አይደለም። ይህን መስኮት ይዝጉ፣ ከዚያ FuzeVPNን ከአሳሹ የቅጥያ አስተዳዳሪ እንደገና ይጫኑ።"
+  },
+  "actionDisconnected": {
+    "message": "FuzeVPN — ተቋርጧል"
+  },
+  "actionConnected": {
+    "message": "FuzeVPN — በዚህ አሳሽ ውስጥ ተጠብቋል"
+  },
+  "actionReconnecting": {
+    "message": "FuzeVPN — እንደገና በመገናኘት ላይ"
+  },
+  "actionError": {
+    "message": "FuzeVPN — ትኩረት ያስፈልጋል"
+  },
+  "browserProtection": {
+    "message": "የአሳሽ ጥበቃ"
+  },
+  "loginTitle": {
+    "message": "እንኳን ወደ FuzeVPN በደህና መጡ"
+  },
+  "loginSubtitle": {
+    "message": "በዚህ አሳሽ ውስጥ አሰሳዎን ለመጠበቅ ይግቡ።"
+  },
+  "email": {
+    "message": "የኢሜይል አድራሻ"
+  },
+  "emailPlaceholder": {
+    "message": "you@example.com"
+  },
+  "password": {
+    "message": "የይለፍ ቃል"
+  },
+  "signIn": {
+    "message": "ግባ"
+  },
+  "signingIn": {
+    "message": "በመግባት ላይ…"
+  },
+  "forgotPassword": {
+    "message": "የይለፍ ቃልዎን ረሱት?"
+  },
+  "createAccount": {
+    "message": "መለያ ፍጠር"
+  },
+  "settings": {
+    "message": "ቅንብሮች"
+  },
+  "close": {
+    "message": "ዝጋ"
+  },
+  "statusDisconnected": {
+    "message": "ተቋርጧል"
+  },
+  "statusConnecting": {
+    "message": "በመገናኘት ላይ…"
+  },
+  "statusChanging": {
+    "message": "አካባቢን በመቀየር ላይ…"
+  },
+  "statusProtected": {
+    "message": "በዚህ አሳሽ ውስጥ ተጠብቋል"
+  },
+  "statusRefreshing": {
+    "message": "ደህንነቱ በተጠበቀ ሁኔታ በማደስ ላይ…"
+  },
+  "statusDisconnecting": {
+    "message": "ግንኙነትን በማቋረጥ ላይ…"
+  },
+  "statusError": {
+    "message": "ጥበቃው ቆሟል"
+  },
+  "browserOnlyDetail": {
+    "message": "ለዚህ አሳሽ የሚሆን ጥበቃ።"
+  },
+  "location": {
+    "message": "አካባቢ"
+  },
+  "change": {
+    "message": "ቀይር"
+  },
+  "noLocation": {
+    "message": "ምንም አካባቢ አይገኝም"
+  },
+  "protectBrowser": {
+    "message": "አሳሹን ጠብቅ"
+  },
+  "disconnect": {
+    "message": "ግንኙነት አቋርጥ"
+  },
+  "subscription": {
+    "message": "የደንበኝነት ምዝገባ"
+  },
+  "refreshSubscription": {
+    "message": "የደንበኝነት ምዝገባን አድስ"
+  },
+  "refreshingSubscription": {
+    "message": "የደንበኝነት ምዝገባን በማደስ ላይ…"
+  },
+  "subscriptionActive": {
+    "message": "ንቁ"
+  },
+  "subscriptionInactive": {
+    "message": "ንቁ ያልሆነ"
+  },
+  "expiresOn": {
+    "message": "የሚያበቃው፦ $1"
+  },
+  "noExpiry": {
+    "message": "የማብቂያ ቀን የለም"
+  },
+  "browserOnlyNotice": {
+    "message": "ይህ አሳሽ ብቻ። ሌሎች መተግበሪያዎች እና አሳሾች አይሸፈኑም።"
+  },
+  "resendVerification": {
+    "message": "ኢሜይሉን እንደገና ላክ"
+  },
+  "incognitoHelp": {
+    "message": "የግል አሰሳ ተመሳሳዩን ጥበቃ የሚጠቀመው በአሳሹ ቅንብሮች ውስጥ ቅጥያው በግል ሁነታ እንዲሠራ ከተፈቀደለት ብቻ ነው።"
+  },
+  "manageAccount": {
+    "message": "መለያዬን አስተዳድር"
+  },
+  "account": {
+    "message": "መለያ"
+  },
+  "devices": {
+    "message": "መሣሪያዎች"
+  },
+  "manageDevices": {
+    "message": "መሣሪያዎችን አስተዳድር"
+  },
+  "refreshDevices": {
+    "message": "መሣሪያዎችን አድስ"
+  },
+  "deviceCount": {
+    "message": "$1 / $2 መሣሪያዎች"
+  },
+  "loadingDevices": {
+    "message": "መሣሪያዎችን በመጫን ላይ…"
+  },
+  "noDevices": {
+    "message": "ምንም ንቁ መሣሪያ የለም።"
+  },
+  "currentDevice": {
+    "message": "ይህ መሣሪያ"
+  },
+  "deviceKindBrowser": {
+    "message": "የአሳሽ ቅጥያ"
+  },
+  "deviceKindVpn": {
+    "message": "የVPN መሣሪያ"
+  },
+  "profile_browser_proxy": {
+    "message": "የአሳሽ ፕሮክሲ"
+  },
+  "profile_wireguard": {
+    "message": "WireGuard"
+  },
+  "profile_openvpn": {
+    "message": "OpenVPN"
+  },
+  "none": {
+    "message": "ምንም"
+  },
+  "deviceCreatedOn": {
+    "message": "የተፈጠረው፦ $1"
+  },
+  "deleteDevice": {
+    "message": "መሣሪያውን ሰርዝ"
+  },
+  "deleteDeviceNamed": {
+    "message": "መሣሪያ $1ን ሰርዝ"
+  },
+  "confirmDeleteDevice": {
+    "message": "“$1” ይወገድ? የVPN ግንኙነቶቹ ይቆማሉ፣ መገለጫዎቹም ይወገዳሉ።"
+  },
+  "resetDevice": {
+    "message": "መሣሪያውን ዳግም አስጀምር"
+  },
+  "confirmResetDevice": {
+    "message": "ይህ ቅጥያ ዳግም ይጀመር? በሚቀጥለው ጊዜ ሲጠቀሙበት እንደ አዲስ መሣሪያ ይመዘገባል።"
+  },
+  "signOutAccount": {
+    "message": "ከመለያ ውጣ"
+  },
+  "chooseLocation": {
+    "message": "አካባቢ ይምረጡ"
+  },
+  "error_invalid_credentials": {
+    "message": "የኢሜይል አድራሻው ወይም የይለፍ ቃሉ ትክክል አይደለም።"
+  },
+  "error_unauthorized": {
+    "message": "ክፍለ-ጊዜዎ አብቅቷል። እባክዎ እንደገና ይግቡ።"
+  },
+  "error_email_verification_required": {
+    "message": "ጥበቃን ከማንቃትዎ በፊት የኢሜይል አድራሻዎን ያረጋግጡ።"
+  },
+  "errorVerificationCooldown": {
+    "message": "አዲስ ኢሜይል ከ$1 ሰከንዶች በኋላ መጠየቅ ይቻላል።"
+  },
+  "error_verification_email_cooldown": {
+    "message": "ሌላ ኢሜይል ከመጠየቅዎ በፊት እባክዎ ይጠብቁ።"
+  },
+  "error_subscription_required": {
+    "message": "ይህን አሳሽ ለመጠበቅ ንቁ የደንበኝነት ምዝገባ ያስፈልጋል።"
+  },
+  "error_device_limit": {
+    "message": "የመሣሪያ ገደብ ላይ ደርሰዋል። እባክዎ አንድ መሣሪያ ያስወግዱ።"
+  },
+  "error_device_identity_revoked": {
+    "message": "ይህ መሣሪያ ከእንግዲህ የተፈቀደለት አይደለም። እንደገና ለመገናኘት ይሞክሩ።"
+  },
+  "error_device_proof_invalid": {
+    "message": "ይህን መሣሪያ ማረጋገጥ አልቻልንም። የኮምፒውተርዎን ቀን እና ሰዓት ያረጋግጡ፣ ከዚያ እንደገና ይሞክሩ።"
+  },
+  "error_device_proof_replayed": {
+    "message": "ይህ ጥያቄ አስቀድሞ ተስተናግዷል። እንደገና ይሞክሩ።"
+  },
+  "error_invalid_device": {
+    "message": "ይህ መሣሪያ አልታወቀም። እንደገና ለመገናኘት ይሞክሩ።"
+  },
+  "error_device_exists": {
+    "message": "ይህ የመሣሪያ ማንነት አስቀድሞ ከሌላ መለያ ጋር ተገናኝቷል።"
+  },
+  "error_not_found": {
+    "message": "ይህ ክዋኔ ከእንግዲህ አይገኝም። እንደገና ይሞክሩ።"
+  },
+  "error_invalid_location": {
+    "message": "ይህ አካባቢ አይገኝም። ሌላ ይምረጡ።"
+  },
+  "error_rate_limited": {
+    "message": "በጣም ብዙ ሙከራዎች። ትንሽ ቆይተው እንደገና ይሞክሩ።"
+  },
+  "error_proxy_unavailable": {
+    "message": "ይህ አገልጋይ ለጊዜው አይገኝም። ትንሽ ቆይተው እንደገና ይሞክሩ።"
+  },
+  "error_api_token_expired": {
+    "message": "የመለያዎ ክፍለ-ጊዜ አብቅቷል። እባክዎ እንደገና ይግቡ።"
+  },
+  "error_network_error": {
+    "message": "አውታረ መረቡ አይገኝም። የበይነመረብ ግንኙነትዎን ያረጋግጡ።"
+  },
+  "error_request_timeout": {
+    "message": "አገልግሎቱ ምላሽ ለመስጠት በጣም ረጅም ጊዜ ወሰደ። እንደገና ይሞክሩ።"
+  },
+  "error_invalid_response": {
+    "message": "አገልግሎቱ ያልተጠበቀ ምላሽ መልሷል።"
+  },
+  "error_proxy_certificate_invalid": {
+    "message": "የአገልጋዩን ደህንነት ማረጋገጥ አልቻልንም። ግንኙነቱ ቆሟል።"
+  },
+  "error_proxy_controlled_by_extension": {
+    "message": "ሌላ ቅጥያ በአሁኑ ጊዜ የአሳሹን ፕሮክሲ እየተቆጣጠረ ነው።"
+  },
+  "error_proxy_controlled_by_policy": {
+    "message": "የአስተዳዳሪ መመሪያ FuzeVPN ፕሮክሲውን እንዳይቀይር ይከለክላል።"
+  },
+  "error_proxy_authentication_failed": {
+    "message": "አገልጋዩ ግንኙነቱን አልተቀበለም። እንደገና ለመገናኘት ይሞክሩ።"
+  },
+  "error_session_expired": {
+    "message": "የተጠበቀው ግንኙነትዎ አብቅቷል። እንደገና ይገናኙ።"
+  },
+  "error_email_delivery_unavailable": {
+    "message": "ኢሜይሉን አሁን መላክ አይቻልም።"
+  },
+  "error_unknown_error": {
+    "message": "ያልተጠበቀ ስህተት ተከስቷል። እንደገና ይሞክሩ።"
+  },
+  "actionBlocked": {
+    "message": "FuzeVPN — አሰሳ ታግዷል"
+  },
+  "statusBlockedRetry": {
+    "message": "አሰሳ ባለበት ቆሟል — እንደገና በመገናኘት ላይ"
+  },
+  "statusBlockedAction": {
+    "message": "አሰሳ ባለበት ቆሟል — ግንኙነቱን ያረጋግጡ"
+  },
+  "statusProtectionUnavailable": {
+    "message": "ጥበቃ አይገኝም — አሰሳ አልታገደም"
+  },
+  "recoveryHelp": {
+    "message": "ጥበቃን ለመቀጠል እንደገና ይሞክሩ። ግንኙነት ማቋረጥ ያለ FuzeVPN እንዲያስሱ ያስችልዎታል።"
+  },
+  "retryConnection": {
+    "message": "እንደገና ሞክር"
+  },
+  "killSwitch": {
+    "message": "ኪል ስዊች"
+  },
+  "killSwitchHelp": {
+    "message": "የVPN ግንኙነቱ ከተቋረጠ አዳዲስ የድር ጥያቄዎችን ያግዳል። የተገለሉ ጣቢያዎች ከVPN ውጭ ተደራሽ ሆነው ይቆያሉ።"
+  },
+  "webRtcProtection": {
+    "message": "የWebRTC ጥበቃ"
+  },
+  "webRtcHelp": {
+    "message": "በድር ጥሪዎች ወቅት የIP አድራሻዎ የግል ሆኖ እንዲቆይ ያግዛል። አንዳንድ ጥሪዎች ላይሠሩ ይችላሉ። ይህን ማጥፋት እውነተኛ የIP አድራሻዎን ሊያጋልጥ ይችላል።"
+  },
+  "securityEffectiveState": {
+    "message": "$1 · $2"
+  },
+  "securityBlocked": {
+    "message": "አሰሳ ታግዷል"
+  },
+  "securityNotBlocked": {
+    "message": "አሰሳ አልታገደም"
+  },
+  "securityWebRtcActive": {
+    "message": "የWebRTC ገደብ ንቁ ነው"
+  },
+  "securityWebRtcInactive": {
+    "message": "የWebRTC ገደብ ንቁ አይደለም"
+  },
+  "localNetworkHelp": {
+    "message": "በጥበቃ ወቅት የአካባቢ IP አድራሻዎች እና የተለመዱ የአካባቢ ስሞች ይታገዳሉ። የተገለለ ጎራ አሁንም የአካባቢውን አውታረ መረብ ተደራሽ ሊያደርግ ይችላል። የስርዓቱ IPv6 ቅንብሮች አይቀየሩም።"
+  },
+  "securityLimits": {
+    "message": "ስለዚህ ጥበቃ"
+  },
+  "killSwitchLimits": {
+    "message": "ይህ አሳሽ ብቻ፦ ነባር ግንኙነቶች እና አንዳንድ የአሳሹ ውስጣዊ ወይም የሌሎች ቅጥያዎች ግንኙነቶች ሊቀጥሉ ይችላሉ። FuzeVPN ምላሽ ከመስጠቱ በፊት ሌላ ቅጥያ ወይም መመሪያ ፕሮክሲውን ሊተካ ይችላል። ቅጥያውን ማሰናከል ጥበቃውን ያስወግዳል። በስርዓት ደረጃ ምንም እገዳ የለም።"
+  },
+  "error_traffic_guard_failed": {
+    "message": "የአሰሳ እገዳው ሊረጋገጥ አልቻለም። ጥበቃው ዋስትና የለውም። የቅጥያውን ፈቃዶች ያረጋግጡ።"
+  },
+  "error_webrtc_control_unavailable": {
+    "message": "የWebRTC ገደቡ ሊተገበር አልቻለም። ቅንብሮችዎን፣ ሌሎች ቅጥያዎችን ወይም የአስተዳዳሪ መመሪያን ያረጋግጡ።"
+  },
+  "language": {
+    "message": "ቋንቋ"
+  },
+  "languageAutomatic": {
+    "message": "ራስ-ሰር — የአሳሹ ቋንቋ"
+  },
+  "languageHelp": {
+    "message": "ለውጦች ወዲያውኑ ይተገበራሉ። ራስ-ሰር የአሳሹን ቋንቋ ይከተላል፤ ይህም ከስርዓቱ ቋንቋ ሊለይ ይችላል።"
+  },
+  "languageSaveError": {
+    "message": "ቋንቋውን ማስቀመጥ አልተቻለም። የቀድሞ ምርጫዎ ተይዟል። እንደገና ይሞክሩ።"
+  },
+  "publicIp": {
+    "message": "ይፋዊ IP"
+  },
+  "vpnIp": {
+    "message": "የVPN IP"
+  },
+  "ipChecking": {
+    "message": "በማረጋገጥ ላይ…"
+  },
+  "ipUnavailable": {
+    "message": "አይገኝም"
+  },
+  "ipLookupExplanation": {
+    "message": "IP የሚረጋገጠው አሁን ያለዎትን ግንኙነት በመጠቀም በipify፣ ወይም እንደ ምትክ በicanhazip ነው። ምንም የአሰሳ ታሪክ አይላክም።"
+  },
+  "automaticLocation": {
+    "message": "ራስ-ሰር"
+  },
+  "automaticLocationHelp": {
+    "message": "የቅርብ ጊዜው ምርጥ የምላሽ ጊዜ፣ ወይም የመጨረሻው አካባቢዎ።"
+  },
+  "automaticLocationName": {
+    "message": "ራስ-ሰር · $1"
+  },
+  "searchLocations": {
+    "message": "አገር ወይም ከተማ ይፈልጉ"
+  },
+  "locationFilters": {
+    "message": "አካባቢዎችን አጣራ"
+  },
+  "allLocations": {
+    "message": "ሁሉም"
+  },
+  "favoriteLocations": {
+    "message": "ተወዳጆች"
+  },
+  "recentLocations": {
+    "message": "የቅርብ ጊዜ"
+  },
+  "noMatchingLocations": {
+    "message": "ከፍለጋዎ ጋር የሚዛመድ አካባቢ የለም።"
+  },
+  "noFavoriteLocations": {
+    "message": "ተወዳጅ አካባቢዎችዎን እዚህ ለማቆየት ኮከብ ያክሉ።"
+  },
+  "noRecentLocations": {
+    "message": "በቅርቡ የተገናኟቸው አካባቢዎች እዚህ ይታያሉ።"
+  },
+  "addFavorite": {
+    "message": "$1ን ወደ ተወዳጆች አክል"
+  },
+  "removeFavorite": {
+    "message": "$1ን ከተወዳጆች አስወግድ"
+  },
+  "unavailableFavoriteLocation": {
+    "message": "የማይገኝ ተወዳጅ $1"
+  },
+  "locationSaveError": {
+    "message": "ለውጡ ሊጠናቀቅ አልቻለም። አንዳንድ ቅንብሮች ተቀምጠው ሊሆኑ ይችላሉ። እንደገና ከመሞከርዎ በፊት የሚታየውን ምርጫ ያረጋግጡ።"
+  },
+  "siteExclusions": {
+    "message": "የተገለሉ ጣቢያዎች"
+  },
+  "siteExclusionsHelp": {
+    "message": "እነዚህ ጣቢያዎች VPN ቢቋረጥም እንኳ ያለ FuzeVPN ግንኙነትዎን ይጠቀማሉ።"
+  },
+  "siteExclusionsEnabled": {
+    "message": "ልዩ ሁኔታዎችን አንቃ"
+  },
+  "siteExclusionInput": {
+    "message": "ጎራ ወይም URL"
+  },
+  "siteExclusionPlaceholder": {
+    "message": "example.com"
+  },
+  "siteExclusionPreview": {
+    "message": "የተመረጠው ጎራ፦ $1"
+  },
+  "siteExclusionSubdomains": {
+    "message": "ንዑስ ጎራዎችን አካትት"
+  },
+  "siteExclusionAdd": {
+    "message": "ጣቢያ አክል"
+  },
+  "siteExclusionsEmpty": {
+    "message": "ምንም የተገለለ ጣቢያ የለም። ያለ VPN ሊጠቀሟቸው የሚፈልጓቸውን ጣቢያዎች ብቻ ያክሉ።"
+  },
+  "siteExclusionsCount": {
+    "message": "$1 / 100 ጣቢያዎች"
+  },
+  "siteExclusionScopeSubdomains": {
+    "message": "ጎራ እና ንዑስ ጎራዎች"
+  },
+  "siteExclusionScopeExact": {
+    "message": "ትክክለኛው ጎራ ብቻ"
+  },
+  "siteExclusionRemove": {
+    "message": "$1ን አስወግድ"
+  },
+  "siteExclusionsDetails": {
+    "message": "ልዩ ሁኔታዎች እንዴት ይሠራሉ?"
+  },
+  "siteExclusionsResources": {
+    "message": "ከሌሎች ጎራዎች የሚመጡ ግብዓቶች እንደተጠበቁ ይቆያሉ። አንድን ገጽ ማግለል ሌላውን ይዘቱን በራስ-ሰር አያገልም።"
+  },
+  "siteExclusionsReload": {
+    "message": "ከለውጥ በኋላ ጣቢያውን እንደገና ይጫኑ። ነባር ግንኙነቶች የቀድሞ መስመራቸውን ሊይዙ ይችላሉ።"
+  },
+  "siteExclusionsWebRtc": {
+    "message": "የWebRTC ጥበቃ የተገለሉ ጣቢያዎችን ጨምሮ ሁሉን አቀፍ ቅንብር ሆኖ ይቆያል።"
+  },
+  "siteExclusionsLocal": {
+    "message": "በዚህ አሳሽ ውስጥ ብቻ የተቀመጠ ሲሆን ከመለያዎ ከወጡ በኋላም ይቆያል።"
+  },
+  "siteExclusionsOn": {
+    "message": "ልዩ ሁኔታዎች ነቅተዋል"
+  },
+  "siteExclusionsOff": {
+    "message": "ልዩ ሁኔታዎች ተሰናክለዋል"
+  },
+  "siteExclusionsSummary": {
+    "message": "ከVPN ውጭ $1 ጣቢያዎች"
+  },
+  "siteExclusionsPending": {
+    "message": "ልዩ ሁኔታዎችን በመተግበር ላይ…"
+  },
+  "siteExclusionsInterrupted": {
+    "message": "ለውጡ ተቋርጧል። ጊዜያዊው መከላከያ በሥራ ላይ እንዳለ ነው።"
+  },
+  "siteExclusionsSaveError": {
+    "message": "ለውጡን ማጠናቀቅ አልተቻለም። ቅንብሮችዎን ያረጋግጡ እና እንደገና ይሞክሩ።"
+  },
+  "siteExclusionsRetry": {
+    "message": "እንደገና ሞክር"
+  },
+  "siteExclusionInvalid": {
+    "message": "ትክክለኛ ይፋዊ ጎራ ያስገቡ። IPዎች፣ የአካባቢ ስሞች፣ ዋይልድካርዶች፣ ይፋዊ ድኅረ-ቅጥያዎች እና የተያዙ ጎራዎች ተቀባይነት የላቸውም።"
+  },
+  "siteExclusionDuplicate": {
+    "message": "ይህ ጎራ አስቀድሞ በዝርዝሩ ውስጥ አለ።"
+  },
+  "siteExclusionsLimit": {
+    "message": "የ100 ጣቢያዎች ገደብ ላይ ደርሰዋል። ሌላ ለማከል አንድ ጣቢያ ያስወግዱ።"
+  },
+  "statusProtectedExceptions": {
+    "message": "VPN ንቁ ነው · $1 ልዩ ሁኔታዎች"
+  },
+  "statusBlockedExceptions": {
+    "message": "ተደራሽ ሆነው የሚቆዩት የተገለሉ ጣቢያዎች ብቻ ናቸው"
+  },
+  "securityBlockedExceptions": {
+    "message": "ከተገለሉ ጣቢያዎች በስተቀር አሰሳ ታግዷል"
+  },
+  "securityBlockUnverified": {
+    "message": "እገዳው አልተረጋገጠም"
+  },
+  "logoutLocalComplete": {
+    "message": "አካባቢያዊ መውጣት ተጠናቅቋል።"
+  },
+  "logoutApiSession": {
+    "message": "የአሁኑ የመለያ ክፍለ-ጊዜ"
+  },
+  "logoutProxySessions": {
+    "message": "የታወቁ የVPN ክፍለ-ጊዜዎች"
+  },
+  "logoutRevocationPending": {
+    "message": "መሻር በሂደት ላይ…"
+  },
+  "logoutRevocationConfirmed": {
+    "message": "መሻሩ ተረጋግጧል"
+  },
+  "logoutRevocationUnconfirmed": {
+    "message": "መሻሩ አልተረጋገጠም"
+  },
+  "logoutUnconfirmedHelp": {
+    "message": "አንዳንድ የርቀት ክፍለ-ጊዜዎች ጊዜያቸው እስኪያበቃ ድረስ ንቁ ሆነው ሊቆዩ ይችላሉ።"
+  },
+  "deviceQuotaLoading": {
+    "message": "የመሣሪያ ገደብን በመጫን ላይ…"
+  },
+  "deviceQuotaUnknown": {
+    "message": "የመሣሪያ ገደብ አይገኝም"
+  },
+  "error_proxy_creation_uncertain": {
+    "message": "አገልጋዩ የአዲሱን ግንኙነት መፈጠር አላረጋገጠም። ራስ-ሰር ዳግም ግንኙነት ባለበት ቆሟል።"
+  },
+  "siteExclusionsPreferencesReset": {
+    "message": "የተቀመጡ የጣቢያ ልዩ ሁኔታዎችዎ ሊነበቡ ስላልቻሉ ዳግም ተጀምረዋል። ማግለል የሚፈልጓቸውን ጣቢያዎች እንደገና ያክሉ።"
+  },
+  "siteExclusionsConflict": {
+    "message": "የተገለሉ ጣቢያዎች ዝርዝር ተቀይሯል። ይገምግሙት፣ ከዚያ ለውጥዎን እንደገና ይሞክሩ።"
+  },
+  "unavailableLocation": {
+    "message": "አካባቢው አይገኝም"
+  },
+  "verificationSending": {
+    "message": "የማረጋገጫ ኢሜይል በመላክ ላይ…"
+  },
+  "verificationSent": {
+    "message": "የማረጋገጫ ኢሜይል ተልኳል። የገቢ መልዕክት ሳጥንዎን እና የአይፈለጌ መልዕክት አቃፊዎን ይመልከቱ።"
+  },
+  "error_login_requires_disconnect": {
+    "message": "ወደ ሌላ መለያ ከመግባትዎ በፊት የአሁኑን የVPN ግንኙነት ያቋርጡ።"
+  },
+  "error_storage_unavailable": {
+    "message": "የመለያው አካባቢያዊ ቅንብሮች አይገኙም። የአሳሽ ማከማቻ ሲገኝ እንደገና ይሞክሩ፤ የተቀመጠው መለያዎ ተጠብቋል።"
+  },
+  "diagnosticsAssistance": {
+    "message": "ድጋፍ"
+  },
+  "diagnosticsTitle": {
+    "message": "ምርመራ"
+  },
+  "diagnosticsIntro": {
+    "message": "ጥበቃዎን ሳይቀይሩ FuzeVPNን እና የአሁኑን ግንኙነት ያረጋግጡ።"
+  },
+  "diagnosticsPrivacyTitle": {
+    "message": "የእርስዎ ውሂብ"
+  },
+  "diagnosticsPrivacy": {
+    "message": "የሪፖርቱ JSON ቴክኒካዊ ሁኔታዎችን እና የስህተት ኮዶችን ይዟል፤ የይለፍ ቃሎችን፣ ቶከኖችን፣ የኢሜይል አድራሻዎችን፣ የIP አድራሻዎችን፣ የተጎበኙ URLዎችን ወይም የተገለሉ ጎራዎችን አይይዝም። መላኩ የተረጋገጠ ሲሆን ሪፖርቱን ከመለያዎ ጋር ያገናኛል። ለአውታረ መረብ ውሂብ ማሳወቂያውን ይመልከቱ።"
+  },
+  "diagnosticsAuto": {
+    "message": "አስፈላጊ የስህተት ሪፖርቶችን በራስ-ሰር ላክ"
+  },
+  "diagnosticsAutoHelp": {
+    "message": "በነባሪ ጠፍቷል። ይህን ማንቃት ያለ አሰሳ ታሪክ ለዚህ መለያ ቀላል ቴክኒካዊ ሪፖርቶችን ይልካል። ራስ-ሰር መላክን ለማቆም እና በመጠባበቅ ላይ ያሉ ራስ-ሰር ሪፖርቶችን ለማስወገድ እዚህ ያጥፉት።"
+  },
+  "diagnosticsHistoryHelp": {
+    "message": "ቴክኒካዊ ታሪክ በአካባቢው ይቆያል፦ ራስ-ሰር መላክ ጠፍቶ እንኳ፣ በ10 ደቂቃ ውስጥ በእያንዳንዱ ጆርናል እስከ 200 ክስተቶች። ምንም የአሰሳ ታሪክ አይይዝም፤ የሚጸዳውም በእጅ፣ አሳሹ ሲዘጋ ወይም መለያው ሲቀየር ነው።"
+  },
+  "diagnosticsHistoryCount": {
+    "message": "$1 አካባቢያዊ ቴክኒካዊ ክስተቶች"
+  },
+  "diagnosticsConnectionLog": {
+    "message": "የግንኙነት ምዝግብ ማስታወሻ ወደ ውጭ ላክ"
+  },
+  "diagnosticsAccountRequired": {
+    "message": "መላክን ለማንቃት ይግቡ። ያለ መለያም ሪፖርትን ማየት እና ወደ ውጭ መላክ ይችላሉ።"
+  },
+  "diagnosticsRun": {
+    "message": "ምርመራ አሂድ"
+  },
+  "diagnosticsClearHistory": {
+    "message": "አካባቢያዊ ታሪክን አጽዳ"
+  },
+  "diagnosticsPreparing": {
+    "message": "ሪፖርቱን በማዘጋጀት ላይ…"
+  },
+  "diagnosticsReports": {
+    "message": "ሪፖርቶች"
+  },
+  "diagnosticsEmpty": {
+    "message": "እስካሁን ምንም አካባቢያዊ ሪፖርት የለም።"
+  },
+  "diagnosticsChooseReport": {
+    "message": "ሪፖርት ይምረጡ"
+  },
+  "diagnosticsReportLabel": {
+    "message": "$1 · $2 · $3"
+  },
+  "diagnosticsTypeFull": {
+    "message": "ሙሉ ሪፖርት"
+  },
+  "diagnosticsTypeSimple": {
+    "message": "የስህተት ሪፖርት"
+  },
+  "diagnosticsSummary": {
+    "message": "የተሰበሰበው፦ $1። FuzeVPN ስሪት $2።"
+  },
+  "diagnosticsJson": {
+    "message": "የሪፖርቱን ይዘት ይመልከቱ (JSON)"
+  },
+  "diagnosticsExport": {
+    "message": "ሪፖርቱን ወደ ውጭ ላክ"
+  },
+  "diagnosticsDelete": {
+    "message": "አካባቢያዊ ሪፖርቱን ሰርዝ"
+  },
+  "diagnosticsRetention": {
+    "message": "አካባቢያዊ ሪፖርቶች ከ24 ሰዓታት በኋላ ጊዜያቸው ያበቃል። እዚህ መሰረዝ አገልግሎቱ አስቀድሞ የተቀበለውን ሪፖርት አይሰርዝም። ስለ አገልጋይ ማቆያ እና የስረዛ ጥያቄዎች ማሳወቂያውን ይመልከቱ።"
+  },
+  "diagnosticsConsent": {
+    "message": "ይህን የምርመራ ሪፖርት ወደ FuzeVPN ላክ"
+  },
+  "diagnosticsDataCollectionRequired": {
+    "message": "ምርመራዎችን ለመላክ Firefox ቴክኒካዊ ውሂብ መሰብሰብን መፍቀድ አለበት። እንደገና ይሞክሩ እና ይህን ፈቃድ ይስጡ።"
+  },
+  "diagnosticsSendHelp": {
+    "message": "መላክ አማራጭ ነው። አንዴ ከጸደቀ፣ ለተመሳሳዩ መለያ ትክክለኛ ክፍለ-ጊዜ ካለ እስከ 24 ሰዓታት ድረስ እንደገና ሊሞከር ይችላል። ተጨማሪ ሙከራዎችን መሰረዝ ይችላሉ። ዘግይቶ መሰረዝ አገልጋዩ ሪፖርቱን አስቀድሞ እንዳልተቀበለ ዋስትና አይሰጥም።"
+  },
+  "diagnosticsSend": {
+    "message": "ሪፖርት ላክ"
+  },
+  "diagnosticsCancel": {
+    "message": "መላክን ሰርዝ"
+  },
+  "diagnosticsReload": {
+    "message": "ይህን ገጽ እንደገና ጫን"
+  },
+  "diagnosticsUnavailable": {
+    "message": "ምርመራ አይገኝም። FuzeVPNን ከአሳሹ የቅጥያ አስተዳዳሪ እንደገና ይጫኑ፣ ከዚያ ይህን ገጽ እንደገና ይክፈቱ። የእርስዎ VPN አልተቀየረም።"
+  },
+  "diagnosticsQueueFull": {
+    "message": "የመላኪያ ወረፋው ሞልቷል። አንድ አካባቢያዊ ሪፖርት ይሰርዙ ወይም በመጠባበቅ ላይ ያለ ሪፖርት እስኪላክ ይጠብቁ።"
+  },
+  "diagnosticsContentUnavailable": {
+    "message": "የሪፖርቱ ይዘት አይገኝም። አካባቢያዊ ሪፖርቱ ካለ ወደ ውጭ ይላኩት እና ድጋፍን ያግኙ።"
+  },
+  "diagnosticsFailure": {
+    "message": "የምርመራ እርምጃው ሊጠናቀቅ አልቻለም። የእርስዎ VPN አልተቀየረም።"
+  },
+  "diagnosticsChecks": {
+    "message": "ፍተሻዎች"
+  },
+  "diagnosticsCheckFallback": {
+    "message": "ቴክኒካዊ ፍተሻ፦ $1"
+  },
+  "diagnosticsCheckLine": {
+    "message": "$1 — $2"
+  },
+  "diagnosticsProxy": {
+    "message": "የአሳሽ ፕሮክሲ"
+  },
+  "diagnosticsStorage": {
+    "message": "አካባቢያዊ ማከማቻ"
+  },
+  "diagnosticsNetwork": {
+    "message": "የአውታረ መረብ ግንኙነት"
+  },
+  "diagnosticsCleanup": {
+    "message": "የክፍለ-ጊዜ ማጽዳት"
+  },
+  "diagnosticsResult_passed": {
+    "message": "አልፏል"
+  },
+  "diagnosticsResult_failed": {
+    "message": "አልተሳካም"
+  },
+  "diagnosticsResult_skipped": {
+    "message": "አልተከናወነም"
+  },
+  "diagnosticsResult_unknown": {
+    "message": "ያልታወቀ"
+  },
+  "diagnosticsStatus_ready": {
+    "message": "በዚህ መሣሪያ ላይ ዝግጁ"
+  },
+  "diagnosticsStatus_pending": {
+    "message": "ለመላክ በመጠባበቅ ላይ"
+  },
+  "diagnosticsStatus_sending": {
+    "message": "በመላክ ላይ…"
+  },
+  "diagnosticsStatus_session_required": {
+    "message": "ለተመሳሳዩ መለያ ትክክለኛ ክፍለ-ጊዜ በመጠባበቅ ላይ"
+  },
+  "diagnosticsStatus_received": {
+    "message": "አገልግሎቱ ተቀብሎታል"
+  },
+  "diagnosticsStatus_failed": {
+    "message": "መላክ አልተሳካም"
+  },
+  "diagnosticsStatus_cancelled": {
+    "message": "መላክ ተሰርዟል"
+  },
+  "diagnosticsStatus_expired": {
+    "message": "የመላኪያ ጊዜ ገደቡ አልፏል"
+  },
+  "diagnosticsReceivedAt": {
+    "message": "የደረሰው፦ $1"
+  },
+  "error_private_browsing_required": {
+    "message": "Firefox በተለመዱ መስኮቶች ውስጥም ቢሆን VPNን ለማዋቀር ይህን ፈቃድ ይፈልጋል። about:addons → FuzeVPN ይክፈቱ፣ በግል መስኮቶች ውስጥ እንዲሠራ ይፍቀዱለት፣ ከዚያ እንደገና ይሞክሩ።"
+  },
+  "error_host_permissions_required": {
+    "message": "በFirefox ውስጥ about:addons → FuzeVPN → ፈቃዶች ይክፈቱ እና ለሁሉም ድር ጣቢያዎች መዳረሻ ይፍቀዱ፣ ከዚያ እንደገና ይሞክሩ።"
+  },
+  "cancelAction": {
+    "message": "ይቅር"
+  },
+  "refreshLocations": {
+    "message": "አካባቢዎችን አድስ"
+  },
+  "refreshingLocations": {
+    "message": "አካባቢዎችን በማደስ ላይ…"
+  },
+  "locationsRefreshError": {
+    "message": "የአካባቢዎች ዝርዝር ሊታደስ አልቻለም። እባክዎ እንደገና ይሞክሩ።"
+  },
+  "error_device_revoked_limit": {
+    "message": "ይህ መሣሪያ ተሽሯል። የመሣሪያ ገደብ ላይ ደርሰዋል፦ እባክዎ አንድ መሣሪያ ያስወግዱ።"
+  },
+  "noAvailableLocations": {
+    "message": "በአሁኑ ጊዜ ምንም አካባቢ አይገኝም። እባክዎ ትንሽ ቆይተው እንደገና ይሞክሩ።"
+  },
+  "noAvailableFavoriteLocations": {
+    "message": "ተወዳጅ አካባቢዎችዎ ለጊዜው አይገኙም።"
+  },
+  "error_location_favorites_limit": {
+    "message": "የ100 ተወዳጆች ገደብ ላይ ደርሰዋል። ሌላ ለማከል አንድ ተወዳጅ ያስወግዱ።"
+  },
+  "error_server_full": {
+    "message": "ይህ አገልጋይ ሞልቷል። ሌላ አካባቢ ይምረጡ።"
+  },
+  "error_capacity_unavailable": {
+    "message": "የዚህ አገልጋይ ተገኝነት አሁን ሊረጋገጥ አልቻለም። እባክዎ ትንሽ ቆይተው እንደገና ይሞክሩ።"
+  },
+  "locationHierarchyHelp": {
+    "message": "ስሙ አገልጋይ ይመርጣል፤ ቀስቱ ዝርዝሮችን ያሳያል።"
+  },
+  "locationCountrySelect": {
+    "message": "የሚገኝ አገልጋይ ይምረጡ፦ $1"
+  },
+  "locationCitySelect": {
+    "message": "የሚገኝ አገልጋይ ይምረጡ፦ $1"
+  },
+  "locationShowCities": {
+    "message": "ከተሞችን አሳይ፦ $1"
+  },
+  "locationHideCities": {
+    "message": "ከተሞችን ደብቅ፦ $1"
+  },
+  "locationShowServers": {
+    "message": "አገልጋዮችን አሳይ፦ $1"
+  },
+  "locationHideServers": {
+    "message": "አገልጋዮችን ደብቅ፦ $1"
+  },
+  "locationAvailableServers": {
+    "message": "የሚገኙ አገልጋዮች፦ $1"
+  },
+  "legalInformation": {
+    "message": "የሕግ መረጃ"
+  },
+  "privacyPolicy": {
+    "message": "የቅጥያው የግላዊነት ማሳወቂያ"
+  },
+  "termsAndConditions": {
+    "message": "የአጠቃቀም እና የሽያጭ ውሎች"
+  },
+  "legalNotice": {
+    "message": "የሕግ ማሳወቂያ"
+  },
+  "contactSupport": {
+    "message": "ድጋፍን ያግኙ"
+  },
+  "webSignIn": {
+    "message": "ወደ FuzeVPN ግባ"
+  },
+  "webSignInDisconnect": {
+    "message": "አቋርጥ እና ግባ"
+  },
+  "webSignInPending": {
+    "message": "መግባት በሂደት ላይ…"
+  },
+  "webSignInHelp": {
+    "message": "በFuzeVPN የደንበኛ ክፍል ውስጥ በGoogle ወይም በኢሜይል ይግቡ ወይም መለያ ይፍጠሩ።"
+  },
+  "webSignInDisconnectHelp": {
+    "message": "ይህ አዝራር በGoogle ወይም በኢሜይል መግባት እንዲችሉ የአሳሽ ጥበቃን ያቆማል። በመግባት ሂደቱ ወቅት አሰሳዎ ጥበቃ አይኖረውም።"
+  },
+  "webSignInStatus": {
+    "message": "በFuzeVPN የመግቢያ መስኮት ውስጥ ይቀጥሉ። ሲጨርሱ ቅጥያው በራስ-ሰር ይዘምናል። ለመሰረዝ ያንን መስኮት ይዝጉ።"
+  },
+  "error_web_login_cancelled": {
+    "message": "መግባቱ ተሰርዟል። እንደገና ይሞክሩ።"
+  },
+  "error_web_login_timeout": {
+    "message": "መግባቱ በጣም ረጅም ጊዜ ወሰደ። እንደገና ይሞክሩ።"
+  },
+  "error_web_login_unavailable": {
+    "message": "በድር መግባት አይገኝም። ቆይተው እንደገና ይሞክሩ።"
+  },
+  "error_web_login_invalid_callback": {
+    "message": "መግባቱ ሊረጋገጥ አልቻለም። ከቅጥያው እንደገና ይጀምሩ።"
+  },
+  "error_web_login_denied": {
+    "message": "መግባቱ አልተፈቀደም። እንደገና ይሞክሩ።"
+  },
+  "error_web_login_busy": {
+    "message": "እንደገና ከመሞከርዎ በፊት አስቀድሞ የተከፈተውን የመግቢያ መስኮት ይዝጉ።"
+  },
+  "deviceKindFirefox": {
+    "message": "Firefox አሳሽ"
+  },
+  "generalPrivacyPolicy": {
+    "message": "አጠቃላይ የግላዊነት መመሪያ"
+  },
+  "privacyNoticeTitle": {
+    "message": "በFuzeVPN ቅጥያ ውስጥ ግላዊነት"
+  },
+  "privacyNoticeIntro": {
+    "message": "ይህ ማሳወቂያ ይህ ቅጥያ የሚጠቀምበትን ውሂብ ይገልጻል። ከዚህ በታች የተገናኘውን የFuzeVPN አጠቃላይ የግላዊነት መመሪያ ያሟላል። አማራጭ የምርመራ መላክ ለመግባት እና VPNን ለመጠቀም ከሚያስፈልገው ውሂብ የተለየ ነው።"
+  },
+  "privacyNoticeUpdated": {
+    "message": "ማሳወቂያው የተዘመነው፦ 19 ኦክቶበር 2026"
+  },
+  "privacyNoticeServiceTitle": {
+    "message": "መለያ እና የVPN አገልግሎት"
+  },
+  "privacyNoticeService": {
+    "message": "ቅጥያው የማረጋገጫ፣ የመለያ፣ የደንበኝነት ምዝገባ፣ የመሣሪያ እና የፕሮክሲ ክፍለ-ጊዜ ውሂብን ከ api.fuzevpn.com ጋር ይለዋወጣል። የVPN ፕሮክሲው በእሱ በኩል የሚተላለፈውን ትራፊክ ያጓጉዛል። እነዚህ ግንኙነቶች የአውታረ መረብ ሜታዳታን ለተቀባዩ አገልግሎት ያጋልጣሉ፤ ይህ ማሳወቂያ ስለ አገልጋይ ምዝግብ የተለየ ቃል አይገባም።"
+  },
+  "privacyNoticeLocalTitle": {
+    "message": "በአሳሽዎ ውስጥ የተከማቸ ውሂብ"
+  },
+  "privacyNoticeLocal": {
+    "message": "የአሳሽ ማከማቻ ክፍለ-ጊዜዎን፣ የመለያ ዝርዝሮችን፣ ምርጫዎችን፣ የተገለሉ ጣቢያዎችን እና የመሣሪያ ማንነትን ይይዛል። ራስ-ሰር ሪፖርት ማድረግ ጠፍቶ እንኳ ቴክኒካዊ ጆርናሎች እስከ 10 ደቂቃ ድረስ በአካባቢው ይቀመጣሉ። የምርመራ ረቂቆች እና በወረፋ ላይ ያሉ ሪፖርቶች ከ24 ሰዓታት በኋላ በአካባቢው ጊዜያቸው ያበቃል፤ ማጽዳቱ የሚከናወነው ቅጥያው መሥራት ሲችል ነው።"
+  },
+  "privacyNoticeIpTitle": {
+    "message": "የይፋዊ IP ፍተሻዎች እና ሶስተኛ ወገኖች"
+  },
+  "privacyNoticeIp": {
+    "message": "የIP ማሳያ እና የአውታረ መረብ ምርመራዎች ከ api.ipify.org ጋር ይገናኛሉ። የIP ማሳያ እንደ ምትክ ipv4.icanhazip.comን ሊጠቀም ይችላል። አቅራቢው የግንኙነቱን IP እና መደበኛ የጥያቄ ሜታዳታ ይቀበላል፦ በቀጥታ ሁነታ ይፋዊ IPዎን፣ ወይም በፕሮክሲ ሲተላለፍ የVPN መውጫ IPን። እነዚህ ጥያቄዎች ኩኪዎችን እና አጣቃሾችን አያካትቱም፤ እንዲሁም ምንም የመለያ ቶከን ወይም የአሰሳ ታሪክ አይልኩም።"
+  },
+  "privacyNoticeReportsTitle": {
+    "message": "የምርመራ ሪፖርቶች ምን ይይዛሉ"
+  },
+  "privacyNoticeReports": {
+    "message": "ሪፖርቶች የዘፈቀደ የሪፖርት መለያ ቁጥር፣ የጊዜ ማህተሞች፣ የቅጥያ እና የአሳሽ ስሪቶች፣ የስርዓተ ክወና ቤተሰብ እና አርክቴክቸር፣ የግንኙነት እና የጥበቃ ሁኔታዎች፣ የስህተት ኮዶች፣ ቆጠራዎች፣ የቆይታ ጊዜዎች እና የፍተሻ ውጤቶችን ሊያካትቱ ይችላሉ። ሙሉ ሪፖርቶች የቅርብ ጊዜ ቴክኒካዊ ክስተቶችን ሊያካትቱ ይችላሉ። የእነሱ JSON የይለፍ ቃሎችን፣ የማረጋገጫ ቶከኖችን፣ የኢሜይል አድራሻዎችን፣ የIP አድራሻዎችን፣ የተጎበኙ URLዎችን እና የተገለሉ ጎራዎችን አያካትትም። ሙሉ ሪፖርትን ከመላክዎ በፊት መመርመር እና ወደ ውጭ መላክ ይችላሉ።"
+  },
+  "privacyNoticeAccountTitle": {
+    "message": "ተቀባይ እና ከመለያ ጋር ያለው ትስስር"
+  },
+  "privacyNoticeAccount": {
+    "message": "ሪፖርቶች በተረጋገጠ ግንኙነት በ api.fuzevpn.com/v1/diagnostics በኩል ወደ FuzeVPN ይላካሉ። ይህ የAPI ግንኙነት የVPN ፕሮክሲውን ያልፋል፦ VPN ንቁ ሆኖ እንኳ FuzeVPN ቀጥተኛ ይፋዊ IPዎን ይቀበላል። ሪፖርቶች ከገባው መለያ ጋር የተገናኙ ናቸው እንጂ ስም-አልባ አይደሉም። የማረጋገጫ ራስጌው እና IP ከሪፖርቱ JSON የተለዩ ናቸው። የተሳካ ደረሰኝ የሚያረጋግጠው ያ የመዳረሻ ነጥብ ሪፖርቱን መቀበሉን ነው እንጂ የድጋፍ ወኪል ሪፖርቱን ማንበቡን አይደለም።"
+  },
+  "privacyNoticeChoiceTitle": {
+    "message": "አማራጭ መላክ እና ፈቃድን ማንሳት"
+  },
+  "privacyNoticeChoice": {
+    "message": "ራስ-ሰር መላክ በነባሪ ጠፍቷል። ማንቃቱ ለዚያ መለያ ቀላል የስህተት ሪፖርቶችን ይፈቅዳል። ሙሉ ሪፖርትን በእጅ መላክ የመላኪያ አመልካች ሳጥኑን መምረጥ ይጠይቃል። Firefox በተጨማሪ የራሱን አማራጭ የቴክኒካዊ ውሂብ ፈቃድ ይፈልጋል። ራስ-ሰር መላክን ለማቆም እና በመጠባበቅ ላይ ያሉ ራስ-ሰር ሪፖርቶችን ለማስወገድ ያሰናክሉት፤ በመጠባበቅ ላይ ያሉ ነጠላ መላኪያዎችን ለየብቻ ይሰርዙ። የምርመራ መላክን አለመቀበል VPNን ከመጠቀም አያግድም።"
+  },
+  "privacyNoticeDeleteTitle": {
+    "message": "አካባቢያዊ ስረዛ እና የወረዱ ፋይሎች"
+  },
+  "privacyNoticeDelete": {
+    "message": "በምርመራ ውስጥ ቴክኒካዊ ታሪክን ያጽዱ ወይም ነጠላ አካባቢያዊ ሪፖርትን ይሰርዙ። ታሪክን ማጽዳት ነባር የሪፖርት ቅጂዎችን አያጠፋም። በአካባቢው መላክን መሰረዝም ሆነ ሪፖርትን ማጥፋት አገልግሎቱ አስቀድሞ የተቀበለውን ውሂብ፣ ከመሰረዙ በፊት የደረሰ ስቀላን ጨምሮ፣ መመለስ አይችልም። የወረዱ ወደ ውጭ የተላኩ ፋይሎች እርስዎ ራስዎ መሰረዝ ያለብዎት የተለዩ ፋይሎች ናቸው።"
+  },
+  "privacyNoticeServerTitle": {
+    "message": "የአገልጋይ ማቆያ እና ጥያቄዎች"
+  },
+  "privacyNoticeServer": {
+    "message": "ይህ ቅጥያ የአገልጋይ ማቆያን ወይም በአገልጋይ በኩል የሚደረግ ስረዛን አይቆጣጠርም ወይም አያረጋግጥም። FuzeVPN ስለሚተገብረው የማቆያ ጊዜ እና አስቀድመው የተላኩ ሪፖርቶችን በተመለከተ ለሚቀርቡ ጥያቄዎች አጠቃላይ የግላዊነት መመሪያውን ይመልከቱ ወይም FuzeVPNን ያግኙ። ይህ ማሳወቂያ ምንም ቋሚ የአገልጋይ ማቆያ ጊዜ ዋስትና አይሰጥም።"
+  },
+  "privacyNoticeSupportTitle": {
+    "message": "ምርመራ እና ድጋፍ የተለያዩ ናቸው"
+  },
+  "privacyNoticeSupport": {
+    "message": "የምርመራ ሪፖርት መላክ በራሱ ከቅጥያው የድጋፍ መልዕክት አይልክም። ችግርን ለማስረዳት ወይም የደረሰ ሪፖርት እንዲሰረዝ ለመጠየቅ ከዚህ በታች ያለውን የFuzeVPN የመገናኛ መንገድ ይጠቀሙ። ወደ ውጭ የተላከ ፋይልን በሌላ መንገድ ለማጋራት ከመረጡ፣ መጀመሪያ ይዘቱን ያረጋግጡ።"
+  },
+  "privacyNoticeManage": {
+    "message": "ምርመራን ክፈት"
+  },
+  "privacyNoticeLinksTitle": {
+    "message": "የአገልግሎት መመሪያ እና አድራሻ"
+  },
+  "theme": {
+    "message": "ገጽታ"
+  },
+  "themeSystem": {
+    "message": "ስርዓት"
+  },
+  "themeLight": {
+    "message": "ብሩህ"
+  },
+  "themeDark": {
+    "message": "ጨለማ"
+  },
+  "switchToDarkTheme": {
+    "message": "ወደ ጨለማ ገጽታ ቀይር"
+  },
+  "switchToLightTheme": {
+    "message": "ወደ ብሩህ ገጽታ ቀይር"
+  }
+}

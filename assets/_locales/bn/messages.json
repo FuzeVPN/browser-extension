@@ -1,0 +1,929 @@
+{
+  "extensionName": {
+    "message": "FuzeVPN"
+  },
+  "extensionDescription": {
+    "message": "এক ক্লিকে আপনার গোপনীয়তা রক্ষা করুন এবং নিরাপত্তা আরও মজবুত করুন।"
+  },
+  "siteExclusionsReloadRequired": {
+    "message": "আপডেট শেষ করতে এবং বাদ দেওয়া সাইট ব্যবহার করতে ব্রাউজারের এক্সটেনশন ম্যানেজার থেকে FuzeVPN আবার লোড করুন।"
+  },
+  "extensionCommunicationError": {
+    "message": "এক্সটেনশনটি সাড়া দিচ্ছে না। এই উইন্ডোটি বন্ধ করুন, তারপর ব্রাউজারের এক্সটেনশন ম্যানেজার থেকে FuzeVPN আবার লোড করুন।"
+  },
+  "actionDisconnected": {
+    "message": "FuzeVPN — ডিসকানেক্ট করা আছে"
+  },
+  "actionConnected": {
+    "message": "FuzeVPN — এই ব্রাউজারে সুরক্ষিত"
+  },
+  "actionReconnecting": {
+    "message": "FuzeVPN — আবার কানেক্ট করা হচ্ছে"
+  },
+  "actionError": {
+    "message": "FuzeVPN — মনোযোগ প্রয়োজন"
+  },
+  "browserProtection": {
+    "message": "ব্রাউজার সুরক্ষা"
+  },
+  "loginTitle": {
+    "message": "FuzeVPN-এ স্বাগতম"
+  },
+  "loginSubtitle": {
+    "message": "এই ব্রাউজারে আপনার ব্রাউজিং সুরক্ষিত রাখতে সাইন ইন করুন।"
+  },
+  "email": {
+    "message": "ইমেল ঠিকানা"
+  },
+  "emailPlaceholder": {
+    "message": "you@example.com"
+  },
+  "password": {
+    "message": "পাসওয়ার্ড"
+  },
+  "signIn": {
+    "message": "সাইন ইন করুন"
+  },
+  "signingIn": {
+    "message": "সাইন ইন করা হচ্ছে…"
+  },
+  "forgotPassword": {
+    "message": "পাসওয়ার্ড ভুলে গেছেন?"
+  },
+  "createAccount": {
+    "message": "অ্যাকাউন্ট তৈরি করুন"
+  },
+  "settings": {
+    "message": "সেটিংস"
+  },
+  "close": {
+    "message": "বন্ধ করুন"
+  },
+  "statusDisconnected": {
+    "message": "ডিসকানেক্ট করা আছে"
+  },
+  "statusConnecting": {
+    "message": "কানেক্ট করা হচ্ছে…"
+  },
+  "statusChanging": {
+    "message": "লোকেশন পরিবর্তন করা হচ্ছে…"
+  },
+  "statusProtected": {
+    "message": "এই ব্রাউজারে সুরক্ষিত"
+  },
+  "statusRefreshing": {
+    "message": "নিরাপদভাবে নবায়ন করা হচ্ছে…"
+  },
+  "statusDisconnecting": {
+    "message": "ডিসকানেক্ট করা হচ্ছে…"
+  },
+  "statusError": {
+    "message": "সুরক্ষা বন্ধ হয়ে গেছে"
+  },
+  "browserOnlyDetail": {
+    "message": "এই ব্রাউজারের জন্য সুরক্ষা।"
+  },
+  "location": {
+    "message": "লোকেশন"
+  },
+  "change": {
+    "message": "পরিবর্তন করুন"
+  },
+  "noLocation": {
+    "message": "কোনো লোকেশন উপলভ্য নেই"
+  },
+  "protectBrowser": {
+    "message": "ব্রাউজার সুরক্ষিত করুন"
+  },
+  "disconnect": {
+    "message": "ডিসকানেক্ট করুন"
+  },
+  "subscription": {
+    "message": "সাবস্ক্রিপশন"
+  },
+  "refreshSubscription": {
+    "message": "সাবস্ক্রিপশন রিফ্রেশ করুন"
+  },
+  "refreshingSubscription": {
+    "message": "সাবস্ক্রিপশন রিফ্রেশ করা হচ্ছে…"
+  },
+  "subscriptionActive": {
+    "message": "সক্রিয়"
+  },
+  "subscriptionInactive": {
+    "message": "নিষ্ক্রিয়"
+  },
+  "expiresOn": {
+    "message": "মেয়াদ শেষ হবে $1 তারিখে"
+  },
+  "noExpiry": {
+    "message": "মেয়াদ শেষের কোনো তারিখ নেই"
+  },
+  "browserOnlyNotice": {
+    "message": "শুধু এই ব্রাউজার। অন্যান্য অ্যাপ ও ব্রাউজার সুরক্ষার আওতায় নেই।"
+  },
+  "resendVerification": {
+    "message": "ইমেল আবার পাঠান"
+  },
+  "incognitoHelp": {
+    "message": "ব্রাউজারের সেটিংসে এক্সটেনশনটিকে প্রাইভেট মোডে অনুমতি দেওয়া থাকলেই কেবল প্রাইভেট ব্রাউজিং একই সুরক্ষা ব্যবহার করে।"
+  },
+  "manageAccount": {
+    "message": "আমার অ্যাকাউন্ট পরিচালনা করুন"
+  },
+  "account": {
+    "message": "অ্যাকাউন্ট"
+  },
+  "devices": {
+    "message": "ডিভাইস"
+  },
+  "manageDevices": {
+    "message": "ডিভাইস পরিচালনা করুন"
+  },
+  "refreshDevices": {
+    "message": "ডিভাইস রিফ্রেশ করুন"
+  },
+  "deviceCount": {
+    "message": "$1 / $2টি ডিভাইস"
+  },
+  "loadingDevices": {
+    "message": "ডিভাইস লোড হচ্ছে…"
+  },
+  "noDevices": {
+    "message": "কোনো সক্রিয় ডিভাইস নেই।"
+  },
+  "currentDevice": {
+    "message": "এই ডিভাইস"
+  },
+  "deviceKindBrowser": {
+    "message": "ব্রাউজার এক্সটেনশন"
+  },
+  "deviceKindVpn": {
+    "message": "VPN ডিভাইস"
+  },
+  "profile_browser_proxy": {
+    "message": "ব্রাউজার প্রক্সি"
+  },
+  "profile_wireguard": {
+    "message": "WireGuard"
+  },
+  "profile_openvpn": {
+    "message": "OpenVPN"
+  },
+  "none": {
+    "message": "কিছু নেই"
+  },
+  "deviceCreatedOn": {
+    "message": "$1 তারিখে তৈরি"
+  },
+  "deleteDevice": {
+    "message": "ডিভাইস মুছুন"
+  },
+  "deleteDeviceNamed": {
+    "message": "ডিভাইস $1 মুছুন"
+  },
+  "confirmDeleteDevice": {
+    "message": "“$1” সরাবেন? এর VPN সংযোগগুলো বন্ধ হয়ে যাবে এবং এর প্রোফাইলগুলো সরিয়ে দেওয়া হবে।"
+  },
+  "resetDevice": {
+    "message": "ডিভাইস রিসেট করুন"
+  },
+  "confirmResetDevice": {
+    "message": "এই এক্সটেনশনটি রিসেট করবেন? পরের বার ব্যবহার করার সময় এটি নতুন ডিভাইস হিসেবে রেজিস্টার হবে।"
+  },
+  "signOutAccount": {
+    "message": "অ্যাকাউন্ট থেকে সাইন আউট করুন"
+  },
+  "chooseLocation": {
+    "message": "একটি লোকেশন বেছে নিন"
+  },
+  "error_invalid_credentials": {
+    "message": "ইমেল ঠিকানা বা পাসওয়ার্ড ভুল।"
+  },
+  "error_unauthorized": {
+    "message": "আপনার সেশনের মেয়াদ শেষ হয়ে গেছে। অনুগ্রহ করে আবার সাইন ইন করুন।"
+  },
+  "error_email_verification_required": {
+    "message": "সুরক্ষা চালু করার আগে আপনার ইমেল ঠিকানা যাচাই করুন।"
+  },
+  "errorVerificationCooldown": {
+    "message": "$1 সেকেন্ড পরে নতুন ইমেলের অনুরোধ করা যাবে।"
+  },
+  "error_verification_email_cooldown": {
+    "message": "আরেকটি ইমেলের অনুরোধ করার আগে অনুগ্রহ করে অপেক্ষা করুন।"
+  },
+  "error_subscription_required": {
+    "message": "এই ব্রাউজার সুরক্ষিত করতে একটি সক্রিয় সাবস্ক্রিপশন প্রয়োজন।"
+  },
+  "error_device_limit": {
+    "message": "ডিভাইসের সীমা পূর্ণ হয়েছে। অনুগ্রহ করে একটি ডিভাইস সরান।"
+  },
+  "error_device_identity_revoked": {
+    "message": "এই ডিভাইসটি আর অনুমোদিত নয়। আবার কানেক্ট করার চেষ্টা করুন।"
+  },
+  "error_device_proof_invalid": {
+    "message": "আমরা এই ডিভাইসটি যাচাই করতে পারিনি। আপনার কম্পিউটারের তারিখ ও সময় দেখে নিয়ে আবার চেষ্টা করুন।"
+  },
+  "error_device_proof_replayed": {
+    "message": "এই অনুরোধটি ইতিমধ্যে প্রক্রিয়া করা হয়েছে। আবার চেষ্টা করুন।"
+  },
+  "error_invalid_device": {
+    "message": "এই ডিভাইসটি শনাক্ত করা যায়নি। আবার কানেক্ট করার চেষ্টা করুন।"
+  },
+  "error_device_exists": {
+    "message": "এই ডিভাইস পরিচয়টি ইতিমধ্যে অন্য একটি অ্যাকাউন্টের সাথে লিঙ্ক করা আছে।"
+  },
+  "error_not_found": {
+    "message": "এই কাজটি আর উপলভ্য নয়। আবার চেষ্টা করুন।"
+  },
+  "error_invalid_location": {
+    "message": "এই লোকেশনটি উপলভ্য নয়। অন্য একটি বেছে নিন।"
+  },
+  "error_rate_limited": {
+    "message": "অনেক বেশিবার চেষ্টা করা হয়েছে। কিছুক্ষণ অপেক্ষা করে আবার চেষ্টা করুন।"
+  },
+  "error_proxy_unavailable": {
+    "message": "এই সার্ভারটি সাময়িকভাবে উপলভ্য নয়। কিছুক্ষণ পরে আবার চেষ্টা করুন।"
+  },
+  "error_api_token_expired": {
+    "message": "আপনার অ্যাকাউন্ট সেশনের মেয়াদ শেষ হয়ে গেছে। অনুগ্রহ করে আবার সাইন ইন করুন।"
+  },
+  "error_network_error": {
+    "message": "নেটওয়ার্ক উপলভ্য নয়। আপনার ইন্টারনেট সংযোগ দেখে নিন।"
+  },
+  "error_request_timeout": {
+    "message": "সার্ভিসটি সাড়া দিতে অনেক বেশি সময় নিয়েছে। আবার চেষ্টা করুন।"
+  },
+  "error_invalid_response": {
+    "message": "সার্ভিসটি একটি অপ্রত্যাশিত উত্তর দিয়েছে।"
+  },
+  "error_proxy_certificate_invalid": {
+    "message": "আমরা সার্ভারের নিরাপত্তা যাচাই করতে পারিনি। সংযোগটি বন্ধ করা হয়েছে।"
+  },
+  "error_proxy_controlled_by_extension": {
+    "message": "অন্য একটি এক্সটেনশন বর্তমানে ব্রাউজারের প্রক্সি নিয়ন্ত্রণ করছে।"
+  },
+  "error_proxy_controlled_by_policy": {
+    "message": "একটি অ্যাডমিনিস্ট্রেটর নীতির কারণে FuzeVPN প্রক্সি পরিবর্তন করতে পারছে না।"
+  },
+  "error_proxy_authentication_failed": {
+    "message": "সার্ভার সংযোগটি গ্রহণ করেনি। আবার কানেক্ট করার চেষ্টা করুন।"
+  },
+  "error_session_expired": {
+    "message": "আপনার সুরক্ষিত সংযোগের মেয়াদ শেষ হয়ে গেছে। আবার কানেক্ট করুন।"
+  },
+  "error_email_delivery_unavailable": {
+    "message": "এই মুহূর্তে ইমেল পাঠানো যাচ্ছে না।"
+  },
+  "error_unknown_error": {
+    "message": "একটি অপ্রত্যাশিত ত্রুটি হয়েছে। আবার চেষ্টা করুন।"
+  },
+  "actionBlocked": {
+    "message": "FuzeVPN — ব্রাউজিং ব্লক করা আছে"
+  },
+  "statusBlockedRetry": {
+    "message": "ব্রাউজিং থামানো আছে — আবার কানেক্ট করা হচ্ছে"
+  },
+  "statusBlockedAction": {
+    "message": "ব্রাউজিং থামানো আছে — সংযোগ দেখে নিন"
+  },
+  "statusProtectionUnavailable": {
+    "message": "সুরক্ষা উপলভ্য নয় — ব্রাউজিং ব্লক করা নেই"
+  },
+  "recoveryHelp": {
+    "message": "সুরক্ষা আবার চালু করতে আবার চেষ্টা করুন। ডিসকানেক্ট করলে FuzeVPN ছাড়াই ব্রাউজ করতে পারবেন।"
+  },
+  "retryConnection": {
+    "message": "আবার চেষ্টা করুন"
+  },
+  "killSwitch": {
+    "message": "কিল সুইচ"
+  },
+  "killSwitchHelp": {
+    "message": "VPN সংযোগ বিচ্ছিন্ন হলে নতুন ওয়েব অনুরোধ ব্লক করে। বাদ দেওয়া সাইটগুলো VPN-এর বাইরে অ্যাক্সেসযোগ্য থাকে।"
+  },
+  "webRtcProtection": {
+    "message": "WebRTC সুরক্ষা"
+  },
+  "webRtcHelp": {
+    "message": "ওয়েব কলের সময় আপনার IP ঠিকানা গোপন রাখতে সাহায্য করে। কিছু কল কাজ নাও করতে পারে। এটি বন্ধ করলে আপনার আসল IP ঠিকানা প্রকাশ পেতে পারে।"
+  },
+  "securityEffectiveState": {
+    "message": "$1 · $2"
+  },
+  "securityBlocked": {
+    "message": "ব্রাউজিং ব্লক করা আছে"
+  },
+  "securityNotBlocked": {
+    "message": "ব্রাউজিং ব্লক করা নেই"
+  },
+  "securityWebRtcActive": {
+    "message": "WebRTC সীমাবদ্ধতা সক্রিয়"
+  },
+  "securityWebRtcInactive": {
+    "message": "WebRTC সীমাবদ্ধতা নিষ্ক্রিয়"
+  },
+  "localNetworkHelp": {
+    "message": "সুরক্ষা চলাকালীন স্থানীয় IP ঠিকানা ও সাধারণ স্থানীয় নাম ব্লক করা থাকে। বাদ দেওয়া কোনো ডোমেইন তবুও স্থানীয় নেটওয়ার্কে অ্যাক্সেস দিতে পারে। সিস্টেমের IPv6 সেটিংস অপরিবর্তিত থাকে।"
+  },
+  "securityLimits": {
+    "message": "এই সুরক্ষা সম্পর্কে"
+  },
+  "killSwitchLimits": {
+    "message": "শুধু এই ব্রাউজার: বিদ্যমান সংযোগ এবং ব্রাউজারের কিছু অভ্যন্তরীণ বা অন্য এক্সটেনশনের যোগাযোগ চলতে পারে। FuzeVPN প্রতিক্রিয়া দেখানোর আগেই অন্য কোনো এক্সটেনশন বা নীতি প্রক্সি প্রতিস্থাপন করতে পারে। এক্সটেনশনটি নিষ্ক্রিয় করলে সুরক্ষা সরে যায়। সিস্টেম-ব্যাপী কোনো ব্লকিং নেই।"
+  },
+  "error_traffic_guard_failed": {
+    "message": "ব্রাউজিং ব্লক যাচাই করা যায়নি। সুরক্ষার নিশ্চয়তা নেই। এক্সটেনশনের অনুমতিগুলো দেখে নিন।"
+  },
+  "error_webrtc_control_unavailable": {
+    "message": "WebRTC সীমাবদ্ধতা প্রয়োগ করা যায়নি। আপনার সেটিংস, অন্যান্য এক্সটেনশন বা অ্যাডমিনিস্ট্রেটর নীতি দেখে নিন।"
+  },
+  "language": {
+    "message": "ভাষা"
+  },
+  "languageAutomatic": {
+    "message": "স্বয়ংক্রিয় — ব্রাউজারের ভাষা"
+  },
+  "languageHelp": {
+    "message": "পরিবর্তন সঙ্গে সঙ্গে প্রযোজ্য হয়। স্বয়ংক্রিয় বিকল্পটি ব্রাউজারের ভাষা অনুসরণ করে, যা সিস্টেমের ভাষা থেকে আলাদা হতে পারে।"
+  },
+  "languageSaveError": {
+    "message": "ভাষা সেভ করা যায়নি। আপনার আগের পছন্দ রাখা হয়েছে। আবার চেষ্টা করুন।"
+  },
+  "publicIp": {
+    "message": "পাবলিক IP"
+  },
+  "vpnIp": {
+    "message": "VPN-এর IP"
+  },
+  "ipChecking": {
+    "message": "যাচাই করা হচ্ছে…"
+  },
+  "ipUnavailable": {
+    "message": "উপলভ্য নয়"
+  },
+  "ipLookupExplanation": {
+    "message": "আপনার বর্তমান সংযোগ ব্যবহার করে ipify দিয়ে, অথবা বিকল্প হিসেবে icanhazip দিয়ে IP যাচাই করা হয়। কোনো ব্রাউজিং ইতিহাস পাঠানো হয় না।"
+  },
+  "automaticLocation": {
+    "message": "স্বয়ংক্রিয়"
+  },
+  "automaticLocationHelp": {
+    "message": "সাম্প্রতিক সেরা রেসপন্স টাইম, অথবা আপনার শেষ লোকেশন।"
+  },
+  "automaticLocationName": {
+    "message": "স্বয়ংক্রিয় · $1"
+  },
+  "searchLocations": {
+    "message": "দেশ বা শহর খুঁজুন"
+  },
+  "locationFilters": {
+    "message": "লোকেশন ফিল্টার করুন"
+  },
+  "allLocations": {
+    "message": "সব"
+  },
+  "favoriteLocations": {
+    "message": "পছন্দসই"
+  },
+  "recentLocations": {
+    "message": "সাম্প্রতিক"
+  },
+  "noMatchingLocations": {
+    "message": "আপনার অনুসন্ধানের সাথে কোনো লোকেশন মেলেনি।"
+  },
+  "noFavoriteLocations": {
+    "message": "পছন্দের লোকেশনগুলো এখানে রাখতে তারকা চিহ্ন দিন।"
+  },
+  "noRecentLocations": {
+    "message": "সম্প্রতি যেসব লোকেশনে কানেক্ট করেছেন সেগুলো এখানে দেখা যাবে।"
+  },
+  "addFavorite": {
+    "message": "$1 পছন্দসইতে যোগ করুন"
+  },
+  "removeFavorite": {
+    "message": "$1 পছন্দসই থেকে সরান"
+  },
+  "unavailableFavoriteLocation": {
+    "message": "উপলভ্য নয় এমন পছন্দসই $1"
+  },
+  "locationSaveError": {
+    "message": "পরিবর্তনটি সম্পূর্ণ করা যায়নি। কিছু সেটিংস হয়তো সেভ হয়ে গেছে। আবার চেষ্টা করার আগে দেখানো পছন্দটি যাচাই করুন।"
+  },
+  "siteExclusions": {
+    "message": "বাদ দেওয়া সাইট"
+  },
+  "siteExclusionsHelp": {
+    "message": "VPN বন্ধ হয়ে গেলেও এই সাইটগুলো FuzeVPN ছাড়াই আপনার সংযোগ ব্যবহার করে।"
+  },
+  "siteExclusionsEnabled": {
+    "message": "ব্যতিক্রম চালু করুন"
+  },
+  "siteExclusionInput": {
+    "message": "ডোমেইন বা URL"
+  },
+  "siteExclusionPlaceholder": {
+    "message": "example.com"
+  },
+  "siteExclusionPreview": {
+    "message": "নির্বাচিত ডোমেইন: $1"
+  },
+  "siteExclusionSubdomains": {
+    "message": "সাবডোমেইন অন্তর্ভুক্ত করুন"
+  },
+  "siteExclusionAdd": {
+    "message": "সাইট যোগ করুন"
+  },
+  "siteExclusionsEmpty": {
+    "message": "কোনো বাদ দেওয়া সাইট নেই। শুধু সেই সাইটগুলো যোগ করুন যেগুলো VPN ছাড়া ব্যবহার করতে চান।"
+  },
+  "siteExclusionsCount": {
+    "message": "$1 / 100টি সাইট"
+  },
+  "siteExclusionScopeSubdomains": {
+    "message": "ডোমেইন ও সাবডোমেইন"
+  },
+  "siteExclusionScopeExact": {
+    "message": "শুধু নির্দিষ্ট ডোমেইন"
+  },
+  "siteExclusionRemove": {
+    "message": "$1 সরান"
+  },
+  "siteExclusionsDetails": {
+    "message": "ব্যতিক্রম কীভাবে কাজ করে?"
+  },
+  "siteExclusionsResources": {
+    "message": "অন্য ডোমেইনের রিসোর্সগুলো সুরক্ষিত থাকে। কোনো পেজ বাদ দিলে তার অন্যান্য কনটেন্ট স্বয়ংক্রিয়ভাবে বাদ যায় না।"
+  },
+  "siteExclusionsReload": {
+    "message": "পরিবর্তনের পরে সাইটটি আবার লোড করুন। বিদ্যমান সংযোগগুলো আগের রুট বজায় রাখতে পারে।"
+  },
+  "siteExclusionsWebRtc": {
+    "message": "বাদ দেওয়া সাইটসহ সব ক্ষেত্রে WebRTC সুরক্ষা একটি গ্লোবাল সেটিং হিসেবে থাকে।"
+  },
+  "siteExclusionsLocal": {
+    "message": "শুধু এই ব্রাউজারে সেভ করা থাকে এবং অ্যাকাউন্ট থেকে সাইন আউট করার পরেও রাখা হয়।"
+  },
+  "siteExclusionsOn": {
+    "message": "ব্যতিক্রম চালু আছে"
+  },
+  "siteExclusionsOff": {
+    "message": "ব্যতিক্রম বন্ধ আছে"
+  },
+  "siteExclusionsSummary": {
+    "message": "VPN-এর বাইরে $1টি সাইট"
+  },
+  "siteExclusionsPending": {
+    "message": "ব্যতিক্রম প্রয়োগ করা হচ্ছে…"
+  },
+  "siteExclusionsInterrupted": {
+    "message": "পরিবর্তন বাধাপ্রাপ্ত হয়েছে। অস্থায়ী সুরক্ষা ব্যবস্থা বহাল রয়েছে।"
+  },
+  "siteExclusionsSaveError": {
+    "message": "পরিবর্তনটি শেষ করা যায়নি। আপনার সেটিংস দেখে আবার চেষ্টা করুন।"
+  },
+  "siteExclusionsRetry": {
+    "message": "আবার চেষ্টা করুন"
+  },
+  "siteExclusionInvalid": {
+    "message": "একটি বৈধ পাবলিক ডোমেইন লিখুন। IP, স্থানীয় নাম, ওয়াইল্ডকার্ড, পাবলিক সাফিক্স ও সংরক্ষিত ডোমেইন গ্রহণ করা হয় না।"
+  },
+  "siteExclusionDuplicate": {
+    "message": "এই ডোমেইনটি ইতিমধ্যে তালিকায় আছে।"
+  },
+  "siteExclusionsLimit": {
+    "message": "100টি সাইটের সীমা পূর্ণ হয়েছে। আরেকটি যোগ করতে একটি সাইট সরান।"
+  },
+  "statusProtectedExceptions": {
+    "message": "VPN সক্রিয় · $1টি ব্যতিক্রম"
+  },
+  "statusBlockedExceptions": {
+    "message": "শুধু বাদ দেওয়া সাইটগুলো অ্যাক্সেসযোগ্য আছে"
+  },
+  "securityBlockedExceptions": {
+    "message": "বাদ দেওয়া সাইট ছাড়া ব্রাউজিং ব্লক করা আছে"
+  },
+  "securityBlockUnverified": {
+    "message": "ব্লকিং যাচাই করা হয়নি"
+  },
+  "logoutLocalComplete": {
+    "message": "স্থানীয় সাইন আউট সম্পূর্ণ হয়েছে।"
+  },
+  "logoutApiSession": {
+    "message": "বর্তমান অ্যাকাউন্ট সেশন"
+  },
+  "logoutProxySessions": {
+    "message": "পরিচিত VPN সেশন"
+  },
+  "logoutRevocationPending": {
+    "message": "প্রত্যাহার করা হচ্ছে…"
+  },
+  "logoutRevocationConfirmed": {
+    "message": "প্রত্যাহার নিশ্চিত হয়েছে"
+  },
+  "logoutRevocationUnconfirmed": {
+    "message": "প্রত্যাহার নিশ্চিত হয়নি"
+  },
+  "logoutUnconfirmedHelp": {
+    "message": "কিছু রিমোট সেশন মেয়াদ শেষ না হওয়া পর্যন্ত সক্রিয় থাকতে পারে।"
+  },
+  "deviceQuotaLoading": {
+    "message": "ডিভাইসের সীমা লোড হচ্ছে…"
+  },
+  "deviceQuotaUnknown": {
+    "message": "ডিভাইসের সীমা উপলভ্য নয়"
+  },
+  "error_proxy_creation_uncertain": {
+    "message": "সার্ভার নতুন সংযোগ তৈরির বিষয়টি নিশ্চিত করেনি। স্বয়ংক্রিয়ভাবে আবার কানেক্ট করা স্থগিত রাখা হয়েছে।"
+  },
+  "siteExclusionsPreferencesReset": {
+    "message": "আপনার সেভ করা সাইট ব্যতিক্রমগুলো পড়া যায়নি বলে রিসেট করা হয়েছে। যে সাইটগুলো বাদ দিতে চান সেগুলো আবার যোগ করুন।"
+  },
+  "siteExclusionsConflict": {
+    "message": "বাদ দেওয়া সাইটের তালিকা পরিবর্তিত হয়েছে। তালিকাটি দেখে নিয়ে আপনার পরিবর্তনটি আবার চেষ্টা করুন।"
+  },
+  "unavailableLocation": {
+    "message": "লোকেশন উপলভ্য নয়"
+  },
+  "verificationSending": {
+    "message": "যাচাইকরণ ইমেল পাঠানো হচ্ছে…"
+  },
+  "verificationSent": {
+    "message": "যাচাইকরণ ইমেল পাঠানো হয়েছে। আপনার ইনবক্স ও স্প্যাম ফোল্ডার দেখুন।"
+  },
+  "error_login_requires_disconnect": {
+    "message": "অন্য অ্যাকাউন্টে সাইন ইন করার আগে বর্তমান VPN সংযোগ ডিসকানেক্ট করুন।"
+  },
+  "error_storage_unavailable": {
+    "message": "অ্যাকাউন্টের স্থানীয় সেটিংস উপলভ্য নয়। ব্রাউজার স্টোরেজ উপলভ্য হলে আবার চেষ্টা করুন; আপনার সেভ করা অ্যাকাউন্ট সংরক্ষিত আছে।"
+  },
+  "diagnosticsAssistance": {
+    "message": "সহায়তা"
+  },
+  "diagnosticsTitle": {
+    "message": "ডায়াগনস্টিকস"
+  },
+  "diagnosticsIntro": {
+    "message": "আপনার সুরক্ষা পরিবর্তন না করেই FuzeVPN ও বর্তমান সংযোগ যাচাই করুন।"
+  },
+  "diagnosticsPrivacyTitle": {
+    "message": "আপনার ডেটা"
+  },
+  "diagnosticsPrivacy": {
+    "message": "রিপোর্টের JSON-এ টেকনিক্যাল অবস্থা ও ত্রুটি কোড থাকে, তবে পাসওয়ার্ড, টোকেন, ইমেল ঠিকানা, IP ঠিকানা, ভিজিট করা URL বা বাদ দেওয়া ডোমেইন থাকে না। পাঠানো প্রমাণীকৃত হয় এবং রিপোর্টটি আপনার অ্যাকাউন্টের সাথে যুক্ত হয়। নেটওয়ার্ক ডেটার জন্য বিজ্ঞপ্তিটি দেখুন।"
+  },
+  "diagnosticsAuto": {
+    "message": "গুরুত্বপূর্ণ ত্রুটির রিপোর্ট স্বয়ংক্রিয়ভাবে পাঠান"
+  },
+  "diagnosticsAutoHelp": {
+    "message": "ডিফল্টভাবে বন্ধ। এটি চালু করলে ব্রাউজিং ইতিহাস ছাড়াই এই অ্যাকাউন্টের জন্য সাধারণ টেকনিক্যাল রিপোর্ট পাঠানো হয়। স্বয়ংক্রিয় পাঠানো বন্ধ করতে এবং অপেক্ষমাণ স্বয়ংক্রিয় রিপোর্ট সরাতে এখানে এটি বন্ধ করুন।"
+  },
+  "diagnosticsHistoryHelp": {
+    "message": "টেকনিক্যাল ইতিহাস স্থানীয়ভাবে থাকে: স্বয়ংক্রিয় পাঠানো বন্ধ থাকলেও প্রতি জার্নালে 10 মিনিটে সর্বোচ্চ 200টি ইভেন্ট। এতে কোনো ব্রাউজিং ইতিহাস থাকে না এবং এটি ম্যানুয়ালি, ব্রাউজার বন্ধ হলে বা অ্যাকাউন্ট পরিবর্তন হলে মুছে যায়।"
+  },
+  "diagnosticsHistoryCount": {
+    "message": "$1টি স্থানীয় টেকনিক্যাল ইভেন্ট"
+  },
+  "diagnosticsConnectionLog": {
+    "message": "সংযোগ লগ এক্সপোর্ট করুন"
+  },
+  "diagnosticsAccountRequired": {
+    "message": "পাঠানো চালু করতে সাইন ইন করুন। অ্যাকাউন্ট ছাড়াও আপনি রিপোর্ট দেখতে ও এক্সপোর্ট করতে পারবেন।"
+  },
+  "diagnosticsRun": {
+    "message": "ডায়াগনস্টিকস চালান"
+  },
+  "diagnosticsClearHistory": {
+    "message": "স্থানীয় ইতিহাস মুছুন"
+  },
+  "diagnosticsPreparing": {
+    "message": "রিপোর্ট প্রস্তুত করা হচ্ছে…"
+  },
+  "diagnosticsReports": {
+    "message": "রিপোর্ট"
+  },
+  "diagnosticsEmpty": {
+    "message": "এখনও কোনো স্থানীয় রিপোর্ট নেই।"
+  },
+  "diagnosticsChooseReport": {
+    "message": "একটি রিপোর্ট বেছে নিন"
+  },
+  "diagnosticsReportLabel": {
+    "message": "$1 · $2 · $3"
+  },
+  "diagnosticsTypeFull": {
+    "message": "সম্পূর্ণ রিপোর্ট"
+  },
+  "diagnosticsTypeSimple": {
+    "message": "ত্রুটির রিপোর্ট"
+  },
+  "diagnosticsSummary": {
+    "message": "$1 তারিখে সংগ্রহ করা হয়েছে। FuzeVPN সংস্করণ $2।"
+  },
+  "diagnosticsJson": {
+    "message": "রিপোর্টের কনটেন্ট দেখুন (JSON)"
+  },
+  "diagnosticsExport": {
+    "message": "রিপোর্ট এক্সপোর্ট করুন"
+  },
+  "diagnosticsDelete": {
+    "message": "স্থানীয় রিপোর্ট মুছুন"
+  },
+  "diagnosticsRetention": {
+    "message": "স্থানীয় রিপোর্টের মেয়াদ 24 ঘণ্টা পরে শেষ হয়। এখানে মুছলে সার্ভিসে ইতিমধ্যে পৌঁছানো রিপোর্ট মোছা হয় না। সার্ভারে সংরক্ষণ ও মুছে ফেলার অনুরোধের জন্য বিজ্ঞপ্তিটি দেখুন।"
+  },
+  "diagnosticsConsent": {
+    "message": "এই ডায়াগনস্টিক রিপোর্টটি FuzeVPN-এ পাঠান"
+  },
+  "diagnosticsDataCollectionRequired": {
+    "message": "ডায়াগনস্টিকস পাঠাতে Firefox-কে টেকনিক্যাল ডেটা সংগ্রহের অনুমতি দিতে হবে। আবার চেষ্টা করুন এবং এই অনুমতি দিন।"
+  },
+  "diagnosticsSendHelp": {
+    "message": "পাঠানো ঐচ্ছিক। অনুমোদনের পরে, একই অ্যাকাউন্টের বৈধ সেশন থাকলে এটি সর্বোচ্চ 24 ঘণ্টা পর্যন্ত আবার চেষ্টা করতে পারে। আপনি পরবর্তী চেষ্টাগুলো বাতিল করতে পারেন। দেরিতে বাতিল করলে সার্ভার রিপোর্টটি এখনও পায়নি এমন নিশ্চয়তা নেই।"
+  },
+  "diagnosticsSend": {
+    "message": "রিপোর্ট পাঠান"
+  },
+  "diagnosticsCancel": {
+    "message": "পাঠানো বাতিল করুন"
+  },
+  "diagnosticsReload": {
+    "message": "এই পেজটি আবার লোড করুন"
+  },
+  "diagnosticsUnavailable": {
+    "message": "ডায়াগনস্টিকস উপলভ্য নয়। ব্রাউজারের এক্সটেনশন ম্যানেজার থেকে FuzeVPN আবার লোড করুন, তারপর এই পেজটি আবার খুলুন। আপনার VPN অপরিবর্তিত আছে।"
+  },
+  "diagnosticsQueueFull": {
+    "message": "পাঠানোর সারি পূর্ণ। একটি স্থানীয় রিপোর্ট মুছুন বা অপেক্ষমাণ রিপোর্ট পাঠানো শেষ হওয়া পর্যন্ত অপেক্ষা করুন।"
+  },
+  "diagnosticsContentUnavailable": {
+    "message": "রিপোর্টের কনটেন্ট উপলভ্য নয়। স্থানীয় রিপোর্টটি উপলভ্য থাকলে এক্সপোর্ট করুন এবং সহায়তায় যোগাযোগ করুন।"
+  },
+  "diagnosticsFailure": {
+    "message": "ডায়াগনস্টিক কাজটি সম্পূর্ণ করা যায়নি। আপনার VPN অপরিবর্তিত আছে।"
+  },
+  "diagnosticsChecks": {
+    "message": "যাচাই"
+  },
+  "diagnosticsCheckFallback": {
+    "message": "টেকনিক্যাল যাচাই: $1"
+  },
+  "diagnosticsCheckLine": {
+    "message": "$1 — $2"
+  },
+  "diagnosticsProxy": {
+    "message": "ব্রাউজার প্রক্সি"
+  },
+  "diagnosticsStorage": {
+    "message": "স্থানীয় স্টোরেজ"
+  },
+  "diagnosticsNetwork": {
+    "message": "নেটওয়ার্ক সংযোগ"
+  },
+  "diagnosticsCleanup": {
+    "message": "সেশন পরিষ্কার"
+  },
+  "diagnosticsResult_passed": {
+    "message": "সফল"
+  },
+  "diagnosticsResult_failed": {
+    "message": "ব্যর্থ"
+  },
+  "diagnosticsResult_skipped": {
+    "message": "করা হয়নি"
+  },
+  "diagnosticsResult_unknown": {
+    "message": "অজানা"
+  },
+  "diagnosticsStatus_ready": {
+    "message": "এই ডিভাইসে প্রস্তুত"
+  },
+  "diagnosticsStatus_pending": {
+    "message": "পাঠানোর অপেক্ষায়"
+  },
+  "diagnosticsStatus_sending": {
+    "message": "পাঠানো হচ্ছে…"
+  },
+  "diagnosticsStatus_session_required": {
+    "message": "একই অ্যাকাউন্টের বৈধ সেশনের অপেক্ষায়"
+  },
+  "diagnosticsStatus_received": {
+    "message": "সার্ভিস গ্রহণ করেছে"
+  },
+  "diagnosticsStatus_failed": {
+    "message": "পাঠানো ব্যর্থ হয়েছে"
+  },
+  "diagnosticsStatus_cancelled": {
+    "message": "পাঠানো বাতিল হয়েছে"
+  },
+  "diagnosticsStatus_expired": {
+    "message": "পাঠানোর সময়সীমা পেরিয়ে গেছে"
+  },
+  "diagnosticsReceivedAt": {
+    "message": "$1 তারিখে গৃহীত"
+  },
+  "error_private_browsing_required": {
+    "message": "সাধারণ উইন্ডোতেও VPN কনফিগার করতে Firefox-এর এই অনুমতি প্রয়োজন। about:addons → FuzeVPN খুলুন, এটিকে প্রাইভেট উইন্ডোতে চালানোর অনুমতি দিন, তারপর আবার চেষ্টা করুন।"
+  },
+  "error_host_permissions_required": {
+    "message": "Firefox-এ about:addons → FuzeVPN → অনুমতি খুলুন এবং সব ওয়েবসাইটে অ্যাক্সেসের অনুমতি দিন, তারপর আবার চেষ্টা করুন।"
+  },
+  "cancelAction": {
+    "message": "বাতিল করুন"
+  },
+  "refreshLocations": {
+    "message": "লোকেশন রিফ্রেশ করুন"
+  },
+  "refreshingLocations": {
+    "message": "লোকেশন রিফ্রেশ করা হচ্ছে…"
+  },
+  "locationsRefreshError": {
+    "message": "লোকেশনের তালিকা রিফ্রেশ করা যায়নি। অনুগ্রহ করে আবার চেষ্টা করুন।"
+  },
+  "error_device_revoked_limit": {
+    "message": "এই ডিভাইসটি প্রত্যাহার করা হয়েছে। ডিভাইসের সীমা পূর্ণ হয়েছে: অনুগ্রহ করে একটি ডিভাইস সরান।"
+  },
+  "noAvailableLocations": {
+    "message": "এই মুহূর্তে কোনো লোকেশন উপলভ্য নেই। একটু পরে আবার চেষ্টা করুন।"
+  },
+  "noAvailableFavoriteLocations": {
+    "message": "আপনার পছন্দের লোকেশনগুলো সাময়িকভাবে উপলভ্য নয়।"
+  },
+  "error_location_favorites_limit": {
+    "message": "100টি পছন্দসইয়ের সীমা পূর্ণ হয়েছে। আরেকটি যোগ করতে একটি পছন্দসই সরান।"
+  },
+  "error_server_full": {
+    "message": "এই সার্ভারটি পূর্ণ। অন্য একটি লোকেশন বেছে নিন।"
+  },
+  "error_capacity_unavailable": {
+    "message": "এই মুহূর্তে এই সার্ভারের প্রাপ্যতা নিশ্চিত করা যাচ্ছে না। একটু পরে আবার চেষ্টা করুন।"
+  },
+  "locationHierarchyHelp": {
+    "message": "নামে ক্লিক করলে সার্ভার নির্বাচিত হয়; তীর চিহ্নে বিস্তারিত দেখা যায়।"
+  },
+  "locationCountrySelect": {
+    "message": "একটি উপলভ্য সার্ভার নির্বাচন করুন: $1"
+  },
+  "locationCitySelect": {
+    "message": "একটি উপলভ্য সার্ভার নির্বাচন করুন: $1"
+  },
+  "locationShowCities": {
+    "message": "শহরগুলো দেখান: $1"
+  },
+  "locationHideCities": {
+    "message": "শহরগুলো লুকান: $1"
+  },
+  "locationShowServers": {
+    "message": "সার্ভারগুলো দেখান: $1"
+  },
+  "locationHideServers": {
+    "message": "সার্ভারগুলো লুকান: $1"
+  },
+  "locationAvailableServers": {
+    "message": "উপলভ্য সার্ভার: $1"
+  },
+  "legalInformation": {
+    "message": "আইনি তথ্য"
+  },
+  "privacyPolicy": {
+    "message": "এক্সটেনশনের গোপনীয়তা বিজ্ঞপ্তি"
+  },
+  "termsAndConditions": {
+    "message": "ব্যবহার ও বিক্রয়ের শর্তাবলি"
+  },
+  "legalNotice": {
+    "message": "আইনি বিজ্ঞপ্তি"
+  },
+  "contactSupport": {
+    "message": "সহায়তায় যোগাযোগ করুন"
+  },
+  "webSignIn": {
+    "message": "FuzeVPN-এ সাইন ইন করুন"
+  },
+  "webSignInDisconnect": {
+    "message": "ডিসকানেক্ট করে সাইন ইন করুন"
+  },
+  "webSignInPending": {
+    "message": "সাইন ইন চলছে…"
+  },
+  "webSignInHelp": {
+    "message": "FuzeVPN ক্লায়েন্ট এরিয়ায় Google বা ইমেল দিয়ে সাইন ইন করুন অথবা অ্যাকাউন্ট তৈরি করুন।"
+  },
+  "webSignInDisconnectHelp": {
+    "message": "এই বোতামটি ব্রাউজার সুরক্ষা বন্ধ করে, যাতে আপনি Google বা ইমেল দিয়ে সাইন ইন করতে পারেন। সাইন ইন চলাকালীন আপনার ব্রাউজিং সুরক্ষিত থাকবে না।"
+  },
+  "webSignInStatus": {
+    "message": "FuzeVPN সাইন-ইন উইন্ডোতে চালিয়ে যান। আপনি শেষ করলে এক্সটেনশনটি স্বয়ংক্রিয়ভাবে আপডেট হবে। বাতিল করতে সেই উইন্ডোটি বন্ধ করুন।"
+  },
+  "error_web_login_cancelled": {
+    "message": "সাইন ইন বাতিল করা হয়েছে। আবার চেষ্টা করুন।"
+  },
+  "error_web_login_timeout": {
+    "message": "সাইন ইন করতে অনেক বেশি সময় লেগেছে। আবার চেষ্টা করুন।"
+  },
+  "error_web_login_unavailable": {
+    "message": "ওয়েব সাইন ইন উপলভ্য নয়। পরে আবার চেষ্টা করুন।"
+  },
+  "error_web_login_invalid_callback": {
+    "message": "সাইন ইন যাচাই করা যায়নি। এক্সটেনশন থেকে আবার শুরু করুন।"
+  },
+  "error_web_login_denied": {
+    "message": "সাইন ইন অনুমোদিত হয়নি। আবার চেষ্টা করুন।"
+  },
+  "error_web_login_busy": {
+    "message": "আবার চেষ্টা করার আগে ইতিমধ্যে খোলা সাইন-ইন উইন্ডোটি বন্ধ করুন।"
+  },
+  "deviceKindFirefox": {
+    "message": "Firefox ব্রাউজার"
+  },
+  "generalPrivacyPolicy": {
+    "message": "সাধারণ গোপনীয়তা নীতি"
+  },
+  "privacyNoticeTitle": {
+    "message": "FuzeVPN এক্সটেনশনে গোপনীয়তা"
+  },
+  "privacyNoticeIntro": {
+    "message": "এই বিজ্ঞপ্তিতে এই এক্সটেনশন যে ডেটা ব্যবহার করে তার বর্ণনা রয়েছে। এটি নিচে লিঙ্ক করা FuzeVPN-এর সাধারণ গোপনীয়তা নীতির পরিপূরক। ঐচ্ছিক ডায়াগনস্টিক পাঠানো সাইন ইন ও VPN ব্যবহারের জন্য প্রয়োজনীয় ডেটা থেকে আলাদা।"
+  },
+  "privacyNoticeUpdated": {
+    "message": "বিজ্ঞপ্তিটি 19 অক্টোবর 2026 তারিখে আপডেট করা হয়েছে"
+  },
+  "privacyNoticeServiceTitle": {
+    "message": "অ্যাকাউন্ট ও VPN সার্ভিস"
+  },
+  "privacyNoticeService": {
+    "message": "এক্সটেনশনটি api.fuzevpn.com-এর সাথে প্রমাণীকরণ, অ্যাকাউন্ট, সাবস্ক্রিপশন, ডিভাইস ও প্রক্সি-সেশনের ডেটা আদান-প্রদান করে। VPN প্রক্সি তার মাধ্যমে রুট করা ট্রাফিক বহন করে। এই সংযোগগুলো গ্রহণকারী সার্ভিসের কাছে নেটওয়ার্ক মেটাডেটা প্রকাশ করে; সার্ভার লগিং সম্পর্কে এই বিজ্ঞপ্তি আলাদা কোনো প্রতিশ্রুতি দেয় না।"
+  },
+  "privacyNoticeLocalTitle": {
+    "message": "আপনার ব্রাউজারে সংরক্ষিত ডেটা"
+  },
+  "privacyNoticeLocal": {
+    "message": "ব্রাউজার স্টোরেজে আপনার সেশন, অ্যাকাউন্টের বিবরণ, পছন্দ, বাদ দেওয়া সাইট ও ডিভাইস পরিচয় থাকে। স্বয়ংক্রিয় রিপোর্টিং বন্ধ থাকলেও টেকনিক্যাল জার্নাল সর্বোচ্চ 10 মিনিট স্থানীয়ভাবে রাখা হয়। ডায়াগনস্টিক খসড়া ও সারিতে থাকা রিপোর্টের মেয়াদ 24 ঘণ্টা পরে স্থানীয়ভাবে শেষ হয়; এক্সটেনশন চলতে পারলে পরিষ্কারের কাজ হয়।"
+  },
+  "privacyNoticeIpTitle": {
+    "message": "পাবলিক IP যাচাই ও তৃতীয় পক্ষ"
+  },
+  "privacyNoticeIp": {
+    "message": "IP প্রদর্শন ও নেটওয়ার্ক ডায়াগনস্টিকস api.ipify.org-এর সাথে যোগাযোগ করে। IP প্রদর্শনের জন্য বিকল্প হিসেবে ipv4.icanhazip.com ব্যবহার হতে পারে। প্রদানকারী সংযোগের IP ও সাধারণ অনুরোধ মেটাডেটা পায়: সরাসরি মোডে আপনার পাবলিক IP, অথবা প্রক্সির মাধ্যমে হলে VPN-এর এক্সিট IP। এই অনুরোধগুলোতে কুকি ও রেফারার থাকে না এবং কোনো অ্যাকাউন্ট টোকেন বা ব্রাউজিং ইতিহাস পাঠানো হয় না।"
+  },
+  "privacyNoticeReportsTitle": {
+    "message": "ডায়াগনস্টিক রিপোর্টে কী থাকে"
+  },
+  "privacyNoticeReports": {
+    "message": "রিপোর্টে একটি র‍্যান্ডম রিপোর্ট আইডেন্টিফায়ার, টাইমস্ট্যাম্প, এক্সটেনশন ও ব্রাউজারের সংস্করণ, অপারেটিং সিস্টেমের ধরন ও আর্কিটেকচার, সংযোগ ও সুরক্ষার অবস্থা, ত্রুটি কোড, গণনা, সময়কাল ও যাচাইয়ের ফলাফল থাকতে পারে। সম্পূর্ণ রিপোর্টে সাম্প্রতিক টেকনিক্যাল ইভেন্ট থাকতে পারে। এগুলোর JSON-এ পাসওয়ার্ড, প্রমাণীকরণ টোকেন, ইমেল ঠিকানা, IP ঠিকানা, ভিজিট করা URL ও বাদ দেওয়া ডোমেইন থাকে না। পাঠানোর আগে আপনি একটি সম্পূর্ণ রিপোর্ট পরীক্ষা ও এক্সপোর্ট করতে পারেন।"
+  },
+  "privacyNoticeAccountTitle": {
+    "message": "প্রাপক ও অ্যাকাউন্টের সাথে সংযুক্তি"
+  },
+  "privacyNoticeAccount": {
+    "message": "রিপোর্টগুলো একটি প্রমাণীকৃত সংযোগের মাধ্যমে api.fuzevpn.com/v1/diagnostics ঠিকানায় FuzeVPN-এ পাঠানো হয়। এই API সংযোগ VPN প্রক্সি এড়িয়ে যায়: VPN সক্রিয় থাকলেও FuzeVPN আপনার সরাসরি পাবলিক IP পায়। রিপোর্টগুলো সাইন ইন করা অ্যাকাউন্টের সাথে যুক্ত, বেনামি নয়। প্রমাণীকরণ হেডার ও IP রিপোর্টের JSON থেকে আলাদা। সফল প্রাপ্তি নিশ্চিত করে যে ওই এন্ডপয়েন্ট রিপোর্টটি গ্রহণ করেছে, কোনো সহায়তা কর্মী রিপোর্টটি পড়েছেন তা নয়।"
+  },
+  "privacyNoticeChoiceTitle": {
+    "message": "ঐচ্ছিক পাঠানো ও সম্মতি প্রত্যাহার"
+  },
+  "privacyNoticeChoice": {
+    "message": "স্বয়ংক্রিয় পাঠানো ডিফল্টভাবে বন্ধ থাকে। এটি চালু করলে ওই অ্যাকাউন্টের জন্য সাধারণ ত্রুটির রিপোর্ট পাঠানোর অনুমতি দেওয়া হয়। ম্যানুয়ালি সম্পূর্ণ রিপোর্ট পাঠাতে পাঠানোর চেকবক্সে টিক দিতে হয়। Firefox-এর ক্ষেত্রে এর ঐচ্ছিক টেকনিক্যাল ডেটার অনুমতিও প্রয়োজন। স্বয়ংক্রিয় পাঠানো বন্ধ করতে এবং অপেক্ষমাণ স্বয়ংক্রিয় রিপোর্ট সরাতে এটি নিষ্ক্রিয় করুন; অপেক্ষমাণ আলাদা পাঠানোগুলো পৃথকভাবে বাতিল করুন। ডায়াগনস্টিক পাঠাতে অস্বীকার করলেও VPN ব্যবহারে কোনো বাধা নেই।"
+  },
+  "privacyNoticeDeleteTitle": {
+    "message": "স্থানীয়ভাবে মোছা ও ডাউনলোড করা ফাইল"
+  },
+  "privacyNoticeDelete": {
+    "message": "ডায়াগনস্টিকস-এ টেকনিক্যাল ইতিহাস মুছুন বা আলাদা কোনো স্থানীয় রিপোর্ট মুছুন। ইতিহাস মুছলে বিদ্যমান রিপোর্টের কপি মোছে না। স্থানীয়ভাবে বাতিল করলে বা মুছলে সার্ভিসের কাছে ইতিমধ্যে পৌঁছানো ডেটা ফেরত আনা যায় না, বাতিলের আগে পৌঁছে যাওয়া আপলোডসহ। ডাউনলোড করা এক্সপোর্টগুলো আলাদা ফাইল, যা আপনাকে নিজে মুছতে হবে।"
+  },
+  "privacyNoticeServerTitle": {
+    "message": "সার্ভারে সংরক্ষণ ও অনুরোধ"
+  },
+  "privacyNoticeServer": {
+    "message": "এই এক্সটেনশন সার্ভারে সংরক্ষণ বা সার্ভার-সাইডে মুছে ফেলা নিয়ন্ত্রণ বা যাচাই করে না। FuzeVPN যে সংরক্ষণকাল প্রয়োগ করে এবং ইতিমধ্যে পাঠানো রিপোর্ট সংক্রান্ত অনুরোধের জন্য সাধারণ গোপনীয়তা নীতি দেখুন অথবা FuzeVPN-এর সাথে যোগাযোগ করুন। এই বিজ্ঞপ্তি সার্ভারে সংরক্ষণের কোনো নির্দিষ্ট সময়কালের নিশ্চয়তা দেয় না।"
+  },
+  "privacyNoticeSupportTitle": {
+    "message": "ডায়াগনস্টিকস ও সহায়তা আলাদা"
+  },
+  "privacyNoticeSupport": {
+    "message": "ডায়াগনস্টিক রিপোর্ট পাঠালে তা নিজে থেকে এক্সটেনশন থেকে কোনো সহায়তা বার্তা পাঠায় না। কোনো সমস্যা ব্যাখ্যা করতে বা গৃহীত রিপোর্ট মোছার অনুরোধ করতে নিচের FuzeVPN যোগাযোগ চ্যানেল ব্যবহার করুন। অন্য কোনো চ্যানেলে এক্সপোর্ট করা ফাইল শেয়ার করতে চাইলে আগে এর কনটেন্ট দেখে নিন।"
+  },
+  "privacyNoticeManage": {
+    "message": "ডায়াগনস্টিকস খুলুন"
+  },
+  "privacyNoticeLinksTitle": {
+    "message": "সার্ভিস নীতি ও যোগাযোগ"
+  },
+  "theme": {
+    "message": "থিম"
+  },
+  "themeSystem": {
+    "message": "সিস্টেম"
+  },
+  "themeLight": {
+    "message": "লাইট"
+  },
+  "themeDark": {
+    "message": "ডার্ক"
+  },
+  "switchToDarkTheme": {
+    "message": "ডার্ক থিমে যান"
+  },
+  "switchToLightTheme": {
+    "message": "লাইট থিমে যান"
+  }
+}

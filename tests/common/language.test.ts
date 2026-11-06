@@ -28,15 +28,15 @@ function deferred<T>() {
 const english = { greeting: { message: "Hello $1" } };
 
 describe("language selection", () => {
-  it("uses RTL only for Arabic, Persian and Urdu", () => {
+  it("uses RTL only for Arabic, Persian, Urdu and Hebrew", () => {
     const directions = Object.keys(LANGUAGE_NAMES).map((language) => [
       language,
       languageDirection(language as keyof typeof LANGUAGE_NAMES),
     ]);
     expect(
       directions.filter(([, direction]) => direction === "rtl").map(([language]) => language),
-    ).toEqual(["ar", "fa", "ur"]);
-    expect(directions.filter(([, direction]) => direction === "ltr")).toHaveLength(27);
+    ).toEqual(["ar", "fa", "ur", "he"]);
+    expect(directions.filter(([, direction]) => direction === "ltr")).toHaveLength(46);
   });
   it.each([
     ["en-GB", "en"],
@@ -78,11 +78,33 @@ describe("language selection", () => {
     ["nb-NO", "no"],
     ["nn-NO", "no"],
     ["el-GR", "el"],
+    ["am-ET", "am"],
+    ["bn-BD", "bn"],
+    ["bg-BG", "bg"],
+    ["hr-HR", "hr"],
+    ["et-EE", "et"],
+    ["fi-FI", "fi"],
+    ["gu-IN", "gu"],
+    ["he-IL", "he"],
+    ["iw-IL", "he"],
+    ["hu-HU", "hu"],
+    ["kn-IN", "kn"],
+    ["lv-LV", "lv"],
+    ["lt-LT", "lt"],
+    ["ml-IN", "ml"],
+    ["mr-IN", "mr"],
+    ["sr-RS", "sr"],
+    ["sr-Latn-RS", "sr"],
+    ["sk-SK", "sk"],
+    ["sl-SI", "sl"],
+    ["sw-KE", "sw"],
+    ["ta-IN", "ta"],
+    ["te-IN", "te"],
     ["", "en"],
   ])("resolves automatic %s to %s", (browser, expected) => {
     expect(resolveLanguage("auto", browser)).toBe(expected);
   });
-  it("exposes the thirty supported languages in the requested order", () => {
+  it("exposes the fifty supported languages in the requested order", () => {
     expect(Object.keys(LANGUAGE_NAMES)).toEqual([
       "en",
       "es",
@@ -114,6 +136,26 @@ describe("language selection", () => {
       "da",
       "no",
       "el",
+      "am",
+      "bn",
+      "bg",
+      "hr",
+      "et",
+      "fi",
+      "gu",
+      "he",
+      "hu",
+      "kn",
+      "lv",
+      "lt",
+      "ml",
+      "mr",
+      "sr",
+      "sk",
+      "sl",
+      "sw",
+      "ta",
+      "te",
     ]);
   });
   it.each([

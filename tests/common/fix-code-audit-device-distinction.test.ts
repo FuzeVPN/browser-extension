@@ -112,7 +112,7 @@ describe("device names distinguish deletion targets", () => {
     const devices = [device("private-a", ""), device("private-b", "\u200b")];
     const names = distinct(devices, language, message("deviceKindBrowser"));
     const numbers = new Intl.NumberFormat(language, { useGrouping: false });
-    expect(languages).toHaveLength(30);
+    expect(languages).toHaveLength(50);
     for (const [index, entry] of devices.entries()) {
       const name = names.get(entry.deviceId)!;
       expect(name).toBe(`${message("deviceKindBrowser")} (${numbers.format(index + 1)})`);

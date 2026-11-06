@@ -32,7 +32,7 @@ const browser = await chromium.launch({
 });
 await mkdir(output, { recursive: true });
 const report = {
-  scope: "Built popup; synthetic web-login runtime; thirty locales; external requests aborted",
+  scope: "Built popup; synthetic web-login runtime; fifty locales; external requests aborted",
   timestamp: new Date().toISOString(),
   chromium: browser.version(),
   checks: [],
@@ -252,7 +252,7 @@ try {
     assert.equal(await page.locator("#loginPrivacyLink").isVisible(), true);
     assert.equal(
       await page.locator("html").getAttribute("dir"),
-      ["ar", "fa", "ur"].includes(language) ? "rtl" : "ltr",
+      ["ar", "fa", "ur", "he"].includes(language) ? "rtl" : "ltr",
     );
     await capture(page, language, "ready", {
       text: designText,

@@ -1,0 +1,929 @@
+{
+  "extensionName": {
+    "message": "FuzeVPN"
+  },
+  "extensionDescription": {
+    "message": "Linda faragha yako na uimarishe usalama wako kwa mbofyo mmoja."
+  },
+  "siteExclusionsReloadRequired": {
+    "message": "Pakia upya FuzeVPN kutoka kwa kidhibiti cha viendelezi cha kivinjari ili kukamilisha sasisho na kutumia tovuti zilizotengwa."
+  },
+  "extensionCommunicationError": {
+    "message": "Kiendelezi hakijibu. Funga dirisha hili, kisha upakie upya FuzeVPN kutoka kwa kidhibiti cha viendelezi cha kivinjari."
+  },
+  "actionDisconnected": {
+    "message": "FuzeVPN — Imetenganishwa"
+  },
+  "actionConnected": {
+    "message": "FuzeVPN — Imelindwa katika kivinjari hiki"
+  },
+  "actionReconnecting": {
+    "message": "FuzeVPN — Inaunganisha upya"
+  },
+  "actionError": {
+    "message": "FuzeVPN — Inahitaji umakini"
+  },
+  "browserProtection": {
+    "message": "Ulinzi wa kivinjari"
+  },
+  "loginTitle": {
+    "message": "Karibu FuzeVPN"
+  },
+  "loginSubtitle": {
+    "message": "Ingia ili kulinda kuvinjari kwako katika kivinjari hiki."
+  },
+  "email": {
+    "message": "Anwani ya barua pepe"
+  },
+  "emailPlaceholder": {
+    "message": "you@example.com"
+  },
+  "password": {
+    "message": "Nenosiri"
+  },
+  "signIn": {
+    "message": "Ingia"
+  },
+  "signingIn": {
+    "message": "Inaingia…"
+  },
+  "forgotPassword": {
+    "message": "Umesahau nenosiri?"
+  },
+  "createAccount": {
+    "message": "Fungua akaunti"
+  },
+  "settings": {
+    "message": "Mipangilio"
+  },
+  "close": {
+    "message": "Funga"
+  },
+  "statusDisconnected": {
+    "message": "Imetenganishwa"
+  },
+  "statusConnecting": {
+    "message": "Inaunganisha…"
+  },
+  "statusChanging": {
+    "message": "Inabadilisha eneo…"
+  },
+  "statusProtected": {
+    "message": "Imelindwa katika kivinjari hiki"
+  },
+  "statusRefreshing": {
+    "message": "Inasasisha kwa usalama…"
+  },
+  "statusDisconnecting": {
+    "message": "Inatenganisha…"
+  },
+  "statusError": {
+    "message": "Ulinzi umesimamishwa"
+  },
+  "browserOnlyDetail": {
+    "message": "Ulinzi wa kivinjari hiki."
+  },
+  "location": {
+    "message": "Eneo"
+  },
+  "change": {
+    "message": "Badilisha"
+  },
+  "noLocation": {
+    "message": "Hakuna eneo linalopatikana"
+  },
+  "protectBrowser": {
+    "message": "Linda kivinjari"
+  },
+  "disconnect": {
+    "message": "Tenganisha"
+  },
+  "subscription": {
+    "message": "Usajili"
+  },
+  "refreshSubscription": {
+    "message": "Onyesha upya usajili"
+  },
+  "refreshingSubscription": {
+    "message": "Inaonyesha upya usajili…"
+  },
+  "subscriptionActive": {
+    "message": "Amilifu"
+  },
+  "subscriptionInactive": {
+    "message": "Si amilifu"
+  },
+  "expiresOn": {
+    "message": "Muda unaisha: $1"
+  },
+  "noExpiry": {
+    "message": "Hakuna tarehe ya mwisho"
+  },
+  "browserOnlyNotice": {
+    "message": "Kivinjari hiki pekee. Programu na vivinjari vingine havijalindwa."
+  },
+  "resendVerification": {
+    "message": "Tuma barua pepe tena"
+  },
+  "incognitoHelp": {
+    "message": "Kuvinjari kwa faragha hutumia ulinzi uleule tu ikiwa kiendelezi kimeruhusiwa katika hali ya faragha kwenye mipangilio ya kivinjari."
+  },
+  "manageAccount": {
+    "message": "Dhibiti akaunti yangu"
+  },
+  "account": {
+    "message": "Akaunti"
+  },
+  "devices": {
+    "message": "Vifaa"
+  },
+  "manageDevices": {
+    "message": "Dhibiti vifaa"
+  },
+  "refreshDevices": {
+    "message": "Onyesha upya vifaa"
+  },
+  "deviceCount": {
+    "message": "Vifaa: $1 / $2"
+  },
+  "loadingDevices": {
+    "message": "Inapakia vifaa…"
+  },
+  "noDevices": {
+    "message": "Hakuna vifaa amilifu."
+  },
+  "currentDevice": {
+    "message": "Kifaa hiki"
+  },
+  "deviceKindBrowser": {
+    "message": "Kiendelezi cha kivinjari"
+  },
+  "deviceKindVpn": {
+    "message": "Kifaa cha VPN"
+  },
+  "profile_browser_proxy": {
+    "message": "Proksi ya kivinjari"
+  },
+  "profile_wireguard": {
+    "message": "WireGuard"
+  },
+  "profile_openvpn": {
+    "message": "OpenVPN"
+  },
+  "none": {
+    "message": "hakuna"
+  },
+  "deviceCreatedOn": {
+    "message": "Kiliundwa: $1"
+  },
+  "deleteDevice": {
+    "message": "Futa kifaa"
+  },
+  "deleteDeviceNamed": {
+    "message": "Futa kifaa $1"
+  },
+  "confirmDeleteDevice": {
+    "message": "Ungependa kuondoa “$1”? Miunganisho yake ya VPN itasimama na wasifu wake utaondolewa."
+  },
+  "resetDevice": {
+    "message": "Weka upya kifaa"
+  },
+  "confirmResetDevice": {
+    "message": "Ungependa kuweka upya kiendelezi hiki? Kitasajiliwa kama kifaa kipya utakapokitumia tena."
+  },
+  "signOutAccount": {
+    "message": "Ondoka kwenye akaunti"
+  },
+  "chooseLocation": {
+    "message": "Chagua eneo"
+  },
+  "error_invalid_credentials": {
+    "message": "Anwani ya barua pepe au nenosiri si sahihi."
+  },
+  "error_unauthorized": {
+    "message": "Kipindi chako kimeisha. Tafadhali ingia tena."
+  },
+  "error_email_verification_required": {
+    "message": "Thibitisha anwani yako ya barua pepe kabla ya kuwasha ulinzi."
+  },
+  "errorVerificationCooldown": {
+    "message": "Unaweza kuomba barua pepe mpya baada ya sekunde $1."
+  },
+  "error_verification_email_cooldown": {
+    "message": "Tafadhali subiri kabla ya kuomba barua pepe nyingine."
+  },
+  "error_subscription_required": {
+    "message": "Usajili amilifu unahitajika ili kulinda kivinjari hiki."
+  },
+  "error_device_limit": {
+    "message": "Kikomo cha vifaa kimefikiwa. Tafadhali ondoa kifaa."
+  },
+  "error_device_identity_revoked": {
+    "message": "Kifaa hiki hakijaidhinishwa tena. Jaribu kuunganisha tena."
+  },
+  "error_device_proof_invalid": {
+    "message": "Hatukuweza kuthibitisha kifaa hiki. Angalia tarehe na saa ya kompyuta yako, kisha ujaribu tena."
+  },
+  "error_device_proof_replayed": {
+    "message": "Ombi hili limeshashughulikiwa. Jaribu tena."
+  },
+  "error_invalid_device": {
+    "message": "Kifaa hiki hakikutambuliwa. Jaribu kuunganisha tena."
+  },
+  "error_device_exists": {
+    "message": "Utambulisho wa kifaa hiki tayari umeunganishwa na akaunti nyingine."
+  },
+  "error_not_found": {
+    "message": "Kitendo hiki hakipatikani tena. Jaribu tena."
+  },
+  "error_invalid_location": {
+    "message": "Eneo hili halipatikani. Chagua jingine."
+  },
+  "error_rate_limited": {
+    "message": "Majaribio mengi mno. Subiri kidogo kisha ujaribu tena."
+  },
+  "error_proxy_unavailable": {
+    "message": "Seva hii haipatikani kwa muda. Jaribu tena baada ya muda mfupi."
+  },
+  "error_api_token_expired": {
+    "message": "Kipindi cha akaunti yako kimeisha. Tafadhali ingia tena."
+  },
+  "error_network_error": {
+    "message": "Mtandao haupatikani. Angalia muunganisho wako wa intaneti."
+  },
+  "error_request_timeout": {
+    "message": "Huduma ilichukua muda mrefu mno kujibu. Jaribu tena."
+  },
+  "error_invalid_response": {
+    "message": "Huduma ilirudisha jibu lisilotarajiwa."
+  },
+  "error_proxy_certificate_invalid": {
+    "message": "Hatukuweza kuthibitisha usalama wa seva. Muunganisho umesimamishwa."
+  },
+  "error_proxy_controlled_by_extension": {
+    "message": "Kiendelezi kingine kwa sasa kinadhibiti proksi ya kivinjari."
+  },
+  "error_proxy_controlled_by_policy": {
+    "message": "Sera ya msimamizi inazuia FuzeVPN kubadilisha proksi."
+  },
+  "error_proxy_authentication_failed": {
+    "message": "Seva haikukubali muunganisho. Jaribu kuunganisha tena."
+  },
+  "error_session_expired": {
+    "message": "Muda wa muunganisho wako uliolindwa umeisha. Unganisha tena."
+  },
+  "error_email_delivery_unavailable": {
+    "message": "Barua pepe haiwezi kutumwa kwa sasa."
+  },
+  "error_unknown_error": {
+    "message": "Hitilafu isiyotarajiwa imetokea. Jaribu tena."
+  },
+  "actionBlocked": {
+    "message": "FuzeVPN — Kuvinjari kumezuiwa"
+  },
+  "statusBlockedRetry": {
+    "message": "Kuvinjari kumesitishwa — inaunganisha upya"
+  },
+  "statusBlockedAction": {
+    "message": "Kuvinjari kumesitishwa — angalia muunganisho"
+  },
+  "statusProtectionUnavailable": {
+    "message": "Ulinzi haupatikani — kuvinjari hakujazuiwa"
+  },
+  "recoveryHelp": {
+    "message": "Chagua “Jaribu tena” ili kurejesha ulinzi. “Tenganisha” hukuruhusu kuvinjari bila FuzeVPN."
+  },
+  "retryConnection": {
+    "message": "Jaribu tena"
+  },
+  "killSwitch": {
+    "message": "Swichi ya dharura"
+  },
+  "killSwitchHelp": {
+    "message": "Huzuia maombi mapya ya wavuti muunganisho wa VPN ukikatika. Tovuti zilizotengwa zinaendelea kufikiwa nje ya VPN."
+  },
+  "webRtcProtection": {
+    "message": "Ulinzi wa WebRTC"
+  },
+  "webRtcHelp": {
+    "message": "Husaidia kuweka anwani yako ya IP kuwa ya faragha wakati wa simu za wavuti. Baadhi ya simu huenda zisifanye kazi. Kuzima kipengele hiki kunaweza kufichua anwani yako halisi ya IP."
+  },
+  "securityEffectiveState": {
+    "message": "$1 · $2"
+  },
+  "securityBlocked": {
+    "message": "Kuvinjari kumezuiwa"
+  },
+  "securityNotBlocked": {
+    "message": "Kuvinjari hakujazuiwa"
+  },
+  "securityWebRtcActive": {
+    "message": "Kizuizi cha WebRTC kinatumika"
+  },
+  "securityWebRtcInactive": {
+    "message": "Kizuizi cha WebRTC hakitumiki"
+  },
+  "localNetworkHelp": {
+    "message": "Anwani za IP za ndani na majina ya kawaida ya ndani huzuiwa wakati wa ulinzi. Kikoa kilichotengwa bado kinaweza kutoa ufikiaji wa mtandao wa ndani. Mipangilio ya IPv6 ya mfumo haibadilishwi."
+  },
+  "securityLimits": {
+    "message": "Kuhusu ulinzi huu"
+  },
+  "killSwitchLimits": {
+    "message": "Kivinjari hiki pekee: miunganisho iliyopo na baadhi ya mawasiliano ya ndani ya kivinjari au ya viendelezi vingine yanaweza kuendelea. Kiendelezi kingine au sera inaweza kubadilisha proksi kabla FuzeVPN haijachukua hatua. Kuzima kiendelezi huondoa ulinzi. Hakuna uzuiaji wa mfumo mzima."
+  },
+  "error_traffic_guard_failed": {
+    "message": "Uzuiaji wa kuvinjari haukuweza kuthibitishwa. Ulinzi haujahakikishwa. Angalia ruhusa za kiendelezi."
+  },
+  "error_webrtc_control_unavailable": {
+    "message": "Kizuizi cha WebRTC hakikuweza kutumika. Angalia mipangilio yako, viendelezi vingine au sera ya msimamizi."
+  },
+  "language": {
+    "message": "Lugha"
+  },
+  "languageAutomatic": {
+    "message": "Kiotomatiki — lugha ya kivinjari"
+  },
+  "languageHelp": {
+    "message": "Mabadiliko yanatumika mara moja. Hali ya kiotomatiki hufuata lugha ya kivinjari, ambayo inaweza kutofautiana na lugha ya mfumo."
+  },
+  "languageSaveError": {
+    "message": "Imeshindwa kuhifadhi lugha. Chaguo lako la awali limebaki. Jaribu tena."
+  },
+  "publicIp": {
+    "message": "IP ya umma"
+  },
+  "vpnIp": {
+    "message": "IP ya VPN"
+  },
+  "ipChecking": {
+    "message": "Inakagua…"
+  },
+  "ipUnavailable": {
+    "message": "Haipatikani"
+  },
+  "ipLookupExplanation": {
+    "message": "IP hukaguliwa kwa ipify, au icanhazip kama mbadala, kwa kutumia muunganisho wako wa sasa. Hakuna historia ya kuvinjari inayotumwa."
+  },
+  "automaticLocation": {
+    "message": "Kiotomatiki"
+  },
+  "automaticLocationHelp": {
+    "message": "Muda bora wa majibu wa hivi karibuni, au eneo lako la mwisho."
+  },
+  "automaticLocationName": {
+    "message": "Kiotomatiki · $1"
+  },
+  "searchLocations": {
+    "message": "Tafuta nchi au jiji"
+  },
+  "locationFilters": {
+    "message": "Chuja maeneo"
+  },
+  "allLocations": {
+    "message": "Yote"
+  },
+  "favoriteLocations": {
+    "message": "Vipendwa"
+  },
+  "recentLocations": {
+    "message": "Ya hivi karibuni"
+  },
+  "noMatchingLocations": {
+    "message": "Hakuna maeneo yanayolingana na utafutaji wako."
+  },
+  "noFavoriteLocations": {
+    "message": "Weka nyota ili kuhifadhi maeneo unayopenda hapa."
+  },
+  "noRecentLocations": {
+    "message": "Maeneo uliyounganisha hivi karibuni yataonekana hapa."
+  },
+  "addFavorite": {
+    "message": "Ongeza kwenye vipendwa: $1"
+  },
+  "removeFavorite": {
+    "message": "Ondoa kwenye vipendwa: $1"
+  },
+  "unavailableFavoriteLocation": {
+    "message": "Kipendwa kisichopatikana: $1"
+  },
+  "locationSaveError": {
+    "message": "Mabadiliko hayakuweza kukamilika. Baadhi ya mipangilio huenda imehifadhiwa. Angalia chaguo linaloonyeshwa kabla ya kujaribu tena."
+  },
+  "siteExclusions": {
+    "message": "Tovuti zilizotengwa"
+  },
+  "siteExclusionsHelp": {
+    "message": "Tovuti hizi hutumia muunganisho wako bila FuzeVPN, hata VPN ikikatika."
+  },
+  "siteExclusionsEnabled": {
+    "message": "Washa vighairi"
+  },
+  "siteExclusionInput": {
+    "message": "Kikoa au URL"
+  },
+  "siteExclusionPlaceholder": {
+    "message": "example.com"
+  },
+  "siteExclusionPreview": {
+    "message": "Kikoa kilichochaguliwa: $1"
+  },
+  "siteExclusionSubdomains": {
+    "message": "Jumuisha vikoa vidogo"
+  },
+  "siteExclusionAdd": {
+    "message": "Ongeza tovuti"
+  },
+  "siteExclusionsEmpty": {
+    "message": "Hakuna tovuti zilizotengwa. Ongeza tu tovuti unazotaka kutumia bila VPN."
+  },
+  "siteExclusionsCount": {
+    "message": "Tovuti: $1 / 100"
+  },
+  "siteExclusionScopeSubdomains": {
+    "message": "Kikoa na vikoa vidogo"
+  },
+  "siteExclusionScopeExact": {
+    "message": "Kikoa halisi pekee"
+  },
+  "siteExclusionRemove": {
+    "message": "Ondoa $1"
+  },
+  "siteExclusionsDetails": {
+    "message": "Vighairi hufanyaje kazi?"
+  },
+  "siteExclusionsResources": {
+    "message": "Rasilimali kutoka vikoa vingine zinaendelea kulindwa. Kutenga ukurasa hakutengi kiotomatiki maudhui yake mengine."
+  },
+  "siteExclusionsReload": {
+    "message": "Pakia upya tovuti baada ya mabadiliko. Miunganisho iliyopo inaweza kubaki na njia yake ya awali."
+  },
+  "siteExclusionsWebRtc": {
+    "message": "Ulinzi wa WebRTC unabaki kuwa mpangilio wa jumla, hata kwa tovuti zilizotengwa."
+  },
+  "siteExclusionsLocal": {
+    "message": "Huhifadhiwa katika kivinjari hiki pekee na hubaki hata baada ya kuondoka kwenye akaunti yako."
+  },
+  "siteExclusionsOn": {
+    "message": "Vighairi vimewashwa"
+  },
+  "siteExclusionsOff": {
+    "message": "Vighairi vimezimwa"
+  },
+  "siteExclusionsSummary": {
+    "message": "Tovuti nje ya VPN: $1"
+  },
+  "siteExclusionsPending": {
+    "message": "Inatumia vighairi…"
+  },
+  "siteExclusionsInterrupted": {
+    "message": "Mabadiliko yamekatizwa. Kinga ya muda bado ipo."
+  },
+  "siteExclusionsSaveError": {
+    "message": "Imeshindwa kukamilisha mabadiliko. Angalia mipangilio yako kisha ujaribu tena."
+  },
+  "siteExclusionsRetry": {
+    "message": "Jaribu tena"
+  },
+  "siteExclusionInvalid": {
+    "message": "Weka kikoa halali cha umma. IP, majina ya ndani, herufi wakilishi, viambishi vya umma na vikoa vilivyohifadhiwa havikubaliwi."
+  },
+  "siteExclusionDuplicate": {
+    "message": "Kikoa hiki tayari kiko kwenye orodha."
+  },
+  "siteExclusionsLimit": {
+    "message": "Kikomo cha tovuti 100 kimefikiwa. Ondoa tovuti ili kuongeza nyingine."
+  },
+  "statusProtectedExceptions": {
+    "message": "VPN inatumika · vighairi: $1"
+  },
+  "statusBlockedExceptions": {
+    "message": "Tovuti zilizotengwa pekee ndizo zinazofikiwa"
+  },
+  "securityBlockedExceptions": {
+    "message": "Kuvinjari kumezuiwa isipokuwa tovuti zilizotengwa"
+  },
+  "securityBlockUnverified": {
+    "message": "Uzuiaji haujathibitishwa"
+  },
+  "logoutLocalComplete": {
+    "message": "Kuondoka kwenye kifaa hiki kumekamilika."
+  },
+  "logoutApiSession": {
+    "message": "Kipindi cha sasa cha akaunti"
+  },
+  "logoutProxySessions": {
+    "message": "Vipindi vya VPN vinavyojulikana"
+  },
+  "logoutRevocationPending": {
+    "message": "Ubatilishaji unaendelea…"
+  },
+  "logoutRevocationConfirmed": {
+    "message": "Ubatilishaji umethibitishwa"
+  },
+  "logoutRevocationUnconfirmed": {
+    "message": "Ubatilishaji haujathibitishwa"
+  },
+  "logoutUnconfirmedHelp": {
+    "message": "Baadhi ya vipindi vya mbali vinaweza kubaki amilifu hadi muda wake uishe."
+  },
+  "deviceQuotaLoading": {
+    "message": "Inapakia kikomo cha vifaa…"
+  },
+  "deviceQuotaUnknown": {
+    "message": "Kikomo cha vifaa hakipatikani"
+  },
+  "error_proxy_creation_uncertain": {
+    "message": "Seva haikuthibitisha kuundwa kwa muunganisho mpya. Kuunganisha upya kiotomatiki kumesitishwa."
+  },
+  "siteExclusionsPreferencesReset": {
+    "message": "Vighairi vya tovuti ulivyohifadhi viliwekwa upya kwa sababu havikuweza kusomwa. Ongeza tena tovuti unazotaka kutenga."
+  },
+  "siteExclusionsConflict": {
+    "message": "Orodha ya tovuti zilizotengwa imebadilika. Ikague, kisha ujaribu mabadiliko yako tena."
+  },
+  "unavailableLocation": {
+    "message": "Eneo halipatikani"
+  },
+  "verificationSending": {
+    "message": "Inatuma barua pepe ya uthibitishaji…"
+  },
+  "verificationSent": {
+    "message": "Barua pepe ya uthibitishaji imetumwa. Angalia kikasha chako na folda ya barua taka."
+  },
+  "error_login_requires_disconnect": {
+    "message": "Tenganisha muunganisho wa sasa wa VPN kabla ya kuingia kwenye akaunti nyingine."
+  },
+  "error_storage_unavailable": {
+    "message": "Mipangilio ya akaunti kwenye kifaa haipatikani. Jaribu tena hifadhi ya kivinjari ikipatikana; akaunti yako iliyohifadhiwa haijaguswa."
+  },
+  "diagnosticsAssistance": {
+    "message": "Usaidizi"
+  },
+  "diagnosticsTitle": {
+    "message": "Uchunguzi"
+  },
+  "diagnosticsIntro": {
+    "message": "Kagua FuzeVPN na muunganisho wa sasa bila kubadilisha ulinzi wako."
+  },
+  "diagnosticsPrivacyTitle": {
+    "message": "Data yako"
+  },
+  "diagnosticsPrivacy": {
+    "message": "JSON ya ripoti ina hali za kiufundi na misimbo ya hitilafu, bila manenosiri, tokeni, anwani za barua pepe, anwani za IP, URL zilizotembelewa wala vikoa vilivyotengwa. Utumaji umethibitishwa na huunganisha ripoti na akaunti yako. Angalia ilani kuhusu data ya mtandao."
+  },
+  "diagnosticsAuto": {
+    "message": "Tuma ripoti za hitilafu muhimu kiotomatiki"
+  },
+  "diagnosticsAutoHelp": {
+    "message": "Imezimwa kwa chaguomsingi. Ukiwasha, ripoti rahisi za kiufundi za akaunti hii hutumwa, bila historia ya kuvinjari. Zima hapa ili kusimamisha utumaji wa kiotomatiki na kuondoa ripoti za kiotomatiki zinazosubiri."
+  },
+  "diagnosticsHistoryHelp": {
+    "message": "Historia ya kiufundi hubaki kwenye kifaa: hadi matukio 200 kwa kila kumbukumbu katika dakika 10, hata utumaji wa kiotomatiki ukiwa umezimwa. Haina historia ya kuvinjari na hufutwa na wewe mwenyewe, kivinjari kinapofungwa au akaunti inapobadilika."
+  },
+  "diagnosticsHistoryCount": {
+    "message": "Matukio ya kiufundi kwenye kifaa: $1"
+  },
+  "diagnosticsConnectionLog": {
+    "message": "Hamisha kumbukumbu ya muunganisho"
+  },
+  "diagnosticsAccountRequired": {
+    "message": "Ingia ili kuwezesha utumaji. Bado unaweza kutazama na kuhamisha ripoti bila akaunti."
+  },
+  "diagnosticsRun": {
+    "message": "Endesha uchunguzi"
+  },
+  "diagnosticsClearHistory": {
+    "message": "Futa historia ya kifaa"
+  },
+  "diagnosticsPreparing": {
+    "message": "Inaandaa ripoti…"
+  },
+  "diagnosticsReports": {
+    "message": "Ripoti"
+  },
+  "diagnosticsEmpty": {
+    "message": "Bado hakuna ripoti kwenye kifaa."
+  },
+  "diagnosticsChooseReport": {
+    "message": "Chagua ripoti"
+  },
+  "diagnosticsReportLabel": {
+    "message": "$1 · $2 · $3"
+  },
+  "diagnosticsTypeFull": {
+    "message": "Ripoti kamili"
+  },
+  "diagnosticsTypeSimple": {
+    "message": "Ripoti ya hitilafu"
+  },
+  "diagnosticsSummary": {
+    "message": "Ilikusanywa: $1. Toleo la FuzeVPN: $2."
+  },
+  "diagnosticsJson": {
+    "message": "Tazama maudhui ya ripoti (JSON)"
+  },
+  "diagnosticsExport": {
+    "message": "Hamisha ripoti"
+  },
+  "diagnosticsDelete": {
+    "message": "Futa ripoti iliyo kwenye kifaa"
+  },
+  "diagnosticsRetention": {
+    "message": "Ripoti zilizo kwenye kifaa huisha muda baada ya saa 24. Kufuta hapa hakufuti ripoti ambayo tayari imepokelewa na huduma. Angalia ilani kuhusu uhifadhi kwenye seva na maombi ya kufuta."
+  },
+  "diagnosticsConsent": {
+    "message": "Tuma ripoti hii ya uchunguzi kwa FuzeVPN"
+  },
+  "diagnosticsDataCollectionRequired": {
+    "message": "Firefox lazima iruhusu ukusanyaji wa data ya kiufundi ili kutuma uchunguzi. Jaribu tena na utoe ruhusa hii."
+  },
+  "diagnosticsSendHelp": {
+    "message": "Kutuma ni hiari. Ukiidhinisha, inaweza kujaribu tena hadi saa 24 kwa kipindi halali cha akaunti hiyohiyo. Unaweza kughairi majaribio zaidi. Kughairi kwa kuchelewa hakuhakikishi kwamba seva haijapokea ripoti tayari."
+  },
+  "diagnosticsSend": {
+    "message": "Tuma ripoti"
+  },
+  "diagnosticsCancel": {
+    "message": "Ghairi kutuma"
+  },
+  "diagnosticsReload": {
+    "message": "Pakia upya ukurasa huu"
+  },
+  "diagnosticsUnavailable": {
+    "message": "Uchunguzi haupatikani. Pakia upya FuzeVPN kutoka kwa kidhibiti cha viendelezi cha kivinjari, kisha ufungue ukurasa huu tena. VPN yako haijabadilishwa."
+  },
+  "diagnosticsQueueFull": {
+    "message": "Foleni ya kutuma imejaa. Futa ripoti iliyo kwenye kifaa au subiri ripoti inayosubiri ikamilike."
+  },
+  "diagnosticsContentUnavailable": {
+    "message": "Maudhui ya ripoti hayapatikani. Hamisha ripoti iliyo kwenye kifaa ikiwa inapatikana na uwasiliane na usaidizi."
+  },
+  "diagnosticsFailure": {
+    "message": "Kitendo cha uchunguzi hakikuweza kukamilika. VPN yako haijabadilishwa."
+  },
+  "diagnosticsChecks": {
+    "message": "Ukaguzi"
+  },
+  "diagnosticsCheckFallback": {
+    "message": "Ukaguzi wa kiufundi: $1"
+  },
+  "diagnosticsCheckLine": {
+    "message": "$1 — $2"
+  },
+  "diagnosticsProxy": {
+    "message": "Proksi ya kivinjari"
+  },
+  "diagnosticsStorage": {
+    "message": "Hifadhi ya kifaa"
+  },
+  "diagnosticsNetwork": {
+    "message": "Muunganisho wa mtandao"
+  },
+  "diagnosticsCleanup": {
+    "message": "Usafishaji wa kipindi"
+  },
+  "diagnosticsResult_passed": {
+    "message": "Imefaulu"
+  },
+  "diagnosticsResult_failed": {
+    "message": "Imeshindwa"
+  },
+  "diagnosticsResult_skipped": {
+    "message": "Haijafanywa"
+  },
+  "diagnosticsResult_unknown": {
+    "message": "Haijulikani"
+  },
+  "diagnosticsStatus_ready": {
+    "message": "Iko tayari kwenye kifaa hiki"
+  },
+  "diagnosticsStatus_pending": {
+    "message": "Inasubiri kutumwa"
+  },
+  "diagnosticsStatus_sending": {
+    "message": "Inatuma…"
+  },
+  "diagnosticsStatus_session_required": {
+    "message": "Inasubiri kipindi halali cha akaunti hiyohiyo"
+  },
+  "diagnosticsStatus_received": {
+    "message": "Imepokelewa na huduma"
+  },
+  "diagnosticsStatus_failed": {
+    "message": "Kutuma kumeshindwa"
+  },
+  "diagnosticsStatus_cancelled": {
+    "message": "Kutuma kumeghairiwa"
+  },
+  "diagnosticsStatus_expired": {
+    "message": "Muda wa mwisho wa kutuma umepita"
+  },
+  "diagnosticsReceivedAt": {
+    "message": "Ilipokelewa: $1"
+  },
+  "error_private_browsing_required": {
+    "message": "Firefox inahitaji ruhusa hii ili kusanidi VPN, hata katika madirisha ya kawaida. Fungua about:addons → FuzeVPN, iruhusu iendeshwe katika madirisha ya faragha, kisha ujaribu tena."
+  },
+  "error_host_permissions_required": {
+    "message": "Katika Firefox, fungua about:addons → FuzeVPN → Ruhusa na uruhusu ufikiaji wa tovuti zote, kisha ujaribu tena."
+  },
+  "cancelAction": {
+    "message": "Ghairi"
+  },
+  "refreshLocations": {
+    "message": "Onyesha upya maeneo"
+  },
+  "refreshingLocations": {
+    "message": "Inaonyesha upya maeneo…"
+  },
+  "locationsRefreshError": {
+    "message": "Orodha ya maeneo haikuweza kuonyeshwa upya. Tafadhali jaribu tena."
+  },
+  "error_device_revoked_limit": {
+    "message": "Kifaa hiki kimebatilishwa. Kikomo cha vifaa kimefikiwa: tafadhali ondoa kifaa."
+  },
+  "noAvailableLocations": {
+    "message": "Hakuna maeneo yanayopatikana kwa sasa. Tafadhali jaribu tena baada ya muda mfupi."
+  },
+  "noAvailableFavoriteLocations": {
+    "message": "Maeneo unayopenda hayapatikani kwa muda."
+  },
+  "error_location_favorites_limit": {
+    "message": "Kikomo cha vipendwa 100 kimefikiwa. Ondoa kipendwa ili kuongeza kingine."
+  },
+  "error_server_full": {
+    "message": "Seva hii imejaa. Chagua eneo jingine."
+  },
+  "error_capacity_unavailable": {
+    "message": "Upatikanaji wa seva hii hauwezi kuthibitishwa kwa sasa. Tafadhali jaribu tena baada ya muda mfupi."
+  },
+  "locationHierarchyHelp": {
+    "message": "Jina huchagua seva; mshale huonyesha maelezo."
+  },
+  "locationCountrySelect": {
+    "message": "Chagua seva inayopatikana: $1"
+  },
+  "locationCitySelect": {
+    "message": "Chagua seva inayopatikana: $1"
+  },
+  "locationShowCities": {
+    "message": "Onyesha miji: $1"
+  },
+  "locationHideCities": {
+    "message": "Ficha miji: $1"
+  },
+  "locationShowServers": {
+    "message": "Onyesha seva: $1"
+  },
+  "locationHideServers": {
+    "message": "Ficha seva: $1"
+  },
+  "locationAvailableServers": {
+    "message": "Seva zinazopatikana: $1"
+  },
+  "legalInformation": {
+    "message": "Maelezo ya kisheria"
+  },
+  "privacyPolicy": {
+    "message": "Ilani ya faragha ya kiendelezi"
+  },
+  "termsAndConditions": {
+    "message": "Masharti ya matumizi na mauzo"
+  },
+  "legalNotice": {
+    "message": "Ilani ya kisheria"
+  },
+  "contactSupport": {
+    "message": "Wasiliana na usaidizi"
+  },
+  "webSignIn": {
+    "message": "Ingia kwenye FuzeVPN"
+  },
+  "webSignInDisconnect": {
+    "message": "Tenganisha kisha uingie"
+  },
+  "webSignInPending": {
+    "message": "Kuingia kunaendelea…"
+  },
+  "webSignInHelp": {
+    "message": "Ingia au fungua akaunti kwa Google au barua pepe katika eneo la wateja la FuzeVPN."
+  },
+  "webSignInDisconnectHelp": {
+    "message": "Kitufe hiki husimamisha ulinzi wa kivinjari ili uweze kuingia kwa Google au barua pepe. Kuvinjari kwako hakutalindwa wakati wa kuingia."
+  },
+  "webSignInStatus": {
+    "message": "Endelea katika dirisha la kuingia la FuzeVPN. Kiendelezi kitasasishwa kiotomatiki ukimaliza. Funga dirisha hilo ili kughairi."
+  },
+  "error_web_login_cancelled": {
+    "message": "Kuingia kumeghairiwa. Jaribu tena."
+  },
+  "error_web_login_timeout": {
+    "message": "Kuingia kumechukua muda mrefu mno. Jaribu tena."
+  },
+  "error_web_login_unavailable": {
+    "message": "Kuingia kupitia wavuti hakupatikani. Jaribu tena baadaye."
+  },
+  "error_web_login_invalid_callback": {
+    "message": "Kuingia hakukuweza kuthibitishwa. Anza tena kutoka kwenye kiendelezi."
+  },
+  "error_web_login_denied": {
+    "message": "Kuingia hakukuidhinishwa. Jaribu tena."
+  },
+  "error_web_login_busy": {
+    "message": "Funga dirisha la kuingia ambalo tayari limefunguliwa kabla ya kujaribu tena."
+  },
+  "deviceKindFirefox": {
+    "message": "Kivinjari cha Firefox"
+  },
+  "generalPrivacyPolicy": {
+    "message": "Sera ya jumla ya faragha"
+  },
+  "privacyNoticeTitle": {
+    "message": "Faragha katika kiendelezi cha FuzeVPN"
+  },
+  "privacyNoticeIntro": {
+    "message": "Ilani hii inaeleza data inayotumiwa na kiendelezi hiki. Inaongeza sera ya jumla ya faragha ya FuzeVPN, iliyounganishwa hapa chini. Utumaji wa hiari wa uchunguzi ni tofauti na data inayohitajika kuingia na kutumia VPN."
+  },
+  "privacyNoticeUpdated": {
+    "message": "Ilani ilisasishwa tarehe 19 Oktoba 2026"
+  },
+  "privacyNoticeServiceTitle": {
+    "message": "Akaunti na huduma ya VPN"
+  },
+  "privacyNoticeService": {
+    "message": "Kiendelezi hubadilishana data ya uthibitishaji, akaunti, usajili, kifaa na kipindi cha proksi na api.fuzevpn.com. Proksi ya VPN hubeba trafiki inayopitishwa ndani yake. Miunganisho hii hufichua metadata ya mtandao kwa huduma inayoipokea; ilani hii haitoi ahadi yoyote tofauti kuhusu kumbukumbu za seva."
+  },
+  "privacyNoticeLocalTitle": {
+    "message": "Data iliyohifadhiwa katika kivinjari chako"
+  },
+  "privacyNoticeLocal": {
+    "message": "Hifadhi ya kivinjari huhifadhi kipindi chako, maelezo ya akaunti, mapendeleo, tovuti zilizotengwa na utambulisho wa kifaa. Kumbukumbu za kiufundi huhifadhiwa kwenye kifaa kwa hadi dakika 10, hata utumaji wa ripoti wa kiotomatiki ukiwa umezimwa. Rasimu za uchunguzi na ripoti zilizo kwenye foleni huisha muda kwenye kifaa baada ya saa 24; usafishaji hufanyika kiendelezi kinapoweza kuendeshwa."
+  },
+  "privacyNoticeIpTitle": {
+    "message": "Ukaguzi wa IP ya umma na wahusika wengine"
+  },
+  "privacyNoticeIp": {
+    "message": "Uonyeshaji wa IP na uchunguzi wa mtandao huwasiliana na api.ipify.org. Uonyeshaji wa IP unaweza kutumia ipv4.icanhazip.com kama mbadala. Mtoa huduma hupokea IP ya muunganisho na metadata ya kawaida ya ombi: IP yako ya umma katika hali ya moja kwa moja, au IP ya kutoka ya VPN ikipitia proksi. Maombi haya hayana vidakuzi wala warejeleaji na hayatumi tokeni ya akaunti wala historia ya kuvinjari."
+  },
+  "privacyNoticeReportsTitle": {
+    "message": "Kilichomo katika ripoti za uchunguzi"
+  },
+  "privacyNoticeReports": {
+    "message": "Ripoti zinaweza kujumuisha kitambulisho nasibu cha ripoti, mihuri ya muda, matoleo ya kiendelezi na kivinjari, familia na usanifu wa mfumo wa uendeshaji, hali za muunganisho na ulinzi, misimbo ya hitilafu, idadi, muda na matokeo ya ukaguzi. Ripoti kamili zinaweza kujumuisha matukio ya kiufundi ya hivi karibuni. JSON yake haijumuishi manenosiri, tokeni za uthibitishaji, anwani za barua pepe, anwani za IP, URL zilizotembelewa wala vikoa vilivyotengwa. Unaweza kukagua na kuhamisha ripoti kamili kabla ya kuituma."
+  },
+  "privacyNoticeAccountTitle": {
+    "message": "Mpokeaji na uhusishaji na akaunti"
+  },
+  "privacyNoticeAccount": {
+    "message": "Ripoti hutumwa kwa FuzeVPN kupitia api.fuzevpn.com/v1/diagnostics kwa muunganisho uliothibitishwa. Muunganisho huu wa API hupita kando ya proksi ya VPN: FuzeVPN hupokea IP yako ya umma ya moja kwa moja hata VPN ikiwa inatumika. Ripoti huhusishwa na akaunti iliyoingia; hazitumwi bila kujulikana. Kichwa cha uthibitishaji na IP ni tofauti na JSON ya ripoti. Upokeaji uliofaulu unathibitisha kukubaliwa na sehemu hiyo ya mwisho, si kwamba wakala wa usaidizi ameisoma ripoti."
+  },
+  "privacyNoticeChoiceTitle": {
+    "message": "Utumaji wa hiari na kujiondoa"
+  },
+  "privacyNoticeChoice": {
+    "message": "Utumaji wa kiotomatiki umezimwa kwa chaguomsingi. Kuuwasha huruhusu ripoti rahisi za hitilafu za akaunti hiyo. Kutuma ripoti kamili wewe mwenyewe kunahitaji kuteua kisanduku cha kutuma. Firefox pia inahitaji ruhusa yake ya hiari ya data ya kiufundi. Zima utumaji wa kiotomatiki ili kuusimamisha na kuondoa ripoti za kiotomatiki zinazosubiri; ghairi kando kila utumaji unaosubiri. Kukataa utumaji wa uchunguzi hakuzuii matumizi ya VPN."
+  },
+  "privacyNoticeDeleteTitle": {
+    "message": "Kufuta kwenye kifaa na faili zilizopakuliwa"
+  },
+  "privacyNoticeDelete": {
+    "message": "Katika Uchunguzi, futa historia ya kiufundi au futa ripoti moja iliyo kwenye kifaa. Kufuta historia hakufuti nakala zilizopo za ripoti. Kughairi au kufuta kwenye kifaa hakuwezi kurejesha data ambayo tayari imepokelewa na huduma, ikiwemo upakiaji uliofika kabla ya kughairi. Faili zilizopakuliwa ni faili tofauti ambazo lazima uzifute wewe mwenyewe."
+  },
+  "privacyNoticeServerTitle": {
+    "message": "Uhifadhi kwenye seva na maombi"
+  },
+  "privacyNoticeServer": {
+    "message": "Kiendelezi hiki hakidhibiti wala hakithibitishi uhifadhi kwenye seva au ufutaji upande wa seva. Kwa muda wa uhifadhi unaotumiwa na FuzeVPN na maombi kuhusu ripoti zilizokwisha tumwa, angalia sera ya jumla ya faragha au wasiliana na FuzeVPN. Ilani hii haihakikishi muda wowote maalum wa uhifadhi kwenye seva."
+  },
+  "privacyNoticeSupportTitle": {
+    "message": "Uchunguzi na usaidizi ni tofauti"
+  },
+  "privacyNoticeSupport": {
+    "message": "Kutuma ripoti ya uchunguzi hakutumi ujumbe wa usaidizi kutoka kwenye kiendelezi. Ili kueleza tatizo au kuomba kufutwa kwa ripoti iliyopokelewa, tumia njia ya mawasiliano ya FuzeVPN hapa chini. Ukichagua kushiriki faili iliyohamishwa kupitia njia nyingine, kagua maudhui yake kwanza."
+  },
+  "privacyNoticeManage": {
+    "message": "Fungua Uchunguzi"
+  },
+  "privacyNoticeLinksTitle": {
+    "message": "Sera ya huduma na mawasiliano"
+  },
+  "theme": {
+    "message": "Mandhari"
+  },
+  "themeSystem": {
+    "message": "Mfumo"
+  },
+  "themeLight": {
+    "message": "Mwanga"
+  },
+  "themeDark": {
+    "message": "Giza"
+  },
+  "switchToDarkTheme": {
+    "message": "Badili utumie mandhari meusi"
+  },
+  "switchToLightTheme": {
+    "message": "Badili utumie mandhari mepesi"
+  }
+}

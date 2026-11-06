@@ -29,8 +29,8 @@ const names = [
 ];
 
 describe("device deletion labels retain the visible action", () => {
-  it("covers all thirty shipped languages", () => {
-    expect(languages).toHaveLength(30);
+  it("covers all fifty shipped languages", () => {
+    expect(languages).toHaveLength(50);
   });
 
   it.each(languages)(

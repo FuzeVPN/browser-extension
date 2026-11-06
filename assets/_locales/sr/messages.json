@@ -1,0 +1,929 @@
+{
+  "extensionName": {
+    "message": "FuzeVPN"
+  },
+  "extensionDescription": {
+    "message": "Сачувајте приватност и ојачајте безбедност једним кликом."
+  },
+  "siteExclusionsReloadRequired": {
+    "message": "Поново учитајте FuzeVPN из менаџера додатака у прегледачу да бисте довршили ажурирање и користили изузете сајтове."
+  },
+  "extensionCommunicationError": {
+    "message": "Додатак не реагује. Затворите овај прозор, па поново учитајте FuzeVPN из менаџера додатака у прегледачу."
+  },
+  "actionDisconnected": {
+    "message": "FuzeVPN — Није повезано"
+  },
+  "actionConnected": {
+    "message": "FuzeVPN — Заштићено у овом прегледачу"
+  },
+  "actionReconnecting": {
+    "message": "FuzeVPN — Поновно повезивање"
+  },
+  "actionError": {
+    "message": "FuzeVPN — Потребна је пажња"
+  },
+  "browserProtection": {
+    "message": "Заштита прегледача"
+  },
+  "loginTitle": {
+    "message": "Добро дошли у FuzeVPN"
+  },
+  "loginSubtitle": {
+    "message": "Пријавите се да бисте заштитили прегледање у овом прегледачу."
+  },
+  "email": {
+    "message": "Имејл адреса"
+  },
+  "emailPlaceholder": {
+    "message": "you@example.com"
+  },
+  "password": {
+    "message": "Лозинка"
+  },
+  "signIn": {
+    "message": "Пријави се"
+  },
+  "signingIn": {
+    "message": "Пријављивање…"
+  },
+  "forgotPassword": {
+    "message": "Заборављена лозинка?"
+  },
+  "createAccount": {
+    "message": "Направи налог"
+  },
+  "settings": {
+    "message": "Подешавања"
+  },
+  "close": {
+    "message": "Затвори"
+  },
+  "statusDisconnected": {
+    "message": "Није повезано"
+  },
+  "statusConnecting": {
+    "message": "Повезивање…"
+  },
+  "statusChanging": {
+    "message": "Промена локације…"
+  },
+  "statusProtected": {
+    "message": "Заштићено у овом прегледачу"
+  },
+  "statusRefreshing": {
+    "message": "Безбедно обнављање…"
+  },
+  "statusDisconnecting": {
+    "message": "Прекидање везе…"
+  },
+  "statusError": {
+    "message": "Заштита је заустављена"
+  },
+  "browserOnlyDetail": {
+    "message": "Заштита за овај прегледач."
+  },
+  "location": {
+    "message": "Локација"
+  },
+  "change": {
+    "message": "Промени"
+  },
+  "noLocation": {
+    "message": "Нема доступне локације"
+  },
+  "protectBrowser": {
+    "message": "Заштити прегледач"
+  },
+  "disconnect": {
+    "message": "Прекини везу"
+  },
+  "subscription": {
+    "message": "Претплата"
+  },
+  "refreshSubscription": {
+    "message": "Освежи претплату"
+  },
+  "refreshingSubscription": {
+    "message": "Освежавање претплате…"
+  },
+  "subscriptionActive": {
+    "message": "Активна"
+  },
+  "subscriptionInactive": {
+    "message": "Неактивна"
+  },
+  "expiresOn": {
+    "message": "Истиче: $1"
+  },
+  "noExpiry": {
+    "message": "Без датума истека"
+  },
+  "browserOnlyNotice": {
+    "message": "Само овај прегледач. Остале апликације и прегледачи нису обухваћени."
+  },
+  "resendVerification": {
+    "message": "Поново пошаљи имејл"
+  },
+  "incognitoHelp": {
+    "message": "Приватно прегледање користи исту заштиту само ако је додатак дозвољен у приватном режиму у подешавањима прегледача."
+  },
+  "manageAccount": {
+    "message": "Управљај мојим налогом"
+  },
+  "account": {
+    "message": "Налог"
+  },
+  "devices": {
+    "message": "Уређаји"
+  },
+  "manageDevices": {
+    "message": "Управљај уређајима"
+  },
+  "refreshDevices": {
+    "message": "Освежи уређаје"
+  },
+  "deviceCount": {
+    "message": "Уређаји: $1 / $2"
+  },
+  "loadingDevices": {
+    "message": "Учитавање уређаја…"
+  },
+  "noDevices": {
+    "message": "Нема активних уређаја."
+  },
+  "currentDevice": {
+    "message": "Овај уређај"
+  },
+  "deviceKindBrowser": {
+    "message": "Додатак за прегледач"
+  },
+  "deviceKindVpn": {
+    "message": "VPN уређај"
+  },
+  "profile_browser_proxy": {
+    "message": "Прокси прегледача"
+  },
+  "profile_wireguard": {
+    "message": "WireGuard"
+  },
+  "profile_openvpn": {
+    "message": "OpenVPN"
+  },
+  "none": {
+    "message": "нема"
+  },
+  "deviceCreatedOn": {
+    "message": "Направљено: $1"
+  },
+  "deleteDevice": {
+    "message": "Избриши уређај"
+  },
+  "deleteDeviceNamed": {
+    "message": "Избриши уређај $1"
+  },
+  "confirmDeleteDevice": {
+    "message": "Уклонити „$1“? Његове VPN везе ће бити прекинуте, а профили уклоњени."
+  },
+  "resetDevice": {
+    "message": "Ресетуј уређај"
+  },
+  "confirmResetDevice": {
+    "message": "Ресетовати овај додатак? При следећем коришћењу биће регистрован као нови уређај."
+  },
+  "signOutAccount": {
+    "message": "Одјави се са налога"
+  },
+  "chooseLocation": {
+    "message": "Изаберите локацију"
+  },
+  "error_invalid_credentials": {
+    "message": "Имејл адреса или лозинка нису исправни."
+  },
+  "error_unauthorized": {
+    "message": "Ваша сесија је истекла. Пријавите се поново."
+  },
+  "error_email_verification_required": {
+    "message": "Потврдите имејл адресу пре укључивања заштите."
+  },
+  "errorVerificationCooldown": {
+    "message": "Нови имејл можете затражити за $1 с."
+  },
+  "error_verification_email_cooldown": {
+    "message": "Сачекајте пре него што затражите нови имејл."
+  },
+  "error_subscription_required": {
+    "message": "За заштиту овог прегледача потребна је активна претплата."
+  },
+  "error_device_limit": {
+    "message": "Достигнуто је ограничење уређаја. Уклоните један уређај."
+  },
+  "error_device_identity_revoked": {
+    "message": "Овај уређај више није овлашћен. Покушајте поново да се повежете."
+  },
+  "error_device_proof_invalid": {
+    "message": "Нисмо могли да потврдимо овај уређај. Проверите датум и време на рачунару, па покушајте поново."
+  },
+  "error_device_proof_replayed": {
+    "message": "Овај захтев је већ обрађен. Покушајте поново."
+  },
+  "error_invalid_device": {
+    "message": "Овај уређај није препознат. Покушајте поново да се повежете."
+  },
+  "error_device_exists": {
+    "message": "Овај идентитет уређаја је већ повезан са другим налогом."
+  },
+  "error_not_found": {
+    "message": "Ова радња више није доступна. Покушајте поново."
+  },
+  "error_invalid_location": {
+    "message": "Ова локација није доступна. Изаберите другу."
+  },
+  "error_rate_limited": {
+    "message": "Превише покушаја. Сачекајте тренутак и покушајте поново."
+  },
+  "error_proxy_unavailable": {
+    "message": "Овај сервер привремено није доступан. Покушајте поново за тренутак."
+  },
+  "error_api_token_expired": {
+    "message": "Сесија вашег налога је истекла. Пријавите се поново."
+  },
+  "error_network_error": {
+    "message": "Мрежа није доступна. Проверите интернет везу."
+  },
+  "error_request_timeout": {
+    "message": "Услузи је требало предуго да одговори. Покушајте поново."
+  },
+  "error_invalid_response": {
+    "message": "Услуга је вратила неочекиван одговор."
+  },
+  "error_proxy_certificate_invalid": {
+    "message": "Нисмо могли да проверимо безбедност сервера. Веза је прекинута."
+  },
+  "error_proxy_controlled_by_extension": {
+    "message": "Други додатак тренутно контролише прокси прегледача."
+  },
+  "error_proxy_controlled_by_policy": {
+    "message": "Смерница администратора спречава FuzeVPN да промени прокси."
+  },
+  "error_proxy_authentication_failed": {
+    "message": "Сервер није прихватио везу. Покушајте поново да се повежете."
+  },
+  "error_session_expired": {
+    "message": "Ваша заштићена веза је истекла. Повежите се поново."
+  },
+  "error_email_delivery_unavailable": {
+    "message": "Имејл тренутно није могуће послати."
+  },
+  "error_unknown_error": {
+    "message": "Дошло је до неочекиване грешке. Покушајте поново."
+  },
+  "actionBlocked": {
+    "message": "FuzeVPN — Прегледање блокирано"
+  },
+  "statusBlockedRetry": {
+    "message": "Прегледање паузирано — поновно повезивање"
+  },
+  "statusBlockedAction": {
+    "message": "Прегледање паузирано — проверите везу"
+  },
+  "statusProtectionUnavailable": {
+    "message": "Заштита недоступна — прегледање није блокирано"
+  },
+  "recoveryHelp": {
+    "message": "Покушајте поново да бисте наставили заштиту. „Прекини везу“ омогућава прегледање без FuzeVPN-а."
+  },
+  "retryConnection": {
+    "message": "Покушај поново"
+  },
+  "killSwitch": {
+    "message": "Безбедносни прекидач"
+  },
+  "killSwitchHelp": {
+    "message": "Блокира нове веб захтеве ако VPN веза прекине. Изузети сајтови остају доступни ван VPN-а."
+  },
+  "webRtcProtection": {
+    "message": "WebRTC заштита"
+  },
+  "webRtcHelp": {
+    "message": "Помаже да ваша IP адреса остане приватна током веб позива. Неки позиви можда неће радити. Искључивање ове опције може открити вашу стварну IP адресу."
+  },
+  "securityEffectiveState": {
+    "message": "$1 · $2"
+  },
+  "securityBlocked": {
+    "message": "Прегледање блокирано"
+  },
+  "securityNotBlocked": {
+    "message": "Прегледање није блокирано"
+  },
+  "securityWebRtcActive": {
+    "message": "WebRTC ограничење активно"
+  },
+  "securityWebRtcInactive": {
+    "message": "WebRTC ограничење неактивно"
+  },
+  "localNetworkHelp": {
+    "message": "Локалне IP адресе и уобичајени локални називи блокирани су током заштите. Изузети домен ипак може омогућити приступ локалној мрежи. Системска IPv6 подешавања остају непромењена."
+  },
+  "securityLimits": {
+    "message": "О овој заштити"
+  },
+  "killSwitchLimits": {
+    "message": "Само овај прегледач: постојеће везе и неке интерне комуникације прегледача или других додатака могу се наставити. Други додатак или смерница може заменити прокси пре него што FuzeVPN реагује. Онемогућавање додатка уклања заштиту. Нема блокирања на нивоу система."
+  },
+  "error_traffic_guard_failed": {
+    "message": "Блокирање прегледања није могло да се провери. Заштита није загарантована. Проверите дозволе додатка."
+  },
+  "error_webrtc_control_unavailable": {
+    "message": "WebRTC ограничење није могло да се примени. Проверите подешавања, друге додатке или смернице администратора."
+  },
+  "language": {
+    "message": "Језик"
+  },
+  "languageAutomatic": {
+    "message": "Аутоматски — језик прегледача"
+  },
+  "languageHelp": {
+    "message": "Промене се примењују одмах. Аутоматски режим прати језик прегледача, који се може разликовати од језика система."
+  },
+  "languageSaveError": {
+    "message": "Језик није сачуван. Задржан је ваш претходни избор. Покушајте поново."
+  },
+  "publicIp": {
+    "message": "Јавна IP адреса"
+  },
+  "vpnIp": {
+    "message": "VPN IP адреса"
+  },
+  "ipChecking": {
+    "message": "Провера…"
+  },
+  "ipUnavailable": {
+    "message": "Недоступно"
+  },
+  "ipLookupExplanation": {
+    "message": "IP адреса се проверава преко услуге ipify или, као резерва, icanhazip, кроз вашу тренутну везу. Историја прегледања се не шаље."
+  },
+  "automaticLocation": {
+    "message": "Аутоматски"
+  },
+  "automaticLocationHelp": {
+    "message": "Најбоље недавно време одзива или ваша последња локација."
+  },
+  "automaticLocationName": {
+    "message": "Аутоматски · $1"
+  },
+  "searchLocations": {
+    "message": "Претражи државу или град"
+  },
+  "locationFilters": {
+    "message": "Филтрирај локације"
+  },
+  "allLocations": {
+    "message": "Све"
+  },
+  "favoriteLocations": {
+    "message": "Омиљене"
+  },
+  "recentLocations": {
+    "message": "Недавне"
+  },
+  "noMatchingLocations": {
+    "message": "Ниједна локација не одговара претрази."
+  },
+  "noFavoriteLocations": {
+    "message": "Означите звездицом да бисте овде чували омиљене локације."
+  },
+  "noRecentLocations": {
+    "message": "Овде ће се приказати локације са којима сте се недавно повезали."
+  },
+  "addFavorite": {
+    "message": "Додај $1 у омиљене"
+  },
+  "removeFavorite": {
+    "message": "Уклони $1 из омиљених"
+  },
+  "unavailableFavoriteLocation": {
+    "message": "Недоступна омиљена локација: $1"
+  },
+  "locationSaveError": {
+    "message": "Промена није могла да се доврши. Нека подешавања су можда сачувана. Проверите приказани избор пре поновног покушаја."
+  },
+  "siteExclusions": {
+    "message": "Изузети сајтови"
+  },
+  "siteExclusionsHelp": {
+    "message": "Ови сајтови користе вашу везу без FuzeVPN-а, чак и ако VPN престане да ради."
+  },
+  "siteExclusionsEnabled": {
+    "message": "Омогући изузетке"
+  },
+  "siteExclusionInput": {
+    "message": "Домен или URL"
+  },
+  "siteExclusionPlaceholder": {
+    "message": "example.com"
+  },
+  "siteExclusionPreview": {
+    "message": "Изабрани домен: $1"
+  },
+  "siteExclusionSubdomains": {
+    "message": "Укључи поддомене"
+  },
+  "siteExclusionAdd": {
+    "message": "Додај сајт"
+  },
+  "siteExclusionsEmpty": {
+    "message": "Нема изузетих сајтова. Додајте само сајтове које желите да користите без VPN-а."
+  },
+  "siteExclusionsCount": {
+    "message": "$1 / 100 сајтова"
+  },
+  "siteExclusionScopeSubdomains": {
+    "message": "Домен и поддомени"
+  },
+  "siteExclusionScopeExact": {
+    "message": "Само тачан домен"
+  },
+  "siteExclusionRemove": {
+    "message": "Уклони $1"
+  },
+  "siteExclusionsDetails": {
+    "message": "Како функционишу изузеци?"
+  },
+  "siteExclusionsResources": {
+    "message": "Ресурси са других домена остају заштићени. Изузимање странице не изузима аутоматски њен остали садржај."
+  },
+  "siteExclusionsReload": {
+    "message": "Након промене поново учитајте сајт. Постојеће везе могу задржати претходну руту."
+  },
+  "siteExclusionsWebRtc": {
+    "message": "WebRTC заштита остаје глобално подешавање, укључујући и изузете сајтове."
+  },
+  "siteExclusionsLocal": {
+    "message": "Чува се само у овом прегледачу и задржава након одјаве са налога."
+  },
+  "siteExclusionsOn": {
+    "message": "Изузеци омогућени"
+  },
+  "siteExclusionsOff": {
+    "message": "Изузеци онемогућени"
+  },
+  "siteExclusionsSummary": {
+    "message": "Сајтови ван VPN-а: $1"
+  },
+  "siteExclusionsPending": {
+    "message": "Примена изузетака…"
+  },
+  "siteExclusionsInterrupted": {
+    "message": "Промена је прекинута. Привремена заштита остаје на снази."
+  },
+  "siteExclusionsSaveError": {
+    "message": "Промена није могла да се доврши. Проверите подешавања и покушајте поново."
+  },
+  "siteExclusionsRetry": {
+    "message": "Покушај поново"
+  },
+  "siteExclusionInvalid": {
+    "message": "Унесите важећи јавни домен. IP адресе, локални називи, џокер знаци, јавни суфикси и резервисани домени нису прихваћени."
+  },
+  "siteExclusionDuplicate": {
+    "message": "Овај домен је већ на листи."
+  },
+  "siteExclusionsLimit": {
+    "message": "Достигнуто је ограничење од 100 сајтова. Уклоните један да бисте додали други."
+  },
+  "statusProtectedExceptions": {
+    "message": "VPN активан · изузеци: $1"
+  },
+  "statusBlockedExceptions": {
+    "message": "Доступни су само изузети сајтови"
+  },
+  "securityBlockedExceptions": {
+    "message": "Прегледање блокирано осим изузетих сајтова"
+  },
+  "securityBlockUnverified": {
+    "message": "Блокирање није проверено"
+  },
+  "logoutLocalComplete": {
+    "message": "Локална одјава је завршена."
+  },
+  "logoutApiSession": {
+    "message": "Тренутна сесија налога"
+  },
+  "logoutProxySessions": {
+    "message": "Познате VPN сесије"
+  },
+  "logoutRevocationPending": {
+    "message": "Опозив у току…"
+  },
+  "logoutRevocationConfirmed": {
+    "message": "Опозив потврђен"
+  },
+  "logoutRevocationUnconfirmed": {
+    "message": "Опозив није потврђен"
+  },
+  "logoutUnconfirmedHelp": {
+    "message": "Неке удаљене сесије могу остати активне док не истекну."
+  },
+  "deviceQuotaLoading": {
+    "message": "Учитавање ограничења уређаја…"
+  },
+  "deviceQuotaUnknown": {
+    "message": "Ограничење уређаја није доступно"
+  },
+  "error_proxy_creation_uncertain": {
+    "message": "Сервер није потврдио прављење нове везе. Аутоматско поновно повезивање је паузирано."
+  },
+  "siteExclusionsPreferencesReset": {
+    "message": "Ваши сачувани изузеци сајтова су ресетовани јер нису могли да се прочитају. Поново додајте сајтове које желите да изузмете."
+  },
+  "siteExclusionsConflict": {
+    "message": "Листа изузетих сајтова је промењена. Прегледајте је, па поново покушајте са изменом."
+  },
+  "unavailableLocation": {
+    "message": "Локација није доступна"
+  },
+  "verificationSending": {
+    "message": "Слање имејла за потврду…"
+  },
+  "verificationSent": {
+    "message": "Имејл за потврду је послат. Проверите пријемно сандуче и фасциклу за нежељену пошту."
+  },
+  "error_login_requires_disconnect": {
+    "message": "Прекините тренутну VPN везу пре пријављивања на други налог."
+  },
+  "error_storage_unavailable": {
+    "message": "Локална подешавања налога нису доступна. Покушајте поново када складиште прегледача буде доступно; ваш сачувани налог је задржан."
+  },
+  "diagnosticsAssistance": {
+    "message": "Подршка"
+  },
+  "diagnosticsTitle": {
+    "message": "Дијагностика"
+  },
+  "diagnosticsIntro": {
+    "message": "Проверите FuzeVPN и тренутну везу без мењања заштите."
+  },
+  "diagnosticsPrivacyTitle": {
+    "message": "Ваши подаци"
+  },
+  "diagnosticsPrivacy": {
+    "message": "JSON извештаја садржи техничка стања и кодове грешака, без лозинки, токена, имејл адреса, IP адреса, посећених URL адреса или изузетих домена. Слање се обавља уз аутентификацију и повезује извештај са вашим налогом. Мрежни подаци су описани у обавештењу."
+  },
+  "diagnosticsAuto": {
+    "message": "Аутоматски шаљи извештаје о важним грешкама"
+  },
+  "diagnosticsAutoHelp": {
+    "message": "Подразумевано искључено. Укључивањем се шаљу једноставни технички извештаји за овај налог, без историје прегледања. Искључите овде да бисте зауставили аутоматско слање и уклонили аутоматске извештаје на чекању."
+  },
+  "diagnosticsHistoryHelp": {
+    "message": "Техничка историја остаје локална: до 200 догађаја по дневнику током 10 минута, чак и када је аутоматско слање искључено. Не садржи историју прегледања и брише се ручно, затварањем прегледача или променом налога."
+  },
+  "diagnosticsHistoryCount": {
+    "message": "Локални технички догађаји: $1"
+  },
+  "diagnosticsConnectionLog": {
+    "message": "Извези дневник везе"
+  },
+  "diagnosticsAccountRequired": {
+    "message": "Пријавите се да бисте омогућили слање. Извештај и даље можете да прегледате и извезете без налога."
+  },
+  "diagnosticsRun": {
+    "message": "Покрени дијагностику"
+  },
+  "diagnosticsClearHistory": {
+    "message": "Обриши локалну историју"
+  },
+  "diagnosticsPreparing": {
+    "message": "Припрема извештаја…"
+  },
+  "diagnosticsReports": {
+    "message": "Извештаји"
+  },
+  "diagnosticsEmpty": {
+    "message": "Још нема локалних извештаја."
+  },
+  "diagnosticsChooseReport": {
+    "message": "Изаберите извештај"
+  },
+  "diagnosticsReportLabel": {
+    "message": "$1 · $2 · $3"
+  },
+  "diagnosticsTypeFull": {
+    "message": "Потпун извештај"
+  },
+  "diagnosticsTypeSimple": {
+    "message": "Извештај о грешци"
+  },
+  "diagnosticsSummary": {
+    "message": "Прикупљено: $1. Верзија FuzeVPN-а: $2."
+  },
+  "diagnosticsJson": {
+    "message": "Прикажи садржај извештаја (JSON)"
+  },
+  "diagnosticsExport": {
+    "message": "Извези извештај"
+  },
+  "diagnosticsDelete": {
+    "message": "Избриши локални извештај"
+  },
+  "diagnosticsRetention": {
+    "message": "Локални извештаји истичу након 24 сата. Брисање овде не брише извештај који је услуга већ примила. За чување на серверу и захтеве за брисање погледајте обавештење."
+  },
+  "diagnosticsConsent": {
+    "message": "Пошаљи овај дијагностички извештај FuzeVPN-у"
+  },
+  "diagnosticsDataCollectionRequired": {
+    "message": "Firefox мора да дозволи прикупљање техничких података да би се слала дијагностика. Покушајте поново и дајте ову дозволу."
+  },
+  "diagnosticsSendHelp": {
+    "message": "Слање није обавезно. Након одобрења, може се поново покушавати до 24 сата уз важећу сесију истог налога. Даље покушаје можете да откажете. Касно отказивање не гарантује да сервер већ није примио извештај."
+  },
+  "diagnosticsSend": {
+    "message": "Пошаљи извештај"
+  },
+  "diagnosticsCancel": {
+    "message": "Откажи слање"
+  },
+  "diagnosticsReload": {
+    "message": "Поново учитај ову страницу"
+  },
+  "diagnosticsUnavailable": {
+    "message": "Дијагностика није доступна. Поново учитајте FuzeVPN из менаџера додатака у прегледачу, па поново отворите ову страницу. Ваш VPN је непромењен."
+  },
+  "diagnosticsQueueFull": {
+    "message": "Ред за слање је пун. Избришите локални извештај или сачекајте да се извештај на чекању пошаље."
+  },
+  "diagnosticsContentUnavailable": {
+    "message": "Садржај извештаја није доступан. Извезите локални извештај ако је доступан и обратите се подршци."
+  },
+  "diagnosticsFailure": {
+    "message": "Дијагностичка радња није могла да се доврши. Ваш VPN је непромењен."
+  },
+  "diagnosticsChecks": {
+    "message": "Провере"
+  },
+  "diagnosticsCheckFallback": {
+    "message": "Техничка провера: $1"
+  },
+  "diagnosticsCheckLine": {
+    "message": "$1 — $2"
+  },
+  "diagnosticsProxy": {
+    "message": "Прокси прегледача"
+  },
+  "diagnosticsStorage": {
+    "message": "Локално складиште"
+  },
+  "diagnosticsNetwork": {
+    "message": "Мрежна веза"
+  },
+  "diagnosticsCleanup": {
+    "message": "Чишћење сесија"
+  },
+  "diagnosticsResult_passed": {
+    "message": "Успешно"
+  },
+  "diagnosticsResult_failed": {
+    "message": "Неуспешно"
+  },
+  "diagnosticsResult_skipped": {
+    "message": "Није извршено"
+  },
+  "diagnosticsResult_unknown": {
+    "message": "Непознато"
+  },
+  "diagnosticsStatus_ready": {
+    "message": "Спремно на овом уређају"
+  },
+  "diagnosticsStatus_pending": {
+    "message": "Чека слање"
+  },
+  "diagnosticsStatus_sending": {
+    "message": "Слање…"
+  },
+  "diagnosticsStatus_session_required": {
+    "message": "Чека важећу сесију истог налога"
+  },
+  "diagnosticsStatus_received": {
+    "message": "Услуга је примила"
+  },
+  "diagnosticsStatus_failed": {
+    "message": "Слање није успело"
+  },
+  "diagnosticsStatus_cancelled": {
+    "message": "Слање отказано"
+  },
+  "diagnosticsStatus_expired": {
+    "message": "Рок за слање је истекао"
+  },
+  "diagnosticsReceivedAt": {
+    "message": "Примљено: $1"
+  },
+  "error_private_browsing_required": {
+    "message": "Firefox захтева ову дозволу за конфигурисање VPN-а, чак и у обичним прозорима. Отворите about:addons → FuzeVPN, дозволите покретање у приватним прозорима, па покушајте поново."
+  },
+  "error_host_permissions_required": {
+    "message": "У Firefox-у отворите about:addons → FuzeVPN → Дозволе и дозволите приступ свим сајтовима, па покушајте поново."
+  },
+  "cancelAction": {
+    "message": "Откажи"
+  },
+  "refreshLocations": {
+    "message": "Освежи локације"
+  },
+  "refreshingLocations": {
+    "message": "Освежавање локација…"
+  },
+  "locationsRefreshError": {
+    "message": "Листа локација није могла да се освежи. Покушајте поново."
+  },
+  "error_device_revoked_limit": {
+    "message": "Овај уређај је опозван. Достигнуто је ограничење уређаја: уклоните један уређај."
+  },
+  "noAvailableLocations": {
+    "message": "Тренутно нема доступних локација. Покушајте поново ускоро."
+  },
+  "noAvailableFavoriteLocations": {
+    "message": "Ваше омиљене локације привремено нису доступне."
+  },
+  "error_location_favorites_limit": {
+    "message": "Достигнуто је ограничење од 100 омиљених. Уклоните једну да бисте додали другу."
+  },
+  "error_server_full": {
+    "message": "Овај сервер је пун. Изаберите другу локацију."
+  },
+  "error_capacity_unavailable": {
+    "message": "Доступност овог сервера тренутно није могуће потврдити. Покушајте поново ускоро."
+  },
+  "locationHierarchyHelp": {
+    "message": "Назив бира сервер; стрелица приказује детаље."
+  },
+  "locationCountrySelect": {
+    "message": "Изабери доступан сервер: $1"
+  },
+  "locationCitySelect": {
+    "message": "Изабери доступан сервер: $1"
+  },
+  "locationShowCities": {
+    "message": "Прикажи градове: $1"
+  },
+  "locationHideCities": {
+    "message": "Сакриј градове: $1"
+  },
+  "locationShowServers": {
+    "message": "Прикажи сервере: $1"
+  },
+  "locationHideServers": {
+    "message": "Сакриј сервере: $1"
+  },
+  "locationAvailableServers": {
+    "message": "Доступни сервери: $1"
+  },
+  "legalInformation": {
+    "message": "Правне информације"
+  },
+  "privacyPolicy": {
+    "message": "Обавештење о приватности додатка"
+  },
+  "termsAndConditions": {
+    "message": "Услови коришћења и продаје"
+  },
+  "legalNotice": {
+    "message": "Правно обавештење"
+  },
+  "contactSupport": {
+    "message": "Контактирај подршку"
+  },
+  "webSignIn": {
+    "message": "Пријави се на FuzeVPN"
+  },
+  "webSignInDisconnect": {
+    "message": "Прекини везу и пријави се"
+  },
+  "webSignInPending": {
+    "message": "Пријављивање у току…"
+  },
+  "webSignInHelp": {
+    "message": "Пријавите се или направите налог помоћу Google-а или имејла у корисничком делу FuzeVPN-а."
+  },
+  "webSignInDisconnectHelp": {
+    "message": "Ово дугме зауставља заштиту прегледача да бисте могли да се пријавите помоћу Google-а или имејла. Током пријављивања прегледање неће бити заштићено."
+  },
+  "webSignInStatus": {
+    "message": "Наставите у прозору за пријављивање на FuzeVPN. Додатак се аутоматски ажурира када завршите. Затворите тај прозор да бисте отказали."
+  },
+  "error_web_login_cancelled": {
+    "message": "Пријављивање је отказано. Покушајте поново."
+  },
+  "error_web_login_timeout": {
+    "message": "Пријављивање је трајало предуго. Покушајте поново."
+  },
+  "error_web_login_unavailable": {
+    "message": "Веб пријављивање није доступно. Покушајте поново касније."
+  },
+  "error_web_login_invalid_callback": {
+    "message": "Пријављивање није могло да се потврди. Почните поново из додатка."
+  },
+  "error_web_login_denied": {
+    "message": "Пријављивање није одобрено. Покушајте поново."
+  },
+  "error_web_login_busy": {
+    "message": "Затворите већ отворен прозор за пријављивање пре поновног покушаја."
+  },
+  "deviceKindFirefox": {
+    "message": "Прегледач Firefox"
+  },
+  "generalPrivacyPolicy": {
+    "message": "Општа политика приватности"
+  },
+  "privacyNoticeTitle": {
+    "message": "Приватност у додатку FuzeVPN"
+  },
+  "privacyNoticeIntro": {
+    "message": "Ово обавештење описује податке које користи овај додатак. Допуњује општу политику приватности FuzeVPN-а, повезану у наставку. Необавезно слање дијагностике одвојено је од података потребних за пријављивање и коришћење VPN-а."
+  },
+  "privacyNoticeUpdated": {
+    "message": "Обавештење ажурирано 19. октобра 2026."
+  },
+  "privacyNoticeServiceTitle": {
+    "message": "Налог и VPN услуга"
+  },
+  "privacyNoticeService": {
+    "message": "Додатак размењује податке о аутентификацији, налогу, претплати, уређају и прокси сесији са api.fuzevpn.com. VPN прокси преноси саобраћај који се кроз њега усмерава. Ове везе откривају мрежне метаподатке услузи која их прима; ово обавештење не даје засебно обећање о вођењу евиденције на серверу."
+  },
+  "privacyNoticeLocalTitle": {
+    "message": "Подаци сачувани у прегледачу"
+  },
+  "privacyNoticeLocal": {
+    "message": "Складиште прегледача садржи вашу сесију, податке о налогу, подешавања, изузете сајтове и идентитет уређаја. Технички дневници се чувају локално до 10 минута, чак и када је аутоматско слање извештаја искључено. Нацрти дијагностике и извештаји у реду за слање локално истичу након 24 сата; чишћење се обавља када додатак може да се покрене."
+  },
+  "privacyNoticeIpTitle": {
+    "message": "Провере јавне IP адресе и треће стране"
+  },
+  "privacyNoticeIp": {
+    "message": "Приказ IP адресе и мрежна дијагностика контактирају api.ipify.org. Приказ IP адресе може као резерву користити ipv4.icanhazip.com. Добављач прима IP адресу везе и уобичајене метаподатке захтева: вашу јавну IP адресу у директном режиму или излазну IP адресу VPN-а када се користи прокси. Ови захтеви не садрже колачиће ни реферер и не шаљу токен налога ни историју прегледања."
+  },
+  "privacyNoticeReportsTitle": {
+    "message": "Шта садрже дијагностички извештаји"
+  },
+  "privacyNoticeReports": {
+    "message": "Извештаји могу садржати насумични идентификатор извештаја, временске ознаке, верзије додатка и прегледача, породицу и архитектуру оперативног система, стања везе и заштите, кодове грешака, бројаче, трајања и резултате провера. Потпуни извештаји могу садржати недавне техничке догађаје. Њихов JSON не садржи лозинке, токене за аутентификацију, имејл адресе, IP адресе, посећене URL адресе ни изузете домене. Потпун извештај можете да прегледате и извезете пре слања."
+  },
+  "privacyNoticeAccountTitle": {
+    "message": "Прималац и повезивање са налогом"
+  },
+  "privacyNoticeAccount": {
+    "message": "Извештаји се шаљу FuzeVPN-у на api.fuzevpn.com/v1/diagnostics преко везе са аутентификацијом. Ова API веза заобилази VPN прокси: FuzeVPN прима вашу директну јавну IP адресу чак и док је VPN активан. Извештаји су повезани са пријављеним налогом и нису анонимни. Заглавље за аутентификацију и IP адреса су одвојени од JSON-а извештаја. Успешан пријем потврђује да је та крајња тачка прихватила извештај, а не да га је запослени у подршци прочитао."
+  },
+  "privacyNoticeChoiceTitle": {
+    "message": "Необавезно слање и опозив сагласности"
+  },
+  "privacyNoticeChoice": {
+    "message": "Аутоматско слање је подразумевано искључено. Његовим укључивањем дозвољавају се једноставни извештаји о грешкама за тај налог. Ручно слање потпуног извештаја захтева означавање поља за потврду слања. Firefox захтева и своју необавезну дозволу за техничке податке. Искључите аутоматско слање да бисте га зауставили и уклонили аутоматске извештаје на чекању; појединачна слања на чекању откажите засебно. Одбијање слања дијагностике не спречава коришћење VPN-а."
+  },
+  "privacyNoticeDeleteTitle": {
+    "message": "Локално брисање и преузете датотеке"
+  },
+  "privacyNoticeDelete": {
+    "message": "У Дијагностици обришите техничку историју или избришите појединачни локални извештај. Брисање историје не брише постојеће копије извештаја. Отказивање или локално брисање не може да опозове податке које је услуга већ примила, укључујући отпремање које је стигло пре отказивања. Преузети извози су засебне датотеке које морате сами да избришете."
+  },
+  "privacyNoticeServerTitle": {
+    "message": "Чување на серверу и захтеви"
+  },
+  "privacyNoticeServer": {
+    "message": "Овај додатак не контролише нити проверава чување и брисање на серверу. За период чувања који примењује FuzeVPN и захтеве у вези са већ послатим извештајима погледајте општу политику приватности или контактирајте FuzeVPN. Ово обавештење не гарантује фиксни период чувања на серверу."
+  },
+  "privacyNoticeSupportTitle": {
+    "message": "Дијагностика и подршка су одвојене"
+  },
+  "privacyNoticeSupport": {
+    "message": "Слањем дијагностичког извештаја из додатка не шаље се и порука подршци. Да бисте описали проблем или затражили брисање примљеног извештаја, користите канал за контакт FuzeVPN-а у наставку. Ако одлучите да извезену датотеку поделите другим каналом, прво проверите њен садржај."
+  },
+  "privacyNoticeManage": {
+    "message": "Отвори Дијагностику"
+  },
+  "privacyNoticeLinksTitle": {
+    "message": "Правила услуге и контакт"
+  },
+  "theme": {
+    "message": "Тема"
+  },
+  "themeSystem": {
+    "message": "Систем"
+  },
+  "themeLight": {
+    "message": "Светла"
+  },
+  "themeDark": {
+    "message": "Тамна"
+  },
+  "switchToDarkTheme": {
+    "message": "Пређи на тамну тему"
+  },
+  "switchToLightTheme": {
+    "message": "Пређи на светлу тему"
+  }
+}

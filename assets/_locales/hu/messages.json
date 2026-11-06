@@ -1,0 +1,929 @@
+{
+  "extensionName": {
+    "message": "FuzeVPN"
+  },
+  "extensionDescription": {
+    "message": "Őrizze meg magánszféráját, és erősítse biztonságát egyetlen kattintással."
+  },
+  "siteExclusionsReloadRequired": {
+    "message": "A frissítés befejezéséhez és a webhelykivételek használatához töltse be újra a FuzeVPN-t a böngésző bővítménykezelőjéből."
+  },
+  "extensionCommunicationError": {
+    "message": "A bővítmény nem válaszol. Zárja be ezt az ablakot, majd töltse be újra a FuzeVPN-t a böngésző bővítménykezelőjéből."
+  },
+  "actionDisconnected": {
+    "message": "FuzeVPN — Nincs kapcsolat"
+  },
+  "actionConnected": {
+    "message": "FuzeVPN — Védett ebben a böngészőben"
+  },
+  "actionReconnecting": {
+    "message": "FuzeVPN — Újracsatlakozás"
+  },
+  "actionError": {
+    "message": "FuzeVPN — Beavatkozás szükséges"
+  },
+  "browserProtection": {
+    "message": "Böngészővédelem"
+  },
+  "loginTitle": {
+    "message": "Üdvözli a FuzeVPN"
+  },
+  "loginSubtitle": {
+    "message": "Jelentkezzen be a böngészés védelméhez ebben a böngészőben."
+  },
+  "email": {
+    "message": "E-mail-cím"
+  },
+  "emailPlaceholder": {
+    "message": "nev@example.com"
+  },
+  "password": {
+    "message": "Jelszó"
+  },
+  "signIn": {
+    "message": "Bejelentkezés"
+  },
+  "signingIn": {
+    "message": "Bejelentkezés…"
+  },
+  "forgotPassword": {
+    "message": "Elfelejtette a jelszavát?"
+  },
+  "createAccount": {
+    "message": "Fiók létrehozása"
+  },
+  "settings": {
+    "message": "Beállítások"
+  },
+  "close": {
+    "message": "Bezárás"
+  },
+  "statusDisconnected": {
+    "message": "Nincs kapcsolat"
+  },
+  "statusConnecting": {
+    "message": "Csatlakozás…"
+  },
+  "statusChanging": {
+    "message": "Helyszín módosítása…"
+  },
+  "statusProtected": {
+    "message": "Védett ebben a böngészőben"
+  },
+  "statusRefreshing": {
+    "message": "Biztonságos megújítás…"
+  },
+  "statusDisconnecting": {
+    "message": "Kapcsolat bontása…"
+  },
+  "statusError": {
+    "message": "A védelem leállt"
+  },
+  "browserOnlyDetail": {
+    "message": "Védelem ehhez a böngészőhöz."
+  },
+  "location": {
+    "message": "Helyszín"
+  },
+  "change": {
+    "message": "Módosítás"
+  },
+  "noLocation": {
+    "message": "Nincs elérhető helyszín"
+  },
+  "protectBrowser": {
+    "message": "Böngésző védelme"
+  },
+  "disconnect": {
+    "message": "Kapcsolat bontása"
+  },
+  "subscription": {
+    "message": "Előfizetés"
+  },
+  "refreshSubscription": {
+    "message": "Előfizetés frissítése"
+  },
+  "refreshingSubscription": {
+    "message": "Előfizetés frissítése…"
+  },
+  "subscriptionActive": {
+    "message": "Aktív"
+  },
+  "subscriptionInactive": {
+    "message": "Inaktív"
+  },
+  "expiresOn": {
+    "message": "Lejárat: $1"
+  },
+  "noExpiry": {
+    "message": "Nincs lejárati dátum"
+  },
+  "browserOnlyNotice": {
+    "message": "Csak ez a böngésző. Más alkalmazásokra és böngészőkre nem terjed ki."
+  },
+  "resendVerification": {
+    "message": "E-mail újraküldése"
+  },
+  "incognitoHelp": {
+    "message": "A privát böngészés csak akkor használja ugyanezt a védelmet, ha a bővítmény a böngésző beállításaiban engedélyezve van privát módban."
+  },
+  "manageAccount": {
+    "message": "Fiókom kezelése"
+  },
+  "account": {
+    "message": "Fiók"
+  },
+  "devices": {
+    "message": "Eszközök"
+  },
+  "manageDevices": {
+    "message": "Eszközök kezelése"
+  },
+  "refreshDevices": {
+    "message": "Eszközök frissítése"
+  },
+  "deviceCount": {
+    "message": "$1 / $2 eszköz"
+  },
+  "loadingDevices": {
+    "message": "Eszközök betöltése…"
+  },
+  "noDevices": {
+    "message": "Nincs aktív eszköz."
+  },
+  "currentDevice": {
+    "message": "Ez az eszköz"
+  },
+  "deviceKindBrowser": {
+    "message": "Böngészőbővítmény"
+  },
+  "deviceKindVpn": {
+    "message": "VPN-eszköz"
+  },
+  "profile_browser_proxy": {
+    "message": "Böngészőproxy"
+  },
+  "profile_wireguard": {
+    "message": "WireGuard"
+  },
+  "profile_openvpn": {
+    "message": "OpenVPN"
+  },
+  "none": {
+    "message": "nincs"
+  },
+  "deviceCreatedOn": {
+    "message": "Létrehozva: $1"
+  },
+  "deleteDevice": {
+    "message": "Eszköz törlése"
+  },
+  "deleteDeviceNamed": {
+    "message": "Eszköz törlése: $1"
+  },
+  "confirmDeleteDevice": {
+    "message": "Eltávolítja ezt: „$1”? A VPN-kapcsolatai megszakadnak, és a profiljai törlődnek."
+  },
+  "resetDevice": {
+    "message": "Eszköz alaphelyzetbe állítása"
+  },
+  "confirmResetDevice": {
+    "message": "Alaphelyzetbe állítja ezt a bővítményt? A következő használatkor új eszközként lesz regisztrálva."
+  },
+  "signOutAccount": {
+    "message": "Kijelentkezés a fiókból"
+  },
+  "chooseLocation": {
+    "message": "Helyszín kiválasztása"
+  },
+  "error_invalid_credentials": {
+    "message": "Az e-mail-cím vagy a jelszó helytelen."
+  },
+  "error_unauthorized": {
+    "message": "A munkamenet lejárt. Jelentkezzen be újra."
+  },
+  "error_email_verification_required": {
+    "message": "A védelem bekapcsolása előtt erősítse meg e-mail-címét."
+  },
+  "errorVerificationCooldown": {
+    "message": "Új e-mail $1 másodperc múlva kérhető."
+  },
+  "error_verification_email_cooldown": {
+    "message": "Várjon egy kicsit, mielőtt újabb e-mailt kér."
+  },
+  "error_subscription_required": {
+    "message": "A böngésző védelméhez aktív előfizetés szükséges."
+  },
+  "error_device_limit": {
+    "message": "Elérte az eszközkorlátot. Távolítson el egy eszközt."
+  },
+  "error_device_identity_revoked": {
+    "message": "Ez az eszköz már nem jogosult. Próbáljon újra csatlakozni."
+  },
+  "error_device_proof_invalid": {
+    "message": "Nem sikerült ellenőrizni ezt az eszközt. Ellenőrizze a számítógép dátumát és idejét, majd próbálja újra."
+  },
+  "error_device_proof_replayed": {
+    "message": "Ezt a kérést már feldolgoztuk. Próbálja újra."
+  },
+  "error_invalid_device": {
+    "message": "Az eszköz nem ismerhető fel. Próbáljon újra csatlakozni."
+  },
+  "error_device_exists": {
+    "message": "Ez az eszközazonosító már egy másik fiókhoz van társítva."
+  },
+  "error_not_found": {
+    "message": "Ez a művelet már nem érhető el. Próbálja újra."
+  },
+  "error_invalid_location": {
+    "message": "Ez a helyszín nem érhető el. Válasszon másikat."
+  },
+  "error_rate_limited": {
+    "message": "Túl sok próbálkozás. Várjon egy kicsit, majd próbálja újra."
+  },
+  "error_proxy_unavailable": {
+    "message": "Ez a szerver átmenetileg nem érhető el. Próbálja újra egy kis idő múlva."
+  },
+  "error_api_token_expired": {
+    "message": "A fiókmunkamenet lejárt. Jelentkezzen be újra."
+  },
+  "error_network_error": {
+    "message": "A hálózat nem érhető el. Ellenőrizze az internetkapcsolatot."
+  },
+  "error_request_timeout": {
+    "message": "A szolgáltatás túl lassan válaszolt. Próbálja újra."
+  },
+  "error_invalid_response": {
+    "message": "A szolgáltatás váratlan választ adott."
+  },
+  "error_proxy_certificate_invalid": {
+    "message": "Nem sikerült ellenőrizni a szerver biztonságát. A kapcsolat leállt."
+  },
+  "error_proxy_controlled_by_extension": {
+    "message": "Jelenleg egy másik bővítmény vezérli a böngésző proxyját."
+  },
+  "error_proxy_controlled_by_policy": {
+    "message": "Egy rendszergazdai házirend megakadályozza, hogy a FuzeVPN módosítsa a proxyt."
+  },
+  "error_proxy_authentication_failed": {
+    "message": "A szerver nem fogadta el a kapcsolatot. Próbáljon újra csatlakozni."
+  },
+  "error_session_expired": {
+    "message": "A védett kapcsolat lejárt. Csatlakozzon újra."
+  },
+  "error_email_delivery_unavailable": {
+    "message": "Az e-mail most nem küldhető el."
+  },
+  "error_unknown_error": {
+    "message": "Váratlan hiba történt. Próbálja újra."
+  },
+  "actionBlocked": {
+    "message": "FuzeVPN — Böngészés letiltva"
+  },
+  "statusBlockedRetry": {
+    "message": "Böngészés szüneteltetve — újracsatlakozás"
+  },
+  "statusBlockedAction": {
+    "message": "Böngészés szüneteltetve — ellenőrizze a kapcsolatot"
+  },
+  "statusProtectionUnavailable": {
+    "message": "A védelem nem érhető el — a böngészés nincs letiltva"
+  },
+  "recoveryHelp": {
+    "message": "A védelem folytatásához próbálja újra. A kapcsolat bontásával FuzeVPN nélkül böngészhet."
+  },
+  "retryConnection": {
+    "message": "Újrapróbálás"
+  },
+  "killSwitch": {
+    "message": "Vészleállító"
+  },
+  "killSwitchHelp": {
+    "message": "Letiltja az új webes kéréseket, ha a VPN-kapcsolat megszakad. A kizárt webhelyek a VPN-en kívül továbbra is elérhetők."
+  },
+  "webRtcProtection": {
+    "message": "WebRTC-védelem"
+  },
+  "webRtcHelp": {
+    "message": "Segít bizalmasan kezelni az IP-címét webes hívások közben. Előfordulhat, hogy egyes hívások nem működnek. A kikapcsolása felfedheti valódi IP-címét."
+  },
+  "securityEffectiveState": {
+    "message": "$1 · $2"
+  },
+  "securityBlocked": {
+    "message": "Böngészés letiltva"
+  },
+  "securityNotBlocked": {
+    "message": "Böngészés nincs letiltva"
+  },
+  "securityWebRtcActive": {
+    "message": "WebRTC-korlátozás aktív"
+  },
+  "securityWebRtcInactive": {
+    "message": "WebRTC-korlátozás inaktív"
+  },
+  "localNetworkHelp": {
+    "message": "A védelem alatt a helyi IP-címek és a gyakori helyi nevek le vannak tiltva. Egy kizárt domain ennek ellenére hozzáférést adhat a helyi hálózathoz. A rendszer IPv6-beállításai nem változnak."
+  },
+  "securityLimits": {
+    "message": "A védelemről"
+  },
+  "killSwitchLimits": {
+    "message": "Csak ez a böngésző: a meglévő kapcsolatok, valamint a böngésző belső vagy más bővítmények egyes kommunikációi folytatódhatnak. Egy másik bővítmény vagy házirend lecserélheti a proxyt, mielőtt a FuzeVPN reagálna. A bővítmény letiltása megszünteti a védelmet. Nincs rendszerszintű tiltás."
+  },
+  "error_traffic_guard_failed": {
+    "message": "Nem sikerült ellenőrizni a böngészés letiltását. A védelem nem garantált. Ellenőrizze a bővítmény engedélyeit."
+  },
+  "error_webrtc_control_unavailable": {
+    "message": "Nem sikerült alkalmazni a WebRTC-korlátozást. Ellenőrizze a beállításokat, a többi bővítményt vagy a rendszergazdai házirendet."
+  },
+  "language": {
+    "message": "Nyelv"
+  },
+  "languageAutomatic": {
+    "message": "Automatikus — a böngésző nyelve"
+  },
+  "languageHelp": {
+    "message": "A módosítások azonnal érvénybe lépnek. Az Automatikus beállítás a böngésző nyelvét követi, amely eltérhet a rendszer nyelvétől."
+  },
+  "languageSaveError": {
+    "message": "Nem sikerült menteni a nyelvet. Az előző választás megmarad. Próbálja újra."
+  },
+  "publicIp": {
+    "message": "Nyilvános IP"
+  },
+  "vpnIp": {
+    "message": "VPN IP-cím"
+  },
+  "ipChecking": {
+    "message": "Ellenőrzés…"
+  },
+  "ipUnavailable": {
+    "message": "Nem érhető el"
+  },
+  "ipLookupExplanation": {
+    "message": "Az IP-t az ipify, tartalékként az icanhazip szolgáltatás ellenőrzi a jelenlegi kapcsolaton keresztül. Böngészési előzmények nem kerülnek elküldésre."
+  },
+  "automaticLocation": {
+    "message": "Automatikus"
+  },
+  "automaticLocationHelp": {
+    "message": "Legjobb friss válaszidő, vagy az utolsó helyszín."
+  },
+  "automaticLocationName": {
+    "message": "Automatikus · $1"
+  },
+  "searchLocations": {
+    "message": "Ország vagy város keresése"
+  },
+  "locationFilters": {
+    "message": "Helyszínek szűrése"
+  },
+  "allLocations": {
+    "message": "Összes"
+  },
+  "favoriteLocations": {
+    "message": "Kedvencek"
+  },
+  "recentLocations": {
+    "message": "Legutóbbiak"
+  },
+  "noMatchingLocations": {
+    "message": "Nincs a keresésnek megfelelő helyszín."
+  },
+  "noFavoriteLocations": {
+    "message": "Jelöljön meg helyszíneket csillaggal, hogy itt megtalálja kedvenceit."
+  },
+  "noRecentLocations": {
+    "message": "A legutóbb használt helyszínek itt jelennek meg."
+  },
+  "addFavorite": {
+    "message": "Hozzáadás a kedvencekhez: $1"
+  },
+  "removeFavorite": {
+    "message": "Eltávolítás a kedvencek közül: $1"
+  },
+  "unavailableFavoriteLocation": {
+    "message": "Nem elérhető kedvenc: $1"
+  },
+  "locationSaveError": {
+    "message": "A módosítást nem sikerült befejezni. Egyes beállítások mentésre kerülhettek. Az újrapróbálás előtt ellenőrizze a megjelenített választást."
+  },
+  "siteExclusions": {
+    "message": "Kizárt webhelyek"
+  },
+  "siteExclusionsHelp": {
+    "message": "Ezek a webhelyek FuzeVPN nélkül használják a kapcsolatot, akkor is, ha a VPN leáll."
+  },
+  "siteExclusionsEnabled": {
+    "message": "Kivételek engedélyezése"
+  },
+  "siteExclusionInput": {
+    "message": "Domain vagy URL"
+  },
+  "siteExclusionPlaceholder": {
+    "message": "example.com"
+  },
+  "siteExclusionPreview": {
+    "message": "Kiválasztott domain: $1"
+  },
+  "siteExclusionSubdomains": {
+    "message": "Aldomainek belefoglalása"
+  },
+  "siteExclusionAdd": {
+    "message": "Webhely hozzáadása"
+  },
+  "siteExclusionsEmpty": {
+    "message": "Nincsenek kizárt webhelyek. Csak olyan webhelyeket adjon hozzá, amelyeket VPN nélkül szeretne használni."
+  },
+  "siteExclusionsCount": {
+    "message": "$1 / 100 webhely"
+  },
+  "siteExclusionScopeSubdomains": {
+    "message": "Domain és aldomainek"
+  },
+  "siteExclusionScopeExact": {
+    "message": "Csak a pontos domain"
+  },
+  "siteExclusionRemove": {
+    "message": "Eltávolítás: $1"
+  },
+  "siteExclusionsDetails": {
+    "message": "Hogyan működnek a kivételek?"
+  },
+  "siteExclusionsResources": {
+    "message": "A más domainekről származó erőforrások védettek maradnak. Egy oldal kizárása nem zárja ki automatikusan annak egyéb tartalmait."
+  },
+  "siteExclusionsReload": {
+    "message": "Módosítás után töltse be újra a webhelyet. A meglévő kapcsolatok megtarthatják korábbi útvonalukat."
+  },
+  "siteExclusionsWebRtc": {
+    "message": "A WebRTC-védelem globális beállítás marad, a kizárt webhelyekre is."
+  },
+  "siteExclusionsLocal": {
+    "message": "Csak ebben a böngészőben tárolódik, és a fiókból való kijelentkezés után is megmarad."
+  },
+  "siteExclusionsOn": {
+    "message": "Kivételek engedélyezve"
+  },
+  "siteExclusionsOff": {
+    "message": "Kivételek letiltva"
+  },
+  "siteExclusionsSummary": {
+    "message": "$1 webhely a VPN-en kívül"
+  },
+  "siteExclusionsPending": {
+    "message": "Kivételek alkalmazása…"
+  },
+  "siteExclusionsInterrupted": {
+    "message": "A módosítás megszakadt. Az ideiglenes védelem érvényben marad."
+  },
+  "siteExclusionsSaveError": {
+    "message": "Nem sikerült befejezni a módosítást. Ellenőrizze a beállításokat, és próbálja újra."
+  },
+  "siteExclusionsRetry": {
+    "message": "Újrapróbálás"
+  },
+  "siteExclusionInvalid": {
+    "message": "Adjon meg egy érvényes nyilvános domaint. IP-címek, helyi nevek, helyettesítő karakterek, nyilvános utótagok és fenntartott domainek nem fogadhatók el."
+  },
+  "siteExclusionDuplicate": {
+    "message": "Ez a domain már szerepel a listán."
+  },
+  "siteExclusionsLimit": {
+    "message": "Elérte a 100 webhelyes korlátot. Új hozzáadásához távolítson el egy webhelyet."
+  },
+  "statusProtectedExceptions": {
+    "message": "VPN aktív · $1 kivétel"
+  },
+  "statusBlockedExceptions": {
+    "message": "Csak a kizárt webhelyek érhetők el"
+  },
+  "securityBlockedExceptions": {
+    "message": "Böngészés letiltva, kivéve a kizárt webhelyeket"
+  },
+  "securityBlockUnverified": {
+    "message": "A letiltás nincs ellenőrizve"
+  },
+  "logoutLocalComplete": {
+    "message": "A helyi kijelentkezés befejeződött."
+  },
+  "logoutApiSession": {
+    "message": "Jelenlegi fiókmunkamenet"
+  },
+  "logoutProxySessions": {
+    "message": "Ismert VPN-munkamenetek"
+  },
+  "logoutRevocationPending": {
+    "message": "Visszavonás folyamatban…"
+  },
+  "logoutRevocationConfirmed": {
+    "message": "Visszavonás megerősítve"
+  },
+  "logoutRevocationUnconfirmed": {
+    "message": "Visszavonás nincs megerősítve"
+  },
+  "logoutUnconfirmedHelp": {
+    "message": "Egyes távoli munkamenetek a lejáratukig aktívak maradhatnak."
+  },
+  "deviceQuotaLoading": {
+    "message": "Eszközkorlát betöltése…"
+  },
+  "deviceQuotaUnknown": {
+    "message": "Az eszközkorlát nem érhető el"
+  },
+  "error_proxy_creation_uncertain": {
+    "message": "A szerver nem erősítette meg az új kapcsolat létrehozását. Az automatikus újracsatlakozás szünetel."
+  },
+  "siteExclusionsPreferencesReset": {
+    "message": "A mentett webhelykivételek alaphelyzetbe álltak, mert nem lehetett beolvasni őket. Adja hozzá újra a kizárni kívánt webhelyeket."
+  },
+  "siteExclusionsConflict": {
+    "message": "A kizárt webhelyek listája megváltozott. Tekintse át, majd próbálja újra a módosítást."
+  },
+  "unavailableLocation": {
+    "message": "A helyszín nem érhető el"
+  },
+  "verificationSending": {
+    "message": "Megerősítő e-mail küldése…"
+  },
+  "verificationSent": {
+    "message": "A megerősítő e-mail elküldve. Ellenőrizze a beérkező leveleket és a levélszemét mappát."
+  },
+  "error_login_requires_disconnect": {
+    "message": "Másik fiókba való bejelentkezés előtt bontsa a jelenlegi VPN-kapcsolatot."
+  },
+  "error_storage_unavailable": {
+    "message": "A helyi fiókbeállítások nem érhetők el. Próbálja újra, amikor a böngésző tárhelye elérhető; a mentett fiókja megmaradt."
+  },
+  "diagnosticsAssistance": {
+    "message": "Támogatás"
+  },
+  "diagnosticsTitle": {
+    "message": "Diagnosztika"
+  },
+  "diagnosticsIntro": {
+    "message": "Ellenőrizze a FuzeVPN-t és a jelenlegi kapcsolatot a védelem módosítása nélkül."
+  },
+  "diagnosticsPrivacyTitle": {
+    "message": "Az Ön adatai"
+  },
+  "diagnosticsPrivacy": {
+    "message": "A jelentés JSON-tartalma technikai állapotokat és hibakódokat tartalmaz jelszavak, tokenek, e-mail-címek, IP-címek, meglátogatott URL-ek és kizárt domainek nélkül. A küldés hitelesített, és a jelentést az Ön fiókjához kapcsolja. A hálózati adatokról az adatvédelmi tájékoztató ad információt."
+  },
+  "diagnosticsAuto": {
+    "message": "Fontos hibajelentések automatikus küldése"
+  },
+  "diagnosticsAutoHelp": {
+    "message": "Alapértelmezés szerint ki van kapcsolva. Bekapcsolása esetén egyszerű technikai jelentések kerülnek elküldésre ehhez a fiókhoz, böngészési előzmények nélkül. Ha itt kikapcsolja, leáll az automatikus küldés, és a függőben lévő automatikus jelentések törlődnek."
+  },
+  "diagnosticsHistoryHelp": {
+    "message": "A technikai előzmények helyben maradnak: naplónként legfeljebb 200 esemény az utolsó 10 percből, akkor is, ha az automatikus küldés ki van kapcsolva. Nem tartalmaznak böngészési előzményeket, és kézzel, a böngésző bezárásakor vagy fiókváltáskor törlődnek."
+  },
+  "diagnosticsHistoryCount": {
+    "message": "$1 helyi technikai esemény"
+  },
+  "diagnosticsConnectionLog": {
+    "message": "Kapcsolatnapló exportálása"
+  },
+  "diagnosticsAccountRequired": {
+    "message": "A küldés engedélyezéséhez jelentkezzen be. Fiók nélkül is megtekintheti és exportálhatja a jelentést."
+  },
+  "diagnosticsRun": {
+    "message": "Diagnosztika futtatása"
+  },
+  "diagnosticsClearHistory": {
+    "message": "Helyi előzmények törlése"
+  },
+  "diagnosticsPreparing": {
+    "message": "Jelentés előkészítése…"
+  },
+  "diagnosticsReports": {
+    "message": "Jelentések"
+  },
+  "diagnosticsEmpty": {
+    "message": "Még nincs helyi jelentés."
+  },
+  "diagnosticsChooseReport": {
+    "message": "Jelentés kiválasztása"
+  },
+  "diagnosticsReportLabel": {
+    "message": "$1 · $2 · $3"
+  },
+  "diagnosticsTypeFull": {
+    "message": "Teljes jelentés"
+  },
+  "diagnosticsTypeSimple": {
+    "message": "Hibajelentés"
+  },
+  "diagnosticsSummary": {
+    "message": "Gyűjtés ideje: $1. FuzeVPN-verzió: $2."
+  },
+  "diagnosticsJson": {
+    "message": "Jelentés tartalmának megtekintése (JSON)"
+  },
+  "diagnosticsExport": {
+    "message": "Jelentés exportálása"
+  },
+  "diagnosticsDelete": {
+    "message": "Helyi jelentés törlése"
+  },
+  "diagnosticsRetention": {
+    "message": "A helyi jelentések 24 óra után lejárnak. Az itt végzett törlés nem törli a szolgáltatás által már megkapott jelentést. A szerveroldali megőrzésről és a törlési kérelmekről az adatvédelmi tájékoztató ad információt."
+  },
+  "diagnosticsConsent": {
+    "message": "Diagnosztikai jelentés küldése a FuzeVPN-nek"
+  },
+  "diagnosticsDataCollectionRequired": {
+    "message": "A diagnosztika küldéséhez a Firefoxnak engedélyeznie kell a technikai adatgyűjtést. Próbálja újra, és adja meg ezt az engedélyt."
+  },
+  "diagnosticsSendHelp": {
+    "message": "A küldés nem kötelező. Jóváhagyás után a rendszer legfeljebb 24 órán át újrapróbálkozhat ugyanazon fiók érvényes munkamenetével. A további próbálkozásokat visszavonhatja. A késői visszavonás nem garantálja, hogy a szerver még nem kapta meg a jelentést."
+  },
+  "diagnosticsSend": {
+    "message": "Jelentés küldése"
+  },
+  "diagnosticsCancel": {
+    "message": "Küldés visszavonása"
+  },
+  "diagnosticsReload": {
+    "message": "Oldal újratöltése"
+  },
+  "diagnosticsUnavailable": {
+    "message": "A diagnosztika nem érhető el. Töltse be újra a FuzeVPN-t a böngésző bővítménykezelőjéből, majd nyissa meg újra ezt az oldalt. A VPN nem változik."
+  },
+  "diagnosticsQueueFull": {
+    "message": "A küldési sor megtelt. Töröljön egy helyi jelentést, vagy várja meg egy függőben lévő jelentés elküldését."
+  },
+  "diagnosticsContentUnavailable": {
+    "message": "A jelentés tartalma nem érhető el. Exportálja a helyi jelentést, ha elérhető, és lépjen kapcsolatba az ügyfélszolgálattal."
+  },
+  "diagnosticsFailure": {
+    "message": "A diagnosztikai műveletet nem sikerült befejezni. A VPN nem változik."
+  },
+  "diagnosticsChecks": {
+    "message": "Ellenőrzések"
+  },
+  "diagnosticsCheckFallback": {
+    "message": "Technikai ellenőrzés: $1"
+  },
+  "diagnosticsCheckLine": {
+    "message": "$1 — $2"
+  },
+  "diagnosticsProxy": {
+    "message": "Böngészőproxy"
+  },
+  "diagnosticsStorage": {
+    "message": "Helyi tárhely"
+  },
+  "diagnosticsNetwork": {
+    "message": "Hálózati kapcsolat"
+  },
+  "diagnosticsCleanup": {
+    "message": "Munkamenetek tisztítása"
+  },
+  "diagnosticsResult_passed": {
+    "message": "Sikeres"
+  },
+  "diagnosticsResult_failed": {
+    "message": "Sikertelen"
+  },
+  "diagnosticsResult_skipped": {
+    "message": "Nem futott"
+  },
+  "diagnosticsResult_unknown": {
+    "message": "Ismeretlen"
+  },
+  "diagnosticsStatus_ready": {
+    "message": "Kész ezen az eszközön"
+  },
+  "diagnosticsStatus_pending": {
+    "message": "Küldésre vár"
+  },
+  "diagnosticsStatus_sending": {
+    "message": "Küldés…"
+  },
+  "diagnosticsStatus_session_required": {
+    "message": "Ugyanazon fiók érvényes munkamenetére vár"
+  },
+  "diagnosticsStatus_received": {
+    "message": "A szolgáltatás megkapta"
+  },
+  "diagnosticsStatus_failed": {
+    "message": "A küldés sikertelen"
+  },
+  "diagnosticsStatus_cancelled": {
+    "message": "A küldés visszavonva"
+  },
+  "diagnosticsStatus_expired": {
+    "message": "A küldési határidő lejárt"
+  },
+  "diagnosticsReceivedAt": {
+    "message": "Megérkezett: $1"
+  },
+  "error_private_browsing_required": {
+    "message": "A Firefox a VPN beállításához ezt az engedélyt kéri, normál ablakokban is. Nyissa meg az about:addons → FuzeVPN oldalt, engedélyezze a futtatást privát ablakokban, majd próbálja újra."
+  },
+  "error_host_permissions_required": {
+    "message": "Firefoxban nyissa meg az about:addons → FuzeVPN → Engedélyek oldalt, engedélyezze a hozzáférést minden webhelyhez, majd próbálja újra."
+  },
+  "cancelAction": {
+    "message": "Mégse"
+  },
+  "refreshLocations": {
+    "message": "Helyszínek frissítése"
+  },
+  "refreshingLocations": {
+    "message": "Helyszínek frissítése…"
+  },
+  "locationsRefreshError": {
+    "message": "Nem sikerült frissíteni a helyszínek listáját. Próbálja újra."
+  },
+  "error_device_revoked_limit": {
+    "message": "Ennek az eszköznek a jogosultságát visszavonták. Elérte az eszközkorlátot: távolítson el egy eszközt."
+  },
+  "noAvailableLocations": {
+    "message": "Jelenleg nincs elérhető helyszín. Próbálja újra hamarosan."
+  },
+  "noAvailableFavoriteLocations": {
+    "message": "A kedvenc helyszínei átmenetileg nem érhetők el."
+  },
+  "error_location_favorites_limit": {
+    "message": "Elérte a 100 kedvences korlátot. Új hozzáadásához távolítson el egy kedvencet."
+  },
+  "error_server_full": {
+    "message": "Ez a szerver megtelt. Válasszon másik helyszínt."
+  },
+  "error_capacity_unavailable": {
+    "message": "A szerver elérhetősége most nem erősíthető meg. Próbálja újra hamarosan."
+  },
+  "locationHierarchyHelp": {
+    "message": "A név kiválaszt egy szervert; a nyíl megjeleníti a részleteket."
+  },
+  "locationCountrySelect": {
+    "message": "Elérhető szerver kiválasztása: $1"
+  },
+  "locationCitySelect": {
+    "message": "Elérhető szerver kiválasztása: $1"
+  },
+  "locationShowCities": {
+    "message": "Városok megjelenítése: $1"
+  },
+  "locationHideCities": {
+    "message": "Városok elrejtése: $1"
+  },
+  "locationShowServers": {
+    "message": "Szerverek megjelenítése: $1"
+  },
+  "locationHideServers": {
+    "message": "Szerverek elrejtése: $1"
+  },
+  "locationAvailableServers": {
+    "message": "Elérhető szerverek: $1"
+  },
+  "legalInformation": {
+    "message": "Jogi információk"
+  },
+  "privacyPolicy": {
+    "message": "A bővítmény adatvédelmi tájékoztatója"
+  },
+  "termsAndConditions": {
+    "message": "Felhasználási és értékesítési feltételek"
+  },
+  "legalNotice": {
+    "message": "Impresszum"
+  },
+  "contactSupport": {
+    "message": "Kapcsolatfelvétel az ügyfélszolgálattal"
+  },
+  "webSignIn": {
+    "message": "Bejelentkezés a FuzeVPN-be"
+  },
+  "webSignInDisconnect": {
+    "message": "Kapcsolat bontása és bejelentkezés"
+  },
+  "webSignInPending": {
+    "message": "Bejelentkezés folyamatban…"
+  },
+  "webSignInHelp": {
+    "message": "Jelentkezzen be, vagy hozzon létre fiókot Google-lel vagy e-maillel a FuzeVPN ügyfélportálján."
+  },
+  "webSignInDisconnectHelp": {
+    "message": "Ez a gomb leállítja a böngésző védelmét, hogy bejelentkezhessen Google-lel vagy e-maillel. A bejelentkezés alatt a böngészés nem lesz védett."
+  },
+  "webSignInStatus": {
+    "message": "Folytassa a FuzeVPN bejelentkezési ablakában. A bővítmény automatikusan frissül, ha végzett. A megszakításhoz zárja be azt az ablakot."
+  },
+  "error_web_login_cancelled": {
+    "message": "A bejelentkezés megszakadt. Próbálja újra."
+  },
+  "error_web_login_timeout": {
+    "message": "A bejelentkezés túl sokáig tartott. Próbálja újra."
+  },
+  "error_web_login_unavailable": {
+    "message": "A webes bejelentkezés nem érhető el. Próbálja újra később."
+  },
+  "error_web_login_invalid_callback": {
+    "message": "A bejelentkezést nem sikerült ellenőrizni. Kezdje újra a bővítményből."
+  },
+  "error_web_login_denied": {
+    "message": "A bejelentkezés nem lett engedélyezve. Próbálja újra."
+  },
+  "error_web_login_busy": {
+    "message": "Az újrapróbálás előtt zárja be a már megnyitott bejelentkezési ablakot."
+  },
+  "deviceKindFirefox": {
+    "message": "Firefox böngésző"
+  },
+  "generalPrivacyPolicy": {
+    "message": "Általános adatvédelmi szabályzat"
+  },
+  "privacyNoticeTitle": {
+    "message": "Adatvédelem a FuzeVPN bővítményben"
+  },
+  "privacyNoticeIntro": {
+    "message": "Ez a tájékoztató a bővítmény által használt adatokat ismerteti. Kiegészíti a FuzeVPN alább hivatkozott általános adatvédelmi szabályzatát. A diagnosztika opcionális küldése független a bejelentkezéshez és a VPN használatához szükséges adatoktól."
+  },
+  "privacyNoticeUpdated": {
+    "message": "A tájékoztató frissítve: 2026. október 19."
+  },
+  "privacyNoticeServiceTitle": {
+    "message": "Fiók és VPN-szolgáltatás"
+  },
+  "privacyNoticeService": {
+    "message": "A bővítmény hitelesítési, fiók-, előfizetési, eszköz- és proxymunkamenet-adatokat cserél az api.fuzevpn.com szolgáltatással. A VPN-proxy továbbítja a rajta keresztül irányított forgalmat. Ezek a kapcsolatok hálózati metaadatokat tesznek láthatóvá a fogadó szolgáltatás számára; ez a tájékoztató nem tesz külön ígéretet a szerveroldali naplózásra vonatkozóan."
+  },
+  "privacyNoticeLocalTitle": {
+    "message": "A böngészőben tárolt adatok"
+  },
+  "privacyNoticeLocal": {
+    "message": "A böngésző tárhelye tárolja a munkamenetét, fiókadatait, beállításait, webhelykivételeit és eszközazonosítóját. A technikai naplók helyben legfeljebb 10 percig maradnak meg, akkor is, ha az automatikus jelentésküldés ki van kapcsolva. A diagnosztikai piszkozatok és a sorban álló jelentések helyben 24 óra után lejárnak; a tisztítás akkor fut le, amikor a bővítmény futni tud."
+  },
+  "privacyNoticeIpTitle": {
+    "message": "Nyilvános IP-ellenőrzések és harmadik felek"
+  },
+  "privacyNoticeIp": {
+    "message": "Az IP-megjelenítés és a hálózati diagnosztika az api.ipify.org címhez kapcsolódik. Az IP-megjelenítés tartalékként az ipv4.icanhazip.com címet is használhatja. A szolgáltató megkapja a kapcsolat IP-címét és a szokásos kérési metaadatokat: közvetlen módban az Ön nyilvános IP-címét, proxyn keresztül pedig a VPN kilépési IP-címét. Ezek a kérések nem tartalmaznak cookie-kat és hivatkozót, és nem küldenek fióktokent vagy böngészési előzményeket."
+  },
+  "privacyNoticeReportsTitle": {
+    "message": "Mit tartalmaznak a diagnosztikai jelentések"
+  },
+  "privacyNoticeReports": {
+    "message": "A jelentések tartalmazhatnak véletlenszerű jelentésazonosítót, időbélyegeket, a bővítmény és a böngésző verzióját, az operációs rendszer családját és architektúráját, a kapcsolat és a védelem állapotát, hibakódokat, számlálókat, időtartamokat és ellenőrzési eredményeket. A teljes jelentések friss technikai eseményeket is tartalmazhatnak. JSON-tartalmukból kimaradnak a jelszavak, hitelesítési tokenek, e-mail-címek, IP-címek, meglátogatott URL-ek és kizárt domainek. A teljes jelentést küldés előtt megtekintheti és exportálhatja."
+  },
+  "privacyNoticeAccountTitle": {
+    "message": "Címzett és fiókhoz rendelés"
+  },
+  "privacyNoticeAccount": {
+    "message": "A jelentések hitelesített kapcsolaton keresztül jutnak el a FuzeVPN-hez az api.fuzevpn.com/v1/diagnostics címre. Ez az API-kapcsolat megkerüli a VPN-proxyt: a FuzeVPN akkor is megkapja az Ön közvetlen nyilvános IP-címét, ha a VPN aktív. A jelentések a bejelentkezett fiókhoz kapcsolódnak, nem névtelenek. A hitelesítési fejléc és az IP-cím elkülönül a jelentés JSON-tartalmától. A sikeres fogadás azt igazolja, hogy a végpont elfogadta a jelentést, nem azt, hogy egy ügyfélszolgálati munkatárs elolvasta."
+  },
+  "privacyNoticeChoiceTitle": {
+    "message": "Opcionális küldés és visszavonás"
+  },
+  "privacyNoticeChoice": {
+    "message": "Az automatikus küldés alapértelmezés szerint ki van kapcsolva. Bekapcsolása egyszerű hibajelentések küldését engedélyezi az adott fiókhoz. A teljes jelentés kézi küldéséhez be kell jelölni a küldési jelölőnégyzetet. A Firefox ezenfelül megköveteli az opcionális technikai adatokra vonatkozó engedélyét. Az automatikus küldés leállításához és a függőben lévő automatikus jelentések eltávolításához kapcsolja ki; az egyes függőben lévő küldéseket külön vonja vissza. A diagnosztikai küldés elutasítása nem akadályozza a VPN használatát."
+  },
+  "privacyNoticeDeleteTitle": {
+    "message": "Helyi törlés és letöltött fájlok"
+  },
+  "privacyNoticeDelete": {
+    "message": "A Diagnosztika részben törölheti a technikai előzményeket, vagy törölhet egy-egy helyi jelentést. Az előzmények törlése nem törli a jelentések meglévő másolatait. A helyi visszavonás vagy törlés nem hívhatja vissza a szolgáltatás által már megkapott adatokat, beleértve a visszavonás előtt megérkezett feltöltést is. A letöltött exportok különálló fájlok, amelyeket Önnek kell törölnie."
+  },
+  "privacyNoticeServerTitle": {
+    "message": "Szerveroldali megőrzés és kérelmek"
+  },
+  "privacyNoticeServer": {
+    "message": "Ez a bővítmény nem szabályozza és nem ellenőrzi a szerveroldali megőrzést vagy törlést. A FuzeVPN által alkalmazott megőrzési időről és a már elküldött jelentésekkel kapcsolatos kérelmekről tájékozódjon az általános adatvédelmi szabályzatban, vagy forduljon a FuzeVPN-hez. Ez a tájékoztató nem garantál rögzített szerveroldali megőrzési időt."
+  },
+  "privacyNoticeSupportTitle": {
+    "message": "A diagnosztika és az ügyfélszolgálat különálló"
+  },
+  "privacyNoticeSupport": {
+    "message": "Egy diagnosztikai jelentés elküldése önmagában nem küld ügyfélszolgálati üzenetet a bővítményből. Probléma leírásához vagy egy megkapott jelentés törlésének kéréséhez használja az alábbi FuzeVPN kapcsolatfelvételi csatornát. Ha egy exportált fájlt más csatornán keresztül oszt meg, előbb ellenőrizze a tartalmát."
+  },
+  "privacyNoticeManage": {
+    "message": "Diagnosztika megnyitása"
+  },
+  "privacyNoticeLinksTitle": {
+    "message": "Szolgáltatási szabályzat és kapcsolat"
+  },
+  "theme": {
+    "message": "Téma"
+  },
+  "themeSystem": {
+    "message": "Rendszer"
+  },
+  "themeLight": {
+    "message": "Világos"
+  },
+  "themeDark": {
+    "message": "Sötét"
+  },
+  "switchToDarkTheme": {
+    "message": "Váltás sötét témára"
+  },
+  "switchToLightTheme": {
+    "message": "Váltás világos témára"
+  }
+}

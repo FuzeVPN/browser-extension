@@ -694,7 +694,7 @@ async function verifyBuiltApplication() {
     );
     await popup.keyboard.press("Escape");
     record(
-      `Thirty languages render with localized legal links, no horizontal overflow or VPN operations: ${state}`,
+      `Fifty languages render with localized legal links, no horizontal overflow or VPN operations: ${state}`,
     );
   }
   let worker = await launch(extensionPath, "application-profile");
@@ -810,7 +810,7 @@ async function verifyBuiltApplication() {
     error: restored.error,
     retryScheduled: restored.nextRetryAt !== null,
   });
-  assert.equal(restored.languagePreference, "el");
+  assert.equal(restored.languagePreference, SUPPORTED_LANGUAGES.at(-1));
   await verifyLanguages(popup, worker, "blocked");
   apiMode = "healthy";
   assert(await popup.locator("#retryButton").isEnabled());
@@ -878,7 +878,7 @@ async function verifyBuiltApplication() {
     killSwitchEnabled: true,
     webRtcProtectionEnabled: false,
   });
-  assert.equal(loggedOut.languagePreference, "el");
+  assert.equal(loggedOut.languagePreference, SUPPORTED_LANGUAGES.at(-1));
   await popup.locator("#settingsButton").click();
   await worker.evaluate(() => {
     const original = chrome.storage.local.set.bind(chrome.storage.local);
@@ -892,7 +892,10 @@ async function verifyBuiltApplication() {
   });
   await popup.locator("#languageSelect").selectOption("fr");
   await popup.locator("#languageError").waitFor({ state: "visible" });
-  assert.equal((await message(popup, { type: "get_snapshot" })).languagePreference, "el");
+  assert.equal(
+    (await message(popup, { type: "get_snapshot" })).languagePreference,
+    SUPPORTED_LANGUAGES.at(-1),
+  );
   await worker.evaluate(() => globalThis.restoreLanguageStorage());
   await popup.evaluate(() => {
     const select = document.querySelector("#languageSelect");

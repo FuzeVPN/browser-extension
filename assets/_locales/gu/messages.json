@@ -1,0 +1,929 @@
+{
+  "extensionName": {
+    "message": "FuzeVPN"
+  },
+  "extensionDescription": {
+    "message": "એક ક્લિકમાં તમારી પ્રાઇવસી જાળવો અને તમારી સુરક્ષા વધુ મજબૂત બનાવો."
+  },
+  "siteExclusionsReloadRequired": {
+    "message": "અપડેટ પૂર્ણ કરવા અને બાકાત સાઇટનો ઉપયોગ કરવા માટે બ્રાઉઝરના એક્સ્ટેન્શન મેનેજરમાંથી FuzeVPN ફરી લોડ કરો."
+  },
+  "extensionCommunicationError": {
+    "message": "એક્સ્ટેન્શન પ્રતિસાદ આપી રહ્યું નથી. આ વિન્ડો બંધ કરો, પછી બ્રાઉઝરના એક્સ્ટેન્શન મેનેજરમાંથી FuzeVPN ફરી લોડ કરો."
+  },
+  "actionDisconnected": {
+    "message": "FuzeVPN — ડિસ્કનેક્ટ થયેલું"
+  },
+  "actionConnected": {
+    "message": "FuzeVPN — આ બ્રાઉઝરમાં સુરક્ષિત"
+  },
+  "actionReconnecting": {
+    "message": "FuzeVPN — ફરી કનેક્ટ થઈ રહ્યું છે"
+  },
+  "actionError": {
+    "message": "FuzeVPN — ધ્યાન આપવું જરૂરી"
+  },
+  "browserProtection": {
+    "message": "બ્રાઉઝર સુરક્ષા"
+  },
+  "loginTitle": {
+    "message": "FuzeVPN પર આપનું સ્વાગત છે"
+  },
+  "loginSubtitle": {
+    "message": "આ બ્રાઉઝરમાં તમારું બ્રાઉઝિંગ સુરક્ષિત કરવા માટે સાઇન ઇન કરો."
+  },
+  "email": {
+    "message": "ઇમેઇલ સરનામું"
+  },
+  "emailPlaceholder": {
+    "message": "you@example.com"
+  },
+  "password": {
+    "message": "પાસવર્ડ"
+  },
+  "signIn": {
+    "message": "સાઇન ઇન કરો"
+  },
+  "signingIn": {
+    "message": "સાઇન ઇન થઈ રહ્યું છે…"
+  },
+  "forgotPassword": {
+    "message": "પાસવર્ડ ભૂલી ગયા?"
+  },
+  "createAccount": {
+    "message": "એકાઉન્ટ બનાવો"
+  },
+  "settings": {
+    "message": "સેટિંગ"
+  },
+  "close": {
+    "message": "બંધ કરો"
+  },
+  "statusDisconnected": {
+    "message": "ડિસ્કનેક્ટ થયેલું"
+  },
+  "statusConnecting": {
+    "message": "કનેક્ટ થઈ રહ્યું છે…"
+  },
+  "statusChanging": {
+    "message": "લોકેશન બદલાઈ રહ્યું છે…"
+  },
+  "statusProtected": {
+    "message": "આ બ્રાઉઝરમાં સુરક્ષિત"
+  },
+  "statusRefreshing": {
+    "message": "સુરક્ષિત રીતે રિન્યૂ થઈ રહ્યું છે…"
+  },
+  "statusDisconnecting": {
+    "message": "ડિસ્કનેક્ટ થઈ રહ્યું છે…"
+  },
+  "statusError": {
+    "message": "સુરક્ષા બંધ થઈ ગઈ"
+  },
+  "browserOnlyDetail": {
+    "message": "આ બ્રાઉઝર માટે સુરક્ષા."
+  },
+  "location": {
+    "message": "લોકેશન"
+  },
+  "change": {
+    "message": "બદલો"
+  },
+  "noLocation": {
+    "message": "કોઈ લોકેશન ઉપલબ્ધ નથી"
+  },
+  "protectBrowser": {
+    "message": "બ્રાઉઝર સુરક્ષિત કરો"
+  },
+  "disconnect": {
+    "message": "ડિસ્કનેક્ટ કરો"
+  },
+  "subscription": {
+    "message": "સબ્સ્ક્રિપ્શન"
+  },
+  "refreshSubscription": {
+    "message": "સબ્સ્ક્રિપ્શન રિફ્રેશ કરો"
+  },
+  "refreshingSubscription": {
+    "message": "સબ્સ્ક્રિપ્શન રિફ્રેશ થઈ રહ્યું છે…"
+  },
+  "subscriptionActive": {
+    "message": "સક્રિય"
+  },
+  "subscriptionInactive": {
+    "message": "નિષ્ક્રિય"
+  },
+  "expiresOn": {
+    "message": "$1ના રોજ સમાપ્ત થશે"
+  },
+  "noExpiry": {
+    "message": "સમાપ્તિની કોઈ તારીખ નથી"
+  },
+  "browserOnlyNotice": {
+    "message": "ફક્ત આ બ્રાઉઝર. અન્ય ઍપ અને બ્રાઉઝર આવરી લેવાયાં નથી."
+  },
+  "resendVerification": {
+    "message": "ઇમેઇલ ફરી મોકલો"
+  },
+  "incognitoHelp": {
+    "message": "બ્રાઉઝરના સેટિંગમાં એક્સ્ટેન્શનને ખાનગી મોડમાં મંજૂરી આપી હોય તો જ ખાનગી બ્રાઉઝિંગ સમાન સુરક્ષાનો ઉપયોગ કરે છે."
+  },
+  "manageAccount": {
+    "message": "મારું એકાઉન્ટ મેનેજ કરો"
+  },
+  "account": {
+    "message": "એકાઉન્ટ"
+  },
+  "devices": {
+    "message": "ડિવાઇસ"
+  },
+  "manageDevices": {
+    "message": "ડિવાઇસ મેનેજ કરો"
+  },
+  "refreshDevices": {
+    "message": "ડિવાઇસ રિફ્રેશ કરો"
+  },
+  "deviceCount": {
+    "message": "$1 / $2 ડિવાઇસ"
+  },
+  "loadingDevices": {
+    "message": "ડિવાઇસ લોડ થઈ રહ્યાં છે…"
+  },
+  "noDevices": {
+    "message": "કોઈ સક્રિય ડિવાઇસ નથી."
+  },
+  "currentDevice": {
+    "message": "આ ડિવાઇસ"
+  },
+  "deviceKindBrowser": {
+    "message": "બ્રાઉઝર એક્સ્ટેન્શન"
+  },
+  "deviceKindVpn": {
+    "message": "VPN ડિવાઇસ"
+  },
+  "profile_browser_proxy": {
+    "message": "બ્રાઉઝર પ્રૉક્સી"
+  },
+  "profile_wireguard": {
+    "message": "WireGuard"
+  },
+  "profile_openvpn": {
+    "message": "OpenVPN"
+  },
+  "none": {
+    "message": "કોઈ નહીં"
+  },
+  "deviceCreatedOn": {
+    "message": "$1ના રોજ બનાવ્યું"
+  },
+  "deleteDevice": {
+    "message": "ડિવાઇસ ડિલીટ કરો"
+  },
+  "deleteDeviceNamed": {
+    "message": "ડિવાઇસ $1 ડિલીટ કરો"
+  },
+  "confirmDeleteDevice": {
+    "message": "“$1” કાઢી નાખીએ? તેનાં VPN કનેક્શન બંધ થઈ જશે અને તેની પ્રોફાઇલ કાઢી નાખવામાં આવશે."
+  },
+  "resetDevice": {
+    "message": "ડિવાઇસ રીસેટ કરો"
+  },
+  "confirmResetDevice": {
+    "message": "આ એક્સ્ટેન્શન રીસેટ કરીએ? તમે આગલી વખતે તેનો ઉપયોગ કરશો ત્યારે તે નવા ડિવાઇસ તરીકે રજિસ્ટર થશે."
+  },
+  "signOutAccount": {
+    "message": "એકાઉન્ટમાંથી સાઇન આઉટ કરો"
+  },
+  "chooseLocation": {
+    "message": "લોકેશન પસંદ કરો"
+  },
+  "error_invalid_credentials": {
+    "message": "ઇમેઇલ સરનામું અથવા પાસવર્ડ ખોટો છે."
+  },
+  "error_unauthorized": {
+    "message": "તમારું સત્ર સમાપ્ત થઈ ગયું છે. કૃપા કરીને ફરી સાઇન ઇન કરો."
+  },
+  "error_email_verification_required": {
+    "message": "સુરક્ષા ચાલુ કરતાં પહેલાં તમારું ઇમેઇલ સરનામું ચકાસો."
+  },
+  "errorVerificationCooldown": {
+    "message": "$1 સેકન્ડમાં નવા ઇમેઇલની વિનંતી કરી શકાશે."
+  },
+  "error_verification_email_cooldown": {
+    "message": "બીજા ઇમેઇલની વિનંતી કરતાં પહેલાં કૃપા કરીને રાહ જુઓ."
+  },
+  "error_subscription_required": {
+    "message": "આ બ્રાઉઝરને સુરક્ષિત કરવા માટે સક્રિય સબ્સ્ક્રિપ્શન જરૂરી છે."
+  },
+  "error_device_limit": {
+    "message": "ડિવાઇસની મર્યાદા પૂરી થઈ ગઈ છે. કૃપા કરીને કોઈ ડિવાઇસ કાઢી નાખો."
+  },
+  "error_device_identity_revoked": {
+    "message": "આ ડિવાઇસ હવે અધિકૃત નથી. ફરી કનેક્ટ કરવાનો પ્રયાસ કરો."
+  },
+  "error_device_proof_invalid": {
+    "message": "અમે આ ડિવાઇસ ચકાસી શક્યા નથી. તમારા કમ્પ્યુટરની તારીખ અને સમય તપાસો, પછી ફરી પ્રયાસ કરો."
+  },
+  "error_device_proof_replayed": {
+    "message": "આ વિનંતી પર પહેલેથી પ્રક્રિયા થઈ ગઈ છે. ફરી પ્રયાસ કરો."
+  },
+  "error_invalid_device": {
+    "message": "આ ડિવાઇસ ઓળખાયું નથી. ફરી કનેક્ટ કરવાનો પ્રયાસ કરો."
+  },
+  "error_device_exists": {
+    "message": "આ ડિવાઇસ ઓળખ પહેલેથી બીજા એકાઉન્ટ સાથે લિંક થયેલી છે."
+  },
+  "error_not_found": {
+    "message": "આ કામગીરી હવે ઉપલબ્ધ નથી. ફરી પ્રયાસ કરો."
+  },
+  "error_invalid_location": {
+    "message": "આ લોકેશન ઉપલબ્ધ નથી. બીજું પસંદ કરો."
+  },
+  "error_rate_limited": {
+    "message": "ઘણા બધા પ્રયાસો. થોડી વાર રાહ જોઈને ફરી પ્રયાસ કરો."
+  },
+  "error_proxy_unavailable": {
+    "message": "આ સર્વર અસ્થાયી રૂપે ઉપલબ્ધ નથી. થોડી વારમાં ફરી પ્રયાસ કરો."
+  },
+  "error_api_token_expired": {
+    "message": "તમારું એકાઉન્ટ સત્ર સમાપ્ત થઈ ગયું છે. કૃપા કરીને ફરી સાઇન ઇન કરો."
+  },
+  "error_network_error": {
+    "message": "નેટવર્ક ઉપલબ્ધ નથી. તમારું ઇન્ટરનેટ કનેક્શન તપાસો."
+  },
+  "error_request_timeout": {
+    "message": "સેવાએ પ્રતિસાદ આપવામાં ઘણો સમય લીધો. ફરી પ્રયાસ કરો."
+  },
+  "error_invalid_response": {
+    "message": "સેવાએ અણધાર્યો પ્રતિસાદ આપ્યો."
+  },
+  "error_proxy_certificate_invalid": {
+    "message": "અમે સર્વરની સુરક્ષા ચકાસી શક્યા નથી. કનેક્શન બંધ કરવામાં આવ્યું છે."
+  },
+  "error_proxy_controlled_by_extension": {
+    "message": "હાલમાં બીજું એક્સ્ટેન્શન બ્રાઉઝરની પ્રૉક્સીને નિયંત્રિત કરે છે."
+  },
+  "error_proxy_controlled_by_policy": {
+    "message": "એડમિનિસ્ટ્રેટરની પૉલિસી FuzeVPNને પ્રૉક્સી બદલવાથી રોકે છે."
+  },
+  "error_proxy_authentication_failed": {
+    "message": "સર્વરે કનેક્શન સ્વીકાર્યું નથી. ફરી કનેક્ટ કરવાનો પ્રયાસ કરો."
+  },
+  "error_session_expired": {
+    "message": "તમારું સુરક્ષિત કનેક્શન સમાપ્ત થઈ ગયું છે. ફરી કનેક્ટ કરો."
+  },
+  "error_email_delivery_unavailable": {
+    "message": "હમણાં ઇમેઇલ મોકલી શકાતો નથી."
+  },
+  "error_unknown_error": {
+    "message": "અણધારી ભૂલ આવી. ફરી પ્રયાસ કરો."
+  },
+  "actionBlocked": {
+    "message": "FuzeVPN — બ્રાઉઝિંગ બ્લૉક કરેલું"
+  },
+  "statusBlockedRetry": {
+    "message": "બ્રાઉઝિંગ થોભાવેલું — ફરી કનેક્ટ થઈ રહ્યું છે"
+  },
+  "statusBlockedAction": {
+    "message": "બ્રાઉઝિંગ થોભાવેલું — કનેક્શન તપાસો"
+  },
+  "statusProtectionUnavailable": {
+    "message": "સુરક્ષા ઉપલબ્ધ નથી — બ્રાઉઝિંગ બ્લૉક કરેલું નથી"
+  },
+  "recoveryHelp": {
+    "message": "સુરક્ષા ફરી શરૂ કરવા માટે ફરી પ્રયાસ કરો. ડિસ્કનેક્ટ કરવાથી તમે FuzeVPN વિના બ્રાઉઝ કરી શકો છો."
+  },
+  "retryConnection": {
+    "message": "ફરી પ્રયાસ કરો"
+  },
+  "killSwitch": {
+    "message": "કિલ સ્વિચ"
+  },
+  "killSwitchHelp": {
+    "message": "VPN કનેક્શન તૂટી જાય તો નવી વેબ વિનંતીઓ બ્લૉક કરે છે. બાકાત સાઇટ VPNની બહાર ઍક્સેસિબલ રહે છે."
+  },
+  "webRtcProtection": {
+    "message": "WebRTC સુરક્ષા"
+  },
+  "webRtcHelp": {
+    "message": "વેબ કૉલ દરમિયાન તમારું IP સરનામું ખાનગી રાખવામાં મદદ કરે છે. અમુક કૉલ કદાચ કામ ન કરે. આ બંધ કરવાથી તમારું વાસ્તવિક IP સરનામું જાહેર થઈ શકે છે."
+  },
+  "securityEffectiveState": {
+    "message": "$1 · $2"
+  },
+  "securityBlocked": {
+    "message": "બ્રાઉઝિંગ બ્લૉક કરેલું"
+  },
+  "securityNotBlocked": {
+    "message": "બ્રાઉઝિંગ બ્લૉક કરેલું નથી"
+  },
+  "securityWebRtcActive": {
+    "message": "WebRTC પ્રતિબંધ સક્રિય"
+  },
+  "securityWebRtcInactive": {
+    "message": "WebRTC પ્રતિબંધ નિષ્ક્રિય"
+  },
+  "localNetworkHelp": {
+    "message": "સુરક્ષા દરમિયાન સ્થાનિક IP સરનામાં અને સામાન્ય સ્થાનિક નામો બ્લૉક કરવામાં આવે છે. બાકાત ડોમેન છતાં સ્થાનિક નેટવર્કનો ઍક્સેસ આપી શકે છે. સિસ્ટમના IPv6 સેટિંગ બદલાતા નથી."
+  },
+  "securityLimits": {
+    "message": "આ સુરક્ષા વિશે"
+  },
+  "killSwitchLimits": {
+    "message": "ફક્ત આ બ્રાઉઝર: હાલનાં કનેક્શન અને બ્રાઉઝરના કેટલાક આંતરિક અથવા અન્ય એક્સ્ટેન્શનના સંચાર ચાલુ રહી શકે છે. FuzeVPN પ્રતિક્રિયા આપે તે પહેલાં બીજું એક્સ્ટેન્શન અથવા પૉલિસી પ્રૉક્સી બદલી શકે છે. એક્સ્ટેન્શન બંધ કરવાથી સુરક્ષા દૂર થાય છે. સિસ્ટમ-વ્યાપી કોઈ બ્લૉકિંગ નથી."
+  },
+  "error_traffic_guard_failed": {
+    "message": "બ્રાઉઝિંગ બ્લૉક ચકાસી શકાયું નથી. સુરક્ષાની ખાતરી નથી. એક્સ્ટેન્શનની પરવાનગીઓ તપાસો."
+  },
+  "error_webrtc_control_unavailable": {
+    "message": "WebRTC પ્રતિબંધ લાગુ કરી શકાયો નથી. તમારા સેટિંગ, અન્ય એક્સ્ટેન્શન અથવા એડમિનિસ્ટ્રેટરની પૉલિસી તપાસો."
+  },
+  "language": {
+    "message": "ભાષા"
+  },
+  "languageAutomatic": {
+    "message": "ઑટોમેટિક — બ્રાઉઝરની ભાષા"
+  },
+  "languageHelp": {
+    "message": "ફેરફારો તરત લાગુ થાય છે. ઑટોમેટિક બ્રાઉઝરની ભાષાને અનુસરે છે, જે સિસ્ટમની ભાષાથી અલગ હોઈ શકે છે."
+  },
+  "languageSaveError": {
+    "message": "ભાષા સાચવી શકાઈ નથી. તમારી અગાઉની પસંદગી જાળવી રાખવામાં આવી છે. ફરી પ્રયાસ કરો."
+  },
+  "publicIp": {
+    "message": "સાર્વજનિક IP"
+  },
+  "vpnIp": {
+    "message": "VPNનું IP"
+  },
+  "ipChecking": {
+    "message": "ચકાસી રહ્યાં છીએ…"
+  },
+  "ipUnavailable": {
+    "message": "ઉપલબ્ધ નથી"
+  },
+  "ipLookupExplanation": {
+    "message": "તમારા વર્તમાન કનેક્શનનો ઉપયોગ કરીને ipify વડે, અથવા વિકલ્પ તરીકે icanhazip વડે IP ચકાસવામાં આવે છે. કોઈ બ્રાઉઝિંગ ઇતિહાસ મોકલવામાં આવતો નથી."
+  },
+  "automaticLocation": {
+    "message": "ઑટોમેટિક"
+  },
+  "automaticLocationHelp": {
+    "message": "તાજેતરનો શ્રેષ્ઠ રિસ્પૉન્સ ટાઇમ, અથવા તમારું છેલ્લું લોકેશન."
+  },
+  "automaticLocationName": {
+    "message": "ઑટોમેટિક · $1"
+  },
+  "searchLocations": {
+    "message": "દેશ અથવા શહેર શોધો"
+  },
+  "locationFilters": {
+    "message": "લોકેશન ફિલ્ટર કરો"
+  },
+  "allLocations": {
+    "message": "બધાં"
+  },
+  "favoriteLocations": {
+    "message": "મનપસંદ"
+  },
+  "recentLocations": {
+    "message": "તાજેતરનાં"
+  },
+  "noMatchingLocations": {
+    "message": "તમારી શોધ સાથે કોઈ લોકેશન મેળ ખાતું નથી."
+  },
+  "noFavoriteLocations": {
+    "message": "તમારાં મનપસંદ લોકેશન અહીં રાખવા માટે સ્ટાર ઉમેરો."
+  },
+  "noRecentLocations": {
+    "message": "તમે તાજેતરમાં કનેક્ટ કરેલાં લોકેશન અહીં દેખાશે."
+  },
+  "addFavorite": {
+    "message": "$1ને મનપસંદમાં ઉમેરો"
+  },
+  "removeFavorite": {
+    "message": "$1ને મનપસંદમાંથી કાઢી નાખો"
+  },
+  "unavailableFavoriteLocation": {
+    "message": "અનુપલબ્ધ મનપસંદ $1"
+  },
+  "locationSaveError": {
+    "message": "ફેરફાર પૂર્ણ થઈ શક્યો નથી. અમુક સેટિંગ સચવાઈ ગયાં હોઈ શકે. ફરી પ્રયાસ કરતાં પહેલાં દર્શાવેલી પસંદગી તપાસો."
+  },
+  "siteExclusions": {
+    "message": "બાકાત સાઇટ"
+  },
+  "siteExclusionsHelp": {
+    "message": "VPN બંધ થઈ જાય તો પણ આ સાઇટ FuzeVPN વિના તમારા કનેક્શનનો ઉપયોગ કરે છે."
+  },
+  "siteExclusionsEnabled": {
+    "message": "અપવાદો ચાલુ કરો"
+  },
+  "siteExclusionInput": {
+    "message": "ડોમેન અથવા URL"
+  },
+  "siteExclusionPlaceholder": {
+    "message": "example.com"
+  },
+  "siteExclusionPreview": {
+    "message": "પસંદ કરેલું ડોમેન: $1"
+  },
+  "siteExclusionSubdomains": {
+    "message": "સબડોમેન શામેલ કરો"
+  },
+  "siteExclusionAdd": {
+    "message": "સાઇટ ઉમેરો"
+  },
+  "siteExclusionsEmpty": {
+    "message": "કોઈ બાકાત સાઇટ નથી. ફક્ત એવી સાઇટ ઉમેરો જેનો તમે VPN વિના ઉપયોગ કરવા માગો છો."
+  },
+  "siteExclusionsCount": {
+    "message": "$1 / 100 સાઇટ"
+  },
+  "siteExclusionScopeSubdomains": {
+    "message": "ડોમેન અને સબડોમેન"
+  },
+  "siteExclusionScopeExact": {
+    "message": "ફક્ત ચોક્કસ ડોમેન"
+  },
+  "siteExclusionRemove": {
+    "message": "$1 કાઢી નાખો"
+  },
+  "siteExclusionsDetails": {
+    "message": "અપવાદો કેવી રીતે કામ કરે છે?"
+  },
+  "siteExclusionsResources": {
+    "message": "અન્ય ડોમેનનાં સંસાધનો સુરક્ષિત રહે છે. કોઈ પેજને બાકાત કરવાથી તેનું અન્ય કન્ટેન્ટ આપમેળે બાકાત થતું નથી."
+  },
+  "siteExclusionsReload": {
+    "message": "ફેરફાર પછી સાઇટ ફરી લોડ કરો. હાલનાં કનેક્શન તેમનો અગાઉનો રૂટ જાળવી શકે છે."
+  },
+  "siteExclusionsWebRtc": {
+    "message": "WebRTC સુરક્ષા બાકાત સાઇટ સહિત, વૈશ્વિક સેટિંગ તરીકે રહે છે."
+  },
+  "siteExclusionsLocal": {
+    "message": "ફક્ત આ બ્રાઉઝરમાં સાચવેલું અને એકાઉન્ટમાંથી સાઇન આઉટ કર્યા પછી પણ જાળવી રાખેલું."
+  },
+  "siteExclusionsOn": {
+    "message": "અપવાદો ચાલુ છે"
+  },
+  "siteExclusionsOff": {
+    "message": "અપવાદો બંધ છે"
+  },
+  "siteExclusionsSummary": {
+    "message": "VPNની બહાર $1 સાઇટ"
+  },
+  "siteExclusionsPending": {
+    "message": "અપવાદો લાગુ થઈ રહ્યા છે…"
+  },
+  "siteExclusionsInterrupted": {
+    "message": "ફેરફારમાં વિક્ષેપ આવ્યો. અસ્થાયી સુરક્ષા અમલમાં રહે છે."
+  },
+  "siteExclusionsSaveError": {
+    "message": "ફેરફાર પૂર્ણ કરી શકાયો નથી. તમારા સેટિંગ તપાસો અને ફરી પ્રયાસ કરો."
+  },
+  "siteExclusionsRetry": {
+    "message": "ફરી પ્રયાસ કરો"
+  },
+  "siteExclusionInvalid": {
+    "message": "માન્ય સાર્વજનિક ડોમેન દાખલ કરો. IP, સ્થાનિક નામો, વાઇલ્ડકાર્ડ, સાર્વજનિક સફિક્સ અને આરક્ષિત ડોમેન સ્વીકારવામાં આવતાં નથી."
+  },
+  "siteExclusionDuplicate": {
+    "message": "આ ડોમેન પહેલેથી સૂચિમાં છે."
+  },
+  "siteExclusionsLimit": {
+    "message": "100 સાઇટની મર્યાદા પૂરી થઈ ગઈ છે. બીજી ઉમેરવા માટે કોઈ સાઇટ કાઢી નાખો."
+  },
+  "statusProtectedExceptions": {
+    "message": "VPN સક્રિય · $1 અપવાદો"
+  },
+  "statusBlockedExceptions": {
+    "message": "ફક્ત બાકાત સાઇટ ઍક્સેસિબલ રહે છે"
+  },
+  "securityBlockedExceptions": {
+    "message": "બાકાત સાઇટ સિવાય બ્રાઉઝિંગ બ્લૉક કરેલું"
+  },
+  "securityBlockUnverified": {
+    "message": "બ્લૉકિંગ ચકાસાયેલું નથી"
+  },
+  "logoutLocalComplete": {
+    "message": "સ્થાનિક સાઇન આઉટ પૂર્ણ થયું."
+  },
+  "logoutApiSession": {
+    "message": "વર્તમાન એકાઉન્ટ સત્ર"
+  },
+  "logoutProxySessions": {
+    "message": "જાણીતાં VPN સત્રો"
+  },
+  "logoutRevocationPending": {
+    "message": "રદ કરવાની પ્રક્રિયા ચાલુ છે…"
+  },
+  "logoutRevocationConfirmed": {
+    "message": "રદ કરવાની પુષ્ટિ થઈ"
+  },
+  "logoutRevocationUnconfirmed": {
+    "message": "રદ કરવાની પુષ્ટિ થઈ નથી"
+  },
+  "logoutUnconfirmedHelp": {
+    "message": "કેટલાંક રિમોટ સત્રો સમાપ્ત ન થાય ત્યાં સુધી સક્રિય રહી શકે છે."
+  },
+  "deviceQuotaLoading": {
+    "message": "ડિવાઇસની મર્યાદા લોડ થઈ રહી છે…"
+  },
+  "deviceQuotaUnknown": {
+    "message": "ડિવાઇસની મર્યાદા ઉપલબ્ધ નથી"
+  },
+  "error_proxy_creation_uncertain": {
+    "message": "સર્વરે નવું કનેક્શન બનાવવાની પુષ્ટિ કરી નથી. ઑટોમેટિક રીતે ફરી કનેક્ટ કરવાનું થોભાવવામાં આવ્યું છે."
+  },
+  "siteExclusionsPreferencesReset": {
+    "message": "તમારા સાચવેલા સાઇટ અપવાદો વાંચી ન શકાયા હોવાથી રીસેટ કરવામાં આવ્યા છે. તમે જે સાઇટ બાકાત કરવા માગો છો તે ફરી ઉમેરો."
+  },
+  "siteExclusionsConflict": {
+    "message": "બાકાત સાઇટની સૂચિ બદલાઈ ગઈ છે. તેની સમીક્ષા કરો, પછી તમારો ફેરફાર ફરી અજમાવો."
+  },
+  "unavailableLocation": {
+    "message": "લોકેશન ઉપલબ્ધ નથી"
+  },
+  "verificationSending": {
+    "message": "ચકાસણી ઇમેઇલ મોકલી રહ્યાં છીએ…"
+  },
+  "verificationSent": {
+    "message": "ચકાસણી ઇમેઇલ મોકલ્યો. તમારું ઇનબૉક્સ અને સ્પામ ફોલ્ડર તપાસો."
+  },
+  "error_login_requires_disconnect": {
+    "message": "બીજા એકાઉન્ટમાં સાઇન ઇન કરતાં પહેલાં વર્તમાન VPN કનેક્શન ડિસ્કનેક્ટ કરો."
+  },
+  "error_storage_unavailable": {
+    "message": "એકાઉન્ટનાં સ્થાનિક સેટિંગ ઉપલબ્ધ નથી. બ્રાઉઝર સ્ટોરેજ ઉપલબ્ધ થાય ત્યારે ફરી પ્રયાસ કરો; તમારું સાચવેલું એકાઉન્ટ જાળવી રાખવામાં આવ્યું છે."
+  },
+  "diagnosticsAssistance": {
+    "message": "સહાય"
+  },
+  "diagnosticsTitle": {
+    "message": "નિદાન"
+  },
+  "diagnosticsIntro": {
+    "message": "તમારી સુરક્ષા બદલ્યા વિના FuzeVPN અને વર્તમાન કનેક્શન તપાસો."
+  },
+  "diagnosticsPrivacyTitle": {
+    "message": "તમારો ડેટા"
+  },
+  "diagnosticsPrivacy": {
+    "message": "રિપોર્ટના JSONમાં ટેક્નિકલ સ્થિતિઓ અને ભૂલ કોડ હોય છે, પાસવર્ડ, ટોકન, ઇમેઇલ સરનામાં, IP સરનામાં, મુલાકાત લીધેલાં URL અથવા બાકાત ડોમેન વિના. મોકલવાનું પ્રમાણિત હોય છે અને રિપોર્ટને તમારા એકાઉન્ટ સાથે લિંક કરે છે. નેટવર્ક ડેટા માટે સૂચના જુઓ."
+  },
+  "diagnosticsAuto": {
+    "message": "મહત્ત્વપૂર્ણ ભૂલ રિપોર્ટ ઑટોમેટિક રીતે મોકલો"
+  },
+  "diagnosticsAutoHelp": {
+    "message": "ડિફૉલ્ટ રૂપે બંધ. આ ચાલુ કરવાથી બ્રાઉઝિંગ ઇતિહાસ વિના, આ એકાઉન્ટ માટે સરળ ટેક્નિકલ રિપોર્ટ મોકલવામાં આવે છે. ઑટોમેટિક મોકલવાનું બંધ કરવા અને બાકી ઑટોમેટિક રિપોર્ટ કાઢી નાખવા માટે તેને અહીં બંધ કરો."
+  },
+  "diagnosticsHistoryHelp": {
+    "message": "ટેક્નિકલ ઇતિહાસ સ્થાનિક રહે છે: ઑટોમેટિક મોકલવાનું બંધ હોય ત્યારે પણ, 10 મિનિટમાં જર્નલ દીઠ વધુમાં વધુ 200 ઇવેન્ટ. તેમાં કોઈ બ્રાઉઝિંગ ઇતિહાસ હોતો નથી અને તે મેન્યુઅલી, બ્રાઉઝર બંધ થાય ત્યારે અથવા એકાઉન્ટ બદલાય ત્યારે સાફ થાય છે."
+  },
+  "diagnosticsHistoryCount": {
+    "message": "$1 સ્થાનિક ટેક્નિકલ ઇવેન્ટ"
+  },
+  "diagnosticsConnectionLog": {
+    "message": "કનેક્શન લૉગ એક્સપોર્ટ કરો"
+  },
+  "diagnosticsAccountRequired": {
+    "message": "મોકલવાનું ચાલુ કરવા માટે સાઇન ઇન કરો. તમે એકાઉન્ટ વિના પણ રિપોર્ટ જોઈ અને એક્સપોર્ટ કરી શકો છો."
+  },
+  "diagnosticsRun": {
+    "message": "નિદાન ચલાવો"
+  },
+  "diagnosticsClearHistory": {
+    "message": "સ્થાનિક ઇતિહાસ સાફ કરો"
+  },
+  "diagnosticsPreparing": {
+    "message": "રિપોર્ટ તૈયાર થઈ રહ્યો છે…"
+  },
+  "diagnosticsReports": {
+    "message": "રિપોર્ટ"
+  },
+  "diagnosticsEmpty": {
+    "message": "હજી સુધી કોઈ સ્થાનિક રિપોર્ટ નથી."
+  },
+  "diagnosticsChooseReport": {
+    "message": "રિપોર્ટ પસંદ કરો"
+  },
+  "diagnosticsReportLabel": {
+    "message": "$1 · $2 · $3"
+  },
+  "diagnosticsTypeFull": {
+    "message": "સંપૂર્ણ રિપોર્ટ"
+  },
+  "diagnosticsTypeSimple": {
+    "message": "ભૂલ રિપોર્ટ"
+  },
+  "diagnosticsSummary": {
+    "message": "$1ના રોજ એકત્રિત. FuzeVPN વર્ઝન $2."
+  },
+  "diagnosticsJson": {
+    "message": "રિપોર્ટનું કન્ટેન્ટ જુઓ (JSON)"
+  },
+  "diagnosticsExport": {
+    "message": "રિપોર્ટ એક્સપોર્ટ કરો"
+  },
+  "diagnosticsDelete": {
+    "message": "સ્થાનિક રિપોર્ટ ડિલીટ કરો"
+  },
+  "diagnosticsRetention": {
+    "message": "સ્થાનિક રિપોર્ટ 24 કલાક પછી સમાપ્ત થાય છે. અહીં ડિલીટ કરવાથી સેવાને પહેલેથી મળેલો રિપોર્ટ ડિલીટ થતો નથી. સર્વર પર જાળવણી અને ડિલીટ કરવાની વિનંતીઓ માટે સૂચના જુઓ."
+  },
+  "diagnosticsConsent": {
+    "message": "આ નિદાન રિપોર્ટ FuzeVPNને મોકલો"
+  },
+  "diagnosticsDataCollectionRequired": {
+    "message": "નિદાન મોકલવા માટે Firefoxએ ટેક્નિકલ ડેટા સંગ્રહની મંજૂરી આપવી આવશ્યક છે. ફરી પ્રયાસ કરો અને આ પરવાનગી આપો."
+  },
+  "diagnosticsSendHelp": {
+    "message": "મોકલવાનું વૈકલ્પિક છે. મંજૂરી આપ્યા પછી, તે જ એકાઉન્ટના માન્ય સત્ર સાથે 24 કલાક સુધી ફરી પ્રયાસ થઈ શકે છે. તમે આગળના પ્રયાસો રદ કરી શકો છો. મોડેથી રદ કરવાથી એ ખાતરી મળતી નથી કે સર્વરને રિપોર્ટ પહેલેથી મળ્યો નથી."
+  },
+  "diagnosticsSend": {
+    "message": "રિપોર્ટ મોકલો"
+  },
+  "diagnosticsCancel": {
+    "message": "મોકલવાનું રદ કરો"
+  },
+  "diagnosticsReload": {
+    "message": "આ પેજ ફરી લોડ કરો"
+  },
+  "diagnosticsUnavailable": {
+    "message": "નિદાન ઉપલબ્ધ નથી. બ્રાઉઝરના એક્સ્ટેન્શન મેનેજરમાંથી FuzeVPN ફરી લોડ કરો, પછી આ પેજ ફરી ખોલો. તમારું VPN બદલાયું નથી."
+  },
+  "diagnosticsQueueFull": {
+    "message": "મોકલવાની કતાર ભરાઈ ગઈ છે. કોઈ સ્થાનિક રિપોર્ટ ડિલીટ કરો અથવા બાકી રિપોર્ટ મોકલાઈ જાય ત્યાં સુધી રાહ જુઓ."
+  },
+  "diagnosticsContentUnavailable": {
+    "message": "રિપોર્ટનું કન્ટેન્ટ ઉપલબ્ધ નથી. સ્થાનિક રિપોર્ટ ઉપલબ્ધ હોય તો તેને એક્સપોર્ટ કરો અને સહાયનો સંપર્ક કરો."
+  },
+  "diagnosticsFailure": {
+    "message": "નિદાનની ક્રિયા પૂર્ણ થઈ શકી નથી. તમારું VPN બદલાયું નથી."
+  },
+  "diagnosticsChecks": {
+    "message": "તપાસ"
+  },
+  "diagnosticsCheckFallback": {
+    "message": "ટેક્નિકલ તપાસ: $1"
+  },
+  "diagnosticsCheckLine": {
+    "message": "$1 — $2"
+  },
+  "diagnosticsProxy": {
+    "message": "બ્રાઉઝર પ્રૉક્સી"
+  },
+  "diagnosticsStorage": {
+    "message": "સ્થાનિક સ્ટોરેજ"
+  },
+  "diagnosticsNetwork": {
+    "message": "નેટવર્ક કનેક્શન"
+  },
+  "diagnosticsCleanup": {
+    "message": "સત્ર સફાઈ"
+  },
+  "diagnosticsResult_passed": {
+    "message": "સફળ"
+  },
+  "diagnosticsResult_failed": {
+    "message": "નિષ્ફળ"
+  },
+  "diagnosticsResult_skipped": {
+    "message": "કરવામાં આવ્યું નથી"
+  },
+  "diagnosticsResult_unknown": {
+    "message": "અજ્ઞાત"
+  },
+  "diagnosticsStatus_ready": {
+    "message": "આ ડિવાઇસ પર તૈયાર"
+  },
+  "diagnosticsStatus_pending": {
+    "message": "મોકલવાની રાહ જોઈ રહ્યું છે"
+  },
+  "diagnosticsStatus_sending": {
+    "message": "મોકલી રહ્યાં છીએ…"
+  },
+  "diagnosticsStatus_session_required": {
+    "message": "તે જ એકાઉન્ટના માન્ય સત્રની રાહ જોઈ રહ્યું છે"
+  },
+  "diagnosticsStatus_received": {
+    "message": "સેવાને પ્રાપ્ત થયું"
+  },
+  "diagnosticsStatus_failed": {
+    "message": "મોકલવામાં નિષ્ફળ"
+  },
+  "diagnosticsStatus_cancelled": {
+    "message": "મોકલવાનું રદ કર્યું"
+  },
+  "diagnosticsStatus_expired": {
+    "message": "મોકલવાની સમયમર્યાદા સમાપ્ત"
+  },
+  "diagnosticsReceivedAt": {
+    "message": "$1ના રોજ પ્રાપ્ત"
+  },
+  "error_private_browsing_required": {
+    "message": "સામાન્ય વિન્ડોમાં પણ VPN ગોઠવવા માટે Firefoxને આ પરવાનગી જરૂરી છે. about:addons → FuzeVPN ખોલો, તેને ખાનગી વિન્ડોમાં ચાલવાની મંજૂરી આપો, પછી ફરી પ્રયાસ કરો."
+  },
+  "error_host_permissions_required": {
+    "message": "Firefoxમાં, about:addons → FuzeVPN → પરવાનગીઓ ખોલો અને બધી વેબસાઇટનો ઍક્સેસ આપો, પછી ફરી પ્રયાસ કરો."
+  },
+  "cancelAction": {
+    "message": "રદ કરો"
+  },
+  "refreshLocations": {
+    "message": "લોકેશન રિફ્રેશ કરો"
+  },
+  "refreshingLocations": {
+    "message": "લોકેશન રિફ્રેશ થઈ રહ્યાં છે…"
+  },
+  "locationsRefreshError": {
+    "message": "લોકેશનની સૂચિ રિફ્રેશ થઈ શકી નથી. કૃપા કરીને ફરી પ્રયાસ કરો."
+  },
+  "error_device_revoked_limit": {
+    "message": "આ ડિવાઇસ રદ કરવામાં આવ્યું છે. ડિવાઇસની મર્યાદા પૂરી થઈ ગઈ છે: કૃપા કરીને કોઈ ડિવાઇસ કાઢી નાખો."
+  },
+  "noAvailableLocations": {
+    "message": "હાલમાં કોઈ લોકેશન ઉપલબ્ધ નથી. કૃપા કરીને થોડી વારમાં ફરી પ્રયાસ કરો."
+  },
+  "noAvailableFavoriteLocations": {
+    "message": "તમારાં મનપસંદ લોકેશન અસ્થાયી રૂપે ઉપલબ્ધ નથી."
+  },
+  "error_location_favorites_limit": {
+    "message": "100 મનપસંદની મર્યાદા પૂરી થઈ ગઈ છે. બીજું ઉમેરવા માટે કોઈ મનપસંદ કાઢી નાખો."
+  },
+  "error_server_full": {
+    "message": "આ સર્વર ભરાઈ ગયું છે. બીજું લોકેશન પસંદ કરો."
+  },
+  "error_capacity_unavailable": {
+    "message": "આ સર્વરની ઉપલબ્ધતાની હમણાં પુષ્ટિ થઈ શકતી નથી. કૃપા કરીને થોડી વારમાં ફરી પ્રયાસ કરો."
+  },
+  "locationHierarchyHelp": {
+    "message": "નામ સર્વર પસંદ કરે છે; તીર વિગતો બતાવે છે."
+  },
+  "locationCountrySelect": {
+    "message": "ઉપલબ્ધ સર્વર પસંદ કરો: $1"
+  },
+  "locationCitySelect": {
+    "message": "ઉપલબ્ધ સર્વર પસંદ કરો: $1"
+  },
+  "locationShowCities": {
+    "message": "શહેરો બતાવો: $1"
+  },
+  "locationHideCities": {
+    "message": "શહેરો છુપાવો: $1"
+  },
+  "locationShowServers": {
+    "message": "સર્વર બતાવો: $1"
+  },
+  "locationHideServers": {
+    "message": "સર્વર છુપાવો: $1"
+  },
+  "locationAvailableServers": {
+    "message": "ઉપલબ્ધ સર્વર: $1"
+  },
+  "legalInformation": {
+    "message": "કાનૂની માહિતી"
+  },
+  "privacyPolicy": {
+    "message": "એક્સ્ટેન્શનની પ્રાઇવસી સૂચના"
+  },
+  "termsAndConditions": {
+    "message": "ઉપયોગ અને વેચાણની શરતો"
+  },
+  "legalNotice": {
+    "message": "કાનૂની સૂચના"
+  },
+  "contactSupport": {
+    "message": "સહાયનો સંપર્ક કરો"
+  },
+  "webSignIn": {
+    "message": "FuzeVPNમાં સાઇન ઇન કરો"
+  },
+  "webSignInDisconnect": {
+    "message": "ડિસ્કનેક્ટ કરીને સાઇન ઇન કરો"
+  },
+  "webSignInPending": {
+    "message": "સાઇન ઇન ચાલુ છે…"
+  },
+  "webSignInHelp": {
+    "message": "FuzeVPN ક્લાયન્ટ એરિયામાં Google અથવા ઇમેઇલ વડે સાઇન ઇન કરો અથવા એકાઉન્ટ બનાવો."
+  },
+  "webSignInDisconnectHelp": {
+    "message": "આ બટન બ્રાઉઝર સુરક્ષા બંધ કરે છે જેથી તમે Google અથવા ઇમેઇલ વડે સાઇન ઇન કરી શકો. સાઇન ઇન દરમિયાન તમારું બ્રાઉઝિંગ અસુરક્ષિત રહેશે."
+  },
+  "webSignInStatus": {
+    "message": "FuzeVPN સાઇન-ઇન વિન્ડોમાં ચાલુ રાખો. તમે પૂર્ણ કરશો ત્યારે એક્સ્ટેન્શન આપમેળે અપડેટ થશે. રદ કરવા માટે તે વિન્ડો બંધ કરો."
+  },
+  "error_web_login_cancelled": {
+    "message": "સાઇન ઇન રદ કરવામાં આવ્યું. ફરી પ્રયાસ કરો."
+  },
+  "error_web_login_timeout": {
+    "message": "સાઇન ઇનમાં ઘણો સમય લાગ્યો. ફરી પ્રયાસ કરો."
+  },
+  "error_web_login_unavailable": {
+    "message": "વેબ સાઇન ઇન ઉપલબ્ધ નથી. પછીથી ફરી પ્રયાસ કરો."
+  },
+  "error_web_login_invalid_callback": {
+    "message": "સાઇન ઇન ચકાસી શકાયું નથી. એક્સ્ટેન્શનમાંથી ફરી શરૂ કરો."
+  },
+  "error_web_login_denied": {
+    "message": "સાઇન ઇન અધિકૃત કરવામાં આવ્યું નથી. ફરી પ્રયાસ કરો."
+  },
+  "error_web_login_busy": {
+    "message": "ફરી પ્રયાસ કરતાં પહેલાં પહેલેથી ખુલ્લી સાઇન-ઇન વિન્ડો બંધ કરો."
+  },
+  "deviceKindFirefox": {
+    "message": "Firefox બ્રાઉઝર"
+  },
+  "generalPrivacyPolicy": {
+    "message": "સામાન્ય પ્રાઇવસી પૉલિસી"
+  },
+  "privacyNoticeTitle": {
+    "message": "FuzeVPN એક્સ્ટેન્શનમાં પ્રાઇવસી"
+  },
+  "privacyNoticeIntro": {
+    "message": "આ સૂચના આ એક્સ્ટેન્શન દ્વારા ઉપયોગમાં લેવાતા ડેટાનું વર્ણન કરે છે. તે નીચે લિંક કરેલી FuzeVPNની સામાન્ય પ્રાઇવસી પૉલિસીને પૂરક છે. વૈકલ્પિક નિદાન મોકલવાનું સાઇન ઇન કરવા અને VPNનો ઉપયોગ કરવા માટે જરૂરી ડેટાથી અલગ છે."
+  },
+  "privacyNoticeUpdated": {
+    "message": "સૂચના 19 ઑક્ટોબર 2026ના રોજ અપડેટ કરવામાં આવી"
+  },
+  "privacyNoticeServiceTitle": {
+    "message": "એકાઉન્ટ અને VPN સેવા"
+  },
+  "privacyNoticeService": {
+    "message": "એક્સ્ટેન્શન api.fuzevpn.com સાથે પ્રમાણીકરણ, એકાઉન્ટ, સબ્સ્ક્રિપ્શન, ડિવાઇસ અને પ્રૉક્સી-સત્રના ડેટાની આપ-લે કરે છે. VPN પ્રૉક્સી તેના દ્વારા રૂટ થયેલો ટ્રાફિક વહન કરે છે. આ કનેક્શન પ્રાપ્ત કરનારી સેવા સમક્ષ નેટવર્ક મેટાડેટા જાહેર કરે છે; આ સૂચના સર્વર લૉગિંગ વિશે અલગથી કોઈ વચન આપતી નથી."
+  },
+  "privacyNoticeLocalTitle": {
+    "message": "તમારા બ્રાઉઝરમાં સંગ્રહિત ડેટા"
+  },
+  "privacyNoticeLocal": {
+    "message": "બ્રાઉઝર સ્ટોરેજમાં તમારું સત્ર, એકાઉન્ટની વિગતો, પસંદગીઓ, બાકાત સાઇટ અને ડિવાઇસ ઓળખ હોય છે. ઑટોમેટિક રિપોર્ટિંગ બંધ હોય ત્યારે પણ ટેક્નિકલ જર્નલ વધુમાં વધુ 10 મિનિટ સુધી સ્થાનિક રીતે રાખવામાં આવે છે. નિદાન ડ્રાફ્ટ અને કતારમાંના રિપોર્ટ 24 કલાક પછી સ્થાનિક રીતે સમાપ્ત થાય છે; એક્સ્ટેન્શન ચાલી શકે ત્યારે સફાઈ થાય છે."
+  },
+  "privacyNoticeIpTitle": {
+    "message": "સાર્વજનિક IP તપાસ અને તૃતીય પક્ષો"
+  },
+  "privacyNoticeIp": {
+    "message": "IP ડિસ્પ્લે અને નેટવર્ક નિદાન api.ipify.orgનો સંપર્ક કરે છે. IP ડિસ્પ્લે વિકલ્પ તરીકે ipv4.icanhazip.comનો ઉપયોગ કરી શકે છે. પ્રદાતાને કનેક્શનનું IP અને સામાન્ય વિનંતી મેટાડેટા મળે છે: ડાયરેક્ટ મોડમાં તમારું સાર્વજનિક IP, અથવા પ્રૉક્સી દ્વારા હોય ત્યારે VPNનું એક્ઝિટ IP. આ વિનંતીઓમાં કુકી અને રેફરર હોતાં નથી અને કોઈ એકાઉન્ટ ટોકન કે બ્રાઉઝિંગ ઇતિહાસ મોકલવામાં આવતો નથી."
+  },
+  "privacyNoticeReportsTitle": {
+    "message": "નિદાન રિપોર્ટમાં શું હોય છે"
+  },
+  "privacyNoticeReports": {
+    "message": "રિપોર્ટમાં રેન્ડમ રિપોર્ટ ઓળખકર્તા, ટાઇમસ્ટેમ્પ, એક્સ્ટેન્શન અને બ્રાઉઝરનાં વર્ઝન, ઑપરેટિંગ સિસ્ટમનો પ્રકાર અને આર્કિટેક્ચર, કનેક્શન અને સુરક્ષાની સ્થિતિઓ, ભૂલ કોડ, ગણતરીઓ, સમયગાળા અને તપાસનાં પરિણામો શામેલ હોઈ શકે છે. સંપૂર્ણ રિપોર્ટમાં તાજેતરની ટેક્નિકલ ઇવેન્ટ શામેલ હોઈ શકે છે. તેમના JSONમાં પાસવર્ડ, પ્રમાણીકરણ ટોકન, ઇમેઇલ સરનામાં, IP સરનામાં, મુલાકાત લીધેલાં URL અને બાકાત ડોમેન શામેલ નથી. મોકલતાં પહેલાં તમે સંપૂર્ણ રિપોર્ટ તપાસી અને એક્સપોર્ટ કરી શકો છો."
+  },
+  "privacyNoticeAccountTitle": {
+    "message": "પ્રાપ્તકર્તા અને એકાઉન્ટ સાથે જોડાણ"
+  },
+  "privacyNoticeAccount": {
+    "message": "રિપોર્ટ પ્રમાણિત કનેક્શન પર api.fuzevpn.com/v1/diagnostics પર FuzeVPNને મોકલવામાં આવે છે. આ API કનેક્શન VPN પ્રૉક્સીને બાયપાસ કરે છે: VPN સક્રિય હોય ત્યારે પણ FuzeVPNને તમારું ડાયરેક્ટ સાર્વજનિક IP મળે છે. રિપોર્ટ સાઇન ઇન કરેલા એકાઉન્ટ સાથે લિંક થયેલા છે, અનામી નથી. પ્રમાણીકરણ હેડર અને IP રિપોર્ટના JSONથી અલગ છે. સફળ પ્રાપ્તિ એ પુષ્ટિ કરે છે કે તે એન્ડપૉઇન્ટે રિપોર્ટ સ્વીકાર્યો છે, એ નહીં કે કોઈ સહાય એજન્ટે તે વાંચ્યો છે."
+  },
+  "privacyNoticeChoiceTitle": {
+    "message": "વૈકલ્પિક મોકલવું અને સંમતિ પાછી ખેંચવી"
+  },
+  "privacyNoticeChoice": {
+    "message": "ઑટોમેટિક મોકલવાનું ડિફૉલ્ટ રૂપે બંધ છે. તેને ચાલુ કરવાથી તે એકાઉન્ટ માટે સરળ ભૂલ રિપોર્ટની મંજૂરી મળે છે. સંપૂર્ણ રિપોર્ટ મેન્યુઅલી મોકલવા માટે મોકલવાનું ચેકબૉક્સ પસંદ કરવું જરૂરી છે. Firefoxને તેની વૈકલ્પિક ટેક્નિકલ ડેટા પરવાનગી પણ જરૂરી છે. ઑટોમેટિક મોકલવાનું રોકવા અને બાકી ઑટોમેટિક રિપોર્ટ કાઢી નાખવા માટે તેને બંધ કરો; બાકી વ્યક્તિગત મોકલવાનું અલગથી રદ કરો. નિદાન મોકલવાનો ઇનકાર કરવાથી VPNનો ઉપયોગ અટકતો નથી."
+  },
+  "privacyNoticeDeleteTitle": {
+    "message": "સ્થાનિક ડિલીટ અને ડાઉનલોડ કરેલી ફાઇલો"
+  },
+  "privacyNoticeDelete": {
+    "message": "નિદાનમાં, ટેક્નિકલ ઇતિહાસ સાફ કરો અથવા કોઈ વ્યક્તિગત સ્થાનિક રિપોર્ટ ડિલીટ કરો. ઇતિહાસ સાફ કરવાથી હાલની રિપોર્ટ નકલો ભૂંસાતી નથી. સ્થાનિક રીતે રદ કે ડિલીટ કરવાથી સેવાને પહેલેથી મળેલો ડેટા પાછો મેળવી શકાતો નથી, જેમાં રદ કરતાં પહેલાં પહોંચેલા અપલોડનો સમાવેશ થાય છે. ડાઉનલોડ કરેલાં એક્સપોર્ટ અલગ ફાઇલો છે જે તમારે જાતે ડિલીટ કરવી પડશે."
+  },
+  "privacyNoticeServerTitle": {
+    "message": "સર્વર પર જાળવણી અને વિનંતીઓ"
+  },
+  "privacyNoticeServer": {
+    "message": "આ એક્સ્ટેન્શન સર્વર પરની જાળવણી કે સર્વર-સાઇડ ડિલીટને નિયંત્રિત કે ચકાસતું નથી. FuzeVPN દ્વારા લાગુ કરાતા જાળવણી સમયગાળા અને પહેલેથી મોકલેલા રિપોર્ટ સંબંધિત વિનંતીઓ માટે, સામાન્ય પ્રાઇવસી પૉલિસી જુઓ અથવા FuzeVPNનો સંપર્ક કરો. આ સૂચના સર્વર પર જાળવણીના કોઈ નિશ્ચિત સમયગાળાની ખાતરી આપતી નથી."
+  },
+  "privacyNoticeSupportTitle": {
+    "message": "નિદાન અને સહાય અલગ છે"
+  },
+  "privacyNoticeSupport": {
+    "message": "નિદાન રિપોર્ટ મોકલવાથી એક્સ્ટેન્શનમાંથી આપમેળે કોઈ સહાય સંદેશ મોકલાતો નથી. કોઈ સમસ્યા સમજાવવા અથવા પ્રાપ્ત થયેલો રિપોર્ટ ડિલીટ કરવાની વિનંતી કરવા માટે, નીચેની FuzeVPN સંપર્ક ચૅનલનો ઉપયોગ કરો. જો તમે એક્સપોર્ટ કરેલી ફાઇલ બીજી ચૅનલ દ્વારા શેર કરવાનું પસંદ કરો, તો પહેલાં તેનું કન્ટેન્ટ તપાસો."
+  },
+  "privacyNoticeManage": {
+    "message": "નિદાન ખોલો"
+  },
+  "privacyNoticeLinksTitle": {
+    "message": "સેવા પૉલિસી અને સંપર્ક"
+  },
+  "theme": {
+    "message": "થીમ"
+  },
+  "themeSystem": {
+    "message": "સિસ્ટમ"
+  },
+  "themeLight": {
+    "message": "લાઇટ"
+  },
+  "themeDark": {
+    "message": "ડાર્ક"
+  },
+  "switchToDarkTheme": {
+    "message": "ડાર્ક થીમ પર સ્વિચ કરો"
+  },
+  "switchToLightTheme": {
+    "message": "લાઇટ થીમ પર સ્વિચ કરો"
+  }
+}

@@ -1,0 +1,929 @@
+{
+  "extensionName": {
+    "message": "FuzeVPN"
+  },
+  "extensionDescription": {
+    "message": "ಒಂದೇ ಕ್ಲಿಕ್‌ನಲ್ಲಿ ನಿಮ್ಮ ಗೌಪ್ಯತೆಯನ್ನು ಕಾಪಾಡಿ ಮತ್ತು ನಿಮ್ಮ ಸುರಕ್ಷತೆಯನ್ನು ಬಲಪಡಿಸಿ."
+  },
+  "siteExclusionsReloadRequired": {
+    "message": "ಅಪ್‌ಡೇಟ್ ಪೂರ್ಣಗೊಳಿಸಲು ಮತ್ತು ಸೈಟ್ ಹೊರಗಿಡುವಿಕೆಗಳನ್ನು ಬಳಸಲು ಬ್ರೌಸರ್‌ನ ವಿಸ್ತರಣೆ ನಿರ್ವಾಹಕದಿಂದ FuzeVPN ಅನ್ನು ಮರುಲೋಡ್ ಮಾಡಿ."
+  },
+  "extensionCommunicationError": {
+    "message": "ವಿಸ್ತರಣೆ ಪ್ರತಿಕ್ರಿಯಿಸುತ್ತಿಲ್ಲ. ಈ ವಿಂಡೋವನ್ನು ಮುಚ್ಚಿ, ನಂತರ ಬ್ರೌಸರ್‌ನ ವಿಸ್ತರಣೆ ನಿರ್ವಾಹಕದಿಂದ FuzeVPN ಅನ್ನು ಮರುಲೋಡ್ ಮಾಡಿ."
+  },
+  "actionDisconnected": {
+    "message": "FuzeVPN — ಸಂಪರ್ಕ ಕಡಿತಗೊಂಡಿದೆ"
+  },
+  "actionConnected": {
+    "message": "FuzeVPN — ಈ ಬ್ರೌಸರ್‌ನಲ್ಲಿ ರಕ್ಷಿಸಲಾಗಿದೆ"
+  },
+  "actionReconnecting": {
+    "message": "FuzeVPN — ಮರುಸಂಪರ್ಕಿಸಲಾಗುತ್ತಿದೆ"
+  },
+  "actionError": {
+    "message": "FuzeVPN — ಗಮನ ಅಗತ್ಯವಿದೆ"
+  },
+  "browserProtection": {
+    "message": "ಬ್ರೌಸರ್ ರಕ್ಷಣೆ"
+  },
+  "loginTitle": {
+    "message": "FuzeVPN ಗೆ ಸ್ವಾಗತ"
+  },
+  "loginSubtitle": {
+    "message": "ಈ ಬ್ರೌಸರ್‌ನಲ್ಲಿ ನಿಮ್ಮ ಬ್ರೌಸಿಂಗ್ ಅನ್ನು ರಕ್ಷಿಸಲು ಸೈನ್ ಇನ್ ಮಾಡಿ."
+  },
+  "email": {
+    "message": "ಇಮೇಲ್ ವಿಳಾಸ"
+  },
+  "emailPlaceholder": {
+    "message": "you@example.com"
+  },
+  "password": {
+    "message": "ಪಾಸ್‌ವರ್ಡ್"
+  },
+  "signIn": {
+    "message": "ಸೈನ್ ಇನ್ ಮಾಡಿ"
+  },
+  "signingIn": {
+    "message": "ಸೈನ್ ಇನ್ ಮಾಡಲಾಗುತ್ತಿದೆ…"
+  },
+  "forgotPassword": {
+    "message": "ಪಾಸ್‌ವರ್ಡ್ ಮರೆತಿದ್ದೀರಾ?"
+  },
+  "createAccount": {
+    "message": "ಖಾತೆ ರಚಿಸಿ"
+  },
+  "settings": {
+    "message": "ಸೆಟ್ಟಿಂಗ್‌ಗಳು"
+  },
+  "close": {
+    "message": "ಮುಚ್ಚಿ"
+  },
+  "statusDisconnected": {
+    "message": "ಸಂಪರ್ಕ ಕಡಿತಗೊಂಡಿದೆ"
+  },
+  "statusConnecting": {
+    "message": "ಸಂಪರ್ಕಿಸಲಾಗುತ್ತಿದೆ…"
+  },
+  "statusChanging": {
+    "message": "ಸ್ಥಳ ಬದಲಾಯಿಸಲಾಗುತ್ತಿದೆ…"
+  },
+  "statusProtected": {
+    "message": "ಈ ಬ್ರೌಸರ್‌ನಲ್ಲಿ ರಕ್ಷಿಸಲಾಗಿದೆ"
+  },
+  "statusRefreshing": {
+    "message": "ಸುರಕ್ಷಿತವಾಗಿ ನವೀಕರಿಸಲಾಗುತ್ತಿದೆ…"
+  },
+  "statusDisconnecting": {
+    "message": "ಸಂಪರ್ಕ ಕಡಿತಗೊಳಿಸಲಾಗುತ್ತಿದೆ…"
+  },
+  "statusError": {
+    "message": "ರಕ್ಷಣೆ ನಿಂತಿದೆ"
+  },
+  "browserOnlyDetail": {
+    "message": "ಈ ಬ್ರೌಸರ್‌ಗಾಗಿ ರಕ್ಷಣೆ."
+  },
+  "location": {
+    "message": "ಸ್ಥಳ"
+  },
+  "change": {
+    "message": "ಬದಲಾಯಿಸಿ"
+  },
+  "noLocation": {
+    "message": "ಯಾವುದೇ ಸ್ಥಳ ಲಭ್ಯವಿಲ್ಲ"
+  },
+  "protectBrowser": {
+    "message": "ಬ್ರೌಸರ್ ಅನ್ನು ರಕ್ಷಿಸಿ"
+  },
+  "disconnect": {
+    "message": "ಸಂಪರ್ಕ ಕಡಿತಗೊಳಿಸಿ"
+  },
+  "subscription": {
+    "message": "ಚಂದಾದಾರಿಕೆ"
+  },
+  "refreshSubscription": {
+    "message": "ಚಂದಾದಾರಿಕೆಯನ್ನು ರಿಫ್ರೆಶ್ ಮಾಡಿ"
+  },
+  "refreshingSubscription": {
+    "message": "ಚಂದಾದಾರಿಕೆಯನ್ನು ರಿಫ್ರೆಶ್ ಮಾಡಲಾಗುತ್ತಿದೆ…"
+  },
+  "subscriptionActive": {
+    "message": "ಸಕ್ರಿಯ"
+  },
+  "subscriptionInactive": {
+    "message": "ನಿಷ್ಕ್ರಿಯ"
+  },
+  "expiresOn": {
+    "message": "ಮುಕ್ತಾಯ ದಿನಾಂಕ: $1"
+  },
+  "noExpiry": {
+    "message": "ಮುಕ್ತಾಯ ದಿನಾಂಕವಿಲ್ಲ"
+  },
+  "browserOnlyNotice": {
+    "message": "ಈ ಬ್ರೌಸರ್ ಮಾತ್ರ. ಇತರ ಆ್ಯಪ್‌ಗಳು ಮತ್ತು ಬ್ರೌಸರ್‌ಗಳು ಒಳಗೊಂಡಿಲ್ಲ."
+  },
+  "resendVerification": {
+    "message": "ಇಮೇಲ್ ಮರುಕಳುಹಿಸಿ"
+  },
+  "incognitoHelp": {
+    "message": "ಬ್ರೌಸರ್‌ನ ಸೆಟ್ಟಿಂಗ್‌ಗಳಲ್ಲಿ ಖಾಸಗಿ ಮೋಡ್‌ನಲ್ಲಿ ವಿಸ್ತರಣೆಗೆ ಅನುಮತಿ ನೀಡಿದಾಗ ಮಾತ್ರ ಖಾಸಗಿ ಬ್ರೌಸಿಂಗ್ ಇದೇ ರಕ್ಷಣೆಯನ್ನು ಬಳಸುತ್ತದೆ."
+  },
+  "manageAccount": {
+    "message": "ನನ್ನ ಖಾತೆಯನ್ನು ನಿರ್ವಹಿಸಿ"
+  },
+  "account": {
+    "message": "ಖಾತೆ"
+  },
+  "devices": {
+    "message": "ಸಾಧನಗಳು"
+  },
+  "manageDevices": {
+    "message": "ಸಾಧನಗಳನ್ನು ನಿರ್ವಹಿಸಿ"
+  },
+  "refreshDevices": {
+    "message": "ಸಾಧನಗಳನ್ನು ರಿಫ್ರೆಶ್ ಮಾಡಿ"
+  },
+  "deviceCount": {
+    "message": "ಸಾಧನಗಳು: $1 / $2"
+  },
+  "loadingDevices": {
+    "message": "ಸಾಧನಗಳನ್ನು ಲೋಡ್ ಮಾಡಲಾಗುತ್ತಿದೆ…"
+  },
+  "noDevices": {
+    "message": "ಯಾವುದೇ ಸಕ್ರಿಯ ಸಾಧನಗಳಿಲ್ಲ."
+  },
+  "currentDevice": {
+    "message": "ಈ ಸಾಧನ"
+  },
+  "deviceKindBrowser": {
+    "message": "ಬ್ರೌಸರ್ ವಿಸ್ತರಣೆ"
+  },
+  "deviceKindVpn": {
+    "message": "VPN ಸಾಧನ"
+  },
+  "profile_browser_proxy": {
+    "message": "ಬ್ರೌಸರ್ ಪ್ರಾಕ್ಸಿ"
+  },
+  "profile_wireguard": {
+    "message": "WireGuard"
+  },
+  "profile_openvpn": {
+    "message": "OpenVPN"
+  },
+  "none": {
+    "message": "ಯಾವುದೂ ಇಲ್ಲ"
+  },
+  "deviceCreatedOn": {
+    "message": "ರಚಿಸಿದ ದಿನಾಂಕ: $1"
+  },
+  "deleteDevice": {
+    "message": "ಸಾಧನವನ್ನು ಅಳಿಸಿ"
+  },
+  "deleteDeviceNamed": {
+    "message": "ಸಾಧನವನ್ನು ಅಳಿಸಿ: $1"
+  },
+  "confirmDeleteDevice": {
+    "message": "“$1” ಅನ್ನು ತೆಗೆದುಹಾಕಬೇಕೆ? ಇದರ VPN ಸಂಪರ್ಕಗಳು ನಿಲ್ಲುತ್ತವೆ ಮತ್ತು ಇದರ ಪ್ರೊಫೈಲ್‌ಗಳನ್ನು ತೆಗೆದುಹಾಕಲಾಗುತ್ತದೆ."
+  },
+  "resetDevice": {
+    "message": "ಸಾಧನವನ್ನು ರೀಸೆಟ್ ಮಾಡಿ"
+  },
+  "confirmResetDevice": {
+    "message": "ಈ ವಿಸ್ತರಣೆಯನ್ನು ರೀಸೆಟ್ ಮಾಡಬೇಕೆ? ಮುಂದಿನ ಬಾರಿ ನೀವು ಇದನ್ನು ಬಳಸಿದಾಗ ಇದನ್ನು ಹೊಸ ಸಾಧನವಾಗಿ ನೋಂದಾಯಿಸಲಾಗುತ್ತದೆ."
+  },
+  "signOutAccount": {
+    "message": "ಖಾತೆಯಿಂದ ಸೈನ್ ಔಟ್ ಮಾಡಿ"
+  },
+  "chooseLocation": {
+    "message": "ಸ್ಥಳವನ್ನು ಆಯ್ಕೆಮಾಡಿ"
+  },
+  "error_invalid_credentials": {
+    "message": "ಇಮೇಲ್ ವಿಳಾಸ ಅಥವಾ ಪಾಸ್‌ವರ್ಡ್ ತಪ್ಪಾಗಿದೆ."
+  },
+  "error_unauthorized": {
+    "message": "ನಿಮ್ಮ ಸೆಷನ್‌ನ ಅವಧಿ ಮುಗಿದಿದೆ. ದಯವಿಟ್ಟು ಮತ್ತೆ ಸೈನ್ ಇನ್ ಮಾಡಿ."
+  },
+  "error_email_verification_required": {
+    "message": "ರಕ್ಷಣೆಯನ್ನು ಸಕ್ರಿಯಗೊಳಿಸುವ ಮೊದಲು ನಿಮ್ಮ ಇಮೇಲ್ ವಿಳಾಸವನ್ನು ಪರಿಶೀಲಿಸಿ."
+  },
+  "errorVerificationCooldown": {
+    "message": "$1 ಸೆಕೆಂಡುಗಳ ನಂತರ ಹೊಸ ಇಮೇಲ್ ಅನ್ನು ವಿನಂತಿಸಬಹುದು."
+  },
+  "error_verification_email_cooldown": {
+    "message": "ಮತ್ತೊಂದು ಇಮೇಲ್ ವಿನಂತಿಸುವ ಮೊದಲು ದಯವಿಟ್ಟು ಸ್ವಲ್ಪ ಕಾಯಿರಿ."
+  },
+  "error_subscription_required": {
+    "message": "ಈ ಬ್ರೌಸರ್ ಅನ್ನು ರಕ್ಷಿಸಲು ಸಕ್ರಿಯ ಚಂದಾದಾರಿಕೆ ಅಗತ್ಯವಿದೆ."
+  },
+  "error_device_limit": {
+    "message": "ಸಾಧನಗಳ ಮಿತಿ ತಲುಪಿದೆ. ದಯವಿಟ್ಟು ಒಂದು ಸಾಧನವನ್ನು ತೆಗೆದುಹಾಕಿ."
+  },
+  "error_device_identity_revoked": {
+    "message": "ಈ ಸಾಧನಕ್ಕೆ ಇನ್ನು ಮುಂದೆ ಅಧಿಕಾರವಿಲ್ಲ. ಮತ್ತೆ ಸಂಪರ್ಕಿಸಲು ಪ್ರಯತ್ನಿಸಿ."
+  },
+  "error_device_proof_invalid": {
+    "message": "ಈ ಸಾಧನವನ್ನು ಪರಿಶೀಲಿಸಲು ಸಾಧ್ಯವಾಗಲಿಲ್ಲ. ನಿಮ್ಮ ಕಂಪ್ಯೂಟರ್‌ನ ದಿನಾಂಕ ಮತ್ತು ಸಮಯವನ್ನು ಪರಿಶೀಲಿಸಿ, ನಂತರ ಮರುಪ್ರಯತ್ನಿಸಿ."
+  },
+  "error_device_proof_replayed": {
+    "message": "ಈ ವಿನಂತಿಯನ್ನು ಈಗಾಗಲೇ ಪ್ರಕ್ರಿಯೆಗೊಳಿಸಲಾಗಿದೆ. ಮತ್ತೆ ಪ್ರಯತ್ನಿಸಿ."
+  },
+  "error_invalid_device": {
+    "message": "ಈ ಸಾಧನವನ್ನು ಗುರುತಿಸಲಾಗಲಿಲ್ಲ. ಮತ್ತೆ ಸಂಪರ್ಕಿಸಲು ಪ್ರಯತ್ನಿಸಿ."
+  },
+  "error_device_exists": {
+    "message": "ಈ ಸಾಧನದ ಗುರುತು ಈಗಾಗಲೇ ಮತ್ತೊಂದು ಖಾತೆಗೆ ಲಿಂಕ್ ಆಗಿದೆ."
+  },
+  "error_not_found": {
+    "message": "ಈ ಕಾರ್ಯಾಚರಣೆ ಇನ್ನು ಮುಂದೆ ಲಭ್ಯವಿಲ್ಲ. ಮತ್ತೆ ಪ್ರಯತ್ನಿಸಿ."
+  },
+  "error_invalid_location": {
+    "message": "ಈ ಸ್ಥಳ ಲಭ್ಯವಿಲ್ಲ. ಬೇರೊಂದನ್ನು ಆಯ್ಕೆಮಾಡಿ."
+  },
+  "error_rate_limited": {
+    "message": "ಹಲವಾರು ಪ್ರಯತ್ನಗಳು. ಸ್ವಲ್ಪ ಕಾಯ್ದು ಮತ್ತೆ ಪ್ರಯತ್ನಿಸಿ."
+  },
+  "error_proxy_unavailable": {
+    "message": "ಈ ಸರ್ವರ್ ತಾತ್ಕಾಲಿಕವಾಗಿ ಲಭ್ಯವಿಲ್ಲ. ಸ್ವಲ್ಪ ಸಮಯದ ನಂತರ ಮತ್ತೆ ಪ್ರಯತ್ನಿಸಿ."
+  },
+  "error_api_token_expired": {
+    "message": "ನಿಮ್ಮ ಖಾತೆ ಸೆಷನ್‌ನ ಅವಧಿ ಮುಗಿದಿದೆ. ದಯವಿಟ್ಟು ಮತ್ತೆ ಸೈನ್ ಇನ್ ಮಾಡಿ."
+  },
+  "error_network_error": {
+    "message": "ನೆಟ್‌ವರ್ಕ್ ಲಭ್ಯವಿಲ್ಲ. ನಿಮ್ಮ ಇಂಟರ್ನೆಟ್ ಸಂಪರ್ಕವನ್ನು ಪರಿಶೀಲಿಸಿ."
+  },
+  "error_request_timeout": {
+    "message": "ಸೇವೆ ಪ್ರತಿಕ್ರಿಯಿಸಲು ತುಂಬಾ ಸಮಯ ತೆಗೆದುಕೊಂಡಿತು. ಮತ್ತೆ ಪ್ರಯತ್ನಿಸಿ."
+  },
+  "error_invalid_response": {
+    "message": "ಸೇವೆಯು ಅನಿರೀಕ್ಷಿತ ಪ್ರತಿಕ್ರಿಯೆಯನ್ನು ನೀಡಿದೆ."
+  },
+  "error_proxy_certificate_invalid": {
+    "message": "ಸರ್ವರ್‌ನ ಸುರಕ್ಷತೆಯನ್ನು ಪರಿಶೀಲಿಸಲು ಸಾಧ್ಯವಾಗಲಿಲ್ಲ. ಸಂಪರ್ಕವನ್ನು ನಿಲ್ಲಿಸಲಾಗಿದೆ."
+  },
+  "error_proxy_controlled_by_extension": {
+    "message": "ಮತ್ತೊಂದು ವಿಸ್ತರಣೆ ಪ್ರಸ್ತುತ ಬ್ರೌಸರ್‌ನ ಪ್ರಾಕ್ಸಿಯನ್ನು ನಿಯಂತ್ರಿಸುತ್ತಿದೆ."
+  },
+  "error_proxy_controlled_by_policy": {
+    "message": "ನಿರ್ವಾಹಕರ ನೀತಿಯು FuzeVPN ಪ್ರಾಕ್ಸಿಯನ್ನು ಬದಲಾಯಿಸುವುದನ್ನು ತಡೆಯುತ್ತಿದೆ."
+  },
+  "error_proxy_authentication_failed": {
+    "message": "ಸರ್ವರ್ ಸಂಪರ್ಕವನ್ನು ಸ್ವೀಕರಿಸಲಿಲ್ಲ. ಮತ್ತೆ ಸಂಪರ್ಕಿಸಲು ಪ್ರಯತ್ನಿಸಿ."
+  },
+  "error_session_expired": {
+    "message": "ನಿಮ್ಮ ರಕ್ಷಿತ ಸಂಪರ್ಕದ ಅವಧಿ ಮುಗಿದಿದೆ. ಮತ್ತೆ ಸಂಪರ್ಕಿಸಿ."
+  },
+  "error_email_delivery_unavailable": {
+    "message": "ಈಗ ಇಮೇಲ್ ಕಳುಹಿಸಲು ಸಾಧ್ಯವಿಲ್ಲ."
+  },
+  "error_unknown_error": {
+    "message": "ಅನಿರೀಕ್ಷಿತ ದೋಷ ಸಂಭವಿಸಿದೆ. ಮತ್ತೆ ಪ್ರಯತ್ನಿಸಿ."
+  },
+  "actionBlocked": {
+    "message": "FuzeVPN — ಬ್ರೌಸಿಂಗ್ ನಿರ್ಬಂಧಿಸಲಾಗಿದೆ"
+  },
+  "statusBlockedRetry": {
+    "message": "ಬ್ರೌಸಿಂಗ್ ವಿರಾಮಗೊಂಡಿದೆ — ಮರುಸಂಪರ್ಕಿಸಲಾಗುತ್ತಿದೆ"
+  },
+  "statusBlockedAction": {
+    "message": "ಬ್ರೌಸಿಂಗ್ ವಿರಾಮಗೊಂಡಿದೆ — ಸಂಪರ್ಕವನ್ನು ಪರಿಶೀಲಿಸಿ"
+  },
+  "statusProtectionUnavailable": {
+    "message": "ರಕ್ಷಣೆ ಲಭ್ಯವಿಲ್ಲ — ಬ್ರೌಸಿಂಗ್ ನಿರ್ಬಂಧಿಸಲಾಗಿಲ್ಲ"
+  },
+  "recoveryHelp": {
+    "message": "ರಕ್ಷಣೆಯನ್ನು ಪುನರಾರಂಭಿಸಲು ಮರುಪ್ರಯತ್ನಿಸಿ. ಸಂಪರ್ಕ ಕಡಿತಗೊಳಿಸಿದರೆ FuzeVPN ಇಲ್ಲದೆ ಬ್ರೌಸ್ ಮಾಡಬಹುದು."
+  },
+  "retryConnection": {
+    "message": "ಮರುಪ್ರಯತ್ನಿಸಿ"
+  },
+  "killSwitch": {
+    "message": "ಕಿಲ್ ಸ್ವಿಚ್"
+  },
+  "killSwitchHelp": {
+    "message": "VPN ಸಂಪರ್ಕ ಕಡಿತಗೊಂಡರೆ ಹೊಸ ವೆಬ್ ವಿನಂತಿಗಳನ್ನು ನಿರ್ಬಂಧಿಸುತ್ತದೆ. ಹೊರಗಿಡಲಾದ ಸೈಟ್‌ಗಳು VPN ಹೊರಗೆ ಲಭ್ಯವಿರುತ್ತವೆ."
+  },
+  "webRtcProtection": {
+    "message": "WebRTC ರಕ್ಷಣೆ"
+  },
+  "webRtcHelp": {
+    "message": "ವೆಬ್ ಕರೆಗಳ ಸಮಯದಲ್ಲಿ ನಿಮ್ಮ IP ವಿಳಾಸವನ್ನು ಖಾಸಗಿಯಾಗಿಡಲು ಸಹಾಯ ಮಾಡುತ್ತದೆ. ಕೆಲವು ಕರೆಗಳು ಕೆಲಸ ಮಾಡದಿರಬಹುದು. ಇದನ್ನು ಆಫ್ ಮಾಡಿದರೆ ನಿಮ್ಮ ನೈಜ IP ವಿಳಾಸ ಬಹಿರಂಗವಾಗಬಹುದು."
+  },
+  "securityEffectiveState": {
+    "message": "$1 · $2"
+  },
+  "securityBlocked": {
+    "message": "ಬ್ರೌಸಿಂಗ್ ನಿರ್ಬಂಧಿಸಲಾಗಿದೆ"
+  },
+  "securityNotBlocked": {
+    "message": "ಬ್ರೌಸಿಂಗ್ ನಿರ್ಬಂಧಿಸಲಾಗಿಲ್ಲ"
+  },
+  "securityWebRtcActive": {
+    "message": "WebRTC ನಿರ್ಬಂಧ ಸಕ್ರಿಯವಾಗಿದೆ"
+  },
+  "securityWebRtcInactive": {
+    "message": "WebRTC ನಿರ್ಬಂಧ ನಿಷ್ಕ್ರಿಯವಾಗಿದೆ"
+  },
+  "localNetworkHelp": {
+    "message": "ರಕ್ಷಣೆಯ ಸಮಯದಲ್ಲಿ ಸ್ಥಳೀಯ IP ವಿಳಾಸಗಳು ಮತ್ತು ಸಾಮಾನ್ಯ ಸ್ಥಳೀಯ ಹೆಸರುಗಳನ್ನು ನಿರ್ಬಂಧಿಸಲಾಗುತ್ತದೆ. ಹೊರಗಿಡಲಾದ ಡೊಮೇನ್ ಇನ್ನೂ ಸ್ಥಳೀಯ ನೆಟ್‌ವರ್ಕ್‌ಗೆ ಪ್ರವೇಶ ಒದಗಿಸಬಹುದು. ಸಿಸ್ಟಂನ IPv6 ಸೆಟ್ಟಿಂಗ್‌ಗಳನ್ನು ಬದಲಾಯಿಸಲಾಗುವುದಿಲ್ಲ."
+  },
+  "securityLimits": {
+    "message": "ಈ ರಕ್ಷಣೆಯ ಬಗ್ಗೆ"
+  },
+  "killSwitchLimits": {
+    "message": "ಈ ಬ್ರೌಸರ್ ಮಾತ್ರ: ಈಗಾಗಲೇ ಇರುವ ಸಂಪರ್ಕಗಳು ಮತ್ತು ಕೆಲವು ಆಂತರಿಕ ಬ್ರೌಸರ್ ಅಥವಾ ಇತರ ವಿಸ್ತರಣೆಗಳ ಸಂವಹನಗಳು ಮುಂದುವರಿಯಬಹುದು. FuzeVPN ಪ್ರತಿಕ್ರಿಯಿಸುವ ಮೊದಲೇ ಮತ್ತೊಂದು ವಿಸ್ತರಣೆ ಅಥವಾ ನೀತಿಯು ಪ್ರಾಕ್ಸಿಯನ್ನು ಬದಲಾಯಿಸಬಹುದು. ವಿಸ್ತರಣೆಯನ್ನು ನಿಷ್ಕ್ರಿಯಗೊಳಿಸಿದರೆ ರಕ್ಷಣೆ ತೆಗೆದುಹಾಕಲ್ಪಡುತ್ತದೆ. ಸಿಸ್ಟಂ-ವ್ಯಾಪಿ ನಿರ್ಬಂಧವಿಲ್ಲ."
+  },
+  "error_traffic_guard_failed": {
+    "message": "ಬ್ರೌಸಿಂಗ್ ನಿರ್ಬಂಧವನ್ನು ಪರಿಶೀಲಿಸಲು ಸಾಧ್ಯವಾಗಲಿಲ್ಲ. ರಕ್ಷಣೆಯ ಖಾತರಿ ಇಲ್ಲ. ವಿಸ್ತರಣೆಯ ಅನುಮತಿಗಳನ್ನು ಪರಿಶೀಲಿಸಿ."
+  },
+  "error_webrtc_control_unavailable": {
+    "message": "WebRTC ನಿರ್ಬಂಧವನ್ನು ಅನ್ವಯಿಸಲು ಸಾಧ್ಯವಾಗಲಿಲ್ಲ. ನಿಮ್ಮ ಸೆಟ್ಟಿಂಗ್‌ಗಳು, ಇತರ ವಿಸ್ತರಣೆಗಳು ಅಥವಾ ನಿರ್ವಾಹಕರ ನೀತಿಯನ್ನು ಪರಿಶೀಲಿಸಿ."
+  },
+  "language": {
+    "message": "ಭಾಷೆ"
+  },
+  "languageAutomatic": {
+    "message": "ಸ್ವಯಂಚಾಲಿತ — ಬ್ರೌಸರ್ ಭಾಷೆ"
+  },
+  "languageHelp": {
+    "message": "ಬದಲಾವಣೆಗಳು ತಕ್ಷಣ ಅನ್ವಯವಾಗುತ್ತವೆ. ಸ್ವಯಂಚಾಲಿತ ಆಯ್ಕೆಯು ಬ್ರೌಸರ್‌ನ ಭಾಷೆಯನ್ನು ಅನುಸರಿಸುತ್ತದೆ, ಅದು ಸಿಸ್ಟಂ ಭಾಷೆಗಿಂತ ಭಿನ್ನವಾಗಿರಬಹುದು."
+  },
+  "languageSaveError": {
+    "message": "ಭಾಷೆಯನ್ನು ಉಳಿಸಲು ಸಾಧ್ಯವಾಗಲಿಲ್ಲ. ನಿಮ್ಮ ಹಿಂದಿನ ಆಯ್ಕೆಯನ್ನು ಉಳಿಸಿಕೊಳ್ಳಲಾಗಿದೆ. ಮತ್ತೆ ಪ್ರಯತ್ನಿಸಿ."
+  },
+  "publicIp": {
+    "message": "ಸಾರ್ವಜನಿಕ IP"
+  },
+  "vpnIp": {
+    "message": "VPN IP"
+  },
+  "ipChecking": {
+    "message": "ಪರಿಶೀಲಿಸಲಾಗುತ್ತಿದೆ…"
+  },
+  "ipUnavailable": {
+    "message": "ಲಭ್ಯವಿಲ್ಲ"
+  },
+  "ipLookupExplanation": {
+    "message": "ನಿಮ್ಮ ಪ್ರಸ್ತುತ ಸಂಪರ್ಕವನ್ನು ಬಳಸಿ ipify ಮೂಲಕ, ಅಥವಾ ಪರ್ಯಾಯವಾಗಿ icanhazip ಮೂಲಕ IP ಪರಿಶೀಲಿಸಲಾಗುತ್ತದೆ. ಯಾವುದೇ ಬ್ರೌಸಿಂಗ್ ಇತಿಹಾಸವನ್ನು ಕಳುಹಿಸಲಾಗುವುದಿಲ್ಲ."
+  },
+  "automaticLocation": {
+    "message": "ಸ್ವಯಂಚಾಲಿತ"
+  },
+  "automaticLocationHelp": {
+    "message": "ಇತ್ತೀಚಿನ ಅತ್ಯುತ್ತಮ ಪ್ರತಿಕ್ರಿಯಾ ಸಮಯ, ಅಥವಾ ನಿಮ್ಮ ಕೊನೆಯ ಸ್ಥಳ."
+  },
+  "automaticLocationName": {
+    "message": "ಸ್ವಯಂಚಾಲಿತ · $1"
+  },
+  "searchLocations": {
+    "message": "ದೇಶ ಅಥವಾ ನಗರವನ್ನು ಹುಡುಕಿ"
+  },
+  "locationFilters": {
+    "message": "ಸ್ಥಳಗಳನ್ನು ಫಿಲ್ಟರ್ ಮಾಡಿ"
+  },
+  "allLocations": {
+    "message": "ಎಲ್ಲವೂ"
+  },
+  "favoriteLocations": {
+    "message": "ಮೆಚ್ಚಿನವುಗಳು"
+  },
+  "recentLocations": {
+    "message": "ಇತ್ತೀಚಿನವು"
+  },
+  "noMatchingLocations": {
+    "message": "ನಿಮ್ಮ ಹುಡುಕಾಟಕ್ಕೆ ಹೊಂದುವ ಯಾವುದೇ ಸ್ಥಳಗಳಿಲ್ಲ."
+  },
+  "noFavoriteLocations": {
+    "message": "ನಿಮ್ಮ ಮೆಚ್ಚಿನ ಸ್ಥಳಗಳನ್ನು ಇಲ್ಲಿ ಇರಿಸಲು ನಕ್ಷತ್ರ ಸೇರಿಸಿ."
+  },
+  "noRecentLocations": {
+    "message": "ನೀವು ಇತ್ತೀಚೆಗೆ ಸಂಪರ್ಕಿಸಿದ ಸ್ಥಳಗಳು ಇಲ್ಲಿ ಕಾಣಿಸುತ್ತವೆ."
+  },
+  "addFavorite": {
+    "message": "ಮೆಚ್ಚಿನವುಗಳಿಗೆ ಸೇರಿಸಿ: $1"
+  },
+  "removeFavorite": {
+    "message": "ಮೆಚ್ಚಿನವುಗಳಿಂದ ತೆಗೆದುಹಾಕಿ: $1"
+  },
+  "unavailableFavoriteLocation": {
+    "message": "ಲಭ್ಯವಿಲ್ಲದ ಮೆಚ್ಚಿನ ಸ್ಥಳ: $1"
+  },
+  "locationSaveError": {
+    "message": "ಬದಲಾವಣೆಯನ್ನು ಪೂರ್ಣಗೊಳಿಸಲು ಸಾಧ್ಯವಾಗಲಿಲ್ಲ. ಕೆಲವು ಸೆಟ್ಟಿಂಗ್‌ಗಳು ಉಳಿಸಲ್ಪಟ್ಟಿರಬಹುದು. ಮತ್ತೆ ಪ್ರಯತ್ನಿಸುವ ಮೊದಲು ಪ್ರದರ್ಶಿತ ಆಯ್ಕೆಯನ್ನು ಪರಿಶೀಲಿಸಿ."
+  },
+  "siteExclusions": {
+    "message": "ಹೊರಗಿಡಲಾದ ಸೈಟ್‌ಗಳು"
+  },
+  "siteExclusionsHelp": {
+    "message": "VPN ಸ್ಥಗಿತಗೊಂಡರೂ ಈ ಸೈಟ್‌ಗಳು FuzeVPN ಇಲ್ಲದೆ ನಿಮ್ಮ ಸಂಪರ್ಕವನ್ನು ಬಳಸುತ್ತವೆ."
+  },
+  "siteExclusionsEnabled": {
+    "message": "ವಿನಾಯಿತಿಗಳನ್ನು ಸಕ್ರಿಯಗೊಳಿಸಿ"
+  },
+  "siteExclusionInput": {
+    "message": "ಡೊಮೇನ್ ಅಥವಾ URL"
+  },
+  "siteExclusionPlaceholder": {
+    "message": "example.com"
+  },
+  "siteExclusionPreview": {
+    "message": "ಆಯ್ಕೆಮಾಡಿದ ಡೊಮೇನ್: $1"
+  },
+  "siteExclusionSubdomains": {
+    "message": "ಉಪಡೊಮೇನ್‌ಗಳನ್ನು ಸೇರಿಸಿ"
+  },
+  "siteExclusionAdd": {
+    "message": "ಸೈಟ್ ಸೇರಿಸಿ"
+  },
+  "siteExclusionsEmpty": {
+    "message": "ಹೊರಗಿಡಲಾದ ಸೈಟ್‌ಗಳಿಲ್ಲ. VPN ಇಲ್ಲದೆ ಬಳಸಲು ಬಯಸುವ ಸೈಟ್‌ಗಳನ್ನು ಮಾತ್ರ ಸೇರಿಸಿ."
+  },
+  "siteExclusionsCount": {
+    "message": "ಸೈಟ್‌ಗಳು: $1 / 100"
+  },
+  "siteExclusionScopeSubdomains": {
+    "message": "ಡೊಮೇನ್ ಮತ್ತು ಉಪಡೊಮೇನ್‌ಗಳು"
+  },
+  "siteExclusionScopeExact": {
+    "message": "ನಿಖರ ಡೊಮೇನ್ ಮಾತ್ರ"
+  },
+  "siteExclusionRemove": {
+    "message": "ತೆಗೆದುಹಾಕಿ: $1"
+  },
+  "siteExclusionsDetails": {
+    "message": "ವಿನಾಯಿತಿಗಳು ಹೇಗೆ ಕೆಲಸ ಮಾಡುತ್ತವೆ?"
+  },
+  "siteExclusionsResources": {
+    "message": "ಇತರ ಡೊಮೇನ್‌ಗಳಿಂದ ಬರುವ ಸಂಪನ್ಮೂಲಗಳು ರಕ್ಷಿತವಾಗಿಯೇ ಇರುತ್ತವೆ. ಒಂದು ಪುಟವನ್ನು ಹೊರಗಿಟ್ಟರೆ ಅದರ ಇತರ ವಿಷಯ ಸ್ವಯಂಚಾಲಿತವಾಗಿ ಹೊರಗಿಡಲ್ಪಡುವುದಿಲ್ಲ."
+  },
+  "siteExclusionsReload": {
+    "message": "ಬದಲಾವಣೆಯ ನಂತರ ಸೈಟ್ ಅನ್ನು ಮರುಲೋಡ್ ಮಾಡಿ. ಈಗಾಗಲೇ ಇರುವ ಸಂಪರ್ಕಗಳು ತಮ್ಮ ಹಿಂದಿನ ಮಾರ್ಗವನ್ನೇ ಉಳಿಸಿಕೊಳ್ಳಬಹುದು."
+  },
+  "siteExclusionsWebRtc": {
+    "message": "ಹೊರಗಿಡಲಾದ ಸೈಟ್‌ಗಳನ್ನೂ ಒಳಗೊಂಡಂತೆ WebRTC ರಕ್ಷಣೆ ಜಾಗತಿಕ ಸೆಟ್ಟಿಂಗ್ ಆಗಿಯೇ ಇರುತ್ತದೆ."
+  },
+  "siteExclusionsLocal": {
+    "message": "ಈ ಬ್ರೌಸರ್‌ನಲ್ಲಿ ಮಾತ್ರ ಉಳಿಸಲಾಗಿದೆ ಮತ್ತು ನಿಮ್ಮ ಖಾತೆಯಿಂದ ಸೈನ್ ಔಟ್ ಮಾಡಿದ ನಂತರವೂ ಉಳಿಯುತ್ತದೆ."
+  },
+  "siteExclusionsOn": {
+    "message": "ವಿನಾಯಿತಿಗಳು ಸಕ್ರಿಯವಾಗಿವೆ"
+  },
+  "siteExclusionsOff": {
+    "message": "ವಿನಾಯಿತಿಗಳು ನಿಷ್ಕ್ರಿಯವಾಗಿವೆ"
+  },
+  "siteExclusionsSummary": {
+    "message": "VPN ಹೊರಗಿನ ಸೈಟ್‌ಗಳು: $1"
+  },
+  "siteExclusionsPending": {
+    "message": "ವಿನಾಯಿತಿಗಳನ್ನು ಅನ್ವಯಿಸಲಾಗುತ್ತಿದೆ…"
+  },
+  "siteExclusionsInterrupted": {
+    "message": "ಬದಲಾವಣೆಗೆ ಅಡಚಣೆಯಾಗಿದೆ. ತಾತ್ಕಾಲಿಕ ರಕ್ಷಣಾ ತಡೆ ಜಾರಿಯಲ್ಲಿದೆ."
+  },
+  "siteExclusionsSaveError": {
+    "message": "ಬದಲಾವಣೆಯನ್ನು ಪೂರ್ಣಗೊಳಿಸಲು ಸಾಧ್ಯವಾಗಲಿಲ್ಲ. ನಿಮ್ಮ ಸೆಟ್ಟಿಂಗ್‌ಗಳನ್ನು ಪರಿಶೀಲಿಸಿ ಮತ್ತು ಮತ್ತೆ ಪ್ರಯತ್ನಿಸಿ."
+  },
+  "siteExclusionsRetry": {
+    "message": "ಮರುಪ್ರಯತ್ನಿಸಿ"
+  },
+  "siteExclusionInvalid": {
+    "message": "ಮಾನ್ಯವಾದ ಸಾರ್ವಜನಿಕ ಡೊಮೇನ್ ನಮೂದಿಸಿ. IP ಗಳು, ಸ್ಥಳೀಯ ಹೆಸರುಗಳು, ವೈಲ್ಡ್‌ಕಾರ್ಡ್‌ಗಳು, ಸಾರ್ವಜನಿಕ ಪ್ರತ್ಯಯಗಳು ಮತ್ತು ಕಾಯ್ದಿರಿಸಿದ ಡೊಮೇನ್‌ಗಳನ್ನು ಸ್ವೀಕರಿಸಲಾಗುವುದಿಲ್ಲ."
+  },
+  "siteExclusionDuplicate": {
+    "message": "ಈ ಡೊಮೇನ್ ಈಗಾಗಲೇ ಪಟ್ಟಿಯಲ್ಲಿದೆ."
+  },
+  "siteExclusionsLimit": {
+    "message": "100 ಸೈಟ್‌ಗಳ ಮಿತಿ ತಲುಪಿದೆ. ಮತ್ತೊಂದನ್ನು ಸೇರಿಸಲು ಒಂದು ಸೈಟ್ ಅನ್ನು ತೆಗೆದುಹಾಕಿ."
+  },
+  "statusProtectedExceptions": {
+    "message": "VPN ಸಕ್ರಿಯ · ವಿನಾಯಿತಿಗಳು: $1"
+  },
+  "statusBlockedExceptions": {
+    "message": "ಹೊರಗಿಡಲಾದ ಸೈಟ್‌ಗಳು ಮಾತ್ರ ಲಭ್ಯವಿವೆ"
+  },
+  "securityBlockedExceptions": {
+    "message": "ಹೊರಗಿಡಲಾದ ಸೈಟ್‌ಗಳನ್ನು ಹೊರತುಪಡಿಸಿ ಬ್ರೌಸಿಂಗ್ ನಿರ್ಬಂಧಿಸಲಾಗಿದೆ"
+  },
+  "securityBlockUnverified": {
+    "message": "ನಿರ್ಬಂಧ ಪರಿಶೀಲಿಸಲಾಗಿಲ್ಲ"
+  },
+  "logoutLocalComplete": {
+    "message": "ಸ್ಥಳೀಯ ಸೈನ್ ಔಟ್ ಪೂರ್ಣಗೊಂಡಿದೆ."
+  },
+  "logoutApiSession": {
+    "message": "ಪ್ರಸ್ತುತ ಖಾತೆ ಸೆಷನ್"
+  },
+  "logoutProxySessions": {
+    "message": "ತಿಳಿದಿರುವ VPN ಸೆಷನ್‌ಗಳು"
+  },
+  "logoutRevocationPending": {
+    "message": "ಹಿಂಪಡೆಯುವಿಕೆ ಪ್ರಗತಿಯಲ್ಲಿದೆ…"
+  },
+  "logoutRevocationConfirmed": {
+    "message": "ಹಿಂಪಡೆಯುವಿಕೆ ದೃಢೀಕರಿಸಲಾಗಿದೆ"
+  },
+  "logoutRevocationUnconfirmed": {
+    "message": "ಹಿಂಪಡೆಯುವಿಕೆ ದೃಢೀಕರಿಸಲಾಗಿಲ್ಲ"
+  },
+  "logoutUnconfirmedHelp": {
+    "message": "ಕೆಲವು ರಿಮೋಟ್ ಸೆಷನ್‌ಗಳು ಅವುಗಳ ಅವಧಿ ಮುಗಿಯುವವರೆಗೆ ಸಕ್ರಿಯವಾಗಿರಬಹುದು."
+  },
+  "deviceQuotaLoading": {
+    "message": "ಸಾಧನ ಮಿತಿಯನ್ನು ಲೋಡ್ ಮಾಡಲಾಗುತ್ತಿದೆ…"
+  },
+  "deviceQuotaUnknown": {
+    "message": "ಸಾಧನ ಮಿತಿ ಲಭ್ಯವಿಲ್ಲ"
+  },
+  "error_proxy_creation_uncertain": {
+    "message": "ಹೊಸ ಸಂಪರ್ಕದ ರಚನೆಯನ್ನು ಸರ್ವರ್ ದೃಢೀಕರಿಸಲಿಲ್ಲ. ಸ್ವಯಂಚಾಲಿತ ಮರುಸಂಪರ್ಕವನ್ನು ವಿರಾಮಗೊಳಿಸಲಾಗಿದೆ."
+  },
+  "siteExclusionsPreferencesReset": {
+    "message": "ನಿಮ್ಮ ಉಳಿಸಿದ ಸೈಟ್ ವಿನಾಯಿತಿಗಳನ್ನು ಓದಲು ಸಾಧ್ಯವಾಗದ ಕಾರಣ ಅವುಗಳನ್ನು ರೀಸೆಟ್ ಮಾಡಲಾಗಿದೆ. ನೀವು ಹೊರಗಿಡಲು ಬಯಸುವ ಸೈಟ್‌ಗಳನ್ನು ಮತ್ತೆ ಸೇರಿಸಿ."
+  },
+  "siteExclusionsConflict": {
+    "message": "ಹೊರಗಿಡಲಾದ ಸೈಟ್‌ಗಳ ಪಟ್ಟಿ ಬದಲಾಗಿದೆ. ಅದನ್ನು ಪರಿಶೀಲಿಸಿ, ನಂತರ ನಿಮ್ಮ ಬದಲಾವಣೆಯನ್ನು ಮತ್ತೆ ಪ್ರಯತ್ನಿಸಿ."
+  },
+  "unavailableLocation": {
+    "message": "ಸ್ಥಳ ಲಭ್ಯವಿಲ್ಲ"
+  },
+  "verificationSending": {
+    "message": "ಪರಿಶೀಲನಾ ಇಮೇಲ್ ಕಳುಹಿಸಲಾಗುತ್ತಿದೆ…"
+  },
+  "verificationSent": {
+    "message": "ಪರಿಶೀಲನಾ ಇಮೇಲ್ ಕಳುಹಿಸಲಾಗಿದೆ. ನಿಮ್ಮ ಇನ್‌ಬಾಕ್ಸ್ ಮತ್ತು ಸ್ಪ್ಯಾಮ್ ಫೋಲ್ಡರ್ ಪರಿಶೀಲಿಸಿ."
+  },
+  "error_login_requires_disconnect": {
+    "message": "ಮತ್ತೊಂದು ಖಾತೆಗೆ ಸೈನ್ ಇನ್ ಮಾಡುವ ಮೊದಲು ಪ್ರಸ್ತುತ VPN ಸಂಪರ್ಕವನ್ನು ಕಡಿತಗೊಳಿಸಿ."
+  },
+  "error_storage_unavailable": {
+    "message": "ಸ್ಥಳೀಯ ಖಾತೆ ಸೆಟ್ಟಿಂಗ್‌ಗಳು ಲಭ್ಯವಿಲ್ಲ. ಬ್ರೌಸರ್ ಸಂಗ್ರಹಣೆ ಲಭ್ಯವಾದಾಗ ಮರುಪ್ರಯತ್ನಿಸಿ; ನಿಮ್ಮ ಉಳಿಸಿದ ಖಾತೆಯನ್ನು ಸಂರಕ್ಷಿಸಲಾಗಿದೆ."
+  },
+  "diagnosticsAssistance": {
+    "message": "ಬೆಂಬಲ"
+  },
+  "diagnosticsTitle": {
+    "message": "ಡಯಾಗ್ನೋಸ್ಟಿಕ್ಸ್"
+  },
+  "diagnosticsIntro": {
+    "message": "ನಿಮ್ಮ ರಕ್ಷಣೆಯನ್ನು ಬದಲಾಯಿಸದೆ FuzeVPN ಮತ್ತು ಪ್ರಸ್ತುತ ಸಂಪರ್ಕವನ್ನು ಪರಿಶೀಲಿಸಿ."
+  },
+  "diagnosticsPrivacyTitle": {
+    "message": "ನಿಮ್ಮ ಡೇಟಾ"
+  },
+  "diagnosticsPrivacy": {
+    "message": "ವರದಿಯ JSON ತಾಂತ್ರಿಕ ಸ್ಥಿತಿಗಳು ಮತ್ತು ದೋಷ ಕೋಡ್‌ಗಳನ್ನು ಒಳಗೊಂಡಿರುತ್ತದೆ; ಪಾಸ್‌ವರ್ಡ್‌ಗಳು, ಟೋಕನ್‌ಗಳು, ಇಮೇಲ್ ವಿಳಾಸಗಳು, IP ವಿಳಾಸಗಳು, ಭೇಟಿ ನೀಡಿದ URL ಗಳು ಅಥವಾ ಹೊರಗಿಡಲಾದ ಡೊಮೇನ್‌ಗಳು ಅದರಲ್ಲಿ ಇರುವುದಿಲ್ಲ. ಕಳುಹಿಸುವಿಕೆ ದೃಢೀಕೃತವಾಗಿದ್ದು ವರದಿಯನ್ನು ನಿಮ್ಮ ಖಾತೆಗೆ ಲಿಂಕ್ ಮಾಡುತ್ತದೆ. ನೆಟ್‌ವರ್ಕ್ ಡೇಟಾಗಾಗಿ ಸೂಚನೆಯನ್ನು ನೋಡಿ."
+  },
+  "diagnosticsAuto": {
+    "message": "ಪ್ರಮುಖ ದೋಷ ವರದಿಗಳನ್ನು ಸ್ವಯಂಚಾಲಿತವಾಗಿ ಕಳುಹಿಸಿ"
+  },
+  "diagnosticsAutoHelp": {
+    "message": "ಡೀಫಾಲ್ಟ್ ಆಗಿ ಆಫ್ ಆಗಿರುತ್ತದೆ. ಇದನ್ನು ಸಕ್ರಿಯಗೊಳಿಸಿದರೆ ಈ ಖಾತೆಗಾಗಿ ಸರಳ ತಾಂತ್ರಿಕ ವರದಿಗಳನ್ನು ಬ್ರೌಸಿಂಗ್ ಇತಿಹಾಸವಿಲ್ಲದೆ ಕಳುಹಿಸಲಾಗುತ್ತದೆ. ಸ್ವಯಂಚಾಲಿತ ಕಳುಹಿಸುವಿಕೆಯನ್ನು ನಿಲ್ಲಿಸಲು ಮತ್ತು ಬಾಕಿ ಇರುವ ಸ್ವಯಂಚಾಲಿತ ವರದಿಗಳನ್ನು ತೆಗೆದುಹಾಕಲು ಇಲ್ಲಿ ಆಫ್ ಮಾಡಿ."
+  },
+  "diagnosticsHistoryHelp": {
+    "message": "ತಾಂತ್ರಿಕ ಇತಿಹಾಸ ಸ್ಥಳೀಯವಾಗಿಯೇ ಇರುತ್ತದೆ: ಸ್ವಯಂಚಾಲಿತ ಕಳುಹಿಸುವಿಕೆ ಆಫ್ ಆಗಿದ್ದರೂ, 10 ನಿಮಿಷಗಳ ಅವಧಿಯಲ್ಲಿ ಪ್ರತಿ ಜರ್ನಲ್‌ಗೆ ಗರಿಷ್ಠ 200 ಘಟನೆಗಳು. ಇದರಲ್ಲಿ ಬ್ರೌಸಿಂಗ್ ಇತಿಹಾಸ ಇರುವುದಿಲ್ಲ ಮತ್ತು ಇದನ್ನು ಹಸ್ತಚಾಲಿತವಾಗಿ, ಬ್ರೌಸರ್ ಮುಚ್ಚಿದಾಗ ಅಥವಾ ಖಾತೆ ಬದಲಾದಾಗ ತೆರವುಗೊಳಿಸಲಾಗುತ್ತದೆ."
+  },
+  "diagnosticsHistoryCount": {
+    "message": "ಸ್ಥಳೀಯ ತಾಂತ್ರಿಕ ಘಟನೆಗಳು: $1"
+  },
+  "diagnosticsConnectionLog": {
+    "message": "ಸಂಪರ್ಕ ಲಾಗ್ ರಫ್ತು ಮಾಡಿ"
+  },
+  "diagnosticsAccountRequired": {
+    "message": "ಕಳುಹಿಸುವಿಕೆಯನ್ನು ಸಕ್ರಿಯಗೊಳಿಸಲು ಸೈನ್ ಇನ್ ಮಾಡಿ. ಖಾತೆ ಇಲ್ಲದೆಯೂ ನೀವು ವರದಿಯನ್ನು ವೀಕ್ಷಿಸಬಹುದು ಮತ್ತು ರಫ್ತು ಮಾಡಬಹುದು."
+  },
+  "diagnosticsRun": {
+    "message": "ಡಯಾಗ್ನೋಸ್ಟಿಕ್ಸ್ ರನ್ ಮಾಡಿ"
+  },
+  "diagnosticsClearHistory": {
+    "message": "ಸ್ಥಳೀಯ ಇತಿಹಾಸ ತೆರವುಗೊಳಿಸಿ"
+  },
+  "diagnosticsPreparing": {
+    "message": "ವರದಿಯನ್ನು ಸಿದ್ಧಪಡಿಸಲಾಗುತ್ತಿದೆ…"
+  },
+  "diagnosticsReports": {
+    "message": "ವರದಿಗಳು"
+  },
+  "diagnosticsEmpty": {
+    "message": "ಇನ್ನೂ ಯಾವುದೇ ಸ್ಥಳೀಯ ವರದಿ ಇಲ್ಲ."
+  },
+  "diagnosticsChooseReport": {
+    "message": "ವರದಿಯನ್ನು ಆಯ್ಕೆಮಾಡಿ"
+  },
+  "diagnosticsReportLabel": {
+    "message": "$1 · $2 · $3"
+  },
+  "diagnosticsTypeFull": {
+    "message": "ಪೂರ್ಣ ವರದಿ"
+  },
+  "diagnosticsTypeSimple": {
+    "message": "ದೋಷ ವರದಿ"
+  },
+  "diagnosticsSummary": {
+    "message": "ಸಂಗ್ರಹಿಸಿದ ದಿನಾಂಕ: $1. FuzeVPN ಆವೃತ್ತಿ $2."
+  },
+  "diagnosticsJson": {
+    "message": "ವರದಿಯ ವಿಷಯವನ್ನು ವೀಕ್ಷಿಸಿ (JSON)"
+  },
+  "diagnosticsExport": {
+    "message": "ವರದಿ ರಫ್ತು ಮಾಡಿ"
+  },
+  "diagnosticsDelete": {
+    "message": "ಸ್ಥಳೀಯ ವರದಿಯನ್ನು ಅಳಿಸಿ"
+  },
+  "diagnosticsRetention": {
+    "message": "ಸ್ಥಳೀಯ ವರದಿಗಳ ಅವಧಿ 24 ಗಂಟೆಗಳ ನಂತರ ಮುಗಿಯುತ್ತದೆ. ಇಲ್ಲಿ ಅಳಿಸಿದರೆ ಸೇವೆಯು ಈಗಾಗಲೇ ಸ್ವೀಕರಿಸಿದ ವರದಿ ಅಳಿಸಲ್ಪಡುವುದಿಲ್ಲ. ಸರ್ವರ್ ಧಾರಣ ಮತ್ತು ಅಳಿಸುವಿಕೆ ವಿನಂತಿಗಳಿಗಾಗಿ ಸೂಚನೆಯನ್ನು ನೋಡಿ."
+  },
+  "diagnosticsConsent": {
+    "message": "ಈ ಡಯಾಗ್ನೋಸ್ಟಿಕ್ ವರದಿಯನ್ನು FuzeVPN ಗೆ ಕಳುಹಿಸಿ"
+  },
+  "diagnosticsDataCollectionRequired": {
+    "message": "ಡಯಾಗ್ನೋಸ್ಟಿಕ್ಸ್ ಕಳುಹಿಸಲು Firefox ತಾಂತ್ರಿಕ ಡೇಟಾ ಸಂಗ್ರಹಣೆಗೆ ಅನುಮತಿ ನೀಡಬೇಕು. ಮತ್ತೆ ಪ್ರಯತ್ನಿಸಿ ಮತ್ತು ಈ ಅನುಮತಿಯನ್ನು ನೀಡಿ."
+  },
+  "diagnosticsSendHelp": {
+    "message": "ಕಳುಹಿಸುವುದು ಐಚ್ಛಿಕ. ಅನುಮೋದಿಸಿದ ನಂತರ, ಅದೇ ಖಾತೆಯ ಮಾನ್ಯ ಸೆಷನ್‌ನೊಂದಿಗೆ 24 ಗಂಟೆಗಳವರೆಗೆ ಇದನ್ನು ಮರುಪ್ರಯತ್ನಿಸಬಹುದು. ಮುಂದಿನ ಪ್ರಯತ್ನಗಳನ್ನು ನೀವು ರದ್ದುಗೊಳಿಸಬಹುದು. ತಡವಾಗಿ ರದ್ದುಗೊಳಿಸಿದರೆ ಸರ್ವರ್ ಈಗಾಗಲೇ ವರದಿಯನ್ನು ಸ್ವೀಕರಿಸಿಲ್ಲ ಎಂಬುದಕ್ಕೆ ಖಾತರಿ ಇಲ್ಲ."
+  },
+  "diagnosticsSend": {
+    "message": "ವರದಿ ಕಳುಹಿಸಿ"
+  },
+  "diagnosticsCancel": {
+    "message": "ಕಳುಹಿಸುವಿಕೆಯನ್ನು ರದ್ದುಮಾಡಿ"
+  },
+  "diagnosticsReload": {
+    "message": "ಈ ಪುಟವನ್ನು ಮರುಲೋಡ್ ಮಾಡಿ"
+  },
+  "diagnosticsUnavailable": {
+    "message": "ಡಯಾಗ್ನೋಸ್ಟಿಕ್ಸ್ ಲಭ್ಯವಿಲ್ಲ. ಬ್ರೌಸರ್‌ನ ವಿಸ್ತರಣೆ ನಿರ್ವಾಹಕದಿಂದ FuzeVPN ಅನ್ನು ಮರುಲೋಡ್ ಮಾಡಿ, ನಂತರ ಈ ಪುಟವನ್ನು ಮತ್ತೆ ತೆರೆಯಿರಿ. ನಿಮ್ಮ VPN ಬದಲಾಗಿಲ್ಲ."
+  },
+  "diagnosticsQueueFull": {
+    "message": "ಕಳುಹಿಸುವ ಸರದಿ ತುಂಬಿದೆ. ಸ್ಥಳೀಯ ವರದಿಯನ್ನು ಅಳಿಸಿ ಅಥವಾ ಬಾಕಿ ಇರುವ ವರದಿ ಪೂರ್ಣಗೊಳ್ಳುವವರೆಗೆ ಕಾಯಿರಿ."
+  },
+  "diagnosticsContentUnavailable": {
+    "message": "ವರದಿಯ ವಿಷಯ ಲಭ್ಯವಿಲ್ಲ. ಸ್ಥಳೀಯ ವರದಿ ಲಭ್ಯವಿದ್ದರೆ ಅದನ್ನು ರಫ್ತು ಮಾಡಿ ಮತ್ತು ಬೆಂಬಲವನ್ನು ಸಂಪರ್ಕಿಸಿ."
+  },
+  "diagnosticsFailure": {
+    "message": "ಡಯಾಗ್ನೋಸ್ಟಿಕ್ ಕ್ರಿಯೆಯನ್ನು ಪೂರ್ಣಗೊಳಿಸಲು ಸಾಧ್ಯವಾಗಲಿಲ್ಲ. ನಿಮ್ಮ VPN ಬದಲಾಗಿಲ್ಲ."
+  },
+  "diagnosticsChecks": {
+    "message": "ಪರಿಶೀಲನೆಗಳು"
+  },
+  "diagnosticsCheckFallback": {
+    "message": "ತಾಂತ್ರಿಕ ಪರಿಶೀಲನೆ: $1"
+  },
+  "diagnosticsCheckLine": {
+    "message": "$1 — $2"
+  },
+  "diagnosticsProxy": {
+    "message": "ಬ್ರೌಸರ್ ಪ್ರಾಕ್ಸಿ"
+  },
+  "diagnosticsStorage": {
+    "message": "ಸ್ಥಳೀಯ ಸಂಗ್ರಹಣೆ"
+  },
+  "diagnosticsNetwork": {
+    "message": "ನೆಟ್‌ವರ್ಕ್ ಸಂಪರ್ಕ"
+  },
+  "diagnosticsCleanup": {
+    "message": "ಸೆಷನ್ ಸ್ವಚ್ಛಗೊಳಿಸುವಿಕೆ"
+  },
+  "diagnosticsResult_passed": {
+    "message": "ಯಶಸ್ವಿಯಾಗಿದೆ"
+  },
+  "diagnosticsResult_failed": {
+    "message": "ವಿಫಲವಾಗಿದೆ"
+  },
+  "diagnosticsResult_skipped": {
+    "message": "ನಡೆಸಲಾಗಿಲ್ಲ"
+  },
+  "diagnosticsResult_unknown": {
+    "message": "ಅಜ್ಞಾತ"
+  },
+  "diagnosticsStatus_ready": {
+    "message": "ಈ ಸಾಧನದಲ್ಲಿ ಸಿದ್ಧವಾಗಿದೆ"
+  },
+  "diagnosticsStatus_pending": {
+    "message": "ಕಳುಹಿಸಲು ಕಾಯಲಾಗುತ್ತಿದೆ"
+  },
+  "diagnosticsStatus_sending": {
+    "message": "ಕಳುಹಿಸಲಾಗುತ್ತಿದೆ…"
+  },
+  "diagnosticsStatus_session_required": {
+    "message": "ಅದೇ ಖಾತೆಯ ಮಾನ್ಯ ಸೆಷನ್‌ಗಾಗಿ ಕಾಯಲಾಗುತ್ತಿದೆ"
+  },
+  "diagnosticsStatus_received": {
+    "message": "ಸೇವೆಯು ಸ್ವೀಕರಿಸಿದೆ"
+  },
+  "diagnosticsStatus_failed": {
+    "message": "ಕಳುಹಿಸುವಿಕೆ ವಿಫಲವಾಗಿದೆ"
+  },
+  "diagnosticsStatus_cancelled": {
+    "message": "ಕಳುಹಿಸುವಿಕೆ ರದ್ದುಗೊಂಡಿದೆ"
+  },
+  "diagnosticsStatus_expired": {
+    "message": "ಕಳುಹಿಸುವ ಗಡುವು ಮುಗಿದಿದೆ"
+  },
+  "diagnosticsReceivedAt": {
+    "message": "ಸ್ವೀಕರಿಸಿದ ದಿನಾಂಕ: $1"
+  },
+  "error_private_browsing_required": {
+    "message": "ಸಾಮಾನ್ಯ ವಿಂಡೋಗಳಲ್ಲಿಯೂ VPN ಕಾನ್ಫಿಗರ್ ಮಾಡಲು Firefox ಗೆ ಈ ಅನುಮತಿ ಅಗತ್ಯವಿದೆ. about:addons → FuzeVPN ತೆರೆಯಿರಿ, ಖಾಸಗಿ ವಿಂಡೋಗಳಲ್ಲಿ ರನ್ ಆಗಲು ಅನುಮತಿಸಿ, ನಂತರ ಮರುಪ್ರಯತ್ನಿಸಿ."
+  },
+  "error_host_permissions_required": {
+    "message": "Firefox ನಲ್ಲಿ, about:addons → FuzeVPN → ಅನುಮತಿಗಳು ತೆರೆಯಿರಿ ಮತ್ತು ಎಲ್ಲಾ ವೆಬ್‌ಸೈಟ್‌ಗಳಿಗೆ ಪ್ರವೇಶ ಅನುಮತಿಸಿ, ನಂತರ ಮರುಪ್ರಯತ್ನಿಸಿ."
+  },
+  "cancelAction": {
+    "message": "ರದ್ದುಮಾಡಿ"
+  },
+  "refreshLocations": {
+    "message": "ಸ್ಥಳಗಳನ್ನು ರಿಫ್ರೆಶ್ ಮಾಡಿ"
+  },
+  "refreshingLocations": {
+    "message": "ಸ್ಥಳಗಳನ್ನು ರಿಫ್ರೆಶ್ ಮಾಡಲಾಗುತ್ತಿದೆ…"
+  },
+  "locationsRefreshError": {
+    "message": "ಸ್ಥಳಗಳ ಪಟ್ಟಿಯನ್ನು ರಿಫ್ರೆಶ್ ಮಾಡಲು ಸಾಧ್ಯವಾಗಲಿಲ್ಲ. ದಯವಿಟ್ಟು ಮತ್ತೆ ಪ್ರಯತ್ನಿಸಿ."
+  },
+  "error_device_revoked_limit": {
+    "message": "ಈ ಸಾಧನವನ್ನು ಹಿಂಪಡೆಯಲಾಗಿದೆ. ಸಾಧನಗಳ ಮಿತಿ ತಲುಪಿದೆ: ದಯವಿಟ್ಟು ಒಂದು ಸಾಧನವನ್ನು ತೆಗೆದುಹಾಕಿ."
+  },
+  "noAvailableLocations": {
+    "message": "ಪ್ರಸ್ತುತ ಯಾವುದೇ ಸ್ಥಳಗಳು ಲಭ್ಯವಿಲ್ಲ. ದಯವಿಟ್ಟು ಸ್ವಲ್ಪ ಸಮಯದ ನಂತರ ಮತ್ತೆ ಪ್ರಯತ್ನಿಸಿ."
+  },
+  "noAvailableFavoriteLocations": {
+    "message": "ನಿಮ್ಮ ಮೆಚ್ಚಿನ ಸ್ಥಳಗಳು ತಾತ್ಕಾಲಿಕವಾಗಿ ಲಭ್ಯವಿಲ್ಲ."
+  },
+  "error_location_favorites_limit": {
+    "message": "100 ಮೆಚ್ಚಿನವುಗಳ ಮಿತಿ ತಲುಪಿದೆ. ಮತ್ತೊಂದನ್ನು ಸೇರಿಸಲು ಒಂದು ಮೆಚ್ಚಿನದನ್ನು ತೆಗೆದುಹಾಕಿ."
+  },
+  "error_server_full": {
+    "message": "ಈ ಸರ್ವರ್ ತುಂಬಿದೆ. ಬೇರೊಂದು ಸ್ಥಳವನ್ನು ಆಯ್ಕೆಮಾಡಿ."
+  },
+  "error_capacity_unavailable": {
+    "message": "ಈ ಸರ್ವರ್‌ನ ಲಭ್ಯತೆಯನ್ನು ಈಗ ದೃಢೀಕರಿಸಲು ಸಾಧ್ಯವಿಲ್ಲ. ದಯವಿಟ್ಟು ಸ್ವಲ್ಪ ಸಮಯದ ನಂತರ ಮತ್ತೆ ಪ್ರಯತ್ನಿಸಿ."
+  },
+  "locationHierarchyHelp": {
+    "message": "ಹೆಸರು ಸರ್ವರ್ ಅನ್ನು ಆಯ್ಕೆಮಾಡುತ್ತದೆ; ಬಾಣದ ಗುರುತು ವಿವರಗಳನ್ನು ತೋರಿಸುತ್ತದೆ."
+  },
+  "locationCountrySelect": {
+    "message": "ಲಭ್ಯವಿರುವ ಸರ್ವರ್ ಆಯ್ಕೆಮಾಡಿ: $1"
+  },
+  "locationCitySelect": {
+    "message": "ಲಭ್ಯವಿರುವ ಸರ್ವರ್ ಆಯ್ಕೆಮಾಡಿ: $1"
+  },
+  "locationShowCities": {
+    "message": "ನಗರಗಳನ್ನು ತೋರಿಸಿ: $1"
+  },
+  "locationHideCities": {
+    "message": "ನಗರಗಳನ್ನು ಮರೆಮಾಡಿ: $1"
+  },
+  "locationShowServers": {
+    "message": "ಸರ್ವರ್‌ಗಳನ್ನು ತೋರಿಸಿ: $1"
+  },
+  "locationHideServers": {
+    "message": "ಸರ್ವರ್‌ಗಳನ್ನು ಮರೆಮಾಡಿ: $1"
+  },
+  "locationAvailableServers": {
+    "message": "ಲಭ್ಯವಿರುವ ಸರ್ವರ್‌ಗಳು: $1"
+  },
+  "legalInformation": {
+    "message": "ಕಾನೂನು ಮಾಹಿತಿ"
+  },
+  "privacyPolicy": {
+    "message": "ವಿಸ್ತರಣೆಯ ಗೌಪ್ಯತಾ ಸೂಚನೆ"
+  },
+  "termsAndConditions": {
+    "message": "ಬಳಕೆ ಮತ್ತು ಮಾರಾಟದ ನಿಯಮಗಳು"
+  },
+  "legalNotice": {
+    "message": "ಕಾನೂನು ಸೂಚನೆ"
+  },
+  "contactSupport": {
+    "message": "ಬೆಂಬಲವನ್ನು ಸಂಪರ್ಕಿಸಿ"
+  },
+  "webSignIn": {
+    "message": "FuzeVPN ಗೆ ಸೈನ್ ಇನ್ ಮಾಡಿ"
+  },
+  "webSignInDisconnect": {
+    "message": "ಸಂಪರ್ಕ ಕಡಿತಗೊಳಿಸಿ ಮತ್ತು ಸೈನ್ ಇನ್ ಮಾಡಿ"
+  },
+  "webSignInPending": {
+    "message": "ಸೈನ್ ಇನ್ ಪ್ರಗತಿಯಲ್ಲಿದೆ…"
+  },
+  "webSignInHelp": {
+    "message": "FuzeVPN ಗ್ರಾಹಕ ವಿಭಾಗದಲ್ಲಿ Google ಅಥವಾ ಇಮೇಲ್ ಮೂಲಕ ಸೈನ್ ಇನ್ ಮಾಡಿ ಅಥವಾ ಖಾತೆ ರಚಿಸಿ."
+  },
+  "webSignInDisconnectHelp": {
+    "message": "ಈ ಬಟನ್ ಬ್ರೌಸರ್ ರಕ್ಷಣೆಯನ್ನು ನಿಲ್ಲಿಸುತ್ತದೆ, ಇದರಿಂದ ನೀವು Google ಅಥವಾ ಇಮೇಲ್ ಮೂಲಕ ಸೈನ್ ಇನ್ ಮಾಡಬಹುದು. ಸೈನ್ ಇನ್ ಸಮಯದಲ್ಲಿ ನಿಮ್ಮ ಬ್ರೌಸಿಂಗ್ ರಕ್ಷಿತವಾಗಿರುವುದಿಲ್ಲ."
+  },
+  "webSignInStatus": {
+    "message": "FuzeVPN ಸೈನ್ ಇನ್ ವಿಂಡೋದಲ್ಲಿ ಮುಂದುವರಿಯಿರಿ. ನೀವು ಮುಗಿಸಿದಾಗ ವಿಸ್ತರಣೆ ಸ್ವಯಂಚಾಲಿತವಾಗಿ ಅಪ್‌ಡೇಟ್ ಆಗುತ್ತದೆ. ರದ್ದುಗೊಳಿಸಲು ಆ ವಿಂಡೋವನ್ನು ಮುಚ್ಚಿ."
+  },
+  "error_web_login_cancelled": {
+    "message": "ಸೈನ್ ಇನ್ ರದ್ದುಗೊಂಡಿದೆ. ಮತ್ತೆ ಪ್ರಯತ್ನಿಸಿ."
+  },
+  "error_web_login_timeout": {
+    "message": "ಸೈನ್ ಇನ್‌ಗೆ ತುಂಬಾ ಸಮಯ ಹಿಡಿಯಿತು. ಮತ್ತೆ ಪ್ರಯತ್ನಿಸಿ."
+  },
+  "error_web_login_unavailable": {
+    "message": "ವೆಬ್ ಸೈನ್ ಇನ್ ಲಭ್ಯವಿಲ್ಲ. ನಂತರ ಮತ್ತೆ ಪ್ರಯತ್ನಿಸಿ."
+  },
+  "error_web_login_invalid_callback": {
+    "message": "ಸೈನ್ ಇನ್ ಅನ್ನು ಪರಿಶೀಲಿಸಲು ಸಾಧ್ಯವಾಗಲಿಲ್ಲ. ವಿಸ್ತರಣೆಯಿಂದ ಮತ್ತೆ ಪ್ರಾರಂಭಿಸಿ."
+  },
+  "error_web_login_denied": {
+    "message": "ಸೈನ್ ಇನ್‌ಗೆ ಅಧಿಕಾರ ನೀಡಲಾಗಿಲ್ಲ. ಮತ್ತೆ ಪ್ರಯತ್ನಿಸಿ."
+  },
+  "error_web_login_busy": {
+    "message": "ಮತ್ತೆ ಪ್ರಯತ್ನಿಸುವ ಮೊದಲು ಈಗಾಗಲೇ ತೆರೆದಿರುವ ಸೈನ್ ಇನ್ ವಿಂಡೋವನ್ನು ಮುಚ್ಚಿ."
+  },
+  "deviceKindFirefox": {
+    "message": "Firefox ಬ್ರೌಸರ್"
+  },
+  "generalPrivacyPolicy": {
+    "message": "ಸಾಮಾನ್ಯ ಗೌಪ್ಯತಾ ನೀತಿ"
+  },
+  "privacyNoticeTitle": {
+    "message": "FuzeVPN ವಿಸ್ತರಣೆಯಲ್ಲಿ ಗೌಪ್ಯತೆ"
+  },
+  "privacyNoticeIntro": {
+    "message": "ಈ ಸೂಚನೆಯು ಈ ವಿಸ್ತರಣೆ ಬಳಸುವ ಡೇಟಾವನ್ನು ವಿವರಿಸುತ್ತದೆ. ಇದು ಕೆಳಗೆ ಲಿಂಕ್ ಮಾಡಲಾದ FuzeVPN ಸಾಮಾನ್ಯ ಗೌಪ್ಯತಾ ನೀತಿಗೆ ಪೂರಕವಾಗಿದೆ. ಐಚ್ಛಿಕ ಡಯಾಗ್ನೋಸ್ಟಿಕ್ ಕಳುಹಿಸುವಿಕೆಯು ಸೈನ್ ಇನ್ ಮಾಡಲು ಮತ್ತು VPN ಬಳಸಲು ಅಗತ್ಯವಿರುವ ಡೇಟಾದಿಂದ ಪ್ರತ್ಯೇಕವಾಗಿದೆ."
+  },
+  "privacyNoticeUpdated": {
+    "message": "ಸೂಚನೆಯನ್ನು 19 ಅಕ್ಟೋಬರ್ 2026 ರಂದು ನವೀಕರಿಸಲಾಗಿದೆ"
+  },
+  "privacyNoticeServiceTitle": {
+    "message": "ಖಾತೆ ಮತ್ತು VPN ಸೇವೆ"
+  },
+  "privacyNoticeService": {
+    "message": "ವಿಸ್ತರಣೆಯು ದೃಢೀಕರಣ, ಖಾತೆ, ಚಂದಾದಾರಿಕೆ, ಸಾಧನ ಮತ್ತು ಪ್ರಾಕ್ಸಿ-ಸೆಷನ್ ಡೇಟಾವನ್ನು api.fuzevpn.com ಜೊತೆ ವಿನಿಮಯ ಮಾಡಿಕೊಳ್ಳುತ್ತದೆ. VPN ಪ್ರಾಕ್ಸಿಯು ಅದರ ಮೂಲಕ ರವಾನೆಯಾಗುವ ಟ್ರಾಫಿಕ್ ಅನ್ನು ಸಾಗಿಸುತ್ತದೆ. ಈ ಸಂಪರ್ಕಗಳು ಸ್ವೀಕರಿಸುವ ಸೇವೆಗೆ ನೆಟ್‌ವರ್ಕ್ ಮೆಟಾಡೇಟಾವನ್ನು ಬಹಿರಂಗಪಡಿಸುತ್ತವೆ; ಸರ್ವರ್ ಲಾಗಿಂಗ್ ಬಗ್ಗೆ ಈ ಸೂಚನೆಯು ಯಾವುದೇ ಪ್ರತ್ಯೇಕ ಭರವಸೆ ನೀಡುವುದಿಲ್ಲ."
+  },
+  "privacyNoticeLocalTitle": {
+    "message": "ನಿಮ್ಮ ಬ್ರೌಸರ್‌ನಲ್ಲಿ ಸಂಗ್ರಹಿಸಲಾದ ಡೇಟಾ"
+  },
+  "privacyNoticeLocal": {
+    "message": "ಬ್ರೌಸರ್ ಸಂಗ್ರಹಣೆಯು ನಿಮ್ಮ ಸೆಷನ್, ಖಾತೆ ವಿವರಗಳು, ಆದ್ಯತೆಗಳು, ಸೈಟ್ ಹೊರಗಿಡುವಿಕೆಗಳು ಮತ್ತು ಸಾಧನದ ಗುರುತನ್ನು ಹೊಂದಿರುತ್ತದೆ. ಸ್ವಯಂಚಾಲಿತ ವರದಿ ಮಾಡುವಿಕೆ ಆಫ್ ಆಗಿದ್ದರೂ ತಾಂತ್ರಿಕ ಜರ್ನಲ್‌ಗಳನ್ನು ಸ್ಥಳೀಯವಾಗಿ ಗರಿಷ್ಠ 10 ನಿಮಿಷಗಳವರೆಗೆ ಇರಿಸಲಾಗುತ್ತದೆ. ಡಯಾಗ್ನೋಸ್ಟಿಕ್ ಡ್ರಾಫ್ಟ್‌ಗಳು ಮತ್ತು ಸರದಿಯಲ್ಲಿರುವ ವರದಿಗಳ ಅವಧಿ 24 ಗಂಟೆಗಳ ನಂತರ ಸ್ಥಳೀಯವಾಗಿ ಮುಗಿಯುತ್ತದೆ; ವಿಸ್ತರಣೆ ಕಾರ್ಯಗತಗೊಳ್ಳಲು ಸಾಧ್ಯವಾದಾಗ ಸ್ವಚ್ಛಗೊಳಿಸುವಿಕೆ ನಡೆಯುತ್ತದೆ."
+  },
+  "privacyNoticeIpTitle": {
+    "message": "ಸಾರ್ವಜನಿಕ IP ಪರಿಶೀಲನೆಗಳು ಮತ್ತು ಮೂರನೇ ವ್ಯಕ್ತಿಗಳು"
+  },
+  "privacyNoticeIp": {
+    "message": "IP ಪ್ರದರ್ಶನ ಮತ್ತು ನೆಟ್‌ವರ್ಕ್ ಡಯಾಗ್ನೋಸ್ಟಿಕ್ಸ್ api.ipify.org ಅನ್ನು ಸಂಪರ್ಕಿಸುತ್ತವೆ. IP ಪ್ರದರ್ಶನವು ಪರ್ಯಾಯವಾಗಿ ipv4.icanhazip.com ಅನ್ನು ಬಳಸಬಹುದು. ಪೂರೈಕೆದಾರರು ಸಂಪರ್ಕದ IP ಮತ್ತು ಸಾಮಾನ್ಯ ವಿನಂತಿ ಮೆಟಾಡೇಟಾವನ್ನು ಸ್ವೀಕರಿಸುತ್ತಾರೆ: ನೇರ ಮೋಡ್‌ನಲ್ಲಿ ನಿಮ್ಮ ಸಾರ್ವಜನಿಕ IP, ಅಥವಾ ಪ್ರಾಕ್ಸಿ ಮೂಲಕ ಹೋದಾಗ VPN ನಿರ್ಗಮನ IP. ಈ ವಿನಂತಿಗಳು ಕುಕೀಗಳು ಮತ್ತು ರೆಫರರ್‌ಗಳನ್ನು ಒಳಗೊಂಡಿರುವುದಿಲ್ಲ ಮತ್ತು ಯಾವುದೇ ಖಾತೆ ಟೋಕನ್ ಅಥವಾ ಬ್ರೌಸಿಂಗ್ ಇತಿಹಾಸವನ್ನು ಕಳುಹಿಸುವುದಿಲ್ಲ."
+  },
+  "privacyNoticeReportsTitle": {
+    "message": "ಡಯಾಗ್ನೋಸ್ಟಿಕ್ ವರದಿಗಳಲ್ಲಿ ಏನಿರುತ್ತದೆ"
+  },
+  "privacyNoticeReports": {
+    "message": "ವರದಿಗಳು ಯಾದೃಚ್ಛಿಕ ವರದಿ ಗುರುತಿಸುವಿಕೆ, ಸಮಯಮುದ್ರೆಗಳು, ವಿಸ್ತರಣೆ ಮತ್ತು ಬ್ರೌಸರ್ ಆವೃತ್ತಿಗಳು, ಆಪರೇಟಿಂಗ್ ಸಿಸ್ಟಂ ಕುಟುಂಬ ಮತ್ತು ಆರ್ಕಿಟೆಕ್ಚರ್, ಸಂಪರ್ಕ ಮತ್ತು ರಕ್ಷಣೆಯ ಸ್ಥಿತಿಗಳು, ದೋಷ ಕೋಡ್‌ಗಳು, ಎಣಿಕೆಗಳು, ಅವಧಿಗಳು ಮತ್ತು ಪರಿಶೀಲನಾ ಫಲಿತಾಂಶಗಳನ್ನು ಒಳಗೊಂಡಿರಬಹುದು. ಪೂರ್ಣ ವರದಿಗಳು ಇತ್ತೀಚಿನ ತಾಂತ್ರಿಕ ಘಟನೆಗಳನ್ನು ಒಳಗೊಂಡಿರಬಹುದು. ಅವುಗಳ JSON ಪಾಸ್‌ವರ್ಡ್‌ಗಳು, ದೃಢೀಕರಣ ಟೋಕನ್‌ಗಳು, ಇಮೇಲ್ ವಿಳಾಸಗಳು, IP ವಿಳಾಸಗಳು, ಭೇಟಿ ನೀಡಿದ URL ಗಳು ಮತ್ತು ಹೊರಗಿಡಲಾದ ಡೊಮೇನ್‌ಗಳನ್ನು ಒಳಗೊಂಡಿರುವುದಿಲ್ಲ. ಕಳುಹಿಸುವ ಮೊದಲು ನೀವು ಪೂರ್ಣ ವರದಿಯನ್ನು ಪರಿಶೀಲಿಸಬಹುದು ಮತ್ತು ರಫ್ತು ಮಾಡಬಹುದು."
+  },
+  "privacyNoticeAccountTitle": {
+    "message": "ಸ್ವೀಕರಿಸುವವರು ಮತ್ತು ಖಾತೆಯೊಂದಿಗೆ ಸಂಯೋಜನೆ"
+  },
+  "privacyNoticeAccount": {
+    "message": "ವರದಿಗಳನ್ನು ದೃಢೀಕೃತ ಸಂಪರ್ಕದ ಮೂಲಕ api.fuzevpn.com/v1/diagnostics ನಲ್ಲಿ FuzeVPN ಗೆ ಕಳುಹಿಸಲಾಗುತ್ತದೆ. ಈ API ಸಂಪರ್ಕವು VPN ಪ್ರಾಕ್ಸಿಯನ್ನು ಬೈಪಾಸ್ ಮಾಡುತ್ತದೆ: VPN ಸಕ್ರಿಯವಾಗಿದ್ದರೂ FuzeVPN ನಿಮ್ಮ ನೇರ ಸಾರ್ವಜನಿಕ IP ಅನ್ನು ಸ್ವೀಕರಿಸುತ್ತದೆ. ವರದಿಗಳು ಸೈನ್ ಇನ್ ಆಗಿರುವ ಖಾತೆಗೆ ಲಿಂಕ್ ಆಗಿರುತ್ತವೆ, ಅನಾಮಧೇಯವಲ್ಲ. ದೃಢೀಕರಣ ಹೆಡರ್ ಮತ್ತು IP ವರದಿಯ JSON ನಿಂದ ಪ್ರತ್ಯೇಕವಾಗಿವೆ. ಯಶಸ್ವಿ ಸ್ವೀಕೃತಿಯು ಆ ಎಂಡ್‌ಪಾಯಿಂಟ್ ಸ್ವೀಕರಿಸಿದೆ ಎಂಬುದನ್ನು ಮಾತ್ರ ದೃಢೀಕರಿಸುತ್ತದೆ, ಬೆಂಬಲ ಏಜೆಂಟ್ ವರದಿಯನ್ನು ಓದಿದ್ದಾರೆ ಎಂಬುದನ್ನಲ್ಲ."
+  },
+  "privacyNoticeChoiceTitle": {
+    "message": "ಐಚ್ಛಿಕ ಕಳುಹಿಸುವಿಕೆ ಮತ್ತು ಹಿಂಪಡೆಯುವಿಕೆ"
+  },
+  "privacyNoticeChoice": {
+    "message": "ಸ್ವಯಂಚಾಲಿತ ಕಳುಹಿಸುವಿಕೆ ಡೀಫಾಲ್ಟ್ ಆಗಿ ಆಫ್ ಆಗಿರುತ್ತದೆ. ಇದನ್ನು ಸಕ್ರಿಯಗೊಳಿಸಿದರೆ ಆ ಖಾತೆಗಾಗಿ ಸರಳ ದೋಷ ವರದಿಗಳನ್ನು ಅನುಮತಿಸಲಾಗುತ್ತದೆ. ಹಸ್ತಚಾಲಿತವಾಗಿ ಪೂರ್ಣ ವರದಿ ಕಳುಹಿಸಲು ಕಳುಹಿಸುವ ಚೆಕ್‌ಬಾಕ್ಸ್ ಅಗತ್ಯವಿದೆ. Firefox ಗೆ ಅದರ ಐಚ್ಛಿಕ ತಾಂತ್ರಿಕ ಡೇಟಾ ಅನುಮತಿಯೂ ಅಗತ್ಯವಿದೆ. ಸ್ವಯಂಚಾಲಿತ ಕಳುಹಿಸುವಿಕೆಯನ್ನು ನಿಲ್ಲಿಸಲು ಮತ್ತು ಬಾಕಿ ಇರುವ ಸ್ವಯಂಚಾಲಿತ ವರದಿಗಳನ್ನು ತೆಗೆದುಹಾಕಲು ಅದನ್ನು ನಿಷ್ಕ್ರಿಯಗೊಳಿಸಿ; ಬಾಕಿ ಇರುವ ಪ್ರತಿಯೊಂದು ಕಳುಹಿಸುವಿಕೆಯನ್ನು ಪ್ರತ್ಯೇಕವಾಗಿ ರದ್ದುಗೊಳಿಸಿ. ಡಯಾಗ್ನೋಸ್ಟಿಕ್ ಕಳುಹಿಸುವಿಕೆಯನ್ನು ನಿರಾಕರಿಸಿದರೂ VPN ಬಳಕೆಗೆ ಅಡ್ಡಿಯಾಗುವುದಿಲ್ಲ."
+  },
+  "privacyNoticeDeleteTitle": {
+    "message": "ಸ್ಥಳೀಯ ಅಳಿಸುವಿಕೆ ಮತ್ತು ಡೌನ್‌ಲೋಡ್ ಮಾಡಿದ ಫೈಲ್‌ಗಳು"
+  },
+  "privacyNoticeDelete": {
+    "message": "ಡಯಾಗ್ನೋಸ್ಟಿಕ್ಸ್‌ನಲ್ಲಿ, ತಾಂತ್ರಿಕ ಇತಿಹಾಸವನ್ನು ತೆರವುಗೊಳಿಸಿ ಅಥವಾ ಪ್ರತ್ಯೇಕ ಸ್ಥಳೀಯ ವರದಿಯನ್ನು ಅಳಿಸಿ. ಇತಿಹಾಸವನ್ನು ತೆರವುಗೊಳಿಸಿದರೆ ಈಗಾಗಲೇ ಇರುವ ವರದಿ ಪ್ರತಿಗಳು ಅಳಿಸಲ್ಪಡುವುದಿಲ್ಲ. ಸ್ಥಳೀಯವಾಗಿ ರದ್ದುಗೊಳಿಸುವುದು ಅಥವಾ ಅಳಿಸುವುದರಿಂದ, ರದ್ದತಿಗೆ ಮೊದಲು ತಲುಪಿದ ಅಪ್‌ಲೋಡ್ ಸೇರಿದಂತೆ, ಸೇವೆಯು ಈಗಾಗಲೇ ಸ್ವೀಕರಿಸಿದ ಡೇಟಾವನ್ನು ಹಿಂಪಡೆಯಲು ಸಾಧ್ಯವಿಲ್ಲ. ಡೌನ್‌ಲೋಡ್ ಮಾಡಿದ ರಫ್ತುಗಳು ಪ್ರತ್ಯೇಕ ಫೈಲ್‌ಗಳಾಗಿದ್ದು, ಅವುಗಳನ್ನು ನೀವೇ ಅಳಿಸಬೇಕು."
+  },
+  "privacyNoticeServerTitle": {
+    "message": "ಸರ್ವರ್ ಧಾರಣ ಮತ್ತು ವಿನಂತಿಗಳು"
+  },
+  "privacyNoticeServer": {
+    "message": "ಈ ವಿಸ್ತರಣೆಯು ಸರ್ವರ್ ಧಾರಣ ಅಥವಾ ಸರ್ವರ್-ಬದಿಯ ಅಳಿಸುವಿಕೆಯನ್ನು ನಿಯಂತ್ರಿಸುವುದಿಲ್ಲ ಅಥವಾ ಪರಿಶೀಲಿಸುವುದಿಲ್ಲ. FuzeVPN ಅನ್ವಯಿಸುವ ಧಾರಣ ಅವಧಿ ಮತ್ತು ಈಗಾಗಲೇ ಕಳುಹಿಸಿದ ವರದಿಗಳಿಗೆ ಸಂಬಂಧಿಸಿದ ವಿನಂತಿಗಳಿಗಾಗಿ, ಸಾಮಾನ್ಯ ಗೌಪ್ಯತಾ ನೀತಿಯನ್ನು ನೋಡಿ ಅಥವಾ FuzeVPN ಅನ್ನು ಸಂಪರ್ಕಿಸಿ. ಈ ಸೂಚನೆಯು ಯಾವುದೇ ನಿಗದಿತ ಸರ್ವರ್ ಧಾರಣ ಅವಧಿಯನ್ನು ಖಾತರಿಪಡಿಸುವುದಿಲ್ಲ."
+  },
+  "privacyNoticeSupportTitle": {
+    "message": "ಡಯಾಗ್ನೋಸ್ಟಿಕ್ಸ್ ಮತ್ತು ಬೆಂಬಲ ಪ್ರತ್ಯೇಕವಾಗಿವೆ"
+  },
+  "privacyNoticeSupport": {
+    "message": "ಡಯಾಗ್ನೋಸ್ಟಿಕ್ ವರದಿಯನ್ನು ಕಳುಹಿಸುವುದರಿಂದ ವಿಸ್ತರಣೆಯಿಂದ ಬೆಂಬಲ ಸಂದೇಶ ತಾನಾಗಿಯೇ ಕಳುಹಿಸಲ್ಪಡುವುದಿಲ್ಲ. ಸಮಸ್ಯೆಯನ್ನು ವಿವರಿಸಲು ಅಥವಾ ಸ್ವೀಕರಿಸಿದ ವರದಿಯ ಅಳಿಸುವಿಕೆಯನ್ನು ವಿನಂತಿಸಲು, ಕೆಳಗಿನ FuzeVPN ಸಂಪರ್ಕ ಮಾರ್ಗವನ್ನು ಬಳಸಿ. ರಫ್ತು ಮಾಡಿದ ಫೈಲ್ ಅನ್ನು ಬೇರೆ ಮಾರ್ಗದ ಮೂಲಕ ಹಂಚಿಕೊಳ್ಳಲು ನೀವು ಆಯ್ಕೆಮಾಡಿದರೆ, ಮೊದಲು ಅದರ ವಿಷಯವನ್ನು ಪರಿಶೀಲಿಸಿ."
+  },
+  "privacyNoticeManage": {
+    "message": "ಡಯಾಗ್ನೋಸ್ಟಿಕ್ಸ್ ತೆರೆಯಿರಿ"
+  },
+  "privacyNoticeLinksTitle": {
+    "message": "ಸೇವಾ ನೀತಿ ಮತ್ತು ಸಂಪರ್ಕ"
+  },
+  "theme": {
+    "message": "ಥೀಮ್"
+  },
+  "themeSystem": {
+    "message": "ಸಿಸ್ಟಂ"
+  },
+  "themeLight": {
+    "message": "ತಿಳಿ"
+  },
+  "themeDark": {
+    "message": "ಗಾಢ"
+  },
+  "switchToDarkTheme": {
+    "message": "ಗಾಢ ಥೀಮ್‌ಗೆ ಬದಲಿಸಿ"
+  },
+  "switchToLightTheme": {
+    "message": "ತಿಳಿ ಥೀಮ್‌ಗೆ ಬದಲಿಸಿ"
+  }
+}

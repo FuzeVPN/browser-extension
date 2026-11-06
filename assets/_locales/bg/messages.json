@@ -1,0 +1,929 @@
+{
+  "extensionName": {
+    "message": "FuzeVPN"
+  },
+  "extensionDescription": {
+    "message": "Запазете поверителността си и подсилете сигурността си с едно щракване."
+  },
+  "siteExclusionsReloadRequired": {
+    "message": "Презаредете FuzeVPN от мениджъра на разширения на браузъра, за да завършите актуализацията и да използвате изключените сайтове."
+  },
+  "extensionCommunicationError": {
+    "message": "Разширението не отговаря. Затворете този прозорец, след това презаредете FuzeVPN от мениджъра на разширения на браузъра."
+  },
+  "actionDisconnected": {
+    "message": "FuzeVPN — Няма връзка"
+  },
+  "actionConnected": {
+    "message": "FuzeVPN — Защитено в този браузър"
+  },
+  "actionReconnecting": {
+    "message": "FuzeVPN — Повторно свързване"
+  },
+  "actionError": {
+    "message": "FuzeVPN — Изисква се внимание"
+  },
+  "browserProtection": {
+    "message": "Защита на браузъра"
+  },
+  "loginTitle": {
+    "message": "Добре дошли във FuzeVPN"
+  },
+  "loginSubtitle": {
+    "message": "Влезте, за да защитите сърфирането си в този браузър."
+  },
+  "email": {
+    "message": "Имейл адрес"
+  },
+  "emailPlaceholder": {
+    "message": "you@example.com"
+  },
+  "password": {
+    "message": "Парола"
+  },
+  "signIn": {
+    "message": "Вход"
+  },
+  "signingIn": {
+    "message": "Влизане…"
+  },
+  "forgotPassword": {
+    "message": "Забравена парола?"
+  },
+  "createAccount": {
+    "message": "Създаване на акаунт"
+  },
+  "settings": {
+    "message": "Настройки"
+  },
+  "close": {
+    "message": "Затвори"
+  },
+  "statusDisconnected": {
+    "message": "Няма връзка"
+  },
+  "statusConnecting": {
+    "message": "Свързване…"
+  },
+  "statusChanging": {
+    "message": "Смяна на местоположението…"
+  },
+  "statusProtected": {
+    "message": "Защитено в този браузър"
+  },
+  "statusRefreshing": {
+    "message": "Защитено подновяване…"
+  },
+  "statusDisconnecting": {
+    "message": "Прекъсване на връзката…"
+  },
+  "statusError": {
+    "message": "Защитата е спряна"
+  },
+  "browserOnlyDetail": {
+    "message": "Защита за този браузър."
+  },
+  "location": {
+    "message": "Местоположение"
+  },
+  "change": {
+    "message": "Промени"
+  },
+  "noLocation": {
+    "message": "Няма налично местоположение"
+  },
+  "protectBrowser": {
+    "message": "Защити браузъра"
+  },
+  "disconnect": {
+    "message": "Прекъсни връзката"
+  },
+  "subscription": {
+    "message": "Абонамент"
+  },
+  "refreshSubscription": {
+    "message": "Опресни абонамента"
+  },
+  "refreshingSubscription": {
+    "message": "Опресняване на абонамента…"
+  },
+  "subscriptionActive": {
+    "message": "Активен"
+  },
+  "subscriptionInactive": {
+    "message": "Неактивен"
+  },
+  "expiresOn": {
+    "message": "Изтича на $1"
+  },
+  "noExpiry": {
+    "message": "Без дата на изтичане"
+  },
+  "browserOnlyNotice": {
+    "message": "Само този браузър. Другите приложения и браузъри не са защитени."
+  },
+  "resendVerification": {
+    "message": "Изпрати имейла отново"
+  },
+  "incognitoHelp": {
+    "message": "Частното сърфиране използва същата защита само ако разширението е разрешено в частен режим в настройките на браузъра."
+  },
+  "manageAccount": {
+    "message": "Управление на акаунта"
+  },
+  "account": {
+    "message": "Акаунт"
+  },
+  "devices": {
+    "message": "Устройства"
+  },
+  "manageDevices": {
+    "message": "Управление на устройствата"
+  },
+  "refreshDevices": {
+    "message": "Опресни устройствата"
+  },
+  "deviceCount": {
+    "message": "Устройства: $1 / $2"
+  },
+  "loadingDevices": {
+    "message": "Зареждане на устройствата…"
+  },
+  "noDevices": {
+    "message": "Няма активни устройства."
+  },
+  "currentDevice": {
+    "message": "Това устройство"
+  },
+  "deviceKindBrowser": {
+    "message": "Разширение за браузър"
+  },
+  "deviceKindVpn": {
+    "message": "VPN устройство"
+  },
+  "profile_browser_proxy": {
+    "message": "Прокси на браузъра"
+  },
+  "profile_wireguard": {
+    "message": "WireGuard"
+  },
+  "profile_openvpn": {
+    "message": "OpenVPN"
+  },
+  "none": {
+    "message": "няма"
+  },
+  "deviceCreatedOn": {
+    "message": "Създадено на $1"
+  },
+  "deleteDevice": {
+    "message": "Изтрий устройството"
+  },
+  "deleteDeviceNamed": {
+    "message": "Изтрий устройството $1"
+  },
+  "confirmDeleteDevice": {
+    "message": "Да се премахне ли „$1“? VPN връзките му ще бъдат прекъснати, а профилите му – премахнати."
+  },
+  "resetDevice": {
+    "message": "Нулирай устройството"
+  },
+  "confirmResetDevice": {
+    "message": "Да се нулира ли това разширение? При следващото използване то ще бъде регистрирано като ново устройство."
+  },
+  "signOutAccount": {
+    "message": "Изход от акаунта"
+  },
+  "chooseLocation": {
+    "message": "Изберете местоположение"
+  },
+  "error_invalid_credentials": {
+    "message": "Имейл адресът или паролата са неправилни."
+  },
+  "error_unauthorized": {
+    "message": "Сесията ви изтече. Моля, влезте отново."
+  },
+  "error_email_verification_required": {
+    "message": "Потвърдете имейл адреса си, преди да включите защитата."
+  },
+  "errorVerificationCooldown": {
+    "message": "Нов имейл може да бъде поискан след $1 сек."
+  },
+  "error_verification_email_cooldown": {
+    "message": "Моля, изчакайте, преди да поискате нов имейл."
+  },
+  "error_subscription_required": {
+    "message": "За защита на този браузър е необходим активен абонамент."
+  },
+  "error_device_limit": {
+    "message": "Достигнат е лимитът на устройствата. Моля, премахнете устройство."
+  },
+  "error_device_identity_revoked": {
+    "message": "Това устройство вече не е упълномощено. Опитайте да се свържете отново."
+  },
+  "error_device_proof_invalid": {
+    "message": "Не успяхме да потвърдим това устройство. Проверете датата и часа на компютъра си, след това опитайте отново."
+  },
+  "error_device_proof_replayed": {
+    "message": "Тази заявка вече е обработена. Опитайте отново."
+  },
+  "error_invalid_device": {
+    "message": "Това устройство не беше разпознато. Опитайте да се свържете отново."
+  },
+  "error_device_exists": {
+    "message": "Тази идентичност на устройството вече е свързана с друг акаунт."
+  },
+  "error_not_found": {
+    "message": "Тази операция вече не е налична. Опитайте отново."
+  },
+  "error_invalid_location": {
+    "message": "Това местоположение не е налично. Изберете друго."
+  },
+  "error_rate_limited": {
+    "message": "Твърде много опити. Изчакайте малко и опитайте отново."
+  },
+  "error_proxy_unavailable": {
+    "message": "Този сървър е временно недостъпен. Опитайте отново след малко."
+  },
+  "error_api_token_expired": {
+    "message": "Сесията на акаунта ви изтече. Моля, влезте отново."
+  },
+  "error_network_error": {
+    "message": "Мрежата не е достъпна. Проверете интернет връзката си."
+  },
+  "error_request_timeout": {
+    "message": "Услугата отговаря твърде бавно. Опитайте отново."
+  },
+  "error_invalid_response": {
+    "message": "Услугата върна неочакван отговор."
+  },
+  "error_proxy_certificate_invalid": {
+    "message": "Не успяхме да проверим сигурността на сървъра. Връзката беше прекъсната."
+  },
+  "error_proxy_controlled_by_extension": {
+    "message": "Друго разширение в момента управлява проксито на браузъра."
+  },
+  "error_proxy_controlled_by_policy": {
+    "message": "Правило на администратора не позволява на FuzeVPN да променя проксито."
+  },
+  "error_proxy_authentication_failed": {
+    "message": "Сървърът не прие връзката. Опитайте да се свържете отново."
+  },
+  "error_session_expired": {
+    "message": "Защитената ви връзка изтече. Свържете се отново."
+  },
+  "error_email_delivery_unavailable": {
+    "message": "В момента имейлът не може да бъде изпратен."
+  },
+  "error_unknown_error": {
+    "message": "Възникна неочаквана грешка. Опитайте отново."
+  },
+  "actionBlocked": {
+    "message": "FuzeVPN — Сърфирането е блокирано"
+  },
+  "statusBlockedRetry": {
+    "message": "Сърфирането е на пауза — повторно свързване"
+  },
+  "statusBlockedAction": {
+    "message": "Сърфирането е на пауза — проверете връзката"
+  },
+  "statusProtectionUnavailable": {
+    "message": "Защитата не е налична — сърфирането не е блокирано"
+  },
+  "recoveryHelp": {
+    "message": "Опитайте отново, за да възобновите защитата. „Прекъсни връзката“ ви позволява да сърфирате без FuzeVPN."
+  },
+  "retryConnection": {
+    "message": "Опитай отново"
+  },
+  "killSwitch": {
+    "message": "Аварийно прекъсване"
+  },
+  "killSwitchHelp": {
+    "message": "Блокира новите уеб заявки, ако VPN връзката прекъсне. Изключените сайтове остават достъпни извън VPN."
+  },
+  "webRtcProtection": {
+    "message": "Защита на WebRTC"
+  },
+  "webRtcHelp": {
+    "message": "Помага IP адресът ви да остане поверителен по време на уеб разговори. Някои разговори може да не работят. Изключването на тази опция може да разкрие истинския ви IP адрес."
+  },
+  "securityEffectiveState": {
+    "message": "$1 · $2"
+  },
+  "securityBlocked": {
+    "message": "Сърфирането е блокирано"
+  },
+  "securityNotBlocked": {
+    "message": "Сърфирането не е блокирано"
+  },
+  "securityWebRtcActive": {
+    "message": "Ограничението на WebRTC е активно"
+  },
+  "securityWebRtcInactive": {
+    "message": "Ограничението на WebRTC е неактивно"
+  },
+  "localNetworkHelp": {
+    "message": "Локалните IP адреси и често срещаните локални имена са блокирани по време на защитата. Изключен домейн все пак може да предостави достъп до локалната мрежа. Системните настройки за IPv6 не се променят."
+  },
+  "securityLimits": {
+    "message": "За тази защита"
+  },
+  "killSwitchLimits": {
+    "message": "Само този браузър: съществуващите връзки и някои вътрешни комуникации на браузъра или на други разширения може да продължат. Друго разширение или правило може да замени проксито, преди FuzeVPN да реагира. Деактивирането на разширението премахва защитата. Няма блокиране на ниво система."
+  },
+  "error_traffic_guard_failed": {
+    "message": "Блокирането на сърфирането не можа да бъде потвърдено. Защитата не е гарантирана. Проверете разрешенията на разширението."
+  },
+  "error_webrtc_control_unavailable": {
+    "message": "Ограничението на WebRTC не можа да бъде приложено. Проверете настройките, другите разширения или правилата на администратора."
+  },
+  "language": {
+    "message": "Език"
+  },
+  "languageAutomatic": {
+    "message": "Автоматично — езикът на браузъра"
+  },
+  "languageHelp": {
+    "message": "Промените се прилагат веднага. „Автоматично“ следва езика на браузъра, който може да се различава от езика на системата."
+  },
+  "languageSaveError": {
+    "message": "Езикът не можа да бъде запазен. Предишният ви избор остава. Опитайте отново."
+  },
+  "publicIp": {
+    "message": "Публичен IP адрес"
+  },
+  "vpnIp": {
+    "message": "VPN IP адрес"
+  },
+  "ipChecking": {
+    "message": "Проверка…"
+  },
+  "ipUnavailable": {
+    "message": "Не е наличен"
+  },
+  "ipLookupExplanation": {
+    "message": "IP адресът се проверява чрез ipify или при нужда чрез icanhazip, през текущата ви връзка. Не се изпраща история на сърфирането."
+  },
+  "automaticLocation": {
+    "message": "Автоматично"
+  },
+  "automaticLocationHelp": {
+    "message": "Най-добро скорошно време за отговор или последното ви местоположение."
+  },
+  "automaticLocationName": {
+    "message": "Автоматично · $1"
+  },
+  "searchLocations": {
+    "message": "Търсене на държава или град"
+  },
+  "locationFilters": {
+    "message": "Филтриране на местоположенията"
+  },
+  "allLocations": {
+    "message": "Всички"
+  },
+  "favoriteLocations": {
+    "message": "Любими"
+  },
+  "recentLocations": {
+    "message": "Скорошни"
+  },
+  "noMatchingLocations": {
+    "message": "Няма местоположения, отговарящи на търсенето ви."
+  },
+  "noFavoriteLocations": {
+    "message": "Отбележете със звезда, за да държите любимите си местоположения тук."
+  },
+  "noRecentLocations": {
+    "message": "Местоположенията, към които сте се свързвали наскоро, ще се показват тук."
+  },
+  "addFavorite": {
+    "message": "Добави $1 към любимите"
+  },
+  "removeFavorite": {
+    "message": "Премахни $1 от любимите"
+  },
+  "unavailableFavoriteLocation": {
+    "message": "Недостъпно любимо местоположение: $1"
+  },
+  "locationSaveError": {
+    "message": "Промяната не можа да бъде завършена. Някои настройки може да са запазени. Проверете показания избор, преди да опитате отново."
+  },
+  "siteExclusions": {
+    "message": "Изключени сайтове"
+  },
+  "siteExclusionsHelp": {
+    "message": "Тези сайтове използват връзката ви без FuzeVPN, дори ако VPN връзката прекъсне."
+  },
+  "siteExclusionsEnabled": {
+    "message": "Активирай изключенията"
+  },
+  "siteExclusionInput": {
+    "message": "Домейн или URL адрес"
+  },
+  "siteExclusionPlaceholder": {
+    "message": "example.com"
+  },
+  "siteExclusionPreview": {
+    "message": "Избран домейн: $1"
+  },
+  "siteExclusionSubdomains": {
+    "message": "Включи поддомейните"
+  },
+  "siteExclusionAdd": {
+    "message": "Добави сайт"
+  },
+  "siteExclusionsEmpty": {
+    "message": "Няма изключени сайтове. Добавяйте само сайтове, които искате да използвате без VPN."
+  },
+  "siteExclusionsCount": {
+    "message": "$1 / 100 сайта"
+  },
+  "siteExclusionScopeSubdomains": {
+    "message": "Домейн и поддомейни"
+  },
+  "siteExclusionScopeExact": {
+    "message": "Само точният домейн"
+  },
+  "siteExclusionRemove": {
+    "message": "Премахни $1"
+  },
+  "siteExclusionsDetails": {
+    "message": "Как работят изключенията?"
+  },
+  "siteExclusionsResources": {
+    "message": "Ресурсите от други домейни остават защитени. Изключването на страница не изключва автоматично останалото ѝ съдържание."
+  },
+  "siteExclusionsReload": {
+    "message": "Презаредете сайта след промяна. Съществуващите връзки може да запазят предишния си маршрут."
+  },
+  "siteExclusionsWebRtc": {
+    "message": "Защитата на WebRTC остава глобална настройка, включително за изключените сайтове."
+  },
+  "siteExclusionsLocal": {
+    "message": "Запазват се само в този браузър и остават след изход от акаунта ви."
+  },
+  "siteExclusionsOn": {
+    "message": "Изключенията са активни"
+  },
+  "siteExclusionsOff": {
+    "message": "Изключенията са деактивирани"
+  },
+  "siteExclusionsSummary": {
+    "message": "Сайтове извън VPN: $1"
+  },
+  "siteExclusionsPending": {
+    "message": "Прилагане на изключенията…"
+  },
+  "siteExclusionsInterrupted": {
+    "message": "Промяната е прекъсната. Временната защита остава в сила."
+  },
+  "siteExclusionsSaveError": {
+    "message": "Промяната не можа да бъде завършена. Проверете настройките си и опитайте отново."
+  },
+  "siteExclusionsRetry": {
+    "message": "Опитай отново"
+  },
+  "siteExclusionInvalid": {
+    "message": "Въведете валиден публичен домейн. IP адреси, локални имена, заместващи символи, публични суфикси и запазени домейни не се приемат."
+  },
+  "siteExclusionDuplicate": {
+    "message": "Този домейн вече е в списъка."
+  },
+  "siteExclusionsLimit": {
+    "message": "Достигнат е лимитът от 100 сайта. Премахнете сайт, за да добавите друг."
+  },
+  "statusProtectedExceptions": {
+    "message": "VPN е активна · изключения: $1"
+  },
+  "statusBlockedExceptions": {
+    "message": "Достъпни остават само изключените сайтове"
+  },
+  "securityBlockedExceptions": {
+    "message": "Сърфирането е блокирано, освен за изключените сайтове"
+  },
+  "securityBlockUnverified": {
+    "message": "Блокирането не е потвърдено"
+  },
+  "logoutLocalComplete": {
+    "message": "Локалният изход е завършен."
+  },
+  "logoutApiSession": {
+    "message": "Текуща сесия на акаунта"
+  },
+  "logoutProxySessions": {
+    "message": "Известни VPN сесии"
+  },
+  "logoutRevocationPending": {
+    "message": "Отмяна на достъпа…"
+  },
+  "logoutRevocationConfirmed": {
+    "message": "Отмяната е потвърдена"
+  },
+  "logoutRevocationUnconfirmed": {
+    "message": "Отмяната не е потвърдена"
+  },
+  "logoutUnconfirmedHelp": {
+    "message": "Някои отдалечени сесии може да останат активни, докато не изтекат."
+  },
+  "deviceQuotaLoading": {
+    "message": "Зареждане на лимита на устройствата…"
+  },
+  "deviceQuotaUnknown": {
+    "message": "Лимитът на устройствата не е наличен"
+  },
+  "error_proxy_creation_uncertain": {
+    "message": "Сървърът не потвърди създаването на новата връзка. Автоматичното повторно свързване е на пауза."
+  },
+  "siteExclusionsPreferencesReset": {
+    "message": "Запазените изключения на сайтове бяха нулирани, защото не можаха да бъдат прочетени. Добавете отново сайтовете, които искате да изключите."
+  },
+  "siteExclusionsConflict": {
+    "message": "Списъкът с изключени сайтове е променен. Прегледайте го, след това опитайте промяната отново."
+  },
+  "unavailableLocation": {
+    "message": "Местоположението не е налично"
+  },
+  "verificationSending": {
+    "message": "Изпращане на имейл за потвърждение…"
+  },
+  "verificationSent": {
+    "message": "Имейлът за потвърждение е изпратен. Проверете входящата си поща и папката за спам."
+  },
+  "error_login_requires_disconnect": {
+    "message": "Прекъснете текущата VPN връзка, преди да влезете в друг акаунт."
+  },
+  "error_storage_unavailable": {
+    "message": "Локалните настройки на акаунта не са налични. Опитайте отново, когато хранилището на браузъра е достъпно; запазеният ви акаунт е съхранен."
+  },
+  "diagnosticsAssistance": {
+    "message": "Поддръжка"
+  },
+  "diagnosticsTitle": {
+    "message": "Диагностика"
+  },
+  "diagnosticsIntro": {
+    "message": "Проверете FuzeVPN и текущата връзка, без да променяте защитата си."
+  },
+  "diagnosticsPrivacyTitle": {
+    "message": "Вашите данни"
+  },
+  "diagnosticsPrivacy": {
+    "message": "JSON съдържанието на отчета включва технически състояния и кодове на грешки, без пароли, токени, имейл адреси, IP адреси, посетени URL адреси или изключени домейни. Изпращането е удостоверено и свързва отчета с вашия акаунт. Вижте известието за мрежовите данни."
+  },
+  "diagnosticsAuto": {
+    "message": "Автоматично изпращане на отчети за важни грешки"
+  },
+  "diagnosticsAutoHelp": {
+    "message": "Изключено по подразбиране. Включването изпраща прости технически отчети за този акаунт, без история на сърфирането. Изключете го тук, за да спрете автоматичното изпращане и да премахнете чакащите автоматични отчети."
+  },
+  "diagnosticsHistoryHelp": {
+    "message": "Техническата история остава локално: до 200 събития на дневник за 10 минути, дори когато автоматичното изпращане е изключено. Тя не съдържа история на сърфирането и се изчиства ръчно, при затваряне на браузъра или при смяна на акаунта."
+  },
+  "diagnosticsHistoryCount": {
+    "message": "Локални технически събития: $1"
+  },
+  "diagnosticsConnectionLog": {
+    "message": "Експортирай дневника на връзката"
+  },
+  "diagnosticsAccountRequired": {
+    "message": "Влезте, за да разрешите изпращането. Пак можете да преглеждате и експортирате отчет без акаунт."
+  },
+  "diagnosticsRun": {
+    "message": "Стартирай диагностика"
+  },
+  "diagnosticsClearHistory": {
+    "message": "Изчисти локалната история"
+  },
+  "diagnosticsPreparing": {
+    "message": "Подготвяне на отчета…"
+  },
+  "diagnosticsReports": {
+    "message": "Отчети"
+  },
+  "diagnosticsEmpty": {
+    "message": "Все още няма локален отчет."
+  },
+  "diagnosticsChooseReport": {
+    "message": "Изберете отчет"
+  },
+  "diagnosticsReportLabel": {
+    "message": "$1 · $2 · $3"
+  },
+  "diagnosticsTypeFull": {
+    "message": "Пълен отчет"
+  },
+  "diagnosticsTypeSimple": {
+    "message": "Отчет за грешка"
+  },
+  "diagnosticsSummary": {
+    "message": "Събран на $1. FuzeVPN версия $2."
+  },
+  "diagnosticsJson": {
+    "message": "Преглед на съдържанието на отчета (JSON)"
+  },
+  "diagnosticsExport": {
+    "message": "Експортирай отчета"
+  },
+  "diagnosticsDelete": {
+    "message": "Изтрий локалния отчет"
+  },
+  "diagnosticsRetention": {
+    "message": "Локалните отчети изтичат след 24 часа. Изтриването тук не изтрива отчет, който вече е получен от услугата. Вижте известието за съхранението на сървъра и заявките за изтриване."
+  },
+  "diagnosticsConsent": {
+    "message": "Изпращане на този диагностичен отчет до FuzeVPN"
+  },
+  "diagnosticsDataCollectionRequired": {
+    "message": "Firefox трябва да разреши събирането на технически данни, за да изпраща диагностика. Опитайте отново и дайте това разрешение."
+  },
+  "diagnosticsSendHelp": {
+    "message": "Изпращането е по избор. След одобрение може да се опитва повторно до 24 часа при валидна сесия за същия акаунт. Можете да отмените следващите опити. Късното отменяне не гарантира, че сървърът още не е получил отчета."
+  },
+  "diagnosticsSend": {
+    "message": "Изпрати отчета"
+  },
+  "diagnosticsCancel": {
+    "message": "Отмени изпращането"
+  },
+  "diagnosticsReload": {
+    "message": "Презареди страницата"
+  },
+  "diagnosticsUnavailable": {
+    "message": "Диагностиката не е налична. Презаредете FuzeVPN от мениджъра на разширения на браузъра, след това отворете отново тази страница. Вашата VPN връзка не е променена."
+  },
+  "diagnosticsQueueFull": {
+    "message": "Опашката за изпращане е пълна. Изтрийте локален отчет или изчакайте чакащ отчет да бъде изпратен."
+  },
+  "diagnosticsContentUnavailable": {
+    "message": "Съдържанието на отчета не е налично. Експортирайте локалния отчет, ако е наличен, и се свържете с поддръжката."
+  },
+  "diagnosticsFailure": {
+    "message": "Диагностичното действие не можа да бъде завършено. Вашата VPN връзка не е променена."
+  },
+  "diagnosticsChecks": {
+    "message": "Проверки"
+  },
+  "diagnosticsCheckFallback": {
+    "message": "Техническа проверка: $1"
+  },
+  "diagnosticsCheckLine": {
+    "message": "$1 — $2"
+  },
+  "diagnosticsProxy": {
+    "message": "Прокси на браузъра"
+  },
+  "diagnosticsStorage": {
+    "message": "Локално хранилище"
+  },
+  "diagnosticsNetwork": {
+    "message": "Мрежова връзка"
+  },
+  "diagnosticsCleanup": {
+    "message": "Изчистване на сесиите"
+  },
+  "diagnosticsResult_passed": {
+    "message": "Успешна"
+  },
+  "diagnosticsResult_failed": {
+    "message": "Неуспешна"
+  },
+  "diagnosticsResult_skipped": {
+    "message": "Не е извършена"
+  },
+  "diagnosticsResult_unknown": {
+    "message": "Неизвестно"
+  },
+  "diagnosticsStatus_ready": {
+    "message": "Готов на това устройство"
+  },
+  "diagnosticsStatus_pending": {
+    "message": "Изчаква изпращане"
+  },
+  "diagnosticsStatus_sending": {
+    "message": "Изпращане…"
+  },
+  "diagnosticsStatus_session_required": {
+    "message": "Изчаква валидна сесия за същия акаунт"
+  },
+  "diagnosticsStatus_received": {
+    "message": "Получен от услугата"
+  },
+  "diagnosticsStatus_failed": {
+    "message": "Изпращането не бе успешно"
+  },
+  "diagnosticsStatus_cancelled": {
+    "message": "Изпращането е отменено"
+  },
+  "diagnosticsStatus_expired": {
+    "message": "Срокът за изпращане изтече"
+  },
+  "diagnosticsReceivedAt": {
+    "message": "Получен на $1"
+  },
+  "error_private_browsing_required": {
+    "message": "Firefox изисква това разрешение, за да конфигурира VPN, дори в нормалните прозорци. Отворете about:addons → FuzeVPN, разрешете изпълнението в частни прозорци, след това опитайте отново."
+  },
+  "error_host_permissions_required": {
+    "message": "Във Firefox отворете about:addons → FuzeVPN → Разрешения и разрешете достъп до всички уебсайтове, след това опитайте отново."
+  },
+  "cancelAction": {
+    "message": "Отказ"
+  },
+  "refreshLocations": {
+    "message": "Опресни местоположенията"
+  },
+  "refreshingLocations": {
+    "message": "Опресняване на местоположенията…"
+  },
+  "locationsRefreshError": {
+    "message": "Списъкът с местоположения не можа да бъде опреснен. Моля, опитайте отново."
+  },
+  "error_device_revoked_limit": {
+    "message": "Достъпът на това устройство е отменен. Достигнат е лимитът на устройствата: моля, премахнете устройство."
+  },
+  "noAvailableLocations": {
+    "message": "В момента няма налични местоположения. Моля, опитайте отново след малко."
+  },
+  "noAvailableFavoriteLocations": {
+    "message": "Любимите ви местоположения временно не са налични."
+  },
+  "error_location_favorites_limit": {
+    "message": "Достигнат е лимитът от 100 любими. Премахнете любимо, за да добавите друго."
+  },
+  "error_server_full": {
+    "message": "Този сървър е пълен. Изберете друго местоположение."
+  },
+  "error_capacity_unavailable": {
+    "message": "Наличността на този сървър не може да бъде потвърдена в момента. Моля, опитайте отново след малко."
+  },
+  "locationHierarchyHelp": {
+    "message": "Името избира сървър; стрелката показва подробности."
+  },
+  "locationCountrySelect": {
+    "message": "Избор на наличен сървър: $1"
+  },
+  "locationCitySelect": {
+    "message": "Избор на наличен сървър: $1"
+  },
+  "locationShowCities": {
+    "message": "Покажи градовете: $1"
+  },
+  "locationHideCities": {
+    "message": "Скрий градовете: $1"
+  },
+  "locationShowServers": {
+    "message": "Покажи сървърите: $1"
+  },
+  "locationHideServers": {
+    "message": "Скрий сървърите: $1"
+  },
+  "locationAvailableServers": {
+    "message": "Налични сървъри: $1"
+  },
+  "legalInformation": {
+    "message": "Правна информация"
+  },
+  "privacyPolicy": {
+    "message": "Известие за поверителност на разширението"
+  },
+  "termsAndConditions": {
+    "message": "Условия за ползване и продажба"
+  },
+  "legalNotice": {
+    "message": "Правно известие"
+  },
+  "contactSupport": {
+    "message": "Свържете се с поддръжката"
+  },
+  "webSignIn": {
+    "message": "Вход във FuzeVPN"
+  },
+  "webSignInDisconnect": {
+    "message": "Прекъсни връзката и влез"
+  },
+  "webSignInPending": {
+    "message": "Влизане…"
+  },
+  "webSignInHelp": {
+    "message": "Влезте или създайте акаунт с Google или имейл в клиентската зона на FuzeVPN."
+  },
+  "webSignInDisconnectHelp": {
+    "message": "Този бутон спира защитата на браузъра, за да можете да влезете с Google или имейл. По време на влизането сърфирането ви няма да е защитено."
+  },
+  "webSignInStatus": {
+    "message": "Продължете в прозореца за вход на FuzeVPN. Разширението се актуализира автоматично, когато приключите. Затворете този прозорец, за да откажете."
+  },
+  "error_web_login_cancelled": {
+    "message": "Влизането беше отменено. Опитайте отново."
+  },
+  "error_web_login_timeout": {
+    "message": "Влизането отне твърде много време. Опитайте отново."
+  },
+  "error_web_login_unavailable": {
+    "message": "Влизането през уеб не е налично. Опитайте отново по-късно."
+  },
+  "error_web_login_invalid_callback": {
+    "message": "Влизането не можа да бъде потвърдено. Започнете отново от разширението."
+  },
+  "error_web_login_denied": {
+    "message": "Влизането не беше разрешено. Опитайте отново."
+  },
+  "error_web_login_busy": {
+    "message": "Затворете вече отворения прозорец за вход, преди да опитате отново."
+  },
+  "deviceKindFirefox": {
+    "message": "Браузър Firefox"
+  },
+  "generalPrivacyPolicy": {
+    "message": "Обща политика за поверителност"
+  },
+  "privacyNoticeTitle": {
+    "message": "Поверителност в разширението FuzeVPN"
+  },
+  "privacyNoticeIntro": {
+    "message": "Това известие описва данните, използвани от това разширение. То допълва общата политика за поверителност на FuzeVPN, достъпна чрез връзката по-долу. Незадължителното изпращане на диагностика е отделно от данните, необходими за вход и използване на VPN."
+  },
+  "privacyNoticeUpdated": {
+    "message": "Известието е актуализирано на 19 октомври 2026 г."
+  },
+  "privacyNoticeServiceTitle": {
+    "message": "Акаунт и VPN услуга"
+  },
+  "privacyNoticeService": {
+    "message": "Разширението обменя с api.fuzevpn.com данни за удостоверяване, акаунт, абонамент, устройства и прокси сесии. VPN проксито пренася трафика, насочен през него. Тези връзки разкриват мрежови метаданни на получаващата услуга; това известие не дава отделно обещание относно воденето на сървърни дневници."
+  },
+  "privacyNoticeLocalTitle": {
+    "message": "Данни, съхранявани в браузъра ви"
+  },
+  "privacyNoticeLocal": {
+    "message": "Хранилището на браузъра съдържа сесията ви, данните за акаунта, предпочитанията, изключенията на сайтове и идентичността на устройството. Техническите дневници се пазят локално до 10 минути, дори когато автоматичното изпращане на отчети е изключено. Черновите на диагностика и отчетите в опашката изтичат локално след 24 часа; изчистването се извършва, когато разширението може да работи."
+  },
+  "privacyNoticeIpTitle": {
+    "message": "Проверки на публичния IP адрес и трети страни"
+  },
+  "privacyNoticeIp": {
+    "message": "Показването на IP адреса и мрежовата диагностика се свързват с api.ipify.org. При показването на IP адреса може да се използва резервно ipv4.icanhazip.com. Доставчикът получава IP адреса на връзката и обичайните метаданни на заявката: публичния ви IP адрес в директен режим или изходния IP адрес на VPN при работа през прокси. Тези заявки не съдържат бисквитки и референти и не изпращат токен на акаунта или история на сърфирането."
+  },
+  "privacyNoticeReportsTitle": {
+    "message": "Какво съдържат диагностичните отчети"
+  },
+  "privacyNoticeReports": {
+    "message": "Отчетите може да включват случаен идентификатор на отчета, времеви отпечатъци, версиите на разширението и браузъра, семейството и архитектурата на операционната система, състоянията на връзката и защитата, кодове на грешки, броячи, продължителности и резултати от проверки. Пълните отчети може да включват скорошни технически събития. Техният JSON изключва пароли, токени за удостоверяване, имейл адреси, IP адреси, посетени URL адреси и изключени домейни. Можете да прегледате и експортирате пълен отчет, преди да го изпратите."
+  },
+  "privacyNoticeAccountTitle": {
+    "message": "Получател и връзка с акаунта"
+  },
+  "privacyNoticeAccount": {
+    "message": "Отчетите се изпращат до FuzeVPN на api.fuzevpn.com/v1/diagnostics чрез удостоверена връзка. Тази API връзка заобикаля VPN проксито: FuzeVPN получава директния ви публичен IP адрес, дори когато VPN е активна. Отчетите са свързани с акаунта, в който сте влезли, и не са анонимни. Заглавката за удостоверяване и IP адресът са отделни от JSON на отчета. Успешното получаване потвърждава приемането от тази крайна точка, а не че служител от поддръжката е прочел отчета."
+  },
+  "privacyNoticeChoiceTitle": {
+    "message": "Незадължително изпращане и оттегляне"
+  },
+  "privacyNoticeChoice": {
+    "message": "Автоматичното изпращане е изключено по подразбиране. Включването му разрешава прости отчети за грешки за този акаунт. Ръчното изпращане на пълен отчет изисква отметка в квадратчето за изпращане. Firefox изисква и своето незадължително разрешение за технически данни. Изключете автоматичното изпращане, за да го спрете и да премахнете чакащите автоматични отчети; отделните чакащи изпращания се отменят поотделно. Отказът от изпращане на диагностика не пречи на използването на VPN."
+  },
+  "privacyNoticeDeleteTitle": {
+    "message": "Локално изтриване и изтеглени файлове"
+  },
+  "privacyNoticeDelete": {
+    "message": "В „Диагностика“ изчистете техническата история или изтрийте отделен локален отчет. Изчистването на историята не изтрива съществуващите копия на отчети. Отменянето или локалното изтриване не може да върне данни, вече получени от услугата, включително качване, пристигнало преди отменянето. Изтеглените експортирани файлове са отделни файлове, които трябва да изтриете сами."
+  },
+  "privacyNoticeServerTitle": {
+    "message": "Съхранение на сървъра и заявки"
+  },
+  "privacyNoticeServer": {
+    "message": "Това разширение не контролира и не проверява съхранението или изтриването на сървъра. За срока на съхранение, прилаган от FuzeVPN, и за заявки относно вече изпратени отчети вижте общата политика за поверителност или се свържете с FuzeVPN. Това известие не гарантира фиксиран срок на съхранение на сървъра."
+  },
+  "privacyNoticeSupportTitle": {
+    "message": "Диагностиката и поддръжката са отделни"
+  },
+  "privacyNoticeSupport": {
+    "message": "Изпращането на диагностичен отчет само по себе си не изпраща съобщение до поддръжката от разширението. За да опишете проблем или да поискате изтриване на получен отчет, използвайте канала за контакт с FuzeVPN по-долу. Ако решите да споделите експортиран файл по друг канал, първо проверете съдържанието му."
+  },
+  "privacyNoticeManage": {
+    "message": "Отвори „Диагностика“"
+  },
+  "privacyNoticeLinksTitle": {
+    "message": "Политика на услугата и контакт"
+  },
+  "theme": {
+    "message": "Тема"
+  },
+  "themeSystem": {
+    "message": "Системна"
+  },
+  "themeLight": {
+    "message": "Светла"
+  },
+  "themeDark": {
+    "message": "Тъмна"
+  },
+  "switchToDarkTheme": {
+    "message": "Превключи към тъмна тема"
+  },
+  "switchToLightTheme": {
+    "message": "Превключи към светла тема"
+  }
+}

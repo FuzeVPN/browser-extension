@@ -336,7 +336,7 @@ try {
     assert.deepEqual(
       direction,
       {
-        page: ["ar", "fa", "ur"].includes(language) ? "rtl" : "ltr",
+        page: ["ar", "fa", "ur", "he"].includes(language) ? "rtl" : "ltr",
         input: "ltr",
         preview: "ltr",
         domain: "ltr",
@@ -344,7 +344,7 @@ try {
       `Excluded domain isolation in ${language}`,
     );
     assert.equal(await page.locator("#exclusionPreview bdi").textContent(), "xn--bcher-kva.de");
-    if (["ar", "fa", "ur"].includes(language))
+    if (["ar", "fa", "ur", "he"].includes(language))
       await page.screenshot({ path: join(output, `sites-exclus-${language}.png`) });
     await page.locator("#exclusionInput").fill("");
     assert.equal(
@@ -364,7 +364,7 @@ try {
       language,
     );
   }
-  record("All thirty translated dialogs render without missing text or horizontal overflow");
+  record("All fifty translated dialogs render without missing text or horizontal overflow");
   record("Excluded domains and URL inputs stay LTR within both RTL and LTR dialogs");
   await page.locator("#closeExclusionsButton").click();
   await page.locator("#languageSelect").selectOption("fr");

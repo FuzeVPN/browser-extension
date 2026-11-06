@@ -1,7 +1,7 @@
 # Architecture de la base commune
 
 La version 0.9.3 possède un seul contrôleur (`src/core/background/state-machine.ts`),
-un seul modèle d'état, une interface popup et assistance partagée, ainsi que trente
+un seul modèle d'état, une interface popup et assistance partagée, ainsi que cinquante
 catalogues dans `assets/_locales`. Le projet contient toutes les sources et ressources
 nécessaires aux trois constructions.
 

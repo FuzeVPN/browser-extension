@@ -1,0 +1,929 @@
+{
+  "extensionName": {
+    "message": "FuzeVPN"
+  },
+  "extensionDescription": {
+    "message": "Suojaa yksityisyytesi ja vahvista tietoturvaasi yhdellä napsautuksella."
+  },
+  "siteExclusionsReloadRequired": {
+    "message": "Viimeistele päivitys ja ota sivustopoikkeukset käyttöön lataamalla FuzeVPN uudelleen selaimen laajennusten hallinnasta."
+  },
+  "extensionCommunicationError": {
+    "message": "Laajennus ei vastaa. Sulje tämä ikkuna ja lataa FuzeVPN uudelleen selaimen laajennusten hallinnasta."
+  },
+  "actionDisconnected": {
+    "message": "FuzeVPN — Yhteys katkaistu"
+  },
+  "actionConnected": {
+    "message": "FuzeVPN — Suojattu tässä selaimessa"
+  },
+  "actionReconnecting": {
+    "message": "FuzeVPN — Yhdistetään uudelleen"
+  },
+  "actionError": {
+    "message": "FuzeVPN — Vaatii huomiota"
+  },
+  "browserProtection": {
+    "message": "Selaimen suojaus"
+  },
+  "loginTitle": {
+    "message": "Tervetuloa FuzeVPN:ään"
+  },
+  "loginSubtitle": {
+    "message": "Kirjaudu sisään suojataksesi selailusi tässä selaimessa."
+  },
+  "email": {
+    "message": "Sähköpostiosoite"
+  },
+  "emailPlaceholder": {
+    "message": "nimi@example.com"
+  },
+  "password": {
+    "message": "Salasana"
+  },
+  "signIn": {
+    "message": "Kirjaudu sisään"
+  },
+  "signingIn": {
+    "message": "Kirjaudutaan…"
+  },
+  "forgotPassword": {
+    "message": "Unohditko salasanan?"
+  },
+  "createAccount": {
+    "message": "Luo tili"
+  },
+  "settings": {
+    "message": "Asetukset"
+  },
+  "close": {
+    "message": "Sulje"
+  },
+  "statusDisconnected": {
+    "message": "Yhteys katkaistu"
+  },
+  "statusConnecting": {
+    "message": "Yhdistetään…"
+  },
+  "statusChanging": {
+    "message": "Vaihdetaan sijaintia…"
+  },
+  "statusProtected": {
+    "message": "Suojattu tässä selaimessa"
+  },
+  "statusRefreshing": {
+    "message": "Uusitaan suojatusti…"
+  },
+  "statusDisconnecting": {
+    "message": "Katkaistaan yhteyttä…"
+  },
+  "statusError": {
+    "message": "Suojaus pysäytetty"
+  },
+  "browserOnlyDetail": {
+    "message": "Suojaus tälle selaimelle."
+  },
+  "location": {
+    "message": "Sijainti"
+  },
+  "change": {
+    "message": "Vaihda"
+  },
+  "noLocation": {
+    "message": "Sijainteja ei saatavilla"
+  },
+  "protectBrowser": {
+    "message": "Suojaa selain"
+  },
+  "disconnect": {
+    "message": "Katkaise yhteys"
+  },
+  "subscription": {
+    "message": "Tilaus"
+  },
+  "refreshSubscription": {
+    "message": "Päivitä tilaus"
+  },
+  "refreshingSubscription": {
+    "message": "Päivitetään tilausta…"
+  },
+  "subscriptionActive": {
+    "message": "Aktiivinen"
+  },
+  "subscriptionInactive": {
+    "message": "Ei aktiivinen"
+  },
+  "expiresOn": {
+    "message": "Vanhenee: $1"
+  },
+  "noExpiry": {
+    "message": "Ei vanhenemispäivää"
+  },
+  "browserOnlyNotice": {
+    "message": "Vain tämä selain. Muut sovellukset ja selaimet eivät ole suojattuja."
+  },
+  "resendVerification": {
+    "message": "Lähetä sähköposti uudelleen"
+  },
+  "incognitoHelp": {
+    "message": "Yksityinen selaus käyttää samaa suojausta vain, jos laajennus on sallittu yksityisessä tilassa selaimen asetuksissa."
+  },
+  "manageAccount": {
+    "message": "Hallinnoi tiliäni"
+  },
+  "account": {
+    "message": "Tili"
+  },
+  "devices": {
+    "message": "Laitteet"
+  },
+  "manageDevices": {
+    "message": "Hallinnoi laitteita"
+  },
+  "refreshDevices": {
+    "message": "Päivitä laitteet"
+  },
+  "deviceCount": {
+    "message": "Laitteet: $1 / $2"
+  },
+  "loadingDevices": {
+    "message": "Ladataan laitteita…"
+  },
+  "noDevices": {
+    "message": "Ei aktiivisia laitteita."
+  },
+  "currentDevice": {
+    "message": "Tämä laite"
+  },
+  "deviceKindBrowser": {
+    "message": "Selainlaajennus"
+  },
+  "deviceKindVpn": {
+    "message": "VPN-laite"
+  },
+  "profile_browser_proxy": {
+    "message": "Selaimen välityspalvelin"
+  },
+  "profile_wireguard": {
+    "message": "WireGuard"
+  },
+  "profile_openvpn": {
+    "message": "OpenVPN"
+  },
+  "none": {
+    "message": "ei mitään"
+  },
+  "deviceCreatedOn": {
+    "message": "Luotu: $1"
+  },
+  "deleteDevice": {
+    "message": "Poista laite"
+  },
+  "deleteDeviceNamed": {
+    "message": "Poista laite $1"
+  },
+  "confirmDeleteDevice": {
+    "message": "Poistetaanko ”$1”? Sen VPN-yhteydet katkaistaan ja sen profiilit poistetaan."
+  },
+  "resetDevice": {
+    "message": "Nollaa laite"
+  },
+  "confirmResetDevice": {
+    "message": "Nollataanko tämä laajennus? Se rekisteröidään uutena laitteena, kun käytät sitä seuraavan kerran."
+  },
+  "signOutAccount": {
+    "message": "Kirjaudu ulos tililtä"
+  },
+  "chooseLocation": {
+    "message": "Valitse sijainti"
+  },
+  "error_invalid_credentials": {
+    "message": "Sähköpostiosoite tai salasana on virheellinen."
+  },
+  "error_unauthorized": {
+    "message": "Istuntosi on vanhentunut. Kirjaudu uudelleen sisään."
+  },
+  "error_email_verification_required": {
+    "message": "Vahvista sähköpostiosoitteesi ennen suojauksen käyttöönottoa."
+  },
+  "errorVerificationCooldown": {
+    "message": "Uuden sähköpostin voi pyytää $1 sekunnin kuluttua."
+  },
+  "error_verification_email_cooldown": {
+    "message": "Odota hetki ennen kuin pyydät uuden sähköpostin."
+  },
+  "error_subscription_required": {
+    "message": "Tämän selaimen suojaaminen edellyttää voimassa olevaa tilausta."
+  },
+  "error_device_limit": {
+    "message": "Laiteraja on täynnä. Poista jokin laite."
+  },
+  "error_device_identity_revoked": {
+    "message": "Tällä laitteella ei ole enää käyttöoikeutta. Yritä yhdistää uudelleen."
+  },
+  "error_device_proof_invalid": {
+    "message": "Laitetta ei voitu vahvistaa. Tarkista tietokoneen päivämäärä ja kellonaika ja yritä uudelleen."
+  },
+  "error_device_proof_replayed": {
+    "message": "Tämä pyyntö on jo käsitelty. Yritä uudelleen."
+  },
+  "error_invalid_device": {
+    "message": "Laitetta ei tunnistettu. Yritä yhdistää uudelleen."
+  },
+  "error_device_exists": {
+    "message": "Tämä laitetunniste on jo liitetty toiseen tiliin."
+  },
+  "error_not_found": {
+    "message": "Tämä toiminto ei ole enää käytettävissä. Yritä uudelleen."
+  },
+  "error_invalid_location": {
+    "message": "Tämä sijainti ei ole käytettävissä. Valitse toinen."
+  },
+  "error_rate_limited": {
+    "message": "Liian monta yritystä. Odota hetki ja yritä uudelleen."
+  },
+  "error_proxy_unavailable": {
+    "message": "Palvelin ei ole tilapäisesti käytettävissä. Yritä hetken kuluttua uudelleen."
+  },
+  "error_api_token_expired": {
+    "message": "Tilisi istunto on vanhentunut. Kirjaudu uudelleen sisään."
+  },
+  "error_network_error": {
+    "message": "Verkko ei ole käytettävissä. Tarkista internetyhteytesi."
+  },
+  "error_request_timeout": {
+    "message": "Palvelu vastasi liian hitaasti. Yritä uudelleen."
+  },
+  "error_invalid_response": {
+    "message": "Palvelu palautti odottamattoman vastauksen."
+  },
+  "error_proxy_certificate_invalid": {
+    "message": "Palvelimen suojausta ei voitu vahvistaa. Yhteys on pysäytetty."
+  },
+  "error_proxy_controlled_by_extension": {
+    "message": "Toinen laajennus hallitsee tällä hetkellä selaimen välityspalvelinta."
+  },
+  "error_proxy_controlled_by_policy": {
+    "message": "Järjestelmänvalvojan käytäntö estää FuzeVPN:ää muuttamasta välityspalvelinta."
+  },
+  "error_proxy_authentication_failed": {
+    "message": "Palvelin ei hyväksynyt yhteyttä. Yritä yhdistää uudelleen."
+  },
+  "error_session_expired": {
+    "message": "Suojattu yhteytesi on vanhentunut. Yhdistä uudelleen."
+  },
+  "error_email_delivery_unavailable": {
+    "message": "Sähköpostia ei voi lähettää juuri nyt."
+  },
+  "error_unknown_error": {
+    "message": "Tapahtui odottamaton virhe. Yritä uudelleen."
+  },
+  "actionBlocked": {
+    "message": "FuzeVPN — Selaus estetty"
+  },
+  "statusBlockedRetry": {
+    "message": "Selaus keskeytetty — yhdistetään uudelleen"
+  },
+  "statusBlockedAction": {
+    "message": "Selaus keskeytetty — tarkista yhteys"
+  },
+  "statusProtectionUnavailable": {
+    "message": "Suojaus ei käytettävissä — selausta ei estetä"
+  },
+  "recoveryHelp": {
+    "message": "Jatka suojausta valitsemalla Yritä uudelleen. Katkaise yhteys -toiminnolla voit selata ilman FuzeVPN:ää."
+  },
+  "retryConnection": {
+    "message": "Yritä uudelleen"
+  },
+  "killSwitch": {
+    "message": "Hätäkatkaisin"
+  },
+  "killSwitchHelp": {
+    "message": "Estää uudet verkkopyynnöt, jos VPN-yhteys katkeaa. Poissuljetut sivustot pysyvät käytettävissä VPN:n ulkopuolella."
+  },
+  "webRtcProtection": {
+    "message": "WebRTC-suojaus"
+  },
+  "webRtcHelp": {
+    "message": "Auttaa pitämään IP-osoitteesi yksityisenä verkkopuheluiden aikana. Jotkin puhelut eivät ehkä toimi. Tämän poistaminen käytöstä voi paljastaa todellisen IP-osoitteesi."
+  },
+  "securityEffectiveState": {
+    "message": "$1 · $2"
+  },
+  "securityBlocked": {
+    "message": "Selaus estetty"
+  },
+  "securityNotBlocked": {
+    "message": "Selausta ei estetty"
+  },
+  "securityWebRtcActive": {
+    "message": "WebRTC-rajoitus käytössä"
+  },
+  "securityWebRtcInactive": {
+    "message": "WebRTC-rajoitus ei käytössä"
+  },
+  "localNetworkHelp": {
+    "message": "Paikalliset IP-osoitteet ja yleiset paikalliset nimet estetään suojauksen aikana. Poissuljettu verkkotunnus voi silti antaa pääsyn paikallisverkkoon. Järjestelmän IPv6-asetuksia ei muuteta."
+  },
+  "securityLimits": {
+    "message": "Tietoa tästä suojauksesta"
+  },
+  "killSwitchLimits": {
+    "message": "Vain tämä selain: olemassa olevat yhteydet sekä osa selaimen sisäisestä tai muiden laajennusten tietoliikenteestä voivat jatkua. Toinen laajennus tai käytäntö voi korvata välityspalvelimen ennen kuin FuzeVPN reagoi. Laajennuksen poistaminen käytöstä poistaa suojauksen. Ei koko järjestelmän kattavaa estoa."
+  },
+  "error_traffic_guard_failed": {
+    "message": "Selauksen estoa ei voitu vahvistaa. Suojausta ei taata. Tarkista laajennuksen käyttöoikeudet."
+  },
+  "error_webrtc_control_unavailable": {
+    "message": "WebRTC-rajoitusta ei voitu ottaa käyttöön. Tarkista asetukset, muut laajennukset tai järjestelmänvalvojan käytäntö."
+  },
+  "language": {
+    "message": "Kieli"
+  },
+  "languageAutomatic": {
+    "message": "Automaattinen — selaimen kieli"
+  },
+  "languageHelp": {
+    "message": "Muutokset tulevat voimaan heti. Automaattinen noudattaa selaimen kieltä, joka voi poiketa järjestelmän kielestä."
+  },
+  "languageSaveError": {
+    "message": "Kieltä ei voitu tallentaa. Aiempi valintasi säilyy. Yritä uudelleen."
+  },
+  "publicIp": {
+    "message": "Julkinen IP"
+  },
+  "vpnIp": {
+    "message": "VPN-IP"
+  },
+  "ipChecking": {
+    "message": "Tarkistetaan…"
+  },
+  "ipUnavailable": {
+    "message": "Ei saatavilla"
+  },
+  "ipLookupExplanation": {
+    "message": "IP tarkistetaan nykyisen yhteytesi kautta ipify-palvelulla tai varalla icanhazip-palvelulla. Selaushistoriaa ei lähetetä."
+  },
+  "automaticLocation": {
+    "message": "Automaattinen"
+  },
+  "automaticLocationHelp": {
+    "message": "Paras viimeaikainen vasteaika tai viimeisin sijaintisi."
+  },
+  "automaticLocationName": {
+    "message": "Automaattinen · $1"
+  },
+  "searchLocations": {
+    "message": "Hae maata tai kaupunkia"
+  },
+  "locationFilters": {
+    "message": "Suodata sijainteja"
+  },
+  "allLocations": {
+    "message": "Kaikki"
+  },
+  "favoriteLocations": {
+    "message": "Suosikit"
+  },
+  "recentLocations": {
+    "message": "Viimeisimmät"
+  },
+  "noMatchingLocations": {
+    "message": "Hakuasi vastaavia sijainteja ei löytynyt."
+  },
+  "noFavoriteLocations": {
+    "message": "Lisää tähti, niin suosikkisijaintisi näkyvät täällä."
+  },
+  "noRecentLocations": {
+    "message": "Viimeksi yhdistetyt sijainnit näkyvät täällä."
+  },
+  "addFavorite": {
+    "message": "Lisää suosikkeihin: $1"
+  },
+  "removeFavorite": {
+    "message": "Poista suosikeista: $1"
+  },
+  "unavailableFavoriteLocation": {
+    "message": "Suosikki ei käytettävissä: $1"
+  },
+  "locationSaveError": {
+    "message": "Muutosta ei voitu viedä loppuun. Osa asetuksista on ehkä tallennettu. Tarkista näytetty valinta ennen kuin yrität uudelleen."
+  },
+  "siteExclusions": {
+    "message": "Poissuljetut sivustot"
+  },
+  "siteExclusionsHelp": {
+    "message": "Nämä sivustot käyttävät yhteyttäsi ilman FuzeVPN:ää, vaikka VPN katkeaisi."
+  },
+  "siteExclusionsEnabled": {
+    "message": "Ota poikkeukset käyttöön"
+  },
+  "siteExclusionInput": {
+    "message": "Verkkotunnus tai URL"
+  },
+  "siteExclusionPlaceholder": {
+    "message": "example.com"
+  },
+  "siteExclusionPreview": {
+    "message": "Valittu verkkotunnus: $1"
+  },
+  "siteExclusionSubdomains": {
+    "message": "Sisällytä aliverkkotunnukset"
+  },
+  "siteExclusionAdd": {
+    "message": "Lisää sivusto"
+  },
+  "siteExclusionsEmpty": {
+    "message": "Ei poissuljettuja sivustoja. Lisää vain sivustot, joita haluat käyttää ilman VPN:ää."
+  },
+  "siteExclusionsCount": {
+    "message": "Sivustot: $1 / 100"
+  },
+  "siteExclusionScopeSubdomains": {
+    "message": "Verkkotunnus ja aliverkkotunnukset"
+  },
+  "siteExclusionScopeExact": {
+    "message": "Vain tarkka verkkotunnus"
+  },
+  "siteExclusionRemove": {
+    "message": "Poista $1"
+  },
+  "siteExclusionsDetails": {
+    "message": "Miten poikkeukset toimivat?"
+  },
+  "siteExclusionsResources": {
+    "message": "Muiden verkkotunnusten resurssit pysyvät suojattuina. Sivun poissulkeminen ei automaattisesti sulje pois sen muuta sisältöä."
+  },
+  "siteExclusionsReload": {
+    "message": "Lataa sivusto uudelleen muutoksen jälkeen. Olemassa olevat yhteydet voivat säilyttää aiemman reittinsä."
+  },
+  "siteExclusionsWebRtc": {
+    "message": "WebRTC-suojaus on edelleen yleinen asetus, myös poissuljetuille sivustoille."
+  },
+  "siteExclusionsLocal": {
+    "message": "Tallennetaan vain tähän selaimeen, ja säilyy tililtä uloskirjautumisen jälkeen."
+  },
+  "siteExclusionsOn": {
+    "message": "Poikkeukset käytössä"
+  },
+  "siteExclusionsOff": {
+    "message": "Poikkeukset pois käytöstä"
+  },
+  "siteExclusionsSummary": {
+    "message": "Sivustoja VPN:n ulkopuolella: $1"
+  },
+  "siteExclusionsPending": {
+    "message": "Otetaan poikkeuksia käyttöön…"
+  },
+  "siteExclusionsInterrupted": {
+    "message": "Muutos keskeytyi. Väliaikainen suojaus pysyy voimassa."
+  },
+  "siteExclusionsSaveError": {
+    "message": "Muutosta ei voitu viedä loppuun. Tarkista asetukset ja yritä uudelleen."
+  },
+  "siteExclusionsRetry": {
+    "message": "Yritä uudelleen"
+  },
+  "siteExclusionInvalid": {
+    "message": "Anna kelvollinen julkinen verkkotunnus. IP-osoitteita, paikallisia nimiä, jokerimerkkejä, julkisia päätteitä ja varattuja verkkotunnuksia ei hyväksytä."
+  },
+  "siteExclusionDuplicate": {
+    "message": "Tämä verkkotunnus on jo luettelossa."
+  },
+  "siteExclusionsLimit": {
+    "message": "100 sivuston raja on saavutettu. Poista sivusto lisätäksesi toisen."
+  },
+  "statusProtectedExceptions": {
+    "message": "VPN käytössä · poikkeuksia: $1"
+  },
+  "statusBlockedExceptions": {
+    "message": "Vain poissuljetut sivustot ovat käytettävissä"
+  },
+  "securityBlockedExceptions": {
+    "message": "Selaus estetty poissuljettuja sivustoja lukuun ottamatta"
+  },
+  "securityBlockUnverified": {
+    "message": "Estoa ei vahvistettu"
+  },
+  "logoutLocalComplete": {
+    "message": "Paikallinen uloskirjautuminen valmis."
+  },
+  "logoutApiSession": {
+    "message": "Nykyinen tili-istunto"
+  },
+  "logoutProxySessions": {
+    "message": "Tunnetut VPN-istunnot"
+  },
+  "logoutRevocationPending": {
+    "message": "Mitätöidään…"
+  },
+  "logoutRevocationConfirmed": {
+    "message": "Mitätöinti vahvistettu"
+  },
+  "logoutRevocationUnconfirmed": {
+    "message": "Mitätöintiä ei vahvistettu"
+  },
+  "logoutUnconfirmedHelp": {
+    "message": "Jotkin etäistunnot voivat pysyä aktiivisina, kunnes ne vanhenevat."
+  },
+  "deviceQuotaLoading": {
+    "message": "Ladataan laiterajaa…"
+  },
+  "deviceQuotaUnknown": {
+    "message": "Laiteraja ei saatavilla"
+  },
+  "error_proxy_creation_uncertain": {
+    "message": "Palvelin ei vahvistanut uuden yhteyden luomista. Automaattinen uudelleenyhdistäminen on keskeytetty."
+  },
+  "siteExclusionsPreferencesReset": {
+    "message": "Tallennetut sivustopoikkeukset nollattiin, koska niitä ei voitu lukea. Lisää poissuljettavat sivustot uudelleen."
+  },
+  "siteExclusionsConflict": {
+    "message": "Poissuljettujen sivustojen luettelo on muuttunut. Tarkista se ja yritä muutosta uudelleen."
+  },
+  "unavailableLocation": {
+    "message": "Sijainti ei käytettävissä"
+  },
+  "verificationSending": {
+    "message": "Lähetetään vahvistussähköpostia…"
+  },
+  "verificationSent": {
+    "message": "Vahvistussähköposti lähetetty. Tarkista saapuneet-kansio ja roskapostikansio."
+  },
+  "error_login_requires_disconnect": {
+    "message": "Katkaise nykyinen VPN-yhteys ennen kuin kirjaudut toiselle tilille."
+  },
+  "error_storage_unavailable": {
+    "message": "Paikalliset tiliasetukset eivät ole käytettävissä. Yritä uudelleen, kun selaimen tallennustila on käytettävissä; tallennettu tilisi on säilytetty."
+  },
+  "diagnosticsAssistance": {
+    "message": "Tuki"
+  },
+  "diagnosticsTitle": {
+    "message": "Diagnostiikka"
+  },
+  "diagnosticsIntro": {
+    "message": "Tarkista FuzeVPN ja nykyinen yhteys muuttamatta suojaustasi."
+  },
+  "diagnosticsPrivacyTitle": {
+    "message": "Tietosi"
+  },
+  "diagnosticsPrivacy": {
+    "message": "Raportin JSON sisältää teknisiä tiloja ja virhekoodeja ilman salasanoja, todennustunnuksia, sähköpostiosoitteita, IP-osoitteita, vierailtuja URL-osoitteita tai poissuljettuja verkkotunnuksia. Lähetys on todennettu ja liittää raportin tiliisi. Verkkotiedoista kerrotaan tietosuojailmoituksessa."
+  },
+  "diagnosticsAuto": {
+    "message": "Lähetä tärkeät virheraportit automaattisesti"
+  },
+  "diagnosticsAutoHelp": {
+    "message": "Oletuksena pois käytöstä. Kun tämä on käytössä, tästä tilistä lähetetään yksinkertaisia teknisiä raportteja ilman selaushistoriaa. Poista asetus käytöstä täällä lopettaaksesi automaattisen lähetyksen ja poistaaksesi odottavat automaattiset raportit."
+  },
+  "diagnosticsHistoryHelp": {
+    "message": "Tekninen historia pysyy paikallisena: enintään 200 tapahtumaa lokia kohden 10 minuutin ajalta, vaikka automaattinen lähetys olisi pois käytöstä. Se ei sisällä selaushistoriaa, ja se tyhjennetään manuaalisesti, kun selain suljetaan tai kun tili vaihtuu."
+  },
+  "diagnosticsHistoryCount": {
+    "message": "Paikallisia teknisiä tapahtumia: $1"
+  },
+  "diagnosticsConnectionLog": {
+    "message": "Vie yhteysloki"
+  },
+  "diagnosticsAccountRequired": {
+    "message": "Kirjaudu sisään ottaaksesi lähetyksen käyttöön. Voit silti tarkastella ja viedä raportin ilman tiliä."
+  },
+  "diagnosticsRun": {
+    "message": "Suorita diagnostiikka"
+  },
+  "diagnosticsClearHistory": {
+    "message": "Tyhjennä paikallinen historia"
+  },
+  "diagnosticsPreparing": {
+    "message": "Valmistellaan raporttia…"
+  },
+  "diagnosticsReports": {
+    "message": "Raportit"
+  },
+  "diagnosticsEmpty": {
+    "message": "Ei vielä paikallisia raportteja."
+  },
+  "diagnosticsChooseReport": {
+    "message": "Valitse raportti"
+  },
+  "diagnosticsReportLabel": {
+    "message": "$1 · $2 · $3"
+  },
+  "diagnosticsTypeFull": {
+    "message": "Täydellinen raportti"
+  },
+  "diagnosticsTypeSimple": {
+    "message": "Virheraportti"
+  },
+  "diagnosticsSummary": {
+    "message": "Kerätty: $1. FuzeVPN-versio $2."
+  },
+  "diagnosticsJson": {
+    "message": "Näytä raportin sisältö (JSON)"
+  },
+  "diagnosticsExport": {
+    "message": "Vie raportti"
+  },
+  "diagnosticsDelete": {
+    "message": "Poista paikallinen raportti"
+  },
+  "diagnosticsRetention": {
+    "message": "Paikalliset raportit vanhenevat 24 tunnin kuluttua. Poistaminen täällä ei poista raporttia, jonka palvelu on jo vastaanottanut. Palvelimella säilyttämisestä ja poistopyynnöistä kerrotaan tietosuojailmoituksessa."
+  },
+  "diagnosticsConsent": {
+    "message": "Lähetä tämä diagnostiikkaraportti FuzeVPN:lle"
+  },
+  "diagnosticsDataCollectionRequired": {
+    "message": "Firefoxin on sallittava teknisten tietojen keruu, jotta diagnostiikkaa voidaan lähettää. Yritä uudelleen ja myönnä tämä käyttöoikeus."
+  },
+  "diagnosticsSendHelp": {
+    "message": "Lähettäminen on vapaaehtoista. Hyväksynnän jälkeen lähetystä voidaan yrittää uudelleen enintään 24 tunnin ajan saman tilin voimassa olevalla istunnolla. Voit peruuttaa myöhemmät yritykset. Myöhäinen peruutus ei takaa, ettei palvelin olisi jo vastaanottanut raporttia."
+  },
+  "diagnosticsSend": {
+    "message": "Lähetä raportti"
+  },
+  "diagnosticsCancel": {
+    "message": "Peruuta lähetys"
+  },
+  "diagnosticsReload": {
+    "message": "Lataa tämä sivu uudelleen"
+  },
+  "diagnosticsUnavailable": {
+    "message": "Diagnostiikka ei ole käytettävissä. Lataa FuzeVPN uudelleen selaimen laajennusten hallinnasta ja avaa tämä sivu uudelleen. VPN-yhteytesi pysyy ennallaan."
+  },
+  "diagnosticsQueueFull": {
+    "message": "Lähetysjono on täynnä. Poista paikallinen raportti tai odota, että odottava raportti on lähetetty."
+  },
+  "diagnosticsContentUnavailable": {
+    "message": "Raportin sisältö ei ole käytettävissä. Vie paikallinen raportti, jos se on saatavilla, ja ota yhteyttä tukeen."
+  },
+  "diagnosticsFailure": {
+    "message": "Diagnostiikkatoimintoa ei voitu suorittaa loppuun. VPN-yhteytesi pysyy ennallaan."
+  },
+  "diagnosticsChecks": {
+    "message": "Tarkistukset"
+  },
+  "diagnosticsCheckFallback": {
+    "message": "Tekninen tarkistus: $1"
+  },
+  "diagnosticsCheckLine": {
+    "message": "$1 — $2"
+  },
+  "diagnosticsProxy": {
+    "message": "Selaimen välityspalvelin"
+  },
+  "diagnosticsStorage": {
+    "message": "Paikallinen tallennustila"
+  },
+  "diagnosticsNetwork": {
+    "message": "Verkkoyhteys"
+  },
+  "diagnosticsCleanup": {
+    "message": "Istuntojen siivous"
+  },
+  "diagnosticsResult_passed": {
+    "message": "Onnistui"
+  },
+  "diagnosticsResult_failed": {
+    "message": "Epäonnistui"
+  },
+  "diagnosticsResult_skipped": {
+    "message": "Ei suoritettu"
+  },
+  "diagnosticsResult_unknown": {
+    "message": "Tuntematon"
+  },
+  "diagnosticsStatus_ready": {
+    "message": "Valmis tällä laitteella"
+  },
+  "diagnosticsStatus_pending": {
+    "message": "Odottaa lähetystä"
+  },
+  "diagnosticsStatus_sending": {
+    "message": "Lähetetään…"
+  },
+  "diagnosticsStatus_session_required": {
+    "message": "Odottaa saman tilin voimassa olevaa istuntoa"
+  },
+  "diagnosticsStatus_received": {
+    "message": "Palvelu vastaanotti"
+  },
+  "diagnosticsStatus_failed": {
+    "message": "Lähetys epäonnistui"
+  },
+  "diagnosticsStatus_cancelled": {
+    "message": "Lähetys peruutettu"
+  },
+  "diagnosticsStatus_expired": {
+    "message": "Lähetysaika umpeutui"
+  },
+  "diagnosticsReceivedAt": {
+    "message": "Vastaanotettu: $1"
+  },
+  "error_private_browsing_required": {
+    "message": "Firefox vaatii tämän käyttöoikeuden VPN:n määrittämiseen myös tavallisissa ikkunoissa. Avaa about:addons → FuzeVPN, salli sen toimia yksityisissä ikkunoissa ja yritä uudelleen."
+  },
+  "error_host_permissions_required": {
+    "message": "Avaa Firefoxissa about:addons → FuzeVPN → Oikeudet, salli pääsy kaikille verkkosivustoille ja yritä uudelleen."
+  },
+  "cancelAction": {
+    "message": "Peruuta"
+  },
+  "refreshLocations": {
+    "message": "Päivitä sijainnit"
+  },
+  "refreshingLocations": {
+    "message": "Päivitetään sijainteja…"
+  },
+  "locationsRefreshError": {
+    "message": "Sijaintiluetteloa ei voitu päivittää. Yritä uudelleen."
+  },
+  "error_device_revoked_limit": {
+    "message": "Tämän laitteen käyttöoikeus on peruttu. Laiteraja on täynnä: poista jokin laite."
+  },
+  "noAvailableLocations": {
+    "message": "Sijainteja ei ole tällä hetkellä saatavilla. Yritä pian uudelleen."
+  },
+  "noAvailableFavoriteLocations": {
+    "message": "Suosikkisijaintisi eivät ole tilapäisesti käytettävissä."
+  },
+  "error_location_favorites_limit": {
+    "message": "100 suosikin raja on saavutettu. Poista suosikki lisätäksesi toisen."
+  },
+  "error_server_full": {
+    "message": "Tämä palvelin on täynnä. Valitse toinen sijainti."
+  },
+  "error_capacity_unavailable": {
+    "message": "Palvelimen saatavuutta ei voida vahvistaa juuri nyt. Yritä pian uudelleen."
+  },
+  "locationHierarchyHelp": {
+    "message": "Nimi valitsee palvelimen; nuoli näyttää tiedot."
+  },
+  "locationCountrySelect": {
+    "message": "Valitse käytettävissä oleva palvelin: $1"
+  },
+  "locationCitySelect": {
+    "message": "Valitse käytettävissä oleva palvelin: $1"
+  },
+  "locationShowCities": {
+    "message": "Näytä kaupungit: $1"
+  },
+  "locationHideCities": {
+    "message": "Piilota kaupungit: $1"
+  },
+  "locationShowServers": {
+    "message": "Näytä palvelimet: $1"
+  },
+  "locationHideServers": {
+    "message": "Piilota palvelimet: $1"
+  },
+  "locationAvailableServers": {
+    "message": "Käytettävissä olevat palvelimet: $1"
+  },
+  "legalInformation": {
+    "message": "Oikeudelliset tiedot"
+  },
+  "privacyPolicy": {
+    "message": "Laajennuksen tietosuojailmoitus"
+  },
+  "termsAndConditions": {
+    "message": "Käyttö- ja myyntiehdot"
+  },
+  "legalNotice": {
+    "message": "Oikeudellinen huomautus"
+  },
+  "contactSupport": {
+    "message": "Ota yhteyttä tukeen"
+  },
+  "webSignIn": {
+    "message": "Kirjaudu FuzeVPN:ään"
+  },
+  "webSignInDisconnect": {
+    "message": "Katkaise yhteys ja kirjaudu sisään"
+  },
+  "webSignInPending": {
+    "message": "Kirjautuminen käynnissä…"
+  },
+  "webSignInHelp": {
+    "message": "Kirjaudu sisään tai luo tili Googlella tai sähköpostilla FuzeVPN-asiakasalueella."
+  },
+  "webSignInDisconnectHelp": {
+    "message": "Tämä painike pysäyttää selaimen suojauksen, jotta voit kirjautua Googlella tai sähköpostilla. Selailusi ei ole suojattu kirjautumisen aikana."
+  },
+  "webSignInStatus": {
+    "message": "Jatka FuzeVPN-kirjautumisikkunassa. Laajennus päivittyy automaattisesti, kun olet valmis. Peruuta sulkemalla kyseinen ikkuna."
+  },
+  "error_web_login_cancelled": {
+    "message": "Kirjautuminen peruutettiin. Yritä uudelleen."
+  },
+  "error_web_login_timeout": {
+    "message": "Kirjautuminen kesti liian kauan. Yritä uudelleen."
+  },
+  "error_web_login_unavailable": {
+    "message": "Verkkokirjautuminen ei ole käytettävissä. Yritä myöhemmin uudelleen."
+  },
+  "error_web_login_invalid_callback": {
+    "message": "Kirjautumista ei voitu vahvistaa. Aloita alusta laajennuksesta."
+  },
+  "error_web_login_denied": {
+    "message": "Kirjautumista ei sallittu. Yritä uudelleen."
+  },
+  "error_web_login_busy": {
+    "message": "Sulje jo avoinna oleva kirjautumisikkuna ennen kuin yrität uudelleen."
+  },
+  "deviceKindFirefox": {
+    "message": "Firefox-selain"
+  },
+  "generalPrivacyPolicy": {
+    "message": "Yleinen tietosuojakäytäntö"
+  },
+  "privacyNoticeTitle": {
+    "message": "Tietosuoja FuzeVPN-laajennuksessa"
+  },
+  "privacyNoticeIntro": {
+    "message": "Tämä ilmoitus kuvaa tämän laajennuksen käyttämät tiedot. Se täydentää alla linkitettyä FuzeVPN:n yleistä tietosuojakäytäntöä. Vapaaehtoinen diagnostiikan lähettäminen on erillään tiedoista, joita tarvitaan sisäänkirjautumiseen ja VPN:n käyttöön."
+  },
+  "privacyNoticeUpdated": {
+    "message": "Ilmoitus päivitetty 19. lokakuuta 2026"
+  },
+  "privacyNoticeServiceTitle": {
+    "message": "Tili ja VPN-palvelu"
+  },
+  "privacyNoticeService": {
+    "message": "Laajennus vaihtaa todennus-, tili-, tilaus-, laite- ja välityspalvelinistuntotietoja palvelun api.fuzevpn.com kanssa. VPN-välityspalvelin välittää sen kautta ohjatun liikenteen. Nämä yhteydet paljastavat verkon metatietoja vastaanottavalle palvelulle; tämä ilmoitus ei anna erillistä lupausta palvelimen lokikirjauksesta."
+  },
+  "privacyNoticeLocalTitle": {
+    "message": "Selaimeen tallennetut tiedot"
+  },
+  "privacyNoticeLocal": {
+    "message": "Selaimen tallennustilassa säilytetään istuntosi, tilitietosi, asetuksesi, sivustopoikkeukset ja laitetunniste. Teknisiä lokeja säilytetään paikallisesti enintään 10 minuuttia, vaikka automaattinen raportointi olisi pois käytöstä. Diagnostiikkaluonnokset ja jonossa olevat raportit vanhenevat paikallisesti 24 tunnin kuluttua; siivous suoritetaan, kun laajennus voi toimia."
+  },
+  "privacyNoticeIpTitle": {
+    "message": "Julkisen IP:n tarkistukset ja kolmannet osapuolet"
+  },
+  "privacyNoticeIp": {
+    "message": "IP-osoitteen näyttäminen ja verkkodiagnostiikka ottavat yhteyttä osoitteeseen api.ipify.org. IP-osoitteen näyttäminen voi käyttää varalla osoitetta ipv4.icanhazip.com. Palveluntarjoaja saa yhteyden IP-osoitteen ja tavalliset pyynnön metatiedot: suorassa tilassa julkisen IP-osoitteesi tai välityspalvelinta käytettäessä VPN:n poistumis-IP:n. Nämä pyynnöt eivät sisällä evästeitä tai viittaustietoja eivätkä lähetä tilitunnusta tai selaushistoriaa."
+  },
+  "privacyNoticeReportsTitle": {
+    "message": "Mitä diagnostiikkaraportit sisältävät"
+  },
+  "privacyNoticeReports": {
+    "message": "Raportit voivat sisältää satunnaisen raporttitunnisteen, aikaleimoja, laajennuksen ja selaimen versiot, käyttöjärjestelmäperheen ja arkkitehtuurin, yhteys- ja suojaustilat, virhekoodeja, laskureita, kestoja ja tarkistusten tuloksia. Täydelliset raportit voivat sisältää viimeaikaisia teknisiä tapahtumia. Niiden JSON ei sisällä salasanoja, todennustunnuksia, sähköpostiosoitteita, IP-osoitteita, vierailtuja URL-osoitteita eikä poissuljettuja verkkotunnuksia. Voit tarkastella ja viedä täydellisen raportin ennen sen lähettämistä."
+  },
+  "privacyNoticeAccountTitle": {
+    "message": "Vastaanottaja ja tiliin liittäminen"
+  },
+  "privacyNoticeAccount": {
+    "message": "Raportit lähetetään FuzeVPN:lle osoitteeseen api.fuzevpn.com/v1/diagnostics todennettua yhteyttä pitkin. Tämä API-yhteys ohittaa VPN-välityspalvelimen: FuzeVPN saa suoran julkisen IP-osoitteesi silloinkin, kun VPN on käytössä. Raportit liitetään sisäänkirjautuneeseen tiliin, eivätkä ne ole anonyymejä. Todennusotsake ja IP-osoite ovat erillään raportin JSONista. Onnistunut vastaanottokuittaus vahvistaa, että kyseinen päätepiste hyväksyi raportin, ei sitä, että tukihenkilö olisi lukenut sen."
+  },
+  "privacyNoticeChoiceTitle": {
+    "message": "Vapaaehtoinen lähetys ja suostumuksen peruminen"
+  },
+  "privacyNoticeChoice": {
+    "message": "Automaattinen lähetys on oletuksena pois käytöstä. Sen käyttöönotto sallii yksinkertaiset virheraportit kyseiselle tilille. Täydellisen raportin manuaalinen lähetys edellyttää lähetyksen valintaruudun valitsemista. Firefox vaatii lisäksi oman valinnaisen teknisten tietojen käyttöoikeutensa. Poista automaattinen lähetys käytöstä lopettaaksesi sen ja poistaaksesi odottavat automaattiset raportit; peruuta yksittäiset odottavat lähetykset erikseen. Diagnostiikan lähettämisestä kieltäytyminen ei estä VPN:n käyttöä."
+  },
+  "privacyNoticeDeleteTitle": {
+    "message": "Paikallinen poistaminen ja ladatut tiedostot"
+  },
+  "privacyNoticeDelete": {
+    "message": "Diagnostiikka-osiossa voit tyhjentää teknisen historian tai poistaa yksittäisen paikallisen raportin. Historian tyhjentäminen ei poista olemassa olevia raporttien kopioita. Paikallinen peruutus tai poisto ei voi palauttaa tietoja, jotka palvelu on jo vastaanottanut, mukaan lukien ennen peruutusta perille tullut lähetys. Ladatut viennit ovat erillisiä tiedostoja, jotka sinun on poistettava itse."
+  },
+  "privacyNoticeServerTitle": {
+    "message": "Palvelimella säilyttäminen ja pyynnöt"
+  },
+  "privacyNoticeServer": {
+    "message": "Tämä laajennus ei hallitse eikä vahvista palvelimella säilyttämistä tai palvelinpuolen poistamista. FuzeVPN:n soveltamasta säilytysajasta ja jo lähetettyjä raportteja koskevista pyynnöistä saat tietoa yleisestä tietosuojakäytännöstä tai ottamalla yhteyttä FuzeVPN:ään. Tämä ilmoitus ei takaa mitään kiinteää palvelimen säilytysaikaa."
+  },
+  "privacyNoticeSupportTitle": {
+    "message": "Diagnostiikka ja tuki ovat erillisiä"
+  },
+  "privacyNoticeSupport": {
+    "message": "Diagnostiikkaraportin lähettäminen ei itsessään lähetä tukiviestiä laajennuksesta. Jos haluat selittää ongelman tai pyytää vastaanotetun raportin poistamista, käytä alla olevaa FuzeVPN-yhteyskanavaa. Jos päätät jakaa viedyn tiedoston muuta kanavaa pitkin, tarkista ensin sen sisältö."
+  },
+  "privacyNoticeManage": {
+    "message": "Avaa Diagnostiikka"
+  },
+  "privacyNoticeLinksTitle": {
+    "message": "Palvelun käytäntö ja yhteystiedot"
+  },
+  "theme": {
+    "message": "Teema"
+  },
+  "themeSystem": {
+    "message": "Järjestelmä"
+  },
+  "themeLight": {
+    "message": "Vaalea"
+  },
+  "themeDark": {
+    "message": "Tumma"
+  },
+  "switchToDarkTheme": {
+    "message": "Vaihda tummaan teemaan"
+  },
+  "switchToLightTheme": {
+    "message": "Vaihda vaaleaan teemaan"
+  }
+}

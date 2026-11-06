@@ -1,0 +1,929 @@
+{
+  "extensionName": {
+    "message": "FuzeVPN"
+  },
+  "extensionDescription": {
+    "message": "שמרו על הפרטיות שלכם וחזקו את האבטחה בלחיצה אחת."
+  },
+  "siteExclusionsReloadRequired": {
+    "message": "טענו מחדש את FuzeVPN ממנהל התוספים של הדפדפן כדי להשלים את העדכון ולהשתמש באתרים מוחרגים."
+  },
+  "extensionCommunicationError": {
+    "message": "התוסף אינו מגיב. סגרו חלון זה ולאחר מכן טענו מחדש את FuzeVPN ממנהל התוספים של הדפדפן."
+  },
+  "actionDisconnected": {
+    "message": "FuzeVPN — מנותק"
+  },
+  "actionConnected": {
+    "message": "FuzeVPN — מוגן בדפדפן זה"
+  },
+  "actionReconnecting": {
+    "message": "FuzeVPN — מתחבר מחדש"
+  },
+  "actionError": {
+    "message": "FuzeVPN — נדרשת תשומת לב"
+  },
+  "browserProtection": {
+    "message": "הגנת הדפדפן"
+  },
+  "loginTitle": {
+    "message": "ברוכים הבאים ל-FuzeVPN"
+  },
+  "loginSubtitle": {
+    "message": "היכנסו כדי להגן על הגלישה בדפדפן זה."
+  },
+  "email": {
+    "message": "כתובת דוא״ל"
+  },
+  "emailPlaceholder": {
+    "message": "you@example.com"
+  },
+  "password": {
+    "message": "סיסמה"
+  },
+  "signIn": {
+    "message": "כניסה"
+  },
+  "signingIn": {
+    "message": "מתבצעת כניסה…"
+  },
+  "forgotPassword": {
+    "message": "שכחתם את הסיסמה?"
+  },
+  "createAccount": {
+    "message": "יצירת חשבון"
+  },
+  "settings": {
+    "message": "הגדרות"
+  },
+  "close": {
+    "message": "סגירה"
+  },
+  "statusDisconnected": {
+    "message": "מנותק"
+  },
+  "statusConnecting": {
+    "message": "מתחבר…"
+  },
+  "statusChanging": {
+    "message": "מחליף מיקום…"
+  },
+  "statusProtected": {
+    "message": "מוגן בדפדפן זה"
+  },
+  "statusRefreshing": {
+    "message": "מתחדש באופן מאובטח…"
+  },
+  "statusDisconnecting": {
+    "message": "מתנתק…"
+  },
+  "statusError": {
+    "message": "ההגנה הופסקה"
+  },
+  "browserOnlyDetail": {
+    "message": "הגנה לדפדפן זה."
+  },
+  "location": {
+    "message": "מיקום"
+  },
+  "change": {
+    "message": "שינוי"
+  },
+  "noLocation": {
+    "message": "אין מיקום זמין"
+  },
+  "protectBrowser": {
+    "message": "הגנה על הדפדפן"
+  },
+  "disconnect": {
+    "message": "ניתוק"
+  },
+  "subscription": {
+    "message": "מינוי"
+  },
+  "refreshSubscription": {
+    "message": "רענון המינוי"
+  },
+  "refreshingSubscription": {
+    "message": "מרענן את המינוי…"
+  },
+  "subscriptionActive": {
+    "message": "פעיל"
+  },
+  "subscriptionInactive": {
+    "message": "לא פעיל"
+  },
+  "expiresOn": {
+    "message": "יפוג ב-$1"
+  },
+  "noExpiry": {
+    "message": "אין תאריך תפוגה"
+  },
+  "browserOnlyNotice": {
+    "message": "דפדפן זה בלבד. אפליקציות ודפדפנים אחרים אינם מוגנים."
+  },
+  "resendVerification": {
+    "message": "שליחת הדוא״ל מחדש"
+  },
+  "incognitoHelp": {
+    "message": "גלישה פרטית משתמשת באותה הגנה רק אם התוסף מורשה לפעול במצב פרטי בהגדרות הדפדפן."
+  },
+  "manageAccount": {
+    "message": "ניהול החשבון שלי"
+  },
+  "account": {
+    "message": "חשבון"
+  },
+  "devices": {
+    "message": "מכשירים"
+  },
+  "manageDevices": {
+    "message": "ניהול מכשירים"
+  },
+  "refreshDevices": {
+    "message": "רענון המכשירים"
+  },
+  "deviceCount": {
+    "message": "$1 / $2 מכשירים"
+  },
+  "loadingDevices": {
+    "message": "טוען מכשירים…"
+  },
+  "noDevices": {
+    "message": "אין מכשירים פעילים."
+  },
+  "currentDevice": {
+    "message": "מכשיר זה"
+  },
+  "deviceKindBrowser": {
+    "message": "תוסף דפדפן"
+  },
+  "deviceKindVpn": {
+    "message": "מכשיר VPN"
+  },
+  "profile_browser_proxy": {
+    "message": "פרוקסי דפדפן"
+  },
+  "profile_wireguard": {
+    "message": "WireGuard"
+  },
+  "profile_openvpn": {
+    "message": "OpenVPN"
+  },
+  "none": {
+    "message": "אין"
+  },
+  "deviceCreatedOn": {
+    "message": "נוצר ב-$1"
+  },
+  "deleteDevice": {
+    "message": "מחיקת המכשיר"
+  },
+  "deleteDeviceNamed": {
+    "message": "מחיקת המכשיר $1"
+  },
+  "confirmDeleteDevice": {
+    "message": "להסיר את “$1”? חיבורי ה-VPN שלו ייעצרו והפרופילים שלו יוסרו."
+  },
+  "resetDevice": {
+    "message": "איפוס המכשיר"
+  },
+  "confirmResetDevice": {
+    "message": "לאפס את התוסף? הוא יירשם כמכשיר חדש בפעם הבאה שתשתמשו בו."
+  },
+  "signOutAccount": {
+    "message": "יציאה מהחשבון"
+  },
+  "chooseLocation": {
+    "message": "בחירת מיקום"
+  },
+  "error_invalid_credentials": {
+    "message": "כתובת הדוא״ל או הסיסמה שגויות."
+  },
+  "error_unauthorized": {
+    "message": "פג תוקף ההפעלה. היכנסו שוב."
+  },
+  "error_email_verification_required": {
+    "message": "אמתו את כתובת הדוא״ל לפני הפעלת ההגנה."
+  },
+  "errorVerificationCooldown": {
+    "message": "ניתן יהיה לבקש דוא״ל חדש בעוד $1 שניות."
+  },
+  "error_verification_email_cooldown": {
+    "message": "המתינו לפני שתבקשו דוא״ל נוסף."
+  },
+  "error_subscription_required": {
+    "message": "נדרש מינוי פעיל כדי להגן על דפדפן זה."
+  },
+  "error_device_limit": {
+    "message": "הגעתם למגבלת המכשירים. הסירו מכשיר."
+  },
+  "error_device_identity_revoked": {
+    "message": "מכשיר זה כבר אינו מורשה. נסו להתחבר שוב."
+  },
+  "error_device_proof_invalid": {
+    "message": "לא הצלחנו לאמת מכשיר זה. בדקו את התאריך והשעה במחשב ונסו שוב."
+  },
+  "error_device_proof_replayed": {
+    "message": "בקשה זו כבר טופלה. נסו שוב."
+  },
+  "error_invalid_device": {
+    "message": "מכשיר זה לא זוהה. נסו להתחבר שוב."
+  },
+  "error_device_exists": {
+    "message": "זהות מכשיר זו כבר מקושרת לחשבון אחר."
+  },
+  "error_not_found": {
+    "message": "פעולה זו כבר אינה זמינה. נסו שוב."
+  },
+  "error_invalid_location": {
+    "message": "מיקום זה אינו זמין. בחרו מיקום אחר."
+  },
+  "error_rate_limited": {
+    "message": "יותר מדי ניסיונות. המתינו רגע ונסו שוב."
+  },
+  "error_proxy_unavailable": {
+    "message": "שרת זה אינו זמין זמנית. נסו שוב בעוד רגע."
+  },
+  "error_api_token_expired": {
+    "message": "פג תוקף ההפעלה בחשבון. היכנסו שוב."
+  },
+  "error_network_error": {
+    "message": "הרשת אינה זמינה. בדקו את החיבור לאינטרנט."
+  },
+  "error_request_timeout": {
+    "message": "השירות לא הגיב בזמן. נסו שוב."
+  },
+  "error_invalid_response": {
+    "message": "השירות החזיר תגובה לא צפויה."
+  },
+  "error_proxy_certificate_invalid": {
+    "message": "לא הצלחנו לאמת את אבטחת השרת. החיבור הופסק."
+  },
+  "error_proxy_controlled_by_extension": {
+    "message": "תוסף אחר שולט כרגע בפרוקסי של הדפדפן."
+  },
+  "error_proxy_controlled_by_policy": {
+    "message": "מדיניות של מנהל המערכת מונעת מ-FuzeVPN לשנות את הפרוקסי."
+  },
+  "error_proxy_authentication_failed": {
+    "message": "השרת לא קיבל את החיבור. נסו להתחבר שוב."
+  },
+  "error_session_expired": {
+    "message": "פג תוקף החיבור המוגן. התחברו שוב."
+  },
+  "error_email_delivery_unavailable": {
+    "message": "לא ניתן לשלוח את הדוא״ל כרגע."
+  },
+  "error_unknown_error": {
+    "message": "אירעה שגיאה לא צפויה. נסו שוב."
+  },
+  "actionBlocked": {
+    "message": "FuzeVPN — הגלישה חסומה"
+  },
+  "statusBlockedRetry": {
+    "message": "הגלישה מושהית — מתחבר מחדש"
+  },
+  "statusBlockedAction": {
+    "message": "הגלישה מושהית — בדקו את החיבור"
+  },
+  "statusProtectionUnavailable": {
+    "message": "ההגנה אינה זמינה — הגלישה אינה חסומה"
+  },
+  "recoveryHelp": {
+    "message": "נסו שוב כדי לחדש את ההגנה. ניתוק מאפשר לגלוש בלי FuzeVPN."
+  },
+  "retryConnection": {
+    "message": "ניסיון חוזר"
+  },
+  "killSwitch": {
+    "message": "מתג חירום"
+  },
+  "killSwitchHelp": {
+    "message": "חוסם בקשות אינטרנט חדשות אם חיבור ה-VPN נופל. אתרים מוחרגים נשארים נגישים מחוץ ל-VPN."
+  },
+  "webRtcProtection": {
+    "message": "הגנת WebRTC"
+  },
+  "webRtcHelp": {
+    "message": "עוזרת לשמור על פרטיות כתובת ה-IP שלכם בשיחות אינטרנט. ייתכן שחלק מהשיחות לא יפעלו. כיבוי ההגנה עלול לחשוף את כתובת ה-IP האמיתית שלכם."
+  },
+  "securityEffectiveState": {
+    "message": "$1 · $2"
+  },
+  "securityBlocked": {
+    "message": "הגלישה חסומה"
+  },
+  "securityNotBlocked": {
+    "message": "הגלישה אינה חסומה"
+  },
+  "securityWebRtcActive": {
+    "message": "הגבלת WebRTC פעילה"
+  },
+  "securityWebRtcInactive": {
+    "message": "הגבלת WebRTC לא פעילה"
+  },
+  "localNetworkHelp": {
+    "message": "כתובות IP מקומיות ושמות מקומיים נפוצים נחסמים בזמן ההגנה. דומיין מוחרג עדיין עשוי לאפשר גישה לרשת המקומית. הגדרות IPv6 של המערכת אינן משתנות."
+  },
+  "securityLimits": {
+    "message": "על הגנה זו"
+  },
+  "killSwitchLimits": {
+    "message": "דפדפן זה בלבד: חיבורים קיימים וחלק מהתקשורת הפנימית של הדפדפן או של תוספים אחרים עשויים להימשך. תוסף אחר או מדיניות עשויים להחליף את הפרוקסי לפני ש-FuzeVPN מגיב. השבתת התוסף מסירה את ההגנה. אין חסימה ברמת המערכת."
+  },
+  "error_traffic_guard_failed": {
+    "message": "לא ניתן היה לאמת את חסימת הגלישה. ההגנה אינה מובטחת. בדקו את ההרשאות של התוסף."
+  },
+  "error_webrtc_control_unavailable": {
+    "message": "לא ניתן היה להחיל את הגבלת WebRTC. בדקו את ההגדרות, תוספים אחרים או את מדיניות מנהל המערכת."
+  },
+  "language": {
+    "message": "שפה"
+  },
+  "languageAutomatic": {
+    "message": "אוטומטי — שפת הדפדפן"
+  },
+  "languageHelp": {
+    "message": "השינויים חלים מיד. האפשרות ׳אוטומטי׳ פועלת לפי שפת הדפדפן, שעשויה להיות שונה משפת המערכת."
+  },
+  "languageSaveError": {
+    "message": "לא ניתן היה לשמור את השפה. הבחירה הקודמת נשמרה. נסו שוב."
+  },
+  "publicIp": {
+    "message": "IP ציבורי"
+  },
+  "vpnIp": {
+    "message": "IP של ה-VPN"
+  },
+  "ipChecking": {
+    "message": "בודק…"
+  },
+  "ipUnavailable": {
+    "message": "לא זמין"
+  },
+  "ipLookupExplanation": {
+    "message": "כתובת ה-IP נבדקת באמצעות ipify, או icanhazip כגיבוי, דרך החיבור הנוכחי. היסטוריית הגלישה אינה נשלחת."
+  },
+  "automaticLocation": {
+    "message": "אוטומטי"
+  },
+  "automaticLocationHelp": {
+    "message": "זמן התגובה הטוב ביותר לאחרונה, או המיקום האחרון שלכם."
+  },
+  "automaticLocationName": {
+    "message": "אוטומטי · $1"
+  },
+  "searchLocations": {
+    "message": "חיפוש מדינה או עיר"
+  },
+  "locationFilters": {
+    "message": "סינון מיקומים"
+  },
+  "allLocations": {
+    "message": "הכול"
+  },
+  "favoriteLocations": {
+    "message": "מועדפים"
+  },
+  "recentLocations": {
+    "message": "אחרונים"
+  },
+  "noMatchingLocations": {
+    "message": "אין מיקומים התואמים לחיפוש."
+  },
+  "noFavoriteLocations": {
+    "message": "סמנו בכוכב כדי לשמור כאן את המיקומים המועדפים."
+  },
+  "noRecentLocations": {
+    "message": "המיקומים שהתחברתם אליהם לאחרונה יופיעו כאן."
+  },
+  "addFavorite": {
+    "message": "הוספת $1 למועדפים"
+  },
+  "removeFavorite": {
+    "message": "הסרת $1 מהמועדפים"
+  },
+  "unavailableFavoriteLocation": {
+    "message": "מועדף לא זמין $1"
+  },
+  "locationSaveError": {
+    "message": "לא ניתן היה להשלים את השינוי. ייתכן שחלק מההגדרות נשמרו. בדקו את הבחירה המוצגת לפני שתנסו שוב."
+  },
+  "siteExclusions": {
+    "message": "אתרים מוחרגים"
+  },
+  "siteExclusionsHelp": {
+    "message": "אתרים אלה משתמשים בחיבור שלכם בלי FuzeVPN, גם אם ה-VPN נופל."
+  },
+  "siteExclusionsEnabled": {
+    "message": "הפעלת חריגים"
+  },
+  "siteExclusionInput": {
+    "message": "דומיין או כתובת URL"
+  },
+  "siteExclusionPlaceholder": {
+    "message": "example.com"
+  },
+  "siteExclusionPreview": {
+    "message": "הדומיין שנבחר: $1"
+  },
+  "siteExclusionSubdomains": {
+    "message": "כולל תת-דומיינים"
+  },
+  "siteExclusionAdd": {
+    "message": "הוספת אתר"
+  },
+  "siteExclusionsEmpty": {
+    "message": "אין אתרים מוחרגים. הוסיפו רק אתרים שבהם תרצו להשתמש בלי VPN."
+  },
+  "siteExclusionsCount": {
+    "message": "$1 / 100 אתרים"
+  },
+  "siteExclusionScopeSubdomains": {
+    "message": "דומיין ותת-דומיינים"
+  },
+  "siteExclusionScopeExact": {
+    "message": "הדומיין המדויק בלבד"
+  },
+  "siteExclusionRemove": {
+    "message": "הסרת $1"
+  },
+  "siteExclusionsDetails": {
+    "message": "איך פועלים החריגים?"
+  },
+  "siteExclusionsResources": {
+    "message": "משאבים מדומיינים אחרים נשארים מוגנים. החרגת דף אינה מחריגה אוטומטית את שאר התוכן שלו."
+  },
+  "siteExclusionsReload": {
+    "message": "טענו מחדש את האתר לאחר שינוי. חיבורים קיימים עשויים לשמור על הנתיב הקודם."
+  },
+  "siteExclusionsWebRtc": {
+    "message": "הגנת WebRTC נשארת הגדרה כללית, גם עבור אתרים מוחרגים."
+  },
+  "siteExclusionsLocal": {
+    "message": "הרשימה שמורה בדפדפן זה בלבד ונשמרת גם לאחר יציאה מהחשבון."
+  },
+  "siteExclusionsOn": {
+    "message": "החריגים מופעלים"
+  },
+  "siteExclusionsOff": {
+    "message": "החריגים מושבתים"
+  },
+  "siteExclusionsSummary": {
+    "message": "$1 אתרים מחוץ ל-VPN"
+  },
+  "siteExclusionsPending": {
+    "message": "מחיל חריגים…"
+  },
+  "siteExclusionsInterrupted": {
+    "message": "השינוי הופסק. ההגנה הזמנית נשארת בתוקף."
+  },
+  "siteExclusionsSaveError": {
+    "message": "לא ניתן היה להשלים את השינוי. בדקו את ההגדרות ונסו שוב."
+  },
+  "siteExclusionsRetry": {
+    "message": "ניסיון חוזר"
+  },
+  "siteExclusionInvalid": {
+    "message": "הזינו דומיין ציבורי תקין. כתובות IP, שמות מקומיים, תווים כלליים, סיומות ציבוריות ודומיינים שמורים אינם מתקבלים."
+  },
+  "siteExclusionDuplicate": {
+    "message": "דומיין זה כבר נמצא ברשימה."
+  },
+  "siteExclusionsLimit": {
+    "message": "הגעתם למגבלה של 100 אתרים. הסירו אתר כדי להוסיף אחר."
+  },
+  "statusProtectedExceptions": {
+    "message": "VPN פעיל · $1 חריגים"
+  },
+  "statusBlockedExceptions": {
+    "message": "רק אתרים מוחרגים נשארים נגישים"
+  },
+  "securityBlockedExceptions": {
+    "message": "הגלישה חסומה למעט אתרים מוחרגים"
+  },
+  "securityBlockUnverified": {
+    "message": "החסימה לא אומתה"
+  },
+  "logoutLocalComplete": {
+    "message": "היציאה המקומית הושלמה."
+  },
+  "logoutApiSession": {
+    "message": "ההפעלה הנוכחית בחשבון"
+  },
+  "logoutProxySessions": {
+    "message": "הפעלות VPN ידועות"
+  },
+  "logoutRevocationPending": {
+    "message": "מתבצע ביטול…"
+  },
+  "logoutRevocationConfirmed": {
+    "message": "הביטול אושר"
+  },
+  "logoutRevocationUnconfirmed": {
+    "message": "הביטול לא אושר"
+  },
+  "logoutUnconfirmedHelp": {
+    "message": "חלק מההפעלות המרוחקות עשויות להישאר פעילות עד שיפוג תוקפן."
+  },
+  "deviceQuotaLoading": {
+    "message": "טוען את מגבלת המכשירים…"
+  },
+  "deviceQuotaUnknown": {
+    "message": "מגבלת המכשירים אינה זמינה"
+  },
+  "error_proxy_creation_uncertain": {
+    "message": "השרת לא אישר את יצירת החיבור החדש. החיבור מחדש האוטומטי מושהה."
+  },
+  "siteExclusionsPreferencesReset": {
+    "message": "האתרים המוחרגים השמורים אופסו מכיוון שלא ניתן היה לקרוא אותם. הוסיפו שוב את האתרים שברצונכם להחריג."
+  },
+  "siteExclusionsConflict": {
+    "message": "רשימת האתרים המוחרגים השתנתה. עיינו בה ונסו לבצע את השינוי שוב."
+  },
+  "unavailableLocation": {
+    "message": "המיקום אינו זמין"
+  },
+  "verificationSending": {
+    "message": "שולח דוא״ל אימות…"
+  },
+  "verificationSent": {
+    "message": "דוא״ל האימות נשלח. בדקו את תיבת הדואר הנכנס ואת תיקיית הספאם."
+  },
+  "error_login_requires_disconnect": {
+    "message": "נתקו את חיבור ה-VPN הנוכחי לפני כניסה לחשבון אחר."
+  },
+  "error_storage_unavailable": {
+    "message": "הגדרות החשבון המקומיות אינן זמינות. נסו שוב כשאחסון הדפדפן יהיה זמין; החשבון השמור שלכם נשמר."
+  },
+  "diagnosticsAssistance": {
+    "message": "תמיכה"
+  },
+  "diagnosticsTitle": {
+    "message": "אבחון"
+  },
+  "diagnosticsIntro": {
+    "message": "בדיקת FuzeVPN והחיבור הנוכחי בלי לשנות את ההגנה."
+  },
+  "diagnosticsPrivacyTitle": {
+    "message": "הנתונים שלכם"
+  },
+  "diagnosticsPrivacy": {
+    "message": "קובץ ה-JSON של הדוח כולל מצבים טכניים וקודי שגיאה, ללא סיסמאות, אסימונים, כתובות דוא״ל, כתובות IP, כתובות URL שבוקרו או דומיינים מוחרגים. השליחה מאומתת ומקשרת את הדוח לחשבון שלכם. לנתוני רשת, עיינו בהודעה."
+  },
+  "diagnosticsAuto": {
+    "message": "שליחה אוטומטית של דוחות שגיאה חשובים"
+  },
+  "diagnosticsAutoHelp": {
+    "message": "כבוי כברירת מחדל. הפעלת האפשרות שולחת דוחות טכניים פשוטים עבור חשבון זה, ללא היסטוריית גלישה. כבו אותה כאן כדי להפסיק את השליחה האוטומטית ולהסיר דוחות אוטומטיים ממתינים."
+  },
+  "diagnosticsHistoryHelp": {
+    "message": "ההיסטוריה הטכנית נשמרת מקומית: עד 200 אירועים ליומן במשך 10 דקות, גם כשהשליחה האוטומטית כבויה. היא אינה כוללת היסטוריית גלישה ונמחקת ידנית, בסגירת הדפדפן או בהחלפת חשבון."
+  },
+  "diagnosticsHistoryCount": {
+    "message": "$1 אירועים טכניים מקומיים"
+  },
+  "diagnosticsConnectionLog": {
+    "message": "ייצוא יומן החיבור"
+  },
+  "diagnosticsAccountRequired": {
+    "message": "היכנסו כדי לאפשר שליחה. עדיין ניתן להציג ולייצא דוח בלי חשבון."
+  },
+  "diagnosticsRun": {
+    "message": "הפעלת אבחון"
+  },
+  "diagnosticsClearHistory": {
+    "message": "ניקוי ההיסטוריה המקומית"
+  },
+  "diagnosticsPreparing": {
+    "message": "מכין את הדוח…"
+  },
+  "diagnosticsReports": {
+    "message": "דוחות"
+  },
+  "diagnosticsEmpty": {
+    "message": "אין עדיין דוח מקומי."
+  },
+  "diagnosticsChooseReport": {
+    "message": "בחירת דוח"
+  },
+  "diagnosticsReportLabel": {
+    "message": "$1 · $2 · $3"
+  },
+  "diagnosticsTypeFull": {
+    "message": "דוח מלא"
+  },
+  "diagnosticsTypeSimple": {
+    "message": "דוח שגיאה"
+  },
+  "diagnosticsSummary": {
+    "message": "נאסף ב-$1. FuzeVPN גרסה $2."
+  },
+  "diagnosticsJson": {
+    "message": "הצגת תוכן הדוח (JSON)"
+  },
+  "diagnosticsExport": {
+    "message": "ייצוא הדוח"
+  },
+  "diagnosticsDelete": {
+    "message": "מחיקת הדוח המקומי"
+  },
+  "diagnosticsRetention": {
+    "message": "תוקפם של דוחות מקומיים פג לאחר 24 שעות. מחיקה כאן אינה מוחקת דוח שהשירות כבר קיבל. לשמירה בשרת ולבקשות מחיקה, עיינו בהודעה."
+  },
+  "diagnosticsConsent": {
+    "message": "שליחת דוח אבחון זה ל-FuzeVPN"
+  },
+  "diagnosticsDataCollectionRequired": {
+    "message": "Firefox חייב לאפשר איסוף נתונים טכניים כדי לשלוח אבחון. נסו שוב ואשרו הרשאה זו."
+  },
+  "diagnosticsSendHelp": {
+    "message": "השליחה אופציונלית. לאחר האישור, ייתכנו ניסיונות חוזרים במשך עד 24 שעות עם הפעלה תקפה של אותו חשבון. ניתן לבטל ניסיונות נוספים. ביטול מאוחר אינו מבטיח שהשרת לא קיבל כבר את הדוח."
+  },
+  "diagnosticsSend": {
+    "message": "שליחת הדוח"
+  },
+  "diagnosticsCancel": {
+    "message": "ביטול השליחה"
+  },
+  "diagnosticsReload": {
+    "message": "טעינה מחדש של הדף"
+  },
+  "diagnosticsUnavailable": {
+    "message": "האבחון אינו זמין. טענו מחדש את FuzeVPN ממנהל התוספים של הדפדפן ופתחו דף זה שוב. ה-VPN שלכם לא השתנה."
+  },
+  "diagnosticsQueueFull": {
+    "message": "תור השליחה מלא. מחקו דוח מקומי או המתינו לסיום שליחה ממתינה."
+  },
+  "diagnosticsContentUnavailable": {
+    "message": "תוכן הדוח אינו זמין. ייצאו את הדוח המקומי אם הוא זמין ופנו לתמיכה."
+  },
+  "diagnosticsFailure": {
+    "message": "לא ניתן היה להשלים את פעולת האבחון. ה-VPN שלכם לא השתנה."
+  },
+  "diagnosticsChecks": {
+    "message": "בדיקות"
+  },
+  "diagnosticsCheckFallback": {
+    "message": "בדיקה טכנית: $1"
+  },
+  "diagnosticsCheckLine": {
+    "message": "$1 — $2"
+  },
+  "diagnosticsProxy": {
+    "message": "פרוקסי הדפדפן"
+  },
+  "diagnosticsStorage": {
+    "message": "אחסון מקומי"
+  },
+  "diagnosticsNetwork": {
+    "message": "חיבור לרשת"
+  },
+  "diagnosticsCleanup": {
+    "message": "ניקוי הפעלות"
+  },
+  "diagnosticsResult_passed": {
+    "message": "עבר"
+  },
+  "diagnosticsResult_failed": {
+    "message": "נכשל"
+  },
+  "diagnosticsResult_skipped": {
+    "message": "לא בוצע"
+  },
+  "diagnosticsResult_unknown": {
+    "message": "לא ידוע"
+  },
+  "diagnosticsStatus_ready": {
+    "message": "מוכן במכשיר זה"
+  },
+  "diagnosticsStatus_pending": {
+    "message": "ממתין לשליחה"
+  },
+  "diagnosticsStatus_sending": {
+    "message": "שולח…"
+  },
+  "diagnosticsStatus_session_required": {
+    "message": "ממתין להפעלה תקפה של אותו חשבון"
+  },
+  "diagnosticsStatus_received": {
+    "message": "התקבל בשירות"
+  },
+  "diagnosticsStatus_failed": {
+    "message": "השליחה נכשלה"
+  },
+  "diagnosticsStatus_cancelled": {
+    "message": "השליחה בוטלה"
+  },
+  "diagnosticsStatus_expired": {
+    "message": "המועד האחרון לשליחה חלף"
+  },
+  "diagnosticsReceivedAt": {
+    "message": "התקבל ב-$1"
+  },
+  "error_private_browsing_required": {
+    "message": "Firefox דורש הרשאה זו כדי להגדיר את ה-VPN, גם בחלונות רגילים. פתחו את about:addons → FuzeVPN, אפשרו לו לפעול בחלונות פרטיים ונסו שוב."
+  },
+  "error_host_permissions_required": {
+    "message": "ב-Firefox, פתחו את about:addons → FuzeVPN → הרשאות, אפשרו גישה לכל האתרים ונסו שוב."
+  },
+  "cancelAction": {
+    "message": "ביטול"
+  },
+  "refreshLocations": {
+    "message": "רענון המיקומים"
+  },
+  "refreshingLocations": {
+    "message": "מרענן מיקומים…"
+  },
+  "locationsRefreshError": {
+    "message": "לא ניתן היה לרענן את רשימת המיקומים. נסו שוב."
+  },
+  "error_device_revoked_limit": {
+    "message": "מכשיר זה בוטל. הגעתם למגבלת המכשירים: הסירו מכשיר."
+  },
+  "noAvailableLocations": {
+    "message": "אין כרגע מיקומים זמינים. נסו שוב בעוד זמן קצר."
+  },
+  "noAvailableFavoriteLocations": {
+    "message": "המיקומים המועדפים שלכם אינם זמינים זמנית."
+  },
+  "error_location_favorites_limit": {
+    "message": "הגעתם למגבלה של 100 מועדפים. הסירו מועדף כדי להוסיף אחר."
+  },
+  "error_server_full": {
+    "message": "שרת זה מלא. בחרו מיקום אחר."
+  },
+  "error_capacity_unavailable": {
+    "message": "לא ניתן לאשר כרגע את זמינות השרת. נסו שוב בעוד זמן קצר."
+  },
+  "locationHierarchyHelp": {
+    "message": "השם בוחר שרת; החץ מציג פרטים."
+  },
+  "locationCountrySelect": {
+    "message": "בחירת שרת זמין: $1"
+  },
+  "locationCitySelect": {
+    "message": "בחירת שרת זמין: $1"
+  },
+  "locationShowCities": {
+    "message": "הצגת ערים: $1"
+  },
+  "locationHideCities": {
+    "message": "הסתרת ערים: $1"
+  },
+  "locationShowServers": {
+    "message": "הצגת שרתים: $1"
+  },
+  "locationHideServers": {
+    "message": "הסתרת שרתים: $1"
+  },
+  "locationAvailableServers": {
+    "message": "שרתים זמינים: $1"
+  },
+  "legalInformation": {
+    "message": "מידע משפטי"
+  },
+  "privacyPolicy": {
+    "message": "הודעת הפרטיות של התוסף"
+  },
+  "termsAndConditions": {
+    "message": "תנאי שימוש ומכירה"
+  },
+  "legalNotice": {
+    "message": "הודעה משפטית"
+  },
+  "contactSupport": {
+    "message": "פנייה לתמיכה"
+  },
+  "webSignIn": {
+    "message": "כניסה ל-FuzeVPN"
+  },
+  "webSignInDisconnect": {
+    "message": "ניתוק וכניסה"
+  },
+  "webSignInPending": {
+    "message": "הכניסה מתבצעת…"
+  },
+  "webSignInHelp": {
+    "message": "היכנסו או צרו חשבון באמצעות Google או דוא״ל באזור הלקוחות של FuzeVPN."
+  },
+  "webSignInDisconnectHelp": {
+    "message": "לחצן זה עוצר את הגנת הדפדפן כדי שתוכלו להיכנס באמצעות Google או דוא״ל. הגלישה שלכם לא תהיה מוגנת במהלך הכניסה."
+  },
+  "webSignInStatus": {
+    "message": "המשיכו בחלון הכניסה של FuzeVPN. התוסף יתעדכן אוטומטית בסיום. סגרו את החלון כדי לבטל."
+  },
+  "error_web_login_cancelled": {
+    "message": "הכניסה בוטלה. נסו שוב."
+  },
+  "error_web_login_timeout": {
+    "message": "הכניסה ארכה זמן רב מדי. נסו שוב."
+  },
+  "error_web_login_unavailable": {
+    "message": "הכניסה דרך האינטרנט אינה זמינה. נסו שוב מאוחר יותר."
+  },
+  "error_web_login_invalid_callback": {
+    "message": "לא ניתן היה לאמת את הכניסה. התחילו מחדש מהתוסף."
+  },
+  "error_web_login_denied": {
+    "message": "הכניסה לא אושרה. נסו שוב."
+  },
+  "error_web_login_busy": {
+    "message": "סגרו את חלון הכניסה שכבר פתוח לפני שתנסו שוב."
+  },
+  "deviceKindFirefox": {
+    "message": "דפדפן Firefox"
+  },
+  "generalPrivacyPolicy": {
+    "message": "מדיניות הפרטיות הכללית"
+  },
+  "privacyNoticeTitle": {
+    "message": "פרטיות בתוסף FuzeVPN"
+  },
+  "privacyNoticeIntro": {
+    "message": "הודעה זו מתארת את הנתונים שבהם משתמש תוסף זה. היא משלימה את מדיניות הפרטיות הכללית של FuzeVPN, המקושרת למטה. שליחת אבחון אופציונלית נפרדת מהנתונים הנדרשים לכניסה ולשימוש ב-VPN."
+  },
+  "privacyNoticeUpdated": {
+    "message": "ההודעה עודכנה ב-19 באוקטובר 2026"
+  },
+  "privacyNoticeServiceTitle": {
+    "message": "חשבון ושירות VPN"
+  },
+  "privacyNoticeService": {
+    "message": "התוסף מחליף עם api.fuzevpn.com נתוני אימות, חשבון, מינוי, מכשיר והפעלות פרוקסי. פרוקסי ה-VPN מעביר את התעבורה המנותבת דרכו. חיבורים אלה חושפים מטא-נתונים של הרשת לשירות המקבל; הודעה זו אינה מתחייבת בנפרד לגבי רישום ביומני השרת."
+  },
+  "privacyNoticeLocalTitle": {
+    "message": "נתונים המאוחסנים בדפדפן"
+  },
+  "privacyNoticeLocal": {
+    "message": "אחסון הדפדפן מכיל את ההפעלה, פרטי החשבון, ההעדפות, האתרים המוחרגים וזהות המכשיר. יומנים טכניים נשמרים מקומית עד 10 דקות, גם כשהדיווח האוטומטי כבוי. טיוטות אבחון ודוחות בתור פגים מקומית לאחר 24 שעות; הניקוי מתבצע כשהתוסף יכול לפעול."
+  },
+  "privacyNoticeIpTitle": {
+    "message": "בדיקות IP ציבורי וצדדים שלישיים"
+  },
+  "privacyNoticeIp": {
+    "message": "הצגת ה-IP ואבחון הרשת פונים אל api.ipify.org. הצגת ה-IP עשויה להשתמש ב-ipv4.icanhazip.com כגיבוי. הספק מקבל את כתובת ה-IP של החיבור ומטא-נתונים רגילים של הבקשה: ה-IP הציבורי שלכם במצב ישיר, או IP היציאה של ה-VPN כשהבקשה עוברת דרך הפרוקסי. בקשות אלה אינן כוללות קובצי Cookie והפניות (Referrer), ואינן שולחות אסימון חשבון או היסטוריית גלישה."
+  },
+  "privacyNoticeReportsTitle": {
+    "message": "מה כוללים דוחות האבחון"
+  },
+  "privacyNoticeReports": {
+    "message": "דוחות יכולים לכלול מזהה דוח אקראי, חותמות זמן, גרסאות התוסף והדפדפן, משפחת מערכת ההפעלה והארכיטקטורה, מצבי חיבור והגנה, קודי שגיאה, ספירות, משכי זמן ותוצאות בדיקות. דוחות מלאים יכולים לכלול אירועים טכניים אחרונים. ה-JSON שלהם אינו כולל סיסמאות, אסימוני אימות, כתובות דוא״ל, כתובות IP, כתובות URL שבוקרו ודומיינים מוחרגים. ניתן לבדוק ולייצא דוח מלא לפני שליחתו."
+  },
+  "privacyNoticeAccountTitle": {
+    "message": "נמען ושיוך לחשבון"
+  },
+  "privacyNoticeAccount": {
+    "message": "הדוחות נשלחים אל FuzeVPN בכתובת api.fuzevpn.com/v1/diagnostics דרך חיבור מאומת. חיבור API זה עוקף את פרוקסי ה-VPN: FuzeVPN מקבל את ה-IP הציבורי הישיר שלכם גם כשה-VPN פעיל. הדוחות מקושרים לחשבון המחובר ואינם אנונימיים. כותרת האימות וה-IP נפרדים מה-JSON של הדוח. אישור קבלה מוצלח מאשר שנקודת קצה זו קיבלה את הדוח, לא שנציג תמיכה קרא אותו."
+  },
+  "privacyNoticeChoiceTitle": {
+    "message": "שליחה אופציונלית וביטול הסכמה"
+  },
+  "privacyNoticeChoice": {
+    "message": "השליחה האוטומטית כבויה כברירת מחדל. הפעלתה מאפשרת דוחות שגיאה פשוטים עבור אותו חשבון. שליחה ידנית של דוח מלא מחייבת סימון תיבת השליחה. Firefox דורש גם את הרשאת הנתונים הטכניים האופציונלית שלו. כבו את השליחה האוטומטית כדי להפסיק אותה ולהסיר דוחות אוטומטיים ממתינים; בטלו בנפרד שליחות ממתינות בודדות. סירוב לשליחת אבחון אינו מונע שימוש ב-VPN."
+  },
+  "privacyNoticeDeleteTitle": {
+    "message": "מחיקה מקומית וקבצים שהורדו"
+  },
+  "privacyNoticeDelete": {
+    "message": "באבחון, נקו את ההיסטוריה הטכנית או מחקו דוח מקומי בודד. ניקוי ההיסטוריה אינו מוחק עותקים קיימים של דוחות. ביטול או מחיקה מקומית אינם יכולים להחזיר נתונים שהשירות כבר קיבל, כולל העלאה שהגיעה לפני הביטול. קובצי ייצוא שהורדו הם קבצים נפרדים שעליכם למחוק בעצמכם."
+  },
+  "privacyNoticeServerTitle": {
+    "message": "שמירה בשרת ובקשות"
+  },
+  "privacyNoticeServer": {
+    "message": "תוסף זה אינו שולט בשמירה בשרת או במחיקה בצד השרת ואינו מאמת אותן. לגבי תקופת השמירה ש-FuzeVPN מחיל ובקשות הנוגעות לדוחות שכבר נשלחו, עיינו במדיניות הפרטיות הכללית או פנו אל FuzeVPN. הודעה זו אינה מבטיחה תקופת שמירה קבועה בשרת."
+  },
+  "privacyNoticeSupportTitle": {
+    "message": "אבחון ותמיכה הם נפרדים"
+  },
+  "privacyNoticeSupport": {
+    "message": "שליחת דוח אבחון אינה שולחת כשלעצמה הודעת תמיכה מהתוסף. כדי להסביר בעיה או לבקש מחיקה של דוח שהתקבל, השתמשו בערוץ יצירת הקשר של FuzeVPN שלמטה. אם תבחרו לשתף קובץ מיוצא בערוץ אחר, בדקו קודם את תוכנו."
+  },
+  "privacyNoticeManage": {
+    "message": "פתיחת האבחון"
+  },
+  "privacyNoticeLinksTitle": {
+    "message": "מדיניות השירות ויצירת קשר"
+  },
+  "theme": {
+    "message": "ערכת נושא"
+  },
+  "themeSystem": {
+    "message": "מערכת"
+  },
+  "themeLight": {
+    "message": "בהירה"
+  },
+  "themeDark": {
+    "message": "כהה"
+  },
+  "switchToDarkTheme": {
+    "message": "מעבר לערכת נושא כהה"
+  },
+  "switchToLightTheme": {
+    "message": "מעבר לערכת נושא בהירה"
+  }
+}

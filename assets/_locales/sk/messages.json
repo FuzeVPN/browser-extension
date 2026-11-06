@@ -1,0 +1,929 @@
+{
+  "extensionName": {
+    "message": "FuzeVPN"
+  },
+  "extensionDescription": {
+    "message": "Chráňte svoje súkromie a posilnite zabezpečenie jedným kliknutím."
+  },
+  "siteExclusionsReloadRequired": {
+    "message": "Ak chcete dokončiť aktualizáciu a používať vylúčené weby, znova načítajte FuzeVPN v správcovi rozšírení prehliadača."
+  },
+  "extensionCommunicationError": {
+    "message": "Rozšírenie nereaguje. Zatvorte toto okno a potom znova načítajte FuzeVPN v správcovi rozšírení prehliadača."
+  },
+  "actionDisconnected": {
+    "message": "FuzeVPN — Odpojené"
+  },
+  "actionConnected": {
+    "message": "FuzeVPN — Chránené v tomto prehliadači"
+  },
+  "actionReconnecting": {
+    "message": "FuzeVPN — Opätovné pripájanie"
+  },
+  "actionError": {
+    "message": "FuzeVPN — Vyžaduje sa pozornosť"
+  },
+  "browserProtection": {
+    "message": "Ochrana prehliadača"
+  },
+  "loginTitle": {
+    "message": "Vitajte vo FuzeVPN"
+  },
+  "loginSubtitle": {
+    "message": "Prihláste sa a chráňte prehliadanie v tomto prehliadači."
+  },
+  "email": {
+    "message": "E-mailová adresa"
+  },
+  "emailPlaceholder": {
+    "message": "you@example.com"
+  },
+  "password": {
+    "message": "Heslo"
+  },
+  "signIn": {
+    "message": "Prihlásiť sa"
+  },
+  "signingIn": {
+    "message": "Prihlasovanie…"
+  },
+  "forgotPassword": {
+    "message": "Zabudli ste heslo?"
+  },
+  "createAccount": {
+    "message": "Vytvoriť účet"
+  },
+  "settings": {
+    "message": "Nastavenia"
+  },
+  "close": {
+    "message": "Zavrieť"
+  },
+  "statusDisconnected": {
+    "message": "Odpojené"
+  },
+  "statusConnecting": {
+    "message": "Pripájanie…"
+  },
+  "statusChanging": {
+    "message": "Zmena lokality…"
+  },
+  "statusProtected": {
+    "message": "Chránené v tomto prehliadači"
+  },
+  "statusRefreshing": {
+    "message": "Bezpečné obnovovanie…"
+  },
+  "statusDisconnecting": {
+    "message": "Odpájanie…"
+  },
+  "statusError": {
+    "message": "Ochrana zastavená"
+  },
+  "browserOnlyDetail": {
+    "message": "Ochrana pre tento prehliadač."
+  },
+  "location": {
+    "message": "Lokalita"
+  },
+  "change": {
+    "message": "Zmeniť"
+  },
+  "noLocation": {
+    "message": "Nie je dostupná žiadna lokalita"
+  },
+  "protectBrowser": {
+    "message": "Chrániť prehliadač"
+  },
+  "disconnect": {
+    "message": "Odpojiť"
+  },
+  "subscription": {
+    "message": "Predplatné"
+  },
+  "refreshSubscription": {
+    "message": "Aktualizovať predplatné"
+  },
+  "refreshingSubscription": {
+    "message": "Aktualizácia predplatného…"
+  },
+  "subscriptionActive": {
+    "message": "Aktívne"
+  },
+  "subscriptionInactive": {
+    "message": "Neaktívne"
+  },
+  "expiresOn": {
+    "message": "Platnosť končí: $1"
+  },
+  "noExpiry": {
+    "message": "Bez dátumu skončenia platnosti"
+  },
+  "browserOnlyNotice": {
+    "message": "Iba tento prehliadač. Iné aplikácie a prehliadače nie sú chránené."
+  },
+  "resendVerification": {
+    "message": "Znova odoslať e-mail"
+  },
+  "incognitoHelp": {
+    "message": "Súkromné prehliadanie používa rovnakú ochranu iba vtedy, ak je rozšírenie v nastaveniach prehliadača povolené v súkromnom režime."
+  },
+  "manageAccount": {
+    "message": "Spravovať môj účet"
+  },
+  "account": {
+    "message": "Účet"
+  },
+  "devices": {
+    "message": "Zariadenia"
+  },
+  "manageDevices": {
+    "message": "Spravovať zariadenia"
+  },
+  "refreshDevices": {
+    "message": "Aktualizovať zariadenia"
+  },
+  "deviceCount": {
+    "message": "Zariadenia: $1 / $2"
+  },
+  "loadingDevices": {
+    "message": "Načítavajú sa zariadenia…"
+  },
+  "noDevices": {
+    "message": "Žiadne aktívne zariadenia."
+  },
+  "currentDevice": {
+    "message": "Toto zariadenie"
+  },
+  "deviceKindBrowser": {
+    "message": "Rozšírenie prehliadača"
+  },
+  "deviceKindVpn": {
+    "message": "Zariadenie VPN"
+  },
+  "profile_browser_proxy": {
+    "message": "Proxy prehliadača"
+  },
+  "profile_wireguard": {
+    "message": "WireGuard"
+  },
+  "profile_openvpn": {
+    "message": "OpenVPN"
+  },
+  "none": {
+    "message": "žiadne"
+  },
+  "deviceCreatedOn": {
+    "message": "Vytvorené: $1"
+  },
+  "deleteDevice": {
+    "message": "Odstrániť zariadenie"
+  },
+  "deleteDeviceNamed": {
+    "message": "Odstrániť zariadenie $1"
+  },
+  "confirmDeleteDevice": {
+    "message": "Odstrániť „$1“? Jeho pripojenia VPN sa ukončia a jeho profily sa odstránia."
+  },
+  "resetDevice": {
+    "message": "Resetovať zariadenie"
+  },
+  "confirmResetDevice": {
+    "message": "Resetovať toto rozšírenie? Pri ďalšom použití sa zaregistruje ako nové zariadenie."
+  },
+  "signOutAccount": {
+    "message": "Odhlásiť sa z účtu"
+  },
+  "chooseLocation": {
+    "message": "Vyberte lokalitu"
+  },
+  "error_invalid_credentials": {
+    "message": "E-mailová adresa alebo heslo sú nesprávne."
+  },
+  "error_unauthorized": {
+    "message": "Vaša relácia vypršala. Prihláste sa znova."
+  },
+  "error_email_verification_required": {
+    "message": "Pred zapnutím ochrany overte svoju e-mailovú adresu."
+  },
+  "errorVerificationCooldown": {
+    "message": "Nový e-mail si môžete vyžiadať o $1 s."
+  },
+  "error_verification_email_cooldown": {
+    "message": "Pred vyžiadaním ďalšieho e-mailu chvíľu počkajte."
+  },
+  "error_subscription_required": {
+    "message": "Na ochranu tohto prehliadača je potrebné aktívne predplatné."
+  },
+  "error_device_limit": {
+    "message": "Dosiahli ste limit zariadení. Odstráňte niektoré zariadenie."
+  },
+  "error_device_identity_revoked": {
+    "message": "Toto zariadenie už nie je autorizované. Skúste sa pripojiť znova."
+  },
+  "error_device_proof_invalid": {
+    "message": "Toto zariadenie sa nepodarilo overiť. Skontrolujte dátum a čas v počítači a skúste to znova."
+  },
+  "error_device_proof_replayed": {
+    "message": "Táto požiadavka už bola spracovaná. Skúste to znova."
+  },
+  "error_invalid_device": {
+    "message": "Toto zariadenie nebolo rozpoznané. Skúste sa pripojiť znova."
+  },
+  "error_device_exists": {
+    "message": "Identita tohto zariadenia je už prepojená s iným účtom."
+  },
+  "error_not_found": {
+    "message": "Táto operácia už nie je dostupná. Skúste to znova."
+  },
+  "error_invalid_location": {
+    "message": "Táto lokalita nie je dostupná. Vyberte inú."
+  },
+  "error_rate_limited": {
+    "message": "Príliš veľa pokusov. Chvíľu počkajte a skúste to znova."
+  },
+  "error_proxy_unavailable": {
+    "message": "Tento server je dočasne nedostupný. Skúste to znova o chvíľu."
+  },
+  "error_api_token_expired": {
+    "message": "Relácia vášho účtu vypršala. Prihláste sa znova."
+  },
+  "error_network_error": {
+    "message": "Sieť nie je dostupná. Skontrolujte internetové pripojenie."
+  },
+  "error_request_timeout": {
+    "message": "Služba neodpovedala včas. Skúste to znova."
+  },
+  "error_invalid_response": {
+    "message": "Služba vrátila neočakávanú odpoveď."
+  },
+  "error_proxy_certificate_invalid": {
+    "message": "Zabezpečenie servera sa nepodarilo overiť. Pripojenie bolo zastavené."
+  },
+  "error_proxy_controlled_by_extension": {
+    "message": "Proxy prehliadača momentálne ovláda iné rozšírenie."
+  },
+  "error_proxy_controlled_by_policy": {
+    "message": "Politika správcu bráni FuzeVPN zmeniť proxy."
+  },
+  "error_proxy_authentication_failed": {
+    "message": "Server neprijal pripojenie. Skúste sa pripojiť znova."
+  },
+  "error_session_expired": {
+    "message": "Platnosť vášho chráneného pripojenia vypršala. Pripojte sa znova."
+  },
+  "error_email_delivery_unavailable": {
+    "message": "E-mail momentálne nie je možné odoslať."
+  },
+  "error_unknown_error": {
+    "message": "Vyskytla sa neočakávaná chyba. Skúste to znova."
+  },
+  "actionBlocked": {
+    "message": "FuzeVPN — Prehliadanie zablokované"
+  },
+  "statusBlockedRetry": {
+    "message": "Prehliadanie pozastavené — opätovné pripájanie"
+  },
+  "statusBlockedAction": {
+    "message": "Prehliadanie pozastavené — skontrolujte pripojenie"
+  },
+  "statusProtectionUnavailable": {
+    "message": "Ochrana nedostupná — prehliadanie nie je blokované"
+  },
+  "recoveryHelp": {
+    "message": "Ochranu obnovíte tlačidlom „Skúsiť znova“. Tlačidlo „Odpojiť“ umožní prehliadať bez FuzeVPN."
+  },
+  "retryConnection": {
+    "message": "Skúsiť znova"
+  },
+  "killSwitch": {
+    "message": "Núdzový vypínač"
+  },
+  "killSwitchHelp": {
+    "message": "Blokuje nové webové požiadavky, ak sa pripojenie VPN preruší. Vylúčené weby zostávajú dostupné mimo VPN."
+  },
+  "webRtcProtection": {
+    "message": "Ochrana WebRTC"
+  },
+  "webRtcHelp": {
+    "message": "Pomáha chrániť súkromie vašej IP adresy počas webových hovorov. Niektoré hovory nemusia fungovať. Vypnutím tejto funkcie môžete odhaliť svoju skutočnú IP adresu."
+  },
+  "securityEffectiveState": {
+    "message": "$1 · $2"
+  },
+  "securityBlocked": {
+    "message": "Prehliadanie blokované"
+  },
+  "securityNotBlocked": {
+    "message": "Prehliadanie neblokované"
+  },
+  "securityWebRtcActive": {
+    "message": "Obmedzenie WebRTC aktívne"
+  },
+  "securityWebRtcInactive": {
+    "message": "Obmedzenie WebRTC neaktívne"
+  },
+  "localNetworkHelp": {
+    "message": "Počas ochrany sú blokované lokálne IP adresy a bežné lokálne názvy. Vylúčená doména môže stále poskytovať prístup k lokálnej sieti. Systémové nastavenia IPv6 sa nemenia."
+  },
+  "securityLimits": {
+    "message": "O tejto ochrane"
+  },
+  "killSwitchLimits": {
+    "message": "Iba tento prehliadač: existujúce pripojenia a niektorá interná komunikácia prehliadača alebo iných rozšírení môže pokračovať. Iné rozšírenie alebo politika môže nahradiť proxy skôr, než FuzeVPN zareaguje. Vypnutím rozšírenia sa ochrana odstráni. Žiadne blokovanie v rámci celého systému."
+  },
+  "error_traffic_guard_failed": {
+    "message": "Blokovanie prehliadania sa nepodarilo overiť. Ochrana nie je zaručená. Skontrolujte povolenia rozšírenia."
+  },
+  "error_webrtc_control_unavailable": {
+    "message": "Obmedzenie WebRTC sa nepodarilo použiť. Skontrolujte nastavenia, iné rozšírenia alebo politiku správcu."
+  },
+  "language": {
+    "message": "Jazyk"
+  },
+  "languageAutomatic": {
+    "message": "Automaticky — jazyk prehliadača"
+  },
+  "languageHelp": {
+    "message": "Zmeny sa prejavia okamžite. Automatický režim sa riadi jazykom prehliadača, ktorý sa môže líšiť od jazyka systému."
+  },
+  "languageSaveError": {
+    "message": "Jazyk sa nepodarilo uložiť. Zostáva predchádzajúca voľba. Skúste to znova."
+  },
+  "publicIp": {
+    "message": "Verejná IP"
+  },
+  "vpnIp": {
+    "message": "IP VPN"
+  },
+  "ipChecking": {
+    "message": "Overuje sa…"
+  },
+  "ipUnavailable": {
+    "message": "Nedostupné"
+  },
+  "ipLookupExplanation": {
+    "message": "IP sa overuje cez ipify, prípadne záložne cez icanhazip, pomocou vášho aktuálneho pripojenia. Neodosiela sa žiadna história prehliadania."
+  },
+  "automaticLocation": {
+    "message": "Automaticky"
+  },
+  "automaticLocationHelp": {
+    "message": "Najlepšia nedávna doba odozvy alebo vaša posledná lokalita."
+  },
+  "automaticLocationName": {
+    "message": "Automaticky · $1"
+  },
+  "searchLocations": {
+    "message": "Hľadať krajinu alebo mesto"
+  },
+  "locationFilters": {
+    "message": "Filtrovať lokality"
+  },
+  "allLocations": {
+    "message": "Všetky"
+  },
+  "favoriteLocations": {
+    "message": "Obľúbené"
+  },
+  "recentLocations": {
+    "message": "Nedávne"
+  },
+  "noMatchingLocations": {
+    "message": "Vyhľadávaniu nezodpovedajú žiadne lokality."
+  },
+  "noFavoriteLocations": {
+    "message": "Označte lokality hviezdičkou a obľúbené sa budú zobrazovať tu."
+  },
+  "noRecentLocations": {
+    "message": "Tu sa zobrazia lokality, ku ktorým ste sa nedávno pripojili."
+  },
+  "addFavorite": {
+    "message": "Pridať do obľúbených: $1"
+  },
+  "removeFavorite": {
+    "message": "Odstrániť z obľúbených: $1"
+  },
+  "unavailableFavoriteLocation": {
+    "message": "Nedostupná obľúbená lokalita: $1"
+  },
+  "locationSaveError": {
+    "message": "Zmenu sa nepodarilo dokončiť. Niektoré nastavenia sa mohli uložiť. Pred ďalším pokusom skontrolujte zobrazenú voľbu."
+  },
+  "siteExclusions": {
+    "message": "Vylúčené weby"
+  },
+  "siteExclusionsHelp": {
+    "message": "Tieto weby používajú vaše pripojenie bez FuzeVPN, aj keď VPN vypadne."
+  },
+  "siteExclusionsEnabled": {
+    "message": "Zapnúť výnimky"
+  },
+  "siteExclusionInput": {
+    "message": "Doména alebo URL"
+  },
+  "siteExclusionPlaceholder": {
+    "message": "example.com"
+  },
+  "siteExclusionPreview": {
+    "message": "Vybraná doména: $1"
+  },
+  "siteExclusionSubdomains": {
+    "message": "Zahrnúť subdomény"
+  },
+  "siteExclusionAdd": {
+    "message": "Pridať web"
+  },
+  "siteExclusionsEmpty": {
+    "message": "Žiadne vylúčené weby. Pridajte iba weby, ktoré chcete používať bez VPN."
+  },
+  "siteExclusionsCount": {
+    "message": "Weby: $1 / 100"
+  },
+  "siteExclusionScopeSubdomains": {
+    "message": "Doména a subdomény"
+  },
+  "siteExclusionScopeExact": {
+    "message": "Iba presná doména"
+  },
+  "siteExclusionRemove": {
+    "message": "Odstrániť $1"
+  },
+  "siteExclusionsDetails": {
+    "message": "Ako fungujú výnimky?"
+  },
+  "siteExclusionsResources": {
+    "message": "Zdroje z iných domén zostávajú chránené. Vylúčením stránky sa automaticky nevylúči jej ďalší obsah."
+  },
+  "siteExclusionsReload": {
+    "message": "Po zmene znova načítajte web. Existujúce pripojenia si môžu ponechať predchádzajúcu trasu."
+  },
+  "siteExclusionsWebRtc": {
+    "message": "Ochrana WebRTC zostáva globálnym nastavením, a to aj pre vylúčené weby."
+  },
+  "siteExclusionsLocal": {
+    "message": "Uložené iba v tomto prehliadači a zachované aj po odhlásení z účtu."
+  },
+  "siteExclusionsOn": {
+    "message": "Výnimky zapnuté"
+  },
+  "siteExclusionsOff": {
+    "message": "Výnimky vypnuté"
+  },
+  "siteExclusionsSummary": {
+    "message": "Weby mimo VPN: $1"
+  },
+  "siteExclusionsPending": {
+    "message": "Používajú sa výnimky…"
+  },
+  "siteExclusionsInterrupted": {
+    "message": "Zmena bola prerušená. Dočasná ochrana zostáva aktívna."
+  },
+  "siteExclusionsSaveError": {
+    "message": "Zmenu sa nepodarilo dokončiť. Skontrolujte nastavenia a skúste to znova."
+  },
+  "siteExclusionsRetry": {
+    "message": "Skúsiť znova"
+  },
+  "siteExclusionInvalid": {
+    "message": "Zadajte platnú verejnú doménu. IP adresy, lokálne názvy, zástupné znaky, verejné prípony a rezervované domény nie sú povolené."
+  },
+  "siteExclusionDuplicate": {
+    "message": "Táto doména už je v zozname."
+  },
+  "siteExclusionsLimit": {
+    "message": "Dosiahli ste limit 100 webov. Ak chcete pridať ďalší, odstráňte niektorý web."
+  },
+  "statusProtectedExceptions": {
+    "message": "VPN aktívna · výnimky: $1"
+  },
+  "statusBlockedExceptions": {
+    "message": "Dostupné zostávajú iba vylúčené weby"
+  },
+  "securityBlockedExceptions": {
+    "message": "Prehliadanie blokované okrem vylúčených webov"
+  },
+  "securityBlockUnverified": {
+    "message": "Blokovanie neoverené"
+  },
+  "logoutLocalComplete": {
+    "message": "Lokálne odhlásenie dokončené."
+  },
+  "logoutApiSession": {
+    "message": "Aktuálna relácia účtu"
+  },
+  "logoutProxySessions": {
+    "message": "Známe relácie VPN"
+  },
+  "logoutRevocationPending": {
+    "message": "Prebieha odvolanie…"
+  },
+  "logoutRevocationConfirmed": {
+    "message": "Odvolanie potvrdené"
+  },
+  "logoutRevocationUnconfirmed": {
+    "message": "Odvolanie nepotvrdené"
+  },
+  "logoutUnconfirmedHelp": {
+    "message": "Niektoré vzdialené relácie môžu zostať aktívne, kým nevyprší ich platnosť."
+  },
+  "deviceQuotaLoading": {
+    "message": "Načítava sa limit zariadení…"
+  },
+  "deviceQuotaUnknown": {
+    "message": "Limit zariadení nie je dostupný"
+  },
+  "error_proxy_creation_uncertain": {
+    "message": "Server nepotvrdil vytvorenie nového pripojenia. Automatické opätovné pripojenie je pozastavené."
+  },
+  "siteExclusionsPreferencesReset": {
+    "message": "Uložené výnimky webov boli resetované, pretože ich nebolo možné načítať. Znova pridajte weby, ktoré chcete vylúčiť."
+  },
+  "siteExclusionsConflict": {
+    "message": "Zoznam vylúčených webov sa zmenil. Skontrolujte ho a potom zmenu zopakujte."
+  },
+  "unavailableLocation": {
+    "message": "Lokalita nedostupná"
+  },
+  "verificationSending": {
+    "message": "Odosiela sa overovací e-mail…"
+  },
+  "verificationSent": {
+    "message": "Overovací e-mail bol odoslaný. Skontrolujte doručenú poštu aj priečinok so spamom."
+  },
+  "error_login_requires_disconnect": {
+    "message": "Pred prihlásením do iného účtu odpojte aktuálne pripojenie VPN."
+  },
+  "error_storage_unavailable": {
+    "message": "Lokálne nastavenia účtu nie sú dostupné. Skúste to znova, keď bude úložisko prehliadača dostupné; váš uložený účet zostal zachovaný."
+  },
+  "diagnosticsAssistance": {
+    "message": "Podpora"
+  },
+  "diagnosticsTitle": {
+    "message": "Diagnostika"
+  },
+  "diagnosticsIntro": {
+    "message": "Skontrolujte FuzeVPN a aktuálne pripojenie bez zmeny ochrany."
+  },
+  "diagnosticsPrivacyTitle": {
+    "message": "Vaše údaje"
+  },
+  "diagnosticsPrivacy": {
+    "message": "JSON hlásenia obsahuje technické stavy a kódy chýb, bez hesiel, tokenov, e-mailových adries, IP adries, navštívených URL alebo vylúčených domén. Odosielanie je overené a prepojí hlásenie s vaším účtom. Informácie o sieťových údajoch nájdete v oznámení."
+  },
+  "diagnosticsAuto": {
+    "message": "Automaticky odosielať hlásenia o závažných chybách"
+  },
+  "diagnosticsAutoHelp": {
+    "message": "Predvolene vypnuté. Po zapnutí sa budú pre tento účet odosielať jednoduché technické hlásenia bez histórie prehliadania. Vypnutím tu zastavíte automatické odosielanie a odstránite čakajúce automatické hlásenia."
+  },
+  "diagnosticsHistoryHelp": {
+    "message": "Technická história zostáva lokálne: až 200 udalostí na denník za 10 minút, aj keď je automatické odosielanie vypnuté. Neobsahuje históriu prehliadania a vymaže sa ručne, po zatvorení prehliadača alebo pri zmene účtu."
+  },
+  "diagnosticsHistoryCount": {
+    "message": "Lokálne technické udalosti: $1"
+  },
+  "diagnosticsConnectionLog": {
+    "message": "Exportovať denník pripojenia"
+  },
+  "diagnosticsAccountRequired": {
+    "message": "Ak chcete povoliť odosielanie, prihláste sa. Hlásenie si môžete zobraziť a exportovať aj bez účtu."
+  },
+  "diagnosticsRun": {
+    "message": "Spustiť diagnostiku"
+  },
+  "diagnosticsClearHistory": {
+    "message": "Vymazať lokálnu históriu"
+  },
+  "diagnosticsPreparing": {
+    "message": "Pripravuje sa hlásenie…"
+  },
+  "diagnosticsReports": {
+    "message": "Hlásenia"
+  },
+  "diagnosticsEmpty": {
+    "message": "Zatiaľ žiadne lokálne hlásenie."
+  },
+  "diagnosticsChooseReport": {
+    "message": "Vyberte hlásenie"
+  },
+  "diagnosticsReportLabel": {
+    "message": "$1 · $2 · $3"
+  },
+  "diagnosticsTypeFull": {
+    "message": "Úplné hlásenie"
+  },
+  "diagnosticsTypeSimple": {
+    "message": "Hlásenie o chybe"
+  },
+  "diagnosticsSummary": {
+    "message": "Zhromaždené: $1. Verzia FuzeVPN $2."
+  },
+  "diagnosticsJson": {
+    "message": "Zobraziť obsah hlásenia (JSON)"
+  },
+  "diagnosticsExport": {
+    "message": "Exportovať hlásenie"
+  },
+  "diagnosticsDelete": {
+    "message": "Odstrániť lokálne hlásenie"
+  },
+  "diagnosticsRetention": {
+    "message": "Platnosť lokálnych hlásení vyprší po 24 hodinách. Odstránením tu sa neodstráni hlásenie, ktoré už služba prijala. Informácie o uchovávaní na serveri a žiadostiach o odstránenie nájdete v oznámení."
+  },
+  "diagnosticsConsent": {
+    "message": "Odoslať toto diagnostické hlásenie spoločnosti FuzeVPN"
+  },
+  "diagnosticsDataCollectionRequired": {
+    "message": "Na odosielanie diagnostiky musí Firefox povoliť zber technických údajov. Skúste to znova a udeľte toto povolenie."
+  },
+  "diagnosticsSendHelp": {
+    "message": "Odosielanie je voliteľné. Po schválení sa môže opakovať až 24 hodín s platnou reláciou rovnakého účtu. Ďalšie pokusy môžete zrušiť. Neskoré zrušenie nezaručuje, že server hlásenie ešte neprijal."
+  },
+  "diagnosticsSend": {
+    "message": "Odoslať hlásenie"
+  },
+  "diagnosticsCancel": {
+    "message": "Zrušiť odosielanie"
+  },
+  "diagnosticsReload": {
+    "message": "Znova načítať túto stránku"
+  },
+  "diagnosticsUnavailable": {
+    "message": "Diagnostika nie je dostupná. Znova načítajte FuzeVPN v správcovi rozšírení prehliadača a potom znova otvorte túto stránku. Vaša VPN sa nezmenila."
+  },
+  "diagnosticsQueueFull": {
+    "message": "Front odosielania je plný. Odstráňte lokálne hlásenie alebo počkajte, kým sa čakajúce hlásenie odošle."
+  },
+  "diagnosticsContentUnavailable": {
+    "message": "Obsah hlásenia nie je dostupný. Ak je to možné, exportujte lokálne hlásenie a kontaktujte podporu."
+  },
+  "diagnosticsFailure": {
+    "message": "Diagnostickú akciu sa nepodarilo dokončiť. Vaša VPN sa nezmenila."
+  },
+  "diagnosticsChecks": {
+    "message": "Kontroly"
+  },
+  "diagnosticsCheckFallback": {
+    "message": "Technická kontrola: $1"
+  },
+  "diagnosticsCheckLine": {
+    "message": "$1 — $2"
+  },
+  "diagnosticsProxy": {
+    "message": "Proxy prehliadača"
+  },
+  "diagnosticsStorage": {
+    "message": "Lokálne úložisko"
+  },
+  "diagnosticsNetwork": {
+    "message": "Sieťové pripojenie"
+  },
+  "diagnosticsCleanup": {
+    "message": "Vyčistenie relácie"
+  },
+  "diagnosticsResult_passed": {
+    "message": "Úspešné"
+  },
+  "diagnosticsResult_failed": {
+    "message": "Neúspešné"
+  },
+  "diagnosticsResult_skipped": {
+    "message": "Nevykonané"
+  },
+  "diagnosticsResult_unknown": {
+    "message": "Neznáme"
+  },
+  "diagnosticsStatus_ready": {
+    "message": "Pripravené v tomto zariadení"
+  },
+  "diagnosticsStatus_pending": {
+    "message": "Čaká na odoslanie"
+  },
+  "diagnosticsStatus_sending": {
+    "message": "Odosiela sa…"
+  },
+  "diagnosticsStatus_session_required": {
+    "message": "Čaká sa na platnú reláciu rovnakého účtu"
+  },
+  "diagnosticsStatus_received": {
+    "message": "Prijaté službou"
+  },
+  "diagnosticsStatus_failed": {
+    "message": "Odoslanie zlyhalo"
+  },
+  "diagnosticsStatus_cancelled": {
+    "message": "Odosielanie zrušené"
+  },
+  "diagnosticsStatus_expired": {
+    "message": "Lehota na odoslanie uplynula"
+  },
+  "diagnosticsReceivedAt": {
+    "message": "Prijaté: $1"
+  },
+  "error_private_browsing_required": {
+    "message": "Firefox vyžaduje toto povolenie na konfiguráciu VPN, a to aj v bežných oknách. Otvorte about:addons → FuzeVPN, povoľte spúšťanie v súkromných oknách a skúste to znova."
+  },
+  "error_host_permissions_required": {
+    "message": "V prehliadači Firefox otvorte about:addons → FuzeVPN → Povolenia, povoľte prístup ku všetkým webom a skúste to znova."
+  },
+  "cancelAction": {
+    "message": "Zrušiť"
+  },
+  "refreshLocations": {
+    "message": "Aktualizovať lokality"
+  },
+  "refreshingLocations": {
+    "message": "Aktualizujú sa lokality…"
+  },
+  "locationsRefreshError": {
+    "message": "Zoznam lokalít sa nepodarilo aktualizovať. Skúste to znova."
+  },
+  "error_device_revoked_limit": {
+    "message": "Toto zariadenie bolo odvolané. Dosiahli ste limit zariadení: odstráňte niektoré zariadenie."
+  },
+  "noAvailableLocations": {
+    "message": "Momentálne nie sú dostupné žiadne lokality. Skúste to znova o chvíľu."
+  },
+  "noAvailableFavoriteLocations": {
+    "message": "Vaše obľúbené lokality sú dočasne nedostupné."
+  },
+  "error_location_favorites_limit": {
+    "message": "Dosiahli ste limit 100 obľúbených lokalít. Ak chcete pridať ďalšiu, odstráňte niektorú obľúbenú."
+  },
+  "error_server_full": {
+    "message": "Tento server je plný. Vyberte inú lokalitu."
+  },
+  "error_capacity_unavailable": {
+    "message": "Dostupnosť tohto servera momentálne nie je možné potvrdiť. Skúste to znova o chvíľu."
+  },
+  "locationHierarchyHelp": {
+    "message": "Názov vyberie server; šípka zobrazí podrobnosti."
+  },
+  "locationCountrySelect": {
+    "message": "Vybrať dostupný server: $1"
+  },
+  "locationCitySelect": {
+    "message": "Vybrať dostupný server: $1"
+  },
+  "locationShowCities": {
+    "message": "Zobraziť mestá: $1"
+  },
+  "locationHideCities": {
+    "message": "Skryť mestá: $1"
+  },
+  "locationShowServers": {
+    "message": "Zobraziť servery: $1"
+  },
+  "locationHideServers": {
+    "message": "Skryť servery: $1"
+  },
+  "locationAvailableServers": {
+    "message": "Dostupné servery: $1"
+  },
+  "legalInformation": {
+    "message": "Právne informácie"
+  },
+  "privacyPolicy": {
+    "message": "Oznámenie o ochrane súkromia rozšírenia"
+  },
+  "termsAndConditions": {
+    "message": "Podmienky používania a predaja"
+  },
+  "legalNotice": {
+    "message": "Právne upozornenie"
+  },
+  "contactSupport": {
+    "message": "Kontaktovať podporu"
+  },
+  "webSignIn": {
+    "message": "Prihlásiť sa do FuzeVPN"
+  },
+  "webSignInDisconnect": {
+    "message": "Odpojiť a prihlásiť sa"
+  },
+  "webSignInPending": {
+    "message": "Prebieha prihlasovanie…"
+  },
+  "webSignInHelp": {
+    "message": "Prihláste sa alebo si vytvorte účet pomocou Google či e-mailu v klientskej zóne FuzeVPN."
+  },
+  "webSignInDisconnectHelp": {
+    "message": "Toto tlačidlo zastaví ochranu prehliadača, aby ste sa mohli prihlásiť cez Google alebo e-mail. Počas prihlasovania nebude prehliadanie chránené."
+  },
+  "webSignInStatus": {
+    "message": "Pokračujte v prihlasovacom okne FuzeVPN. Po dokončení sa rozšírenie automaticky aktualizuje. Ak chcete akciu zrušiť, zatvorte toto okno."
+  },
+  "error_web_login_cancelled": {
+    "message": "Prihlásenie bolo zrušené. Skúste to znova."
+  },
+  "error_web_login_timeout": {
+    "message": "Prihlásenie trvalo príliš dlho. Skúste to znova."
+  },
+  "error_web_login_unavailable": {
+    "message": "Webové prihlásenie nie je dostupné. Skúste to neskôr."
+  },
+  "error_web_login_invalid_callback": {
+    "message": "Prihlásenie sa nepodarilo overiť. Začnite znova z rozšírenia."
+  },
+  "error_web_login_denied": {
+    "message": "Prihlásenie nebolo autorizované. Skúste to znova."
+  },
+  "error_web_login_busy": {
+    "message": "Pred ďalším pokusom zatvorte už otvorené prihlasovacie okno."
+  },
+  "deviceKindFirefox": {
+    "message": "Prehliadač Firefox"
+  },
+  "generalPrivacyPolicy": {
+    "message": "Všeobecné zásady ochrany súkromia"
+  },
+  "privacyNoticeTitle": {
+    "message": "Ochrana súkromia v rozšírení FuzeVPN"
+  },
+  "privacyNoticeIntro": {
+    "message": "Toto oznámenie opisuje údaje, ktoré používa toto rozšírenie. Dopĺňa všeobecné zásady ochrany súkromia FuzeVPN, na ktoré odkazujeme nižšie. Voliteľné odosielanie diagnostiky je oddelené od údajov potrebných na prihlásenie a používanie VPN."
+  },
+  "privacyNoticeUpdated": {
+    "message": "Oznámenie aktualizované 19. októbra 2026"
+  },
+  "privacyNoticeServiceTitle": {
+    "message": "Účet a služba VPN"
+  },
+  "privacyNoticeService": {
+    "message": "Rozšírenie si vymieňa s api.fuzevpn.com údaje o overení, účte, predplatnom, zariadení a relácii proxy. Proxy VPN prenáša prevádzku, ktorá je cez ňu smerovaná. Tieto pripojenia odhaľujú sieťové metaúdaje prijímajúcej službe; toto oznámenie neposkytuje žiadny samostatný prísľub týkajúci sa záznamov na serveri."
+  },
+  "privacyNoticeLocalTitle": {
+    "message": "Údaje uložené vo vašom prehliadači"
+  },
+  "privacyNoticeLocal": {
+    "message": "Úložisko prehliadača uchováva vašu reláciu, údaje o účte, predvoľby, vylúčené weby a identitu zariadenia. Technické denníky sa uchovávajú lokálne až 10 minút, aj keď je automatické odosielanie hlásení vypnuté. Platnosť diagnostických konceptov a hlásení vo fronte lokálne vyprší po 24 hodinách; čistenie prebieha, keď sa rozšírenie môže spustiť."
+  },
+  "privacyNoticeIpTitle": {
+    "message": "Kontroly verejnej IP a tretie strany"
+  },
+  "privacyNoticeIp": {
+    "message": "Zobrazenie IP a diagnostika siete kontaktujú api.ipify.org. Zobrazenie IP môže záložne použiť ipv4.icanhazip.com. Poskytovateľ dostane IP pripojenia a bežné metaúdaje požiadavky: v priamom režime vašu verejnú IP, pri použití proxy výstupnú IP VPN. Tieto požiadavky neobsahujú súbory cookie ani hlavičky referrer a neodosielajú žiadny token účtu ani históriu prehliadania."
+  },
+  "privacyNoticeReportsTitle": {
+    "message": "Čo obsahujú diagnostické hlásenia"
+  },
+  "privacyNoticeReports": {
+    "message": "Hlásenia môžu obsahovať náhodný identifikátor hlásenia, časové pečiatky, verzie rozšírenia a prehliadača, rodinu a architektúru operačného systému, stavy pripojenia a ochrany, kódy chýb, počty, trvania a výsledky kontrol. Úplné hlásenia môžu obsahovať nedávne technické udalosti. Ich JSON neobsahuje heslá, overovacie tokeny, e-mailové adresy, IP adresy, navštívené URL ani vylúčené domény. Úplné hlásenie si pred odoslaním môžete prezrieť a exportovať."
+  },
+  "privacyNoticeAccountTitle": {
+    "message": "Príjemca a priradenie k účtu"
+  },
+  "privacyNoticeAccount": {
+    "message": "Hlásenia sa odosielajú spoločnosti FuzeVPN na api.fuzevpn.com/v1/diagnostics cez overené pripojenie. Toto pripojenie API obchádza proxy VPN: FuzeVPN dostane vašu priamu verejnú IP, aj keď je VPN aktívna. Hlásenia sú prepojené s prihláseným účtom a nie sú anonymné. Overovacia hlavička a IP sú oddelené od JSON hlásenia. Úspešné prijatie potvrdzuje prijatie týmto koncovým bodom, nie to, že hlásenie si prečítal pracovník podpory."
+  },
+  "privacyNoticeChoiceTitle": {
+    "message": "Voliteľné odosielanie a odvolanie súhlasu"
+  },
+  "privacyNoticeChoice": {
+    "message": "Automatické odosielanie je predvolene vypnuté. Jeho zapnutím povolíte jednoduché hlásenia o chybách pre daný účet. Ručné odoslanie úplného hlásenia vyžaduje začiarknutie políčka odoslania. Firefox navyše vyžaduje svoje voliteľné povolenie pre technické údaje. Vypnutím automatického odosielania ho zastavíte a odstránite čakajúce automatické hlásenia; jednotlivé čakajúce odoslania zrušte samostatne. Odmietnutie odosielania diagnostiky nebráni používaniu VPN."
+  },
+  "privacyNoticeDeleteTitle": {
+    "message": "Lokálne odstránenie a stiahnuté súbory"
+  },
+  "privacyNoticeDelete": {
+    "message": "V časti Diagnostika vymažte technickú históriu alebo odstráňte jednotlivé lokálne hlásenie. Vymazaním histórie sa neodstránia existujúce kópie hlásení. Zrušenie alebo lokálne odstránenie nemôže vziať späť údaje, ktoré už služba prijala, vrátane nahrávania, ktoré dorazilo pred zrušením. Stiahnuté exporty sú samostatné súbory, ktoré musíte odstrániť sami."
+  },
+  "privacyNoticeServerTitle": {
+    "message": "Uchovávanie na serveri a žiadosti"
+  },
+  "privacyNoticeServer": {
+    "message": "Toto rozšírenie nekontroluje ani neoveruje uchovávanie na serveri ani odstraňovanie na strane servera. Informácie o dobe uchovávania, ktorú uplatňuje FuzeVPN, a o žiadostiach týkajúcich sa už odoslaných hlásení nájdete vo všeobecných zásadách ochrany súkromia, prípadne kontaktujte FuzeVPN. Toto oznámenie nezaručuje žiadnu pevnú dobu uchovávania na serveri."
+  },
+  "privacyNoticeSupportTitle": {
+    "message": "Diagnostika a podpora sú oddelené"
+  },
+  "privacyNoticeSupport": {
+    "message": "Odoslaním diagnostického hlásenia sa z rozšírenia samo osebe neodošle žiadna správa podpore. Ak chcete opísať problém alebo požiadať o odstránenie prijatého hlásenia, použite kontaktný kanál FuzeVPN nižšie. Ak sa rozhodnete zdieľať exportovaný súbor iným kanálom, najprv skontrolujte jeho obsah."
+  },
+  "privacyNoticeManage": {
+    "message": "Otvoriť diagnostiku"
+  },
+  "privacyNoticeLinksTitle": {
+    "message": "Zásady služby a kontakt"
+  },
+  "theme": {
+    "message": "Motív"
+  },
+  "themeSystem": {
+    "message": "Systémový"
+  },
+  "themeLight": {
+    "message": "Svetlý"
+  },
+  "themeDark": {
+    "message": "Tmavý"
+  },
+  "switchToDarkTheme": {
+    "message": "Prepnúť na tmavý motív"
+  },
+  "switchToLightTheme": {
+    "message": "Prepnúť na svetlý motív"
+  }
+}

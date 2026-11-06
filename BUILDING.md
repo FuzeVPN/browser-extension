@@ -47,7 +47,7 @@ node scripts/verify-dist.mjs
 
 `validate` runs formatting, TypeScript, ESLint, unit tests, build, distribution audits and Firefox validation through Mozilla's `addons-linter` 10.13.0. This is the validator used by `web-ext` and addons.mozilla.org; the project invokes it directly without the Android tooling dependency. The evidence-producing unit runner additionally rejects out-of-project writes and reports failure if inputs change while tests execute. Tests use synthetic accounts and dependencies.
 
-The separate `node scripts/verify-dist.mjs` command reconstructs executable outputs in memory and compares every file with `dist/<target>`. It rejects stale files, unexpected files, changed sources and symbolic links. `npm run validate` builds the distributions and audits trusted manifest profiles, thirty locale catalogs, remote execution restrictions and Chrome/Edge parity; it does not run this independent reconstruction. Packaging runs the complete distribution comparison before creating archives.
+The separate `node scripts/verify-dist.mjs` command reconstructs executable outputs in memory and compares every file with `dist/<target>`. It rejects stale files, unexpected files, changed sources and symbolic links. `npm run validate` builds the distributions and audits trusted manifest profiles, fifty locale catalogs, remote execution restrictions and Chrome/Edge parity; it does not run this independent reconstruction. Packaging runs the complete distribution comparison before creating archives.
 
 ## Native browser validation
 

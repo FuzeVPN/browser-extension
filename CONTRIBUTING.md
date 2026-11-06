@@ -12,7 +12,7 @@ Use Node.js 24 and install from the lockfile with `npm ci`. Read
 - Keep account, session and interface behavior in `src/core` and `src/ui`.
 - Place direct `chrome.*` or `browser.*` calls in the platform adapters. Firefox
   must retain its route guard, proxy authentication checks and native consent.
-- Keep all thirty locale catalogs complete. Verify French and RTL views for UI
+- Keep all fifty locale catalogs complete. Verify French and RTL views for UI
   changes.
 - Preserve the public API contracts, stable extension identities and storage keys.
 - Use synthetic accounts and isolated profiles for tests. Never commit tokens,
