@@ -846,7 +846,7 @@
     "message": "Diese Hinweise beschreiben die von dieser Erweiterung verwendeten Daten. Sie ergänzen die unten verlinkte allgemeine Datenschutzerklärung von FuzeVPN. Der optionale Diagnoseversand ist von den Daten getrennt, die für die Anmeldung und VPN-Nutzung erforderlich sind."
   },
   "privacyNoticeUpdated": {
-    "message": "Hinweise aktualisiert am 19. Oktober 2026"
+    "message": "Hinweise aktualisiert am 12. November 2026"
   },
   "privacyNoticeServiceTitle": {
     "message": "Konto und VPN-Dienst"
@@ -858,7 +858,7 @@
     "message": "Im Browser gespeicherte Daten"
   },
   "privacyNoticeLocal": {
-    "message": "Der Browserspeicher enthält Ihre Sitzung, Kontodaten, Einstellungen, Website-Ausnahmen und Geräteidentität. Technische Protokolle bleiben bis zu 10 Minuten lokal gespeichert, auch wenn der automatische Versand deaktiviert ist. Diagnoseentwürfe und Berichte in der Warteschlange laufen lokal nach 24 Stunden ab; die Bereinigung erfolgt, sobald die Erweiterung ausgeführt werden kann."
+    "message": "Der Browserspeicher enthält Ihre Sitzung, Kontodaten, Einstellungen, Website-Ausnahmen und Geräteidentität. Die zuletzt gemessene VPN-Ausgangs-IP jedes Standorts bleibt bis zu 30 Tage gespeichert, damit sie bei der nächsten Verbindung sofort angezeigt wird. Technische Protokolle bleiben bis zu 10 Minuten lokal gespeichert, auch wenn der automatische Versand deaktiviert ist. Diagnoseentwürfe und Berichte in der Warteschlange laufen lokal nach 24 Stunden ab; die Bereinigung erfolgt, sobald die Erweiterung ausgeführt werden kann."
   },
   "privacyNoticeIpTitle": {
     "message": "Prüfung der öffentlichen IP und Drittanbieter"

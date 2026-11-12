@@ -846,7 +846,7 @@
     "message": "Šajā paziņojumā aprakstīti dati, ko izmanto šis paplašinājums. Tas papildina FuzeVPN vispārējo privātuma politiku, kuras saite ir norādīta tālāk. Neobligātā diagnostikas sūtīšana ir nodalīta no datiem, kas nepieciešami, lai pierakstītos un izmantotu VPN."
   },
   "privacyNoticeUpdated": {
-    "message": "Paziņojums atjaunināts 2026. gada 19. oktobrī"
+    "message": "Paziņojums atjaunināts 2026. gada 12. novembrī"
   },
   "privacyNoticeServiceTitle": {
     "message": "Konts un VPN pakalpojums"
@@ -858,7 +858,7 @@
     "message": "Pārlūkā saglabātie dati"
   },
   "privacyNoticeLocal": {
-    "message": "Pārlūka krātuvē tiek glabāta jūsu sesija, konta informācija, preferences, vietņu izņēmumi un ierīces identitāte. Tehniskie žurnāli tiek glabāti lokāli līdz 10 minūtēm, pat ja automātiskā ziņošana ir izslēgta. Diagnostikas melnraksti un rindā esošie ziņojumi lokāli zaudē derīgumu pēc 24 stundām; tīrīšana notiek, kad paplašinājums var darboties."
+    "message": "Pārlūka krātuvē tiek glabāta jūsu sesija, konta informācija, preferences, vietņu izņēmumi un ierīces identitāte. Katrai atrašanās vietai pēdējais izmērītais VPN izejas IP tiek glabāts līdz 30 dienām, lai to varētu parādīt, tiklīdz atkal izveidojat savienojumu. Tehniskie žurnāli tiek glabāti lokāli līdz 10 minūtēm, pat ja automātiskā ziņošana ir izslēgta. Diagnostikas melnraksti un rindā esošie ziņojumi lokāli zaudē derīgumu pēc 24 stundām; tīrīšana notiek, kad paplašinājums var darboties."
   },
   "privacyNoticeIpTitle": {
     "message": "Publiskās IP pārbaudes un trešās puses"

@@ -846,7 +846,7 @@
     "message": "Ilani hii inaeleza data inayotumiwa na kiendelezi hiki. Inaongeza sera ya jumla ya faragha ya FuzeVPN, iliyounganishwa hapa chini. Utumaji wa hiari wa uchunguzi ni tofauti na data inayohitajika kuingia na kutumia VPN."
   },
   "privacyNoticeUpdated": {
-    "message": "Ilani ilisasishwa tarehe 19 Oktoba 2026"
+    "message": "Ilani ilisasishwa tarehe 12 Novemba 2026"
   },
   "privacyNoticeServiceTitle": {
     "message": "Akaunti na huduma ya VPN"
@@ -858,7 +858,7 @@
     "message": "Data iliyohifadhiwa katika kivinjari chako"
   },
   "privacyNoticeLocal": {
-    "message": "Hifadhi ya kivinjari huhifadhi kipindi chako, maelezo ya akaunti, mapendeleo, tovuti zilizotengwa na utambulisho wa kifaa. Kumbukumbu za kiufundi huhifadhiwa kwenye kifaa kwa hadi dakika 10, hata utumaji wa ripoti wa kiotomatiki ukiwa umezimwa. Rasimu za uchunguzi na ripoti zilizo kwenye foleni huisha muda kwenye kifaa baada ya saa 24; usafishaji hufanyika kiendelezi kinapoweza kuendeshwa."
+    "message": "Hifadhi ya kivinjari huhifadhi kipindi chako, maelezo ya akaunti, mapendeleo, tovuti zilizotengwa na utambulisho wa kifaa. IP ya kutoka ya VPN iliyopimwa mara ya mwisho kwa kila eneo huhifadhiwa kwa hadi siku 30, ili ionyeshwe mara tu unapounganisha upya. Kumbukumbu za kiufundi huhifadhiwa kwenye kifaa kwa hadi dakika 10, hata utumaji wa ripoti wa kiotomatiki ukiwa umezimwa. Rasimu za uchunguzi na ripoti zilizo kwenye foleni huisha muda kwenye kifaa baada ya saa 24; usafishaji hufanyika kiendelezi kinapoweza kuendeshwa."
   },
   "privacyNoticeIpTitle": {
     "message": "Ukaguzi wa IP ya umma na wahusika wengine"

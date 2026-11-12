@@ -846,7 +846,7 @@
     "message": "Ta informacja opisuje dane wykorzystywane przez to rozszerzenie. Uzupełnia ogólną politykę prywatności FuzeVPN, do której link znajduje się poniżej. Opcjonalne wysyłanie diagnostyki jest niezależne od danych potrzebnych do logowania i korzystania z VPN."
   },
   "privacyNoticeUpdated": {
-    "message": "Informację zaktualizowano 19 października 2026 r."
+    "message": "Informację zaktualizowano 12 listopada 2026 r."
   },
   "privacyNoticeServiceTitle": {
     "message": "Konto i usługa VPN"
@@ -858,7 +858,7 @@
     "message": "Dane przechowywane w przeglądarce"
   },
   "privacyNoticeLocal": {
-    "message": "Pamięć przeglądarki przechowuje Twoją sesję, dane konta, preferencje, wykluczenia witryn i tożsamość urządzenia. Dzienniki techniczne są przechowywane lokalnie przez maksymalnie 10 minut, także gdy automatyczne wysyłanie jest wyłączone. Szkice diagnostyczne i raporty w kolejce wygasają lokalnie po 24 godzinach; czyszczenie następuje, gdy rozszerzenie ma możliwość działania."
+    "message": "Pamięć przeglądarki przechowuje Twoją sesję, dane konta, preferencje, wykluczenia witryn i tożsamość urządzenia. Ostatni wyjściowy adres IP VPN zmierzony dla każdej lokalizacji jest przechowywany przez maksymalnie 30 dni, aby można go było wyświetlić od razu po ponownym połączeniu. Dzienniki techniczne są przechowywane lokalnie przez maksymalnie 10 minut, także gdy automatyczne wysyłanie jest wyłączone. Szkice diagnostyczne i raporty w kolejce wygasają lokalnie po 24 godzinach; czyszczenie następuje, gdy rozszerzenie ma możliwość działania."
   },
   "privacyNoticeIpTitle": {
     "message": "Sprawdzanie publicznego IP i usługi zewnętrzne"

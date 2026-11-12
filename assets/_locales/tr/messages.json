@@ -846,7 +846,7 @@
     "message": "Bu bildirim, uzantının kullandığı verileri açıklar. Aşağıda bağlantısı verilen genel FuzeVPN gizlilik politikasını tamamlar. İsteğe bağlı tanılama raporu gönderimi, oturum açmak ve VPN'i kullanmak için gerekli verilerden ayrıdır."
   },
   "privacyNoticeUpdated": {
-    "message": "Bildirim 19 Ekim 2026 tarihinde güncellendi"
+    "message": "Bildirim 12 Kasım 2026 tarihinde güncellendi"
   },
   "privacyNoticeServiceTitle": {
     "message": "Hesap ve VPN hizmeti"
@@ -858,7 +858,7 @@
     "message": "Tarayıcınızda saklanan veriler"
   },
   "privacyNoticeLocal": {
-    "message": "Tarayıcı depolaması oturumunuzu, hesap bilgilerinizi, tercihlerinizi, site istisnalarını ve cihaz kimliğinizi tutar. Otomatik raporlama kapalıyken de teknik günlükler en fazla 10 dakika yerel olarak saklanır. Tanılama taslaklarının ve sıradaki raporların yerel süresi 24 saat sonra dolar; temizleme, uzantı çalışabildiğinde yapılır."
+    "message": "Tarayıcı depolaması oturumunuzu, hesap bilgilerinizi, tercihlerinizi, site istisnalarını ve cihaz kimliğinizi tutar. Her konum için ölçülen son VPN çıkış IP adresi, yeniden bağlandığınızda hemen gösterilebilmesi için en fazla 30 gün saklanır. Otomatik raporlama kapalıyken de teknik günlükler en fazla 10 dakika yerel olarak saklanır. Tanılama taslaklarının ve sıradaki raporların yerel süresi 24 saat sonra dolar; temizleme, uzantı çalışabildiğinde yapılır."
   },
   "privacyNoticeIpTitle": {
     "message": "Genel IP denetimleri ve üçüncü taraflar"

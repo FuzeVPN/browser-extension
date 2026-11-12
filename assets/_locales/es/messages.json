@@ -846,7 +846,7 @@
     "message": "Este aviso describe los datos que utiliza esta extensión. Complementa la política general de privacidad de FuzeVPN, enlazada más abajo. El envío opcional de diagnósticos es independiente de los datos necesarios para iniciar sesión y utilizar la VPN."
   },
   "privacyNoticeUpdated": {
-    "message": "Aviso actualizado el 19 de octubre de 2026"
+    "message": "Aviso actualizado el 12 de noviembre de 2026"
   },
   "privacyNoticeServiceTitle": {
     "message": "Cuenta y servicio VPN"
@@ -858,7 +858,7 @@
     "message": "Datos almacenados en su navegador"
   },
   "privacyNoticeLocal": {
-    "message": "El almacenamiento del navegador conserva su sesión, datos de cuenta, preferencias, exclusiones de sitios e identidad del dispositivo. Los registros técnicos se guardan localmente durante un máximo de 10 minutos, incluso con el envío automático desactivado. Los borradores de diagnóstico y los informes en cola caducan localmente después de 24 horas; la limpieza se ejecuta cuando la extensión puede funcionar."
+    "message": "El almacenamiento del navegador conserva su sesión, datos de cuenta, preferencias, exclusiones de sitios e identidad del dispositivo. La última IP de salida de la VPN medida para cada ubicación se guarda durante un máximo de 30 días, para mostrarla en cuanto vuelva a conectarse. Los registros técnicos se guardan localmente durante un máximo de 10 minutos, incluso con el envío automático desactivado. Los borradores de diagnóstico y los informes en cola caducan localmente después de 24 horas; la limpieza se ejecuta cuando la extensión puede funcionar."
   },
   "privacyNoticeIpTitle": {
     "message": "Comprobaciones de IP pública y terceros"

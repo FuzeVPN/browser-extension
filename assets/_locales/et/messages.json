@@ -846,7 +846,7 @@
     "message": "See teade kirjeldab andmeid, mida see laiendus kasutab. See täiendab allpool lingitud FuzeVPN-i üldist privaatsuspoliitikat. Diagnostika vabatahtlik saatmine on eraldi andmetest, mida on vaja sisselogimiseks ja VPN-i kasutamiseks."
   },
   "privacyNoticeUpdated": {
-    "message": "Teadet uuendati 19. oktoobril 2026"
+    "message": "Teadet uuendati 12. novembril 2026"
   },
   "privacyNoticeServiceTitle": {
     "message": "Konto ja VPN-teenus"
@@ -858,7 +858,7 @@
     "message": "Brauserisse salvestatud andmed"
   },
   "privacyNoticeLocal": {
-    "message": "Brauseri salvestusruumis hoitakse sinu seanssi, konto andmeid, eelistusi, saidierandeid ja seadme identiteeti. Tehnilisi logisid hoitakse kohalikult kuni 10 minutit, isegi kui automaatne aruandlus on välja lülitatud. Diagnostika mustandid ja järjekorras aruanded aeguvad kohalikult 24 tunni pärast; puhastus toimub, kui laiendus saab töötada."
+    "message": "Brauseri salvestusruumis hoitakse sinu seanssi, konto andmeid, eelistusi, saidierandeid ja seadme identiteeti. Iga asukoha viimati mõõdetud VPN-i väljund-IP-d hoitakse kuni 30 päeva, et seda saaks kuvada kohe, kui uuesti ühenduse lood. Tehnilisi logisid hoitakse kohalikult kuni 10 minutit, isegi kui automaatne aruandlus on välja lülitatud. Diagnostika mustandid ja järjekorras aruanded aeguvad kohalikult 24 tunni pärast; puhastus toimub, kui laiendus saab töötada."
   },
   "privacyNoticeIpTitle": {
     "message": "Avaliku IP kontrollid ja kolmandad osapooled"

@@ -846,7 +846,7 @@
     "message": "Wannan sanarwa tana bayyana bayanan da wannan ƙari ke amfani da su. Tana ƙara wa manufar sirri ta gaba ɗaya ta FuzeVPN, wadda mahaɗinta ke ƙasa. Aika binciken matsala na zaɓi ya bambanta da bayanan da ake buƙata don shiga da amfani da VPN."
   },
   "privacyNoticeUpdated": {
-    "message": "An sabunta sanarwar a ranar 19 ga Oktoba 2026"
+    "message": "An sabunta sanarwar a ranar 12 ga Nuwamba 2026"
   },
   "privacyNoticeServiceTitle": {
     "message": "Asusu da sabis na VPN"
@@ -858,7 +858,7 @@
     "message": "Bayanan da aka ajiye a burauzarka"
   },
   "privacyNoticeLocal": {
-    "message": "Ma'ajiyar burauza tana riƙe da zamanka, bayanan asusu, zaɓuɓɓukanka, keɓancewar shafuka da shaidar na'ura. Ana riƙe rajistar fasaha a gida har zuwa mintuna 10, ko da an kashe aika rahoto ta atomatik. Daftarorin binciken matsala da rahotannin da ke layi suna ƙarewa a gida bayan awa 24; ana tsabtacewa idan ƙarin yana iya aiki."
+    "message": "Ma'ajiyar burauza tana riƙe da zamanka, bayanan asusu, zaɓuɓɓukanka, keɓancewar shafuka da shaidar na'ura. Ana riƙe IP na fitar VPN na ƙarshe da aka auna ga kowane wuri har zuwa kwanaki 30, domin a nuna shi da zarar ka sake haɗawa. Ana riƙe rajistar fasaha a gida har zuwa mintuna 10, ko da an kashe aika rahoto ta atomatik. Daftarorin binciken matsala da rahotannin da ke layi suna ƙarewa a gida bayan awa 24; ana tsabtacewa idan ƙarin yana iya aiki."
   },
   "privacyNoticeIpTitle": {
     "message": "Duba IP na jama'a da ɓangarori na uku"

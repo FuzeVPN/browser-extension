@@ -846,7 +846,7 @@
     "message": "Ky njoftim përshkruan të dhënat që përdor kjo shtesë. Ai plotëson politikën e përgjithshme të privatësisë së FuzeVPN, të lidhur më poshtë. Dërgimi opsional i diagnostikimeve është i ndarë nga të dhënat e nevojshme për të hyrë dhe për të përdorur VPN-në."
   },
   "privacyNoticeUpdated": {
-    "message": "Njoftimi u përditësua më 19 tetor 2026"
+    "message": "Njoftimi u përditësua më 12 nëntor 2026"
   },
   "privacyNoticeServiceTitle": {
     "message": "Llogaria dhe shërbimi VPN"
@@ -858,7 +858,7 @@
     "message": "Të dhënat e ruajtura në shfletues"
   },
   "privacyNoticeLocal": {
-    "message": "Hapësira ruajtëse e shfletuesit mban sesionin tuaj, të dhënat e llogarisë, preferencat, përjashtimet e sajteve dhe identitetin e pajisjes. Regjistrat teknikë mbahen lokalisht deri në 10 minuta, edhe kur raportimi automatik është joaktiv. Draftet e diagnostikimit dhe raportet në radhë skadojnë lokalisht pas 24 orësh; pastrimi kryhet kur shtesa mund të ekzekutohet."
+    "message": "Hapësira ruajtëse e shfletuesit mban sesionin tuaj, të dhënat e llogarisë, preferencat, përjashtimet e sajteve dhe identitetin e pajisjes. IP-ja e fundit e daljes së VPN-së e matur për çdo vendndodhje mbahet deri në 30 ditë, që të shfaqet sapo të rilidheni. Regjistrat teknikë mbahen lokalisht deri në 10 minuta, edhe kur raportimi automatik është joaktiv. Draftet e diagnostikimit dhe raportet në radhë skadojnë lokalisht pas 24 orësh; pastrimi kryhet kur shtesa mund të ekzekutohet."
   },
   "privacyNoticeIpTitle": {
     "message": "Kontrollet e IP-së publike dhe palët e treta"

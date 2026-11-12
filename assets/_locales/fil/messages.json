@@ -846,7 +846,7 @@
     "message": "Inilalarawan ng abisong ito ang data na ginagamit ng extension na ito. Karagdagan ito sa pangkalahatang patakaran sa privacy ng FuzeVPN na naka-link sa ibaba. Opsyonal ang pagpapadala ng mga diagnostic at hiwalay ito sa data na kailangan para mag-sign in at gamitin ang VPN."
   },
   "privacyNoticeUpdated": {
-    "message": "Na-update ang abiso noong 19 Oktubre 2026"
+    "message": "Na-update ang abiso noong 12 Nobyembre 2026"
   },
   "privacyNoticeServiceTitle": {
     "message": "Account at serbisyo ng VPN"
@@ -858,7 +858,7 @@
     "message": "Data na nakaimbak sa iyong browser"
   },
   "privacyNoticeLocal": {
-    "message": "Iniimbak ng browser ang iyong session, mga detalye ng account, kagustuhan, pagbubukod ng mga site at pagkakakilanlan ng device. Pinananatili nang lokal ang mga teknikal na log nang hanggang 10 minuto, kahit naka-off ang awtomatikong pag-uulat. Nag-e-expire nang lokal ang mga draft ng diagnostic at nakapilang ulat pagkalipas ng 24 na oras; isinasagawa ang paglilinis kapag makakatakbo ang extension."
+    "message": "Iniimbak ng browser ang iyong session, mga detalye ng account, kagustuhan, pagbubukod ng mga site at pagkakakilanlan ng device. Pinananatili nang hanggang 30 araw ang huling nasukat na exit IP ng VPN para sa bawat lokasyon, para maipakita ito agad kapag muli kang kumonekta. Pinananatili nang lokal ang mga teknikal na log nang hanggang 10 minuto, kahit naka-off ang awtomatikong pag-uulat. Nag-e-expire nang lokal ang mga draft ng diagnostic at nakapilang ulat pagkalipas ng 24 na oras; isinasagawa ang paglilinis kapag makakatakbo ang extension."
   },
   "privacyNoticeIpTitle": {
     "message": "Mga pagsusuri ng pampublikong IP at mga third party"

@@ -846,7 +846,7 @@
     "message": "Ìkéde yìí ṣàlàyé dátà tí àfikún yìí ń lò. Ó ṣe àfikún sí ìlànà àṣírí gbogbogbò ti FuzeVPN, tí ìjápọ̀ rẹ̀ wà nísàlẹ̀. Fífi àyẹ̀wò ìṣòro ránṣẹ́, tí ó jẹ́ àṣàyàn, yàtọ̀ sí dátà tí a nílò láti wọlé àti láti lo VPN."
   },
   "privacyNoticeUpdated": {
-    "message": "A ṣe ìmúdójúìwọ̀n ìkéde yìí ní 19 Oṣù Kẹwàá 2026"
+    "message": "A ṣe ìmúdójúìwọ̀n ìkéde yìí ní 12 Oṣù Kọkànlá 2026"
   },
   "privacyNoticeServiceTitle": {
     "message": "Àkọọ́lẹ̀ àti iṣẹ́ VPN"
@@ -858,7 +858,7 @@
     "message": "Dátà tí a fi pamọ́ sínú aṣàwákiri rẹ"
   },
   "privacyNoticeLocal": {
-    "message": "Ibi ìpamọ́ aṣàwákiri ń tọ́jú ìgbà ìlò rẹ, àlàyé àkọọ́lẹ̀, àwọn ààyò, àwọn ìyàsọ́tọ̀ ojú-òpó àti ìdánimọ̀ ẹ̀rọ. A ń tọ́jú àwọn àkọsílẹ̀ ìmọ̀-ẹ̀rọ sórí ẹ̀rọ yìí fún tó ìṣẹ́jú 10, kódà nígbà tí ìjábọ̀ aládàáṣe bá wà ní pípa. Àwọn ìjábọ̀ àyẹ̀wò ìṣòro tí a kò tíì parí àti àwọn ìjábọ̀ tó wà nínú ìlà ń parí lórí ẹ̀rọ lẹ́yìn wákàtí 24; ìfọmọ́ ń ṣẹlẹ̀ nígbà tí àfikún náà bá lè ṣiṣẹ́."
+    "message": "Ibi ìpamọ́ aṣàwákiri ń tọ́jú ìgbà ìlò rẹ, àlàyé àkọọ́lẹ̀, àwọn ààyò, àwọn ìyàsọ́tọ̀ ojú-òpó àti ìdánimọ̀ ẹ̀rọ. A ń tọ́jú IP ìjáde VPN tí a wọ̀n kẹ́yìn fún ibùdó kọ̀ọ̀kan fún tó ọjọ́ 30, kí a lè fi hàn ní kété tí o bá tún sopọ̀. A ń tọ́jú àwọn àkọsílẹ̀ ìmọ̀-ẹ̀rọ sórí ẹ̀rọ yìí fún tó ìṣẹ́jú 10, kódà nígbà tí ìjábọ̀ aládàáṣe bá wà ní pípa. Àwọn ìjábọ̀ àyẹ̀wò ìṣòro tí a kò tíì parí àti àwọn ìjábọ̀ tó wà nínú ìlà ń parí lórí ẹ̀rọ lẹ́yìn wákàtí 24; ìfọmọ́ ń ṣẹlẹ̀ nígbà tí àfikún náà bá lè ṣiṣẹ́."
   },
   "privacyNoticeIpTitle": {
     "message": "Àyẹ̀wò IP gbangba àti àwọn ẹgbẹ́ kẹta"

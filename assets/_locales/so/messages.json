@@ -846,7 +846,7 @@
     "message": "Ogeysiiskan wuxuu sharxayaa xogta ay kordhintani isticmaasho. Wuxuu dhammaystirayaa siyaasadda asturnaanta guud ee FuzeVPN, oo hoos looga xidhay. Dirista ikhtiyaariga ah ee baadhistu way ka duwan tahay xogta loo baahan yahay si loo galo loona isticmaalo VPN-ka."
   },
   "privacyNoticeUpdated": {
-    "message": "Ogeysiiska waxaa la cusboonaysiiyay 19 Oktoobar 2026"
+    "message": "Ogeysiiska waxaa la cusboonaysiiyay 12 Nofembar 2026"
   },
   "privacyNoticeServiceTitle": {
     "message": "Akoonka iyo adeegga VPN"
@@ -858,7 +858,7 @@
     "message": "Xogta lagu kaydiyay biraawsarkaaga"
   },
   "privacyNoticeLocal": {
-    "message": "Kaydka biraawsarku wuxuu hayaa fadhigaaga, faahfaahinta akoonka, dookhyada, ka-reebisyada bogagga iyo aqoonsiga qalabka. Diiwaannada farsamada waxaa lagu hayaa qalabka ilaa 10 daqiiqo, xitaa marka warbixinta tooska ahi dansan tahay. Qabyo-qoraallada baadhista iyo warbixinnada safka ku jira waxay ku dhacaan qalabka 24 saacadood kadib; nadiifintu waxay dhacdaa marka kordhintu shaqayn karto."
+    "message": "Kaydka biraawsarku wuxuu hayaa fadhigaaga, faahfaahinta akoonka, dookhyada, ka-reebisyada bogagga iyo aqoonsiga qalabka. IP-ga ka bixitaanka VPN ee ugu dambeeyay ee goob kasta laga cabbiray waxaa la hayaa ilaa 30 maalmood, si loo muujiyo isla marka aad dib u xidhanto. Diiwaannada farsamada waxaa lagu hayaa qalabka ilaa 10 daqiiqo, xitaa marka warbixinta tooska ahi dansan tahay. Qabyo-qoraallada baadhista iyo warbixinnada safka ku jira waxay ku dhacaan qalabka 24 saacadood kadib; nadiifintu waxay dhacdaa marka kordhintu shaqayn karto."
   },
   "privacyNoticeIpTitle": {
     "message": "Hubinta IP-ga dadweynaha iyo dhinacyo saddexaad"

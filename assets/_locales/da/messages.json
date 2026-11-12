@@ -846,7 +846,7 @@
     "message": "Disse oplysninger beskriver de data, som denne udvidelse bruger. De supplerer FuzeVPNs generelle privatlivspolitik, som der linkes til nedenfor. Valgfri afsendelse af diagnosticeringsdata er adskilt fra de data, der er nødvendige for at logge ind og bruge VPN."
   },
   "privacyNoticeUpdated": {
-    "message": "Oplysningerne blev opdateret den 19. oktober 2026"
+    "message": "Oplysningerne blev opdateret den 12. november 2026"
   },
   "privacyNoticeServiceTitle": {
     "message": "Konto og VPN-tjeneste"
@@ -858,7 +858,7 @@
     "message": "Data gemt i din browser"
   },
   "privacyNoticeLocal": {
-    "message": "Browserens lager indeholder din session, kontooplysninger, indstillinger, webstedsundtagelser og enhedsidentitet. Tekniske logfiler gemmes lokalt i op til 10 minutter, også når automatisk rapportering er slået fra. Udkast og rapporter i kø udløber lokalt efter 24 timer. Oprydningen sker, når udvidelsen kan køre."
+    "message": "Browserens lager indeholder din session, kontooplysninger, indstillinger, webstedsundtagelser og enhedsidentitet. Den senest målte IP-adresse for VPN-udgangen for hver placering gemmes i op til 30 dage, så den kan vises, så snart du opretter forbindelse igen. Tekniske logfiler gemmes lokalt i op til 10 minutter, også når automatisk rapportering er slået fra. Udkast og rapporter i kø udløber lokalt efter 24 timer. Oprydningen sker, når udvidelsen kan køre."
   },
   "privacyNoticeIpTitle": {
     "message": "Kontrol af offentlig IP-adresse og tredjeparter"

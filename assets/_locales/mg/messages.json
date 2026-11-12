@@ -846,7 +846,7 @@
     "message": "Ity fampahafantarana ity dia mamaritra ny angona ampiasain'ity fanitarana ity. Mameno ny politika ankapobeny momba ny fiainana manokana an'ny FuzeVPN, misy rohy eo ambany, izy io. Tsy mitovy amin'ny angona ilaina hidirana sy hampiasana ny VPN ny fandefasana fanadihadiana tsy voatery."
   },
   "privacyNoticeUpdated": {
-    "message": "Fampahafantarana nohavaozina tamin'ny 19 Oktobra 2026"
+    "message": "Fampahafantarana nohavaozina tamin'ny 12 Novambra 2026"
   },
   "privacyNoticeServiceTitle": {
     "message": "Kaonty sy tolotra VPN"
@@ -858,7 +858,7 @@
     "message": "Angona voatahiry ao amin'ny mpitety"
   },
   "privacyNoticeLocal": {
-    "message": "Ny fitahirizan'ny mpitety dia mitazona ny fotoam-pidiranao, ny antsipirian'ny kaontinao, ny safidinao, ny tranonkala maningana ary ny famantarana ny fitaovana. Tazonina eo an-toerana mandritra ny 10 minitra ny diary ara-teknika, na dia maty aza ny fandefasana tatitra ho azy. Lany daty eo an-toerana aorian'ny 24 ora ny drafitra fanadihadiana sy ny tatitra miandry; atao ny fanadiovana rehefa afaka mandeha ny fanitarana."
+    "message": "Ny fitahirizan'ny mpitety dia mitazona ny fotoam-pidiranao, ny antsipirian'ny kaontinao, ny safidinao, ny tranonkala maningana ary ny famantarana ny fitaovana. Tazonina hatramin'ny 30 andro ny IP fivoahan'ny VPN farany norefesina ho an'ny toerana tsirairay, mba hanehoana azy raha vao mifandray indray ianao. Tazonina eo an-toerana mandritra ny 10 minitra ny diary ara-teknika, na dia maty aza ny fandefasana tatitra ho azy. Lany daty eo an-toerana aorian'ny 24 ora ny drafitra fanadihadiana sy ny tatitra miandry; atao ny fanadiovana rehefa afaka mandeha ny fanitarana."
   },
   "privacyNoticeIpTitle": {
     "message": "Fanamarinana IP ampahibemaso sy antoko fahatelo"

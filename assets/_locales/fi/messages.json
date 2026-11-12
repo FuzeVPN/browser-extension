@@ -846,7 +846,7 @@
     "message": "Tämä ilmoitus kuvaa tämän laajennuksen käyttämät tiedot. Se täydentää alla linkitettyä FuzeVPN:n yleistä tietosuojakäytäntöä. Vapaaehtoinen diagnostiikan lähettäminen on erillään tiedoista, joita tarvitaan sisäänkirjautumiseen ja VPN:n käyttöön."
   },
   "privacyNoticeUpdated": {
-    "message": "Ilmoitus päivitetty 19. lokakuuta 2026"
+    "message": "Ilmoitus päivitetty 12. marraskuuta 2026"
   },
   "privacyNoticeServiceTitle": {
     "message": "Tili ja VPN-palvelu"
@@ -858,7 +858,7 @@
     "message": "Selaimeen tallennetut tiedot"
   },
   "privacyNoticeLocal": {
-    "message": "Selaimen tallennustilassa säilytetään istuntosi, tilitietosi, asetuksesi, sivustopoikkeukset ja laitetunniste. Teknisiä lokeja säilytetään paikallisesti enintään 10 minuuttia, vaikka automaattinen raportointi olisi pois käytöstä. Diagnostiikkaluonnokset ja jonossa olevat raportit vanhenevat paikallisesti 24 tunnin kuluttua; siivous suoritetaan, kun laajennus voi toimia."
+    "message": "Selaimen tallennustilassa säilytetään istuntosi, tilitietosi, asetuksesi, sivustopoikkeukset ja laitetunniste. Kunkin sijainnin viimeksi mitattu VPN:n poistumis-IP säilytetään enintään 30 päivää, jotta se voidaan näyttää heti, kun yhdistät uudelleen. Teknisiä lokeja säilytetään paikallisesti enintään 10 minuuttia, vaikka automaattinen raportointi olisi pois käytöstä. Diagnostiikkaluonnokset ja jonossa olevat raportit vanhenevat paikallisesti 24 tunnin kuluttua; siivous suoritetaan, kun laajennus voi toimia."
   },
   "privacyNoticeIpTitle": {
     "message": "Julkisen IP:n tarkistukset ja kolmannet osapuolet"

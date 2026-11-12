@@ -846,7 +846,7 @@
     "message": "Den här informationen beskriver vilka data som används av tillägget. Den kompletterar FuzeVPN:s allmänna integritetspolicy, som länkas nedan. Den frivilliga sändningen av diagnostik är separat från de data som behövs för att logga in och använda VPN."
   },
   "privacyNoticeUpdated": {
-    "message": "Informationen uppdaterades den 19 oktober 2026"
+    "message": "Informationen uppdaterades den 12 november 2026"
   },
   "privacyNoticeServiceTitle": {
     "message": "Konto och VPN-tjänst"
@@ -858,7 +858,7 @@
     "message": "Data som lagras i webbläsaren"
   },
   "privacyNoticeLocal": {
-    "message": "Webbläsarens lagring innehåller din session, kontouppgifter, inställningar, webbplatsundantag och enhetsidentitet. Tekniska loggar sparas lokalt i upp till 10 minuter, även när automatisk rapportering är avstängd. Diagnostikutkast och rapporter i kö löper ut lokalt efter 24 timmar. Rensningen sker när tillägget kan köras."
+    "message": "Webbläsarens lagring innehåller din session, kontouppgifter, inställningar, webbplatsundantag och enhetsidentitet. Den senast uppmätta IP-adressen för VPN-utgången för varje plats sparas i upp till 30 dagar, så att den kan visas så snart du ansluter igen. Tekniska loggar sparas lokalt i upp till 10 minuter, även när automatisk rapportering är avstängd. Diagnostikutkast och rapporter i kö löper ut lokalt efter 24 timmar. Rensningen sker när tillägget kan köras."
   },
   "privacyNoticeIpTitle": {
     "message": "Kontroller av offentlig IP-adress och tredje parter"

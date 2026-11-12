@@ -846,7 +846,7 @@
     "message": "Questa informativa descrive i dati utilizzati dall’estensione. Integra l’informativa generale sulla privacy di FuzeVPN, disponibile tramite il collegamento qui sotto. L’invio facoltativo di dati diagnostici è distinto dai dati necessari per accedere all’account e utilizzare la VPN."
   },
   "privacyNoticeUpdated": {
-    "message": "Informativa aggiornata il 19 ottobre 2026"
+    "message": "Informativa aggiornata il 12 novembre 2026"
   },
   "privacyNoticeServiceTitle": {
     "message": "Account e servizio VPN"
@@ -858,7 +858,7 @@
     "message": "Dati memorizzati nel browser"
   },
   "privacyNoticeLocal": {
-    "message": "Il browser memorizza la sessione, i dati dell’account, le preferenze, le esclusioni dei siti e l’identità del dispositivo. I registri tecnici vengono conservati localmente per un massimo di 10 minuti, anche quando l’invio automatico è disattivato. Le bozze diagnostiche e i rapporti in coda scadono localmente dopo 24 ore; la pulizia avviene quando l’estensione può essere eseguita."
+    "message": "Il browser memorizza la sessione, i dati dell’account, le preferenze, le esclusioni dei siti e l’identità del dispositivo. L’ultimo IP di uscita della VPN misurato per ogni posizione viene conservato per un massimo di 30 giorni, per mostrarlo non appena ci si riconnette. I registri tecnici vengono conservati localmente per un massimo di 10 minuti, anche quando l’invio automatico è disattivato. Le bozze diagnostiche e i rapporti in coda scadono localmente dopo 24 ore; la pulizia avviene quando l’estensione può essere eseguita."
   },
   "privacyNoticeIpTitle": {
     "message": "Verifiche dell’IP pubblico e terze parti"

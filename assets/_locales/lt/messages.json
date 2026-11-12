@@ -846,7 +846,7 @@
     "message": "Šiame pranešime aprašomi šio plėtinio naudojami duomenys. Jis papildo toliau nurodytą bendrąją FuzeVPN privatumo politiką. Pasirenkamas diagnostikos siuntimas yra atskirtas nuo duomenų, reikalingų prisijungti ir naudoti VPN."
   },
   "privacyNoticeUpdated": {
-    "message": "Pranešimas atnaujintas 2026 m. spalio 19 d."
+    "message": "Pranešimas atnaujintas 2026 m. lapkričio 12 d."
   },
   "privacyNoticeServiceTitle": {
     "message": "Paskyra ir VPN paslauga"
@@ -858,7 +858,7 @@
     "message": "Naršyklėje saugomi duomenys"
   },
   "privacyNoticeLocal": {
-    "message": "Naršyklės saugykloje laikoma jūsų sesija, paskyros duomenys, nuostatos, neįtrauktos svetainės ir įrenginio tapatybė. Techniniai žurnalai vietoje saugomi iki 10 minučių, net kai automatinis ataskaitų siuntimas išjungtas. Diagnostikos juodraščių ir eilėje laukiančių ataskaitų galiojimas vietoje baigiasi po 24 valandų; valymas atliekamas, kai plėtinys gali veikti."
+    "message": "Naršyklės saugykloje laikoma jūsų sesija, paskyros duomenys, nuostatos, neįtrauktos svetainės ir įrenginio tapatybė. Paskutinis kiekvienai vietai išmatuotas VPN išėjimo IP saugomas iki 30 dienų, kad būtų parodytas, vos tik prisijungsite iš naujo. Techniniai žurnalai vietoje saugomi iki 10 minučių, net kai automatinis ataskaitų siuntimas išjungtas. Diagnostikos juodraščių ir eilėje laukiančių ataskaitų galiojimas vietoje baigiasi po 24 valandų; valymas atliekamas, kai plėtinys gali veikti."
   },
   "privacyNoticeIpTitle": {
     "message": "Viešojo IP tikrinimas ir trečiosios šalys"

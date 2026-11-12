@@ -846,7 +846,7 @@
     "message": "Bu bildiriş genişləndirmənin istifadə etdiyi məlumatları təsvir edir. O, aşağıda keçidi verilmiş ümumi FuzeVPN məxfilik siyasətini tamamlayır. Diaqnostikanın könüllü göndərilməsi daxil olmaq və VPN-dən istifadə etmək üçün lazım olan məlumatlardan ayrıdır."
   },
   "privacyNoticeUpdated": {
-    "message": "Bildiriş 19 oktyabr 2026-cı il tarixində yeniləndi"
+    "message": "Bildiriş 12 noyabr 2026-cı il tarixində yeniləndi"
   },
   "privacyNoticeServiceTitle": {
     "message": "Hesab və VPN xidməti"
@@ -858,7 +858,7 @@
     "message": "Brauzerinizdə saxlanılan məlumatlar"
   },
   "privacyNoticeLocal": {
-    "message": "Brauzer yaddaşında sessiyanız, hesab məlumatlarınız, seçimləriniz, sayt istisnaları və cihaz identifikatoru saxlanılır. Avtomatik hesabat söndürülü olsa belə, texniki jurnallar lokal olaraq 10 dəqiqəyə qədər saxlanılır. Diaqnostika qaralamalarının və növbədəki hesabatların müddəti lokal olaraq 24 saatdan sonra bitir; təmizləmə genişləndirmə işləyə bildikdə həyata keçirilir."
+    "message": "Brauzer yaddaşında sessiyanız, hesab məlumatlarınız, seçimləriniz, sayt istisnaları və cihaz identifikatoru saxlanılır. Hər məkan üçün ölçülmüş son VPN çıxış IP-si yenidən qoşulan kimi göstərilməsi üçün 30 günə qədər saxlanılır. Avtomatik hesabat söndürülü olsa belə, texniki jurnallar lokal olaraq 10 dəqiqəyə qədər saxlanılır. Diaqnostika qaralamalarının və növbədəki hesabatların müddəti lokal olaraq 24 saatdan sonra bitir; təmizləmə genişləndirmə işləyə bildikdə həyata keçirilir."
   },
   "privacyNoticeIpTitle": {
     "message": "İctimai IP yoxlamaları və üçüncü tərəflər"

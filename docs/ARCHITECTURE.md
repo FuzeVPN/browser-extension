@@ -65,7 +65,8 @@ mesure de la nouvelle route s'effectue. Elle n'est jamais enregistrée ni export
 une mesure, une mesure qui échoue l'efface, et elle ne contient ni adresse personnelle ni
 IPv6. Elle est liée à l'emplacement et non au compte : une déconnexion du compte ne
 l'efface pas. Une adresse de plus de trente jours est retirée de la clé dès la lecture
-suivante par le worker.
+suivante par le worker. La notice de confidentialité embarquée décrit cette conservation
+dans les soixante-dix langues.
 
 Le serveur reçoit les contrats existants. Les diagnostics gardent notamment les champs
 historiques `platform: "chrome_extension"` et `chrome`, même sur Firefox. Firefox envoie

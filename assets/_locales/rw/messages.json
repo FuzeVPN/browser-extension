@@ -846,7 +846,7 @@
     "message": "Iri tangazo risobanura amakuru akoreshwa n'uyu mugereka. Ryuzuza politiki rusange y'ubuzima bwite ya FuzeVPN, ihuza ryayo riri hepfo. Kohereza isuzuma ku bushake bitandukanye n'amakuru akenewe kugira ngo winjire kandi ukoreshe VPN."
   },
   "privacyNoticeUpdated": {
-    "message": "Itangazo ryavuguruwe ku wa 19 Ukwakira 2026"
+    "message": "Itangazo ryavuguruwe ku wa 12 Ugushyingo 2026"
   },
   "privacyNoticeServiceTitle": {
     "message": "Konti na serivisi ya VPN"
@@ -858,7 +858,7 @@
     "message": "Amakuru abitswe muri mushakisha yawe"
   },
   "privacyNoticeLocal": {
-    "message": "Ububiko bwa mushakisha bubika isesiyo yawe, amakuru ya konti, ibyo wahisemo, imbuga zisonewe n'umwirondoro w'igikoresho. Ibitabo bya tekiniki bibikwa kuri iki gikoresho mu gihe kigera ku minota 10, kabone n'iyo kohereza raporo byikora bizimye. Inyandiko z'agateganyo z'isuzuma na raporo zitegereje koherezwa zirangira hano nyuma y'amasaha 24; isukura rikorwa iyo umugereka ushoboye gukora."
+    "message": "Ububiko bwa mushakisha bubika isesiyo yawe, amakuru ya konti, ibyo wahisemo, imbuga zisonewe n'umwirondoro w'igikoresho. IP isohokeramo ya VPN iheruka gupimwa kuri buri hantu ibikwa mu gihe kigera ku minsi 30, kugira ngo ihite igaragazwa igihe wongeye guhuza. Ibitabo bya tekiniki bibikwa kuri iki gikoresho mu gihe kigera ku minota 10, kabone n'iyo kohereza raporo byikora bizimye. Inyandiko z'agateganyo z'isuzuma na raporo zitegereje koherezwa zirangira hano nyuma y'amasaha 24; isukura rikorwa iyo umugereka ushoboye gukora."
   },
   "privacyNoticeIpTitle": {
     "message": "Igenzura rya IP rusange n'ibigo by'abandi"

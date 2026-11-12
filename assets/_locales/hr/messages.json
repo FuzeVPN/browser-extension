@@ -846,7 +846,7 @@
     "message": "Ova obavijest opisuje podatke koje koristi ovo proširenje. Dopunjuje opća pravila o privatnosti FuzeVPN-a, povezana u nastavku. Neobavezno slanje dijagnostike odvojeno je od podataka potrebnih za prijavu i korištenje VPN-a."
   },
   "privacyNoticeUpdated": {
-    "message": "Obavijest ažurirana 19. listopada 2026."
+    "message": "Obavijest ažurirana 12. studenoga 2026."
   },
   "privacyNoticeServiceTitle": {
     "message": "Račun i VPN usluga"
@@ -858,7 +858,7 @@
     "message": "Podaci pohranjeni u pregledniku"
   },
   "privacyNoticeLocal": {
-    "message": "Pohrana preglednika sadrži vašu sesiju, podatke o računu, preferencije, izuzeta web-mjesta i identitet uređaja. Tehnički zapisnici čuvaju se lokalno do 10 minuta, čak i kada je automatsko slanje izvješća isključeno. Dijagnostičke skice i izvješća u redu čekanja lokalno istječu nakon 24 sata; čišćenje se izvodi kada se proširenje može pokrenuti."
+    "message": "Pohrana preglednika sadrži vašu sesiju, podatke o računu, preferencije, izuzeta web-mjesta i identitet uređaja. Posljednja izlazna IP adresa VPN-a izmjerena za svaku lokaciju čuva se do 30 dana kako bi se prikazala čim se ponovno povežete. Tehnički zapisnici čuvaju se lokalno do 10 minuta, čak i kada je automatsko slanje izvješća isključeno. Dijagnostičke skice i izvješća u redu čekanja lokalno istječu nakon 24 sata; čišćenje se izvodi kada se proširenje može pokrenuti."
   },
   "privacyNoticeIpTitle": {
     "message": "Provjere javne IP adrese i treće strane"

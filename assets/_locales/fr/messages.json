@@ -846,7 +846,7 @@
     "message": "Cette notice décrit les données utilisées par cette extension. Elle complète la politique de confidentialité générale de FuzeVPN, accessible ci-dessous. L’envoi facultatif de diagnostics est distinct des données nécessaires à la connexion au compte et à l’utilisation du VPN."
   },
   "privacyNoticeUpdated": {
-    "message": "Notice mise à jour le 19 octobre 2026"
+    "message": "Notice mise à jour le 12 novembre 2026"
   },
   "privacyNoticeServiceTitle": {
     "message": "Compte et service VPN"
@@ -858,7 +858,7 @@
     "message": "Données stockées dans le navigateur"
   },
   "privacyNoticeLocal": {
-    "message": "Le navigateur stocke votre session, les informations de compte, les préférences, les exclusions de sites et l’identité d’appareil. Des journaux techniques restent locaux pendant dix minutes au maximum, même sans envoi automatique. Les brouillons et rapports en attente expirent localement après 24 heures ; le nettoyage s’effectue lorsque l’extension peut s’exécuter."
+    "message": "Le navigateur stocke votre session, les informations de compte, les préférences, les exclusions de sites et l’identité d’appareil. La dernière IP de sortie VPN mesurée pour chaque emplacement est conservée pendant 30 jours au maximum, afin de l’afficher dès la reconnexion. Des journaux techniques restent locaux pendant dix minutes au maximum, même sans envoi automatique. Les brouillons et rapports en attente expirent localement après 24 heures ; le nettoyage s’effectue lorsque l’extension peut s’exécuter."
   },
   "privacyNoticeIpTitle": {
     "message": "Vérification de l’IP et services tiers"

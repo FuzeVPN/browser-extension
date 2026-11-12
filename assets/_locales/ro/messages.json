@@ -846,7 +846,7 @@
     "message": "Această informare descrie datele utilizate de această extensie. Ea completează politica generală de confidențialitate FuzeVPN, disponibilă prin linkul de mai jos. Trimiterea opțională a diagnosticelor este distinctă de datele necesare pentru autentificare și utilizarea VPN-ului."
   },
   "privacyNoticeUpdated": {
-    "message": "Informare actualizată la 19 octombrie 2026"
+    "message": "Informare actualizată la 12 noiembrie 2026"
   },
   "privacyNoticeServiceTitle": {
     "message": "Contul și serviciul VPN"
@@ -858,7 +858,7 @@
     "message": "Date stocate în browser"
   },
   "privacyNoticeLocal": {
-    "message": "Stocarea browserului păstrează sesiunea, datele contului, preferințele, excluderile de site-uri și identitatea dispozitivului. Jurnalele tehnice sunt păstrate local timp de cel mult 10 minute, chiar și când trimiterea automată este dezactivată. Schițele rapoartelor de diagnostic și rapoartele în coadă expiră local după 24 de ore; curățarea se face când extensia poate rula."
+    "message": "Stocarea browserului păstrează sesiunea, datele contului, preferințele, excluderile de site-uri și identitatea dispozitivului. Ultimul IP de ieșire VPN măsurat pentru fiecare locație este păstrat timp de cel mult 30 de zile, pentru a fi afișat imediat ce vă reconectați. Jurnalele tehnice sunt păstrate local timp de cel mult 10 minute, chiar și când trimiterea automată este dezactivată. Schițele rapoartelor de diagnostic și rapoartele în coadă expiră local după 24 de ore; curățarea se face când extensia poate rula."
   },
   "privacyNoticeIpTitle": {
     "message": "Verificarea IP-ului public și serviciile terțe"

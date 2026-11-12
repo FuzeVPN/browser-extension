@@ -846,7 +846,7 @@
     "message": "Ushbu bildirishnoma kengaytma foydalanadigan maʼlumotlarni tavsiflaydi. U quyida havolasi berilgan umumiy FuzeVPN maxfiylik siyosatini toʻldiradi. Ixtiyoriy diagnostika yuborish hisobga kirish va VPN ishlatish uchun zarur maʼlumotlardan alohida."
   },
   "privacyNoticeUpdated": {
-    "message": "Bildirishnoma 2026-yil 19-oktabrda yangilangan"
+    "message": "Bildirishnoma 2026-yil 12-noyabrda yangilangan"
   },
   "privacyNoticeServiceTitle": {
     "message": "Hisob va VPN xizmati"
@@ -858,7 +858,7 @@
     "message": "Brauzeringizda saqlanadigan maʼlumotlar"
   },
   "privacyNoticeLocal": {
-    "message": "Brauzer xotirasida seansingiz, hisob maʼlumotlari, sozlamalar, sayt istisnolari va qurilma identifikatori saqlanadi. Texnik jurnallar avtomatik hisobot yuborish oʻchiq boʻlsa ham, qurilmada 10 daqiqagacha saqlanadi. Diagnostika qoralamalari va navbatdagi hisobotlarning mahalliy muddati 24 soatdan keyin tugaydi; tozalash kengaytma ishga tusha olganda bajariladi."
+    "message": "Brauzer xotirasida seansingiz, hisob maʼlumotlari, sozlamalar, sayt istisnolari va qurilma identifikatori saqlanadi. Har bir joylashuv uchun oxirgi oʻlchangan VPN chiqish IP manzili qayta ulanganingizda darhol koʻrsatilishi uchun 30 kungacha saqlanadi. Texnik jurnallar avtomatik hisobot yuborish oʻchiq boʻlsa ham, qurilmada 10 daqiqagacha saqlanadi. Diagnostika qoralamalari va navbatdagi hisobotlarning mahalliy muddati 24 soatdan keyin tugaydi; tozalash kengaytma ishga tusha olganda bajariladi."
   },
   "privacyNoticeIpTitle": {
     "message": "Ommaviy IP tekshiruvlari va uchinchi tomonlar"

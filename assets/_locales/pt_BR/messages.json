@@ -846,7 +846,7 @@
     "message": "Este aviso descreve os dados usados por esta extensão. Ele complementa a política geral de privacidade da FuzeVPN, cujo link está abaixo. O envio opcional de diagnósticos é independente dos dados necessários para entrar na conta e usar a VPN."
   },
   "privacyNoticeUpdated": {
-    "message": "Aviso atualizado em 19 de outubro de 2026"
+    "message": "Aviso atualizado em 12 de novembro de 2026"
   },
   "privacyNoticeServiceTitle": {
     "message": "Conta e serviço VPN"
@@ -858,7 +858,7 @@
     "message": "Dados armazenados no seu navegador"
   },
   "privacyNoticeLocal": {
-    "message": "O armazenamento do navegador guarda sua sessão, dados da conta, preferências, exclusões de sites e identidade do dispositivo. Os registros técnicos são mantidos localmente por até 10 minutos, mesmo com os relatórios automáticos desativados. Rascunhos de diagnóstico e relatórios na fila expiram localmente após 24 horas; a limpeza ocorre quando a extensão pode ser executada."
+    "message": "O armazenamento do navegador guarda sua sessão, dados da conta, preferências, exclusões de sites e identidade do dispositivo. O último IP de saída da VPN medido para cada localização é mantido por até 30 dias, para ser exibido assim que você se reconectar. Os registros técnicos são mantidos localmente por até 10 minutos, mesmo com os relatórios automáticos desativados. Rascunhos de diagnóstico e relatórios na fila expiram localmente após 24 horas; a limpeza ocorre quando a extensão pode ser executada."
   },
   "privacyNoticeIpTitle": {
     "message": "Verificações de IP público e terceiros"

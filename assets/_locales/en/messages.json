@@ -846,7 +846,7 @@
     "message": "This notice describes the data used by this extension. It supplements the general FuzeVPN privacy policy, linked below. Optional diagnostic sending is separate from the data needed to sign in and use the VPN."
   },
   "privacyNoticeUpdated": {
-    "message": "Notice updated on 19 October 2026"
+    "message": "Notice updated on 12 November 2026"
   },
   "privacyNoticeServiceTitle": {
     "message": "Account and VPN service"
@@ -858,7 +858,7 @@
     "message": "Data stored in your browser"
   },
   "privacyNoticeLocal": {
-    "message": "Browser storage holds your session, account details, preferences, site exclusions and device identity. Technical journals are kept locally for up to 10 minutes, even when automatic reporting is off. Diagnostic drafts and queued reports expire locally after 24 hours; cleanup runs when the extension can execute."
+    "message": "Browser storage holds your session, account details, preferences, site exclusions and device identity. The last VPN exit IP measured for each location is kept for up to 30 days, to display it as soon as you reconnect. Technical journals are kept locally for up to 10 minutes, even when automatic reporting is off. Diagnostic drafts and queued reports expire locally after 24 hours; cleanup runs when the extension can execute."
   },
   "privacyNoticeIpTitle": {
     "message": "Public IP checks and third parties"

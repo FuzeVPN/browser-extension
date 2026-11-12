@@ -846,7 +846,7 @@
     "message": "Ez a tájékoztató a bővítmény által használt adatokat ismerteti. Kiegészíti a FuzeVPN alább hivatkozott általános adatvédelmi szabályzatát. A diagnosztika opcionális küldése független a bejelentkezéshez és a VPN használatához szükséges adatoktól."
   },
   "privacyNoticeUpdated": {
-    "message": "A tájékoztató frissítve: 2026. október 19."
+    "message": "A tájékoztató frissítve: 2026. november 12."
   },
   "privacyNoticeServiceTitle": {
     "message": "Fiók és VPN-szolgáltatás"
@@ -858,7 +858,7 @@
     "message": "A böngészőben tárolt adatok"
   },
   "privacyNoticeLocal": {
-    "message": "A böngésző tárhelye tárolja a munkamenetét, fiókadatait, beállításait, webhelykivételeit és eszközazonosítóját. A technikai naplók helyben legfeljebb 10 percig maradnak meg, akkor is, ha az automatikus jelentésküldés ki van kapcsolva. A diagnosztikai piszkozatok és a sorban álló jelentések helyben 24 óra után lejárnak; a tisztítás akkor fut le, amikor a bővítmény futni tud."
+    "message": "A böngésző tárhelye tárolja a munkamenetét, fiókadatait, beállításait, webhelykivételeit és eszközazonosítóját. Az egyes helyszíneknél utoljára mért VPN kilépési IP-cím legfeljebb 30 napig marad meg, hogy újracsatlakozáskor azonnal megjelenhessen. A technikai naplók helyben legfeljebb 10 percig maradnak meg, akkor is, ha az automatikus jelentésküldés ki van kapcsolva. A diagnosztikai piszkozatok és a sorban álló jelentések helyben 24 óra után lejárnak; a tisztítás akkor fut le, amikor a bővítmény futni tud."
   },
   "privacyNoticeIpTitle": {
     "message": "Nyilvános IP-ellenőrzések és harmadik felek"

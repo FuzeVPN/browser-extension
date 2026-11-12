@@ -846,7 +846,7 @@
     "message": "Notis ini menerangkan data yang digunakan oleh sambungan ini. Notis ini melengkapkan dasar privasi umum FuzeVPN yang dipautkan di bawah. Penghantaran diagnostik adalah pilihan dan berasingan daripada data yang diperlukan untuk log masuk dan menggunakan VPN."
   },
   "privacyNoticeUpdated": {
-    "message": "Notis dikemas kini pada 19 Oktober 2026"
+    "message": "Notis dikemas kini pada 12 November 2026"
   },
   "privacyNoticeServiceTitle": {
     "message": "Akaun dan perkhidmatan VPN"
@@ -858,7 +858,7 @@
     "message": "Data yang disimpan dalam pelayar anda"
   },
   "privacyNoticeLocal": {
-    "message": "Storan pelayar menyimpan sesi, butiran akaun, keutamaan, pengecualian laman dan identiti peranti anda. Log teknikal disimpan secara setempat selama sehingga 10 minit, walaupun pelaporan automatik dimatikan. Draf diagnostik dan laporan dalam baris gilir luput secara setempat selepas 24 jam; pembersihan dijalankan apabila sambungan boleh beroperasi."
+    "message": "Storan pelayar menyimpan sesi, butiran akaun, keutamaan, pengecualian laman dan identiti peranti anda. IP keluar VPN terakhir yang diukur bagi setiap lokasi disimpan selama sehingga 30 hari, supaya dapat dipaparkan sebaik sahaja anda menyambung semula. Log teknikal disimpan secara setempat selama sehingga 10 minit, walaupun pelaporan automatik dimatikan. Draf diagnostik dan laporan dalam baris gilir luput secara setempat selepas 24 jam; pembersihan dijalankan apabila sambungan boleh beroperasi."
   },
   "privacyNoticeIpTitle": {
     "message": "Semakan IP awam dan pihak ketiga"

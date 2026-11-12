@@ -846,7 +846,7 @@
     "message": "Deze verklaring beschrijft de gegevens die deze extensie gebruikt. Ze vormt een aanvulling op het algemene privacybeleid van FuzeVPN, waarnaar hieronder wordt verwezen. Optionele verzending van diagnostische gegevens staat los van de gegevens die nodig zijn om in te loggen en de VPN te gebruiken."
   },
   "privacyNoticeUpdated": {
-    "message": "Verklaring bijgewerkt op 19 oktober 2026"
+    "message": "Verklaring bijgewerkt op 12 november 2026"
   },
   "privacyNoticeServiceTitle": {
     "message": "Account en VPN-dienst"
@@ -858,7 +858,7 @@
     "message": "Gegevens die in uw browser worden opgeslagen"
   },
   "privacyNoticeLocal": {
-    "message": "De browseropslag bevat uw sessie, accountgegevens, voorkeuren, website-uitzonderingen en apparaatidentiteit. Technische logboeken worden maximaal 10 minuten lokaal bewaard, ook als automatisch rapporteren is uitgeschakeld. Diagnostische concepten en rapporten in de wachtrij verlopen lokaal na 24 uur; het opschonen gebeurt wanneer de extensie kan worden uitgevoerd."
+    "message": "De browseropslag bevat uw sessie, accountgegevens, voorkeuren, website-uitzonderingen en apparaatidentiteit. Het laatst gemeten uitgaande IP-adres van de VPN voor elke locatie wordt maximaal 30 dagen bewaard, zodat het direct kan worden getoond wanneer u opnieuw verbinding maakt. Technische logboeken worden maximaal 10 minuten lokaal bewaard, ook als automatisch rapporteren is uitgeschakeld. Diagnostische concepten en rapporten in de wachtrij verlopen lokaal na 24 uur; het opschonen gebeurt wanneer de extensie kan worden uitgevoerd."
   },
   "privacyNoticeIpTitle": {
     "message": "Openbare IP-controles en derden"

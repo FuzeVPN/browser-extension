@@ -846,7 +846,7 @@
     "message": "Pemberitahuan ini menjelaskan data yang digunakan oleh ekstensi ini. Pemberitahuan ini melengkapi kebijakan privasi umum FuzeVPN yang ditautkan di bawah. Pengiriman diagnostik bersifat opsional dan terpisah dari data yang diperlukan untuk masuk ke akun dan menggunakan VPN."
   },
   "privacyNoticeUpdated": {
-    "message": "Pemberitahuan diperbarui pada 19 Oktober 2026"
+    "message": "Pemberitahuan diperbarui pada 12 November 2026"
   },
   "privacyNoticeServiceTitle": {
     "message": "Akun dan layanan VPN"
@@ -858,7 +858,7 @@
     "message": "Data yang disimpan di peramban Anda"
   },
   "privacyNoticeLocal": {
-    "message": "Penyimpanan peramban menyimpan sesi, detail akun, preferensi, pengecualian situs, dan identitas perangkat Anda. Log teknis disimpan secara lokal selama paling lama 10 menit, meskipun pelaporan otomatis dinonaktifkan. Draf diagnostik dan laporan dalam antrean kedaluwarsa secara lokal setelah 24 jam; pembersihan dijalankan saat ekstensi dapat beroperasi."
+    "message": "Penyimpanan peramban menyimpan sesi, detail akun, preferensi, pengecualian situs, dan identitas perangkat Anda. IP keluar VPN terakhir yang diukur untuk setiap lokasi disimpan selama paling lama 30 hari, agar dapat ditampilkan segera setelah Anda terhubung kembali. Log teknis disimpan secara lokal selama paling lama 10 menit, meskipun pelaporan otomatis dinonaktifkan. Draf diagnostik dan laporan dalam antrean kedaluwarsa secara lokal setelah 24 jam; pembersihan dijalankan saat ekstensi dapat beroperasi."
   },
   "privacyNoticeIpTitle": {
     "message": "Pemeriksaan IP publik dan pihak ketiga"

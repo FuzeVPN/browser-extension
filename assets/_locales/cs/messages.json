@@ -846,7 +846,7 @@
     "message": "Tyto informace popisují údaje používané tímto rozšířením. Doplňují obecné zásady ochrany soukromí FuzeVPN, na které odkazujeme níže. Volitelné odesílání diagnostiky je oddělené od údajů potřebných k přihlášení a používání VPN."
   },
   "privacyNoticeUpdated": {
-    "message": "Informace aktualizovány 19. října 2026"
+    "message": "Informace aktualizovány 12. listopadu 2026"
   },
   "privacyNoticeServiceTitle": {
     "message": "Účet a služba VPN"
@@ -858,7 +858,7 @@
     "message": "Údaje uložené v prohlížeči"
   },
   "privacyNoticeLocal": {
-    "message": "Úložiště prohlížeče uchovává vaši relaci, údaje o účtu, předvolby, výjimky pro weby a identitu zařízení. Technické protokoly se uchovávají místně nejvýše 10 minut, i když je automatické odesílání vypnuté. Platnost diagnostických konceptů a zpráv ve frontě místně vyprší po 24 hodinách; čištění probíhá, když má rozšíření možnost běžet."
+    "message": "Úložiště prohlížeče uchovává vaši relaci, údaje o účtu, předvolby, výjimky pro weby a identitu zařízení. Poslední výstupní IP adresa VPN naměřená pro každé umístění se uchovává nejvýše 30 dní, aby se zobrazila ihned po opětovném připojení. Technické protokoly se uchovávají místně nejvýše 10 minut, i když je automatické odesílání vypnuté. Platnost diagnostických konceptů a zpráv ve frontě místně vyprší po 24 hodinách; čištění probíhá, když má rozšíření možnost běžet."
   },
   "privacyNoticeIpTitle": {
     "message": "Kontroly veřejné IP adresy a služby třetích stran"

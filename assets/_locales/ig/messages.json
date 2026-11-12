@@ -846,7 +846,7 @@
     "message": "Ọkwa a na-akọwa data ndọtị a na-eji. Ọ na-agbakwunye iwu nzuzo n'ozuzu nke FuzeVPN, nke ejikọrọ n'okpuru. Iziga nchọpụta nsogbu nke nhọrọ dị iche na data achọrọ iji banye ma jiri VPN."
   },
   "privacyNoticeUpdated": {
-    "message": "E melitere ọkwa a na 19 Ọktoba 2026"
+    "message": "E melitere ọkwa a na 12 Novemba 2026"
   },
   "privacyNoticeServiceTitle": {
     "message": "Akaụntụ na ọrụ VPN"
@@ -858,7 +858,7 @@
     "message": "Data echekwara n'ihe nchọgharị gị"
   },
   "privacyNoticeLocal": {
-    "message": "Ebe nchekwa ihe nchọgharị na-edobe nnọkọ gị, nkọwa akaụntụ, mmasị, mwepụ saịtị na njirimara ngwaọrụ. A na-edobe ndekọ teknụzụ n'ime ngwaọrụ a ruo nkeji 10, ọbụlagodi mgbe agbanyụrụ akụkọ akpaaka. Akụkọ nchọpụta nsogbu edezubeghị na akụkọ nọ n'ahịrị na-agwụ n'ime ngwaọrụ a mgbe awa 24 gachara; nhicha na-eme mgbe ndọtị ahụ nwere ike ịrụ ọrụ."
+    "message": "Ebe nchekwa ihe nchọgharị na-edobe nnọkọ gị, nkọwa akaụntụ, mmasị, mwepụ saịtị na njirimara ngwaọrụ. A na-edobe IP mpụta VPN ikpeazụ a tụrụ maka ebe ọ bụla ruo ụbọchị 30, ka e gosi ya ozugbo ị jikọrọ ọzọ. A na-edobe ndekọ teknụzụ n'ime ngwaọrụ a ruo nkeji 10, ọbụlagodi mgbe agbanyụrụ akụkọ akpaaka. Akụkọ nchọpụta nsogbu edezubeghị na akụkọ nọ n'ahịrị na-agwụ n'ime ngwaọrụ a mgbe awa 24 gachara; nhicha na-eme mgbe ndọtị ahụ nwere ike ịrụ ọrụ."
   },
   "privacyNoticeIpTitle": {
     "message": "Nlele IP ọha na ndị ọzọ"

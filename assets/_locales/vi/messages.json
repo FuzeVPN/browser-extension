@@ -846,7 +846,7 @@
     "message": "Thông báo này mô tả dữ liệu mà tiện ích mở rộng này sử dụng. Thông báo bổ sung cho chính sách quyền riêng tư chung của FuzeVPN được liên kết bên dưới. Việc gửi dữ liệu chẩn đoán là tùy chọn và tách biệt với dữ liệu cần thiết để đăng nhập và sử dụng VPN."
   },
   "privacyNoticeUpdated": {
-    "message": "Thông báo được cập nhật ngày 19 tháng 10 năm 2026"
+    "message": "Thông báo được cập nhật ngày 12 tháng 11 năm 2026"
   },
   "privacyNoticeServiceTitle": {
     "message": "Tài khoản và dịch vụ VPN"
@@ -858,7 +858,7 @@
     "message": "Dữ liệu được lưu trong trình duyệt của bạn"
   },
   "privacyNoticeLocal": {
-    "message": "Bộ nhớ trình duyệt lưu phiên, thông tin tài khoản, tùy chọn, các trang web được loại trừ và danh tính thiết bị của bạn. Nhật ký kỹ thuật được lưu cục bộ tối đa 10 phút, ngay cả khi tắt báo cáo tự động. Bản nháp chẩn đoán và báo cáo trong hàng đợi hết hạn cục bộ sau 24 giờ; quá trình dọn dẹp chạy khi tiện ích có thể hoạt động."
+    "message": "Bộ nhớ trình duyệt lưu phiên, thông tin tài khoản, tùy chọn, các trang web được loại trừ và danh tính thiết bị của bạn. IP đầu ra của VPN đo được gần nhất cho mỗi vị trí được lưu tối đa 30 ngày, để hiển thị ngay khi bạn kết nối lại. Nhật ký kỹ thuật được lưu cục bộ tối đa 10 phút, ngay cả khi tắt báo cáo tự động. Bản nháp chẩn đoán và báo cáo trong hàng đợi hết hạn cục bộ sau 24 giờ; quá trình dọn dẹp chạy khi tiện ích có thể hoạt động."
   },
   "privacyNoticeIpTitle": {
     "message": "Kiểm tra IP công khai và bên thứ ba"
