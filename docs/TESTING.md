@@ -48,7 +48,7 @@ personal profile or disable the local write guard to run it.
 - Firefox's selected-route guard, invalid PAC, unavailable proxy, retained exclusions,
   permission revocation, WebRTC settings and release of settings on disconnect.
 - Device deletion and recovery, capacity errors, catalogue loading and cached catalogue
-  restoration, thirty complete translation catalogs and French/RTL popup and assistance.
+  restoration, seventy complete translation catalogs and French/RTL popup and assistance.
 - Package inventory, source correspondence, no private publication inputs, stable
   Chrome/Edge files outside the manifest and no archive replacement.
 
