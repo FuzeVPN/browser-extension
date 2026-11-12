@@ -85,11 +85,29 @@ The visible popup asks for an observation every five seconds. Successful measure
 remain cached for thirty seconds, so normal IP-service traffic does not increase.
 A failed measurement is cached for five seconds and then measured again without
 reconnecting. The last IPv4 remains visible while the same route is being checked;
-final failure or a route change clears it. The IP lookup replies asynchronously and
+final failure or a route change clears it, except for the address remembered for a VPN
+location, described below. The IP lookup replies asynchronously and
 never changes the VPN state or disables its controls. Neither service bypasses the
 VPN. HTTP 429 puts that provider on a minimum thirty-second cooldown and respects a
 longer `Retry-After`; another eligible provider can still answer. Manual diagnostics
 retain one ipify request with their original eight-second limit.
+
+A new tunnel refuses requests for about a second, so no measurement can be displayed
+with the connected state. The extension therefore remembers the IPv4 last measured
+through each location and displays it as soon as that location is connected again,
+while the measurement of the new route runs on its unchanged schedule. The popup shows
+that address as it shows a measured one, marked busy for assistive technologies until
+the measurement ends. It is never stored, recorded or exported as a measurement: the
+result replaces it, and a final failure forgets it durably, so neither a credential
+renewal nor a later worker shows it again before a new measurement succeeds. It is
+kept per location and not per account, for the VPN route only, for at most thirty days
+and sixty-four locations, and only a verified public IPv4 is stored or recalled. A
+logout does not remove it, like the other location preferences. The first connection
+to a location still waits for its measurement. The native Chromium fixture measures
+both cases with a tunnel refused for 1.2 s: about 1.6 s before the address of a first
+connection, and a few tens of milliseconds for a location already measured. The native
+experience suite checks that no address of the user's own connection and no IPv6 reaches
+local or session storage, and that the VPN IPv4 appears in this record only.
 
 Unit regressions cover fallback, timeouts, deduplication, route changes, IPv6 rejection,
 verification refusal and bounded responses. Native Chromium and Firefox fixtures check

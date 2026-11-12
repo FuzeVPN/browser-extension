@@ -59,6 +59,14 @@ Un enregistrement `fuzevpnPendingProxyRevocations` illisible est remplacé lors 
 déconnexion ou d'une fermeture de session explicite, une fois le nettoyage inconnu
 enregistré durablement ; une simple erreur de lecture ne le remplace jamais.
 
+La clé `fuzevpnVpnAddresses` conserve, par emplacement, la dernière adresse IPv4 mesurée
+à travers le VPN. Elle est affichée dès la reconnexion à cet emplacement, pendant que la
+mesure de la nouvelle route s'effectue. Elle n'est jamais enregistrée ni exportée comme
+une mesure, une mesure qui échoue l'efface, et elle ne contient ni adresse personnelle ni
+IPv6. Elle est liée à l'emplacement et non au compte : une déconnexion du compte ne
+l'efface pas. Une adresse de plus de trente jours est retirée de la clé dès la lecture
+suivante par le worker.
+
 Le serveur reçoit les contrats existants. Les diagnostics gardent notamment les champs
 historiques `platform: "chrome_extension"` et `chrome`, même sur Firefox. Firefox envoie
 `browser_name: "unknown"` et sa version numérique réelle ; aucun nouveau format serveur

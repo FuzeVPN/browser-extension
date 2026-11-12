@@ -23,6 +23,11 @@ interface NetworkObserverOptions {
   getSnapshot(): AppSnapshot;
   verifyRoute(mode: RouteMode): Promise<boolean>;
   onChanged(): void;
+  /**
+   * The IPv4 last measured through a VPN location. It is displayed at once while the
+   * measurement of the new route runs, and is never reported as a measurement itself.
+   */
+  recall?(locationId: string): string | null;
   fetch?: typeof fetch;
   now?: () => number;
   useFallback?: boolean;
@@ -67,11 +72,36 @@ export class NetworkObserver {
     this.pending?.abort.abort();
     this.pending = null;
     const mode = eligibleMode(snapshot);
+    const locationId = mode === "vpn" ? snapshot.activeLocationId : null;
     this.replace({
       ...EMPTY_NETWORK_OBSERVATION,
       mode,
-      locationId: mode === "vpn" ? snapshot.activeLocationId : null,
+      locationId,
+      ip: this.remembered(mode, locationId),
     });
+  }
+
+  /**
+   * The memory may finish loading after a route was first observed. Its address is then
+   * shown for that route, unless a measurement has already started or ended on it.
+   */
+  remind(): void {
+    if (this.state.status !== "idle" || this.state.ip !== null || this.state.checkedAt !== null)
+      return;
+    const ip = this.remembered(this.state.mode, this.state.locationId);
+    if (ip !== null) this.replace({ ...this.state, ip });
+  }
+
+  /** Only for a VPN location, and only an address which could have been measured. */
+  private remembered(mode: RouteMode | null, locationId: string | null): string | null {
+    if (mode !== "vpn" || !locationId) return null;
+    let ip: string | null = null;
+    try {
+      ip = this.options.recall?.(locationId) ?? null;
+    } catch {
+      /* A failing memory cannot prevent or delay the measurement. */
+    }
+    return ip !== null && isPublicIpv4(ip) ? ip : null;
   }
 
   refresh(): Promise<void> {
@@ -93,11 +123,17 @@ export class NetworkObserver {
     // Register the promise before notifying the UI, so another request deduplicates.
     const promise = Promise.resolve().then(() => this.probe(mode, revision, abort));
     this.pending = { revision, abort, promise };
+    const locationId = mode === "vpn" ? snapshot.activeLocationId : null;
     this.replace({
       ...this.state,
       status: "checking",
       mode,
-      locationId: mode === "vpn" ? snapshot.activeLocationId : null,
+      locationId,
+      // The memory may have been loaded after this route was first observed. A route
+      // already measured keeps its own result, including a failure.
+      ...(this.state.checkedAt === null && this.state.ip === null
+        ? { ip: this.remembered(mode, locationId) }
+        : {}),
     });
     return promise;
   }
@@ -454,7 +490,7 @@ function parsePublicIp(value: unknown): string | null {
   return typeof ip === "string" && isPublicIpv4(ip) ? ip : null;
 }
 
-function isPublicIpv4(ip: string): boolean {
+export function isPublicIpv4(ip: string): boolean {
   if (!/^(?:0|[1-9]\d{0,2})(?:\.(?:0|[1-9]\d{0,2})){3}$/.test(ip)) return false;
   const octets = ip.split(".").map(Number);
   if (octets.some((part) => part > 255)) return false;

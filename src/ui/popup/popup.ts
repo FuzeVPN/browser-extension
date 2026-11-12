@@ -1211,12 +1211,18 @@ function refreshDiagnosticsState(): void {
 function renderNetwork(next: AppSnapshot): void {
   const observation = next.network;
   const isVpn = next.protected;
+  const measured = observation.status === "ready" || observation.status === "checking";
   const matchesRoute =
-    (observation.status === "ready" || observation.status === "checking") &&
     observation.ip !== null &&
     (isVpn
-      ? observation.mode === "vpn" && observation.locationId === next.activeLocationId
-      : observation.mode === "direct" && !next.protectionRequested && !next.trafficBlocked);
+      ? // The IPv4 last measured through this location is known before its check starts.
+        (measured || observation.status === "idle") &&
+        observation.mode === "vpn" &&
+        observation.locationId === next.activeLocationId
+      : measured &&
+        observation.mode === "direct" &&
+        !next.protectionRequested &&
+        !next.trafficBlocked);
   const label = message(isVpn ? "vpnIp" : "publicIp");
   const value = communicationFailed
     ? message("ipUnavailable")
@@ -1226,6 +1232,14 @@ function renderNetwork(next: AppSnapshot): void {
   elements.publicIp.replaceChildren(
     `${label} · `,
     matchesRoute && !communicationFailed && observation.ip ? isolatedText(value, "ltr") : value,
+  );
+  // An address known from the previous measurement of this location is still being
+  // checked on the new route.
+  elements.publicIp.setAttribute(
+    "aria-busy",
+    String(
+      !communicationFailed && (observation.status === "checking" || (matchesRoute && !measured)),
+    ),
   );
   elements.publicIp.title = message("ipLookupExplanation");
 }

@@ -25,6 +25,7 @@ import { ExtensionSecurityStorage } from "../storage/security-storage";
 import { LanguageController } from "./language-controller";
 import { ExtensionLanguageStorage } from "../storage/language-storage";
 import { NetworkObserver } from "./network-observer";
+import { VpnAddressBook } from "./vpn-addresses";
 import { LocationPreferences } from "./location-preferences";
 import { ConnectionJournal, type ConnectionTrace } from "./connection-journal";
 import { ExtensionSiteExclusionStorage } from "../storage/site-exclusion-storage";
@@ -108,15 +109,33 @@ new PlatformRouteGuard({
   readState: readRouteGuardState,
   extensionRoot: () => extensionApi.runtime.getURL(""),
 }).register();
+const VPN_ADDRESSES_KEY = "fuzevpnVpnAddresses";
+const vpnAddresses = new VpnAddressBook({
+  storage: {
+    async read() {
+      const stored = await extensionApi.storage.local.get(VPN_ADDRESSES_KEY);
+      const addresses: unknown = stored[VPN_ADDRESSES_KEY];
+      return addresses;
+    },
+    async write(value) {
+      await extensionApi.storage.local.set({ [VPN_ADDRESSES_KEY]: value });
+    },
+  },
+});
 const network = new NetworkObserver({
   getSnapshot: () => controller.getSnapshot(),
   verifyRoute: verifyObservationRoute,
   useFallback: true,
+  recall: (locationId) => vpnAddresses.recall(locationId),
   onChanged: () => {
     locations.recordObservation(network.getState());
+    vpnAddresses.record(network.getState());
     queuePublication();
   },
 });
+// Read once per worker, before any popup asks: a connection handled first still finds
+// the address of its location.
+void vpnAddresses.initialize().then(() => network.remind());
 const LOCATION_PREFERENCES_KEY = "fuzevpnLocationPreferences";
 const locations = new LocationPreferences({
   storage: {
@@ -418,11 +437,15 @@ async function handleMessage(
         controller.initialize(),
         initializeLanguageForPublication(),
         locations.initialize(),
+        vpnAddresses.initialize(),
       ]);
+      // A route restored before the memory was read gets its address in this reply.
+      network.remind();
       break;
     case "refresh_network":
-      await controller.initialize();
+      await Promise.all([controller.initialize(), vpnAddresses.initialize()]);
       network.observe(controller.getSnapshot());
+      network.remind();
       // Publish the IP later without holding the command response open.
       void network.refresh().catch(() => undefined);
       break;

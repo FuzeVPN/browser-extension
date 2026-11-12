@@ -957,10 +957,21 @@ try {
     local: await chrome.storage.local.get(null),
     session: await chrome.storage.session.get(null),
   }));
-  const stored = JSON.stringify(storage);
+  // The IPv4 last measured through a VPN location is remembered in one dedicated local
+  // record. An address of the user's own connection is never stored anywhere.
+  const { fuzevpnVpnAddresses: remembered, ...local } = storage.local;
+  const elsewhere = JSON.stringify({ local, session: storage.session });
   for (const ip of [directIp, vpnIp, publicIpv6])
-    assert(!stored.includes(ip), "An observed IP was persisted");
-  record("Observed public and VPN IP addresses are absent from local and session storage");
+    assert(!elsewhere.includes(ip), "An observed IP was persisted");
+  const kept = JSON.stringify(remembered ?? null);
+  for (const ip of [directIp, publicIpv6])
+    assert(!kept.includes(ip), "A direct or IPv6 address was remembered for a VPN location");
+  for (const entry of remembered?.addresses ?? [])
+    assert.equal(entry.ip, vpnIp, "An unmeasured address was remembered for a VPN location");
+  report.rememberedVpnAddresses = remembered?.addresses?.length ?? 0;
+  record(
+    "Observed direct and IPv6 addresses are absent from storage; the VPN IPv4 is kept only in its dedicated record",
+  );
 
   assert(ipRequests.length >= 6);
   for (const request of ipRequests) {

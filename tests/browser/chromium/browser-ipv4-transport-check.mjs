@@ -738,6 +738,78 @@ async function verify() {
   assert.equal(restored.protected, true);
   await readyIp(activeSlot);
   record("worker restart restores the authenticated route and displays its IPv4");
+
+  // The other location was measured earlier in this run, before the worker restarted.
+  // Its new tunnel refuses every CONNECT for 1.2 s: no measurement can succeed before
+  // then, yet its IPv4 is displayed with the connected state.
+  mode = "proxy-startup";
+  proxyReadyAt = Number.POSITIVE_INFINITY;
+  const knownSlot = 1 - activeSlot;
+  const knownIp = slots[knownSlot].ip;
+  start = report.transport.length;
+  const knownConnected = await reconnect(knownSlot);
+  const knownCreatedAt = await worker.evaluate(() => globalThis.nativeIpCreatedAt);
+  const knownTunnels = () =>
+    report.transport
+      .slice(start)
+      .filter(
+        (entry) =>
+          entry.kind === "connect" &&
+          ["api.ipify.org:443", "ipv4.icanhazip.com:443"].includes(entry.host),
+      );
+  // Measured before any assertion: the report of a build which fails below still states
+  // how long its popup needed to display the address.
+  await waitForRead(
+    () => popup.locator("#publicIp").textContent(),
+    (text) => text?.includes(knownIp),
+    { timeoutMs: 4000, intervalMs: 10, message: "Known location never displayed its IPv4" },
+  );
+  const knownDisplayedMs = Date.now() - knownCreatedAt;
+  const knownDisplayedUnmeasured = knownTunnels().every((entry) => entry.tunnelStatus !== 200);
+  report.knownLocation = {
+    displayedMs: knownDisplayedMs,
+    displayedBeforeAnyMeasurement: knownDisplayedUnmeasured,
+  };
+  assert.equal(
+    knownConnected.network.ip,
+    knownIp,
+    "The connected state did not carry the IPv4 last measured through this location",
+  );
+  assert.equal(knownConnected.network.locationId, "native-ip-" + knownSlot);
+  assert.notEqual(
+    knownConnected.network.status,
+    "ready",
+    "A remembered IPv4 passed for a measurement",
+  );
+  assert.equal(knownConnected.network.checkedAt, null);
+  assert(
+    knownDisplayedUnmeasured,
+    "The IPv4 was displayed by a measurement, not from the previous one",
+  );
+  assert(knownDisplayedMs < 1200, "The IPv4 was not displayed before the tunnel became ready");
+  const knownVerified = await waitForRead(
+    () => message({ type: "refresh_network" }),
+    (snapshot) => snapshot.network.status === "ready" && snapshot.network.ip === knownIp,
+    { timeoutMs: 2500, intervalMs: 40, message: "The displayed IPv4 was never verified" },
+  );
+  const knownVerifiedMs = Date.now() - knownCreatedAt;
+  report.knownLocation.verifiedMs = knownVerifiedMs;
+  assert(knownVerifiedMs >= 1200, "The verification finished before the tunnel was ready");
+  assert(
+    knownTunnels()[0].at - knownCreatedAt >= 500,
+    "A provider request started before the 500 ms settling delay",
+  );
+  assert(knownVerified.network.checkedAt > 0);
+  assert(
+    (await popup.locator("#publicIp").textContent()).includes(knownIp),
+    "The verified IPv4 replaced the displayed one with something else",
+  );
+  record("known location displays its IPv4 with the connected state, before it can be measured", {
+    displayedMs: knownDisplayedMs,
+    verifiedMs: knownVerifiedMs,
+    rejectedConnects: knownTunnels().filter((entry) => entry.tunnelStatus === 503).length,
+  });
+  mode = "healthy";
   await message({ type: "disconnect" });
   const selectedTarget = "native-ip-" + activeSlot;
   const selected = await message({ type: "select_location", locationId: selectedTarget });
