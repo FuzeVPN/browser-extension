@@ -121,6 +121,9 @@ export class PlatformProxyService implements ProxyService {
 
   async apply(session: ProxySession): Promise<void> {
     await this.assertControllable();
+    // The endpoint being replaced may have been inherited from an earlier browser
+    // session, whose history is gone: its late challenges are still ours to cancel.
+    await this.rememberOwnedEndpoint();
     // A request may receive its first 407 after this proxy is cleared. Keep only
     // its endpoint (never credentials) for canceling those late challenges.
     await this.rememberEndpoint(session);
@@ -165,6 +168,19 @@ export class PlatformProxyService implements ProxyService {
   }
 
   async clear(): Promise<void> {
+    await this.rememberOwnedEndpoint();
+    await chrome.proxy.settings.clear({ scope: "regular" });
+    if (
+      (await this.readSettings()).some(
+        (result) => result.levelOfControl === "controlled_by_this_extension",
+      )
+    ) {
+      throw new ProxyControlError("configuration_rejected");
+    }
+  }
+
+  /** Records the endpoint this extension owns before it is replaced or cleared. */
+  private async rememberOwnedEndpoint(): Promise<void> {
     const current = await chrome.proxy.settings.get({ incognito: false }).catch(() => null);
     const endpoint = current?.value.rules?.singleProxy;
     if (
@@ -173,18 +189,10 @@ export class PlatformProxyService implements ProxyService {
       endpoint?.scheme === "https"
     ) {
       // Also covers a configuration created before endpoint tracking existed.
-      // Failure to persist this cancel-only history must not prevent disconnect.
+      // Failure to persist this cancel-only history must not prevent the change.
       await this.rememberEndpoint({ host: endpoint.host, port: endpoint.port ?? 443 }).catch(
         () => undefined,
       );
-    }
-    await chrome.proxy.settings.clear({ scope: "regular" });
-    if (
-      (await this.readSettings()).some(
-        (result) => result.levelOfControl === "controlled_by_this_extension",
-      )
-    ) {
-      throw new ProxyControlError("configuration_rejected");
     }
   }
 

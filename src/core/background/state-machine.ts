@@ -36,6 +36,7 @@ import { type ProxyControlLevel, ProxyControlError, type ProxyService } from "./
 import { computeRefreshAt, type AlarmService } from "./session-refresh";
 import {
   DEFAULT_SECURITY_STATE,
+  withSuspensionCause,
   type SecurityState,
   type SecurityStatus,
 } from "../shared/security";
@@ -139,6 +140,8 @@ export class AppController {
   // during its final check.
   private proxyControlRevision = 0;
   private startupStorageRecovery: "none" | "temporary_guard" | "preserve_guard" = "none";
+  // The stored record of a guard armed for unreadable stores; null until it is read.
+  private temporaryGuardMarker: boolean | null = null;
   private operationId = 0;
   // The operation current when a status was last published (see ownsBusyStatus).
   private statusOperation = 0;
@@ -165,12 +168,27 @@ export class AppController {
   // The error a guard route takeover replaced, with the operation then current: a later
   // operation publishes its own outcome instead (see reverifyGuardRoute).
   private takeoverDisplacedError: { operation: number; error: AppErrorCode | null } | null = null;
+  // The reason of a failed connection which a failed account request replaced, with the
+  // operation then current (see connectionErrorToKeep).
+  private displacedConnectionError: {
+    operation: number;
+    error: AppErrorCode | null;
+    shown: AppErrorCode;
+  } | null = null;
+  // When the published retry delay was received: it runs from then, for every reader.
+  private retryAfterSince: number | null = null;
   private readonly deviceDeletions = new Map<string, Promise<void>>();
   private readonly deviceDeletionCommands = new Map<string, Promise<CommandResult>>();
   private readonly pendingSessions = new Map<ProxySession, string>();
   private readonly proxyCreations = new Set<PendingProxyCreation>();
   private readonly remoteSessions = new Map<string, Map<string, KnownRemoteSession>>();
   private readonly uncertainCreationTokens = new Set<string>();
+  /**
+   * Tokens whose ambiguous creation still suspends automatic retries: until a creation
+   * of that token commits or protection is released. uncertainCreationTokens remembers
+   * them longer, for the cleanup a logout reports.
+   */
+  private readonly retrySuspendingTokens = new Set<string>();
   private readonly cleanupRequestedTokens = new Set<string>();
   private readonly activeRemoteCleanups = new Map<string, number>();
   private historicalCleanupUncertain = false;
@@ -339,7 +357,25 @@ export class AppController {
   }
 
   getSnapshot(): AppSnapshot {
-    return structuredClone(this.snapshot);
+    const snapshot = structuredClone(this.snapshot);
+    // "blocked" describes the guard as last published. It never replaces the stored
+    // status, which a later publication without a status must find again once the
+    // guard is released.
+    if (
+      snapshot.trafficBlocked &&
+      !snapshot.protected &&
+      snapshot.status !== "connecting" &&
+      snapshot.status !== "refreshing" &&
+      snapshot.status !== "disconnecting"
+    )
+      snapshot.status = "blocked";
+    // A delay the server asked for runs from when it was received: a popup opened later
+    // is given what remains of it, not the whole delay again.
+    if (snapshot.retryAfterSeconds !== null && this.retryAfterSince !== null) {
+      const elapsed = Math.floor((this.dependencies.now() - this.retryAfterSince) / 1_000);
+      snapshot.retryAfterSeconds = Math.max(0, snapshot.retryAfterSeconds - Math.max(0, elapsed));
+    }
+    return snapshot;
   }
 
   hasRestoredAccount(): boolean {
@@ -587,10 +623,7 @@ export class AppController {
       else await this.handleOperationError(error, false);
       return failedCommand(error);
     } finally {
-      if (this.diagnosticAccountGeneration === diagnosticGeneration) {
-        this.diagnosticAccountChanging = false;
-        this.notifyDiagnosticAccountChanged();
-      }
+      this.endDiagnosticAccountChange(diagnosticGeneration);
     }
   }
 
@@ -691,14 +724,24 @@ export class AppController {
       await this.withStateMutation(async () => {
         this.assertCurrent(operation.id);
         this.assertSelectionOwner(selectionRevision, requestedLocationId);
-        this.security = {
-          ...this.security,
-          protectionRequested: true,
-          retrySuspended: false,
-          selectedLocationId: requestedLocationId ?? this.security.selectedLocationId,
-          ...(manual ? { capacityBlockedLocationId: null } : {}),
-        };
-        this.creationMarkerOwner = 0;
+        this.security = withSuspensionCause(
+          {
+            ...this.security,
+            protectionRequested: true,
+            retrySuspended: false,
+            selectedLocationId: requestedLocationId ?? this.security.selectedLocationId,
+            ...(manual ? { capacityBlockedLocationId: null } : {}),
+          },
+          null,
+        );
+        // An earlier request still unanswered keeps its marker: only its answer settles
+        // it, and resumes the retries which this attempt may leave deferred.
+        if (
+          ![...this.proxyCreations].some(
+            (creation) => creation.sequence === this.creationMarkerOwner,
+          )
+        )
+          this.creationMarkerOwner = 0;
         await this.blockSafety(this.security.killSwitchEnabled);
         this.assertCurrent(operation.id);
         await this.writeSecurity();
@@ -866,15 +909,35 @@ export class AppController {
     const signal = this.accountAbort.signal;
     await this.withStateMutation(async () => {
       assertNotAborted(signal);
-      this.persisted = { ...this.persisted, selectedLocationId: locationId };
-      await this.dependencies.storage.writePersisted(this.persisted);
+      const previousAccount = this.persisted;
+      const account = { ...previousAccount, selectedLocationId: locationId };
+      this.persisted = account;
+      try {
+        await this.dependencies.storage.writePersisted(account);
+      } catch (error) {
+        if (this.persisted === account) this.persisted = previousAccount;
+        throw error;
+      }
       assertNotAborted(signal);
-      this.security = {
-        ...this.security,
+      const previousSecurity = this.security;
+      const security = {
+        ...previousSecurity,
         selectedLocationId: locationId,
         capacityBlockedLocationId: null,
       };
-      await this.writeSecurity();
+      this.security = security;
+      try {
+        await this.writeSecurity();
+      } catch (error) {
+        // The stored target is still the previous one: a selection which could not be
+        // saved must not become the target of the next attempt either.
+        if (this.security === security) this.security = previousSecurity;
+        if (this.persisted === account) {
+          this.persisted = previousAccount;
+          await this.dependencies.storage.writePersisted(previousAccount).catch(() => undefined);
+        }
+        throw error;
+      }
       assertNotAborted(signal);
       // A pending connection attempt must not commit another target over this choice.
       this.selectionRevision += 1;
@@ -1188,8 +1251,8 @@ export class AppController {
     if (this.logoutInProgress && this.accountGeneration === this.logoutGeneration)
       return this.logoutInProgress;
     this.logoutGeneration = this.accountGeneration;
-    this.beginDiagnosticAccountChange();
-    const logout = this.performLogout();
+    const diagnosticGeneration = this.beginDiagnosticAccountChange();
+    const logout = this.performLogout(diagnosticGeneration);
     this.logoutInProgress = logout;
     void logout
       .finally(() => {
@@ -1199,7 +1262,7 @@ export class AppController {
     return logout;
   }
 
-  private async performLogout(): Promise<CommandResult> {
+  private async performLogout(diagnosticGeneration: number): Promise<CommandResult> {
     this.startupStopRequests += 1;
     this.credentialsAllowed = false;
     try {
@@ -1207,7 +1270,11 @@ export class AppController {
     } finally {
       this.startupStopRequests -= 1;
     }
-    if (!this.startupStorageLoaded) return failedCommand(new LocalError("storage_unavailable"));
+    if (!this.startupStorageLoaded) {
+      // No account could be read, so none was left: its diagnostics are not changing.
+      this.endDiagnosticAccountChange(diagnosticGeneration);
+      return failedCommand(new LocalError("storage_unavailable"));
+    }
     return this.trackStartupRecoveryCommand(this.logoutInitialized());
   }
 
@@ -1305,6 +1372,9 @@ export class AppController {
           // Record their unresolved remote cleanup before removing the only local copy.
           await this.writeSecurity();
           cleanupDurable = true;
+          // That durable unknown replaces a ledger record nobody can read, which would
+          // otherwise refuse every later startup.
+          await this.cleanup.resetInvalid().catch(() => undefined);
         } catch (error) {
           releaseError = error;
         }
@@ -1513,12 +1583,26 @@ export class AppController {
       try {
         await this.withStateMutation(async () => {
           this.assertCurrent(operation.id);
-          this.security = { ...this.security, killSwitchEnabled, webRtcProtectionEnabled };
-          await this.writeSecurity();
+          await this.writeSecurityPreferences(killSwitchEnabled, webRtcProtectionEnabled);
           this.assertCurrent(operation.id);
         });
         this.assertCurrent(operation.id);
-        this.initialization = null;
+        // A restoration which another event started during that write is never dropped:
+        // two at once tear each other down. It ends first.
+        const racing = this.initialization;
+        if (racing) {
+          await racing.catch(() => undefined);
+          // It repaired the guard, possibly under the previous preferences: apply these
+          // to its outcome like any other preference change.
+          if (!this.startupGuardRefused())
+            return await this.updateSecurityPreferences(
+              killSwitchEnabled,
+              webRtcProtectionEnabled,
+              observer,
+            );
+        }
+        // Only a settled restoration is replaced by the retry.
+        if (this.initialization === racing) this.initialization = null;
         await this.initialize(observer);
         return this.startupRecoveryResult();
       } catch (error) {
@@ -1530,9 +1614,8 @@ export class AppController {
     try {
       await this.withStateMutation(async () => {
         this.assertCurrent(operation.id);
-        this.security = { ...this.security, killSwitchEnabled, webRtcProtectionEnabled };
         // Commit before applying: a restart must retry the requested preference.
-        await this.writeSecurity();
+        await this.writeSecurityPreferences(killSwitchEnabled, webRtcProtectionEnabled);
         this.assertCurrent(operation.id);
         if (this.security.protectionRequested) {
           await this.blockSafety(killSwitchEnabled);
@@ -1586,6 +1669,30 @@ export class AppController {
       if (!this.isCurrent(operation.id)) return supersededCommand();
       await this.enterFailure(error, operation.id);
       return failedCommand(error);
+    }
+  }
+
+  /** Read through a method: a restoration awaited meanwhile may have repaired it. */
+  private startupGuardRefused(): boolean {
+    return this.startupGuardFailure !== null;
+  }
+
+  /**
+   * Caller holds stateMutation. Preferences which could not be stored are neither in
+   * force nor published: the next worker would read the previous ones.
+   */
+  private async writeSecurityPreferences(
+    killSwitchEnabled: boolean,
+    webRtcProtectionEnabled: boolean,
+  ): Promise<void> {
+    const previous = this.security;
+    const changed = { ...previous, killSwitchEnabled, webRtcProtectionEnabled };
+    this.security = changed;
+    try {
+      await this.writeSecurity();
+    } catch (error) {
+      if (this.security === changed) this.security = previous;
+      throw error;
     }
   }
 
@@ -1682,7 +1789,7 @@ export class AppController {
       assertNotAborted(operation.signal);
       this.publish({
         status: this.snapshot.status,
-        error: null,
+        error: this.connectionErrorToKeep(),
         retryAfterSeconds: null,
       });
       return { ok: true };
@@ -1703,12 +1810,13 @@ export class AppController {
     try {
       if (!(await this.hydrateAccount(operation.signal, trace))) return supersededCommand();
       this.assertCurrent(operation.id);
+      const kept = this.connectionErrorToKeep();
       this.publish({
         status: this.snapshot.status,
         protected: this.snapshot.protected,
         error:
           this.deviceQuotaError ??
-          (isCapacityErrorCode(this.snapshot.error) ? this.snapshot.error : null),
+          (isCapacityErrorCode(this.snapshot.error) ? this.snapshot.error : kept),
       });
       return { ok: true };
     } catch (error) {
@@ -1758,13 +1866,14 @@ export class AppController {
       );
       this.assertCurrent(operation.id);
       if (revision !== this.deviceListRevision) return supersededCommand();
+      const kept = this.connectionErrorToKeep();
       this.publish({
         devices: result.devices,
         deviceLimit: result.limit,
         currentDeviceId,
         error:
           this.deviceQuotaError ??
-          (isDeviceQuota(this.snapshot.error) ? this.snapshot.error : null),
+          (isDeviceQuota(this.snapshot.error) ? this.snapshot.error : kept),
       });
       return { ok: true };
     } catch (error) {
@@ -1786,7 +1895,15 @@ export class AppController {
     await this.initialize(observer);
     if (!this.startupSecondaryStorageLoaded)
       return failedCommand(new LocalError("storage_unavailable"));
-    const key = JSON.stringify([this.requireUserId(), this.accountGeneration, deviceId]);
+    let key: string;
+    try {
+      key = JSON.stringify([this.requireUserId(), this.accountGeneration, deviceId]);
+    } catch (error) {
+      // Like every command, an account without a profile is a result, not a rejection.
+      // Nothing else changes: this command neither clears that account nor replaces
+      // what a logout in progress is publishing.
+      return failedCommand(error);
+    }
     const pending = this.deviceDeletionCommands.get(key);
     if (pending) return pending;
     const command = this.performDeleteDevice(deviceId, observer);
@@ -1804,8 +1921,14 @@ export class AppController {
   ): Promise<CommandResult> {
     const accountSignal = this.accountAbort.signal;
     const accountGeneration = this.accountGeneration;
-    const token = this.requireToken();
-    const userId = this.requireUserId();
+    let token: string;
+    let userId: string;
+    try {
+      token = this.requireToken();
+      userId = this.requireUserId();
+    } catch (error) {
+      return failedCommand(error);
+    }
     const initialId = this.operationId;
     let intentRevision = this.connectionIntentRevision;
     const resumeAfterQuota =
@@ -1975,7 +2098,12 @@ export class AppController {
     await this.initialize();
     if (!this.startupSecondaryStorageLoaded)
       return failedCommand(new LocalError("storage_unavailable"));
-    const userId = this.requireUserId();
+    let userId: string;
+    try {
+      userId = this.requireUserId();
+    } catch (error) {
+      return failedCommand(error);
+    }
     const initialId = this.operationId;
     const disconnected = await this.disconnect();
     if (!disconnected.ok) return disconnected;
@@ -2002,6 +2130,14 @@ export class AppController {
         await this.dependencies.alarms.scheduleReconnect(this.security.nextRetryAt);
         return;
       }
+      // An attempt in progress publishes its own outcome and schedules its own retry:
+      // the deadline of an earlier failure must not replace it. A "refreshing" status
+      // may rest after a renewal which already ended: it defers nothing.
+      if (
+        this.statusOperation === this.operationId &&
+        (this.snapshot.status === "connecting" || this.snapshot.status === "disconnecting")
+      )
+        return;
       await this.retryConnection(true, observer);
       return;
     }
@@ -2306,7 +2442,7 @@ export class AppController {
     const startupGeneration = ++this.startupGeneration;
     this.startupInProgress = true;
     for (const failure of this.startupProxyFailures) failure.generation = startupGeneration;
-    const recoveringUnreadStorage = this.startupStorageRecovery;
+    let recoveringUnreadStorage = this.startupStorageRecovery;
     const repairingGuardFailure = this.startupGuardFailure;
     let restoringStoredSession: ProxySession | null = null;
     // Readability belongs to this restoration attempt, including guard-repair retries.
@@ -2351,6 +2487,15 @@ export class AppController {
       }
       await this.inspectSafety();
       // An interrupted first write or failed release may have left a durable guard.
+      if (
+        (this.safetyStatus.filterActive || this.safetyStatus.trafficBlocked) &&
+        !this.security.protectionRequested &&
+        recoveringUnreadStorage === "none" &&
+        // An earlier worker armed that guard for unreadable stores and recorded it: it
+        // is released like this worker's own, never read as interrupted protection.
+        (await this.temporaryGuardRecorded())
+      )
+        recoveringUnreadStorage = "temporary_guard";
       if (
         (this.safetyStatus.filterActive || this.safetyStatus.trafficBlocked) &&
         !this.security.protectionRequested &&
@@ -2441,8 +2586,11 @@ export class AppController {
         if (logoutOutcome) this.publish({ logoutOutcome });
         return;
       }
-      if (this.security.proxyCreationUncertain)
+      if (this.security.proxyCreationUncertain) {
         this.uncertainCreationTokens.add(this.requireToken());
+        this.retrySuspendingTokens.add(this.requireToken());
+      }
+      // The historical marker alone is cleanup to report: it suspends no retry.
       if (this.historicalCleanupUncertain) this.uncertainCreationTokens.add(this.requireToken());
       const restoredConfiguration =
         transient.proxySession &&
@@ -2573,7 +2721,8 @@ export class AppController {
               ? "proxy_creation_uncertain"
               : this.security.capacityBlockedLocationId
                 ? "server_full"
-                : "proxy_unavailable",
+                : // A refusal only the user can resolve is still what suspends protection.
+                  (this.security.suspensionCause ?? "proxy_unavailable"),
           });
           return;
         }
@@ -2668,6 +2817,11 @@ export class AppController {
         this.credentialsAllowed = false;
         if (!this.startupStorageLoaded)
           this.security = { ...this.security, protectionRequested: true };
+        // Its record, under a key of its own, is started first but never awaited: this path
+        // exists because storage misbehaves, and a slow write must not delay the guard it
+        // describes. A worker stopped before the recovery then leaves the next one a guard
+        // to release, not to connect for.
+        if (this.startupStorageRecovery === "temporary_guard") void this.recordTemporaryGuard();
         let reported: AppErrorCode = "storage_unavailable";
         try {
           // A policy not yet read cannot permit exclusions in the recovery guard.
@@ -3305,16 +3459,23 @@ export class AppController {
     this.assertCurrent(id);
     await this.dependencies.safety.release();
     this.assertCurrent(id);
-    this.security = {
-      ...this.security,
-      protectionRequested: false,
-      reconnectAttempts: 0,
-      nextRetryAt: null,
-      retrySuspended: false,
-      proxyCreationUncertain: false,
-      retryNotBefore: null,
-      capacityBlockedLocationId: null,
-    };
+    // The guard is gone, whatever it had been armed for.
+    await this.forgetTemporaryGuard();
+    this.assertCurrent(id);
+    this.security = withSuspensionCause(
+      {
+        ...this.security,
+        protectionRequested: false,
+        reconnectAttempts: 0,
+        nextRetryAt: null,
+        retrySuspended: false,
+        proxyCreationUncertain: false,
+        retryNotBefore: null,
+        capacityBlockedLocationId: null,
+      },
+      null,
+    );
+    this.retrySuspendingTokens.clear();
     this.creationMarkerOwner = 0;
     this.deviceQuotaError = null;
     await this.writeSecurity();
@@ -3347,15 +3508,18 @@ export class AppController {
     if (!this.safetyStatus.filterActive) throw new SafetyError("traffic_guard_failed");
     if (this.security.webRtcProtectionEnabled && !this.safetyStatus.webRtcProtected)
       throw new SafetyError("webrtc_control_unavailable");
-    this.security = {
-      ...this.security,
-      reconnectAttempts: 0,
-      nextRetryAt: null,
-      retrySuspended: this.retriesSuspended(),
-      selectedLocationId: this.security.capacityBlockedLocationId
-        ? this.security.selectedLocationId
-        : session.locationId,
-    };
+    this.security = withSuspensionCause(
+      {
+        ...this.security,
+        reconnectAttempts: 0,
+        nextRetryAt: null,
+        retrySuspended: this.retriesSuspended(),
+        selectedLocationId: this.security.capacityBlockedLocationId
+          ? this.security.selectedLocationId
+          : session.locationId,
+      },
+      null,
+    );
     await this.writeSecurity();
     this.assertCurrent(id);
     await this.dependencies.alarms.clearReconnect();
@@ -3461,17 +3625,21 @@ export class AppController {
         canAutomaticallyRetry(reported);
       const shouldRetry = retryable && !this.security.proxyCreationUncertain;
       this.failureSuspendedRetries = !retryable;
-      this.security = {
-        ...this.security,
-        reconnectAttempts: shouldRetry
-          ? this.security.reconnectAttempts + 1
-          : this.security.reconnectAttempts,
-        nextRetryAt: shouldRetry
-          ? Math.max(this.dependencies.now() + delay, retryNotBefore ?? 0)
-          : null,
-        retrySuspended: !shouldRetry,
-        retryNotBefore,
-      };
+      this.security = withSuspensionCause(
+        {
+          ...this.security,
+          reconnectAttempts: shouldRetry
+            ? this.security.reconnectAttempts + 1
+            : this.security.reconnectAttempts,
+          nextRetryAt: shouldRetry
+            ? Math.max(this.dependencies.now() + delay, retryNotBefore ?? 0)
+            : null,
+          retrySuspended: !shouldRetry,
+          retryNotBefore,
+        },
+        // Kept for the next worker, which could not ask the server again by itself.
+        shouldRetry ? null : reported,
+      );
       try {
         await this.writeSecurity();
         this.assertCurrent(operation.id);
@@ -3636,6 +3804,10 @@ export class AppController {
       try {
         await this.recordCleanupUncertainty();
         this.assertCurrent(id);
+        // Now that the unknown cleanup is durable, a ledger record nobody can read is
+        // replaced: it would otherwise refuse every later startup.
+        await this.cleanup.resetInvalid().catch(() => undefined);
+        this.assertCurrent(id);
         return true;
       } catch {
         this.assertCurrent(id);
@@ -3724,7 +3896,36 @@ export class AppController {
       this.assertNoProxyRefusal(session);
   }
 
+  /** Whether an earlier worker recorded its guard as armed for unreadable stores. */
+  private async temporaryGuardRecorded(): Promise<boolean> {
+    this.temporaryGuardMarker ??=
+      (await this.dependencies.securityStorage.readTemporaryGuard?.().catch(() => false)) ?? false;
+    return this.temporaryGuardMarker;
+  }
+
+  private async recordTemporaryGuard(): Promise<void> {
+    if (this.temporaryGuardMarker === true) return;
+    const written = await this.dependencies.securityStorage.writeTemporaryGuard?.(true).then(
+      () => true,
+      () => false,
+    );
+    // An unrecorded guard stays unknown: the next worker reads it as before.
+    if (written) this.temporaryGuardMarker = true;
+  }
+
+  /** The guard was released, or protection now owns it: the record no longer applies. */
+  private async forgetTemporaryGuard(): Promise<void> {
+    if (!(await this.temporaryGuardRecorded())) return;
+    const cleared = await this.dependencies.securityStorage.writeTemporaryGuard?.(false).then(
+      () => true,
+      () => false,
+    );
+    if (cleared) this.temporaryGuardMarker = false;
+  }
+
   private async writeSecurity(): Promise<void> {
+    // A guard which protection now owns is no longer the one of unreadable stores.
+    if (this.security.protectionRequested) await this.forgetTemporaryGuard();
     try {
       await this.dependencies.securityStorage.write(this.security);
     } catch {
@@ -3856,6 +4057,7 @@ export class AppController {
       return;
     this.remoteSessions.delete(token);
     this.uncertainCreationTokens.delete(token);
+    this.retrySuspendingTokens.delete(token);
     this.cleanupRequestedTokens.delete(token);
     this.activeRemoteCleanups.delete(token);
   }
@@ -4106,6 +4308,7 @@ export class AppController {
   private async recordUnknownCreation(creation: PendingProxyCreation): Promise<void> {
     creation.outcome = "uncertain";
     this.uncertainCreationTokens.add(creation.token);
+    this.retrySuspendingTokens.add(creation.token);
     // The marker is global: an unknown ID created before a logout or an
     // account change still needs cleanup, and nothing else will record it.
     await this.withStateMutation(() => this.recordCleanupUncertainty()).catch(() => undefined);
@@ -4128,7 +4331,7 @@ export class AppController {
         return this.resolveCleanupMarker(token).catch(() => undefined);
       this.security = {
         ...this.security,
-        proxyCreationUncertain: this.uncertainCreationTokens.has(token),
+        proxyCreationUncertain: this.retrySuspendingTokens.has(token),
         proxyCleanupUncertain: this.cleanupUncertain(),
       };
       this.creationMarkerOwner = 0;
@@ -4209,7 +4412,7 @@ export class AppController {
           return this.resolveCleanupMarker(token);
         const id = this.operationId;
         recovery.id = id;
-        const uncertain = this.uncertainCreationTokens.has(token);
+        const uncertain = this.retrySuspendingTokens.has(token);
         const current = this.activeSession;
         // A live authorized session proves no failure ended the connection: a
         // displayed account or capacity error must not cost it this renewal.
@@ -4331,6 +4534,9 @@ export class AppController {
     const token = this.pendingSessions.get(session);
     const known = token ? this.remoteSessions.get(token)?.get(session.id) : undefined;
     if (this.creationMarkerOwner !== known?.sequence) return;
+    // The committed creation ends what an earlier ambiguous one suspended: a later
+    // definitive refusal must not suspend the retries again in its name.
+    if (token) this.retrySuspendingTokens.delete(token);
     this.security = {
       ...this.security,
       proxyCreationUncertain: false,
@@ -4505,6 +4711,13 @@ export class AppController {
     return this.diagnosticAccountGeneration;
   }
 
+  /** Ends the change this generation began, unless a newer one replaced it. */
+  private endDiagnosticAccountChange(generation: number): void {
+    if (this.diagnosticAccountGeneration !== generation) return;
+    this.diagnosticAccountChanging = false;
+    this.notifyDiagnosticAccountChanged();
+  }
+
   private notifyDiagnosticAccountChanged(): void {
     try {
       this.dependencies.onDiagnosticAccountChanged?.();
@@ -4672,12 +4885,51 @@ export class AppController {
       return;
     }
     if (error instanceof DOMException && error.name === "AbortError") return;
+    // The error this one replaces may be the reason of a failed connection whose retry
+    // is pending: it comes back once an account request succeeds again. A takeover of
+    // the proxy is not recorded: the route verification alone decides when it ends.
+    const shown = mapError(error);
+    const record = this.displacedConnectionError;
+    const replaced =
+      record?.operation === this.operationId && this.snapshot.error === record.shown
+        ? record.error
+        : this.snapshot.error;
+    this.displacedConnectionError =
+      this.connectionRetryPending() && !isProxyControlError(replaced)
+        ? { operation: this.operationId, error: replaced, shown }
+        : null;
     this.publish({
-      status: "error",
+      // A failed account request ends no live session: its status stays what it was.
+      status: protectedState ? this.snapshot.status : "error",
       protected: protectedState,
-      error: mapError(error),
+      error: shown,
       retryAfterSeconds: error instanceof ApiError ? (error.retryAfterSeconds ?? null) : null,
     });
+  }
+
+  /** A connection failed and its automatic retry is scheduled: its outcome is unchanged. */
+  private connectionRetryPending(): boolean {
+    return (
+      this.security.protectionRequested &&
+      !this.snapshot.protected &&
+      this.security.nextRetryAt !== null
+    );
+  }
+
+  /**
+   * What a successful account, device or verification request leaves displayed. It
+   * erases the error of such a request, never the reason of a failed connection which
+   * is still waiting for its retry.
+   */
+  private connectionErrorToKeep(): AppErrorCode | null {
+    const record = this.displacedConnectionError;
+    this.displacedConnectionError = null;
+    if (!this.connectionRetryPending()) return null;
+    // The recorded reason comes back only while the failed request's own error is still
+    // displayed: any other publication since then owns what is shown.
+    return record?.operation === this.operationId && this.snapshot.error === record.shown
+      ? record.error
+      : this.snapshot.error;
   }
 
   private captureConnectionObserver(): ConnectionRecorder {
@@ -4711,6 +4963,8 @@ export class AppController {
 
   private publish(changes: Partial<AppSnapshot>): void {
     if (changes.status !== undefined) this.statusOperation = this.operationId;
+    if (changes.retryAfterSeconds !== undefined)
+      this.retryAfterSince = changes.retryAfterSeconds === null ? null : this.dependencies.now();
     this.snapshot = { ...this.snapshot, ...changes };
     this.snapshot.activeLocation = this.locationMetadata(this.activeSession);
     this.emit();
@@ -4760,14 +5014,6 @@ export class AppController {
       (this.security.webRtcProtectionEnabled && !this.safetyStatus.webRtcProtected)
     )
       this.snapshot.protected = false;
-    if (
-      this.safetyStatus.trafficBlocked &&
-      !this.snapshot.protected &&
-      this.snapshot.status !== "connecting" &&
-      this.snapshot.status !== "refreshing" &&
-      this.snapshot.status !== "disconnecting"
-    )
-      this.snapshot.status = "blocked";
     this.dependencies.onStateChanged(this.getSnapshot());
   }
 }

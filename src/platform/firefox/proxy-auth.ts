@@ -136,6 +136,15 @@ export class ProxyAuthHandler {
       this.reportAuthenticationFailure(session);
       return { cancel: true };
     }
+    // Requests which never complete must not grow this record without bound. Only a
+    // count evicts it, oldest first: an age alone never lets a challenge be answered twice.
+    if (
+      !this.attemptedSessionsByRequest.has(details.requestId) &&
+      this.attemptedSessionsByRequest.size >= MAX_TRACKED_REQUESTS
+    ) {
+      const oldest = this.attemptedSessionsByRequest.keys().next();
+      if (!oldest.done) this.attemptedSessionsByRequest.delete(oldest.value);
+    }
     this.attemptedSessionsByRequest.set(details.requestId, session.id);
     const response = {
       authCredentials: { username: session.username, password: session.password },
@@ -165,6 +174,8 @@ export class ProxyAuthHandler {
         now - request.startedAt < REQUEST_PROVENANCE_MS
       )
         break;
+      // Its attempt record stays: Firefox credentials do not depend on this provenance,
+      // so a request evicted here must still have its repeated challenge cancelled.
       this.startedRequests.delete(id);
     }
     this.startedRequests.set(requestId, {
@@ -189,22 +200,21 @@ export class ProxyAuthHandler {
     // recovery. Concurrent rejected requests report this session only once.
     void Promise.resolve()
       .then(async () => {
-        if (!this.canSendCredentials(session)) return false;
+        if (!this.canSendCredentials(session)) return;
         const owned = await this.dependencies
           .isConfiguredProxyChallenge(session)
           .catch(() => false);
-        if (!owned || !this.canSendCredentials(session)) return false;
+        if (!owned || !this.canSendCredentials(session)) return;
         await this.dependencies.onAuthenticationFailure?.(session);
-        return true;
-      })
-      .then((reported) => {
-        if (!reported && this.reportedFailureSessionId === session.id)
-          this.reportedFailureSessionId = null;
       })
       .catch(() => {
-        if (this.reportedFailureSessionId === session.id) this.reportedFailureSessionId = null;
         // Do not log the rejected error: it could contain proxy credentials.
         console.warn("FuzeVPN: proxy authentication recovery failed.");
+      })
+      .finally(() => {
+        // The latch only merges concurrent rejections. A session its owner kept after
+        // this report can be refused, and reported, again.
+        if (this.reportedFailureSessionId === session.id) this.reportedFailureSessionId = null;
       });
   }
 

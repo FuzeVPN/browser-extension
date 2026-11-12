@@ -50,6 +50,8 @@ interface PopupResponse extends ExtensionResponse {
   snapshot: PopupSnapshot;
   stale?: boolean;
   transportFailed?: boolean;
+  /** The reply was lost, but the published state shows the command took effect. */
+  effectConfirmed?: boolean;
 }
 
 // An in-flight request marker holds an opaque token: only the request that stored it may
@@ -166,6 +168,7 @@ let snapshot: PopupSnapshot | null = null;
 const snapshotOrder = new PopupSnapshotOrder();
 let communicationFailed = false;
 let diagnosticsPending = false;
+let diagnosticsStateRequest: Promise<unknown> | null = null;
 const diagnostics = new DiagnosticConnection(renderDiagnostics);
 let loginPending = false;
 let accountRefreshPending: PendingRequest = false;
@@ -180,8 +183,14 @@ let verificationTimer: ReturnType<typeof setTimeout> | undefined;
 let devicesRefreshPending: PendingRequest = false;
 let accountEpoch = 0;
 let devicesAction = 0;
-let devicesFailure: { transport: boolean; code: AppErrorCode; retryAfter: number | null } | null =
-  null;
+// A refused deletion names its device: it stays reported while that device is listed,
+// whatever other device command starts or succeeds meanwhile.
+let devicesFailure: {
+  transport: boolean;
+  code: AppErrorCode;
+  retryAfter: number | null;
+  deviceId?: string;
+} | null = null;
 const deviceDeletions = new Set<string>();
 let returnToSettingsAfterDevices = false;
 let securityPreferencesPending: PendingRequest = false;
@@ -189,6 +198,8 @@ let connectionRetryPending: PendingRequest = false;
 let observedNetworkRoute: string | null = null;
 let locationFilter: "all" | "favorites" | "recent" = "all";
 let locationPreferenceFailure: AppErrorCode | "save" | "transport" | null = null;
+// The failure displayed is the one of a favorite toggle, not of a selection.
+let locationFavoriteFailed = false;
 let locationsRefreshPending: PendingRequest = false;
 let locationsRefreshFailed = false;
 let automaticSelectionPending: PendingRequest = false;
@@ -229,7 +240,7 @@ localizeDocument();
 configureLinks();
 bindEvents();
 void initializePopup().catch(() => undefined);
-void diagnostics.request({ type: "diagnostics_state" });
+refreshDiagnosticsState();
 void detectBrowserEnvironment()
   .then((environment) => {
     currentBrowserName = browserDeviceName(environment);
@@ -239,9 +250,7 @@ void detectBrowserEnvironment()
   .catch(() => undefined);
 
 // A short-lived popup requests observations; no background polling of browsing activity.
-setInterval(() => {
-  if (snapshot?.profile && document.visibilityState === "visible") refreshNetwork();
-}, NETWORK_OBSERVATION_POLL_MS);
+setInterval(pollVisiblePopup, NETWORK_OBSERVATION_POLL_MS);
 window.addEventListener("online", () => refreshNetwork());
 
 extensionApi.runtime.onMessage.addListener((message: unknown) => {
@@ -297,6 +306,9 @@ function bindEvents(): void {
     if (target) void request({ type: "connect", locationId: target.id });
   });
   elements.changeLocationButton.addEventListener("click", () => {
+    // A failure which arrived after the dialog was closed belongs to no action here.
+    locationPreferenceFailure = null;
+    locationFavoriteFailed = false;
     elements.locationDialog.showModal();
     elements.locationSearch.focus();
     void refreshLocations();
@@ -319,6 +331,7 @@ function bindEvents(): void {
     locationSelectionPending = false;
     const selection = ++locationSelectionRequest;
     locationPreferenceFailure = null;
+    locationFavoriteFailed = false;
     renderLocations(snapshot);
     void request({ type: "select_automatic_location" })
       .then((response) => {
@@ -343,6 +356,12 @@ function bindEvents(): void {
   elements.settingsButton.addEventListener("click", () => elements.settingsPanel.showModal());
   elements.retryButton.addEventListener("click", () => {
     if (snapshot?.profile === null && snapshot.error !== "storage_unavailable") {
+      if (communicationFailed) {
+        // The sign-in button stays disabled while the worker is unreachable: read its
+        // state again rather than focus a control which cannot be used.
+        void request({ type: "get_snapshot" });
+        return;
+      }
       elements.loginButton.focus();
       elements.loginButton.scrollIntoView({ block: "center" });
       return;
@@ -627,6 +646,10 @@ async function sendExclusionsUpdate(
       }
       const retry = exclusionRetry(failedExclusionIntent, current.snapshot.siteExclusions);
       if (retry.type === "conflict") {
+        // The reported intent is abandoned, never resent: the next retry resumes the
+        // worker's own policy, as a popup opened afterwards does.
+        failedExclusionIntent = null;
+        submittedExclusionDraft = null;
         exclusionConflict = true;
         exclusionRequestFailed = true;
         return false;
@@ -639,7 +662,7 @@ async function sendExclusionsUpdate(
     }
     const response = await request(update);
     const applied =
-      response.ok &&
+      (response.ok || response.effectConfirmed === true) &&
       !response.superseded &&
       !response.snapshot.siteExclusions.pending &&
       !response.snapshot.siteExclusions.error &&
@@ -809,12 +832,14 @@ async function refreshDevices(): Promise<void> {
   const pending = {};
   const action = ++devicesAction;
   devicesRefreshPending = pending;
-  devicesFailure = null;
+  if (!devicesFailure?.deviceId) devicesFailure = null;
   renderDevices(snapshot);
   try {
     const response = await request({ type: "refresh_devices" });
     if (epoch !== accountEpoch || action !== devicesAction || response.superseded) return;
-    devicesFailure = deviceFailure(response);
+    const failure = deviceFailure(response);
+    if (failure) devicesFailure = failure;
+    else if (!devicesFailure?.deviceId) devicesFailure = null;
     render(response.snapshot);
   } finally {
     // A newer account or worker may already own a refresh of its own.
@@ -826,7 +851,7 @@ async function refreshDevices(): Promise<void> {
 }
 
 function deviceFailure(response: PopupResponse): typeof devicesFailure {
-  return response.ok
+  return response.ok || response.effectConfirmed
     ? null
     : {
         transport: response.transportFailed === true,
@@ -837,13 +862,12 @@ function deviceFailure(response: PopupResponse): typeof devicesFailure {
 
 async function initializePopup(): Promise<void> {
   const response = await request({ type: "get_snapshot" });
-  if (response.stale) return;
-  render(response.snapshot);
-  if (
-    response.snapshot.profile &&
-    !isBusy(response.snapshot.status) &&
-    !(response.snapshot.autoConnect && !response.snapshot.protected)
-  ) {
+  // A publication received before this reply already displayed a newer state, which
+  // makes the reply stale: the first account refresh follows that state, not nothing.
+  const first = response.stale ? snapshot : response.snapshot;
+  if (!first) return;
+  if (!response.stale) render(first);
+  if (first.profile && !isBusy(first.status) && !(first.autoConnect && !first.protected)) {
     await refreshAccount();
   }
 }
@@ -890,7 +914,7 @@ async function refreshLocations(): Promise<void> {
 }
 
 function locationCommandFailure(response: PopupResponse): typeof locationPreferenceFailure {
-  if (response.ok) return null;
+  if (response.ok || response.effectConfirmed) return null;
   if (response.transportFailed) return "transport";
   return response.commandError ?? response.snapshot.error ?? "save";
 }
@@ -924,6 +948,7 @@ function render(value: unknown, confirmed = false): boolean {
     ++locationSelectionRequest;
     devicesFailure = null;
     locationPreferenceFailure = null;
+    locationFavoriteFailed = false;
     locationsRefreshFailed = false;
     locationSelectionPending = false;
     expandedLocationCountries.clear();
@@ -1050,6 +1075,7 @@ function renderCurrent(next: PopupSnapshot): void {
     elements.locationSearch.value = "";
     locationFilter = "all";
     locationPreferenceFailure = null;
+    locationFavoriteFailed = false;
     elements.deviceList.replaceChildren();
     renderedDevices = "";
     elements.deviceCount.textContent = "";
@@ -1162,6 +1188,24 @@ async function signInOnWeb(): Promise<void> {
 
 function refreshNetwork(): void {
   void request({ type: "refresh_network" });
+}
+
+function pollVisiblePopup(): void {
+  if (document.visibilityState !== "visible") return;
+  if (snapshot?.profile) refreshNetwork();
+  // The first diagnostics read may have found the worker starting. Nothing else asks
+  // again: without this the automatic-reporting control stays disabled until the worker
+  // happens to broadcast.
+  if (!diagnostics.available && !diagnosticsPending) refreshDiagnosticsState();
+}
+
+/** Reads the diagnostics state, one request at a time. */
+function refreshDiagnosticsState(): void {
+  if (diagnosticsStateRequest) return;
+  const pending = diagnostics.request({ type: "diagnostics_state" }).finally(() => {
+    if (diagnosticsStateRequest === pending) diagnosticsStateRequest = null;
+  });
+  diagnosticsStateRequest = pending;
 }
 
 function renderNetwork(next: AppSnapshot): void {
@@ -1302,7 +1346,8 @@ function renderLogoutOutcome(next: AppSnapshot): void {
 
 function renderLocations(next: AppSnapshot): void {
   const loading = next.locationsStatus === "loading" || Boolean(locationsRefreshPending);
-  const failed = next.locationsStatus === "error" || locationsRefreshFailed;
+  // A refresh in flight replaces the failure of the previous one: never both at once.
+  const failed = !loading && (next.locationsStatus === "error" || locationsRefreshFailed);
   const unknown = next.locations.length === 0 && next.locationsStatus !== "ready";
   elements.refreshLocationsButton.disabled = loading || !next.profile;
   elements.refreshLocationsButton.setAttribute("aria-busy", String(loading));
@@ -1478,12 +1523,13 @@ function selectLocation(locationId: string): void {
   const selection = ++locationSelectionRequest;
   locationSelectionPending = true;
   locationPreferenceFailure = null;
+  locationFavoriteFailed = false;
   void request({ type, locationId })
     .then((response) => {
       if (epoch !== accountEpoch || selection !== locationSelectionRequest || response.superseded)
         return;
       locationPreferenceFailure = locationCommandFailure(response);
-      if (response.ok) elements.locationDialog.close();
+      if (response.ok || response.effectConfirmed) elements.locationDialog.close();
       render(response.snapshot);
     })
     .catch(() => {
@@ -1682,7 +1728,9 @@ function favoriteButton(id: string, label: string, selected: boolean): HTMLButto
     if (!snapshot?.profile || favoriteChanges.has(key)) return;
     const epoch = accountEpoch;
     favoriteChanges.add(key);
-    locationPreferenceFailure = null;
+    // A new toggle replaces the failure of an earlier one, never a refused selection.
+    if (locationFavoriteFailed) locationPreferenceFailure = null;
+    locationFavoriteFailed = false;
     const preferences = snapshot.locationPreferences;
     const value = ![
       ...preferences.favoriteIds,
@@ -1692,11 +1740,17 @@ function favoriteButton(id: string, label: string, selected: boolean): HTMLButto
     void request({ type: "set_location_favorite", locationId: id, favorite: value })
       .then((response) => {
         if (epoch !== accountEpoch || response.superseded) return;
-        locationPreferenceFailure = locationCommandFailure(response);
+        const failure = locationCommandFailure(response);
+        if (failure) {
+          locationPreferenceFailure = failure;
+          locationFavoriteFailed = true;
+        }
         render(response.snapshot);
       })
       .catch(() => {
-        if (epoch === accountEpoch) locationPreferenceFailure = "transport";
+        if (epoch !== accountEpoch) return;
+        locationPreferenceFailure = "transport";
+        locationFavoriteFailed = true;
       })
       .finally(() => {
         favoriteChanges.delete(key);
@@ -1722,6 +1776,10 @@ function isolatedText(value: string, direction: "auto" | "ltr" = "auto"): HTMLEl
 }
 
 function renderDevices(next: AppSnapshot): void {
+  // A refused deletion is no longer reported once its device left the list.
+  const refusedDeviceId = devicesFailure?.deviceId;
+  if (refusedDeviceId && !next.devices.some((device) => device.deviceId === refusedDeviceId))
+    devicesFailure = null;
   const refreshing = Boolean(devicesRefreshPending);
   elements.devicesError.classList.toggle("hidden", !devicesFailure);
   elements.devicesError.textContent = devicesFailure
@@ -1913,14 +1971,22 @@ async function deleteDevice(
       : elements.refreshDevicesButton;
     fallback.focus({ preventScroll: true });
   }
-  const action = ++devicesAction;
+  ++devicesAction;
   deviceDeletions.add(deletionKey);
-  devicesFailure = null;
+  if (!devicesFailure?.deviceId || devicesFailure.deviceId === deviceId) devicesFailure = null;
   renderDevices(snapshot);
   await request({ type: "delete_device", deviceId })
     .then((response) => {
-      if (epoch !== accountEpoch || action !== devicesAction || response.superseded) return;
-      devicesFailure = deviceFailure(response);
+      if (epoch !== accountEpoch || response.superseded) return;
+      // The outcome of this deletion is its own: a refresh or another deletion started
+      // before this reply neither hides its refusal nor is hidden by its success.
+      const failure = deviceFailure(response);
+      // A failure which left the device listed stays reported until it is gone. One
+      // which followed its removal names no device: the next device command replaces it.
+      const listed = response.snapshot.devices.some((device) => device.deviceId === deviceId);
+      if (failure) devicesFailure = listed ? { ...failure, deviceId } : failure;
+      else if (!devicesFailure?.deviceId || devicesFailure.deviceId === deviceId)
+        devicesFailure = null;
       render(response.snapshot);
     })
     .finally(() => {
@@ -2144,17 +2210,18 @@ async function request(messageValue: ExtensionRequest): Promise<PopupResponse> {
       "set_location_favorite",
       "set_language_preference",
     ].includes(messageValue.type);
-    const stateConfirmed =
-      confirmation !== confirmedSnapshotSequence &&
-      snapshot !== null &&
-      !isBusy(snapshot.status) &&
-      (newerStateSuffices || (currentState !== null && previousState !== currentState));
+    const newerState =
+      confirmation !== confirmedSnapshotSequence && snapshot !== null && !isBusy(snapshot.status);
+    // The command's own effect is published: its caller treats it as done.
+    const effectConfirmed = newerState && currentState !== null && previousState !== currentState;
+    const stateConfirmed = newerState && (newerStateSuffices || effectConfirmed);
     // Public IP is optional; its message channel cannot change the connection UI.
     if (messageValue.type !== "refresh_network" && !superseded && !stateConfirmed)
       renderCommunicationFailure();
     return {
       ok: false,
       transportFailed: true,
+      ...(effectConfirmed && !superseded ? { effectConfirmed: true } : {}),
       ...(superseded ? { stale: true, superseded: true } : {}),
       snapshot: snapshot ?? popupSnapshot({ ...EMPTY_SNAPSHOT, siteExclusions: undefined }),
     };

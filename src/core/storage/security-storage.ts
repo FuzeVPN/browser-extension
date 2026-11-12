@@ -1,13 +1,22 @@
 // SPDX-License-Identifier: MPL-2.0
 
 import { extensionApi } from "@platform/bridge";
-import { DEFAULT_SECURITY_STATE, type SecurityState } from "../shared/security";
+import { DEFAULT_SECURITY_STATE, isSuspensionCause, type SecurityState } from "../shared/security";
 
 export const SECURITY_STORAGE_KEY = "fuzevpnSecurityState";
+
+export const TEMPORARY_GUARD_KEY = "fuzevpnTemporaryGuard";
 
 export interface SecurityStorage {
   read(legacyAutoConnect: boolean, selectedLocationId: string | null): Promise<SecurityState>;
   write(state: SecurityState): Promise<void>;
+  /**
+   * Whether the traffic guard was armed for stores a startup could not read, not for
+   * requested protection. Kept under a key of its own: it is recorded while the
+   * account and security stores must not be written.
+   */
+  readTemporaryGuard?(): Promise<boolean>;
+  writeTemporaryGuard?(armed: boolean): Promise<void>;
 }
 
 /** Separate from account storage so logout cannot accidentally disarm the traffic guard. */
@@ -42,6 +51,15 @@ export class ExtensionSecurityStorage implements SecurityStorage {
     if (!isRecord(actual) || !Object.entries(safe).every(([key, value]) => actual[key] === value)) {
       throw new Error("security_storage_failed");
     }
+  }
+
+  async readTemporaryGuard(): Promise<boolean> {
+    const stored = await extensionApi.storage.local.get(TEMPORARY_GUARD_KEY);
+    return stored[TEMPORARY_GUARD_KEY] === true;
+  }
+
+  async writeTemporaryGuard(armed: boolean): Promise<void> {
+    await extensionApi.storage.local.set({ [TEMPORARY_GUARD_KEY]: armed });
   }
 }
 
@@ -84,6 +102,7 @@ function sanitize(value: unknown): SecurityState {
       value.capacityBlockedLocationId.length <= 256
         ? value.capacityBlockedLocationId
         : null,
+    ...(isSuspensionCause(value.suspensionCause) ? { suspensionCause: value.suspensionCause } : {}),
   };
 }
 

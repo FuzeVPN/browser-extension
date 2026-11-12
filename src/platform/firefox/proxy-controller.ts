@@ -115,6 +115,9 @@ export class PlatformProxyService implements ProxyService {
   async apply(session: ProxySession): Promise<void> {
     const value = proxyConfig(session, this.exclusions);
     await this.assertControllable();
+    // The endpoint being replaced may have been inherited from an earlier browser
+    // session, whose history is gone: its late challenges are still ours to cancel.
+    await this.rememberOwnedEndpoint();
     // A request may receive its first 407 after this proxy is cleared. Keep only
     // its endpoint (never credentials) for canceling those late challenges.
     await this.rememberEndpoint(session);
@@ -156,14 +159,19 @@ export class PlatformProxyService implements ProxyService {
     );
   }
 
-  async clear(): Promise<void> {
+  /** Records the endpoint this extension owns before it is replaced or cleared. */
+  private async rememberOwnedEndpoint(): Promise<void> {
     const current = await browser.proxy.settings.get({}).catch(() => null);
     const configuration = current && readProxyConfiguration(current.value);
     if (current?.levelOfControl === "controlled_by_this_extension" && configuration) {
       // Also covers a configuration created before endpoint tracking existed.
-      // Failure to persist this cancel-only history must not prevent disconnect.
+      // Failure to persist this cancel-only history must not prevent the change.
       await this.rememberEndpoint(configuration.endpoint).catch(() => undefined);
     }
+  }
+
+  async clear(): Promise<void> {
+    await this.rememberOwnedEndpoint();
     await browser.proxy.settings.clear({ scope: "regular" });
     if (
       (await this.readSettings()).some(

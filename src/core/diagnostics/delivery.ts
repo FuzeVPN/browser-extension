@@ -201,29 +201,49 @@ export class DiagnosticDelivery {
     assertContext: () => void = () => undefined,
   ): Promise<void> {
     assertContext();
+    const optedOut = !enabled && !this.automaticDisabled.has(ownerId);
+    const withdrawn: string[] = [];
     if (!enabled) {
       this.automaticDisabled.add(ownerId);
       for (const entry of this.state.reports) {
-        if (entry.ownerId === ownerId && isQueued(entry) && isAutomatic(entry))
-          this.invalidate(entryKey(entry));
+        if (entry.ownerId === ownerId && isQueued(entry) && isAutomatic(entry)) {
+          const target = entryKey(entry);
+          if (!this.cancelled.has(target)) withdrawn.push(target);
+          this.invalidate(target);
+        }
       }
     }
-    await this.initialize();
-    assertContext();
-    this.requireOwner(ownerId);
-    if (enabled) await this.requireNativeConsent();
-    await this.change(async (next) => {
+    try {
+      await this.initialize();
       assertContext();
       this.requireOwner(ownerId);
       if (enabled) await this.requireNativeConsent();
-      assertContext();
-      this.requireOwner(ownerId);
-      settings(next, ownerId).automatic = enabled;
-      if (!enabled)
-        next.reports = next.reports.filter(
-          (entry) => !(entry.ownerId === ownerId && isQueued(entry) && isAutomatic(entry)),
-        );
-    }, assertContext);
+      await this.change(async (next) => {
+        assertContext();
+        this.requireOwner(ownerId);
+        if (enabled) await this.requireNativeConsent();
+        assertContext();
+        this.requireOwner(ownerId);
+        settings(next, ownerId).automatic = enabled;
+        if (!enabled)
+          next.reports = next.reports.filter(
+            (entry) => !(entry.ownerId === ownerId && isQueued(entry) && isAutomatic(entry)),
+          );
+      }, assertContext);
+    } catch (error) {
+      if (error instanceof DiagnosticDeliveryError && error.code === "storage_unavailable") {
+        // An opt-out which storage refused exists in this worker's memory only: the next
+        // worker would resume automatic reports. It is not shown as effective, and the
+        // command can be repeated.
+        if (optedOut) this.automaticDisabled.delete(ownerId);
+        for (const target of withdrawn) this.cancelled.delete(target);
+        if (optedOut || withdrawn.length > 0) {
+          this.notify();
+          this.kick();
+        }
+      }
+      throw error;
+    }
     if (enabled) this.automaticDisabled.delete(ownerId);
     await this.reschedule();
     this.kick();
@@ -325,16 +345,23 @@ export class DiagnosticDelivery {
   }
 
   async cancel(id: string, ownerId: string): Promise<void> {
-    this.invalidate(key(ownerId, id));
-    await this.initialize();
-    await this.change((next) => {
-      const entry = next.reports.find((value) => value.id === id && value.ownerId === ownerId);
-      if (!entry) throw new DiagnosticDeliveryError("not_found");
-      if (entry.status === "received") return;
-      entry.status = "cancelled";
-      entry.nextAttemptAt = null;
-      delete entry.error;
-    });
+    const target = key(ownerId, id);
+    const held = this.cancelled.has(target);
+    this.invalidate(target);
+    try {
+      await this.initialize();
+      await this.change((next) => {
+        const entry = next.reports.find((value) => value.id === id && value.ownerId === ownerId);
+        if (!entry) throw new DiagnosticDeliveryError("not_found");
+        if (entry.status === "received") return;
+        entry.status = "cancelled";
+        entry.nextAttemptAt = null;
+        delete entry.error;
+      });
+    } catch (error) {
+      this.reinstate(target, held, error);
+      throw error;
+    }
     if (
       this.state.reports.some(
         (entry) => entry.id === id && entry.ownerId === ownerId && entry.status === "received",
@@ -347,11 +374,18 @@ export class DiagnosticDelivery {
   }
 
   async remove(id: string, ownerId: string): Promise<void> {
-    this.invalidate(key(ownerId, id));
-    await this.initialize();
-    await this.change((next) => {
-      next.reports = next.reports.filter((entry) => entry.id !== id || entry.ownerId !== ownerId);
-    });
+    const target = key(ownerId, id);
+    const held = this.cancelled.has(target);
+    this.invalidate(target);
+    try {
+      await this.initialize();
+      await this.change((next) => {
+        next.reports = next.reports.filter((entry) => entry.id !== id || entry.ownerId !== ownerId);
+      });
+    } catch (error) {
+      this.reinstate(target, held, error);
+      throw error;
+    }
     await this.reschedule();
   }
 
@@ -647,6 +681,19 @@ export class DiagnosticDelivery {
     this.cancelled.add(value);
     if (this.active?.key === value) this.active.abort.abort();
     this.notify();
+  }
+
+  /**
+   * A cancellation or removal which storage refused exists in this worker's memory
+   * only: the next worker would deliver the report. It is not shown as done; the
+   * report keeps its stored state and the command can be repeated.
+   */
+  private reinstate(value: string, held: boolean, error: unknown): void {
+    if (held || !(error instanceof DiagnosticDeliveryError) || error.code !== "storage_unavailable")
+      return;
+    this.cancelled.delete(value);
+    this.notify();
+    this.kick();
   }
 
   private change(

@@ -29,6 +29,16 @@ export class ProxyCleanupLedger {
     return this.initialization;
   }
 
+  /**
+   * Replaces a stored record which nobody can read. Its caller has durably recorded
+   * the cleanup as unknown first: the record would otherwise refuse every later worker.
+   */
+  async resetInvalid(): Promise<void> {
+    if (this.readable || !this.storage?.resetInvalid) return;
+    await this.storage.resetInvalid();
+    await this.initialize();
+  }
+
   // Reads use the same proof as removal: a record whose expiry is not proven is
   // revoked and reported as outstanding, never confirmed by a wall clock alone.
   forAccount(userId: string): PendingProxyRevocation[] {

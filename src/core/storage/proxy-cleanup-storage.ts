@@ -10,6 +10,15 @@ export interface PendingProxyRevocation {
 export interface ProxyCleanupStorage {
   read(): Promise<PendingProxyRevocation[]>;
   write(sessions: PendingProxyRevocation[]): Promise<void>;
+  /** Only after an explicit stop has durably recorded the cleanup as unknown. */
+  resetInvalid?(): Promise<void>;
+}
+
+export class InvalidProxyCleanupStorageError extends Error {
+  constructor() {
+    super("proxy_cleanup_storage_invalid");
+    this.name = "InvalidProxyCleanupStorageError";
+  }
 }
 
 const CLEANUP_KEY = "fuzevpnPendingProxyRevocations";
@@ -21,7 +30,7 @@ export class ExtensionProxyCleanupStorage implements ProxyCleanupStorage {
     const record: unknown = stored[CLEANUP_KEY];
     if (record === undefined) return [];
     if (!isRecord(record) || record.version !== 1 || !isSessionList(record.sessions))
-      throw new Error("proxy_cleanup_storage_invalid");
+      throw new InvalidProxyCleanupStorageError();
     return record.sessions.map(({ userId, sessionId, expiresAt }) => ({
       userId,
       sessionId,
@@ -29,8 +38,20 @@ export class ExtensionProxyCleanupStorage implements ProxyCleanupStorage {
     }));
   }
 
+  async resetInvalid(): Promise<void> {
+    // A read error is not evidence of corruption: only a record which was read and
+    // refused is replaced. No later worker could read it either.
+    try {
+      await this.read();
+      return;
+    } catch (error) {
+      if (!(error instanceof InvalidProxyCleanupStorageError)) throw error;
+    }
+    await this.write([]);
+  }
+
   async write(sessions: PendingProxyRevocation[]): Promise<void> {
-    if (!isSessionList(sessions)) throw new Error("proxy_cleanup_storage_invalid");
+    if (!isSessionList(sessions)) throw new InvalidProxyCleanupStorageError();
     await extensionApi.storage.local.set({ [CLEANUP_KEY]: { version: 1, sessions } });
     if (JSON.stringify(await this.read()) !== JSON.stringify(sessions))
       throw new Error("proxy_cleanup_storage_unverified");

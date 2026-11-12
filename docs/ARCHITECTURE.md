@@ -36,12 +36,28 @@ le coupe-circuit, WebRTC, le renouvellement et la restauration.
 un chargement ou une erreur d'un catalogue chargé réellement vide. La suppression d'un
 appareil ne peut pas publier une réponse obsolète dans un compte remplacé.
 
+Le statut `blocked` est déduit à la lecture de l'état publié, sans remplacer le statut
+enregistré : il disparaît dès que la garde du trafic est relâchée. `retryAfterSeconds`
+indique le délai restant depuis sa réception, et non le délai reçu à l'origine.
+
 ## Compatibilité des données
 
 Les clés existantes `fuzevpnState`, `fuzevpnProxySession`, `fuzevpnSecurityState`,
 `fuzevpnLanguage`, les exclusions et leurs journaux, les favoris et la base IndexedDB
 `fuzevpn-device-identity` sont conservés. Les identifiants du proxy restent en stockage de
 session. Aucun profil, jeton ou clé d'appareil n'est importé depuis une autre identité.
+
+Deux ajouts restent compatibles avec les données existantes. `fuzevpnSecurityState` peut
+porter un champ facultatif `suspensionCause` (abonnement, vérification de l'e-mail ou
+limite d'appareils) : la cause d'une protection suspendue reste affichée après un
+redémarrage du worker. La clé `fuzevpnTemporaryGuard` indique que la garde du trafic a été
+posée pour des données illisibles au démarrage, et non pour une protection demandée : le
+worker suivant la relâche au lieu de se connecter. Cette clé est distincte parce qu'un
+démarrage aux données illisibles n'écrit ni le compte ni l'état de sécurité.
+
+Un enregistrement `fuzevpnPendingProxyRevocations` illisible est remplacé lors d'une
+déconnexion ou d'une fermeture de session explicite, une fois le nettoyage inconnu
+enregistré durablement ; une simple erreur de lecture ne le remplace jamais.
 
 Le serveur reçoit les contrats existants. Les diagnostics gardent notamment les champs
 historiques `platform: "chrome_extension"` et `chrome`, même sur Firefox. Firefox envoie

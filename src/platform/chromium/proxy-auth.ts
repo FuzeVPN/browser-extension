@@ -236,22 +236,21 @@ export class ProxyAuthHandler {
     // recovery. Concurrent rejected requests report this session only once.
     void Promise.resolve()
       .then(async () => {
-        if (!this.canSendCredentials(session)) return false;
+        if (!this.canSendCredentials(session)) return;
         const owned = await this.dependencies
           .isConfiguredProxyChallenge(session)
           .catch(() => false);
-        if (!owned || !this.canSendCredentials(session)) return false;
+        if (!owned || !this.canSendCredentials(session)) return;
         await this.dependencies.onAuthenticationFailure?.(session);
-        return true;
-      })
-      .then((reported) => {
-        if (!reported && this.reportedFailureSessionId === session.id)
-          this.reportedFailureSessionId = null;
       })
       .catch(() => {
-        if (this.reportedFailureSessionId === session.id) this.reportedFailureSessionId = null;
         // Do not log the rejected error: it could contain proxy credentials.
         console.warn("FuzeVPN: proxy authentication recovery failed.");
+      })
+      .finally(() => {
+        // The latch only merges concurrent rejections. A session its owner kept after
+        // this report can be refused, and reported, again.
+        if (this.reportedFailureSessionId === session.id) this.reportedFailureSessionId = null;
       });
   }
 

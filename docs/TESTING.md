@@ -109,8 +109,10 @@ Assistance can export `fuzevpn-connection-journal.json` without running or sendi
 diagnostic report. The journal records bounded state transitions, command outcomes,
 catalogue membership and local/API failure classifications. It contains no account or
 location identifiers, credentials, public IPs, URLs or free-form error text. It retains
-at most 200 entries from the last ten minutes in browser session storage. Logging and
-storage failures never delay connection commands.
+at most 200 entries from the last ten minutes in browser session storage. Restored
+entries have no owner: a new worker discards them when it establishes the account
+boundary, so an export covers the current worker lifetime. Logging and storage failures
+never delay connection commands.
 
 A manual connection retains its explicitly requested location from the catalogue at
 the start of that operation. If the refreshed catalogue drops that row, the controller
@@ -122,6 +124,26 @@ Regression checks cover this catalogue change, actual API refusals, unknown targ
 automatic selection from the fresh catalogue, cancellation and fresh subscription
 checks. A location already absent when the operation starts remains subject to the
 normal catalogue check. The journal distinguishes local rejection from an API response.
+
+## Lifecycle regressions
+
+The `latent-*` unit tests reproduce states which only arise across several events: a
+worker restart, a storage write which fails, two commands which overlap, or a reply which
+never arrives. Where it is cheap, each failing sequence is paired with a control case.
+
+They cover automatic retries after an ambiguous session creation or an overlapping
+attempt, a reconnect alarm falling due during a manual connection, and the `blocked`
+status once its guard is released. Across a worker restart they cover the cause of a
+suspended protection, the guard armed for unreadable stores and an unreadable proxy
+cleanup record. They also cover preferences and selections whose write fails, account
+refreshes during a pending retry or a live connection, repeated proxy authentication
+failures, endpoint history and WebRTC inspection in the adapters, diagnostic commands
+which storage refuses, the assistance page's polling, content loading and refusal
+messages, and popup replies lost after their effect, failure messages, the first
+snapshot, the diagnostics control and the verification delay.
+
+These tests use the same fakes as the other unit suites. None of them drives a real
+browser: they do not replace the native browser suites.
 
 ## Development dependency audit
 

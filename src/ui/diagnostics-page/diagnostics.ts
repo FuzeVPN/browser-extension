@@ -45,6 +45,8 @@ let busy = false;
 let exportingConnectionLog = false;
 let localFailure: string | null = null;
 let contentFailure = false;
+// The content read got no answer at all, as when the worker was being replaced.
+let contentUnanswered = false;
 let poll: ReturnType<typeof setTimeout> | undefined;
 const urls = new Set<string>();
 const client = new DiagnosticConnection(changed);
@@ -163,6 +165,9 @@ function changed(): void {
   if (selectedId && !state?.reports.some((item) => item.id === selectedId)) resetSelection();
   if (!state?.signedIn || !selected()?.canSend) elements.consent.checked = false;
   if (!selectedId && state?.reports[0] && client.available) selectReport(state.reports[0].id);
+  // The selector emits no change for the entry already selected: a content read which
+  // the worker never answered is repeated once it answers again.
+  else if (selectedId && contentUnanswered && client.available) selectReport(selectedId);
   render();
   schedulePoll();
 }
@@ -176,6 +181,7 @@ function resetSelection(): void {
   selectedId = null;
   content = null;
   contentFailure = false;
+  contentUnanswered = false;
   elements.consent.checked = false;
   element<HTMLDetailsElement>("jsonDetails").open = false;
 }
@@ -200,6 +206,7 @@ function selectReport(id: string): void {
     } catch {
       content = null;
       contentFailure = true;
+      contentUnanswered = !response;
     }
     render();
   });
@@ -208,6 +215,9 @@ function selectReport(id: string): void {
 async function command(request: DiagnosticRequest): Promise<void> {
   if (busy || !client.available) return;
   busy = true;
+  // A poll already armed would send its own request during this command and replace
+  // the refusal this command may have to display.
+  clearTimeout(poll);
   localFailure = null;
   render();
   try {
@@ -261,17 +271,22 @@ function render(): void {
   const state = client.state;
   const unavailable = !client.available;
   const historyCount = (state?.historyCount ?? 0) + (state?.connectionHistoryCount ?? 0);
+  // A worker which answered "unavailable" refused a command: it is not a dead worker,
+  // and reloading the extension would not help.
+  const workerLost = client.error === "unavailable" && unavailable;
   const error =
     localFailure ??
     (languageCatalogFailed
       ? "diagnosticsFailure"
       : client.error
-        ? diagnosticErrorKey(client.error)
+        ? client.error === "unavailable" && !workerLost
+          ? "diagnosticsFailure"
+          : diagnosticErrorKey(client.error)
         : null);
   const banner = element("pageError");
   banner.hidden = error === null;
   banner.textContent = error ? message(error) : "";
-  elements.reload.hidden = client.error !== "unavailable";
+  elements.reload.hidden = !workerLost;
   elements.auto.checked = state?.signedIn === true && state.autoReporting;
   elements.auto.disabled = unavailable || busy || !state?.signedIn;
   elements.run.disabled = unavailable || busy || state?.preparing === true;

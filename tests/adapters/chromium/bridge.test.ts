@@ -40,7 +40,10 @@ describe("Chromium platform boundary", () => {
       value: "disable_non_proxied_udp",
       levelOfControl: "controlled_by_other_extensions",
     });
-    vi.stubGlobal("chrome", { privacy: { network: { webRTCIPHandlingPolicy: { get } } } });
+    vi.stubGlobal("chrome", {
+      extension: { isAllowedIncognitoAccess: async () => false },
+      privacy: { network: { webRTCIPHandlingPolicy: { get } } },
+    });
     expect(await inspectWebRtc()).toBe(false);
     get.mockResolvedValue({
       value: "disable_non_proxied_udp",

@@ -28,10 +28,17 @@ export async function configureTrustedStorage(): Promise<void> {
 }
 
 export async function inspectWebRtc(): Promise<boolean> {
-  const setting = await nativeApi().privacy.network.webRTCIPHandlingPolicy.get({});
-  return (
-    setting.levelOfControl === "controlled_by_this_extension" &&
-    setting.value === "disable_non_proxied_udp"
+  const api = nativeApi();
+  // A private window may hold its own override: like the safety inspection, the claim
+  // covers every context this extension can reach.
+  const contexts = (await api.extension.isAllowedIncognitoAccess()) ? [false, true] : [false];
+  const settings = await Promise.all(
+    contexts.map((incognito) => api.privacy.network.webRTCIPHandlingPolicy.get({ incognito })),
+  );
+  return settings.every(
+    (setting) =>
+      setting.levelOfControl === "controlled_by_this_extension" &&
+      setting.value === "disable_non_proxied_udp",
   );
 }
 

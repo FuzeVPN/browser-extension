@@ -549,6 +549,13 @@ export class FakeSafety implements NetworkSafetyService {
 
 export class FakeSecurityStorage implements SecurityStorage {
   state: SecurityState | null = null;
+  temporaryGuard = false;
+  async readTemporaryGuard(): Promise<boolean> {
+    return this.temporaryGuard;
+  }
+  async writeTemporaryGuard(armed: boolean): Promise<void> {
+    this.temporaryGuard = armed;
+  }
   async read(
     legacyAutoConnect: boolean,
     selectedLocationId: string | null,
