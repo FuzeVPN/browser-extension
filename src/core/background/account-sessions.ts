@@ -24,6 +24,8 @@ const MAX_RETRY_DELAY_MS = 60 * 60_000;
 /** A token this instance just asked for is not renewed again, whatever the clock says. */
 const RECENT_ROTATION_MS = 30_000;
 const REFUSED_RETENTION_MS = 24 * 60 * 60_000;
+/** A server which cannot perform a conversion for this long will not recover it. */
+const UNCONVERTIBLE_AFTER_MS = 24 * 60 * 60_000;
 const MAX_SESSIONS = 4;
 
 /** A rotation is stored before it is sent, and sent again unchanged until it is answered. */
@@ -42,6 +44,13 @@ interface SessionRecord {
   classicUntil: number | null;
   /** No rotation is sent before this time, which a later worker respects too. */
   retryAt: number | null;
+  /**
+   * When the server first answered that it cannot perform the pending conversion, while
+   * an earlier attempt may have been applied. One such answer may come from a single
+   * instance during a deployment: it counts once this worker receives the same answer,
+   * with no other in between, a day later.
+   */
+  unknownSince: number | null;
   /** The server refused this session: only a new sign-in restores the account. */
   refused: boolean;
   touchedAt: number;
@@ -62,8 +71,8 @@ interface RuntimeState {
   detached: boolean;
   /** The server may have applied the pending rotation: no answer says it did not. */
   doubt: boolean;
-  /** The server last answered that it cannot perform the pending conversion at all. */
-  unknown: boolean;
+  /** When this worker last received the answer which `unknownSince` dates. */
+  unknownAt: number | null;
 }
 
 interface AccountSessionsOptions {
@@ -198,32 +207,35 @@ export class AccountSessions {
       if (session.pending) {
         // The refusal may be the rotation in doubt, already applied by the server.
         if (!this.deferred(runtime)) session = await this.rotate(record);
-        // A conversion which the server certainly did not apply, or which it cannot
-        // perform at all, explains nothing: the refusal of the sign-in token stands.
-        // Otherwise nothing can be said yet.
+        // A conversion which the server certainly did not apply explains nothing, and
+        // one which it has been unable to perform for a day will not be recovered: the
+        // refusal of the sign-in token stands. Otherwise nothing can be said yet.
         if (
           session.pending &&
-          (session.pending.route !== "upgrade" || (runtime.doubt && !runtime.unknown))
+          (session.pending.route !== "upgrade" ||
+            (runtime.doubt && !this.unconvertible(record, runtime)))
         )
           throw this.unavailable(runtime);
       }
       const current = session.credentials?.accessToken ?? handle;
       if (current !== rejected) {
-        // Tokens recovered with an old request may be expiring: they are renewed first.
-        if (!session.credentials || this.recent(runtime) || !this.expiresSoon(record))
-          return current;
-        if (!this.deferred(runtime)) session = await this.rotate(record, "refresh");
-        const credentials = session.credentials;
-        if (!credentials) return null;
-        if (
-          (session.pending || this.deferred(runtime)) &&
-          Date.parse(credentials.expiresAt) <= this.now()
-        )
-          throw this.unavailable(runtime);
-        return credentials.accessToken;
+        // The request is sent once more, and a refusal of that is final. A token which
+        // this instance was issued a moment ago is good for it. Any other was recovered
+        // with an earlier request and may be as old as that request: it is renewed
+        // first, and nothing is sent again while it cannot be.
+        if (!session.credentials || this.recent(runtime)) return current;
+        if (this.deferred(runtime)) throw this.unavailable(runtime);
+        session = await this.rotate(record, "refresh");
+        if (session.pending || this.deferred(runtime)) throw this.unavailable(runtime);
+        return session.credentials?.accessToken ?? null;
       }
       // The sign-in token of a classic session: nothing can replace it.
-      if (!session.credentials) return null;
+      if (!session.credentials) {
+        // Whatever session an unanswered conversion left on the server ends with it.
+        if (session.pending && runtime.doubt)
+          void this.options.api.logout(handle).catch(() => undefined);
+        return null;
+      }
       // Expired for the server, or revoked: one renewal tells which, and its own
       // refusal is the one which ends the session.
       if (this.deferred(runtime)) throw this.unavailable(runtime);
@@ -295,15 +307,17 @@ export class AccountSessions {
       const record = this.records.get(handle);
       if (!record) return this.options.api.logout(handle);
       const runtime = this.state(handle);
-      // Only the refresh token of a conversion in doubt ends the session it created.
+      // A conversion in doubt is settled first when it can be: its refresh token ends
+      // the session at any generation, the sign-in token only the one just converted.
       if (record.pending?.route === "upgrade" && runtime.doubt && !this.deferred(runtime))
         await this.rotate(record).catch(() => undefined);
       const token = record.credentials?.refreshToken ?? handle;
       try {
         await this.options.api.logout(token);
       } catch (error) {
-        // Nothing of a session the user left stays in storage. This worker may retry.
-        runtime.detached = true;
+        // Nothing of a session the user left stays in storage, and this worker may
+        // retry. The session of an account which storage still holds stays with it.
+        runtime.detached = handle !== this.account;
         await this.persist().catch(() => undefined);
         throw error;
       }
@@ -380,6 +394,7 @@ export class AccountSessions {
         pending: null,
         classicUntil: null,
         retryAt: null,
+        unknownSince: null,
         refused: false,
         touchedAt: this.now(),
       };
@@ -399,7 +414,7 @@ export class AccountSessions {
         // Until this instance is told which account storage holds, every session may be it.
         detached: this.account !== undefined && handle !== this.account,
         doubt: false,
-        unknown: false,
+        unknownAt: null,
       };
       this.runtime.set(handle, runtime);
     }
@@ -422,6 +437,15 @@ export class AccountSessions {
   private unavailable(runtime: RuntimeState): SessionRenewalUnavailableError {
     const remaining = Math.ceil(((runtime.retryAt ?? 0) - this.monotonic()) / 1_000);
     return new SessionRenewalUnavailableError(remaining > 0 ? remaining : undefined);
+  }
+
+  /** Both times are those of answers of the server, never the time elapsed since. */
+  private unconvertible(record: SessionRecord, runtime: RuntimeState): boolean {
+    return (
+      record.unknownSince !== null &&
+      runtime.unknownAt !== null &&
+      runtime.unknownAt - record.unknownSince >= UNCONVERTIBLE_AFTER_MS
+    );
   }
 
   private expiresSoon(record: SessionRecord): boolean {
@@ -458,8 +482,8 @@ export class AccountSessions {
       // second request with the same token would end it.
       if (await this.adoptStored(record)) return this.view(record);
       record.pending = { route, token, requestId: this.requestId() };
+      record.unknownSince = runtime.unknownAt = null;
       runtime.doubt = false;
-      runtime.unknown = false;
       replayed = false;
       try {
         // Stored before it is sent: a lost answer is recovered with the same request.
@@ -485,8 +509,8 @@ export class AccountSessions {
     record.pending = null;
     record.classicUntil = null;
     record.retryAt = null;
+    record.unknownSince = runtime.unknownAt = null;
     runtime.doubt = false;
-    runtime.unknown = false;
     runtime.failures = 0;
     runtime.retryAt = null;
     // Tokens recovered with an earlier request may be as old as that request: they
@@ -504,7 +528,6 @@ export class AccountSessions {
     pending: PendingRotation,
     error: unknown,
   ): Promise<void> {
-    runtime.unknown = false;
     if (!(error instanceof ApiError)) {
       // No answer, or an unreadable one: the server may have applied the rotation.
       runtime.doubt = true;
@@ -523,6 +546,7 @@ export class AccountSessions {
       record.pending = null;
       record.classicUntil = null;
       record.retryAt = null;
+      record.unknownSince = runtime.unknownAt = null;
       await this.persist().catch(() => undefined);
       throw unauthorized();
     }
@@ -545,9 +569,14 @@ export class AccountSessions {
       await this.persist().catch(() => undefined);
       return;
     }
-    // The request is kept, but the server which answers cannot convert this session:
-    // its refusal of the sign-in token is not explained by an earlier attempt.
-    runtime.unknown = pending.route === "upgrade" && (error.status === 404 || error.status === 400);
+    // The request is kept. A server which answers that it cannot perform the conversion
+    // may be one instance among others: the answer only counts once it has lasted.
+    if (pending.route === "upgrade" && (error.status === 404 || error.status === 400)) {
+      const now = this.now();
+      // A system clock which moved back starts the day again.
+      if (record.unknownSince === null || record.unknownSince > now) record.unknownSince = now;
+      runtime.unknownAt = now;
+    } else record.unknownSince = runtime.unknownAt = null;
     // A session in transition, a rate limit or a server failure: same request, later.
     // Only these answers are given before the server changes anything.
     const untouched =
@@ -578,6 +607,7 @@ export class AccountSessions {
     record.credentials = other.credentials;
     record.pending = other.pending;
     record.classicUntil = other.classicUntil;
+    record.unknownSince = other.unknownSince;
     this.state(record.handle).doubt = other.pending !== null;
     return true;
   }
@@ -633,6 +663,7 @@ export class AccountSessions {
         pending: record.pending ? { ...record.pending } : null,
         classicUntil: record.classicUntil,
         retryAt: record.retryAt,
+        unknownSince: record.unknownSince,
         refused: record.refused,
         touchedAt: record.touchedAt,
       })),
@@ -852,6 +883,7 @@ function decodeRecord(entry: unknown): SessionRecord | null {
     pending,
     classicUntil: timestamp(entry.classicUntil),
     retryAt: timestamp(entry.retryAt),
+    unknownSince: timestamp(entry.unknownSince),
     refused: entry.refused === true,
     touchedAt: timestamp(entry.touchedAt) ?? 0,
   };

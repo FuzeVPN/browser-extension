@@ -492,21 +492,38 @@ try {
     await new Promise((done) => setTimeout(done, 250));
   }
   assert.deepEqual(rotations[3], rotations[2]);
+  // Tokens recovered while a refused request waits are renewed once more before that
+  // request is sent again: the stored session ends at the generation of the server.
+  const generation = () => [...sessions.values()][0]?.generation;
   const recovered = await waitForRead(
     () => storedSession(page),
-    (current) => current?.credentials.refreshToken.endsWith(".3") && current.pending === null,
+    (current) =>
+      current?.pending === null &&
+      current.credentials.refreshToken.endsWith(`.${generation()}`) &&
+      accepts(current.credentials.accessToken),
     { message: "The recovered tokens were not stored" },
   );
-  assert.equal(accepts(recovered.credentials.accessToken), true);
   assert.equal(sessions.size, 1);
-  assert.equal(rotations.length, 4);
+  assert(generation() === 3 || generation() === 4, "The session was rotated more than once more");
+  assert.equal(rotations.length, generation() + 1);
+  if (rotations.length === 5) {
+    assert.equal(rotations[4].route, "refresh");
+    assert(rotations[4].token.endsWith(".3"), "A retired refresh token was presented again");
+    assert.notEqual(rotations[4].requestId, rotations[3].requestId);
+  }
   assert.notEqual((await snapshot(page)).profile, null);
-  record("A lost renewal answer is recovered by the next worker with the unchanged request");
+  record("A lost renewal answer is recovered by the next worker with the unchanged request", {
+    rotationsAfterRecovery: rotations.length - 4,
+  });
 
+  const leaving = await storedSession(page);
+  assert.equal(leaving.pending, null);
+  assert(leaving.credentials.refreshToken.endsWith(`.${generation()}`));
+  assert(recovered.credentials.refreshToken.endsWith(".3") || generation() === 4);
   await command(page, { type: "logout" });
   await page.locator("#loginView").waitFor({ state: "visible" });
   assert.equal(logouts.length, 1);
-  assert.equal(logouts[0].token, recovered.credentials.refreshToken);
+  assert.equal(logouts[0].token, leaving.credentials.refreshToken);
   assert.equal(logouts[0].body, null);
   assert(
     logouts[0].headers.every((name) => !/context|cookie/i.test(name)),

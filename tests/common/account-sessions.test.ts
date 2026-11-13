@@ -489,11 +489,11 @@ describe("a request refused with a 401", () => {
     await expect(f.sessions.recover(HANDLE, first)).rejects.toBeInstanceOf(
       SessionRenewalUnavailableError,
     );
+    expect(f.record()).toMatchObject({ refused: false });
+    // The request stored by the first attempt is sent again once the delay has passed.
     f.clock.now += 2_000;
-    f.storage.failWrite = true;
-    f.server.faults.length = 0;
-    // The pending request is still stored from the first attempt, and is sent again.
     expect(f.server.accepts((await f.sessions.recover(HANDLE, first)) ?? "")).toBe(true);
+    expect(f.server.rotations[2]).toEqual(f.server.rotations[1]);
   });
 });
 
@@ -686,6 +686,7 @@ describe("the stored account sessions", () => {
       "refused",
       "retryAt",
       "touchedAt",
+      "unknownSince",
     ]);
   });
 });
@@ -918,9 +919,11 @@ describe("a request which an earlier attempt may have applied", () => {
     f.clock.now += 2_000;
     expect(await f.sessions.credential(HANDLE)).toBe(HANDLE);
     expect(f.record()?.pending).toMatchObject({ route: "upgrade" });
-    // That server cannot convert the session: its refusal of the sign-in token stands,
-    // instead of leaving the account in a state which nothing would ever settle.
-    expect(await f.sessions.recover(HANDLE, HANDLE)).toBeNull();
+    // One such answer may come from a single instance during a deployment: the
+    // refusal of the sign-in token cannot be judged yet.
+    await expect(f.sessions.recover(HANDLE, HANDLE)).rejects.toBeInstanceOf(
+      SessionRenewalUnavailableError,
+    );
 
     f.server.supported = true;
     f.clock.now += 5_000;
@@ -1178,14 +1181,16 @@ describe("sessions recovered late, or of an account which storage does not hold"
     expect(f.server.rotations.at(-1)).toMatchObject({ route: "refresh" });
   });
 
-  it("returns recovered tokens which are still good without renewing them", async () => {
+  it("renews recovered tokens before they are sent again, however recent they look", async () => {
     const f = setup();
     f.server.faults.push("lost");
     await f.sessions.credential(HANDLE);
     f.clock.now += 2_000;
+    // Tokens recovered with an earlier request may be as old as that request, and the
+    // refusal of what is sent again would be final.
     const access = await f.sessions.recover(HANDLE, HANDLE);
     expect(f.server.accepts(access ?? "")).toBe(true);
-    expect(f.server.rotations.map((call) => call.route)).toEqual(["upgrade", "upgrade"]);
+    expect(f.server.rotations.map((call) => call.route)).toEqual(["upgrade", "upgrade", "refresh"]);
   });
 
   it("does not convert a session whose account storage does not hold", async () => {
@@ -1231,5 +1236,210 @@ describe("sessions recovered late, or of an account which storage does not hold"
     f.sessions.follow(HANDLE);
     await settled();
     expect(f.stored().sessions.map((entry) => entry.handle)).toEqual([HANDLE]);
+  });
+});
+
+describe("a conversion which the server says it cannot perform, after a lost answer", () => {
+  /** The conversion is applied, its answer is lost, and the next answer is a 404. */
+  async function unanswered() {
+    const f = setup();
+    f.server.faults.push("lost");
+    await f.sessions.credential(HANDLE);
+    f.server.supported = false;
+    f.clock.now += 2_000;
+    await f.sessions.credential(HANDLE);
+    return f;
+  }
+
+  it("lets the refusal of the sign-in token stand once that has lasted a day", async () => {
+    const f = await unanswered();
+    f.clock.now += DAY - 1;
+    const next = f.worker();
+    await expect(next.recover(HANDLE, HANDLE)).rejects.toBeInstanceOf(
+      SessionRenewalUnavailableError,
+    );
+    f.clock.now += HOUR;
+    expect(await next.recover(HANDLE, HANDLE)).toBeNull();
+    // The session which the unanswered conversion left on the server is ended too.
+    await vi.waitFor(() =>
+      expect(f.server.calls.at(-1)).toEqual({ route: "logout", token: HANDLE }),
+    );
+    expect(f.server.sessionCount).toBe(0);
+  });
+
+  it("needs the same answer again a day later, not the mere passing of a day", async () => {
+    const f = await unanswered();
+    // The deployment ends, a day passes without the extension, and the first
+    // repetition of the next worker gets no answer.
+    f.server.supported = true;
+    f.clock.now += 25 * HOUR;
+    const next = f.worker();
+    f.server.faults.push(new NetworkError("timeout"));
+    await expect(next.recover(HANDLE, HANDLE)).rejects.toBeInstanceOf(
+      SessionRenewalUnavailableError,
+    );
+    expect(f.server.calls.filter((call) => call.route === "logout")).toEqual([]);
+    expect(f.server.sessionCount).toBe(1);
+    // The repetition which follows recovers the session.
+    f.clock.now += 2_000;
+    expect(f.server.accepts((await next.recover(HANDLE, HANDLE)) ?? "")).toBe(true);
+  });
+
+  it("does not count a day which only passed for the worker which got the answer", async () => {
+    const f = await unanswered();
+    // The same worker is still there a day later, and its repetition gets no answer.
+    f.server.supported = true;
+    f.clock.now += 25 * HOUR;
+    f.server.faults.push(new NetworkError("timeout"));
+    await expect(f.sessions.recover(HANDLE, HANDLE)).rejects.toBeInstanceOf(
+      SessionRenewalUnavailableError,
+    );
+    expect(f.server.sessionCount).toBe(1);
+  });
+
+  it("counts the day in the same way for a request refused as malformed", async () => {
+    const f = setup();
+    f.server.faults.push("lost", new ApiError("invalid_json", 400));
+    await f.sessions.credential(HANDLE);
+    f.clock.now += 2_000;
+    await f.sessions.credential(HANDLE);
+    expect(f.record()).toMatchObject({ pending: { route: "upgrade" } });
+    f.clock.now += DAY;
+    f.server.faults.push(new ApiError("invalid_json", 400));
+    expect(await f.sessions.recover(HANDLE, HANDLE)).toBeNull();
+  });
+
+  it("starts the day again after an answer of another kind", async () => {
+    const f = await unanswered();
+    f.clock.now += 12 * HOUR;
+    f.server.faults.push(new ApiError("server_error", 502));
+    await f.sessions.credential(HANDLE);
+    f.clock.now += 13 * HOUR;
+    await expect(f.sessions.recover(HANDLE, HANDLE)).rejects.toBeInstanceOf(
+      SessionRenewalUnavailableError,
+    );
+    expect(f.server.calls.filter((call) => call.route === "logout")).toEqual([]);
+  });
+
+  it("is still recovered when the server knows the conversion again within the day", async () => {
+    const f = await unanswered();
+    f.clock.now += 20 * HOUR;
+    f.server.supported = true;
+    const access = await f.sessions.recover(HANDLE, HANDLE);
+    expect(f.server.accepts(access ?? "")).toBe(true);
+    expect(f.server.sessionCount).toBe(1);
+  });
+
+  it("does not count a day for a conversion which no answer left in doubt", async () => {
+    const f = setup();
+    f.server.supported = false;
+    await f.sessions.credential(HANDLE);
+    expect(f.record()).toMatchObject({ pending: null, unknownSince: null });
+  });
+});
+
+describe("a renewal made while a refused request is recovered", () => {
+  it("does not hand back a token which its lost answer may have retired", async () => {
+    const f = setup();
+    f.server.faults.push("lost");
+    await f.sessions.credential(HANDLE);
+    // The conversion is recovered when its access token is about to expire, and the
+    // answer to the renewal which follows is lost in turn.
+    f.clock.now += 56 * MINUTE;
+    const refresh = f.server.refreshSession.bind(f.server);
+    f.server.refreshSession = (token, requestId) => {
+      f.server.faults.push("lost");
+      f.server.refreshSession = refresh;
+      return refresh(token, requestId);
+    };
+    await expect(f.sessions.recover(HANDLE, HANDLE)).rejects.toBeInstanceOf(
+      SessionRenewalUnavailableError,
+    );
+    const retired = f.record()?.credentials?.accessToken;
+    expect(retired).toMatch(/^access-/);
+    expect(f.server.accepts(retired ?? "")).toBe(false);
+
+    f.clock.now += 5_000;
+    expect(f.server.accepts(await f.sessions.credential(HANDLE))).toBe(true);
+    expect(f.server.sessionCount).toBe(1);
+  });
+
+  it("sends nothing again while the recovered tokens cannot be renewed", async () => {
+    const f = setup();
+    f.server.faults.push("lost");
+    await f.sessions.credential(HANDLE);
+    f.clock.now += 56 * MINUTE;
+    const refresh = f.server.refreshSession.bind(f.server);
+    f.server.refreshSession = (token, requestId) => {
+      f.server.faults.push(new ApiError("rate_limited", 429, 30));
+      f.server.refreshSession = refresh;
+      return refresh(token, requestId);
+    };
+    await expect(f.sessions.recover(HANDLE, HANDLE)).rejects.toMatchObject({
+      retryAfterSeconds: 30,
+    });
+    f.clock.now += 30_000;
+    expect(f.server.accepts(await f.sessions.credential(HANDLE))).toBe(true);
+  });
+});
+
+describe("a logout which the server could not confirm", () => {
+  it("leaves the session stored while storage still holds its account", async () => {
+    const f = setup();
+    f.sessions.follow(HANDLE);
+    await f.sessions.credential(HANDLE);
+    f.server.logoutError = new NetworkError("network");
+    await expect(f.sessions.logout(HANDLE)).rejects.toBeInstanceOf(NetworkError);
+    // The account could not be cleared either: the next worker restores it whole.
+    expect(f.stored().sessions.map((entry) => entry.handle)).toEqual([HANDLE]);
+    const next = f.worker();
+    await next.initialize();
+    expect(next.expiryOf(HANDLE)).not.toBeNull();
+  });
+
+  it("removes the session from storage once storage no longer holds its account", async () => {
+    const f = setup();
+    f.sessions.follow(HANDLE);
+    await f.sessions.credential(HANDLE);
+    f.sessions.follow(null);
+    f.server.logoutError = new NetworkError("network");
+    await expect(f.sessions.logout(HANDLE)).rejects.toBeInstanceOf(NetworkError);
+    expect(f.stored().sessions).toEqual([]);
+  });
+});
+
+describe("a fetch whose renewed token is refused as well", () => {
+  function fetching(refusals: number) {
+    const f = setup();
+    let remaining = refusals;
+    const base = vi.fn<typeof fetch>(async () => {
+      await Promise.resolve();
+      return new Response("{}", { status: remaining-- > 0 ? 401 : 201 });
+    });
+    return { ...f, base, fetch: f.sessions.fetcher(base) };
+  }
+  const request = { method: "POST", headers: { Authorization: `Bearer ${HANDLE}` }, body: "{}" };
+
+  it("sends the request once more, and no more", async () => {
+    const f = fetching(9);
+    await f.sessions.credential(HANDLE);
+    f.clock.now += 10 * MINUTE;
+    const response = await f.fetch("https://api.fuzevpn.com/v1/diagnostics", request);
+    expect(response.status).toBe(401);
+    expect(f.base).toHaveBeenCalledTimes(2);
+    expect(f.server.rotations).toHaveLength(2);
+  });
+
+  it("succeeds with the token renewed after one refusal", async () => {
+    const f = fetching(1);
+    await f.sessions.credential(HANDLE);
+    f.clock.now += 10 * MINUTE;
+    const response = await f.fetch("https://api.fuzevpn.com/v1/diagnostics", request);
+    expect(response.status).toBe(201);
+    expect(f.base).toHaveBeenCalledTimes(2);
+    const presented = f.base.mock.calls.map(([, init]) =>
+      new Headers(init?.headers).get("Authorization"),
+    );
+    expect(new Set(presented).size).toBe(2);
   });
 });

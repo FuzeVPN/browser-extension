@@ -17,6 +17,8 @@ export const START = Date.parse("2026-11-12T10:00:00Z");
 interface ServerSession {
   id: string;
   access: string;
+  /** The access token which the last rotation replaced. */
+  previousAccess: string | null;
   accessExpiresAt: number;
   /** 0 while the session is classic; the number of rotations afterwards. */
   generation: number;
@@ -57,6 +59,7 @@ export class FakeRenewalServer implements SessionRenewalService {
     this.sessions.set(id, {
       id,
       access: token,
+      previousAccess: null,
       accessExpiresAt: this.now() + lifetime,
       generation: 0,
       upgradeToken: null,
@@ -104,7 +107,8 @@ export class FakeRenewalServer implements SessionRenewalService {
       return;
     }
     for (const session of this.sessions.values())
-      if (session.access === token) this.sessions.delete(session.id);
+      if (session.access === token || session.previousAccess === token)
+        this.sessions.delete(session.id);
   }
 
   private async rotate(
@@ -174,6 +178,7 @@ export class FakeRenewalServer implements SessionRenewalService {
 
   private apply(session: ServerSession, access: string, requestId: string): RenewableSession {
     session.generation += 1;
+    session.previousAccess = session.access;
     session.access = access;
     session.accessExpiresAt = this.now() + HOUR;
     session.refreshExpiresAt = this.now() + 365 * DAY;

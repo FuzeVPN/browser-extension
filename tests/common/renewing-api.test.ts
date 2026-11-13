@@ -124,12 +124,32 @@ describe("the API with a renewable account session", () => {
     const f = setup();
     await f.api.getProfile(HANDLE);
     f.clock.now += 10 * MINUTE;
+    let calls = 0;
     f.fake.getDevices = async () => {
+      calls += 1;
       throw new ApiError("unauthorized", 401);
     };
     await expect(f.api.getDevices(HANDLE)).rejects.toMatchObject({ status: 401 });
-    // One renewal and one repetition, no more.
+    // One renewal and one repetition, as the session contract allows.
     expect(f.server.rotations).toHaveLength(2);
+    expect(calls).toBe(2);
+  });
+
+  it("fails like the network while a refusal cannot be explained yet", async () => {
+    const f = setup();
+    // The conversion is applied and its answer is lost: the sign-in token is refused.
+    f.server.faults.push("lost");
+    await expect(f.api.getProfile(HANDLE)).rejects.toEqual(new NetworkError("network"));
+    const failure = await f.api
+      .createProxySession(HANDLE, "frankfurt-01", PROOF)
+      .catch((error: unknown) => error);
+    expect(failure).toMatchObject({ code: "proxy_unavailable", status: 409 });
+    expect(isDefinitiveProxyCreationRejection(failure)).toBe(true);
+    expect(f.fake.proofs).toEqual([]);
+
+    f.clock.now += 2_000;
+    await expect(f.api.getProfile(HANDLE)).resolves.toEqual(f.fake.profile);
+    expect(f.server.sessionCount).toBe(1);
   });
 
   it("reports the refusal of a session the server ended", async () => {

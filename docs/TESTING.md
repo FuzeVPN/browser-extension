@@ -98,8 +98,9 @@ through each location and displays it as soon as that location is connected agai
 while the measurement of the new route runs on its unchanged schedule. The popup shows
 that address as it shows a measured one, marked busy for assistive technologies until
 the measurement ends. It is never stored, recorded or exported as a measurement: the
-result replaces it, and a final failure forgets it durably, so neither a credential
-renewal nor a later worker shows it again before a new measurement succeeds. It is
+result replaces it, and a final failure forgets it: a credential renewal does not show
+it again, nor does a later worker once the removal is written to storage, which is
+attempted once. It is
 kept per location and not per account, for the VPN route only, for at most thirty days
 and sixty-four locations, and only a verified public IPv4 is stored or recalled. A
 logout does not remove it, like the other location preferences. The first connection
@@ -174,8 +175,8 @@ recovered by the same or the next worker, every answer of the contract (`400`, `
 a change of the system time, concurrent requests, logout with the refresh token, and
 the removal of stored tokens once their account leaves storage. The controller suites
 check that an account stays signed in beyond its sign-in expiry, that a renewal failure
-is a network error which leaves no proxy creation in doubt, and that only a refusal by
-the server signs the account out.
+is a network error which leaves no proxy creation in doubt and never signs the account
+out: only a refusal by the server or the end of the right to renew does.
 
 The native `session-renewal` suite runs the built Chrome and Edge extension against a
 synthetic API with the same rules: conversion at sign-in, the access token on every

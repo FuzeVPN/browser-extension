@@ -155,6 +155,25 @@ describe("an account whose session is renewable", () => {
     expect(next.controller.getSnapshot()).toMatchObject({ status: "logged_out", profile: null });
   });
 
+  it("is signed out at the end of its right to renew", async () => {
+    const f = setup();
+    const first = f.worker();
+    await first.controller.connect("frankfurt-01");
+    await first.controller.disconnect();
+
+    // A year without any use: nothing renewed the session meanwhile.
+    f.clock.now += 365 * DAY + 1;
+    const next = f.worker();
+    await next.controller.initialize();
+    expect(next.controller.getSnapshot()).toMatchObject({ status: "logged_out", profile: null });
+    expect(f.account.persisted.auth).toBeNull();
+    // The server would have refused the renewal as well.
+    expect(f.server.sessionCount).toBe(1);
+    await expect(
+      f.server.refreshSession("fr1.00000000-0000-4000-8000-000000000001.1", "A".repeat(43)),
+    ).rejects.toMatchObject({ status: 401 });
+  });
+
   it("is signed out once the server refuses its session", async () => {
     const f = setup();
     const first = f.worker();

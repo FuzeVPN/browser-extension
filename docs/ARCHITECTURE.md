@@ -82,15 +82,24 @@ remplacement.
 Chaque conversion ou renouvellement est enregistré avant son envoi, avec sa route, son
 jeton et son identifiant de demande, puis renvoyé à l'identique tant que le serveur n'a
 pas répondu, y compris par le worker suivant. Les nouveaux jetons et le retrait de la
-demande sont écrits ensemble. Seul un refus du serveur met fin au compte : une panne du
-renouvellement le conserve et s'affiche comme une erreur réseau, sans laisser de création
-de session proxy dans le doute. Un serveur qui ne connaît pas la conversion répond
-`404` : la session classique continue et la conversion est redemandée un jour plus tard.
+demande sont écrits ensemble. Une panne du renouvellement conserve le compte et
+s'affiche comme une erreur réseau, sans laisser de création de session proxy dans le
+doute. Le compte ne prend fin que sur un refus du serveur, ou à l'échéance du droit de
+renouveler. Un serveur qui ne connaît pas la conversion répond `404` : la session
+classique continue et la conversion est redemandée un jour plus tard.
+
+Une conversion dont la réponse s'est perdue reste en attente, même si une répétition
+reçoit `404` ou `400` : pendant un déploiement, cette réponse peut venir d'une seule
+instance du serveur. Si le serveur donne encore cette réponse un jour plus tard, sans en
+avoir donné d'autre entre-temps, un refus du jeton de connexion met alors fin au compte,
+et l'extension demande au serveur de terminer la session que la conversion a pu y
+laisser.
 
 La clé `fuzevpnAccountSessions` contient ces jetons et la demande en attente. Elle ne
 conserve que la session du compte présent dans `fuzevpnState` : celle d'un compte qui
-quitte le stockage en est retirée aussitôt, et une session restée sans compte est
-terminée auprès du serveur au démarrage suivant. Ces valeurs n'apparaissent ni dans
+quitte le stockage en est retirée aussitôt. Si une session y reste sans son compte, le
+worker suivant demande une fois au serveur de la terminer, puis l'oublie quelle que soit
+la réponse. Ces valeurs n'apparaissent ni dans
 l'état publié, ni dans les journaux, ni dans les rapports de diagnostic. Une version
 antérieure de l'extension ne sait pas utiliser une session convertie : elle demande une
 nouvelle connexion.
