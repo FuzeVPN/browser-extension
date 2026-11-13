@@ -1,6 +1,6 @@
 # FuzeVPN browser extensions
 
-Shared sources for desktop **Chrome, Microsoft Edge and Firefox**, licensed under **MPL-2.0**. Current extension version: **1.0.0**.
+Shared sources for desktop **Chrome, Microsoft Edge and Firefox**, licensed under **MPL-2.0**. Current extension version: **1.0.1**.
 
 Repository: [FuzeVPN/browser-extension](https://github.com/FuzeVPN/browser-extension).
 

@@ -1,6 +1,6 @@
 # Architecture de la base commune
 
-La version 1.0.0 possède un seul contrôleur (`src/core/background/state-machine.ts`),
+La version 1.0.1 possède un seul contrôleur (`src/core/background/state-machine.ts`),
 un seul modèle d'état, une interface popup et assistance partagée, ainsi que soixante-dix
 catalogues dans `assets/_locales`. Le projet contient toutes les sources et ressources
 nécessaires aux trois constructions.
