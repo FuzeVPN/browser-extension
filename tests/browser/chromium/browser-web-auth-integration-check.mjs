@@ -263,7 +263,11 @@ async function api(route) {
         created_at: new Date().toISOString(),
       };
     } else if (path === "/v1/auth/logout" || method === "DELETE") status = 204;
-    else {
+    else if (path === "/v1/auth/session/upgrade" && method === "POST") {
+      // This synthetic API has no renewable sessions: the classic session goes on.
+      status = 404;
+      body = { error: "not_found" };
+    } else {
       report.unexpectedRequests.push({ origin: "https://api.fuzevpn.com", path, method });
       status = 404;
       body = { error: "not_found" };

@@ -68,6 +68,35 @@ l'efface pas. Une adresse de plus de trente jours est retirée de la clé dès l
 suivante par le worker. La notice de confidentialité embarquée décrit cette conservation
 dans les soixante-dix langues.
 
+## Sessions de compte renouvelables
+
+Le serveur convertit une session classique en session renouvelable : un jeton d'accès
+d'une heure et un jeton de renouvellement. `AccountSessions`
+(`src/core/background/account-sessions.ts`) demande cette conversion au premier appel
+authentifié, renouvelle le jeton d'accès cinq minutes avant son expiration ou après un
+refus `401`, et déconnecte avec le jeton de renouvellement. Le contrôleur garde le jeton
+de connexion comme identité du compte ; `RenewingApi` présente à sa place le jeton
+d'accès courant sur chaque route de compte, et l'envoi des diagnostics passe par le même
+remplacement.
+
+Chaque conversion ou renouvellement est enregistré avant son envoi, avec sa route, son
+jeton et son identifiant de demande, puis renvoyé à l'identique tant que le serveur n'a
+pas répondu, y compris par le worker suivant. Les nouveaux jetons et le retrait de la
+demande sont écrits ensemble. Seul un refus du serveur met fin au compte : une panne du
+renouvellement le conserve et s'affiche comme une erreur réseau, sans laisser de création
+de session proxy dans le doute. Un serveur qui ne connaît pas la conversion répond
+`404` : la session classique continue et la conversion est redemandée un jour plus tard.
+
+La clé `fuzevpnAccountSessions` contient ces jetons et la demande en attente. Elle ne
+conserve que la session du compte présent dans `fuzevpnState` : celle d'un compte qui
+quitte le stockage en est retirée aussitôt, et une session restée sans compte est
+terminée auprès du serveur au démarrage suivant. Ces valeurs n'apparaissent ni dans
+l'état publié, ni dans les journaux, ni dans les rapports de diagnostic. Une version
+antérieure de l'extension ne sait pas utiliser une session convertie : elle demande une
+nouvelle connexion.
+
+## Contrats du serveur
+
 Le serveur reçoit les contrats existants. Les diagnostics gardent notamment les champs
 historiques `platform: "chrome_extension"` et `chrome`, même sur Firefox. Firefox envoie
 `browser_name: "unknown"` et sa version numérique réelle ; aucun nouveau format serveur

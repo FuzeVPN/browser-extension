@@ -63,6 +63,8 @@ interface ServiceDependencies extends CollectorDependencies {
   uuid?(): string;
   environment?(): Promise<DiagnosticEnvironment>;
   canSendDiagnostics?(): Promise<boolean>;
+  /** Sends reports; the worker supplies one which presents the current account token. */
+  fetch?: typeof fetch;
   connectionHistory?: {
     initialize(): Promise<void>;
     clear(): void;
@@ -105,6 +107,7 @@ export class DiagnosticService {
         (await extensionApi.storage.local.get(DIAGNOSTIC_DELIVERY_KEY))[DIAGNOSTIC_DELIVERY_KEY],
       write: async (value) => extensionApi.storage.local.set({ [DIAGNOSTIC_DELIVERY_KEY]: value }),
       getAccount: () => dependencies.getAccount(),
+      ...(dependencies.fetch ? { fetch: dependencies.fetch } : {}),
       canSendDiagnostics: () => dependencies.canSendDiagnostics?.() ?? canSendDiagnostics(),
       now: () => dependencies.now(),
       onChanged: () => this.changed(),

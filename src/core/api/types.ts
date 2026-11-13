@@ -5,6 +5,14 @@ export interface AuthSession {
   expiresAt: string;
 }
 
+/** A renewable account session: a short-lived access token and the right to renew it. */
+export interface RenewableSession {
+  accessToken: string;
+  expiresAt: string;
+  refreshToken: string;
+  refreshExpiresAt: string;
+}
+
 export interface ExtensionCodeExchange {
   clientId: string;
   code: string;
@@ -117,6 +125,29 @@ export function decodeAuthSession(value: unknown): AuthSession | null {
   const data = object(value);
   if (!data || !nonEmptyString(data.access_token) || !dateString(data.expires_at)) return null;
   return { accessToken: data.access_token, expiresAt: data.expires_at };
+}
+
+/** Opaque to the extension, but each token must fit an Authorization header. */
+function bearerToken(value: unknown): value is string {
+  return string(value) && /^[\x21-\x7e]{1,512}$/.test(value);
+}
+
+export function decodeRenewableSession(value: unknown): RenewableSession | null {
+  const data = object(value);
+  if (
+    !data ||
+    !bearerToken(data.access_token) ||
+    !dateString(data.expires_at) ||
+    !bearerToken(data.refresh_token) ||
+    !dateString(data.refresh_expires_at)
+  )
+    return null;
+  return {
+    accessToken: data.access_token,
+    expiresAt: data.expires_at,
+    refreshToken: data.refresh_token,
+    refreshExpiresAt: data.refresh_expires_at,
+  };
 }
 
 export function decodeProfile(value: unknown): Profile | null {

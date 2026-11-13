@@ -74,6 +74,8 @@ export interface ControllerDependencies {
   onDiagnosticAccountChanged?(): void;
   /** Per-stage network deadline; production uses the API request deadline. */
   remoteCleanupTimeoutMs?: number;
+  /** When a renewable account session ends; null leaves the sign-in expiry in force. */
+  accountSessionExpiry?(auth: AuthSession): number | null;
   /** Undefined preserves a manual selection; null means Auto has no available target. */
   resolveAutomaticLocation?(
     locations: Location[],
@@ -4207,6 +4209,9 @@ export class AppController {
   ): Promise<ProxySession> {
     const token = this.requireToken();
     const userId = this.requireUserId();
+    // Renewed before anything is sent: a failure here leaves no creation in doubt.
+    if (this.dependencies.api.prepareSession)
+      await this.dependencies.api.prepareSession(token, signal);
     const proof = await this.dependencies.identity.createProof(
       userId,
       deviceId,
@@ -4648,8 +4653,13 @@ export class AppController {
 
   private hasValidApiSession(): boolean {
     return Boolean(
-      this.persisted.auth && Date.parse(this.persisted.auth.expiresAt) > this.dependencies.now(),
+      this.persisted.auth && this.apiSessionExpiry(this.persisted.auth) > this.dependencies.now(),
     );
+  }
+
+  /** A renewable session lasts as long as its right to be renewed. */
+  private apiSessionExpiry(auth: AuthSession): number {
+    return this.dependencies.accountSessionExpiry?.(auth) ?? Date.parse(auth.expiresAt);
   }
 
   /** Loaded account context only: no restoration, refresh or storage migration. */
@@ -4673,7 +4683,12 @@ export class AppController {
     return {
       ownerId: profile.userId,
       token: auth.accessToken,
-      expiresAt: Date.parse(auth.expiresAt),
+      // The validity was checked above. Where sessions are renewable no deadline is
+      // reported: it moves with every rotation, and a conversion or a renewal must not
+      // be taken for a change of account.
+      expiresAt: this.dependencies.accountSessionExpiry
+        ? Number.MAX_SAFE_INTEGER
+        : Date.parse(auth.expiresAt),
       generation: this.diagnosticAccountGeneration,
     };
   }
@@ -4728,7 +4743,7 @@ export class AppController {
 
   private requireToken(): string {
     if (!this.persisted.auth) throw new LocalError("unauthorized");
-    if (Date.parse(this.persisted.auth.expiresAt) <= this.dependencies.now())
+    if (this.apiSessionExpiry(this.persisted.auth) <= this.dependencies.now())
       throw new LocalError("api_token_expired");
     return this.persisted.auth.accessToken;
   }

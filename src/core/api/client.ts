@@ -9,6 +9,7 @@ import {
   decodeLocations,
   decodeProfile,
   decodeProxySession,
+  decodeRenewableSession,
   decodeSubscription,
   type AuthSession,
   type BillingSubscription,
@@ -19,6 +20,7 @@ import {
   type Location,
   type Profile,
   type ProxySession,
+  type RenewableSession,
 } from "./types";
 
 // Bound decoded response resources independently of account or device quotas.
@@ -88,9 +90,20 @@ export interface ApiService {
   revokeProxySession(token: string, sessionId: string): Promise<void>;
   resendVerification(token: string, signal?: AbortSignal): Promise<void>;
   logout(token: string): Promise<void>;
+  /**
+   * Makes the account credential usable before a request which must not be left in
+   * doubt. A failure here proves that nothing was sent with this token.
+   */
+  prepareSession?(token: string, signal?: AbortSignal): Promise<void>;
 }
 
-export class ApiClient implements ApiService {
+/** Converts a classic account session and rotates the tokens of a renewable one. */
+export interface SessionRenewalService {
+  upgradeSession(accessToken: string, requestId: string): Promise<RenewableSession>;
+  refreshSession(refreshToken: string, requestId: string): Promise<RenewableSession>;
+}
+
+export class ApiClient implements ApiService, SessionRenewalService {
   private readonly fetchImpl: typeof fetch;
 
   constructor(
@@ -238,11 +251,31 @@ export class ApiClient implements ApiService {
     });
   }
 
+  /** Accepts the access token of a classic session or the refresh token of a renewable one. */
   logout(token: string): Promise<void> {
     return this.requestVoid("/v1/auth/logout", {
       method: "POST",
       token,
       expectedStatus: 204,
+    });
+  }
+
+  upgradeSession(accessToken: string, requestId: string): Promise<RenewableSession> {
+    return this.rotateSession("/v1/auth/session/upgrade", accessToken, requestId);
+  }
+
+  refreshSession(refreshToken: string, requestId: string): Promise<RenewableSession> {
+    return this.rotateSession("/v1/auth/session/refresh", refreshToken, requestId);
+  }
+
+  /** The same request identifier recovers the same tokens after a lost response. */
+  private rotateSession(path: string, token: string, requestId: string): Promise<RenewableSession> {
+    return this.request(path, {
+      method: "POST",
+      token,
+      body: { request_id: requestId },
+      expectedStatus: 200,
+      decoder: decodeRenewableSession,
     });
   }
 

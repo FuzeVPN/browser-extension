@@ -196,6 +196,9 @@ async function intercept(route) {
     (path === "/v1/auth/logout" && method === "POST")
   )
     return reply(route, 204);
+  // This synthetic API has no renewable sessions: the classic session goes on.
+  if (path === "/v1/auth/session/upgrade" && method === "POST")
+    return reply(route, 404, { error: "not_found" });
   evidence.unexpectedApiRequests.push(`${method} ${path}`);
   return route.abort("blockedbyclient");
 }

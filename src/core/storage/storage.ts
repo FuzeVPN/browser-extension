@@ -63,22 +63,36 @@ export interface StorageService {
   clearTransient(): Promise<void>;
 }
 
+export interface AccountStorageObserver {
+  /** Completes before the account is read. */
+  ready?(): Promise<void>;
+  /** The account which storage holds, after each read and each successful write. */
+  stored?(auth: AuthSession | null): void;
+}
+
 export class ExtensionStorageService implements StorageService {
+  constructor(private readonly observer: AccountStorageObserver = {}) {}
+
   configureTrustedContexts(): Promise<void> {
     return configureTrustedStorage();
   }
 
   async readPersisted(): Promise<PersistedState> {
+    if (this.observer.ready) await this.observer.ready();
     const result = await extensionApi.storage.local.get(LOCAL_KEY);
-    return sanitizePersisted(result[LOCAL_KEY]);
+    const state = sanitizePersisted(result[LOCAL_KEY]);
+    this.observer.stored?.(state.auth);
+    return state;
   }
 
   async writePersisted(state: PersistedState): Promise<void> {
     await extensionApi.storage.local.set({ [LOCAL_KEY]: state });
+    this.observer.stored?.(state.auth);
   }
 
   async clearPersisted(): Promise<void> {
     await extensionApi.storage.local.remove(LOCAL_KEY);
+    this.observer.stored?.(null);
   }
 
   async readTransient(): Promise<TransientState> {

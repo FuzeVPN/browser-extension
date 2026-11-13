@@ -14,6 +14,8 @@ import {
 import { EMPTY_SNAPSHOT, type AppSnapshot, type MachineState } from "../shared/state";
 import { PROXY_AUTH_RESTORE_TIMEOUT_MS, SITE_URLS } from "../shared/config";
 import { ExtensionStorageService } from "../storage/storage";
+import { ExtensionAccountSessionStorage } from "../storage/account-session-storage";
+import { AccountSessions, RenewingApi } from "./account-sessions";
 import { ProxyAuthHandler } from "./proxy-auth";
 import { PlatformProxyService } from "./proxy-controller";
 import { ExtensionAlarmService } from "./session-refresh";
@@ -74,6 +76,12 @@ const diagnosticReady = new Promise<void>((resolve) => {
   signalDiagnosticReady = resolve;
 });
 let webAuthService: ExtensionWebAuthService | null = null;
+const apiClient = new ApiClient();
+const accountSessions = new AccountSessions({
+  api: apiClient,
+  storage: new ExtensionAccountSessionStorage(),
+  now: () => Date.now(),
+});
 const controller = new AppController({
   webAuth: {
     authorize(signal, locale) {
@@ -81,8 +89,16 @@ const controller = new AppController({
       return webAuthService.authorize(signal, locale);
     },
   },
-  api: new ApiClient(),
-  storage: new ExtensionStorageService(),
+  api: new RenewingApi(apiClient, accountSessions),
+  storage: new ExtensionStorageService({
+    // A renewable session is known before the account it belongs to is restored.
+    ready: () => accountSessions.initialize(),
+    // No token of an account which storage no longer holds stays stored.
+    stored: (auth) => {
+      accountSessions.follow(auth?.accessToken ?? null);
+    },
+  }),
+  accountSessionExpiry: (auth) => accountSessions.expiryOf(auth.accessToken),
   identity: new IndexedDbDeviceIdentityService(),
   proxy,
   alarms: new ExtensionAlarmService(),
@@ -169,6 +185,7 @@ const diagnostics = new DiagnosticService({
   },
   read: diagnosticReadState,
   getAccount: () => diagnosticController.getDiagnosticAccount?.() ?? null,
+  fetch: accountSessions.fetcher(globalThis.fetch.bind(globalThis)),
   canSendDiagnostics,
   inspectSafety: () => safety.inspect(),
   inspectWebRtc,
@@ -190,6 +207,14 @@ const diagnostics = new DiagnosticService({
 });
 diagnosticObserver.current = diagnostics;
 void diagnostics.initialize().catch(() => undefined);
+// A rotation which a previous worker left unanswered is sent again, unchanged.
+accountSessions.resume();
+
+/** The popup is in the foreground: the access token its account needs next is renewed. */
+function renewAccountSession(): void {
+  const account = diagnosticController.getDiagnosticAccount?.();
+  if (account) accountSessions.touch(account.token);
+}
 
 const actionIconCache = new Map<string, ImageData>();
 
@@ -441,6 +466,7 @@ async function handleMessage(
       ]);
       // A route restored before the memory was read gets its address in this reply.
       network.remind();
+      renewAccountSession();
       break;
     case "refresh_network":
       await Promise.all([controller.initialize(), vpnAddresses.initialize()]);

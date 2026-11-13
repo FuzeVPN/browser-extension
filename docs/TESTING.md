@@ -163,6 +163,30 @@ snapshot, the diagnostics control and the verification delay.
 These tests use the same fakes as the other unit suites. None of them drives a real
 browser: they do not replace the native browser suites.
 
+## Account session renewal
+
+The unit suites drive the session manager against a fake server which applies the
+rotation rules of the API: one conversion per classic session, the same tokens for a
+repeated request, and the end of the session for a different request made with a
+retired refresh token. They cover the request stored before it is sent, lost answers
+recovered by the same or the next worker, every answer of the contract (`400`, `401`,
+`404`, both `409`, `429`, `5xx`, network), delays kept across workers and unaffected by
+a change of the system time, concurrent requests, logout with the refresh token, and
+the removal of stored tokens once their account leaves storage. The controller suites
+check that an account stays signed in beyond its sign-in expiry, that a renewal failure
+is a network error which leaves no proxy creation in doubt, and that only a refusal by
+the server signs the account out.
+
+The native `session-renewal` suite runs the built Chrome and Edge extension against a
+synthetic API with the same rules: conversion at sign-in, the access token on every
+account route, the tokens stored in their own record only, renewal when the popup
+opens, a lost answer recovered after a real worker restart, logout with the refresh
+token, and a refused renewal. It shifts the clocks of the worker instead of waiting an
+hour. The other native suites answer `404` to the conversion and keep exercising classic
+sessions. Firefox shares this code and its native suites run on classic sessions: no
+native Firefox check converts a session. None of these checks contacts the production
+API, so they do not establish that the deployed server applies the contract.
+
 ## Development dependency audit
 
 The project invokes Mozilla's `addons-linter` directly for Firefox validation.

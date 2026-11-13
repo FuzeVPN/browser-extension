@@ -142,6 +142,13 @@ const suites = [
     scope: "Built worker and popup; synthetic API",
   },
   {
+    name: "session-renewal",
+    script: "browser-session-renewal-check.mjs",
+    output: "SESSION_RENEWAL_OUTPUT",
+    report: "report.json",
+    scope: "Built worker and popup; synthetic API with renewable account sessions",
+  },
+  {
     name: "capacity-ui",
     script: "browser-capacity-ui-check.mjs",
     output: "CAPACITY_UI_OUTPUT",
