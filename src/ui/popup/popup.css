@@ -620,19 +620,9 @@ a {
   min-width: 0;
 }
 
-.settings-heading {
-  margin-bottom: 12px;
-}
-
 .settings-heading svg {
   flex-shrink: 0;
   color: var(--signal-deep);
-}
-
-.settings-heading .settings-section-title {
-  margin: 0;
-  color: var(--ink);
-  font-size: 13px;
 }
 
 .dialog-icon {
@@ -735,14 +725,6 @@ a {
   height: 28px;
   margin-bottom: 10px;
   color: #684508;
-}
-
-.legal-links {
-  display: grid;
-}
-
-.legal-links a {
-  padding: 8px 0;
 }
 
 .status-card {
@@ -996,16 +978,21 @@ a {
   position: fixed;
   inset: 12px;
   width: calc(100% - 24px);
+  /* A dialog is narrower than this by default. */
+  max-width: calc(100% - 24px);
   max-height: calc(100% - 24px);
-  padding: 20px;
+  padding: 12px;
   margin: auto;
   color: var(--ink);
+  background: var(--paper);
   overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: var(--line-strong) transparent;
+  /* Rows brought into view by the keyboard stay clear of the sticky heading, even when
+     a long title takes two lines, and their focus ring stays inside the panel. */
+  scroll-padding-top: 100px;
+  scroll-padding-bottom: 8px;
   animation: reveal 140ms ease-out;
-}
-
-.assistance-section .setting-label {
-  margin-top: 16px;
 }
 
 .recovery-panel {
@@ -1034,12 +1021,6 @@ a {
   font-size: 12px;
 }
 
-.language-setting {
-  display: grid;
-  gap: 8px;
-  margin-bottom: 18px;
-}
-
 .language-setting select {
   width: 100%;
   min-width: 0;
@@ -1050,17 +1031,6 @@ a {
   background: var(--paper);
   color: var(--ink);
   font: inherit;
-}
-
-.language-setting p {
-  margin: 0;
-  font-size: 12px;
-}
-
-.security-setting {
-  padding: 14px 0;
-  margin-top: 0;
-  border-bottom: 1px solid var(--line);
 }
 
 .setting-label {
@@ -1083,12 +1053,11 @@ a {
   margin: 0;
   border: 1px solid var(--muted);
   border-radius: 20px;
-  background: var(--muted);
+  background: transparent;
   cursor: pointer;
   transition: background 120ms ease;
 }
 
-.security-setting p,
 .settings-help,
 .security-limits {
   margin: 6px 0 0;
@@ -1119,30 +1088,6 @@ a {
   justify-content: space-between;
   gap: 15px;
   margin-bottom: 22px;
-}
-
-.account-email {
-  padding: 12px;
-  margin-bottom: 14px;
-  border: 1px solid var(--line);
-  border-radius: 6px;
-  background: var(--wash);
-  font-size: 12px;
-  font-weight: 650;
-  overflow-wrap: anywhere;
-}
-
-.full-link {
-  display: grid;
-  min-height: 44px;
-  margin-top: 20px;
-  place-items: center;
-  text-decoration: none;
-}
-
-.full-button {
-  width: 100%;
-  margin-top: 20px;
 }
 
 .danger-button {
@@ -1602,23 +1547,7 @@ div.location-option {
   }
 }
 
-/* Keep settings scannable and controls comfortable across all translations. */
-.settings-section {
-  padding-top: 18px;
-  margin-top: 18px;
-  border-top: 1px solid var(--line);
-}
-.settings-section-title {
-  margin: 0 0 12px;
-  color: var(--muted);
-  font-size: 12px;
-  font-weight: 700;
-  line-height: 1.4;
-}
-.language-setting label {
-  font-size: 13px;
-  font-weight: 700;
-}
+/* Keep dialogs scannable and controls comfortable across all translations. */
 .settings-head,
 .dialog-head {
   position: sticky;
@@ -1642,15 +1571,17 @@ div.location-option {
   width: 16px;
   height: 16px;
   border-radius: 50%;
-  background: var(--surface);
-  box-shadow: 0 1px 3px rgb(0 0 0 / 15%);
-  transition: transform 120ms ease;
+  background: var(--muted);
+  transition:
+    transform 120ms ease,
+    background 120ms ease;
 }
 .setting-label input:checked {
   border-color: var(--ink);
   background: var(--ink);
 }
 .setting-label input:checked::before {
+  background: var(--surface);
   transform: translateX(16px);
 }
 :root[dir="rtl"] .setting-label input:checked::before {
@@ -1660,8 +1591,8 @@ div.location-option {
   cursor: not-allowed;
   opacity: 0.48;
 }
-.security-setting:first-of-type {
-  margin-top: 0;
+.setting-label:has(input:disabled) {
+  cursor: default;
 }
 .security-limits summary {
   padding: 10px 0;
@@ -1670,13 +1601,6 @@ div.location-option {
 }
 .security-limits p {
   margin-top: 10px;
-}
-.account-section .full-button,
-.account-section .full-link {
-  margin-top: 8px;
-}
-.account-email:empty {
-  display: none;
 }
 .error-banner {
   flex-wrap: wrap;
@@ -1814,6 +1738,378 @@ h3,
   .setting-label input::before {
     display: none;
   }
+}
+
+/* Settings: titled groups of rows on the paper background, like the cards of the main view. */
+.settings-panel .settings-head {
+  /* Sticks against the edge of the panel, across its padding. */
+  top: -12px;
+  padding: 12px;
+  margin: -12px -12px 16px;
+  border-bottom-color: var(--line);
+  background: var(--paper);
+}
+.settings-group {
+  margin-top: 20px;
+}
+.settings-head + .settings-group {
+  margin-top: 0;
+}
+.settings-panel .settings-heading {
+  gap: 8px;
+  margin: 0 2px 8px;
+}
+.settings-panel .settings-heading svg {
+  width: 15px;
+  height: 15px;
+}
+.settings-section-title {
+  min-width: 0;
+  margin: 0;
+  color: var(--muted);
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 1.4;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+}
+/* Neither capitals nor letter spacing exist in these scripts: the title keeps the text face. */
+:root[dir="rtl"] .settings-section-title {
+  font-family: inherit;
+  font-size: 12px;
+  letter-spacing: 0;
+}
+.settings-card {
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--surface);
+}
+.settings-card + .settings-card {
+  margin-top: 8px;
+}
+.settings-row {
+  padding: 12px 14px;
+}
+.settings-row + .settings-row {
+  border-top: 1px solid var(--wash);
+}
+.settings-row-action {
+  padding: 0;
+}
+/* The first line of every row starts at the same height. */
+.settings-panel .setting-label {
+  min-height: 32px;
+  padding-block: 4px;
+  margin-block: -4px;
+}
+.settings-panel .settings-help {
+  margin-top: 4px;
+}
+.settings-panel .settings-help + .settings-help {
+  margin-top: 8px;
+}
+.settings-row .error-banner {
+  margin: 10px 0 0;
+}
+.settings-row .privacy-link {
+  min-height: 32px;
+  margin-top: 4px;
+}
+
+/* A row which opens a dialog or a page: the control fills the row, its icon sits at the end. */
+.settings-action {
+  position: relative;
+}
+.settings-action-control {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  min-height: 48px;
+  padding: 10px 14px;
+  padding-inline-end: 42px;
+  border: 0;
+  color: var(--ink);
+  background: transparent;
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1.35;
+  text-align: start;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background 120ms ease;
+}
+.settings-action-control:hover:not(:disabled) {
+  background: var(--wash);
+}
+/* The card clips what leaves it: these rings are drawn inside the row, and follow
+   the corners of the card on its first and last rows. */
+.settings-action-control:focus-visible,
+.settings-panel .security-limits summary:focus-visible {
+  outline-offset: -3px;
+}
+.settings-row:first-child .settings-action-control {
+  border-start-start-radius: 9px;
+  border-start-end-radius: 9px;
+}
+.settings-row:last-child .settings-action-control,
+.settings-panel .security-limits:last-child:not([open]) summary {
+  border-end-start-radius: 9px;
+  border-end-end-radius: 9px;
+}
+.settings-action > svg {
+  position: absolute;
+  top: 50%;
+  inset-inline-end: 14px;
+  width: 14px;
+  height: 14px;
+  margin-top: -7px;
+  color: var(--muted);
+  pointer-events: none;
+}
+.settings-action-control:disabled + svg {
+  opacity: 0.48;
+}
+.external-icon {
+  stroke: currentColor;
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+:root[dir="rtl"] .external-icon {
+  transform: scaleX(-1);
+}
+.settings-danger {
+  color: #9e2525;
+}
+.settings-danger:hover:not(:disabled) {
+  background: #fff8f8;
+}
+:root[data-theme="dark"] .settings-danger {
+  color: #f2a7a7;
+}
+:root[data-theme="dark"] .settings-danger:hover:not(:disabled) {
+  background: #2a1717;
+}
+/* A row with a note under its title is one target: its control reaches over the note,
+   and the row takes the hover tint and the focus ring. */
+.settings-row-noted {
+  position: relative;
+  padding-bottom: 12px;
+  transition: background 120ms ease;
+}
+.settings-row-noted .settings-action {
+  position: static;
+}
+.settings-row-noted .settings-action-control {
+  min-height: 40px;
+  padding-bottom: 4px;
+}
+.settings-row-noted .settings-action-control::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+}
+.settings-row-noted .settings-action-control:hover:not(:disabled) {
+  background: transparent;
+}
+.settings-row-noted:has(.settings-action-control:hover:not(:disabled)) {
+  background: var(--wash);
+}
+.settings-row-noted .settings-action-control:focus-visible {
+  outline: 0;
+}
+.settings-row-noted .settings-action-control:focus-visible::after {
+  outline: 3px solid var(--ink);
+  outline-offset: -3px;
+}
+.settings-row-noted > .settings-help {
+  margin-inline: 14px;
+  padding-inline-end: 28px;
+}
+.settings-row-noted > .settings-action + .settings-help {
+  margin-top: 0;
+}
+
+/* The details about the protection open in place, as the last row of their card. */
+.settings-panel .security-limits {
+  padding: 0;
+  margin: 0;
+}
+.settings-panel .security-limits summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  min-height: 48px;
+  padding: 10px 14px;
+  margin: 0;
+  color: var(--ink);
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1.35;
+  list-style: none;
+  transition: background 120ms ease;
+}
+.settings-panel .security-limits summary::-webkit-details-marker {
+  display: none;
+}
+.settings-panel .security-limits summary:hover {
+  background: var(--wash);
+}
+/* Opens in place: the chevron points down, then up, whatever the direction of the text. */
+.settings-panel .security-limits summary .action-chevron {
+  flex: 0 0 14px;
+  color: var(--muted);
+  transform: rotate(90deg);
+  transition: transform 120ms ease;
+}
+.settings-panel .security-limits[open] summary .action-chevron {
+  transform: rotate(-90deg);
+}
+.settings-panel .security-limits > p {
+  margin: 10px 14px 0;
+}
+.settings-panel .security-limits > .settings-help {
+  margin-top: 10px;
+}
+.settings-panel .security-limits > .security-state {
+  margin-top: 2px;
+}
+.settings-panel .security-limits > p:last-child {
+  margin-bottom: 14px;
+}
+
+.settings-row-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+  margin-bottom: 8px;
+  font-size: 13px;
+  font-weight: 700;
+}
+.settings-row-label svg {
+  flex: 0 0 16px;
+  width: 16px;
+  height: 16px;
+  color: var(--signal-deep);
+  stroke: currentColor;
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.settings-row-label label,
+.settings-row-label span {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+/* One choice among a few, all visible: each option is a radio button drawn as a segment. */
+.segmented {
+  display: flex;
+  gap: 4px;
+  padding: 4px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: var(--paper);
+}
+.segment {
+  position: relative;
+  display: grid;
+  /* Shared space, but never less than the label needs: no word is cut. */
+  flex: 1 1 auto;
+  min-width: 0;
+  min-height: 36px;
+  padding: 6px;
+  place-items: center;
+  font-size: 12px;
+  font-weight: 650;
+  line-height: 1.25;
+  text-align: center;
+  cursor: pointer;
+}
+.segment input {
+  appearance: none;
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  background: transparent;
+  cursor: pointer;
+  transition: background 120ms ease;
+}
+.segment input:hover:not(:checked) {
+  background: var(--wash);
+}
+.segment input:checked {
+  border-color: var(--ink);
+  background: var(--ink);
+}
+.segment span {
+  position: relative;
+  color: var(--muted);
+  overflow-wrap: anywhere;
+  pointer-events: none;
+}
+.segment input:checked + span {
+  color: var(--surface);
+}
+@media (forced-colors: active) {
+  .segment {
+    display: flex;
+    justify-content: center;
+    gap: 6px;
+  }
+  .segment input {
+    appearance: auto;
+    position: static;
+    flex: none;
+    width: auto;
+    height: auto;
+  }
+  .settings-action > svg,
+  .settings-row-label svg,
+  .settings-heading svg,
+  .settings-panel .security-limits summary .action-chevron {
+    color: CanvasText;
+  }
+}
+
+.account-email {
+  margin: 0;
+  /* Not the tint of a row under the pointer: this one does nothing. */
+  background: var(--paper);
+  font-size: 12px;
+  font-weight: 650;
+  overflow-wrap: anywhere;
+}
+:root[dir="rtl"] .account-email {
+  text-align: right;
+}
+.account-email:empty {
+  display: none;
+}
+.account-email:empty + .settings-row {
+  border-top: 0;
+}
+
+.settings-legal {
+  padding: 0 2px;
+  margin-top: 20px;
+}
+.legal-links {
+  display: flex;
+  flex-wrap: wrap;
+  column-gap: 16px;
+}
+.legal-links a {
+  min-height: 36px;
+  color: var(--prose);
 }
 
 .topbar-actions {

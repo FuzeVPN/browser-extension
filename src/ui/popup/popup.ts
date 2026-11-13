@@ -65,7 +65,9 @@ document.documentElement.dataset.theme = resolveTheme(themePreference, systemDar
 
 const elements = {
   languageSelect: element<HTMLSelectElement>("languageSelect"),
-  themeSelect: element<HTMLSelectElement>("themeSelect"),
+  themeSystemOption: element<HTMLInputElement>("themeSystemOption"),
+  themeLightOption: element<HTMLInputElement>("themeLightOption"),
+  themeDarkOption: element<HTMLInputElement>("themeDarkOption"),
   themeToggleButton: element<HTMLButtonElement>("themeToggleButton"),
   languageError: element<HTMLElement>("languageError"),
   loginView: element<HTMLElement>("loginView"),
@@ -82,6 +84,7 @@ const elements = {
   diagnosticsAuto: element<HTMLInputElement>("diagnosticsAuto"),
   diagnosticsError: element<HTMLElement>("diagnosticsError"),
   diagnosticsAccountRequired: element<HTMLElement>("diagnosticsAccountRequired"),
+  accountSettings: element<HTMLElement>("accountSettings"),
   accountEmail: element<HTMLElement>("accountEmail"),
   protectButton: element<HTMLButtonElement>("protectButton"),
   changeLocationButton: element<HTMLButtonElement>("changeLocationButton"),
@@ -284,10 +287,15 @@ function bindEvents(): void {
     });
   });
   elements.languageSelect.addEventListener("change", () => void changeLanguage());
-  elements.themeSelect.addEventListener("change", () => {
-    const preference = elements.themeSelect.value;
-    if (isThemePreference(preference)) setThemePreference(preference);
-  });
+  for (const option of [
+    elements.themeSystemOption,
+    elements.themeLightOption,
+    elements.themeDarkOption,
+  ]) {
+    option.addEventListener("change", () => {
+      if (option.checked && isThemePreference(option.value)) setThemePreference(option.value);
+    });
+  }
   elements.themeToggleButton.addEventListener("click", () =>
     setThemePreference(toggledTheme(themePreference, systemDarkTheme.matches)),
   );
@@ -1293,11 +1301,9 @@ function renderSecurity(next: AppSnapshot): void {
         ),
         message(next.webRtcProtected ? "securityWebRtcActive" : "securityWebRtcInactive"),
       ]);
-  const loggedIn = next.profile !== null;
-  elements.accountEmail.classList.toggle("hidden", !loggedIn);
+  // Everything in the account group needs an account: it leaves with the session.
+  elements.accountSettings.classList.toggle("hidden", next.profile === null);
   elements.accountEmail.textContent = next.profile?.email ?? "";
-  elements.manageDevicesButton.classList.toggle("hidden", !loggedIn);
-  elements.logoutButton.classList.toggle("hidden", !loggedIn);
 }
 
 function canDisconnect(next: AppSnapshot): boolean {
@@ -2272,7 +2278,9 @@ function setThemePreference(preference: ThemePreference): void {
 function renderTheme(): void {
   const theme = resolveTheme(themePreference, systemDarkTheme.matches);
   document.documentElement.dataset.theme = theme;
-  elements.themeSelect.value = themePreference;
+  elements.themeSystemOption.checked = themePreference === "system";
+  elements.themeLightOption.checked = themePreference === "light";
+  elements.themeDarkOption.checked = themePreference === "dark";
   const label = message(theme === "dark" ? "switchToLightTheme" : "switchToDarkTheme");
   elements.themeToggleButton.setAttribute("aria-label", label);
   elements.themeToggleButton.title = label;

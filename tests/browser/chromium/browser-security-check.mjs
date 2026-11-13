@@ -177,8 +177,9 @@ async function verifyLegalLinks(popup, language, catalog) {
     assert.equal(link.label, catalog[link.key].message);
     assert.equal(link.tabIndex, 0);
   }
-  assert.equal(await popup.locator(".legal-links a[data-legal-link]").count(), 4);
+  assert.equal(await popup.locator(".legal-links a[data-legal-link]").count(), 3);
   assert.equal(await popup.locator("#legalInformationTitle").isVisible(), true);
+  assert.equal(await popup.locator("#legalContactLink").isVisible(), true);
   assert.equal(await popup.locator("#diagnosticsPrivacyLink").isVisible(), true);
 }
 
@@ -674,7 +675,7 @@ async function verifyBuiltApplication() {
       );
       await screenshot(popup, `language-${state}-${code}.png`);
       if (["fr", "ar"].includes(code)) {
-        await popup.locator("#legalContactLink").scrollIntoViewIfNeeded();
+        await popup.locator("#legalNoticeLink").scrollIntoViewIfNeeded();
         await screenshot(popup, `legal-${state}-${code}.png`);
       }
       await popup.keyboard.press("Escape");

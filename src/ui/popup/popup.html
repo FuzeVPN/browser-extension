@@ -317,35 +317,7 @@
             <span aria-hidden="true">×</span>
           </button>
         </div>
-        <div class="language-setting">
-          <div class="settings-heading">
-            <svg aria-hidden="true" viewBox="0 0 24 24" fill="none">
-              <circle cx="12" cy="12" r="9" />
-              <ellipse cx="12" cy="12" rx="4" ry="9" />
-              <path d="M3 12h18" />
-            </svg>
-            <label for="languageSelect" data-i18n="language"></label>
-          </div>
-          <select id="languageSelect" aria-describedby="languageHelp languageError">
-            <option value="auto" data-i18n="languageAutomatic"></option>
-          </select>
-          <p id="languageHelp" class="muted" data-i18n="languageHelp"></p>
-          <p id="languageError" class="error-banner hidden" role="alert"></p>
-        </div>
-        <div class="language-setting theme-setting">
-          <div class="settings-heading">
-            <svg aria-hidden="true" viewBox="0 0 24 24" fill="none">
-              <path d="M20 14.5A8.5 8.5 0 0 1 9.5 4 8.5 8.5 0 1 0 20 14.5Z" />
-            </svg>
-            <label for="themeSelect" data-i18n="theme"></label>
-          </div>
-          <select id="themeSelect">
-            <option value="system" data-i18n="themeSystem"></option>
-            <option value="light" data-i18n="themeLight"></option>
-            <option value="dark" data-i18n="themeDark"></option>
-          </select>
-        </div>
-        <section class="settings-section" aria-labelledby="protectionSettingsTitle">
+        <section class="settings-group" aria-labelledby="protectionSettingsTitle">
           <div class="settings-heading">
             <svg aria-hidden="true" viewBox="0 0 24 24" fill="none">
               <path d="m12 3 9 4v5c0 5-9 9-9 9s-9-4-9-9V7l9-4Z" />
@@ -358,55 +330,168 @@
             ></h3>
           </div>
           <p id="settingsError" class="error-banner hidden" role="alert"></p>
-          <div class="security-setting">
-            <label class="setting-label" for="killSwitchEnabled">
-              <span data-i18n="killSwitch"></span>
-              <input
-                id="killSwitchEnabled"
-                type="checkbox"
-                checked
-                disabled
-                aria-describedby="killSwitchHelp"
-              />
-            </label>
-            <p id="killSwitchHelp" class="muted" data-i18n="killSwitchHelp"></p>
+          <div class="settings-card">
+            <div class="settings-row">
+              <label class="setting-label" for="killSwitchEnabled">
+                <span data-i18n="killSwitch"></span>
+                <input
+                  id="killSwitchEnabled"
+                  type="checkbox"
+                  checked
+                  disabled
+                  aria-describedby="killSwitchHelp"
+                />
+              </label>
+              <p id="killSwitchHelp" class="settings-help muted" data-i18n="killSwitchHelp"></p>
+            </div>
+            <div class="settings-row">
+              <label class="setting-label" for="webRtcProtectionEnabled">
+                <span data-i18n="webRtcProtection"></span>
+                <input
+                  id="webRtcProtectionEnabled"
+                  type="checkbox"
+                  checked
+                  disabled
+                  aria-describedby="webRtcHelp"
+                />
+              </label>
+              <p id="webRtcHelp" class="settings-help muted" data-i18n="webRtcHelp"></p>
+            </div>
+            <div class="settings-row settings-row-action settings-row-noted">
+              <div class="settings-action">
+                <button
+                  id="manageExclusionsButton"
+                  class="settings-action-control"
+                  type="button"
+                  data-i18n="siteExclusions"
+                  aria-haspopup="dialog"
+                  aria-describedby="exclusionsSummary"
+                ></button>
+                <svg class="action-chevron" aria-hidden="true" viewBox="0 0 16 16" fill="none">
+                  <path d="m6 4 4 4-4 4" />
+                </svg>
+              </div>
+              <p id="exclusionsSummary" class="settings-help muted" aria-live="polite"></p>
+              <p
+                id="exclusionsRecoveryNotice"
+                class="settings-help muted hidden"
+                role="status"
+                data-i18n="siteExclusionsPreferencesReset"
+              ></p>
+            </div>
+            <details class="settings-row security-limits">
+              <summary>
+                <span data-i18n="securityLimits"></span>
+                <svg class="action-chevron" aria-hidden="true" viewBox="0 0 16 16" fill="none">
+                  <path d="m6 4 4 4-4 4" />
+                </svg>
+              </summary>
+              <p id="securityState" class="security-state" aria-live="polite"></p>
+              <p class="settings-help muted" data-i18n="localNetworkHelp"></p>
+              <p class="settings-help muted" data-i18n="killSwitchLimits"></p>
+              <p class="settings-help muted" data-i18n="incognitoHelp"></p>
+            </details>
           </div>
-          <div class="security-setting">
-            <label class="setting-label" for="webRtcProtectionEnabled">
-              <span data-i18n="webRtcProtection"></span>
-              <input
-                id="webRtcProtectionEnabled"
-                type="checkbox"
-                checked
-                disabled
-                aria-describedby="webRtcHelp"
-              />
-            </label>
-            <p id="webRtcHelp" class="muted" data-i18n="webRtcHelp"></p>
-          </div>
-          <button
-            id="manageExclusionsButton"
-            class="secondary full-button"
-            type="button"
-            data-i18n="siteExclusions"
-            aria-haspopup="dialog"
-          ></button>
-          <p id="exclusionsSummary" class="settings-help muted" aria-live="polite"></p>
-          <p
-            id="exclusionsRecoveryNotice"
-            class="settings-help muted hidden"
-            role="status"
-            data-i18n="siteExclusionsPreferencesReset"
-          ></p>
-          <details class="security-limits">
-            <summary data-i18n="securityLimits"></summary>
-            <p id="securityState" class="security-state" aria-live="polite"></p>
-            <p class="settings-help muted" data-i18n="localNetworkHelp"></p>
-            <p class="muted" data-i18n="killSwitchLimits"></p>
-            <p class="muted" data-i18n="incognitoHelp"></p>
-          </details>
         </section>
-        <section class="settings-section assistance-section" aria-labelledby="assistanceTitle">
+        <div class="settings-group" role="group" aria-labelledby="languageLabel themeLabel">
+          <div class="settings-card">
+            <div class="settings-row language-setting">
+              <div class="settings-row-label">
+                <svg aria-hidden="true" viewBox="0 0 24 24" fill="none">
+                  <circle cx="12" cy="12" r="9" />
+                  <ellipse cx="12" cy="12" rx="4" ry="9" />
+                  <path d="M3 12h18" />
+                </svg>
+                <label id="languageLabel" for="languageSelect" data-i18n="language"></label>
+              </div>
+              <select id="languageSelect" aria-describedby="languageHelp languageError">
+                <option value="auto" data-i18n="languageAutomatic"></option>
+              </select>
+              <p id="languageHelp" class="settings-help muted" data-i18n="languageHelp"></p>
+              <p id="languageError" class="error-banner hidden" role="alert"></p>
+            </div>
+            <div class="settings-row">
+              <div class="settings-row-label">
+                <svg aria-hidden="true" viewBox="0 0 24 24" fill="none">
+                  <path d="M20 14.5A8.5 8.5 0 0 1 9.5 4 8.5 8.5 0 1 0 20 14.5Z" />
+                </svg>
+                <span id="themeLabel" data-i18n="theme"></span>
+              </div>
+              <div class="segmented" role="radiogroup" aria-labelledby="themeLabel">
+                <label class="segment">
+                  <input
+                    id="themeSystemOption"
+                    type="radio"
+                    name="themePreference"
+                    value="system"
+                  />
+                  <span data-i18n="themeSystem"></span>
+                </label>
+                <label class="segment">
+                  <input id="themeLightOption" type="radio" name="themePreference" value="light" />
+                  <span data-i18n="themeLight"></span>
+                </label>
+                <label class="segment">
+                  <input id="themeDarkOption" type="radio" name="themePreference" value="dark" />
+                  <span data-i18n="themeDark"></span>
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+        <section id="accountSettings" class="settings-group" aria-labelledby="accountSettingsTitle">
+          <div class="settings-heading">
+            <svg aria-hidden="true" viewBox="0 0 24 24" fill="none">
+              <circle cx="12" cy="8" r="4" />
+              <path d="M4 21v-2a8 8 0 0 1 16 0v2" />
+            </svg>
+            <h3 id="accountSettingsTitle" class="settings-section-title" data-i18n="account"></h3>
+          </div>
+          <div class="settings-card">
+            <p id="accountEmail" class="settings-row account-email" dir="ltr"></p>
+            <div class="settings-row settings-row-action">
+              <div class="settings-action">
+                <button
+                  id="manageDevicesButton"
+                  class="settings-action-control"
+                  type="button"
+                  data-i18n="manageDevices"
+                  aria-haspopup="dialog"
+                ></button>
+                <svg class="action-chevron" aria-hidden="true" viewBox="0 0 16 16" fill="none">
+                  <path d="m6 4 4 4-4 4" />
+                </svg>
+              </div>
+            </div>
+            <div class="settings-row settings-row-action">
+              <div class="settings-action">
+                <a
+                  id="dashboardLink"
+                  class="settings-action-control"
+                  target="_blank"
+                  rel="noreferrer"
+                  data-i18n="manageAccount"
+                ></a>
+                <svg class="external-icon" aria-hidden="true" viewBox="0 0 16 16" fill="none">
+                  <path d="M6 4h6v6M12 4l-8 8" />
+                </svg>
+              </div>
+            </div>
+          </div>
+          <div class="settings-card">
+            <div class="settings-row settings-row-action">
+              <div class="settings-action">
+                <button
+                  id="logoutButton"
+                  class="settings-action-control settings-danger"
+                  type="button"
+                  data-i18n="signOutAccount"
+                ></button>
+              </div>
+            </div>
+          </div>
+        </section>
+        <section class="settings-group" aria-labelledby="assistanceTitle">
           <div class="settings-heading">
             <svg aria-hidden="true" viewBox="0 0 24 24" fill="none">
               <circle cx="12" cy="12" r="9" />
@@ -418,86 +503,74 @@
               data-i18n="diagnosticsAssistance"
             ></h3>
           </div>
-          <a
-            id="diagnosticsLink"
-            class="secondary full-link"
-            target="_blank"
-            rel="noreferrer"
-            data-i18n="diagnosticsTitle"
-          ></a>
-          <label class="setting-label" for="diagnosticsAuto">
-            <span data-i18n="diagnosticsAuto"></span>
-            <input
-              id="diagnosticsAuto"
-              type="checkbox"
-              disabled
-              aria-describedby="diagnosticsAutoHelp diagnosticsAccountRequired diagnosticsError"
-            />
-          </label>
-          <p
-            id="diagnosticsAutoHelp"
-            class="settings-help muted"
-            data-i18n="diagnosticsAutoHelp"
-          ></p>
-          <a
-            id="diagnosticsPrivacyLink"
-            class="privacy-link"
-            data-legal-link="privacy"
-            target="_blank"
-            rel="noopener noreferrer"
-            data-i18n="privacyPolicy"
-          ></a>
-          <p
-            id="diagnosticsAccountRequired"
-            class="settings-help muted"
-            data-i18n="diagnosticsAccountRequired"
-          ></p>
-          <p id="diagnosticsError" class="error-banner hidden" role="alert"></p>
-        </section>
-        <section
-          id="accountSettings"
-          class="settings-section account-section"
-          aria-labelledby="accountSettingsTitle"
-        >
-          <div class="settings-heading">
-            <svg aria-hidden="true" viewBox="0 0 24 24" fill="none">
-              <circle cx="12" cy="8" r="4" />
-              <path d="M4 21v-2a8 8 0 0 1 16 0v2" />
-            </svg>
-            <h3 id="accountSettingsTitle" class="settings-section-title" data-i18n="account"></h3>
+          <div class="settings-card">
+            <div class="settings-row settings-row-action">
+              <div class="settings-action">
+                <a
+                  id="diagnosticsLink"
+                  class="settings-action-control"
+                  target="_blank"
+                  rel="noreferrer"
+                  data-i18n="diagnosticsTitle"
+                ></a>
+                <svg class="external-icon" aria-hidden="true" viewBox="0 0 16 16" fill="none">
+                  <path d="M6 4h6v6M12 4l-8 8" />
+                </svg>
+              </div>
+            </div>
+            <div class="settings-row settings-row-action">
+              <div class="settings-action">
+                <a
+                  id="legalContactLink"
+                  class="settings-action-control"
+                  data-legal-link="contact"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  data-i18n="contactSupport"
+                ></a>
+                <svg class="external-icon" aria-hidden="true" viewBox="0 0 16 16" fill="none">
+                  <path d="M6 4h6v6M12 4l-8 8" />
+                </svg>
+              </div>
+            </div>
+            <div class="settings-row">
+              <label class="setting-label" for="diagnosticsAuto">
+                <span data-i18n="diagnosticsAuto"></span>
+                <input
+                  id="diagnosticsAuto"
+                  type="checkbox"
+                  disabled
+                  aria-describedby="diagnosticsAutoHelp diagnosticsAccountRequired diagnosticsError"
+                />
+              </label>
+              <p
+                id="diagnosticsAutoHelp"
+                class="settings-help muted"
+                data-i18n="diagnosticsAutoHelp"
+              ></p>
+              <p
+                id="diagnosticsAccountRequired"
+                class="settings-help muted"
+                data-i18n="diagnosticsAccountRequired"
+              ></p>
+              <a
+                id="diagnosticsPrivacyLink"
+                class="privacy-link"
+                data-legal-link="privacy"
+                target="_blank"
+                rel="noopener noreferrer"
+                data-i18n="privacyPolicy"
+              ></a>
+              <p id="diagnosticsError" class="error-banner hidden" role="alert"></p>
+            </div>
           </div>
-          <p id="accountEmail" class="account-email" dir="ltr"></p>
-          <button
-            id="manageDevicesButton"
-            class="secondary full-button"
-            type="button"
-            data-i18n="manageDevices"
-          ></button>
-          <a
-            id="dashboardLink"
-            class="secondary full-link"
-            target="_blank"
-            rel="noreferrer"
-            data-i18n="manageAccount"
-          ></a>
-          <button
-            id="logoutButton"
-            class="danger-button"
-            type="button"
-            data-i18n="signOutAccount"
-          ></button>
         </section>
-        <section class="settings-section legal-section" aria-labelledby="legalInformationTitle">
-          <div class="settings-heading">
-            <svg aria-hidden="true" viewBox="0 0 24 24" fill="none">
-              <path d="M6 3h8l4 4v14H6V3Zm8 0v5h4M9 12h6m-6 4h6" />
-            </svg>
-            <h3
-              id="legalInformationTitle"
-              class="settings-section-title"
-              data-i18n="legalInformation"
-            ></h3>
-          </div>
+        <section class="settings-legal" aria-labelledby="legalInformationTitle">
+          <h3
+            id="legalInformationTitle"
+            class="settings-section-title"
+            data-i18n="legalInformation"
+          ></h3>
           <nav class="legal-links" aria-labelledby="legalInformationTitle">
             <a
               id="legalPrivacyLink"
@@ -519,13 +592,6 @@
               target="_blank"
               rel="noopener noreferrer"
               data-i18n="legalNotice"
-            ></a>
-            <a
-              id="legalContactLink"
-              data-legal-link="contact"
-              target="_blank"
-              rel="noopener noreferrer"
-              data-i18n="contactSupport"
             ></a>
           </nav>
         </section>

@@ -1688,7 +1688,7 @@ async function verifyLegalInformation() {
     );
     if (["fr", "ar"].includes(language)) {
       await driver.executeScript(
-        "document.querySelector('#legalContactLink').scrollIntoView({block:'end'})",
+        "document.querySelector('#legalNoticeLink').scrollIntoView({block:'end'})",
       );
       await settleLegalVisuals();
       assert.equal(

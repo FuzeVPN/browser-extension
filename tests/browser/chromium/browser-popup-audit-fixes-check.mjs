@@ -2024,6 +2024,188 @@ try {
     name: "Unchanged hidden and visible lists retain node identity and keyboard focus; malformed nested snapshots show recovery without breaking the popup",
   });
   await page.close();
+
+  page = await open();
+  const settingsLayout = () =>
+    page.evaluate(() => {
+      const panel = document.getElementById("settingsPanel");
+      const shown = (node) => node.getClientRects().length > 0;
+      const ids = (selector) =>
+        [...panel.querySelectorAll(selector)].filter(shown).map((node) => node.id);
+      const group = document.querySelector("#settingsPanel [role=radiogroup]");
+      return {
+        groups: ids(".settings-section-title"),
+        themes: [...group.querySelectorAll("input[type=radio]")].map((node) => ({
+          value: node.value,
+          name: node.name,
+          label: node.labels[0].textContent.trim(),
+          checked: node.checked,
+        })),
+        themeGroupName: document.getElementById(group.getAttribute("aria-labelledby")).textContent,
+        theme: document.documentElement.dataset.theme,
+        stored: localStorage.getItem("fuzevpnTheme"),
+        toggleLabel: document.getElementById("themeToggleButton").getAttribute("aria-label"),
+        account: ids("#accountSettings button, #accountSettings a"),
+        email: document.getElementById("accountEmail").textContent,
+        assistance: ids("section[aria-labelledby=assistanceTitle] a"),
+        legal: ids(".legal-links a"),
+        rows: [...panel.querySelectorAll(".settings-action-control")].filter(shown).map((node) => {
+          const box = node.getBoundingClientRect();
+          const card = node.closest(".settings-card").getBoundingClientRect();
+          return { id: node.id, height: box.height, spans: box.width >= card.width - 2 };
+        }),
+      };
+    });
+  const themeChoice = (layout) => layout.themes.find((option) => option.checked)?.value;
+  await page.locator("#settingsButton").click();
+  let layout = await settingsLayout();
+  assert.deepEqual(layout.groups, [
+    "protectionSettingsTitle",
+    "accountSettingsTitle",
+    "assistanceTitle",
+    "legalInformationTitle",
+  ]);
+  assert.deepEqual(layout.account, ["manageDevicesButton", "dashboardLink", "logoutButton"]);
+  assert.equal(layout.email, connected.profile.email);
+  assert.deepEqual(layout.assistance, [
+    "diagnosticsLink",
+    "legalContactLink",
+    "diagnosticsPrivacyLink",
+  ]);
+  assert.deepEqual(layout.legal, ["legalPrivacyLink", "legalTermsLink", "legalNoticeLink"]);
+  assert.deepEqual(
+    layout.rows.map((row) => row.id),
+    [
+      "manageExclusionsButton",
+      "manageDevicesButton",
+      "dashboardLink",
+      "logoutButton",
+      "diagnosticsLink",
+      "legalContactLink",
+    ],
+  );
+  for (const row of layout.rows)
+    assert(row.height >= 40 && row.spans, `Settings row target: ${JSON.stringify(row)}`);
+  report.checks.push({
+    passed: true,
+    name: "Settings group protection, account, assistance and legal links, and every row which opens something spans its card",
+  });
+
+  assert.equal(layout.themeGroupName, catalog.theme.message);
+  assert.deepEqual(
+    layout.themes.map(({ value, label }) => [value, label]),
+    [
+      ["system", catalog.themeSystem.message],
+      ["light", catalog.themeLight.message],
+      ["dark", catalog.themeDark.message],
+    ],
+  );
+  assert.equal(new Set(layout.themes.map((option) => option.name)).size, 1);
+  assert.equal(themeChoice(layout), "system");
+  assert.equal(layout.theme, "light");
+  await page.locator("#themeDarkOption").check();
+  layout = await settingsLayout();
+  assert.deepEqual(
+    [themeChoice(layout), layout.theme, layout.stored, layout.toggleLabel],
+    ["dark", "dark", "dark", catalog.switchToLightTheme.message],
+  );
+  await page.locator("#themeDarkOption").focus();
+  await page.keyboard.press("ArrowLeft");
+  layout = await settingsLayout();
+  assert.equal(await page.evaluate(() => document.activeElement.id), "themeLightOption");
+  assert.deepEqual([themeChoice(layout), layout.theme, layout.stored], ["light", "light", "light"]);
+  await page.locator("#closeSettingsButton").click();
+  await page.locator("#themeToggleButton").click();
+  await page.locator("#settingsButton").click();
+  layout = await settingsLayout();
+  assert.deepEqual([themeChoice(layout), layout.theme, layout.stored], ["dark", "dark", "dark"]);
+  await page.locator("#themeSystemOption").check();
+  layout = await settingsLayout();
+  assert.deepEqual(
+    [themeChoice(layout), layout.theme, layout.stored, layout.toggleLabel],
+    ["system", "light", "system", catalog.switchToDarkTheme.message],
+  );
+  report.checks.push({
+    passed: true,
+    name: "The theme is one choice among three visible options, by pointer and by arrow keys, in step with the toolbar button",
+  });
+
+  // Headless Chromium draws no scrollbar. The panel always scrolls, and a classic
+  // scrollbar takes its width from the text: the same room is taken here.
+  const classicScrollbar = await page.addStyleTag({
+    content: "#settingsPanel { padding-inline-end: 29px; }",
+  });
+  for (const language of SUPPORTED_LANGUAGES) {
+    await page.evaluate(
+      (language) =>
+        window.fixture.publish({ languagePreference: language, effectiveLanguage: language }),
+      language,
+    );
+    await page.waitForFunction((language) => document.documentElement.lang === language, language);
+    await page.evaluate(() => document.fonts.ready);
+    await rendered(page);
+    const fit = await page.evaluate(() => {
+      const panel = document.getElementById("settingsPanel");
+      const lines = (node) => {
+        const range = document.createRange();
+        range.selectNodeContents(node);
+        return new Set([...range.getClientRects()].map((rect) => Math.round(rect.top))).size;
+      };
+      return {
+        overflow: Math.max(
+          panel.scrollWidth - panel.clientWidth,
+          document.documentElement.scrollWidth - innerWidth,
+        ),
+        // A label on more lines than it has words was broken inside a word.
+        cut: [...panel.querySelectorAll(".segment span")]
+          .filter((node) => lines(node) > node.textContent.trim().split(/\s+/).length)
+          .map((node) => node.textContent),
+      };
+    });
+    assert(fit.overflow <= 0 && fit.cut.length === 0, `${language}: ${JSON.stringify(fit)}`);
+  }
+  await classicScrollbar.evaluate((node) => node.remove());
+  await page.evaluate(() =>
+    window.fixture.publish({ languagePreference: "fr", effectiveLanguage: "fr" }),
+  );
+  await page.waitForFunction(() => document.documentElement.lang === "fr");
+  report.checks.push({
+    passed: true,
+    name: "Settings keep their width and whole theme labels in all seventy languages beside a classic scrollbar",
+  });
+
+  await page.evaluate(() =>
+    window.fixture.publish({
+      profile: null,
+      subscription: null,
+      status: "logged_out",
+      protected: false,
+      protectionRequested: false,
+      webRtcProtected: false,
+      activeLocationId: null,
+      devices: [],
+      error: null,
+      logoutOutcome: null,
+    }),
+  );
+  await page.locator("#loginView").waitFor({ state: "visible" });
+  await page.locator("#settingsButton").click();
+  layout = await settingsLayout();
+  assert.deepEqual(layout.groups, [
+    "protectionSettingsTitle",
+    "assistanceTitle",
+    "legalInformationTitle",
+  ]);
+  assert.deepEqual(layout.account, []);
+  assert.equal(layout.email, "");
+  assert.equal(await page.locator("#accountSettings").isHidden(), true);
+  assert.equal(await page.locator("#manageExclusionsButton").isEnabled(), true);
+  assert.equal(await page.locator("#killSwitchEnabled").isEnabled(), true);
+  report.checks.push({
+    passed: true,
+    name: "Signed out, settings show no account group and keep protection, assistance and legal links",
+  });
+  await page.close();
   await reviewPopupDesign();
   assert.deepEqual(report.pageErrors, []);
   report.completed = true;
