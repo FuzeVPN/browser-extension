@@ -307,3 +307,11 @@ requests a real worker makes when the browser restarts it.
 The project invokes Mozilla's `addons-linter` directly for Firefox validation.
 Run `npm audit` to check the current lockfile, including development dependencies.
 Dependency audit results apply to the versions checked at the time of execution.
+
+The workflow runs `npm run audit:dependencies`. It fails on any advisory of high or
+critical severity, as `npm audit --audit-level=high` does, except those listed in
+`scripts/dependency-audit-exceptions.json`. An exception names one advisory and its
+package, gives its reason and ends on a date: it is for an advisory which no released
+version fixes, which would otherwise fail every commit whatever it changes. Past its
+date the workflow fails again. Unit tests cover the decision; they do not query the
+advisory database.

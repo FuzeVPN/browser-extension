@@ -37,7 +37,7 @@ jobs:
       - name: Validate and build Chrome, Edge and Firefox
         run: npm run validate
       - name: Audit development dependencies
-        run: npm audit --audit-level=high
+        run: npm run audit:dependencies
       - name: Package all targets and sources
         run: npm run package
       - name: Reconstruct from the source archive

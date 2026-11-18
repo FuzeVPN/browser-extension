@@ -27,6 +27,7 @@
     "build:firefox": "node scripts/build.mjs firefox",
     "audit:dist": "node scripts/audit-dist.mjs",
     "audit:publication": "node scripts/audit-publication.mjs --history",
+    "audit:dependencies": "node scripts/audit-dependencies.mjs",
     "lint:firefox": "addons-linter --output json dist/firefox",
     "validate": "npm run format:check && npm run typecheck && npm run lint && npm test && npm run build && npm run audit:dist && npm run lint:firefox",
     "validate:browser": "node scripts/validate-browser.mjs",
