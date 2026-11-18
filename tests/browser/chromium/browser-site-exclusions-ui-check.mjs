@@ -136,6 +136,8 @@ try {
         snapshot: structuredClone(initial),
         commands: [],
         failNext: false,
+        /** While set, an exclusions update waits for it before it answers. */
+        hold: null,
         publish() {
           for (const listener of listeners) {
             listener({ type: "state_changed", snapshot: structuredClone(this.snapshot) });
@@ -159,6 +161,7 @@ try {
             fixture.commands.push(structuredClone(request));
             let ok = true;
             if (request.type === "update_site_exclusions") {
+              if (fixture.hold) await fixture.hold;
               if (fixture.failNext) {
                 fixture.failNext = false;
                 ok = false;
@@ -344,6 +347,26 @@ try {
       `Excluded domain isolation in ${language}`,
     );
     assert.equal(await page.locator("#exclusionPreview bdi").textContent(), "xn--bcher-kva.de");
+    // Arabic script joins its letters: no text written in it is spaced, in any view.
+    if (["ar", "fa", "ur", "ps"].includes(language))
+      assert.deepEqual(
+        await page.evaluate(() => {
+          const arabic = /[\u0600-\u06FF\u0750-\u077F\uFB50-\uFDFF\uFE70-\uFEFF]/;
+          return [...document.querySelectorAll("body *")]
+            .filter(
+              (node) =>
+                [...node.childNodes].some(
+                  (child) => child.nodeType === Node.TEXT_NODE && arabic.test(child.data),
+                ) && !["normal", "0px"].includes(getComputedStyle(node).letterSpacing),
+            )
+            .map(
+              (node) =>
+                `${node.id ? "#" + node.id : node.localName + "." + node.className} ${getComputedStyle(node).letterSpacing}`,
+            );
+        }),
+        [],
+        language,
+      );
     if (["ar", "fa", "ur", "he", "ps"].includes(language))
       await page.screenshot({ path: join(output, `sites-exclus-${language}.png`) });
     await page.locator("#exclusionInput").fill("");
@@ -366,6 +389,7 @@ try {
   }
   record("All seventy translated dialogs render without missing text or horizontal overflow");
   record("Excluded domains and URL inputs stay LTR within both RTL and LTR dialogs");
+  record("No text in Arabic script is letter-spaced, in Arabic, Persian, Urdu and Pashto");
   await page.locator("#closeExclusionsButton").click();
   await page.locator("#languageSelect").selectOption("fr");
   await page.waitForFunction(() => document.documentElement.lang === "fr");
@@ -462,6 +486,70 @@ try {
   assert.equal(await page.locator(".exclusion-row").count(), 99);
   assert.equal(await page.locator("#addExclusionButton").isDisabled(), false);
   record("The 100-entry limit prevents additions until a site is removed");
+
+  const focused = () =>
+    page.evaluate(() => ({
+      key: document.activeElement.dataset.focusKey ?? null,
+      id: document.activeElement.id,
+      unavailable: document.activeElement.getAttribute("aria-disabled"),
+    }));
+  await page.evaluate(() => {
+    window.exclusionFixture.hold = new Promise((release) => {
+      window.exclusionFixture.release = release;
+    });
+  });
+  await page.locator(".exclusion-remove").nth(1).focus();
+  await page.keyboard.press("Enter");
+  await rendered(page);
+  // The worker has not answered: the button pressed keeps the focus, and does nothing more.
+  assert.deepEqual(await focused(), { key: "site1.example.com", id: "", unavailable: "true" });
+  const sent = await page.evaluate(() => window.exclusionFixture.commands.length);
+  await page.keyboard.press("Enter");
+  await rendered(page);
+  assert.equal(await page.evaluate(() => window.exclusionFixture.commands.length), sent);
+  await page.evaluate(() => {
+    window.exclusionFixture.hold = null;
+    window.exclusionFixture.release();
+  });
+  await rendered(page);
+  assert.equal(await page.locator(".exclusion-row").count(), 98);
+  assert.deepEqual(await focused(), { key: "site2.example.com", id: "", unavailable: "false" });
+  record("A site removed from the keyboard leaves the focus to the site which followed it");
+
+  await page.locator(".exclusion-remove").last().focus();
+  await page.keyboard.press("Enter");
+  await rendered(page);
+  assert.equal(await page.locator(".exclusion-row").count(), 97);
+  assert.equal((await focused()).key, "site97.example.com");
+  record("The last site of the list leaves the focus to the one before it");
+
+  await page.evaluate(() => {
+    window.exclusionFixture.failNext = true;
+  });
+  await page.locator(".exclusion-remove").first().focus();
+  await page.keyboard.press("Enter");
+  await rendered(page);
+  assert.equal(await page.locator(".exclusion-row").count(), 97);
+  assert.equal((await focused()).key, "site0.example.com");
+  record("A refused removal keeps the focus on its button");
+
+  const committedOne = await page.evaluate(
+    () => window.exclusionFixture.snapshot.siteExclusions.saved,
+  );
+  const single = {
+    revision: committedOne.revision + 1,
+    enabled: true,
+    entries: [{ domain: "only.example.org", includeSubdomains: true }],
+  };
+  await publish(page, {
+    siteExclusions: { saved: single, applied: single, pending: false, error: false },
+  });
+  await page.locator(".exclusion-remove").focus();
+  await page.keyboard.press("Enter");
+  await rendered(page);
+  assert.equal(await page.locator(".exclusion-row").count(), 0);
+  assert.equal((await focused()).id, "exclusionInput");
+  record("The only site of the list leaves the focus to the field which adds one");
 
   assert.deepEqual(report.pageErrors, []);
   report.passed = true;

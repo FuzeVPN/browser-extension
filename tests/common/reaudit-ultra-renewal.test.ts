@@ -147,7 +147,7 @@ describe("known settlement of a renewal superseded by settings", () => {
     await renewing;
 
     expect(scheduled.get(ALARM_REFRESH)).toBe(AT + 1_000);
-    expect(scheduled.get(ALARM_EXPIRY)).toBe(Date.parse(previous.expiresAt));
+    expect(scheduled.get(ALARM_EXPIRY)).toBe(Date.parse(previous.expiresAt) - 5_000);
     expect(controller.getSnapshot().protected).toBe(true);
   });
 

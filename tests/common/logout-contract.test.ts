@@ -6,7 +6,12 @@ import {
   NetworkError,
   ProxyCreationUncertainError,
 } from "../../src/core/api/client";
-import { ALARM_EXPIRY, ALARM_RECONNECT, ALARM_REFRESH } from "../../src/core/shared/config";
+import {
+  ALARM_EXPIRY,
+  ALARM_RECONNECT,
+  ALARM_REFRESH,
+  PROXY_CREATION_UNCERTAINTY_MS,
+} from "../../src/core/shared/config";
 import { AUTH, authenticatedState, createHarness, NOW, PROFILE } from "./helpers";
 
 function deferred<T>() {
@@ -206,7 +211,8 @@ describe("non-idempotent proxy creation contract", () => {
     h.api.createError = new ApiError("server_error", 503);
     await h.controller.connect("frankfurt-01");
     expect(h.api.proofs).toHaveLength(1);
-    expect(h.alarms.reconnectAt).toBeNull();
+    // Nothing is replayed while a session this request created may still be alive.
+    expect(h.alarms.reconnectAt).toBe(NOW + PROXY_CREATION_UNCERTAINTY_MS);
     expect(h.securityStorage.state?.proxyCreationUncertain).toBe(true);
     await h.controller.handleAlarm(ALARM_RECONNECT);
     await h.controller.handleAlarm(ALARM_REFRESH);
@@ -250,7 +256,8 @@ describe("non-idempotent proxy creation contract", () => {
     await restarted.controller.handleAlarm(ALARM_EXPIRY);
     await restarted.controller.handleAlarm(ALARM_RECONNECT);
     expect(restarted.controller.getSnapshot().protected).toBe(false);
-    expect(restarted.alarms.reconnectAt).toBeNull();
+    // The reconnection waits for the deadline of the unanswered renewal.
+    expect(restarted.alarms.reconnectAt).toBe(NOW + PROXY_CREATION_UNCERTAINTY_MS);
     expect(restarted.api.proofs).toHaveLength(0);
   });
 

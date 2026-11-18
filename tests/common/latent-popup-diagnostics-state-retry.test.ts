@@ -2,6 +2,7 @@
 
 import { readFileSync } from "node:fs";
 import { runInNewContext } from "node:vm";
+import { popupDom } from "./popup-dom";
 import ts from "typescript";
 import type {
   DiagnosticUiState,
@@ -76,7 +77,7 @@ function setup() {
     },
   };
   // Execute the production functions, with only messaging and the document replaced.
-  runInNewContext(executable, context);
+  runInNewContext(executable, Object.assign(context, popupDom));
   const subject = context as unknown as Subject & { renderDiagnostics(): void };
   const settle = () => new Promise<void>((resolve) => setTimeout(resolve, 0));
   return {

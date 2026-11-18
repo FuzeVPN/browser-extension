@@ -529,25 +529,44 @@ try {
 
   await login(page);
   createStatus = 503;
+  const ambiguousSentAt = Date.now();
   const ambiguous = await command(page, { type: "connect", locationId: location.id });
   assert.equal(ambiguous.snapshot.error, "proxy_creation_uncertain");
-  assert.equal(ambiguous.snapshot.nextRetryAt, null);
   const security = await page.evaluate(async () => ({
     settings: (await chrome.storage.local.get("fuzevpnSecurityState")).fuzevpnSecurityState,
-    alarms: (await chrome.alarms.getAll()).map((alarm) => alarm.name),
+    alarms: (await chrome.alarms.getAll()).map(({ name, scheduledTime }) => ({
+      name,
+      scheduledTime,
+    })),
   }));
   assert.equal(security.settings.proxyCreationUncertain, true);
   assert.equal(security.settings.retrySuspended, true);
-  assert(!security.alarms.includes("fuzevpn-proxy-reconnect"));
-  assert(!security.alarms.includes("fuzevpn-proxy-refresh"));
+  // The retry waits for the deadline of the marker. A session lasts ten minutes: one
+  // which this request created has expired by then, and nothing is replayed before.
+  const uncertainUntil = security.settings.proxyCreationUncertainUntil;
+  assert(Number.isSafeInteger(uncertainUntil));
+  assert(uncertainUntil > ambiguousSentAt + 10 * 60_000);
+  assert(uncertainUntil <= Date.now() + 11 * 60_000);
+  assert.equal(ambiguous.snapshot.nextRetryAt, uncertainUntil);
+  assert.deepEqual(
+    security.alarms.filter((alarm) => alarm.name === "fuzevpn-proxy-reconnect"),
+    [{ name: "fuzevpn-proxy-reconnect", scheduledTime: uncertainUntil }],
+  );
+  assert(!security.alarms.some((alarm) => alarm.name === "fuzevpn-proxy-refresh"));
   record(
-    "A JSON 503 from session creation leaves a durable uncertainty marker and no automatic retry",
+    "A JSON 503 from session creation leaves a durable uncertainty marker and defers the automatic retry to its deadline",
   );
   async function restartWorker() {
     const cdp = await context.newCDPSession(page);
     const versions = new Map();
+    // The worker can start again a moment after it stopped: a stop is noted when the
+    // browser reports it, not read from the latest state of the worker afterwards.
+    const stopped = new Set();
     cdp.on("ServiceWorker.workerVersionUpdated", ({ versions: changed }) => {
-      for (const version of changed) versions.set(version.versionId, version);
+      for (const version of changed) {
+        versions.set(version.versionId, version);
+        if (version.runningStatus === "stopped") stopped.add(version.versionId);
+      }
     });
     await cdp.send("ServiceWorker.enable");
     async function waitForVersion(condition) {
@@ -565,8 +584,9 @@ try {
     const version = [...versions.values()].find(
       (value) => value.scriptURL === worker.url() && value.runningStatus === "running",
     );
+    stopped.delete(version.versionId);
     await cdp.send("ServiceWorker.stopWorker", { versionId: version.versionId });
-    await waitForVersion(() => versions.get(version.versionId)?.runningStatus === "stopped");
+    await waitForVersion(() => stopped.has(version.versionId));
     const current = await snapshot(page);
     const workerUrl = worker.url();
     worker =
@@ -581,7 +601,13 @@ try {
   const requestsBeforeRestart = order.filter((event) => event === "creation_requested").length;
   const restarted = await restartWorker();
   assert.equal(restarted.error, "proxy_creation_uncertain");
-  assert.equal(restarted.nextRetryAt, null);
+  assert.equal(restarted.nextRetryAt, uncertainUntil);
+  assert.deepEqual(
+    await page.evaluate(
+      async () => (await chrome.alarms.get("fuzevpn-proxy-reconnect"))?.scheduledTime ?? null,
+    ),
+    uncertainUntil,
+  );
   assert.equal(
     order.filter((event) => event === "creation_requested").length,
     requestsBeforeRestart,
@@ -601,6 +627,69 @@ try {
   record(
     "Unknown earlier cleanup stays unconfirmed after a successful manual connection and worker restart",
   );
+
+  // Every sign-in of this fixture is another account.
+  await login(page);
+  const owner = await snapshot(page);
+  const favorite = await command(page, {
+    type: "set_location_favorite",
+    locationId: location.id,
+    favorite: true,
+  });
+  assert.equal(favorite.ok, true);
+  const excluded = await command(page, {
+    type: "update_site_exclusions",
+    expectedRevision: owner.siteExclusions.saved.revision,
+    enabled: true,
+    entries: [{ domain: "example.com", includeSubdomains: true }],
+  });
+  assert.equal(excluded.ok, true);
+  const chosen = await snapshot(page);
+  assert.deepEqual(chosen.locationPreferences.favoriteIds, [location.id]);
+  assert.equal(chosen.siteExclusions.saved.enabled, true);
+  assert.equal(chosen.siteExclusions.saved.entries.length, 1);
+  await command(page, { type: "logout" });
+  await waitLocalLogout(page);
+  // Signed out, the preferences stay in the profile for the account which set them.
+  const kept = await page.evaluate(() =>
+    chrome.storage.local.get([
+      "fuzevpnSiteExclusions",
+      "fuzevpnLocationPreferences",
+      "fuzevpnPreferenceOwner",
+    ]),
+  );
+  assert.equal(kept.fuzevpnSiteExclusions.saved.entries.length, 1);
+  assert.deepEqual(kept.fuzevpnLocationPreferences.favoriteIds, [location.id]);
+  assert.match(kept.fuzevpnPreferenceOwner.owner, /^[0-9a-f]{64}$/);
+  assert.equal(kept.fuzevpnPreferenceOwner.pending, undefined);
+  assert.equal(JSON.stringify(kept.fuzevpnPreferenceOwner).includes(owner.profile.userId), false);
+  await login(page);
+  const successor = await waitForRead(
+    () => snapshot(page),
+    (current) =>
+      current.profile !== null &&
+      !current.siteExclusions.pending &&
+      current.siteExclusions.saved.entries.length === 0 &&
+      current.locationPreferences.favoriteIds.length === 0,
+    { message: "Another account kept the previous account's exclusions or favourites" },
+  );
+  assert.notEqual(successor.profile.userId, owner.profile.userId);
+  assert.equal(successor.siteExclusions.saved.enabled, false);
+  assert.equal(successor.siteExclusions.error, false);
+  assert.deepEqual(successor.locationPreferences.recentIds, []);
+  const replaced = await waitForRead(
+    () => page.evaluate(() => chrome.storage.local.get("fuzevpnPreferenceOwner")),
+    (stored) =>
+      stored.fuzevpnPreferenceOwner.owner !== kept.fuzevpnPreferenceOwner.owner &&
+      stored.fuzevpnPreferenceOwner.pending === undefined,
+    { message: "The new account was not recorded as the owner of the preferences" },
+  );
+  assert.match(replaced.fuzevpnPreferenceOwner.owner, /^[0-9a-f]{64}$/);
+  record(
+    "Another account signing in starts without the previous account's exclusions and favourites",
+  );
+  await command(page, { type: "logout" });
+  await waitLocalLogout(page);
 
   assert.equal(report.pageErrors.length, 0);
   report.result = "PASS";

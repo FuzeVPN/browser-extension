@@ -14,6 +14,7 @@ const HISTORIES = [
 async function connected(ambiguous: boolean) {
   const h = createHarness({ persisted: authenticatedState() });
   await h.controller.initialize();
+  await h.controller.startupConnectionSettled();
   if (ambiguous) {
     h.api.createError = new NetworkError("timeout");
     expect(await h.controller.connect("frankfurt-01")).toEqual({
@@ -50,6 +51,7 @@ describe("automatic retries long after one ambiguous session creation", () => {
       restarted.setNow(later);
       restarted.api.createError = new ApiError("rate_limited", 429, 90);
       await restarted.controller.initialize();
+      await restarted.controller.startupConnectionSettled();
 
       // The refusal is definitive: nothing was created, so the reconnection is retried.
       expect(restarted.api.proofs).toHaveLength(1);
@@ -72,6 +74,7 @@ describe("automatic retries long after one ambiguous session creation", () => {
       const attempts = h.api.proofs.length;
       h.api.createError = new ApiError("rate_limited", 429, 90);
       await h.controller.handleAlarm(ALARM_REFRESH);
+      await h.controller.startupConnectionSettled();
 
       // The live session stays protected and its renewal is tried again later.
       expect(h.api.proofs).toHaveLength(attempts + 1);

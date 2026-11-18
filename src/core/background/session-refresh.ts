@@ -2,7 +2,13 @@
 
 import { extensionApi } from "@platform/bridge";
 import type { ProxySession } from "../api/types";
-import { ALARM_EXPIRY, ALARM_REFRESH, ALARM_RECONNECT, REFRESH_RETRY_MS } from "../shared/config";
+import {
+  ALARM_EXPIRY,
+  ALARM_REFRESH,
+  ALARM_RECONNECT,
+  PROXY_EXPIRY_MARGIN_MS,
+  REFRESH_RETRY_MS,
+} from "../shared/config";
 
 export interface AlarmService {
   scheduleSession(session: ProxySession, refreshAt?: number | null): Promise<void>;
@@ -22,7 +28,9 @@ export class ExtensionAlarmService implements AlarmService {
       refreshAt === null
         ? extensionApi.alarms.clear(ALARM_REFRESH)
         : createVerifiedAlarm(ALARM_REFRESH, refreshAt),
-      createVerifiedAlarm(ALARM_EXPIRY, Date.parse(session.expiresAt)),
+      // A session is refused this margin before the server ends it. The alarm which
+      // replaces it is due then, not once that margin has passed without protection.
+      createVerifiedAlarm(ALARM_EXPIRY, Date.parse(session.expiresAt) - PROXY_EXPIRY_MARGIN_MS),
     ]);
   }
 

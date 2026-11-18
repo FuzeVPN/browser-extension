@@ -2,6 +2,7 @@
 
 import { readFileSync } from "node:fs";
 import { runInNewContext } from "node:vm";
+import { popupDom } from "./popup-dom";
 import ts from "typescript";
 import type { Device, Location } from "../../src/core/api/types";
 import type { ExtensionRequest } from "../../src/core/shared/messages";
@@ -23,6 +24,7 @@ interface Subject {
   communicationFailed: boolean;
   locationPreferenceFailure: string | null;
   devicesFailure: { transport: boolean; code: string } | null;
+  deviceRefusals: Map<string, { transport: boolean; code: string }>;
   exclusionRequestFailed: boolean;
   elements: { locationDialog: { open: boolean } };
   render(value: unknown, confirmed?: boolean): boolean;
@@ -137,6 +139,7 @@ function setup() {
     automaticSelectionPending: false,
     verificationPending: false,
     devicesFailure: null,
+    deviceRefusals: new Map<string, unknown>(),
     locationPreferenceFailure: null,
     locationsRefreshFailed: false,
     locationSelectionPending: false,
@@ -194,7 +197,7 @@ function setup() {
       ++context.renderSequence;
     },
   };
-  runInNewContext(executable, context);
+  runInNewContext(executable, Object.assign(context, popupDom));
   return {
     subject: context as unknown as Subject,
     pending,
@@ -266,7 +269,8 @@ describe("a device deletion whose reply is lost", () => {
     await deletion;
     expect(subject.snapshot.devices).toContainEqual(REMOTE);
     expect(subject.communicationFailed).toBe(true);
-    expect(subject.devicesFailure).toMatchObject({ transport: true });
+    expect(subject.deviceRefusals.get(REMOTE.deviceId)).toMatchObject({ transport: true });
+    expect(subject.devicesFailure).toBeNull();
   });
 
   it("reports no failure for a device the published state no longer lists", async () => {

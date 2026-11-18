@@ -69,8 +69,119 @@ a:focus-visible {
 .shell {
   position: relative;
   min-height: 540px;
-  padding: 16px;
+  padding: 16px 16px 12px;
   overflow: hidden;
+}
+
+/*
+ * A browser popup is at most 600px tall. popup/fit.ts raises this level only as far as
+ * the page needs to fit without scrolling: texts are longer in some languages.
+ */
+.shell[data-fit] .connection-scene {
+  height: 78px;
+  margin: 2px 0;
+}
+
+.shell[data-fit] .status-card {
+  padding: 14px 18px 16px;
+}
+
+.shell[data-fit] .intro {
+  padding: 16px 18px 14px;
+  margin-bottom: 12px;
+}
+
+.shell[data-fit] .form-card {
+  padding: 14px 16px;
+}
+
+.shell[data-fit] .web-login-heading {
+  margin-bottom: 10px;
+}
+
+.shell[data-fit] .web-login-help {
+  margin-bottom: 12px;
+}
+
+.shell[data-fit] .web-login-status,
+.shell[data-fit] .web-login-cancel {
+  margin-top: 10px;
+}
+
+.shell[data-fit="2"] .connection-scene,
+.shell[data-fit="3"] .connection-scene {
+  height: 68px;
+  margin: 0;
+}
+
+/* The ring around the orb keeps clear of the lines above and below it. */
+.shell[data-fit="2"] .status-orb,
+.shell[data-fit="3"] .status-orb {
+  width: 52px;
+  height: 52px;
+}
+
+.shell[data-fit="2"] .status-symbol,
+.shell[data-fit="3"] .status-symbol {
+  width: 30px;
+  height: 30px;
+}
+
+.shell[data-fit="2"] .primary.large,
+.shell[data-fit="3"] .primary.large {
+  margin-top: 12px;
+}
+
+.shell[data-fit="2"] .intro .muted,
+.shell[data-fit="3"] .intro .muted {
+  display: none;
+}
+
+.shell[data-fit="2"] .intro h1,
+.shell[data-fit="3"] .intro h1 {
+  margin-bottom: 0;
+  font-size: 24px;
+}
+
+.shell[data-fit="2"] .location-card,
+.shell[data-fit="2"] .subscription-card,
+.shell[data-fit="3"] .location-card,
+.shell[data-fit="3"] .subscription-card {
+  margin-top: 8px;
+  padding-block: 10px;
+}
+
+.shell[data-fit="2"] .subscription-card,
+.shell[data-fit="3"] .subscription-card {
+  min-height: 0;
+}
+
+.shell[data-fit="2"] .privacy-note,
+.shell[data-fit="3"] .privacy-note {
+  margin-top: 8px;
+}
+
+.shell[data-fit="3"] {
+  padding-top: 10px;
+  padding-bottom: 8px;
+}
+
+.shell[data-fit="3"] .topbar {
+  padding-bottom: 8px;
+  margin-bottom: 8px;
+}
+
+.shell[data-fit="3"] .connection-eyebrow {
+  display: none;
+}
+
+/* While a sign-in is pending, its actions matter more than the welcome. */
+.shell[data-fit="3"] #loginView:has(.web-login-card[data-pending="true"]) .intro {
+  display: none;
+}
+
+.shell[data-fit="3"] .status-card {
+  padding: 16px 18px 12px;
 }
 
 .topbar {
@@ -79,7 +190,7 @@ a:focus-visible {
   justify-content: space-between;
   min-height: 44px;
   padding-bottom: 12px;
-  margin-bottom: 16px;
+  margin-bottom: 14px;
   border-bottom: 1px solid var(--line);
 }
 
@@ -109,6 +220,39 @@ a:focus-visible {
 
 .view {
   animation: reveal 160ms ease-out;
+}
+
+/*
+ * Until the background has said whether an account is signed in, neither view is the
+ * right one to show: the sign-in view would flash before the main one.
+ */
+.shell[data-boot] .view {
+  display: none;
+}
+
+/* A background which is slow to answer is waited for in the open. */
+.boot-wait {
+  display: none;
+}
+
+.shell[data-boot="waiting"] .boot-wait {
+  display: block;
+  width: 28px;
+  height: 28px;
+  margin: 96px auto;
+  border: 3px solid var(--line);
+  border-inline-end-color: var(--signal-deep);
+  border-radius: 50%;
+  animation: spin 800ms linear infinite;
+}
+
+/*
+ * A background which did not answer has not said whether an account is signed in: the
+ * sign-in view then shows the failure alone, neither its welcome nor its form.
+ */
+.shell[data-account-unknown] .login-hero,
+.shell[data-account-unknown] #loginForm {
+  display: none;
 }
 
 .intro {
@@ -251,6 +395,11 @@ h2 {
   line-height: 1.6;
 }
 
+.web-login-cancel {
+  width: 100%;
+  margin-top: 14px;
+}
+
 .field {
   display: grid;
   gap: 7px;
@@ -304,7 +453,8 @@ h2 {
   transform: translateY(-1px);
 }
 
-button:disabled {
+button:disabled,
+.exclusion-remove[aria-disabled="true"] {
   cursor: not-allowed;
   opacity: 0.48;
 }
@@ -901,7 +1051,7 @@ a {
   display: flex;
   align-items: flex-start;
   gap: 8px;
-  margin: 14px 4px 0;
+  margin: 12px 4px 0;
   color: var(--muted);
   font-size: 11px;
   line-height: 1.4;
@@ -927,6 +1077,11 @@ a {
 
 .error-banner p {
   margin: 0;
+}
+
+/* One line for each failure which still stands. */
+#devicesError {
+  white-space: pre-line;
 }
 
 .logout-result {
@@ -1773,6 +1928,14 @@ h3,
   line-height: 1.4;
   letter-spacing: 0.07em;
   text-transform: uppercase;
+}
+/*
+ * Arabic script joins its letters: spaced apart they stop touching, and tightened they
+ * overlap. Titles and small labels keep the spacing of the text in these languages.
+ */
+:root:is(:lang(ar), :lang(fa), :lang(ps), :lang(ur))
+  :is(h1, h2, .eyebrow, .card-label, .connection-eyebrow, .status-label) {
+  letter-spacing: 0;
 }
 /* Neither capitals nor letter spacing exist in these scripts: the title keeps the text face. */
 :root[dir="rtl"] .settings-section-title {

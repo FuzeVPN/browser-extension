@@ -204,17 +204,20 @@ export function decodeLocations(value: unknown): Location[] | null {
   const identifiers = new Set<string>();
   for (const item of root.locations) {
     const data = object(item);
+    // An entry which cannot be read is one location nobody can use: it is left out, and
+    // the catalogue stands with the others.
     if (
       !data ||
       !nonEmptyString(data.id) ||
-      identifiers.has(data.id) ||
       !string(data.city) ||
       !string(data.country_code) ||
       !string(data.display_name) ||
       !Array.isArray(data.supported_protocols) ||
       !data.supported_protocols.every(string)
     )
-      return null;
+      continue;
+    // Two entries under one identifier: nothing says which the server means.
+    if (identifiers.has(data.id)) return null;
     identifiers.add(data.id);
     locations.push({
       id: data.id,
@@ -286,16 +289,18 @@ export function decodeDeviceList(value: unknown): DeviceList | null {
   const identifiers = new Set<string>();
   for (const item of root.devices) {
     const data = object(item);
+    // As for the locations: an entry which cannot be read is left out, so that the
+    // other devices can still be seen and removed.
     if (
       !data ||
       !nonEmptyString(data.device_id) ||
-      identifiers.has(data.device_id) ||
       !string(data.name) ||
       !string(data.kind) ||
       !dateString(data.created_at) ||
       !Array.isArray(data.profiles)
     )
-      return null;
+      continue;
+    if (identifiers.has(data.device_id)) return null;
     identifiers.add(data.device_id);
     const profiles: DeviceProfile[] = [];
     for (const profileItem of data.profiles) {
@@ -309,7 +314,7 @@ export function decodeDeviceList(value: unknown): DeviceList | null {
           profile.expires_at !== null &&
           !dateString(profile.expires_at))
       )
-        return null;
+        continue;
       profiles.push({
         protocol: profile.protocol,
         status: profile.status,

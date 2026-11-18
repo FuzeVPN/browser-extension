@@ -38,6 +38,19 @@ export const DIAGNOSTIC_DELIVERY_KEY = "fuzevpnDiagnosticDelivery";
 const TTL = 86_400_000;
 /** Lifetime of a repeated-error counter, measured from its first occurrence. */
 const INCIDENT_WINDOW_MS = 600_000;
+/** Commands a page repeats on a timer: their success is no event of the technical history. */
+/**
+ * Commands whose success is no event. The popup asks for the network state every few
+ * seconds, and a worker starts at the first request after each pause: recorded, their
+ * successes would fill the history and each need a purge of its own. Their failures
+ * are recorded, and their successes still end the count of earlier failures.
+ */
+const ROUTINE_COMMANDS: ReadonlySet<string> = new Set(["refresh_network", "initialize"]);
+
+/** What the state tells a page, whatever revision it is sent under. */
+function stateSignature(state: DiagnosticUiState): string {
+  return JSON.stringify({ ...state, revision: 0 });
+}
 interface Draft {
   owner: string | null;
   report: DiagnosticReport;
@@ -68,6 +81,8 @@ interface ServiceDependencies extends CollectorDependencies {
   connectionHistory?: {
     initialize(): Promise<void>;
     clear(): void;
+    /** Drops what was restored without an owner, and keeps what this worker recorded. */
+    establish?(): void;
     count(): number;
     pruneExpired(): Promise<void>;
     nextExpiry(): number | null;
@@ -83,6 +98,8 @@ export class DiagnosticService {
   private owner: string | null = null;
   private drafts: Draft[] = [];
   private incidents: Incident[] = [];
+  /** What the last start-up left, for the account it was restored for. */
+  private startup: { owner: string | null; outcome: string } | null = null;
   private preparing = false;
   private epoch = 0;
   /** Bumped by every automatic consent decision; older automatic work is void. */
@@ -94,6 +111,15 @@ export class DiagnosticService {
   private housekeepingUpdates: Promise<void> = Promise.resolve();
   private draftRevision = 0;
   private persistedDraftRevision = 0;
+  /**
+   * The purge alarm as this worker last left it: the time it was set and verified for,
+   * null once removed, undefined while that is not known.
+   */
+  private housekeepingAlarm: number | null | undefined;
+  /** Bumped when the alarm fires: what was known of it before no longer holds. */
+  private housekeepingFirings = 0;
+  /** The state last sent to open pages, without its revision. */
+  private sentState: string | null = null;
 
   constructor(private readonly dependencies: ServiceDependencies) {
     this.history = new DiagnosticHistory({
@@ -148,7 +174,16 @@ export class DiagnosticService {
         DIAGNOSTIC_DRAFTS_KEY
       ];
       if (stored && typeof stored === "object") {
-        const data = stored as { drafts?: unknown; incidents?: unknown };
+        const data = stored as { drafts?: unknown; incidents?: unknown; startup?: unknown };
+        if (data.startup && typeof data.startup === "object") {
+          const { owner, outcome } = data.startup as { owner?: unknown; outcome?: unknown };
+          if (
+            (owner === null || (typeof owner === "string" && owner.length <= 256)) &&
+            typeof outcome === "string" &&
+            outcome.length <= 256
+          )
+            this.startup = { owner, outcome };
+        }
         if (Array.isArray(data.drafts))
           for (const value of data.drafts.slice(-20)) {
             try {
@@ -251,19 +286,30 @@ export class DiagnosticService {
       await this.scheduleHousekeeping();
     }
     this.loaded = true;
+    // Sent once: the account boundary above has just sent it if anything was to say.
     this.syncAccount();
-    this.changed();
+    this.changed(true);
     void this.delivery.pump().catch(() => undefined);
   }
 
+  /**
+   * The first boundary of a worker: the account it has just restored. Unlike a change
+   * of account, it keeps what this worker itself recorded before that account was known.
+   */
+  establishAccount(): void {
+    this.syncAccount(true, true);
+  }
+
   /** Called synchronously at account boundaries, before any network/storage await. */
-  syncAccount(force = false): void {
+  syncAccount(force = false, establishing = false): void {
     const owner = this.currentOwner();
     if (force || owner !== this.owner) {
       this.owner = owner;
       this.epoch += 1;
       this.incidents = [];
-      this.dependencies.connectionHistory?.clear();
+      const history = this.dependencies.connectionHistory;
+      if (establishing && history?.establish) history.establish();
+      else history?.clear();
       if (this.loaded) {
         void this.history
           .clear(owner)
@@ -273,7 +319,8 @@ export class DiagnosticService {
       }
     }
     this.delivery.syncAccount();
-    if (this.loaded) this.changed();
+    // Called at every state publication: pages are told only what they do not know.
+    if (this.loaded) this.changed(true);
   }
 
   permissionsRemoved(): void {
@@ -407,7 +454,9 @@ export class DiagnosticService {
           await this.history.clear(this.owner).finally(() => this.scheduleHousekeeping());
           break;
       }
-      this.changed();
+      // The answer carries the state. The other pages are told when it differs from what
+      // they were last sent: a request which only reads it changes nothing for them.
+      this.changed(true);
       return {
         diagnosticsVersion: 1,
         ok: true,
@@ -432,6 +481,9 @@ export class DiagnosticService {
   }
 
   async historyAlarm(): Promise<void> {
+    // The browser removed the alarm when it delivered it.
+    this.housekeepingFirings += 1;
+    this.housekeepingAlarm = undefined;
     try {
       // Journal retention must still run if another diagnostic store cannot load.
       await this.dependencies.connectionHistory?.pruneExpired();
@@ -447,6 +499,30 @@ export class DiagnosticService {
     }
   }
 
+  /**
+   * Whether a start-up left something other than the previous one did, for the same
+   * account. A worker starts at the first request after each pause and finds again what
+   * the previous one left: that is no event. What it finds changed is one, whatever
+   * started it. The outcome is remembered for the browser session.
+   */
+  startupNews(outcome: string): Promise<boolean> {
+    const answer = this.work
+      .catch(() => undefined)
+      .then(async () => {
+        await this.initialize();
+        const owner = this.owner;
+        if (this.startup?.owner === owner && this.startup.outcome === outcome) return false;
+        this.startup = { owner, outcome: outcome.slice(0, 256) };
+        await this.persist().catch(() => undefined);
+        return true;
+      });
+    this.work = answer.then(
+      () => undefined,
+      () => undefined,
+    );
+    return answer;
+  }
+
   /** Never awaited by a business operation. No command arguments enter this path. */
   capture(command: string): (result: CommandResult, elapsed?: number) => void {
     const epoch = this.epoch;
@@ -460,28 +536,35 @@ export class DiagnosticService {
     const operation = diagnosticOperation(command);
     const epoch = this.epoch;
     const generation = this.automaticGeneration;
+    const routine = ROUTINE_COMMANDS.has(command) && !result.commandError && !result.superseded;
     this.work = this.work
       .catch(() => undefined)
       .then(async () => {
         await this.initialize();
         if (epoch !== this.epoch) return;
         const error = result.commandError ? diagnosticError(result.commandError, operation) : null;
-        await this.history
-          .record({
-            source: "controller",
-            stage: error?.stage ?? operationStage(operation),
-            event: result.superseded ? "cancelled" : error ? "error" : "end",
-            offset_ms: 0,
-            ...(error ? { code: error.code } : {}),
-            duration_ms: Math.min(604_800_000, Math.max(0, Math.round(elapsed))),
-          })
-          .finally(() => this.scheduleHousekeeping());
-        if (epoch !== this.epoch) return;
+        if (!routine) {
+          await this.history
+            .record({
+              source: "controller",
+              stage: error?.stage ?? operationStage(operation),
+              event: result.superseded ? "cancelled" : error ? "error" : "end",
+              offset_ms: 0,
+              ...(error ? { code: error.code } : {}),
+              duration_ms: Math.min(604_800_000, Math.max(0, Math.round(elapsed))),
+            })
+            .finally(() => this.scheduleHousekeeping());
+          if (epoch !== this.epoch) return;
+        }
         if (result.superseded) return;
         if (error) await this.maybeAutomatic(error, generation);
         else {
-          this.incidents = this.incidents.filter((incident) => incident.operation !== operation);
-          await this.persist();
+          // A success ends the count of the failures of its operation, when there is one.
+          const counted = this.incidents.filter((incident) => incident.operation !== operation);
+          if (counted.length !== this.incidents.length) {
+            this.incidents = counted;
+            await this.persist();
+          } else if (routine) return;
         }
         this.changed();
       })
@@ -589,6 +672,13 @@ export class DiagnosticService {
       await this.persist();
       return;
     }
+    // A failure which lasts is counted again every ten minutes. While the report of the
+    // same failure is still kept, within the day, another one would say nothing more.
+    if (this.delivery.reportedAutomatically(account.ownerId, error.code, error.operation)) {
+      incident.reported = true;
+      await this.persist();
+      return;
+    }
     const environment = await this.environment();
     assertContext();
     if (!(await this.nativeConsentGranted())) return;
@@ -682,6 +772,7 @@ export class DiagnosticService {
             [DIAGNOSTIC_DRAFTS_KEY]: {
               drafts: structuredClone(this.drafts),
               incidents: structuredClone(this.incidents),
+              ...(this.startup ? { startup: { ...this.startup } } : {}),
             },
           });
           this.persistedDraftRevision = revision;
@@ -706,23 +797,41 @@ export class DiagnosticService {
           deadlines.push(connectionExpiry);
         if (this.draftRevision !== this.persistedDraftRevision)
           deadlines.push(this.dependencies.now() + 60_000);
+        const firings = this.housekeepingFirings;
         if (!deadlines.length) {
+          if (this.housekeepingAlarm === null) return;
+          this.housekeepingAlarm = undefined;
           await extensionApi.alarms.clear(DIAGNOSTIC_HISTORY_ALARM);
+          if (firings === this.housekeepingFirings) this.housekeepingAlarm = null;
           return;
         }
-        await extensionApi.alarms.create(DIAGNOSTIC_HISTORY_ALARM, {
-          when: Math.max(this.dependencies.now() + 1_000, Math.min(...deadlines)),
-        });
+        const when = Math.max(this.dependencies.now() + 1_000, Math.min(...deadlines));
+        // Most changes leave the earliest deadline where it was: the alarm stands.
+        if (this.housekeepingAlarm === when) return;
+        this.housekeepingAlarm = undefined;
+        await extensionApi.alarms.create(DIAGNOSTIC_HISTORY_ALARM, { when });
         if (!(await extensionApi.alarms.get(DIAGNOSTIC_HISTORY_ALARM)))
           throw new Error("diagnostic_history_alarm_unavailable");
+        // Known only once verified, and only if it has not fired in the meantime.
+        if (firings === this.housekeepingFirings) this.housekeepingAlarm = when;
       });
     return this.housekeepingUpdates;
   }
-  private changed(): void {
+  /** Sends the state to open pages; `unlessSame` skips one they were already sent. */
+  private changed(unlessSame = false): void {
+    if (unlessSame && this.loaded) {
+      try {
+        if (stateSignature(this.state()) === this.sentState) return;
+      } catch {
+        /* A state which cannot be compared is sent. */
+      }
+    }
     this.revision += 1;
     if (!this.loaded) return;
     try {
-      this.dependencies.onChanged(this.state());
+      const state = this.state();
+      this.sentState = stateSignature(state);
+      this.dependencies.onChanged(state);
     } catch {
       /* UI is optional. */
     }

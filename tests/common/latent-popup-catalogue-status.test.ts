@@ -2,6 +2,7 @@
 
 import { readFileSync } from "node:fs";
 import { runInNewContext } from "node:vm";
+import { popupDom } from "./popup-dom";
 import ts from "typescript";
 import { NetworkError } from "../../src/core/api/client";
 import type { CommandResult, ExtensionRequest } from "../../src/core/shared/messages";
@@ -142,6 +143,7 @@ function setup(catalogue: Partial<AppSnapshot> = {}) {
     locale: "fr",
     languageCatalogFailed: false,
     devicesFailure: null,
+    deviceRefusals: new Map<string, unknown>(),
     locationPreferenceFailure: null,
     locationsRefreshFailed: false,
     locationSelectionPending: false,
@@ -184,7 +186,7 @@ function setup(catalogue: Partial<AppSnapshot> = {}) {
     replaceListChildren: vi.fn(),
   };
   // Execute the production functions, with only messaging and row rendering replaced.
-  runInNewContext(executable, context);
+  runInNewContext(executable, Object.assign(context, popupDom));
   const subject = context as unknown as Subject;
   subject.bindEvents();
   subject.renderLocations(subject.snapshot);

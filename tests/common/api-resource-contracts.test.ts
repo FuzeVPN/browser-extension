@@ -79,13 +79,61 @@ describe("required API identities", () => {
       expect(
         decodeProfile({ user_id: id, email: "", first_name: "", last_name: "", country_code: "" }),
       ).toBeNull();
-      expect(decodeLocations({ locations: [{ ...location, id }] })).toBeNull();
-      expect(decodeDeviceList({ limit: 1, devices: [{ ...device, device_id: id }] })).toBeNull();
+      // In a list, an entry which nothing can name is left out; the list stands.
+      expect(decodeLocations({ locations: [{ ...location, id }] })).toEqual([]);
+      expect(decodeDeviceList({ limit: 1, devices: [{ ...device, device_id: id }] })).toEqual({
+        limit: 1,
+        devices: [],
+      });
       expect(decodeBrowserDeviceEnrollment({ ...device, device_id: id })).toBeNull();
       expect(decodeProxySession({ ...session, id })).toBeNull();
       expect(decodeProxySession({ ...session, location_id: id })).toBeNull();
     },
   );
+
+  it.each([
+    ["no object", "frankfurt"],
+    ["nothing", null],
+    ["without a city", { ...location, id: "other", city: undefined }],
+    ["with protocols which are no list", { ...location, id: "other", supported_protocols: "all" }],
+    ["with a protocol which is no name", { ...location, id: "other", supported_protocols: [7] }],
+  ])("leaves out a location which is %s, and keeps the others", (_name, broken) => {
+    expect(decodeLocations({ locations: [broken, location] })).toEqual([
+      expect.objectContaining({ id: location.id }),
+    ]);
+  });
+
+  it.each([
+    ["no object", "browser"],
+    ["without a name", { ...device, device_id: "other", name: undefined }],
+    ["with a creation date which is none", { ...device, device_id: "other", created_at: "soon" }],
+    ["with profiles which are no list", { ...device, device_id: "other", profiles: null }],
+  ])("leaves out a device which is %s, and keeps the others and the quota", (_name, broken) => {
+    expect(decodeDeviceList({ limit: 3, devices: [broken, device] })).toEqual({
+      limit: 3,
+      devices: [expect.objectContaining({ deviceId: device.device_id })],
+    });
+  });
+
+  it("leaves out a profile which cannot be read, and keeps its device", () => {
+    const profile = { protocol: "browser_proxy", status: "active", created_at: date };
+    const decoded = decodeDeviceList({
+      limit: 3,
+      devices: [{ ...device, profiles: [{ ...profile, created_at: "soon" }, "none", profile] }],
+    });
+
+    expect(decoded?.devices).toHaveLength(1);
+    expect(decoded?.devices[0]?.profiles).toEqual([
+      { protocol: "browser_proxy", status: "active", createdAt: date, expiresAt: null },
+    ]);
+  });
+
+  it("still rejects a list which is none", () => {
+    expect(decodeLocations({ locations: "all" })).toBeNull();
+    expect(decodeLocations({})).toBeNull();
+    expect(decodeDeviceList({ limit: 3, devices: "all" })).toBeNull();
+    expect(decodeDeviceList({ devices: [] })).toBeNull();
+  });
 
   it("rejects duplicate location identities before filtering unsupported protocols", () => {
     expect(

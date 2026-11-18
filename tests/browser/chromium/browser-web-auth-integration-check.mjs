@@ -495,6 +495,34 @@ try {
   await capture("native-cancelled");
   check("Closing the real native authentication window cancels sign-in without creating a session");
 
+  const givenUpCount = tokenCount();
+  const givenUpWindowsBefore = await popup.evaluate(async () =>
+    (await chrome.windows.getAll()).map(({ id }) => id),
+  );
+  const abandoned = await start("hold");
+  assert.equal((await snapshot()).webLoginPending, true);
+  await popup.locator("#webLoginCancelButton").waitFor({ state: "visible" });
+  await popup.locator("#webLoginCancelButton").click();
+  const givenUp = await settled();
+  assert.equal(givenUp.profile, null);
+  assert.equal(givenUp.error, "web_login_cancelled");
+  await popup.locator("#webLoginCancelButton").waitFor({ state: "hidden" });
+  await popup.waitForFunction(() => !document.getElementById("loginButton").disabled);
+  // The window which the user could not find returns later: its code is never exchanged.
+  complete(abandoned);
+  await waitForRead(
+    () => popup.evaluate(async () => (await chrome.windows.getAll()).map(({ id }) => id)),
+    (ids) => ids.every((id) => givenUpWindowsBefore.includes(id)),
+    { message: "Abandoned native callback did not close its browser authentication window" },
+  );
+  const afterAbandoned = await snapshot();
+  assert.equal(afterAbandoned.profile, null);
+  assert.equal(afterAbandoned.webLoginPending, false);
+  assert.equal(tokenCount(), givenUpCount);
+  await capture("popup-cancelled");
+  await flowSecretsAbsent();
+  check("The popup gives up a pending native flow; its later valid return cannot create a session");
+
   const lateCount = tokenCount();
   const lateWindowsBefore = await popup.evaluate(async () =>
     (await chrome.windows.getAll()).map(({ id }) => id),

@@ -3,6 +3,7 @@
 import { readFileSync } from "node:fs";
 import { resolve } from "node:path";
 import { runInNewContext } from "node:vm";
+import { popupDom } from "./popup-dom";
 import ts from "typescript";
 import type { Device } from "../../src/core/api/types";
 import { LANGUAGE_NAMES, localeDirectory, type Language } from "../../src/core/shared/language";
@@ -203,6 +204,8 @@ async function popup(language: Language, devices: Device[], status: AppSnapshot[
     refreshDevicesButton: new TextElement("button"),
     closeDevicesButton: new TextElement("button"),
     deviceList: new TextElement("section"),
+    // The list is rendered for its dialog, which is open.
+    devicesDialog: { open: true },
   };
   const context = {
     elements,
@@ -212,6 +215,7 @@ async function popup(language: Language, devices: Device[], status: AppSnapshot[
     currentBrowserName: "Firefox",
     devicesAction: 0,
     devicesFailure: null,
+    deviceRefusals: new Map<string, unknown>(),
     devicesRefreshPending: false,
     renderedDevices: "",
     deviceDeletions: new Set<string>(),
@@ -228,7 +232,7 @@ async function popup(language: Language, devices: Device[], status: AppSnapshot[
       list.children = children;
     },
   };
-  runInNewContext(executable, context);
+  runInNewContext(executable, Object.assign(context, popupDom));
   const subject = context as typeof context & {
     renderDevices(next: AppSnapshot): void;
     deleteDevice(deviceId: string, deletionKey: string, remove: TextElement): Promise<void>;

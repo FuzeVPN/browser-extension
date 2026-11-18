@@ -35,6 +35,9 @@ import { NETWORK_OBSERVATION_POLL_MS, networkRouteKey } from "../../core/shared/
 import { normalizeSiteExclusion, type SiteExclusion } from "../../core/shared/site-exclusions";
 import { PopupSnapshotOrder, popupSnapshot, type PopupSnapshot } from "./snapshot";
 import { exclusionRetry, type ExclusionIntent } from "./exclusion-retry";
+import { focusNeighbour } from "./list-focus";
+import { setContent, setDisabled, setText } from "./dom";
+import { keepPopupFitted } from "./fit";
 import { DiagnosticConnection, diagnosticErrorKey } from "../diagnostics-page/client";
 import { requestDiagnosticsConsent } from "../../core/shared/data-consent";
 import {
@@ -58,6 +61,14 @@ interface PopupResponse extends ExtensionResponse {
 // release it, and render() releases every marker when the account or worker changes.
 type PendingRequest = false | object;
 
+/**
+ * How long the popup waits for its first state before it shows that it is waiting.
+ * The background usually answers within a few hundred milliseconds, start-up included.
+ */
+const BOOT_REVEAL_MS = 1_500;
+/** A background which has said nothing after this long is reported as not answering. */
+const BOOT_FAILURE_MS = 10_000;
+
 // Apply the saved theme before the popup renders anything.
 const systemDarkTheme = matchMedia("(prefers-color-scheme: dark)");
 let themePreference = readThemePreference();
@@ -77,6 +88,7 @@ const elements = {
   webLoginButtonLabel: element<HTMLElement>("webLoginButtonLabel"),
   webLoginHelp: element<HTMLElement>("webLoginHelp"),
   webLoginStatus: element<HTMLElement>("webLoginStatus"),
+  webLoginCancelButton: element<HTMLButtonElement>("webLoginCancelButton"),
   settingsButton: element<HTMLButtonElement>("settingsButton"),
   settingsPanel: element<HTMLDialogElement>("settingsPanel"),
   closeSettingsButton: element<HTMLButtonElement>("closeSettingsButton"),
@@ -170,6 +182,9 @@ const elements = {
 let snapshot: PopupSnapshot | null = null;
 const snapshotOrder = new PopupSnapshotOrder();
 let communicationFailed = false;
+// Whether the background has ever said which account, if any, is signed in. Until then
+// neither the main view nor the invitation to sign in is the right one to show.
+let accountKnown = false;
 let diagnosticsPending = false;
 let diagnosticsStateRequest: Promise<unknown> | null = null;
 const diagnostics = new DiagnosticConnection(renderDiagnostics);
@@ -186,18 +201,21 @@ let verificationTimer: ReturnType<typeof setTimeout> | undefined;
 let devicesRefreshPending: PendingRequest = false;
 let accountEpoch = 0;
 let devicesAction = 0;
-// A refused deletion names its device: it stays reported while that device is listed,
-// whatever other device command starts or succeeds meanwhile.
-let devicesFailure: {
+interface DeviceFailure {
   transport: boolean;
   code: AppErrorCode;
   retryAfter: number | null;
-  deviceId?: string;
-} | null = null;
+}
+// What the last list refresh reported, or a command whose device left the list.
+let devicesFailure: DeviceFailure | null = null;
+// A refused deletion belongs to its device: it stays reported while that device is
+// listed, whatever other device command starts, succeeds or is refused meanwhile.
+const deviceRefusals = new Map<string, DeviceFailure>();
 const deviceDeletions = new Set<string>();
 let returnToSettingsAfterDevices = false;
 let securityPreferencesPending: PendingRequest = false;
 let connectionRetryPending: PendingRequest = false;
+let stateReadPending = false;
 let observedNetworkRoute: string | null = null;
 let locationFilter: "all" | "favorites" | "recent" = "all";
 let locationPreferenceFailure: AppErrorCode | "save" | "transport" | null = null;
@@ -242,6 +260,18 @@ for (const [value, label] of Object.entries(LANGUAGE_NAMES)) {
 localizeDocument();
 configureLinks();
 bindEvents();
+// The popup is at most 600px tall: the page tightens itself rather than scroll a few pixels.
+const shell = document.querySelector<HTMLElement>(".shell");
+if (shell) keepPopupFitted(shell);
+// The catalogs load while the background answers, not after.
+translator.preload(locale);
+// No view is shown until the state says which one. A background which is slow to
+// answer is waited for in the open; one which does not answer is reported as such,
+// with the way to ask again, and is still listened to.
+const bootReveal = setTimeout(() => shell?.setAttribute("data-boot", "waiting"), BOOT_REVEAL_MS);
+const bootDeadline = setTimeout(() => {
+  if (!accountKnown && !communicationFailed) renderCommunicationFailure();
+}, BOOT_FAILURE_MS);
 void initializePopup().catch(() => undefined);
 refreshDiagnosticsState();
 void detectBrowserEnvironment()
@@ -304,8 +334,15 @@ function bindEvents(): void {
     event.preventDefault();
     void signInOnWeb();
   });
-  elements.protectButton.addEventListener("click", () => {
+  // The sign-in window may be hidden or lost: the attempt can be given up from here.
+  elements.webLoginCancelButton.addEventListener("click", () => {
+    void request({ type: "cancel_web_login" });
+  });
+  elements.protectButton.addEventListener("click", (event) => {
     if (!snapshot) return;
+    // The second click of a double-click finds the button already changed by the
+    // first: it would disconnect what that click has just asked to connect.
+    if (event.detail > 1) return;
     if (canDisconnect(snapshot)) {
       void request({ type: "disconnect" });
       return;
@@ -318,6 +355,8 @@ function bindEvents(): void {
     locationPreferenceFailure = null;
     locationFavoriteFailed = false;
     elements.locationDialog.showModal();
+    // The list is built now that it is shown; this is the only way the dialog opens.
+    if (snapshot) renderLocations(snapshot);
     elements.locationSearch.focus();
     void refreshLocations();
   });
@@ -363,13 +402,14 @@ function bindEvents(): void {
   elements.closeLocationButton.addEventListener("click", () => elements.locationDialog.close());
   elements.settingsButton.addEventListener("click", () => elements.settingsPanel.showModal());
   elements.retryButton.addEventListener("click", () => {
+    if (communicationFailed) {
+      // What the popup shows is not what the worker last said: its state is read again
+      // before anything is asked of it. A connection which may be fine is not made again,
+      // and nobody is invited to sign in before a state says that nobody is.
+      void readStateAgain();
+      return;
+    }
     if (snapshot?.profile === null && snapshot.error !== "storage_unavailable") {
-      if (communicationFailed) {
-        // The sign-in button stays disabled while the worker is unreachable: read its
-        // state again rather than focus a control which cannot be used.
-        void request({ type: "get_snapshot" });
-        return;
-      }
       elements.loginButton.focus();
       elements.loginButton.scrollIntoView({ block: "center" });
       return;
@@ -475,9 +515,9 @@ function openDevices(): void {
 function confirmAction(title: string, description: string): Promise<boolean> {
   const dialog = elements.confirmationDialog;
   if (dialog.open) return Promise.resolve(false);
-  elements.confirmationTitle.textContent = title;
-  elements.confirmationMessage.textContent = description;
-  elements.confirmationAcceptButton.textContent = title;
+  setText(elements.confirmationTitle, title);
+  setText(elements.confirmationMessage, description);
+  setText(elements.confirmationAcceptButton, title);
   dialog.returnValue = "cancel";
   dialog.showModal();
   elements.confirmationCancelButton.focus();
@@ -486,6 +526,19 @@ function confirmAction(title: string, description: string): Promise<boolean> {
       once: true,
     });
   });
+}
+
+/** Asks the worker for its state after a failure to reach it, one request at a time. */
+async function readStateAgain(): Promise<void> {
+  if (stateReadPending) return;
+  stateReadPending = true;
+  if (snapshot) renderSecurity(snapshot);
+  try {
+    await request({ type: "get_snapshot" });
+  } finally {
+    stateReadPending = false;
+    if (snapshot) renderSecurity(snapshot);
+  }
 }
 
 async function retryConnection(): Promise<void> {
@@ -554,16 +607,19 @@ function renderVerification(next: AppSnapshot): void {
   }
   const remaining = Math.max(0, Math.ceil((verificationCooldownUntil - Date.now()) / 1000));
   elements.verificationPanel.classList.toggle("hidden", !next.profile || !verificationAvailable);
-  elements.verificationStatus.textContent = verificationPending
-    ? message("verificationSending")
-    : verificationSent
-      ? message("verificationSent")
-      : remaining > 0
-        ? message("errorVerificationCooldown", [String(remaining)])
-        : verificationFailure && verificationFailure.code !== "verification_email_cooldown"
-          ? errorMessage(verificationFailure.code, verificationFailure.retryAfter)
-          : "";
-  elements.resendButton.disabled = verificationPending || remaining > 0;
+  setText(
+    elements.verificationStatus,
+    verificationPending
+      ? message("verificationSending")
+      : verificationSent
+        ? message("verificationSent")
+        : remaining > 0
+          ? message("errorVerificationCooldown", [String(remaining)])
+          : verificationFailure && verificationFailure.code !== "verification_email_cooldown"
+            ? errorMessage(verificationFailure.code, verificationFailure.retryAfter)
+            : "",
+  );
+  setDisabled(elements.resendButton, verificationPending || remaining > 0);
   elements.resendButton.setAttribute("aria-busy", String(verificationPending));
   clearTimeout(verificationTimer);
   verificationTimer = undefined;
@@ -594,14 +650,14 @@ async function updateSecurityPreferences(): Promise<void> {
   };
   const pending = {};
   securityPreferencesPending = pending;
-  elements.killSwitchEnabled.disabled = true;
-  elements.webRtcProtectionEnabled.disabled = true;
+  setDisabled(elements.killSwitchEnabled, true);
+  setDisabled(elements.webRtcProtectionEnabled, true);
   try {
     const response = await request(update);
     if (response.stale) return;
     render(response.snapshot);
   } catch {
-    elements.settingsError.textContent = message("error_unknown_error");
+    setText(elements.settingsError, message("error_unknown_error"));
     elements.settingsError.classList.remove("hidden");
   } finally {
     // A newer account or worker may already own an update of its own.
@@ -668,7 +724,12 @@ async function sendExclusionsUpdate(
       }
       update = retry;
     }
-    const response = await request(update);
+    // The request is over when its reply is here. That reply is rendered as such: a
+    // list which it empties gives its focus to the field, which a request still shown
+    // as pending would leave disabled.
+    const response = await request(update, () => {
+      exclusionRequestPending = false;
+    });
     const applied =
       (response.ok || response.effectConfirmed === true) &&
       !response.superseded &&
@@ -743,24 +804,26 @@ function renderExclusionPreview(): void {
     });
   }
   elements.exclusionInputError.classList.toggle("hidden", !error);
-  elements.exclusionInputError.textContent = error ? message(error) : "";
+  setText(elements.exclusionInputError, error ? message(error) : "");
   elements.exclusionInput.setAttribute("aria-invalid", String(Boolean(input && error)));
-  elements.addExclusionButton.disabled =
+  setDisabled(
+    elements.addExclusionButton,
     !snapshot ||
-    !entry ||
-    Boolean(error) ||
-    exclusionRequestPending ||
-    snapshot.siteExclusions.pending;
+      !entry ||
+      Boolean(error) ||
+      exclusionRequestPending ||
+      snapshot.siteExclusions.pending,
+  );
 }
 
 function renderSiteExclusions(next: PopupSnapshot): void {
-  elements.manageExclusionsButton.disabled = !next.siteExclusionsAvailable;
+  setDisabled(elements.manageExclusionsButton, !next.siteExclusionsAvailable);
   const preferencesReset =
     next.siteExclusionsAvailable && next.siteExclusions.recoveryNotice === "preferences_reset";
   elements.exclusionsRecoveryNotice.classList.toggle("hidden", !preferencesReset);
   elements.exclusionsDialogRecoveryNotice.classList.toggle("hidden", !preferencesReset);
   if (!next.siteExclusionsAvailable) {
-    elements.exclusionsSummary.textContent = message("siteExclusionsReloadRequired");
+    setText(elements.exclusionsSummary, message("siteExclusionsReloadRequired"));
     elements.exclusionsDialog.close();
     return;
   }
@@ -769,14 +832,17 @@ function renderSiteExclusions(next: PopupSnapshot): void {
   const busy = exclusionRequestPending || state.pending;
   const failed = exclusionRequestFailed || state.error;
   elements.exclusionsEnabled.checked = saved.enabled;
-  elements.exclusionsEnabled.disabled = busy || saved.entries.length === 0;
+  setDisabled(elements.exclusionsEnabled, busy || saved.entries.length === 0);
   elements.exclusionsEnabled.setAttribute("aria-busy", String(busy));
   elements.exclusionsError.classList.toggle("hidden", !failed);
-  elements.exclusionsErrorMessage.textContent = message(
-    exclusionConflict ? "siteExclusionsConflict" : "siteExclusionsSaveError",
+  setText(
+    elements.exclusionsErrorMessage,
+    message(exclusionConflict ? "siteExclusionsConflict" : "siteExclusionsSaveError"),
   );
-  elements.retryExclusionsButton.disabled =
-    exclusionRequestPending || (state.pending && !state.error);
+  setDisabled(
+    elements.retryExclusionsButton,
+    exclusionRequestPending || (state.pending && !state.error),
+  );
   const stateKey = busy
     ? state.error
       ? "siteExclusionsInterrupted"
@@ -784,17 +850,17 @@ function renderSiteExclusions(next: PopupSnapshot): void {
     : saved.enabled && saved.entries.length > 0
       ? "siteExclusionsOn"
       : "siteExclusionsOff";
-  elements.exclusionsState.textContent = message(stateKey);
-  elements.exclusionsSummary.textContent = message(
-    busy ? stateKey : saved.enabled ? "siteExclusionsSummary" : "siteExclusionsOff",
-    [String(saved.entries.length)],
+  setText(elements.exclusionsState, message(stateKey));
+  setText(
+    elements.exclusionsSummary,
+    message(busy ? stateKey : saved.enabled ? "siteExclusionsSummary" : "siteExclusionsOff", [
+      String(saved.entries.length),
+    ]),
   );
-  elements.exclusionsCount.textContent = message("siteExclusionsCount", [
-    String(saved.entries.length),
-  ]);
+  setText(elements.exclusionsCount, message("siteExclusionsCount", [String(saved.entries.length)]));
   elements.exclusionsEmpty.classList.toggle("hidden", saved.entries.length > 0);
-  elements.exclusionInput.disabled = busy;
-  elements.exclusionSubdomains.disabled = busy;
+  setDisabled(elements.exclusionInput, busy);
+  setDisabled(elements.exclusionSubdomains, busy);
   const listKey = JSON.stringify([locale, saved.entries, busy]);
   renderExclusionPreview();
   if (listKey === renderedExclusions) return;
@@ -820,9 +886,11 @@ function renderSiteExclusions(next: PopupSnapshot): void {
     const label = message("siteExclusionRemove", [entry.domain]);
     remove.setAttribute("aria-label", label);
     remove.title = label;
-    remove.disabled = busy;
+    // Unavailable, not disabled: a disabled button loses the keyboard focus, which the
+    // one pressed must keep until the list says what became of its site.
+    remove.setAttribute("aria-disabled", String(busy));
     remove.addEventListener("click", () => {
-      if (!snapshot) return;
+      if (!snapshot || exclusionRequestPending || snapshot.siteExclusions.pending) return;
       const current = snapshot.siteExclusions.saved;
       const entries = current.entries.filter(({ domain }) => domain !== entry.domain);
       void updateSiteExclusions(entries.length > 0 && current.enabled, entries);
@@ -831,7 +899,14 @@ function renderSiteExclusions(next: PopupSnapshot): void {
     return row;
   });
   renderedExclusions = listKey;
-  replaceListChildren(elements.exclusionsList, rows, elements.closeExclusionsButton);
+  // The focus of a site which left goes to its neighbour, and to the field when it
+  // was the last one.
+  replaceListChildren(
+    elements.exclusionsList,
+    rows,
+    elements.exclusionInput.disabled ? elements.closeExclusionsButton : elements.exclusionInput,
+    true,
+  );
 }
 
 async function refreshDevices(): Promise<void> {
@@ -840,14 +915,12 @@ async function refreshDevices(): Promise<void> {
   const pending = {};
   const action = ++devicesAction;
   devicesRefreshPending = pending;
-  if (!devicesFailure?.deviceId) devicesFailure = null;
+  devicesFailure = null;
   renderDevices(snapshot);
   try {
     const response = await request({ type: "refresh_devices" });
     if (epoch !== accountEpoch || action !== devicesAction || response.superseded) return;
-    const failure = deviceFailure(response);
-    if (failure) devicesFailure = failure;
-    else if (!devicesFailure?.deviceId) devicesFailure = null;
+    devicesFailure = deviceFailure(response);
     render(response.snapshot);
   } finally {
     // A newer account or worker may already own a refresh of its own.
@@ -858,7 +931,7 @@ async function refreshDevices(): Promise<void> {
   }
 }
 
-function deviceFailure(response: PopupResponse): typeof devicesFailure {
+function deviceFailure(response: PopupResponse): DeviceFailure | null {
   return response.ok || response.effectConfirmed
     ? null
     : {
@@ -872,6 +945,9 @@ async function initializePopup(): Promise<void> {
   const response = await request({ type: "get_snapshot" });
   // A publication received before this reply already displayed a newer state, which
   // makes the reply stale: the first account refresh follows that state, not nothing.
+  // A worker which did not answer gave no state, and nothing published one either: what
+  // stands for its reply says nothing of the account, and is not rendered as a state.
+  if (response.transportFailed && !accountKnown) return;
   const first = response.stale ? snapshot : response.snapshot;
   if (!first) return;
   if (!response.stale) render(first);
@@ -955,6 +1031,7 @@ function render(value: unknown, confirmed = false): boolean {
     ++devicesAction;
     ++locationSelectionRequest;
     devicesFailure = null;
+    deviceRefusals.clear();
     locationPreferenceFailure = null;
     locationFavoriteFailed = false;
     locationsRefreshFailed = false;
@@ -964,6 +1041,7 @@ function render(value: unknown, confirmed = false): boolean {
     resetVerificationFeedback();
   }
   snapshot = next;
+  accountKnown = true;
   if (confirmed) {
     ++confirmedSnapshotSequence;
     communicationFailed = false;
@@ -1007,7 +1085,19 @@ function render(value: unknown, confirmed = false): boolean {
   return true;
 }
 
+/** The first state, or failure, is about to be shown: the views may appear. */
+function endBoot(): void {
+  clearTimeout(bootReveal);
+  clearTimeout(bootDeadline);
+  shell?.removeAttribute("data-boot");
+  shell?.removeAttribute("aria-busy");
+  // A failure before any state leaves the account unknown: the sign-in view then shows
+  // the failure alone, without its welcome and its form.
+  shell?.toggleAttribute("data-account-unknown", !accountKnown);
+}
+
 function renderCommunicationFailure(): void {
+  endBoot();
   communicationFailed = true;
   ++renderSequence;
   const current = snapshot ?? popupSnapshot({ ...EMPTY_SNAPSHOT, siteExclusions: undefined });
@@ -1023,8 +1113,8 @@ function renderCommunicationFailure(): void {
   });
   renderWebLogin(current);
   elements.statusOrb.className = "status-orb unverified";
-  elements.statusLabel.textContent = message("securityBlockUnverified");
-  elements.publicIp.textContent = message("ipUnavailable");
+  setText(elements.statusLabel, message("securityBlockUnverified"));
+  setText(elements.publicIp, message("ipUnavailable"));
   elements.logoutResult.classList.add("hidden");
 }
 
@@ -1061,12 +1151,13 @@ function renderCurrent(next: PopupSnapshot): void {
   }
   if (!languagePending) elements.languageSelect.value = next.languagePreference;
   const languageError = languageFailed || languageCatalogFailed;
-  elements.languageError.textContent = languageError ? message("languageSaveError") : "";
+  setText(elements.languageError, languageError ? message("languageSaveError") : "");
   elements.languageError.classList.toggle("hidden", !languageError);
   const loggedIn = next.profile !== null;
   const lostAccount = !loggedIn && !elements.mainView.classList.contains("hidden");
   elements.loginView.classList.toggle("hidden", loggedIn);
   elements.mainView.classList.toggle("hidden", !loggedIn);
+  endBoot();
   elements.settingsButton.classList.remove("hidden");
   renderWebLogin(next);
   renderError(next);
@@ -1086,53 +1177,63 @@ function renderCurrent(next: PopupSnapshot): void {
     locationFavoriteFailed = false;
     elements.deviceList.replaceChildren();
     renderedDevices = "";
-    elements.deviceCount.textContent = "";
-    elements.locationName.textContent = message("noLocation");
-    elements.publicIp.textContent = "";
-    elements.subscriptionStatus.textContent = "";
-    elements.subscriptionExpiry.textContent = "";
+    setText(elements.deviceCount, "");
+    setText(elements.locationName, message("noLocation"));
+    setText(elements.publicIp, "");
+    setText(elements.subscriptionStatus, "");
+    setText(elements.subscriptionExpiry, "");
     if (lostAccount) {
       elements.loginButton.focus();
     }
     return;
   }
 
-  elements.accountEmail.textContent = next.profile?.email ?? "";
+  setText(elements.accountEmail, next.profile?.email ?? "");
   const exclusionCount = next.siteExclusions.applied.enabled
     ? next.siteExclusions.applied.entries.length
     : 0;
   const status = statusKey(next);
-  elements.statusLabel.textContent =
+  setText(
+    elements.statusLabel,
     status === "statusProtected" && exclusionCount > 0
       ? message("statusProtectedExceptions", [String(exclusionCount)])
-      : message(status);
+      : message(status),
+  );
   elements.statusOrb.className = `status-orb ${
     communicationFailed ? "unverified" : statusClass(next.status, next.protected)
   }`;
   const selected = displayedLocation(next);
   const selectedLabel = selected ? locationLabel(selected) : message(missingLocationMessage(next));
-  const locationText = document.createElement("span");
-  locationText.textContent = next.locationPreferences.automatic
+  const locationLine = next.locationPreferences.automatic
     ? message("automaticLocationName", [selectedLabel])
     : selectedLabel;
-  elements.locationName.replaceChildren(
-    ...(selected ? [countryFlag(selected.countryCode)] : []),
-    locationText,
+  setContent(
+    elements.locationName,
+    JSON.stringify([selected?.countryCode ?? null, locationLine]),
+    () => {
+      const locationText = document.createElement("span");
+      locationText.textContent = locationLine;
+      return [...(selected ? [countryFlag(selected.countryCode)] : []), locationText];
+    },
   );
   renderNetwork(next);
-  elements.protectButton.textContent = message(
-    canDisconnect(next) ? "disconnect" : "protectBrowser",
+  setText(elements.protectButton, message(canDisconnect(next) ? "disconnect" : "protectBrowser"));
+  setDisabled(
+    elements.protectButton,
+    canDisconnect(next)
+      ? next.status === "disconnecting"
+      : isBusy(next.status) || !selected || !next.subscription?.hasAccess,
   );
-  elements.protectButton.disabled = canDisconnect(next)
-    ? next.status === "disconnecting"
-    : isBusy(next.status) || !selected || !next.subscription?.hasAccess;
-  elements.changeLocationButton.disabled = isBusy(next.status);
-  elements.subscriptionStatus.textContent = message(
-    next.subscription?.hasAccess ? "subscriptionActive" : "subscriptionInactive",
+  setDisabled(elements.changeLocationButton, isBusy(next.status));
+  setText(
+    elements.subscriptionStatus,
+    message(next.subscription?.hasAccess ? "subscriptionActive" : "subscriptionInactive"),
   );
-  elements.subscriptionExpiry.textContent = subscriptionExpiry(next);
-  elements.refreshSubscriptionButton.disabled =
-    Boolean(accountRefreshPending) || isBusy(next.status);
+  setText(elements.subscriptionExpiry, subscriptionExpiry(next));
+  setDisabled(
+    elements.refreshSubscriptionButton,
+    Boolean(accountRefreshPending) || isBusy(next.status),
+  );
   elements.refreshSubscriptionButton.classList.toggle("refreshing", Boolean(accountRefreshPending));
   elements.refreshSubscriptionButton.setAttribute(
     "aria-busy",
@@ -1158,21 +1259,33 @@ function renderWebLogin(next: AppSnapshot): void {
   const disconnectFirst = webLoginRequiresDisconnect(next);
   elements.loginForm.dataset.pending = String(pending);
   elements.loginForm.dataset.disconnect = String(disconnectFirst);
-  elements.loginForm.setAttribute("aria-busy", String(pending));
-  elements.loginButton.disabled =
+  // The sign-in button is what is busy. The form around it also holds the button
+  // which gives the sign-in up: marked busy, it would hide that button from some
+  // screen readers for as long as it is offered.
+  elements.loginButton.setAttribute("aria-busy", String(pending));
+  setDisabled(
+    elements.loginButton,
     pending ||
-    communicationFailed ||
-    next.profile !== null ||
-    next.error === "storage_unavailable" ||
-    next.status === "disconnecting";
-  elements.webLoginButtonLabel.textContent = message(
-    pending ? "webSignInPending" : disconnectFirst ? "webSignInDisconnect" : "webSignIn",
+      communicationFailed ||
+      next.profile !== null ||
+      next.error === "storage_unavailable" ||
+      next.status === "disconnecting",
   );
-  elements.webLoginHelp.textContent = message(
-    disconnectFirst ? "webSignInDisconnectHelp" : "webSignInHelp",
+  setText(
+    elements.webLoginButtonLabel,
+    message(pending ? "webSignInPending" : disconnectFirst ? "webSignInDisconnect" : "webSignIn"),
+  );
+  setText(
+    elements.webLoginHelp,
+    message(disconnectFirst ? "webSignInDisconnectHelp" : "webSignInHelp"),
   );
   elements.webLoginStatus.classList.toggle("hidden", !pending);
-  elements.webLoginStatus.textContent = pending ? message("webSignInStatus") : "";
+  setText(elements.webLoginStatus, pending ? message("webSignInStatus") : "");
+  // The button which had the focus is about to disappear: the sign-in action takes it.
+  const cancelFocused = document.activeElement === elements.webLoginCancelButton;
+  elements.webLoginCancelButton.classList.toggle("hidden", !pending);
+  setDisabled(elements.webLoginCancelButton, communicationFailed);
+  if (!pending && cancelFocused) elements.loginButton.focus();
 }
 
 async function signInOnWeb(): Promise<void> {
@@ -1237,10 +1350,13 @@ function renderNetwork(next: AppSnapshot): void {
     : matchesRoute
       ? (observation.ip ?? message("ipUnavailable"))
       : message(observation.status === "checking" ? "ipChecking" : "ipUnavailable");
-  elements.publicIp.replaceChildren(
+  const isolated = matchesRoute && !communicationFailed && observation.ip !== null;
+  // Screen readers read this line again whenever it is written. The popup asks for the
+  // address every few seconds: the line is written when it changes, not at each answer.
+  setContent(elements.publicIp, JSON.stringify([label, value, isolated]), () => [
     `${label} · `,
-    matchesRoute && !communicationFailed && observation.ip ? isolatedText(value, "ltr") : value,
-  );
+    isolated ? isolatedText(value, "ltr") : value,
+  ]);
   // An address known from the previous measurement of this location is still being
   // checked on the new route.
   elements.publicIp.setAttribute(
@@ -1263,47 +1379,68 @@ function renderSecurity(next: AppSnapshot): void {
   // Recovery must retain access to the selector so an empty catalogue can be refreshed.
   elements.locationCard.classList.remove("hidden");
   elements.protectButton.classList.toggle("hidden", showRecovery);
-  elements.retryButton.textContent = message(
-    next.profile === null && next.error !== "storage_unavailable" ? "signIn" : "retryConnection",
+  setText(
+    elements.retryButton,
+    message(
+      !communicationFailed && next.profile === null && next.error !== "storage_unavailable"
+        ? "signIn"
+        : "retryConnection",
+    ),
   );
-  elements.recoveryStatus.textContent = message(
-    communicationFailed || next.blockingScope === "unverified"
-      ? "securityBlockUnverified"
-      : next.blockingScope === "except_excluded"
-        ? "statusBlockedExceptions"
-        : next.trafficBlocked
-          ? next.nextRetryAt !== null || next.status === "connecting"
-            ? "statusBlockedRetry"
-            : "statusBlockedAction"
-          : "statusProtectionUnavailable",
+  setText(
+    elements.recoveryStatus,
+    message(
+      communicationFailed || next.blockingScope === "unverified"
+        ? "securityBlockUnverified"
+        : next.blockingScope === "except_excluded"
+          ? "statusBlockedExceptions"
+          : next.trafficBlocked
+            ? next.nextRetryAt !== null || next.status === "connecting"
+              ? "statusBlockedRetry"
+              : "statusBlockedAction"
+            : "statusProtectionUnavailable",
+    ),
   );
-  elements.retryButton.disabled =
-    Boolean(connectionRetryPending) ||
-    (next.error !== "storage_unavailable" &&
-      ((next.profile !== null && !next.selectedLocationId) || isBusy(next.status)));
-  elements.recoveryDisconnectButton.disabled = next.status === "disconnecting";
+  setDisabled(
+    elements.retryButton,
+    communicationFailed
+      ? // The button then reads the state again, which nothing of the last state forbids.
+        stateReadPending
+      : Boolean(connectionRetryPending) ||
+          (next.error !== "storage_unavailable" &&
+            ((next.profile !== null && !next.selectedLocationId) || isBusy(next.status))),
+  );
+  setDisabled(elements.recoveryDisconnectButton, next.status === "disconnecting");
   elements.killSwitchEnabled.checked = next.securityPreferences.killSwitchEnabled;
   elements.webRtcProtectionEnabled.checked = next.securityPreferences.webRtcProtectionEnabled;
-  elements.killSwitchEnabled.disabled = communicationFailed || Boolean(securityPreferencesPending);
-  elements.webRtcProtectionEnabled.disabled =
-    communicationFailed || Boolean(securityPreferencesPending);
-  elements.securityState.textContent = communicationFailed
-    ? message("extensionCommunicationError")
-    : message("securityEffectiveState", [
-        message(
-          next.blockingScope === "unverified"
-            ? "securityBlockUnverified"
-            : next.blockingScope === "except_excluded"
-              ? "securityBlockedExceptions"
-              : next.trafficBlocked
-                ? "securityBlocked"
-                : "securityNotBlocked",
-        ),
-        message(next.webRtcProtected ? "securityWebRtcActive" : "securityWebRtcInactive"),
-      ]);
+  setDisabled(
+    elements.killSwitchEnabled,
+    communicationFailed || Boolean(securityPreferencesPending),
+  );
+  setDisabled(
+    elements.webRtcProtectionEnabled,
+    communicationFailed || Boolean(securityPreferencesPending),
+  );
+  setText(
+    elements.securityState,
+    communicationFailed
+      ? message("extensionCommunicationError")
+      : message("securityEffectiveState", [
+          message(
+            next.blockingScope === "unverified"
+              ? "securityBlockUnverified"
+              : next.blockingScope === "except_excluded"
+                ? "securityBlockedExceptions"
+                : next.trafficBlocked
+                  ? "securityBlocked"
+                  : "securityNotBlocked",
+          ),
+          message(next.webRtcProtected ? "securityWebRtcActive" : "securityWebRtcInactive"),
+        ]),
+  );
   // Everything in the account group needs an account: it leaves with the session.
   elements.accountSettings.classList.toggle("hidden", next.profile === null);
-  elements.accountEmail.textContent = next.profile?.email ?? "";
+  setText(elements.accountEmail, next.profile?.email ?? "");
 }
 
 function canDisconnect(next: AppSnapshot): boolean {
@@ -1325,30 +1462,32 @@ function renderError(next: AppSnapshot): void {
       : "";
   elements.errorBanner.classList.toggle("hidden", !visible || next.profile === null);
   elements.loginErrorBanner.classList.toggle("hidden", !visible || next.profile !== null);
-  elements.errorMessage.textContent = text;
-  elements.loginErrorMessage.textContent = text;
-  elements.settingsError.textContent = text;
+  setText(elements.errorMessage, text);
+  setText(elements.loginErrorMessage, text);
+  setText(elements.settingsError, text);
   elements.settingsError.classList.toggle("hidden", !visible);
   elements.retryUncertainConnectionButton.classList.toggle(
     "hidden",
     next.error !== "proxy_creation_uncertain",
   );
-  elements.retryUncertainConnectionButton.disabled =
-    communicationFailed || Boolean(connectionRetryPending) || isBusy(next.status);
+  setDisabled(
+    elements.retryUncertainConnectionButton,
+    communicationFailed || Boolean(connectionRetryPending) || isBusy(next.status),
+  );
   renderVerification(next);
   elements.errorManageDevicesButton.classList.toggle(
     "hidden",
     communicationFailed || (next.error !== "device_limit" && next.error !== "device_revoked_limit"),
   );
-  elements.errorManageDevicesButton.disabled = communicationFailed || isBusy(next.status);
+  setDisabled(elements.errorManageDevicesButton, communicationFailed || isBusy(next.status));
 }
 
 function renderLogoutOutcome(next: AppSnapshot): void {
   const outcome = next.profile === null && !communicationFailed ? next.logoutOutcome : null;
   elements.logoutResult.classList.toggle("hidden", !outcome);
   if (!outcome) {
-    elements.logoutApiStatus.textContent = "";
-    elements.logoutProxyStatus.textContent = "";
+    setText(elements.logoutApiStatus, "");
+    setText(elements.logoutProxyStatus, "");
     return;
   }
   const keys = {
@@ -1356,8 +1495,8 @@ function renderLogoutOutcome(next: AppSnapshot): void {
     confirmed: "logoutRevocationConfirmed",
     unconfirmed: "logoutRevocationUnconfirmed",
   };
-  elements.logoutApiStatus.textContent = message(keys[outcome.apiSession]);
-  elements.logoutProxyStatus.textContent = message(keys[outcome.proxySessions]);
+  setText(elements.logoutApiStatus, message(keys[outcome.apiSession]));
+  setText(elements.logoutProxyStatus, message(keys[outcome.proxySessions]));
   elements.logoutUnconfirmedHelp.classList.toggle(
     "hidden",
     outcome.apiSession !== "unconfirmed" && outcome.proxySessions !== "unconfirmed",
@@ -1369,7 +1508,7 @@ function renderLocations(next: AppSnapshot): void {
   // A refresh in flight replaces the failure of the previous one: never both at once.
   const failed = !loading && (next.locationsStatus === "error" || locationsRefreshFailed);
   const unknown = next.locations.length === 0 && next.locationsStatus !== "ready";
-  elements.refreshLocationsButton.disabled = loading || !next.profile;
+  setDisabled(elements.refreshLocationsButton, loading || !next.profile);
   elements.refreshLocationsButton.setAttribute("aria-busy", String(loading));
   const refreshLabel = message(loading ? "refreshingLocations" : "refreshLocations");
   elements.refreshLocationsButton.setAttribute("aria-label", refreshLabel);
@@ -1377,8 +1516,9 @@ function renderLocations(next: AppSnapshot): void {
   elements.refreshLocationsButton.classList.toggle("refreshing", loading);
   elements.locationList.setAttribute("aria-busy", String(loading));
   elements.locationLoadStatus.classList.toggle("hidden", !loading && !failed);
-  elements.locationLoadStatus.textContent = message(
-    failed ? "locationsRefreshError" : "refreshingLocations",
+  setText(
+    elements.locationLoadStatus,
+    message(failed ? "locationsRefreshError" : "refreshingLocations"),
   );
   const preferences = next.locationPreferences;
   const query = elements.locationSearch.value;
@@ -1392,20 +1532,24 @@ function renderLocations(next: AppSnapshot): void {
     button.setAttribute("aria-pressed", String(filter === locationFilter));
   }
   elements.automaticLocationButton.setAttribute("aria-pressed", String(preferences.automatic));
-  elements.automaticLocationButton.disabled =
-    isBusy(next.status) || Boolean(automaticSelectionPending) || !next.locations.length;
+  setDisabled(
+    elements.automaticLocationButton,
+    isBusy(next.status) || Boolean(automaticSelectionPending) || !next.locations.length,
+  );
   const failure =
     locationPreferenceFailure ??
     (next.error === "server_full" || next.error === "capacity_unavailable" ? next.error : null);
   elements.locationPreferenceError.classList.toggle("hidden", failure === null);
-  elements.locationPreferenceError.textContent =
+  setText(
+    elements.locationPreferenceError,
     failure === "transport"
       ? message("extensionCommunicationError")
       : failure === "save"
         ? message("locationSaveError")
         : failure
           ? errorMessage(failure, next.retryAfterSeconds)
-          : "";
+          : "",
+  );
   const listKey = JSON.stringify([
     locale,
     accountEpoch,
@@ -1423,6 +1567,9 @@ function renderLocations(next: AppSnapshot): void {
     [...expandedLocationCities],
   ]);
   if (listKey === renderedLocations) return;
+  // Rows, each with a flag to load, are built for a list which is shown. A closed
+  // dialog keeps what it had: it is brought up to date when it opens.
+  if (!elements.locationDialog.open) return;
   const favoriteIds = new Set(preferences.favoriteIds);
   const recentIds = new Set(preferences.recentIds);
   const visible = next.locations.filter((location) => {
@@ -1443,20 +1590,23 @@ function renderLocations(next: AppSnapshot): void {
   };
   visible.sort((left, right) => rank(left) - rank(right));
   elements.locationEmpty.classList.toggle("hidden", visible.length > 0 || unknown);
-  elements.locationEmpty.textContent = message(
-    locationFilter === "favorites" &&
-      !preferences.favoriteIds.length &&
-      preferences.unavailableFavoriteIds?.length
-      ? "noAvailableFavoriteLocations"
-      : !next.locations.length
-        ? "noAvailableLocations"
-        : search.length
-          ? "noMatchingLocations"
-          : locationFilter === "favorites"
-            ? "noFavoriteLocations"
-            : locationFilter === "recent"
-              ? "noRecentLocations"
-              : "noAvailableLocations",
+  setText(
+    elements.locationEmpty,
+    message(
+      locationFilter === "favorites" &&
+        !preferences.favoriteIds.length &&
+        preferences.unavailableFavoriteIds?.length
+        ? "noAvailableFavoriteLocations"
+        : !next.locations.length
+          ? "noAvailableLocations"
+          : search.length
+            ? "noMatchingLocations"
+            : locationFilter === "favorites"
+              ? "noFavoriteLocations"
+              : locationFilter === "recent"
+                ? "noRecentLocations"
+                : "noAvailableLocations",
+    ),
   );
   const rows: HTMLElement[] = hierarchical
     ? buildLocationGroups(visible, locale).map((group) => locationCountryGroup(group, next))
@@ -1797,21 +1947,30 @@ function isolatedText(value: string, direction: "auto" | "ltr" = "auto"): HTMLEl
 
 function renderDevices(next: AppSnapshot): void {
   // A refused deletion is no longer reported once its device left the list.
-  const refusedDeviceId = devicesFailure?.deviceId;
-  if (refusedDeviceId && !next.devices.some((device) => device.deviceId === refusedDeviceId))
-    devicesFailure = null;
+  for (const deviceId of deviceRefusals.keys())
+    if (!next.devices.some((device) => device.deviceId === deviceId))
+      deviceRefusals.delete(deviceId);
   const refreshing = Boolean(devicesRefreshPending);
-  elements.devicesError.classList.toggle("hidden", !devicesFailure);
-  elements.devicesError.textContent = devicesFailure
-    ? devicesFailure.transport
-      ? message("extensionCommunicationError")
-      : errorMessage(devicesFailure.code, devicesFailure.retryAfter)
-    : "";
-  elements.deviceCount.textContent =
+  // Every failure which still stands is reported, each reason once.
+  const failures = [
+    ...new Set(
+      [...(devicesFailure ? [devicesFailure] : []), ...deviceRefusals.values()].map((failure) =>
+        failure.transport
+          ? message("extensionCommunicationError")
+          : errorMessage(failure.code, failure.retryAfter),
+      ),
+    ),
+  ].join("\n");
+  elements.devicesError.classList.toggle("hidden", failures === "");
+  // An alert is read when it is written: it is written when it changes.
+  setText(elements.devicesError, failures);
+  setText(
+    elements.deviceCount,
     next.deviceLimit === null
       ? message(refreshing ? "deviceQuotaLoading" : "deviceQuotaUnknown")
-      : message("deviceCount", [String(next.devices.length), String(next.deviceLimit)]);
-  elements.refreshDevicesButton.disabled = refreshing || isBusy(next.status);
+      : message("deviceCount", [String(next.devices.length), String(next.deviceLimit)]),
+  );
+  setDisabled(elements.refreshDevicesButton, refreshing || isBusy(next.status));
   elements.refreshDevicesButton.classList.toggle("refreshing", refreshing);
   elements.refreshDevicesButton.setAttribute("aria-busy", String(refreshing));
   const listKey = JSON.stringify([
@@ -1824,6 +1983,9 @@ function renderDevices(next: AppSnapshot): void {
     [...deviceDeletions],
   ]);
   if (listKey === renderedDevices) return;
+  // As for the locations: rows are built for a list which is shown. The dialog renders
+  // its list when it opens, with the refresh it starts.
+  if (!elements.devicesDialog.open) return;
   const entries: HTMLElement[] = [];
   if (next.devices.length === 0) {
     const empty = document.createElement("p");
@@ -1856,14 +2018,25 @@ function renderDevices(next: AppSnapshot): void {
   );
 }
 
+/**
+ * Replaces the rows of a list and keeps the keyboard focus which one of its buttons had.
+ * When that button is gone, `neighbours` gives the focus to the nearest row which
+ * remains; otherwise, and when none remains, `fallbackFocus` takes it.
+ */
 function replaceListChildren(
   list: HTMLElement,
   children: HTMLElement[],
-  fallbackFocus: HTMLButtonElement,
+  fallbackFocus: HTMLElement,
+  neighbours = false,
 ): void {
   const active = document.activeElement;
   const focusKey =
     active instanceof HTMLButtonElement && list.contains(active) ? active.dataset.focusKey : null;
+  const focusKeys = (): string[] =>
+    Array.from(list.querySelectorAll<HTMLButtonElement>("button[data-focus-key]")).map(
+      (button) => button.dataset.focusKey ?? "",
+    );
+  const previousKeys = neighbours && focusKey ? focusKeys() : [];
   const cityKey =
     active instanceof HTMLElement
       ? active.closest<HTMLElement>(".location-city-group")?.dataset.cityKey
@@ -1882,6 +2055,7 @@ function replaceListChildren(
       focusKey,
       cityKey ? `city:${cityKey}` : null,
       countryCode ? `country:${countryCode}` : null,
+      neighbours ? focusNeighbour(previousKeys, focusKey, focusKeys()) : null,
     ]
       .map((key) => visibleButtons.find((button) => button.dataset.focusKey === key))
       .find(Boolean);
@@ -1993,7 +2167,8 @@ async function deleteDevice(
   }
   ++devicesAction;
   deviceDeletions.add(deletionKey);
-  if (!devicesFailure?.deviceId || devicesFailure.deviceId === deviceId) devicesFailure = null;
+  devicesFailure = null;
+  deviceRefusals.delete(deviceId);
   renderDevices(snapshot);
   await request({ type: "delete_device", deviceId })
     .then((response) => {
@@ -2004,9 +2179,8 @@ async function deleteDevice(
       // A failure which left the device listed stays reported until it is gone. One
       // which followed its removal names no device: the next device command replaces it.
       const listed = response.snapshot.devices.some((device) => device.deviceId === deviceId);
-      if (failure) devicesFailure = listed ? { ...failure, deviceId } : failure;
-      else if (!devicesFailure?.deviceId || devicesFailure.deviceId === deviceId)
-        devicesFailure = null;
+      if (failure && listed) deviceRefusals.set(deviceId, failure);
+      else if (failure) devicesFailure = failure;
       render(response.snapshot);
     })
     .finally(() => {
@@ -2098,6 +2272,9 @@ function connectionRequestState(
   next: AppSnapshot | null,
   command: ExtensionRequest,
 ): string | null {
+  // A sign-in given up is reported as an error: its cancellation took effect all the same.
+  if (command.type === "cancel_web_login")
+    return next && !next.webLoginPending ? "no_web_login" : null;
   if (!next || next.error || isBusy(next.status)) return null;
   switch (command.type) {
     case "logout":
@@ -2163,7 +2340,15 @@ function connectionRequestState(
   }
 }
 
-async function request(messageValue: ExtensionRequest): Promise<PopupResponse> {
+/**
+ * Sends a command to the worker and renders the state it answers with. `replied` is
+ * called when the reply is here, before it is rendered: there a caller releases what
+ * it shows as pending, which that first render would otherwise still show.
+ */
+async function request(
+  messageValue: ExtensionRequest,
+  replied?: () => void,
+): Promise<PopupResponse> {
   const epoch = accountEpoch;
   const workerId = snapshot?.snapshotVersion?.workerId ?? null;
   const confirmation = confirmedSnapshotSequence;
@@ -2204,6 +2389,7 @@ async function request(messageValue: ExtensionRequest): Promise<PopupResponse> {
     if (isSuperseded())
       return { ok: false, stale: true, superseded: true, snapshot: snapshot ?? next };
     const command = response as ExtensionResponse;
+    replied?.();
     const accepted = render(next, true);
     return {
       ok: command.ok,
@@ -2294,13 +2480,16 @@ function configureLinks(): void {
 function renderDiagnostics(): void {
   const state = diagnostics.state;
   elements.diagnosticsAuto.checked = state?.signedIn === true && state.autoReporting;
-  elements.diagnosticsAuto.disabled =
-    !diagnostics.available || diagnosticsPending || !state?.signedIn;
+  setDisabled(
+    elements.diagnosticsAuto,
+    !diagnostics.available || diagnosticsPending || !state?.signedIn,
+  );
   elements.diagnosticsAccountRequired.classList.toggle("hidden", state?.signedIn === true);
   elements.diagnosticsError.classList.toggle("hidden", diagnostics.error === null);
-  elements.diagnosticsError.textContent = diagnostics.error
-    ? message(diagnosticErrorKey(diagnostics.error))
-    : "";
+  setText(
+    elements.diagnosticsError,
+    diagnostics.error ? message(diagnosticErrorKey(diagnostics.error)) : "",
+  );
 }
 
 function message(key: string, substitutions?: string[]): string {

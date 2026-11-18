@@ -17,6 +17,7 @@ function deferred() {
 async function connected() {
   const harness = createHarness({ persisted: authenticatedState() });
   await harness.controller.initialize();
+  await harness.controller.startupConnectionSettled();
   await harness.controller.connect("frankfurt-01");
   expect(harness.controller.getSnapshot().protected).toBe(true);
   return harness;
@@ -26,6 +27,7 @@ describe("network protection lifecycle", () => {
   it("arms both protections before asking the server for connection credentials", async () => {
     const harness = createHarness({ persisted: authenticatedState() });
     await harness.controller.initialize();
+    await harness.controller.startupConnectionSettled();
     const create = harness.api.createProxySession.bind(harness.api);
     vi.spyOn(harness.api, "createProxySession").mockImplementation(async (...args) => {
       expect(harness.safety.status).toEqual({
@@ -59,6 +61,7 @@ describe("network protection lifecycle", () => {
     expect(harness.controller.getSnapshot().protected).toBe(false);
     wait.resolve();
     await restoring;
+    await harness.controller.startupConnectionSettled();
     expect(harness.controller.getSnapshot()).toMatchObject({
       protected: true,
       trafficBlocked: false,
@@ -78,6 +81,7 @@ describe("network protection lifecycle", () => {
       activeProxy: proxySession(),
     });
     await harness.controller.initialize();
+    await harness.controller.startupConnectionSettled();
     expect(harness.storage.persisted.auth).toBeNull();
     expect(harness.controller.getSnapshot()).toMatchObject({
       status: "blocked",
@@ -99,6 +103,7 @@ describe("network protection lifecycle", () => {
   it("does not apply late server credentials after explicit disconnect (SEC-02)", async () => {
     const harness = createHarness({ persisted: authenticatedState() });
     await harness.controller.initialize();
+    await harness.controller.startupConnectionSettled();
     const wait = deferred();
     harness.api.createWait = wait.promise;
     harness.api.ignoreCreateAbort = true;
@@ -120,6 +125,7 @@ describe("network protection lifecycle", () => {
   it("serializes disconnect behind an already-running proxy write (SEC-02)", async () => {
     const harness = createHarness({ persisted: authenticatedState() });
     await harness.controller.initialize();
+    await harness.controller.startupConnectionSettled();
     const wait = deferred();
     harness.proxy.applyWait = wait.promise;
     const connecting = harness.controller.connect("frankfurt-01");
@@ -149,6 +155,7 @@ describe("network protection lifecycle", () => {
     await vi.waitFor(() => expect(harness.api.proofs).toHaveLength(2));
     harness.setNow(Date.parse("2026-08-26T12:10:01Z"));
     await harness.controller.handleAlarm(ALARM_EXPIRY);
+    await harness.controller.startupConnectionSettled();
     wait.resolve();
     await renewing;
     expect(harness.controller.getSnapshot()).toMatchObject({
@@ -165,6 +172,7 @@ describe("network protection lifecycle", () => {
     const harness = await connected();
     harness.api.createError = new NetworkError("network");
     await harness.controller.handleAlarm(ALARM_REFRESH);
+    await harness.controller.startupConnectionSettled();
     expect(harness.controller.getSnapshot()).toMatchObject({
       protected: true,
       trafficBlocked: false,
@@ -195,6 +203,7 @@ describe("network protection lifecycle", () => {
   it("uses persistent reconnect backoff of 30, 60, 120, then 300 seconds", async () => {
     const harness = createHarness({ persisted: authenticatedState() });
     await harness.controller.initialize();
+    await harness.controller.startupConnectionSettled();
     vi.spyOn(harness.api, "getProfile").mockRejectedValue(new NetworkError("network"));
     await harness.controller.connect("frankfurt-01");
     let now = NOW;
@@ -205,12 +214,14 @@ describe("network protection lifecycle", () => {
       now += delay;
       harness.setNow(now);
       await harness.controller.handleAlarm(ALARM_RECONNECT);
+      await harness.controller.startupConnectionSettled();
     }
   });
 
   it("respects a longer server retry delay", async () => {
     const harness = createHarness({ persisted: authenticatedState() });
     await harness.controller.initialize();
+    await harness.controller.startupConnectionSettled();
     harness.api.createError = new ApiError("rate_limited", 429, 700);
     await harness.controller.connect("frankfurt-01");
     expect(harness.alarms.reconnectAt).toBe(NOW + 700_000);
@@ -224,6 +235,7 @@ describe("network protection lifecycle", () => {
   ])("keeps the guard and suspends retries when user action is needed: %s", async (code) => {
     const harness = createHarness({ persisted: authenticatedState() });
     await harness.controller.initialize();
+    await harness.controller.startupConnectionSettled();
     harness.api.createError = new ApiError(code, 403);
     await harness.controller.connect("frankfurt-01");
     expect(harness.controller.getSnapshot()).toMatchObject({
@@ -273,6 +285,7 @@ describe("network protection lifecycle", () => {
   it("reopens ordinary navigation when the kill switch is disabled during a failed connection", async () => {
     const harness = createHarness({ persisted: authenticatedState() });
     await harness.controller.initialize();
+    await harness.controller.startupConnectionSettled();
     harness.api.createError = new NetworkError("network");
     await harness.controller.connect("frankfurt-01");
     await harness.controller.updateSecurityPreferences(false, true);
@@ -307,6 +320,7 @@ describe("network protection lifecycle", () => {
       new Error("security_storage_failed"),
     );
     await harness.controller.initialize();
+    await harness.controller.startupConnectionSettled();
     expect(harness.controller.getSnapshot()).toMatchObject({
       protected: false,
       trafficBlocked: true,
@@ -318,6 +332,7 @@ describe("network protection lifecycle", () => {
   it("does not claim protection when the rule API rejected the guard", async () => {
     const harness = createHarness({ persisted: authenticatedState() });
     await harness.controller.initialize();
+    await harness.controller.startupConnectionSettled();
     vi.spyOn(harness.safety, "block").mockRejectedValue(new SafetyError("traffic_guard_failed"));
     await harness.controller.connect("frankfurt-01");
     expect(harness.controller.getSnapshot()).toMatchObject({
@@ -332,6 +347,7 @@ describe("network protection lifecycle", () => {
   it("retains the guard when security preferences cannot be persisted", async () => {
     const harness = createHarness({ persisted: authenticatedState() });
     await harness.controller.initialize();
+    await harness.controller.startupConnectionSettled();
     vi.spyOn(harness.securityStorage, "write").mockRejectedValue(new Error("disk unavailable"));
     await harness.controller.connect("frankfurt-01");
     expect(harness.controller.getSnapshot()).toMatchObject({
@@ -364,6 +380,7 @@ describe("network protection lifecycle", () => {
   it("does not claim protection merely because an account refresh interrupted a pending proxy write", async () => {
     const harness = createHarness({ persisted: authenticatedState() });
     await harness.controller.initialize();
+    await harness.controller.startupConnectionSettled();
     const wait = deferred();
     harness.proxy.applyWait = wait.promise;
     const connecting = harness.controller.connect("frankfurt-01");
@@ -389,6 +406,7 @@ describe("network protection lifecycle", () => {
       },
     });
     await harness.controller.initialize();
+    await harness.controller.startupConnectionSettled();
     expect(harness.api.proofs).toHaveLength(0);
     expect(harness.controller.getSnapshot()).toMatchObject({
       protected: false,
@@ -415,12 +433,15 @@ describe("network protection lifecycle", () => {
       },
     });
     await harness.controller.initialize();
+    await harness.controller.startupConnectionSettled();
     expect(harness.api.proofs).toHaveLength(0);
     expect(harness.alarms.reconnectAt).toBe(NOW + 120_000);
     await harness.controller.handleAlarm(ALARM_RECONNECT);
+    await harness.controller.startupConnectionSettled();
     expect(harness.api.proofs).toHaveLength(0);
     harness.setNow(NOW + 120_000);
     await harness.controller.handleAlarm(ALARM_RECONNECT);
+    await harness.controller.startupConnectionSettled();
     expect(harness.controller.getSnapshot().protected).toBe(true);
     expect(harness.securityStorage.state?.reconnectAttempts).toBe(0);
     expect(harness.securityStorage.state?.nextRetryAt).toBeNull();
@@ -430,10 +451,12 @@ describe("network protection lifecycle", () => {
     const harness = await connected();
     harness.api.createError = new ApiError("rate_limited", 429, 900);
     await harness.controller.handleAlarm(ALARM_REFRESH);
+    await harness.controller.startupConnectionSettled();
     expect(harness.controller.getSnapshot().protected).toBe(true);
     expect(harness.securityStorage.state?.retryNotBefore).toBe(NOW + 900_000);
     harness.setNow(NOW + 601_000);
     await harness.controller.handleAlarm(ALARM_EXPIRY);
+    await harness.controller.startupConnectionSettled();
     expect(harness.controller.getSnapshot()).toMatchObject({
       protected: false,
       trafficBlocked: true,
@@ -444,6 +467,7 @@ describe("network protection lifecycle", () => {
   it("does not authorize a session that expired while Chrome acknowledged its allowance", async () => {
     const harness = createHarness({ persisted: authenticatedState() });
     await harness.controller.initialize();
+    await harness.controller.startupConnectionSettled();
     const allow = harness.safety.allow.bind(harness.safety);
     vi.spyOn(harness.safety, "allow").mockImplementation(async () => {
       await allow();
@@ -474,6 +498,7 @@ describe("network protection lifecycle", () => {
   it("restarts connection safely when preferences interrupt an unverified proxy write", async () => {
     const harness = createHarness({ persisted: authenticatedState() });
     await harness.controller.initialize();
+    await harness.controller.startupConnectionSettled();
     harness.api.sessions = [
       proxySession("cancelled-staged-session"),
       proxySession("authorized-replacement"),
@@ -500,6 +525,7 @@ describe("network protection lifecycle", () => {
   it("does not fall back to a staged session revoked by an interrupted connect", async () => {
     const harness = createHarness({ persisted: authenticatedState() });
     await harness.controller.initialize();
+    await harness.controller.startupConnectionSettled();
     harness.api.sessions = [proxySession("cancelled-staged-session")];
     const wait = deferred();
     harness.proxy.applyWait = wait.promise;
@@ -520,6 +546,7 @@ describe("network protection lifecycle", () => {
   it("does not cancel a browser connection when deleting a different account device", async () => {
     const harness = createHarness({ persisted: authenticatedState() });
     await harness.controller.initialize();
+    await harness.controller.startupConnectionSettled();
     const wait = deferred();
     harness.api.createWait = wait.promise;
     const connecting = harness.controller.connect("frankfurt-01");

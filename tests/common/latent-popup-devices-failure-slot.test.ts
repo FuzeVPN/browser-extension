@@ -2,6 +2,7 @@
 
 import { readFileSync } from "node:fs";
 import { runInNewContext } from "node:vm";
+import { popupDom } from "./popup-dom";
 import ts from "typescript";
 import { NetworkError } from "../../src/core/api/client";
 import type { Device } from "../../src/core/api/types";
@@ -18,6 +19,7 @@ import { PROFILE, authenticatedState, createHarness } from "./helpers";
 interface Subject {
   snapshot: AppSnapshot;
   bindEvents(): void;
+  render(value: unknown, confirmed?: boolean): boolean;
   renderDevices(next: AppSnapshot): void;
 }
 
@@ -33,8 +35,20 @@ function deferred<T>() {
 
 /** The few DOM members the popup uses on its own elements and device rows. */
 class FakeElement {
-  textContent = "";
+  private text = "";
+  /** How many times the text was written. */
+  writes = 0;
   disabled = false;
+
+  get textContent(): string {
+    return this.text;
+  }
+
+  set textContent(value: string) {
+    this.writes += 1;
+    this.text = value;
+  }
+
   dataset: Record<string, string> = {};
   children: FakeElement[] = [];
   focus = vi.fn();
@@ -126,8 +140,8 @@ function state(revision: number, patch: Partial<AppSnapshot>): AppSnapshot {
   };
 }
 
-/** The devices dialog of the popup, against a scripted worker. */
-function setup() {
+/** The devices dialog of the popup, open unless told otherwise, against a scripted worker. */
+function setup(open = true) {
   const pending: (ReturnType<typeof deferred<unknown>> & { message: ExtensionRequest })[] = [];
   const sent: ExtensionRequest[] = [];
   const worker = { revision: 1, state: {} as Partial<AppSnapshot> };
@@ -163,6 +177,7 @@ function setup() {
     languageCatalogFailed: false,
     currentBrowserName: "Firefox",
     devicesFailure: null,
+    deviceRefusals: new Map<string, unknown>(),
     locationPreferenceFailure: null,
     locationsRefreshFailed: false,
     locationSelectionPending: false,
@@ -206,9 +221,10 @@ function setup() {
     },
   };
   // Execute the production functions, with only messaging and other views replaced.
-  runInNewContext(executable, context);
+  runInNewContext(executable, Object.assign(context, popupDom));
   const subject = context as unknown as Subject;
   subject.bindEvents();
+  (elements.devicesDialog as unknown as { open: boolean }).open = open;
   subject.renderDevices(subject.snapshot);
   // Lets confirmations and fire-and-forget handlers finish their promise chains.
   const settle = () => new Promise((resolve) => setTimeout(resolve, 0));
@@ -246,6 +262,25 @@ const remove = (device: Device): ExtensionRequest => ({
   deviceId: device.deviceId,
 });
 const refused: CommandResult = { ok: false, commandError: "network_error" };
+const limited: CommandResult = { ok: false, commandError: "rate_limited" };
+const LIMITED: Partial<AppSnapshot> = { status: "error", error: "rate_limited" };
+const LIMIT = "<error_rate_limited>";
+
+describe("the rows of the device list", () => {
+  it("are not built while the dialog is closed, and are when it is open", () => {
+    const { subject, elements } = setup(false);
+    expect(elements.deviceList!.children).toEqual([]);
+    // What the main view shows of the devices does not wait for the dialog.
+    expect(elements.deviceCount!.textContent).toBe("<deviceCount>");
+
+    subject.render(state(2, { devices: [CURRENT, LAPTOP] }));
+    expect(elements.deviceList!.children).toEqual([]);
+
+    (elements.devicesDialog as unknown as { open: boolean }).open = true;
+    subject.renderDevices(subject.snapshot);
+    expect(elements.deviceList!.children).toHaveLength(2);
+  });
+});
 
 describe("the failure of a device deletion in the devices dialog", () => {
   it("scripts the worker as the controller answers overlapping device commands", async () => {
@@ -316,6 +351,72 @@ describe("the failure of a device deletion in the devices dialog", () => {
     await answer(remove(LAPTOP), refused, FAILED);
     expect(subject.snapshot.devices).toContainEqual(LAPTOP);
     expect(shownFailure()).toBe(FAILURE);
+  });
+
+  it("is still shown when the deletion of another device is refused for another reason", async () => {
+    const { subject, pressDelete, answer, shownFailure } = setup();
+    await pressDelete(LAPTOP);
+    await answer(remove(LAPTOP), refused, FAILED);
+    await pressDelete(PHONE);
+    // The first refusal stands while the second deletion is on its way.
+    expect(shownFailure()).toBe(FAILURE);
+    await answer(remove(PHONE), limited, LIMITED);
+    expect(subject.snapshot.devices).toEqual([CURRENT, LAPTOP, PHONE]);
+
+    // Both devices are still listed, and both refusals are reported.
+    expect(shownFailure()).toBe(`${FAILURE}\n${LIMIT}`);
+
+    // The phone is removed from elsewhere: its refusal leaves, the other one stays.
+    subject.render(state(50, { ...LIMITED, devices: [CURRENT, LAPTOP] }));
+    expect(shownFailure()).toBe(FAILURE);
+  });
+
+  it("is said once when two deletions are refused for the same reason", async () => {
+    const { pressDelete, answer, shownFailure } = setup();
+    await pressDelete(LAPTOP);
+    await answer(remove(LAPTOP), refused, FAILED);
+    await pressDelete(PHONE);
+    await answer(remove(PHONE), refused, FAILED);
+    expect(shownFailure()).toBe(FAILURE);
+  });
+
+  it("leaves when the same deletion is asked again, and then succeeds", async () => {
+    const { pressDelete, answer, shownFailure } = setup();
+    await pressDelete(LAPTOP);
+    await answer(remove(LAPTOP), refused, FAILED);
+    await pressDelete(PHONE);
+    await answer(remove(PHONE), limited, LIMITED);
+
+    await pressDelete(LAPTOP);
+    // Asked again, the first deletion no longer reports its previous refusal.
+    expect(shownFailure()).toBe(LIMIT);
+    await answer(remove(LAPTOP), { ok: true }, { error: null, devices: [CURRENT, PHONE] });
+    // Its success says nothing of the phone, which is still refused.
+    expect(shownFailure()).toBe(LIMIT);
+  });
+
+  it("is not hidden by a list refresh which fails for another reason", async () => {
+    const { elements, answer, pressDelete, shownFailure } = setup();
+    await pressDelete(LAPTOP);
+    await answer(remove(LAPTOP), refused, FAILED);
+    elements.refreshDevicesButton!.click();
+    await answer({ type: "refresh_devices" }, limited, LIMITED);
+    expect(shownFailure()).toBe(`${LIMIT}\n${FAILURE}`);
+
+    // The next refresh succeeds: only what it reported itself leaves.
+    elements.refreshDevicesButton!.click();
+    await answer({ type: "refresh_devices" }, { ok: true }, { error: null });
+    expect(shownFailure()).toBe(FAILURE);
+  });
+
+  it("is written once: an alert written again is read again", async () => {
+    const { subject, elements, pressDelete, answer } = setup();
+    await pressDelete(LAPTOP);
+    await answer(remove(LAPTOP), refused, FAILED);
+    const written = elements.devicesError!.writes;
+    subject.renderDevices(subject.snapshot);
+    subject.renderDevices(subject.snapshot);
+    expect(elements.devicesError!.writes).toBe(written);
   });
 
   it.each(["the deletion first", "the refresh first"] as const)(

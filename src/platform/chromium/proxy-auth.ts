@@ -7,6 +7,11 @@ import { protectedBrowserContexts, type ProxyChallenger } from "./proxy-controll
 const MAX_TRACKED_REQUESTS = 4_096;
 const REQUEST_PROVENANCE_MS = 5 * 60_000;
 const REQUEST_ROUTE_RETRY_MS = 1_000;
+/**
+ * The routes a worker verified, kept for the browser session so that the next worker
+ * knows them from its first instruction. Endpoints only: no credential is stored.
+ */
+export const VERIFIED_ROUTES_KEY = "fuzevpnVerifiedProxyRoutes";
 
 type RequestRoutes = ReadonlyMap<boolean, ProxyChallenger | null | undefined>;
 
@@ -17,6 +22,8 @@ interface StartedRequest {
   routeGeneration: number;
   routes: Promise<RequestRoutes>;
   verifiedRoutes: RequestRoutes | null;
+  /** For a request which began before this worker had read anything: see register(). */
+  inheritedRoutes: Promise<RequestRoutes | null> | null;
 }
 
 import type { ProxyAuthDependencies } from "../contracts/proxy-auth";
@@ -32,6 +39,8 @@ export class ProxyAuthHandler {
   private requestRoutesNeedRecovery = false;
   private nextRequestRouteReadAt = 0;
   private reportedFailureSessionId: string | null = null;
+  private inheritedRequestRoutes: Promise<RequestRoutes | null> = Promise.resolve(null);
+  private initialRequestRoutesSettled = false;
   private readonly credentialResponses = new WeakMap<
     chrome.webRequest.BlockingResponse,
     { session: ProxySession; request: StartedRequest }
@@ -44,8 +53,19 @@ export class ProxyAuthHandler {
     // alone cannot distinguish a late FuzeVPN 407 from a new request using another
     // extension's proxy. Reads are shared until Chrome reports a setting change.
     this.refreshRequestRoutes();
+    // The request which starts a worker began before that worker could read anything,
+    // and so did those which arrive while its first read is pending. Their route is
+    // nonetheless known when an earlier worker verified it and nothing has changed
+    // since: every change of the settings is reported to a worker, which forgets the
+    // verified routes before it handles any later request. Routes still kept, and equal
+    // to those in place, were therefore in place when these requests began. Without
+    // this, the first request after a pause cannot answer the proxy's challenge once a
+    // renewal has replaced the credentials the browser remembers, and its page fails.
+    this.inheritedRequestRoutes = this.inheritRequestRoutes(this.requestRoutes);
     chrome.proxy.settings.onChange.addListener(() => {
       this.requestRouteGeneration++;
+      // Before anything else: no later worker may inherit a route which has changed.
+      forgetVerifiedRoutes();
       this.refreshRequestRoutes();
     });
     chrome.webRequest.onBeforeRequest.addListener(
@@ -156,6 +176,22 @@ export class ProxyAuthHandler {
     this.startedRequests.delete(requestId);
   }
 
+  private inheritRequestRoutes(initial: Promise<RequestRoutes>): Promise<RequestRoutes | null> {
+    // Asked for now: what this worker keeps later is written after this read.
+    const kept = readVerifiedRoutes();
+    const settled = () => {
+      this.initialRequestRoutesSettled = true;
+    };
+    void initial.then(settled, settled);
+    return Promise.all([kept, initial]).then(
+      ([verified, routes]) =>
+        this.requestRouteGeneration === 0 && verified !== null && sameRoutes(verified, routes)
+          ? routes
+          : null,
+      () => null,
+    );
+  }
+
   private refreshRequestRoutes(invalidate = true): void {
     const generation = this.requestRouteGeneration;
     // A pending read may observe a configuration installed after onBeforeRequest.
@@ -172,6 +208,8 @@ export class ProxyAuthHandler {
         this.verifiedRequestRoutes = routes;
         this.requestRoutesNeedRecovery =
           routes.size === 0 || [...routes.values()].some((route) => route === undefined);
+        // What the next worker may rely on: this extension's HTTPS proxy in every scope.
+        keepVerifiedRoutes(routes);
       })
       .catch(() => {
         if (generation === this.requestRouteGeneration && this.requestRoutes === pending)
@@ -213,6 +251,10 @@ export class ProxyAuthHandler {
       routeGeneration: this.requestRouteGeneration,
       routes: this.requestRoutes,
       verifiedRoutes: this.verifiedRequestRoutes,
+      inheritedRoutes:
+        this.requestRouteGeneration === 0 && !this.initialRequestRoutesSettled
+          ? this.inheritedRequestRoutes
+          : null,
     });
     // The triggering request keeps its original evidence. Retry unknown scopes
     // only for later requests, with one shared read and no autonomous retry loop.
@@ -290,7 +332,9 @@ async function startedRouteSatisfies(
   satisfies: (route: ProxyChallenger | null | undefined) => boolean,
   verifiedOnly = false,
 ): Promise<boolean> {
-  const routes = verifiedOnly ? started.verifiedRoutes : await started.routes;
+  const routes = verifiedOnly
+    ? (started.verifiedRoutes ?? (await started.inheritedRoutes))
+    : await started.routes;
   if (!routes) return false;
   if (routes.size === 1 && routes.has(false)) return satisfies(routes.get(false));
   if (!routes.has(false) || !routes.has(true)) return false;
@@ -337,6 +381,76 @@ async function readRequestRoutes(): Promise<RequestRoutes> {
     }),
   );
   return routes;
+}
+
+type KeptRoute = [incognito: boolean, host: string, port: number];
+
+/** Kept only when every scope is routed by this extension's HTTPS proxy; else forgotten. */
+function keepVerifiedRoutes(routes: RequestRoutes): void {
+  const kept: KeptRoute[] = [];
+  for (const [incognito, route] of routes) {
+    if (!route) {
+      forgetVerifiedRoutes();
+      return;
+    }
+    kept.push([incognito, route.host, route.port]);
+  }
+  if (kept.length === 0) {
+    forgetVerifiedRoutes();
+    return;
+  }
+  try {
+    void chrome.storage.session.set({ [VERIFIED_ROUTES_KEY]: kept }).catch(() => undefined);
+  } catch {
+    // Routes which are not kept are only not inherited: the next worker verifies its own.
+  }
+}
+
+function forgetVerifiedRoutes(): void {
+  try {
+    void chrome.storage.session.remove(VERIFIED_ROUTES_KEY).catch(() => undefined);
+  } catch {
+    // Without session storage nothing was kept, and nothing is inherited.
+  }
+}
+
+/** Null when nothing usable is kept: nothing is then known of earlier requests. */
+async function readVerifiedRoutes(): Promise<RequestRoutes | null> {
+  try {
+    const stored = await chrome.storage.session.get(VERIFIED_ROUTES_KEY);
+    const kept: unknown = stored[VERIFIED_ROUTES_KEY];
+    if (!Array.isArray(kept) || kept.length === 0 || kept.length > 2) return null;
+    const routes = new Map<boolean, ProxyChallenger>();
+    for (const entry of kept as unknown[]) {
+      if (!Array.isArray(entry) || entry.length !== 3) return null;
+      const [incognito, host, port] = entry as unknown[];
+      if (
+        typeof incognito !== "boolean" ||
+        routes.has(incognito) ||
+        typeof host !== "string" ||
+        host.length === 0 ||
+        typeof port !== "number" ||
+        !Number.isInteger(port) ||
+        port <= 0 ||
+        port > 65535
+      )
+        return null;
+      routes.set(incognito, { host, port });
+    }
+    return routes;
+  } catch {
+    return null;
+  }
+}
+
+/** The same scopes, each routed by the same HTTPS proxy of this extension. */
+function sameRoutes(verified: RequestRoutes, routes: RequestRoutes): boolean {
+  if (verified.size !== routes.size) return false;
+  for (const [incognito, route] of routes) {
+    const kept = verified.get(incognito);
+    if (!route || !kept || !sameEndpoint(route, kept)) return false;
+  }
+  return true;
 }
 
 function sameEndpoint(left: ProxyChallenger, right: ProxyChallenger): boolean {

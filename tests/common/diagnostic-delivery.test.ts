@@ -341,6 +341,21 @@ describe("isolated diagnostic delivery", () => {
     });
   });
 
+  it("confirms a receipt which carries a field this version does not know", async () => {
+    const f = fixture();
+    f.fetcher.mockResolvedValue(
+      new Response(JSON.stringify({ ...receipt(id(1)), region: "eu-west" }), { status: 201 }),
+    );
+    await f.delivery.enqueue(report(), OWNER);
+    await f.flush();
+
+    // A server which says more than this version reads has received the report all the same.
+    expect(f.delivery.list(OWNER)[0]).toMatchObject({ status: "received" });
+    // Only what this version reads is kept.
+    expect(persisted(f.state.stored).reports[0]!.receipt).toEqual(receipt(id(1)));
+    expect(f.fetcher).toHaveBeenCalledOnce();
+  });
+
   it("retries with the same bytes and accepts only the correlated duplicate receipt", async () => {
     const f = fixture();
     await f.delivery.enqueue(report(), OWNER);
@@ -509,7 +524,6 @@ describe("isolated diagnostic delivery", () => {
     { received_at: "2026-09-16T24:00:00Z" },
     { received_at: "2026-09-16T12:00:00+24:00" },
     { expires_at: new Date(NOW - 1).toISOString() },
-    { extra: "not accepted" },
   ])("does not confirm malformed or mismatched success %j", async (patch) => {
     const f = fixture();
     f.fetcher.mockResolvedValue(
@@ -918,19 +932,47 @@ describe("isolated diagnostic delivery", () => {
     expect(restarted.fetcher).not.toHaveBeenCalled();
   });
 
-  it("bounds retained reports and rejects body changes under an existing identifier", async () => {
+  it("bounds the reports still to be sent and rejects body changes under an existing identifier", async () => {
     const f = fixture();
-    f.fetcher.mockImplementation(async () => new Response("{}", { status: 400 }));
+    // The server is unavailable: every report waits for another attempt.
+    f.fetcher.mockImplementation(async () => new Response("{}", { status: 503 }));
     for (let index = 1; index <= 20; index++) {
       await f.delivery.enqueue(report(index), OWNER);
       await f.flush();
     }
+    expect(persisted(f.state.stored).reports.every((entry) => entry.status === "pending")).toBe(
+      true,
+    );
     await expect(f.delivery.enqueue(report(21), OWNER)).rejects.toMatchObject({
       code: "queue_full",
     });
     await expect(f.delivery.enqueue({ ...report(), occurrences: 2 }, OWNER)).rejects.toMatchObject({
       code: "invalid_report",
     });
+  });
+
+  it("bounds retained reports by dropping the oldest which is over for a new one", async () => {
+    const f = fixture();
+    // The server refuses the reports for good: none of them is to be sent again.
+    f.fetcher.mockImplementation(async () => new Response("{}", { status: 400 }));
+    for (let index = 1; index <= 20; index++) {
+      await f.delivery.enqueue(report(index), OWNER);
+      await f.flush();
+    }
+    const before = persisted(f.state.stored).reports;
+    expect(before).toHaveLength(20);
+    const over = before.find((entry) => entry.status !== "pending");
+    expect(over).toBeDefined();
+
+    await f.delivery.enqueue(report(21), OWNER);
+    await f.flush();
+
+    const after = persisted(f.state.stored).reports;
+    expect(after).toHaveLength(20);
+    // The oldest report which was over gave its place; none still to be sent was dropped.
+    expect(after.map((entry) => entry.id)).not.toContain(over!.id);
+    for (const entry of before.filter((item) => item.status === "pending"))
+      expect(after.map((item) => item.id)).toContain(entry.id);
   });
 
   it("bounds aggregate storage to 1 MiB and retains reserved room for a strict receipt", async () => {

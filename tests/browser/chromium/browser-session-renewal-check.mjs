@@ -224,8 +224,14 @@ async function installSyntheticAuth() {
 async function restartWorker(page) {
   const cdp = await context.newCDPSession(page);
   const versions = new Map();
+  // The worker can start again a moment after it stopped: a stop is noted when the
+  // browser reports it, not read from the latest state of the worker afterwards.
+  const stopped = new Set();
   cdp.on("ServiceWorker.workerVersionUpdated", ({ versions: changed }) => {
-    for (const version of changed) versions.set(version.versionId, version);
+    for (const version of changed) {
+      versions.set(version.versionId, version);
+      if (version.runningStatus === "stopped") stopped.add(version.versionId);
+    }
   });
   await cdp.send("ServiceWorker.enable");
   const running = () =>
@@ -234,11 +240,9 @@ async function restartWorker(page) {
     );
   await waitUntil(() => Boolean(running()), "Worker lifecycle event missing");
   const version = running();
+  stopped.delete(version.versionId);
   await cdp.send("ServiceWorker.stopWorker", { versionId: version.versionId });
-  await waitUntil(
-    () => versions.get(version.versionId)?.runningStatus === "stopped",
-    "Worker did not stop",
-  );
+  await waitUntil(() => stopped.has(version.versionId), "Worker did not stop");
   await snapshot(page);
   const workerUrl = worker.url();
   worker =

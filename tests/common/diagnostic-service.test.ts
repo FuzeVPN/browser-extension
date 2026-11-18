@@ -22,6 +22,8 @@ const accountA: DiagnosticAccount = {
   expiresAt: NOW + 3_600_000,
   generation: 1,
 };
+/** The same account, signed in for longer than a test which lets hours pass. */
+const LASTING_ACCOUNT: DiagnosticAccount = { ...accountA, expiresAt: NOW + 72 * 3_600_000 };
 const accountB: DiagnosticAccount = {
   ownerId: "owner-b",
   token: "synthetic-token-b",
@@ -266,11 +268,61 @@ describe("diagnostic service manual consent and account boundaries", () => {
     expect(f.fetcher).not.toHaveBeenCalled();
   });
 
+  it("records a start-up which fails, and no start-up which succeeds", async () => {
+    const f = fixture();
+    await f.service.initialize();
+    f.service.record("initialize", { ok: true });
+    await f.settle();
+    // A worker starts at the first request after each pause: that is no event.
+    expect(f.service.state().historyCount).toBe(0);
+    expect(f.alarms.has(DIAGNOSTIC_HISTORY_ALARM)).toBe(false);
+
+    f.service.record("initialize", { ok: false, commandError: "traffic_guard_failed" });
+    await f.settle();
+    expect(f.service.state().historyCount).toBe(1);
+  });
+
+  it("tells a start-up which leaves what the previous one left from one which does not", async () => {
+    const f = fixture();
+    await f.service.initialize();
+    await expect(f.service.startupNews("blocked")).resolves.toBe(true);
+    await expect(f.service.startupNews("blocked")).resolves.toBe(false);
+
+    // The next worker of the same browser session finds it again.
+    const next = f.restart();
+    await expect(next.startupNews("blocked")).resolves.toBe(false);
+    await expect(next.startupNews("connected")).resolves.toBe(true);
+    await expect(next.startupNews("blocked")).resolves.toBe(true);
+  });
+
+  it("takes the first start-up of another account for news, whatever it leaves", async () => {
+    const f = fixture();
+    await f.service.initialize();
+    await expect(f.service.startupNews("blocked")).resolves.toBe(true);
+
+    f.setAccount(accountB);
+    f.service.syncAccount();
+    await expect(f.service.startupNews("blocked")).resolves.toBe(true);
+    await expect(f.service.startupNews("blocked")).resolves.toBe(false);
+  });
+
+  it.each([
+    ["a text", "blocked"],
+    ["an outcome which is none", { owner: "owner-a", outcome: 7 }],
+    ["an owner which is none", { owner: 7, outcome: "blocked" }],
+  ])("ignores a stored start-up outcome which is %s", async (_name, stored) => {
+    const f = fixture();
+    f.session[DIAGNOSTIC_DRAFTS_KEY] = { drafts: [], incidents: [], startup: stored };
+    await f.service.initialize();
+
+    await expect(f.service.startupNews("blocked")).resolves.toBe(true);
+  });
+
   it("wakes to remove expired history from session storage without a report or new event", async () => {
     const f = fixture();
     await f.service.initialize();
     expect(f.alarms.has(DIAGNOSTIC_HISTORY_ALARM)).toBe(false);
-    f.service.record("initialize", { ok: true });
+    f.service.record("runtime.onStartup", { ok: true });
     await f.settle();
     expect(f.alarms.get(DIAGNOSTIC_HISTORY_ALARM)).toBe(NOW + 600_001);
     f.setNow(NOW + 600_001);
@@ -288,10 +340,10 @@ describe("diagnostic service manual consent and account boundaries", () => {
   it("replans for remaining events and clears the history alarm on an account boundary", async () => {
     const f = fixture();
     await f.service.initialize();
-    f.service.record("initialize", { ok: true });
+    f.service.record("runtime.onStartup", { ok: true });
     await f.settle();
     f.setNow(NOW + 5_000);
-    f.service.record("initialize", { ok: true });
+    f.service.record("runtime.onStartup", { ok: true });
     await f.settle();
     f.setNow(NOW + 600_001);
     await f.service.historyAlarm();
@@ -312,7 +364,7 @@ describe("diagnostic service manual consent and account boundaries", () => {
   it("restores the history deadline and persists an account mismatch purge on startup", async () => {
     const f = fixture();
     await f.service.initialize();
-    f.service.record("initialize", { ok: true });
+    f.service.record("runtime.onStartup", { ok: true });
     await f.settle();
     f.alarms.clear();
     await f.restart().initialize();
@@ -354,7 +406,7 @@ describe("diagnostic service manual consent and account boundaries", () => {
   it("keeps a bounded retry alarm when an expired history purge cannot be persisted", async () => {
     const f = fixture();
     await f.service.initialize();
-    f.service.record("initialize", { ok: true });
+    f.service.record("runtime.onStartup", { ok: true });
     await f.settle();
     f.setNow(NOW + 600_001);
     const write = f.storage.session.set.getMockImplementation()!;
@@ -558,6 +610,74 @@ describe("diagnostic service manual consent and account boundaries", () => {
     ).toMatchObject({ ok: false });
     expect(f.service.state().reports).toEqual([]);
     expect(f.fetcher).not.toHaveBeenCalled();
+  });
+});
+
+describe("the queue of reports", () => {
+  afterEach(() => vi.unstubAllGlobals());
+
+  /** Prepares a report and sends it with the user's consent. */
+  async function sendOne(f: ReturnType<typeof fixture>) {
+    const prepared = await f.send({ type: "diagnostics_run" });
+    expect(prepared.ok).toBe(true);
+    const sent = await f.send({
+      type: "diagnostics_send",
+      reportId: prepared.reportId,
+      consent: true,
+      noticeVersion: 1,
+    });
+    await f.settle();
+    return { ...sent, reportId: prepared.reportId };
+  }
+
+  it("makes room for a new report by dropping the oldest one which is over", async () => {
+    const f = fixture();
+    f.setAccount(LASTING_ACCOUNT);
+    await f.service.initialize();
+    // Twenty reports received by the server within the day, ten uploads an hour at most.
+    let first: string | undefined;
+    for (let index = 0; index < 20; index++) {
+      if (index === 10) f.setNow(NOW + 3_600_001);
+      const sent = await sendOne(f);
+      expect(sent).toMatchObject({ ok: true });
+      first ??= sent.reportId;
+    }
+    const kept = f.service.state().reports;
+    expect(kept).toHaveLength(20);
+    expect(kept.every((report) => report.status === "received")).toBe(true);
+
+    f.setNow(NOW + 2 * 3_600_001);
+    expect(await sendOne(f)).toMatchObject({ ok: true });
+
+    const after = f.service.state().reports;
+    expect(after).toHaveLength(20);
+    // The oldest receipt gave its place; the new report was received in its turn.
+    expect(kept.map((report) => report.id)).toContain(first);
+    expect(after.map((report) => report.id)).not.toContain(first);
+    expect(after.every((report) => report.status === "received")).toBe(true);
+    expect(f.fetcher).toHaveBeenCalledTimes(21);
+  });
+
+  it("is full only of reports which are still to be sent", async () => {
+    const f = fixture();
+    f.setAccount(LASTING_ACCOUNT);
+    await f.service.initialize();
+    // The server refuses every upload for now: each report waits for its next attempt.
+    f.fetcher.mockImplementation(async () =>
+      Response.json({ error: "synthetic-server-failure" }, { status: 503 }),
+    );
+    for (let index = 0; index < 20; index++) {
+      if (index === 10) f.setNow(NOW + 3_600_001);
+      expect(await sendOne(f)).toMatchObject({ ok: true });
+    }
+    expect(f.service.state().reports.filter((report) => report.status === "pending")).toHaveLength(
+      20,
+    );
+
+    expect(await sendOne(f)).toMatchObject({ ok: false, error: "queue_full" });
+    expect(f.service.state().reports.filter((report) => report.status === "pending")).toHaveLength(
+      20,
+    );
   });
 });
 
@@ -821,6 +941,36 @@ describe("diagnostic service automatic incident policy", () => {
     expect(f.fetcher).toHaveBeenCalledOnce();
   });
 
+  it("reports a failure which lasts once, not again every ten minutes", async () => {
+    const f = fixture();
+    f.setAccount(LASTING_ACCOUNT);
+    await f.send({ type: "diagnostics_set_auto", enabled: true });
+    f.service.record("connect", { ok: false, commandError: "traffic_guard_failed" });
+    await f.settle();
+    expect(f.fetcher).toHaveBeenCalledOnce();
+
+    // The failure is still there eleven minutes later, then an hour later.
+    for (const later of [11 * 60_000, 61 * 60_000, 6 * 3_600_000]) {
+      f.setNow(NOW + later);
+      await f.service.historyAlarm();
+      f.service.record("connect", { ok: false, commandError: "traffic_guard_failed" });
+      await f.settle();
+    }
+    expect(f.fetcher).toHaveBeenCalledOnce();
+
+    // Another failure is another report.
+    f.service.record("connect", { ok: false, commandError: "webrtc_control_unavailable" });
+    await f.settle();
+    expect(f.fetcher).toHaveBeenCalledTimes(2);
+
+    // A day later the first report is no longer kept: the failure, still there, is news.
+    f.setNow(NOW + 25 * 3_600_000);
+    await f.service.historyAlarm();
+    f.service.record("connect", { ok: false, commandError: "traffic_guard_failed" });
+    await f.settle();
+    expect(f.fetcher).toHaveBeenCalledTimes(3);
+  });
+
   it("resets repeated network incidents after a successful operation", async () => {
     const f = fixture();
     await f.send({ type: "diagnostics_set_auto", enabled: true });
@@ -1028,7 +1178,8 @@ describe("diagnostic service worker restart and failed storage", () => {
   it("restores a bounded ten-minute history after a worker restart", async () => {
     const f = fixture();
     await f.service.initialize();
-    for (let index = 0; index < 205; index++) f.service.record("initialize", { ok: true }, index);
+    for (let index = 0; index < 205; index++)
+      f.service.record("runtime.onStartup", { ok: true }, index);
     await vi.waitFor(() => expect(f.service.state().historyCount).toBe(200));
     await f.settle();
     const restored = f.restart();

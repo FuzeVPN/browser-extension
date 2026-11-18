@@ -2,6 +2,7 @@
 
 import { readFileSync } from "node:fs";
 import { runInNewContext } from "node:vm";
+import { popupDom } from "./popup-dom";
 import ts from "typescript";
 import type { Device } from "../../src/core/api/types";
 import type { ExtensionRequest, ExtensionResponse } from "../../src/core/shared/messages";
@@ -84,6 +85,7 @@ function setup(initial = state()) {
     connectionRequestIntent: 0,
     accountRefreshPending: false,
     devicesAction: 0,
+    deviceRefusals: new Map<string, unknown>(),
     locationSelectionRequest: 0,
     loadedLocale: "fr",
     snapshotOrder: order,
@@ -108,7 +110,7 @@ function setup(initial = state()) {
       ++context.failures;
     },
   };
-  runInNewContext(executable, context);
+  runInNewContext(executable, Object.assign(context, popupDom));
   return { subject: context as unknown as Harness, pending };
 }
 
@@ -134,6 +136,51 @@ describe("CODE10: only the requested effect confirms a lost command reply", () =
     expect(await login).toMatchObject({ ok: true });
     expect(subject.snapshot.profile?.userId).toBe(PROFILE.userId);
     expect(subject.failures).toBe(0);
+  });
+
+  describe("a cancelled web sign-in whose reply is lost", () => {
+    const signingIn = {
+      profile: null,
+      status: "logged_out" as const,
+      protected: false,
+      protectionRequested: false,
+      activeLocationId: null,
+      webLoginPending: true,
+    };
+
+    it("is taken as cancelled once the worker publishes that no sign-in is pending", async () => {
+      const { subject, pending } = setup(state(1, signingIn));
+      const cancelled = subject.request({ type: "cancel_web_login" });
+      // The worker reports the sign-in it gave up, with the error which says so.
+      subject.render(
+        state(2, { ...signingIn, webLoginPending: false, error: "web_login_cancelled" }),
+        true,
+      );
+      pending[0]!.reject(new Error("reply lost"));
+      expect(await cancelled).toMatchObject({
+        ok: false,
+        transportFailed: true,
+        effectConfirmed: true,
+      });
+      expect(subject.failures).toBe(0);
+    });
+
+    it("is reported while the sign-in is still pending", async () => {
+      const { subject, pending } = setup(state(1, signingIn));
+      const cancelled = subject.request({ type: "cancel_web_login" });
+      subject.render(state(2, { ...signingIn, selectedLocationId: "es" }), true);
+      pending[0]!.reject(new Error("reply lost"));
+      expect(await cancelled).not.toHaveProperty("effectConfirmed");
+      expect(subject.failures).toBe(1);
+    });
+
+    it("is reported when the worker published nothing since", async () => {
+      const { subject, pending } = setup(state(1, signingIn));
+      const cancelled = subject.request({ type: "cancel_web_login" });
+      pending[0]!.reject(new Error("reply lost"));
+      expect(await cancelled).not.toHaveProperty("effectConfirmed");
+      expect(subject.failures).toBe(1);
+    });
   });
 
   it.each(connectionCommands)(

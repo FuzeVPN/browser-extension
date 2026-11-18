@@ -46,6 +46,7 @@ async function fixture() {
     captureConnectionEvents: () => journal.capture(),
   });
   await h.controller.initialize();
+  await h.controller.startupConnectionSettled();
   expect(await h.controller.connect(LOCATIONS[0]!.id)).toEqual({ ok: true });
   await h.proxy.clear();
   return { h, journal, stored: () => structuredClone(stored) };
@@ -144,6 +145,7 @@ async function guardRefusedFixture() {
     captureConnectionEvents: () => journal.capture(),
   });
   await h.controller.initialize();
+  await h.controller.startupConnectionSettled();
   expect(h.controller.getSnapshot()).toMatchObject({
     protected: false,
     error: "proxy_controlled_by_extension",
@@ -169,6 +171,8 @@ describe("startup guard repairs keep the journal generation of the command that 
     f.journal.clear();
     gate.resolve(undefined);
     expect(await updating).toEqual({ ok: true });
+    // The connection which the retried restoration left to make belongs to that command.
+    await f.h.controller.startupConnectionSettled();
     expect(f.h.controller.getSnapshot().protected).toBe(true);
     await f.journal.pruneExpired();
     expect(operationEvents(await f.journal.snapshot())).toEqual([]);

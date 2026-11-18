@@ -28,18 +28,56 @@ async function failedConnection(killSwitchEnabled = false) {
 afterEach(() => vi.restoreAllMocks());
 
 describe("the reason of a failed connection across account requests", () => {
-  it("does not come back once another publication replaced the error shown", async () => {
+  it("is shown again once what replaced it is over, for as long as its retry is pending", async () => {
     const h = await failedConnection();
     vi.spyOn(h.api, "getProfile").mockRejectedValueOnce(new ApiError("server_error", 503));
     expect(await h.controller.refreshAccount()).toMatchObject({ ok: false });
     expect(h.controller.getSnapshot().error).toBe("proxy_unavailable");
 
-    // A selection publishes its own outcome, which owns the error from then on.
+    // A selection publishes that nothing is wrong with it. The connection is still down
+    // for the reason which its retry was scheduled for: that is what is displayed.
     expect(await h.controller.selectLocation("frankfurt-02")).toEqual({ ok: true });
-    expect(h.controller.getSnapshot().error).toBeNull();
+    expect(h.controller.getSnapshot()).toMatchObject({
+      status: "error",
+      error: "network_error",
+      nextRetryAt: NOW + 30_000,
+      selectedLocationId: "frankfurt-02",
+    });
 
     expect(await h.controller.refreshAccount()).toEqual({ ok: true });
-    expect(h.controller.getSnapshot().error).toBeNull();
+    expect(h.controller.getSnapshot().error).toBe("network_error");
+
+    // The retry is made, and succeeds: nothing is left to display.
+    h.setNow(NOW + 30_000);
+    await h.controller.handleAlarm(ALARM_RECONNECT);
+    expect(h.controller.getSnapshot()).toMatchObject({
+      status: "connected",
+      protected: true,
+      error: null,
+    });
+  });
+
+  it("is still shown after a preference was changed", async () => {
+    const h = await failedConnection();
+
+    expect(await h.controller.updateSecurityPreferences(true, false)).toEqual({ ok: true });
+
+    // The preference is applied, and the connection is still down for the same reason.
+    expect(h.controller.getSnapshot()).toMatchObject({
+      protected: false,
+      protectionRequested: true,
+      error: "network_error",
+      nextRetryAt: NOW + 30_000,
+      securityPreferences: { killSwitchEnabled: true, webRtcProtectionEnabled: false },
+    });
+  });
+
+  it("is not shown again after a deliberate disconnection", async () => {
+    const h = await failedConnection();
+    expect(await h.controller.disconnect()).toEqual({ ok: true });
+
+    expect(await h.controller.selectLocation("frankfurt-02")).toEqual({ ok: true });
+    expect(h.controller.getSnapshot()).toMatchObject({ status: "disconnected", error: null });
   });
 
   it("is not replaced by a proxy takeover which has ended", async () => {

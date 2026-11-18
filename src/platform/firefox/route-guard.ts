@@ -4,7 +4,7 @@ import { API_BASE_URL } from "../../core/shared/config";
 import { normalizeSiteExclusion, type SiteExclusion } from "../../core/shared/site-exclusions";
 import { requestUsesProxy } from "./proxy-controller";
 
-import type { RouteGuardDependencies } from "../contracts/route-guard";
+import type { RouteGuardDependencies, RouteGuardState } from "../contracts/route-guard";
 export type { RouteGuardState, RouteGuardDependencies } from "../contracts/route-guard";
 
 /** Firefox exposes proxyInfo at runtime; its generated community typings omit it. */
@@ -20,6 +20,8 @@ const API_ORIGIN = new URL(API_BASE_URL).origin;
 const REQUEST_FILTER: browser.webRequest.RequestFilter = {
   urls: ["http://*/*", "https://*/*", "ws://*/*", "wss://*/*"],
 };
+/** How many times a decision reads the state again when it changed while being read. */
+const STATE_REREADS = 3;
 
 /** Complements persistent DNR rules when a PAC fails or Firefox selects a direct route. */
 export class PlatformRouteGuard {
@@ -51,7 +53,7 @@ export class PlatformRouteGuard {
       // some URL implementations. Compare protocol and UUID hostname explicitly.
       if (isOwnApiRequest(details, destination, this.dependencies.extensionRoot())) return {};
       const state = await Promise.race([
-        this.dependencies.readState(),
+        this.readCurrentState(),
         new Promise<never>((_, reject) => {
           timer = setTimeout(
             () => reject(new Error("route_restore_timeout")),
@@ -59,7 +61,8 @@ export class PlatformRouteGuard {
           );
         }),
       ]);
-      if (!state.isCurrent()) return { cancel: true };
+      // Checked at the decision itself, which nothing interrupts from here on.
+      if (!state?.isCurrent()) return { cancel: true };
       if (state.mode === "off") return {};
       // A website must never receive the API's direct-route exception, including
       // navigation, images, fetches and redirects to the otherwise authorized API.
@@ -76,6 +79,20 @@ export class PlatformRouteGuard {
     } finally {
       if (timer !== undefined) clearTimeout(timer);
     }
+  }
+
+  /**
+   * The state a decision rests on must still be the current one once it is read. A
+   * renewal or a setting which changes meanwhile calls for another read, not for the
+   * request to fail: it is decided by the new state, as any later request is. Null when
+   * the state keeps changing, which is refused.
+   */
+  private async readCurrentState(): Promise<RouteGuardState | null> {
+    for (let read = 0; read <= STATE_REREADS; read++) {
+      const state = await this.dependencies.readState();
+      if (state.isCurrent()) return state;
+    }
+    return null;
   }
 }
 

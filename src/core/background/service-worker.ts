@@ -27,11 +27,13 @@ import { ExtensionSecurityStorage } from "../storage/security-storage";
 import { LanguageController } from "./language-controller";
 import { ExtensionLanguageStorage } from "../storage/language-storage";
 import { NetworkObserver } from "./network-observer";
+import { PreferenceOwner, preferenceMark, preferenceOwnerDigest } from "./preference-owner";
 import { VpnAddressBook } from "./vpn-addresses";
 import { LocationPreferences } from "./location-preferences";
 import { ConnectionJournal, type ConnectionTrace } from "./connection-journal";
 import { ExtensionSiteExclusionStorage } from "../storage/site-exclusion-storage";
 import { ExtensionProxyCleanupStorage } from "../storage/proxy-cleanup-storage";
+import { ExtensionAccountCacheStorage } from "../storage/account-cache-storage";
 import {
   DiagnosticService,
   DIAGNOSTIC_ALARM,
@@ -50,7 +52,20 @@ let publicationScheduled = false;
 let locationIntent = 0;
 const snapshotWorkerId = crypto.randomUUID();
 let snapshotRevision = 0;
+/** Moves whenever something a route decision rests on has changed. */
 let routingRevision = 0;
+/** What the last published state means for routing: its changes move the revision. */
+let routingKey = "";
+/**
+ * The basis of route decisions, kept while nothing it was read from has changed. Every
+ * request asks for it twice: reading the proxy settings and building the configuration
+ * to compare them with, each time, delayed each request for the same answer. Changes
+ * are reported by events; the settings are still read again after this long, should an
+ * event ever be missing.
+ */
+const ROUTE_GUARD_MEMO_MS = 1_000;
+let routeGuardMemo: { state: RouteGuardState; readAt: number } | null = null;
+let routeGuardRead: Promise<RouteGuardState> | null = null;
 const proxy = new PlatformProxyService();
 const safety = new PlatformNetworkSafetyService();
 const CONNECTION_JOURNAL_KEY = "fuzevpnConnectionJournal";
@@ -70,6 +85,18 @@ const connectionJournal = new ConnectionJournal({
 });
 let lastConnectionState = "";
 let connectionHistoryOwnerEstablished = false;
+/** When this worker's script started: an alarm due before it is what started the worker. */
+const workerStartedAt = Date.now();
+/**
+ * True while this worker has only served the history purge alarm which started it.
+ * Technical history is retained ten minutes and purged by that alarm. Whatever the
+ * start-up of such a worker recorded would need a purge of its own ten minutes later,
+ * which would start the next worker, and so on for as long as the browser stays open.
+ * This start-up therefore records nothing; history is kept again from the first event
+ * which is not the purge itself.
+ */
+let purgeOnlyWorker = false;
+let workerActivity = false;
 const diagnosticObserver: { current: DiagnosticService | null } = { current: null };
 let signalDiagnosticReady: () => void = () => undefined;
 const diagnosticReady = new Promise<void>((resolve) => {
@@ -106,10 +133,19 @@ const controller = new AppController({
   securityStorage: new ExtensionSecurityStorage(),
   siteExclusionStorage: new ExtensionSiteExclusionStorage(),
   cleanupStorage: new ExtensionProxyCleanupStorage(),
+  accountCache: new ExtensionAccountCacheStorage(preferenceOwnerDigest),
   now: Date.now,
   onStateChanged: publishSnapshot,
+  // A connection made after a restoration is a real attempt: its outcome is recorded
+  // as its own event, whatever started the worker.
+  onStartupConnection: (ended) => runBackgroundEvent("startup_connection", () => ended),
   onConnectionEvent: recordConnectionEvent,
-  captureConnectionEvents: () => connectionJournal.capture(),
+  captureConnectionEvents: () => {
+    const record = connectionJournal.capture();
+    return (event) => {
+      if (!purgeOnlyWorker) record(event);
+    };
+  },
   onDiagnosticAccountChanged: () => {
     lastConnectionState = "";
     if (diagnosticObserver.current) diagnosticObserver.current.syncAccount(true);
@@ -166,6 +202,48 @@ const locations = new LocationPreferences({
   },
   onChanged: queuePublication,
 });
+const PREFERENCE_OWNER_KEY = "fuzevpnPreferenceOwner";
+/** The saved site exclusions, once nothing can change them but a new choice. */
+function settledSiteExclusions() {
+  const { saved, pending } = controller.getSnapshot().siteExclusions;
+  // Unread, or changed without the change being applied yet: cancelled, it gives way
+  // to what was applied before it.
+  if (pending) throw new Error("site_exclusions_unsettled");
+  return saved;
+}
+/** Tells whether the exclusions are what they were, whatever happened in between. */
+function siteExclusionsMark(saved: ReturnType<typeof settledSiteExclusions>): Promise<string> {
+  return preferenceMark(
+    JSON.stringify([
+      saved.enabled,
+      saved.entries.map(({ domain, includeSubdomains }) => [domain, includeSubdomains]),
+    ]),
+  );
+}
+const preferenceOwner = new PreferenceOwner({
+  storage: {
+    async read() {
+      const stored = await extensionApi.storage.local.get(PREFERENCE_OWNER_KEY);
+      const owner: unknown = stored[PREFERENCE_OWNER_KEY];
+      return owner;
+    },
+    async write(record) {
+      await extensionApi.storage.local.set({ [PREFERENCE_OWNER_KEY]: record });
+    },
+  },
+  digest: preferenceOwnerDigest,
+  resetLocations: (token) => locations.reset(token),
+  exclusionsMark: async () => siteExclusionsMark(settledSiteExclusions()),
+  async resetExclusions(mark) {
+    const saved = settledSiteExclusions();
+    // Another content was saved by the account now signed in: it is not the previous
+    // one's. The revision does not tell, which a failed attempt of this reset moves too.
+    if ((await siteExclusionsMark(saved)) !== mark) return;
+    if (!saved.enabled && saved.entries.length === 0) return;
+    // A change made meanwhile is refused by its revision, and the reset tried again.
+    await controller.updateSiteExclusions(saved.revision, false, []);
+  },
+});
 
 const diagnosticController: Partial<
   Pick<AppController, "getDiagnosticAccount" | "getDiagnosticReadState" | "verifyDiagnosticProxy">
@@ -175,6 +253,7 @@ const diagnostics = new DiagnosticService({
   connectionHistory: {
     initialize: () => connectionJournal.initialize(),
     clear: () => connectionJournal.clear(),
+    establish: () => connectionJournal.establish(),
     // A restored journal has no trusted owner until account restoration and purge finish.
     count: () =>
       connectionHistoryOwnerEstablished && controller.hasRestoredAccount()
@@ -224,6 +303,7 @@ new ProxyAuthHandler({
   wasUsedProxyChallenge: (challenger) => proxy.wasUsedProxyChallenge(challenger),
   isSessionCurrent: (session) => controller.isSessionCurrentForProxyAuth(session),
   onAuthenticationFailure: async (session) => {
+    noteWorkerActivity();
     const record = diagnostics.capture("proxy_authentication");
     const started = Date.now();
     try {
@@ -245,6 +325,7 @@ extensionApi.runtime.onMessage.addListener((message: unknown, sender, sendRespon
     !sender.url?.startsWith(extensionApi.runtime.getURL(""))
   )
     return false;
+  noteWorkerActivity();
   if (
     message &&
     typeof message === "object" &&
@@ -290,6 +371,12 @@ extensionApi.runtime.onMessage.addListener((message: unknown, sender, sendRespon
 
 extensionApi.alarms.onAlarm.addListener((alarm) => {
   if (alarm.name === DIAGNOSTIC_HISTORY_ALARM) {
+    // Due before this worker existed: the purge started it, and nothing else has.
+    if (alarm.scheduledTime <= workerStartedAt && !workerActivity && !purgeOnlyWorker) {
+      purgeOnlyWorker = true;
+      // What this start-up has already recorded is dropped with the rest.
+      connectionJournal.clear();
+    }
     void diagnostics.historyAlarm().catch(() => undefined);
     return;
   }
@@ -351,8 +438,8 @@ function establishConnectionHistoryOwner(): boolean {
   if (!connectionHistoryOwnerEstablished) {
     // Restored arrays have no owner. Start a known account/guest boundary before
     // publishing or exporting them, including after an unread-storage recovery.
-    if (diagnosticObserver.current) diagnosticObserver.current.syncAccount(true);
-    else connectionJournal.clear();
+    if (diagnosticObserver.current) diagnosticObserver.current.establishAccount();
+    else connectionJournal.establish();
     connectionHistoryOwnerEstablished = true;
     lastConnectionState = "";
   }
@@ -362,7 +449,7 @@ function establishConnectionHistoryOwner(): boolean {
 async function readConnectionJournal() {
   try {
     await diagnosticReady;
-    await controller.initialize();
+    await controller.ready();
     if (!establishConnectionHistoryOwner()) return { ok: false, error: "storage_unavailable" };
     diagnostics.syncAccount();
     return {
@@ -378,9 +465,60 @@ async function readConnectionJournal() {
   }
 }
 
+/** Anything but the purge alarm and the start-up it caused: history is kept again. */
+function noteWorkerActivity(): void {
+  workerActivity = true;
+  if (!purgeOnlyWorker) return;
+  purgeOnlyWorker = false;
+  // The journal starts from the state this activity found.
+  lastConnectionState = "";
+  if (connectionHistoryOwnerEstablished) recordConnectionState(controller.getSnapshot());
+}
+
+/**
+ * A worker starts at the first request after each pause, and for the purge of its own
+ * history. What it finds is most often what the previous worker left: recorded again
+ * each time, it would fill the history, and the record of a worker which only purges
+ * would need a purge of its own, for as long as the browser stays open. A start-up is
+ * therefore recorded when what it leaves is not what the previous one left, for the
+ * account it restored: a failure which is new is never lost, whatever started the
+ * worker, and one which lasts is recorded once.
+ */
+function recordStartup(result: CommandResult, elapsed: number): void {
+  let outcome: string;
+  try {
+    const snapshot = controller.getSnapshot();
+    outcome = JSON.stringify([
+      result.commandError ?? snapshot.error,
+      snapshot.status,
+      snapshot.protected,
+      snapshot.trafficBlocked,
+      snapshot.protectionRequested,
+    ]);
+  } catch {
+    outcome = JSON.stringify([result.commandError ?? "unknown_error"]);
+  }
+  void diagnostics
+    .startupNews(outcome)
+    .then((news) => {
+      if (!news) return;
+      // History is kept from here on, starting from the state this start-up left.
+      noteWorkerActivity();
+      // Recorded for the account which the start-up has just established.
+      diagnostics.record("initialize", result, elapsed);
+    })
+    .catch(() => undefined);
+}
+
 function runBackgroundEvent(event: string, operation: () => Promise<unknown>): void {
+  const startup = event === "initialize";
+  if (!startup && event !== "state_publication") noteWorkerActivity();
   const started = Date.now();
-  const recordDiagnostic = diagnostics.capture(event);
+  const capturedDiagnostic = diagnostics.capture(event);
+  const recordDiagnostic: typeof capturedDiagnostic = (result, elapsed) => {
+    if (startup) recordStartup(result, elapsed ?? 0);
+    else capturedDiagnostic(result, elapsed);
+  };
   const readSignature = () => {
     try {
       const model = diagnosticController.getDiagnosticReadState?.();
@@ -459,7 +597,7 @@ async function handleMessage(
       break;
     case "get_snapshot":
       await Promise.all([
-        controller.initialize(),
+        controller.ready(),
         initializeLanguageForPublication(),
         locations.initialize(),
         vpnAddresses.initialize(),
@@ -469,7 +607,7 @@ async function handleMessage(
       renewAccountSession();
       break;
     case "refresh_network":
-      await Promise.all([controller.initialize(), vpnAddresses.initialize()]);
+      await Promise.all([controller.ready(), vpnAddresses.initialize()]);
       network.observe(controller.getSnapshot());
       network.remind();
       // Publish the IP later without holding the command response open.
@@ -479,6 +617,8 @@ async function handleMessage(
       await language.setPreference(message.preference);
       publishSnapshot(controller.getSnapshot());
       break;
+    case "cancel_web_login":
+      return controller.cancelWebLogin();
     case "web_login":
       await initializeLanguageForPublication();
       assertLocationIntent(intent);
@@ -578,6 +718,10 @@ async function prepareLocationAction(
 ): Promise<void> {
   // A restoration retried here belongs to the command, like the one it would retry itself.
   await Promise.all([controller.initialize(recordConnection), locations.initialize()]);
+  // A restoration leaves the connection it found due to be made after it, and that
+  // connection reads the catalogue. An action on a location needs the catalogue: while
+  // none is known, it waits for the one being read.
+  if (controller.getSnapshot().locations.length === 0) await controller.startupConnectionSettled();
   assertLocationIntent(intent);
   if (!controller.getSnapshot().profile) throw new Error("unauthorized");
 }
@@ -605,6 +749,7 @@ function assertAvailableLocation(
 }
 
 function recordConnectionEvent(event: ConnectionTrace): void {
+  if (purgeOnlyWorker) return;
   try {
     connectionJournal.record(event);
   } catch {
@@ -662,12 +807,8 @@ function localizedSnapshot(): AppSnapshot {
   };
 }
 
-function publishSnapshot(snapshot: AppSnapshot): void {
-  try {
-    establishConnectionHistoryOwner();
-  } catch {
-    /* A failing history observer cannot interrupt state publication. */
-  }
+/** Records a published state once, however many publications repeat it. */
+function recordConnectionState(snapshot: AppSnapshot): void {
   const connectionState: ConnectionTrace = {
     event: "state",
     status: snapshot.status,
@@ -681,10 +822,22 @@ function publishSnapshot(snapshot: AppSnapshot): void {
     ),
   };
   const stateKey = JSON.stringify(connectionState);
-  if (stateKey !== lastConnectionState) {
-    lastConnectionState = stateKey;
-    recordConnectionEvent(connectionState);
+  if (stateKey === lastConnectionState) return;
+  lastConnectionState = stateKey;
+  recordConnectionEvent(connectionState);
+}
+
+function publishSnapshot(snapshot: AppSnapshot): void {
+  // First, and whatever follows fails: a route decision must not outlive this state.
+  noteRouting(snapshot);
+  try {
+    establishConnectionHistoryOwner();
+  } catch {
+    /* A failing history observer cannot interrupt state publication. */
   }
+  // Preferences kept in the profile follow the account: another one starts from defaults.
+  if (snapshot.profile) void preferenceOwner.adopt(snapshot.profile.userId).catch(() => undefined);
+  recordConnectionState(snapshot);
   try {
     diagnosticObserver.current?.syncAccount();
     diagnosticObserver.current?.observeRecovery();
@@ -699,9 +852,31 @@ function publishSnapshot(snapshot: AppSnapshot): void {
 }
 
 async function readRouteGuardState(): Promise<RouteGuardState> {
-  await controller.initialize();
+  await controller.ready();
+  // A request which arrives while the connection of a start-up is being made is held
+  // for it, within the deadline of the guard, and then leaves through the VPN: the tabs
+  // which a browser restores are not failed for arriving a moment too early.
+  await controller.startupConnectionSettled();
+  const memo = routeGuardMemo;
+  if (memo?.state.isCurrent() && performance.now() - memo.readAt < ROUTE_GUARD_MEMO_MS)
+    return memo.state;
+  // Requests which arrive together share one read. One begun before a change answers a
+  // state which is no longer current: its callers read again.
+  routeGuardRead ??= computeRouteGuardState()
+    .then((state) => {
+      routeGuardMemo = { state, readAt: performance.now() };
+      return state;
+    })
+    .finally(() => {
+      routeGuardRead = null;
+    });
+  return routeGuardRead;
+}
+
+async function computeRouteGuardState(): Promise<RouteGuardState> {
+  // The state this read starts from, should no publication have reported it yet.
+  noteRouting(controller.getSnapshot());
   const revision = routingRevision;
-  const routingPolicy = routingSnapshotKey(controller.getSnapshot());
   const session = await controller.getActiveSession();
   const owned = (await proxy.getControlLevel()) === "controlled_by_this_extension";
   const configured = !!session && owned && (await proxy.isActiveConfiguration(session));
@@ -709,9 +884,9 @@ async function readRouteGuardState(): Promise<RouteGuardState> {
   const exclusions = safety.getRouteExclusions();
   const exclusionGuard = safety.hasExclusionGuard();
   const policy = JSON.stringify(exclusions);
+  // The published state moves the revision when its routing changes: see publishSnapshot.
   const isCurrent = () =>
     revision === routingRevision &&
-    routingPolicy === routingSnapshotKey(controller.getSnapshot()) &&
     exclusionGuard === safety.hasExclusionGuard() &&
     policy === JSON.stringify(safety.getRouteExclusions());
   if (exclusionGuard || snapshot.trafficBlocked) {
@@ -731,7 +906,15 @@ async function readRouteGuardState(): Promise<RouteGuardState> {
   return { mode: "off", isCurrent };
 }
 
-/** Account/catalog/UI publications must not cancel an otherwise unchanged request. */
+/** Moves the revision when what a state means for routing differs from the last one. */
+function noteRouting(snapshot: AppSnapshot): void {
+  const key = routingSnapshotKey(snapshot);
+  if (key === routingKey) return;
+  routingKey = key;
+  routingRevision++;
+}
+
+/** Account/catalog/UI publications must not invalidate an otherwise unchanged decision. */
 function routingSnapshotKey(snapshot: AppSnapshot): string {
   return JSON.stringify([
     snapshot.protectionRequested,
@@ -838,15 +1021,37 @@ async function verifyObservationRoute(mode: "direct" | "vpn"): Promise<boolean> 
   );
 }
 
+/**
+ * What this worker last gave the toolbar button, which the browser keeps. Most
+ * publications change neither its icon nor its title: the button is given only what
+ * changes. An update which the browser refused is not remembered, and is made again.
+ */
+const shownAction: { icon?: string; title?: string; badgeCleared?: true } = {};
+
 async function updateAction(snapshot: AppSnapshot): Promise<void> {
   const visual = statusVisual(snapshot.status);
-  const updates: Promise<unknown>[] = [
-    updateActionIcon(visual.icon),
-    // The compact state indicator is part of the local icon. Clear Chrome's
-    // own badge because its fixed size obscures most of a 16 px brand mark.
-    extensionApi.action.setBadgeText({ text: "" }),
-    extensionApi.action.setTitle({ title: language.message(visual.titleKey) }),
-  ];
+  const title = language.message(visual.titleKey);
+  const updates: Promise<unknown>[] = [];
+  if (shownAction.icon !== visual.icon)
+    updates.push(
+      updateActionIcon(visual.icon).then(() => {
+        shownAction.icon = visual.icon;
+      }),
+    );
+  // The compact state indicator is part of the local icon. Clear Chrome's
+  // own badge because its fixed size obscures most of a 16 px brand mark.
+  if (!shownAction.badgeCleared)
+    updates.push(
+      extensionApi.action.setBadgeText({ text: "" }).then(() => {
+        shownAction.badgeCleared = true;
+      }),
+    );
+  if (shownAction.title !== title)
+    updates.push(
+      extensionApi.action.setTitle({ title }).then(() => {
+        shownAction.title = title;
+      }),
+    );
   await Promise.allSettled(updates);
 }
 

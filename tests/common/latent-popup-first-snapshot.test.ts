@@ -2,6 +2,7 @@
 
 import { readFileSync } from "node:fs";
 import { runInNewContext } from "node:vm";
+import { popupDom } from "./popup-dom";
 import ts from "typescript";
 import type { ExtensionRequest } from "../../src/core/shared/messages";
 import { EMPTY_SNAPSHOT, type AppSnapshot } from "../../src/core/shared/state";
@@ -84,6 +85,7 @@ function setup() {
     loadedLocale: "fr",
     languageCatalogFailed: false,
     devicesFailure: null,
+    deviceRefusals: new Map<string, unknown>(),
     locationPreferenceFailure: null,
     locationsRefreshFailed: false,
     locationSelectionPending: false,
@@ -110,7 +112,7 @@ function setup() {
     },
   };
   // Execute the production functions, with only messaging and final rendering replaced.
-  runInNewContext(executable, context);
+  runInNewContext(executable, Object.assign(context, popupDom));
   return {
     subject: context as unknown as Subject,
     pending,

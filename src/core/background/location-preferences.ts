@@ -19,6 +19,8 @@ interface StoredLocationPreferences {
   favoriteIds: string[];
   recentIds: string[];
   automatic: boolean;
+  /** Names the reset which last emptied these preferences: it is not done a second time. */
+  reset?: string;
 }
 
 interface LocationPreferencesOptions {
@@ -120,6 +122,19 @@ export class LocationPreferences {
     });
   }
 
+  /**
+   * Back to the defaults, for an account which did not set these preferences. The reset
+   * is named: asked again after it was done, it leaves what was chosen since.
+   */
+  reset(token: string): Promise<void> {
+    return this.update((current) => {
+      if (!RESET_TOKEN.test(token)) throw new Error("invalid_location_preference");
+      if (current.reset === token) return current;
+      this.measurements.clear();
+      return { favoriteIds: [], recentIds: [], automatic: false, reset: token };
+    });
+  }
+
   recordConnected(locationId: string): Promise<void> {
     return this.update((current) => {
       assertLocationId(locationId);
@@ -167,6 +182,7 @@ export class LocationPreferences {
         favoriteIds: [...next.favoriteIds],
         recentIds: [...next.recentIds],
         automatic: next.automatic,
+        ...(next.reset === undefined ? {} : { reset: next.reset }),
       });
       this.state = next;
       this.options.onChanged();
@@ -176,11 +192,15 @@ export class LocationPreferences {
   }
 }
 
+const RESET_TOKEN = /^[0-9a-f-]{36}$/;
+
 function sanitizePreferences(value: unknown): StoredLocationPreferences {
+  const reset = ownValue(value, "reset");
   return {
     favoriteIds: sanitizeIds(ownValue(value, "favoriteIds"), MAX_FAVORITES),
     recentIds: sanitizeIds(ownValue(value, "recentIds"), MAX_RECENT),
     automatic: ownValue(value, "automatic") === true,
+    ...(typeof reset === "string" && RESET_TOKEN.test(reset) ? { reset } : {}),
   };
 }
 
@@ -211,6 +231,7 @@ function assertLocationId(value: unknown): asserts value is string {
 function samePreferences(a: StoredLocationPreferences, b: StoredLocationPreferences): boolean {
   return (
     a.automatic === b.automatic &&
+    a.reset === b.reset &&
     JSON.stringify(a.favoriteIds) === JSON.stringify(b.favoriteIds) &&
     JSON.stringify(a.recentIds) === JSON.stringify(b.recentIds)
   );

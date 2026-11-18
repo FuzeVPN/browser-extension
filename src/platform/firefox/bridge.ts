@@ -107,16 +107,20 @@ export function registerPlatformEvents(handlers: PlatformEventHandlers): void {
     },
     { urls: ["<all_urls>"] },
   );
+  // A consent to diagnostics alone changes nothing the connection relies on.
+  const consentOnly = (change: browser.permissions.Permissions) =>
+    !!change.data_collection?.length && !change.permissions?.length && !change.origins?.length;
   browser.permissions.onRemoved.addListener((removed) => {
     if (removed.data_collection?.includes("technicalAndInteraction"))
       handlers.diagnosticsConsentRemoved();
-    if (removed.data_collection?.length && !removed.permissions?.length && !removed.origins?.length)
-      return;
-    handlers.permissionsChanged();
+    if (!consentOnly(removed)) handlers.permissionsChanged();
   });
   browser.permissions.onAdded.addListener((added) => {
     if (added.data_collection?.includes("technicalAndInteraction"))
       handlers.diagnosticsConsentAdded();
+    // A permission which is granted back lets the protection which was refused for it
+    // resume, as it does on Chromium, without waiting for the user to ask again.
+    if (!consentOnly(added)) handlers.permissionsChanged();
   });
   browser.privacy.network.webRTCIPHandlingPolicy.onChange.addListener(() =>
     handlers.privacyChanged(),

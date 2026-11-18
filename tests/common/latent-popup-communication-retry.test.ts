@@ -2,6 +2,7 @@
 
 import { readFileSync } from "node:fs";
 import { runInNewContext } from "node:vm";
+import { popupDom } from "./popup-dom";
 import ts from "typescript";
 import type { ExtensionRequest } from "../../src/core/shared/messages";
 import { networkRouteKey } from "../../src/core/shared/network";
@@ -11,6 +12,7 @@ import { PopupSnapshotOrder, popupSnapshot } from "../../src/ui/popup/snapshot";
 interface Subject {
   snapshot: AppSnapshot | null;
   communicationFailed: boolean;
+  accountKnown: boolean;
   bindEvents(): void;
   initializePopup(): Promise<void>;
   render(value: unknown, confirmed?: boolean): boolean;
@@ -80,6 +82,7 @@ const functionNames = new Set([
   "initializePopup",
   "refreshAccount",
   "retryConnection",
+  "readStateAgain",
   "signInOnWeb",
   "request",
   "render",
@@ -111,6 +114,24 @@ function signedOut(revision: number): AppSnapshot {
   };
 }
 
+function signedIn(revision: number): AppSnapshot {
+  return {
+    ...signedOut(revision),
+    status: "connected",
+    protected: true,
+    protectionRequested: true,
+    activeLocationId: "fr",
+    selectedLocationId: "fr",
+    profile: {
+      userId: "user",
+      email: "user@example.invalid",
+      firstName: "Test",
+      lastName: "User",
+      countryCode: "FR",
+    },
+  };
+}
+
 /** A popup that has just been opened, with its real event handlers and view rendering. */
 function setup() {
   const pending: (ReturnType<typeof deferred<unknown>> & { message: ExtensionRequest })[] = [];
@@ -122,18 +143,35 @@ function setup() {
   elements.recoveryPanel!.classList.add("hidden");
   elements.mainView!.classList.add("hidden");
   elements.loginButton!.disabled = true;
+  // Until its first state or failure the popup shows neither view: this ends that.
+  const endBoot = vi.fn();
   const context = {
+    // No element has the focus in this popup.
+    document: { activeElement: null, createElement: () => new FakeElement() },
+    // Of the main view, these tests read which view is shown and its recovery panel.
+    statusKey: () => "statusProtected",
+    statusClass: () => "connected",
+    displayedLocation: () => null,
+    missingLocationMessage: () => "noLocation",
+    canDisconnect: () => true,
+    subscriptionExpiry: () => "",
+    renderNetwork: vi.fn(),
+    refreshNetwork: vi.fn(),
+    renderLocations: vi.fn(),
+    renderDevices: vi.fn(),
     snapshot: null,
     accountEpoch: 0,
     accountRefreshPending: false,
     devicesRefreshPending: false,
     locationsRefreshPending: false,
     connectionRetryPending: false,
+    stateReadPending: false,
     securityPreferencesPending: false,
     automaticSelectionPending: false,
     verificationPending: false,
     loginPending: false,
     communicationFailed: false,
+    accountKnown: false,
     renderSequence: 0,
     confirmedSnapshotSequence: 0,
     connectionRequestIntent: 0,
@@ -149,6 +187,7 @@ function setup() {
     renderedDevices: "",
     locationFilter: "all",
     devicesFailure: null,
+    deviceRefusals: new Map<string, unknown>(),
     locationPreferenceFailure: null,
     locationsRefreshFailed: false,
     locationSelectionPending: false,
@@ -176,15 +215,17 @@ function setup() {
     renderExclusionPreview: vi.fn(),
     renderTheme: vi.fn(),
     openDevices: vi.fn(),
+    endBoot,
   };
   // Execute the production functions, with only messaging and unrelated rendering replaced.
-  runInNewContext(executable, context);
+  runInNewContext(executable, Object.assign(context, popupDom));
   const subject = context as unknown as Subject;
   subject.bindEvents();
   return {
     subject,
     elements,
     pending,
+    endBoot,
     sent: () => pending.map(({ message }) => message.type),
     // The sign-in button submits its form.
     pressSignIn() {
@@ -208,15 +249,40 @@ async function openWithoutWorker() {
   expect(subject.snapshot?.profile).toBeNull();
   expect(elements.loginErrorBanner!.visible).toBe(true);
   expect(elements.loginErrorMessage!.textContent).toBe("extensionCommunicationError");
+  // The failure is shown: a popup which stayed empty would hide it.
+  expect(popup.endBoot).toHaveBeenCalled();
   return popup;
 }
 
 describe("a signed-out popup whose first snapshot request failed", () => {
-  it("shows the recovery panel with one enabled button labelled as sign-in", async () => {
-    const { elements } = await openWithoutWorker();
+  it("shows the recovery panel with one enabled button, which says that it tries again", async () => {
+    const { subject, elements } = await openWithoutWorker();
     expect(elements.recoveryPanel!.visible).toBe(true);
-    expect(elements.retryButton).toMatchObject({ textContent: "signIn", disabled: false });
+    // Nothing says that nobody is signed in: the button does not invite to sign in.
+    expect(elements.retryButton).toMatchObject({ textContent: "retryConnection", disabled: false });
     expect(elements.loginButton!.disabled).toBe(true);
+    expect(subject.accountKnown).toBe(false);
+  });
+
+  it("reads the state again from that button, and shows the account it finds", async () => {
+    const { subject, elements, sent, pending } = await openWithoutWorker();
+    elements.retryButton!.click();
+    expect(sent()).toEqual(["get_snapshot", "get_snapshot"]);
+
+    pending[1]!.resolve({ ok: true, snapshot: signedIn(1) });
+    await settle();
+    expect(subject.communicationFailed).toBe(false);
+    expect(subject.accountKnown).toBe(true);
+    expect(elements.mainView!.visible).toBe(true);
+    expect(elements.loginView!.visible).toBe(false);
+  });
+
+  it("invites to sign in once a state says that nobody is", async () => {
+    const { subject, elements } = await openWithoutWorker();
+    expect(subject.render(signedOut(1), true)).toBe(true);
+    expect(subject.accountKnown).toBe(true);
+    expect(elements.loginView!.visible).toBe(true);
+    expect(elements.loginButton!.disabled).toBe(false);
   });
 
   it("lets the user sign in as soon as the worker publishes again", async () => {
@@ -231,12 +297,58 @@ describe("a signed-out popup whose first snapshot request failed", () => {
   it("gives that button a way to reach the worker again", async () => {
     const { elements, sent, pressSignIn } = await openWithoutWorker();
     elements.retryButton!.click();
-    // The button only moves the focus to the sign-in button: the user presses it next.
+    // The sign-in button stays disabled while the worker does not answer.
     pressSignIn();
     await settle();
-    expect(
-      sent().slice(1),
-      "messages sent by the recovery button and the sign-in button it focuses",
-    ).not.toEqual([]);
+    expect(sent().slice(1), "messages sent by the recovery button").toEqual(["get_snapshot"]);
+  });
+});
+
+describe("a signed-in popup whose worker stops answering", () => {
+  async function lostWorker(patch: Partial<AppSnapshot> = {}) {
+    const popup = setup();
+    expect(popup.subject.render({ ...signedIn(1), ...patch }, true)).toBe(true);
+    void popup.subject.initializePopup();
+    popup.pending
+      .find(({ message }) => message.type === "get_snapshot")!
+      .reject(new Error("worker_unreachable"));
+    await settle();
+    expect(popup.subject.communicationFailed).toBe(true);
+    // What the popup asks about the state or the connection, among its other requests.
+    const asked = () =>
+      popup.sent().filter((type) => type === "get_snapshot" || type === "retry_connection");
+    return { ...popup, asked };
+  }
+
+  it("keeps the account it knew, and offers to try again", async () => {
+    const { subject, elements } = await lostWorker();
+    expect(subject.accountKnown).toBe(true);
+    expect(elements.mainView!.visible).toBe(true);
+    expect(elements.recoveryPanel!.visible).toBe(true);
+    expect(elements.retryButton).toMatchObject({ textContent: "retryConnection", disabled: false });
+  });
+
+  it("reads the state again: a connection which may be fine is not made again", async () => {
+    const { elements, asked } = await lostWorker();
+    elements.retryButton!.click();
+    expect(asked()).toEqual(["get_snapshot", "get_snapshot"]);
+  });
+
+  it.each([
+    ["no location is selected", { selectedLocationId: null }],
+    ["the last state was in progress", { status: "connecting" as const }],
+  ])("can try again when %s", async (_name, patch) => {
+    const { elements, asked } = await lostWorker(patch);
+    expect(elements.retryButton!.disabled).toBe(false);
+    elements.retryButton!.click();
+    expect(asked()).toEqual(["get_snapshot", "get_snapshot"]);
+  });
+
+  it("asks once while its reading is on its way", async () => {
+    const { elements, asked } = await lostWorker();
+    elements.retryButton!.click();
+    expect(elements.retryButton!.disabled).toBe(true);
+    elements.retryButton!.click();
+    expect(asked()).toEqual(["get_snapshot", "get_snapshot"]);
   });
 });

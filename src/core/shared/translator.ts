@@ -14,11 +14,22 @@ export class Translator {
   private readonly catalogs = new Map<Language, Promise<Catalog>>();
   constructor(private readonly loader: CatalogLoader = loadCatalog) {}
 
+  /**
+   * Starts loading the catalogs a first render will most likely ask for. A failure
+   * here is forgotten: forLanguage loads again, and reports it.
+   */
+  preload(language: Language): void {
+    void this.load("en").catch(() => undefined);
+    if (language !== "en") void this.load(language).catch(() => undefined);
+  }
+
   async forLanguage(
     language: Language,
   ): Promise<(key: string, substitutions?: string[]) => string> {
-    const english = await this.load("en");
-    const selected = language === "en" ? english : await this.load(language);
+    const [english, selected] = await Promise.all([
+      this.load("en"),
+      language === "en" ? this.load("en") : this.load(language),
+    ]);
     return (key, substitutions = []) => {
       const entry = selected[key] ?? english[key];
       return entry ? interpolate(entry, substitutions) : key;

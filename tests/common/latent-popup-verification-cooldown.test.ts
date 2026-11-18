@@ -2,6 +2,7 @@
 
 import { readFileSync } from "node:fs";
 import { runInNewContext } from "node:vm";
+import { popupDom } from "./popup-dom";
 import ts from "typescript";
 import { ApiError } from "../../src/core/api/client";
 import type { AppSnapshot } from "../../src/core/shared/state";
@@ -66,7 +67,7 @@ function openPopup(clock: { now: number }) {
     elements,
   };
   // Execute the production rendering, with only the clock and the DOM replaced.
-  runInNewContext(executable, context);
+  runInNewContext(executable, Object.assign(context, popupDom));
   const subject = context as unknown as Subject;
   return {
     render: (snapshot: AppSnapshot) => subject.renderVerification(snapshot),

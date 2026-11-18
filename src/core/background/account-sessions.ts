@@ -45,6 +45,11 @@ interface SessionRecord {
   /** No rotation is sent before this time, which a later worker respects too. */
   retryAt: number | null;
   /**
+   * How many rotations failed in a row. Kept with the session: the delays go on growing
+   * for the workers which follow, each of which would otherwise start from the shortest.
+   */
+  failures: number;
+  /**
    * When the server first answered that it cannot perform the pending conversion, while
    * an earlier attempt may have been applied. One such answer may come from a single
    * instance during a deployment: it counts once this worker receives the same answer,
@@ -132,6 +137,7 @@ export class AccountSessions {
           const runtime = this.state(record.handle);
           // Nothing tells what became of a request which a previous worker stored.
           if (record.pending) runtime.doubt = true;
+          runtime.failures = record.failures;
           const wait = (record.retryAt ?? 0) - this.now();
           if (wait > 0) runtime.retryAt = this.monotonic() + Math.min(wait, MAX_RETRY_DELAY_MS);
         }
@@ -394,6 +400,7 @@ export class AccountSessions {
         pending: null,
         classicUntil: null,
         retryAt: null,
+        failures: 0,
         unknownSince: null,
         refused: false,
         touchedAt: this.now(),
@@ -458,6 +465,7 @@ export class AccountSessions {
   private defer(record: SessionRecord, runtime: RuntimeState, retryAfterSeconds?: number): void {
     const step = RETRY_DELAYS_MS[Math.min(runtime.failures, RETRY_DELAYS_MS.length - 1)] ?? 0;
     runtime.failures += 1;
+    record.failures = runtime.failures;
     const requested = retryAfterSeconds === undefined ? step : retryAfterSeconds * 1_000;
     const delay = Math.min(Math.max(requested, 1_000), MAX_RETRY_DELAY_MS);
     runtime.retryAt = this.monotonic() + delay;
@@ -511,7 +519,7 @@ export class AccountSessions {
     record.retryAt = null;
     record.unknownSince = runtime.unknownAt = null;
     runtime.doubt = false;
-    runtime.failures = 0;
+    runtime.failures = record.failures = 0;
     runtime.retryAt = null;
     // Tokens recovered with an earlier request may be as old as that request: they
     // are not taken for fresh ones, and are renewed at once if they are about to expire.
@@ -663,6 +671,7 @@ export class AccountSessions {
         pending: record.pending ? { ...record.pending } : null,
         classicUntil: record.classicUntil,
         retryAt: record.retryAt,
+        ...(record.failures > 0 ? { failures: record.failures } : {}),
         unknownSince: record.unknownSince,
         refused: record.refused,
         touchedAt: record.touchedAt,
@@ -883,6 +892,12 @@ function decodeRecord(entry: unknown): SessionRecord | null {
     pending,
     classicUntil: timestamp(entry.classicUntil),
     retryAt: timestamp(entry.retryAt),
+    failures:
+      typeof entry.failures === "number" &&
+      Number.isSafeInteger(entry.failures) &&
+      entry.failures > 0
+        ? Math.min(entry.failures, 1_000)
+        : 0,
     unknownSince: timestamp(entry.unknownSince),
     refused: entry.refused === true,
     touchedAt: timestamp(entry.touchedAt) ?? 0,

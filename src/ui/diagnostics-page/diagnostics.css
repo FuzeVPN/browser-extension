@@ -803,3 +803,11 @@ pre {
     display: none;
   }
 }
+
+/*
+ * Arabic script joins its letters: spaced apart they stop touching, and tightened they
+ * overlap. Titles and small labels keep the spacing of the text in these languages.
+ */
+:root:is(:lang(ar), :lang(fa), :lang(ps), :lang(ur)) :is(h1, h2, h3, .hero-eyebrow) {
+  letter-spacing: 0;
+}

@@ -103,6 +103,7 @@ describe("restored proxy session validation", () => {
         return createSession(...arguments_);
       });
     await h.controller.initialize();
+    await h.controller.startupConnectionSettled();
     return { ...f, h, replacement };
   }
 

@@ -2,6 +2,7 @@
 
 import { readFileSync } from "node:fs";
 import { runInNewContext } from "node:vm";
+import { popupDom } from "./popup-dom";
 import ts from "typescript";
 import type { ExtensionRequest, ExtensionResponse } from "../../src/core/shared/messages";
 import { EMPTY_SNAPSHOT, type AppSnapshot } from "../../src/core/shared/state";
@@ -75,6 +76,7 @@ function setup(initial = state()) {
     confirmedSnapshotSequence: 0,
     connectionRequestIntent: 0,
     devicesAction: 0,
+    deviceRefusals: new Map<string, unknown>(),
     locationSelectionRequest: 0,
     loadedLocale: "fr",
     snapshotOrder: order,
@@ -101,7 +103,7 @@ function setup(initial = state()) {
     },
   };
   // Run the actual request/ordering functions without popup startup or a browser.
-  runInNewContext(executable, context);
+  runInNewContext(executable, Object.assign(context, popupDom));
   return { subject: context as unknown as Harness, pending };
 }
 

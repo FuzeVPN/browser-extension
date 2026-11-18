@@ -89,7 +89,7 @@ describe("renewal deadlines across worker restarts", () => {
       controller = restart();
       await controller.initialize();
       expect(alarms.get(ALARM_REFRESH)).toBe(deadline);
-      expect(alarms.get(ALARM_EXPIRY)).toBe(Date.parse(session.expiresAt));
+      expect(alarms.get(ALARM_EXPIRY)).toBe(Date.parse(session.expiresAt) - 5_000);
       await controller.handleAlarm(ALARM_REFRESH);
       expect(h.api.proofs).toHaveLength(1);
       expect(controller.getSnapshot().protected).toBe(true);
@@ -116,7 +116,7 @@ describe("renewal deadlines across worker restarts", () => {
     await controller.handleAlarm(ALARM_REFRESH);
     expect(h.api.proofs).toHaveLength(3);
     expect(alarms.has(ALARM_REFRESH)).toBe(false);
-    expect(alarms.get(ALARM_EXPIRY)).toBe(Date.parse(session.expiresAt));
+    expect(alarms.get(ALARM_EXPIRY)).toBe(Date.parse(session.expiresAt) - 5_000);
     now = Date.parse(session.expiresAt);
     await controller.handleAlarm(ALARM_EXPIRY);
     expect(controller.getSnapshot()).toMatchObject({ protected: false, trafficBlocked: true });

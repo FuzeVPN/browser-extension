@@ -56,6 +56,7 @@ async function guardRefusedFixture() {
     captureConnectionEvents: () => journal.capture(),
   });
   await h.controller.initialize();
+  await h.controller.startupConnectionSettled();
   expect(h.controller.getSnapshot()).toMatchObject({
     protected: false,
     error: "proxy_controlled_by_extension",
@@ -93,6 +94,8 @@ describe("startup guard repairs retried by any command keep that command's journ
       f.journal.clear();
       gate.resolve(undefined);
       await command;
+      // The connection which the restoration left to make belongs to that command too.
+      await f.h.controller.startupConnectionSettled();
       // The restoration itself still happens; only its history belongs to the erased journal.
       expect(f.h.controller.getSnapshot().protected).toBe(true);
       await f.journal.pruneExpired();

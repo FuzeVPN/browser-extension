@@ -620,6 +620,26 @@ try {
       true,
       `Overflow in ${code}`,
     );
+    // Arabic script joins its letters: no text written in it is spaced.
+    if (["ar", "fa", "ur", "ps"].includes(code))
+      assert.deepEqual(
+        await page.evaluate(() => {
+          const arabic = /[\u0600-\u06FF\u0750-\u077F\uFB50-\uFDFF\uFE70-\uFEFF]/;
+          return [...document.querySelectorAll("body *")]
+            .filter(
+              (node) =>
+                [...node.childNodes].some(
+                  (child) => child.nodeType === Node.TEXT_NODE && arabic.test(child.data),
+                ) && !["normal", "0px"].includes(getComputedStyle(node).letterSpacing),
+            )
+            .map(
+              (node) =>
+                `${node.id ? "#" + node.id : node.localName + "." + node.className} ${getComputedStyle(node).letterSpacing}`,
+            );
+        }),
+        [],
+        code,
+      );
     assert.equal(
       await page
         .locator("[data-i18n]")
@@ -634,6 +654,7 @@ try {
     "Diagnostics, consent, delivery and localized legal links cover all seventy languages without horizontal overflow at 360 px",
   );
   record("Diagnostic layouts follow RTL and return to LTR while exported JSON remains LTR");
+  record("No text in Arabic script is letter-spaced, in Arabic, Persian, Urdu and Pashto");
   await page.close();
   legacy = true;
   state.language = "fr";

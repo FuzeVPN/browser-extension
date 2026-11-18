@@ -205,6 +205,19 @@ describe("Firefox actual request route guard", () => {
     await expect(guard.decide(request(), true)).resolves.toEqual({ cancel: true });
   });
 
+  it("decides by the state which replaced the one invalidated while it was read", async () => {
+    const { guard, readState } = fixture();
+    readState.mockResolvedValueOnce({ mode: "block", exclusions: [], isCurrent: () => false });
+    await expect(guard.decide(request({ proxyInfo }), true)).resolves.toEqual({});
+    expect(readState).toHaveBeenCalledTimes(2);
+  });
+
+  it("refuses once the state has changed at every one of its four reads", async () => {
+    const { guard, readState } = fixture({ mode: "off", isCurrent: () => false });
+    await expect(guard.decide(request(), true)).resolves.toEqual({ cancel: true });
+    expect(readState).toHaveBeenCalledTimes(4);
+  });
+
   it("allows ordinary direct traffic after a verified explicit release", async () => {
     const { guard } = fixture({ mode: "off", isCurrent: current });
     await expect(guard.decide(request(), true)).resolves.toEqual({});

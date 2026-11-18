@@ -1,7 +1,16 @@
 // SPDX-License-Identifier: MPL-2.0
 
 import { ExtensionAlarmService, computeRefreshAt } from "../../src/core/background/session-refresh";
-import { ALARM_EXPIRY, ALARM_RECONNECT, ALARM_REFRESH } from "../../src/core/shared/config";
+import {
+  ALARM_EXPIRY,
+  ALARM_RECONNECT,
+  ALARM_REFRESH,
+  PROXY_EXPIRY_MARGIN_MS,
+} from "../../src/core/shared/config";
+
+/** When a session stops being used: the margin before the server ends it. */
+const refusedAt = (session: { expiresAt: string }) =>
+  Date.parse(session.expiresAt) - PROXY_EXPIRY_MARGIN_MS;
 import { NOW, proxySession } from "./helpers";
 
 function deferred<T>() {
@@ -108,17 +117,25 @@ describe("verified Chrome alarm scheduling", () => {
     const session = proxySession();
     await service.scheduleSession(session, NOW + 1_000);
     expect(scheduled.get(ALARM_REFRESH)?.scheduledTime).toBe(NOW + 1_000);
-    expect(scheduled.get(ALARM_EXPIRY)?.scheduledTime).toBe(Date.parse(session.expiresAt));
+    expect(scheduled.get(ALARM_EXPIRY)?.scheduledTime).toBe(refusedAt(session));
     expect(get.mock.calls.map(([name]) => name).sort()).toEqual(
       [ALARM_REFRESH, ALARM_EXPIRY].sort(),
     );
+  });
+
+  it("sets the expiry alarm for the moment the session stops being used", async () => {
+    const session = proxySession();
+    await service.scheduleSession(session);
+    // Refused five seconds before the server ends it: replaced then, not five seconds
+    // later without protection.
+    expect(scheduled.get(ALARM_EXPIRY)?.scheduledTime).toBe(Date.parse(session.expiresAt) - 5_000);
   });
 
   it("keeps the existing computed session deadlines", async () => {
     const session = proxySession();
     await service.scheduleSession(session);
     expect(scheduled.get(ALARM_REFRESH)?.scheduledTime).toBe(computeRefreshAt(session, NOW));
-    expect(scheduled.get(ALARM_EXPIRY)?.scheduledTime).toBe(Date.parse(session.expiresAt));
+    expect(scheduled.get(ALARM_EXPIRY)?.scheduledTime).toBe(refusedAt(session));
   });
 
   it("clears exhausted refresh retries while confirming the expiry alarm", async () => {
@@ -126,9 +143,7 @@ describe("verified Chrome alarm scheduling", () => {
     const session = proxySession();
     await service.scheduleSession(session, null);
     expect(scheduled.has(ALARM_REFRESH)).toBe(false);
-    expect(create).toHaveBeenCalledExactlyOnceWith(ALARM_EXPIRY, {
-      when: Date.parse(session.expiresAt),
-    });
+    expect(create).toHaveBeenCalledExactlyOnceWith(ALARM_EXPIRY, { when: refusedAt(session) });
     expect(get).toHaveBeenCalledExactlyOnceWith(ALARM_EXPIRY);
   });
 
@@ -144,6 +159,6 @@ describe("verified Chrome alarm scheduling", () => {
     const expiresAt = Date.parse(session.expiresAt);
     vi.mocked(Date.now).mockReturnValue(expiresAt + 60_000);
     await service.scheduleSession(session, null);
-    expect(create).toHaveBeenCalledExactlyOnceWith(ALARM_EXPIRY, { when: expiresAt });
+    expect(create).toHaveBeenCalledExactlyOnceWith(ALARM_EXPIRY, { when: refusedAt(session) });
   });
 });

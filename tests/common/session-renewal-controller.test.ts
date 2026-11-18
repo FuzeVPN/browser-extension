@@ -186,13 +186,17 @@ describe("an account whose session is renewable", () => {
     f.issue("proxy-after-refusal");
     // The refusal ends the account, which supersedes the connection it interrupted.
     await expect(next.controller.connect("frankfurt-01")).resolves.toMatchObject({ ok: false });
-    await vi.waitFor(() => expect(next.controller.getSnapshot().profile).toBeNull());
+    // The account is no longer shown from the instant its removal begins.
+    expect(next.controller.getSnapshot().profile).toBeNull();
+    await vi.waitFor(() => expect(f.account.persisted.auth).toBeNull());
     // The protection which was asked for stays guarded, as for any account which ends.
-    expect(next.controller.getSnapshot()).toMatchObject({
-      status: "blocked",
-      error: "unauthorized",
-    });
-    expect(f.account.persisted.auth).toBeNull();
+    await vi.waitFor(() =>
+      expect(next.controller.getSnapshot()).toMatchObject({
+        profile: null,
+        status: "blocked",
+        error: "unauthorized",
+      }),
+    );
   });
 
   it("stays signed in while its session cannot be renewed, with no creation in doubt", async () => {

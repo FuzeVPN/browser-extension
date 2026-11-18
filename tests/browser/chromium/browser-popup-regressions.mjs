@@ -249,6 +249,48 @@ try {
   await login(page);
   await page.close();
 
+  // What a signed-in user sees while the popup opens, frame by frame.
+  page = await context.newPage();
+  trackErrors(page);
+  await page.addInitScript(() => {
+    const views = (window.viewsPainted = []);
+    const shown = (id) => {
+      const node = document.getElementById(id);
+      return (
+        Boolean(node) &&
+        node.getClientRects().length > 0 &&
+        getComputedStyle(node).visibility !== "hidden"
+      );
+    };
+    const frame = () => {
+      views.push(shown("loginView") ? "login" : shown("mainView") ? "main" : "none");
+      if (views.length < 900) requestAnimationFrame(frame);
+    };
+    requestAnimationFrame(frame);
+  });
+  await page.goto(url);
+  await page.locator("#mainView").waitFor({ state: "visible" });
+  await rendered(page);
+  const viewsPainted = await page.evaluate(() => window.viewsPainted);
+  assert(viewsPainted.length > 2);
+  assert(viewsPainted.includes("main"));
+  // The sign-in view used to be painted until the background had answered.
+  assert.equal(viewsPainted.filter((view) => view === "login").length, 0);
+  assert.equal(await page.locator("main.shell").getAttribute("data-boot"), null);
+  record("A signed-in popup opens on its main view without painting the sign-in view first");
+
+  // The list of locations, and its flags, are built when its dialog opens.
+  assert.equal(await page.locator("#locationList > *").count(), 0);
+  assert.equal(await page.locator("#locationList img").count(), 0);
+  await page.locator("#changeLocationButton").click();
+  await page.locator("#locationList .location-country-group").first().waitFor({ state: "visible" });
+  // One group for each country of the synthetic catalogue, each with its flag.
+  assert.equal(await page.locator("#locationList .location-country-group").count(), 2);
+  assert((await page.locator("#locationList img").count()) >= 2);
+  await page.locator("#closeLocationButton").click();
+  record("The list of locations is built when its dialog opens, not while the popup opens");
+  await page.close();
+
   // Reproduce the initial account refresh arriving during keyboard navigation.
   const accountRefresh = hold("/v1/me");
   page = await context.newPage();
@@ -484,6 +526,10 @@ try {
   const staleAccount = (await command(page, { type: "get_snapshot" })).snapshot;
   assert.ok(staleAccount.snapshotVersion);
   await page.locator("#settingsButton").click();
+  // The toolbar button is given its title only when it changes: the publication to hold
+  // is one which changes it, here by its language.
+  await command(page, { type: "set_language_preference", preference: "en" });
+  await page.waitForFunction(() => document.documentElement.lang === "en");
   await worker.evaluate(() => {
     const original = chrome.action.setTitle.bind(chrome.action);
     globalThis.popupAuditGates = [];

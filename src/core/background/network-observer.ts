@@ -11,6 +11,12 @@ import type { AppSnapshot } from "../shared/state";
 const IP_ENDPOINT = "https://api.ipify.org?format=json";
 const FALLBACK_IP_ENDPOINT = "https://ipv4.icanhazip.com/";
 const CACHE_MS = 30_000;
+/**
+ * The longest a provider is left alone after it asked to be. A provider which asks for
+ * a day, or names a date which a wrong clock makes distant, would otherwise leave the
+ * address unknown for as long: it is asked again, once, after this.
+ */
+const MAX_PROVIDER_COOLDOWN_MS = 10 * 60_000;
 const TIMEOUT_MS = 8_000;
 const PROVIDER_TIMEOUT_MS = 3_000;
 const FALLBACK_HEDGE_MS = 750;
@@ -162,7 +168,8 @@ export class NetworkObserver {
     } catch {
       if (!this.isCurrent(revision)) return;
       const remainingCooldowns = this.providers(mode).map(
-        (endpoint) => (this.providerRetryAt.get(endpoint) ?? 0) - this.now(),
+        (endpoint) =>
+          (this.providerRetryAt.get(this.cooldownKey(mode, endpoint)) ?? 0) - this.now(),
       );
       this.failureCacheMs = remainingCooldowns.every((delay) => delay > 0)
         ? Math.min(...remainingCooldowns)
@@ -211,7 +218,8 @@ export class NetworkObserver {
       this.assertCurrent(revision, signal);
       const retryEndpoints: string[] = [];
       const eligible = endpoints.filter(
-        (endpoint) => (this.providerRetryAt.get(endpoint) ?? 0) <= this.now(),
+        (endpoint) =>
+          (this.providerRetryAt.get(this.cooldownKey(mode, endpoint)) ?? 0) <= this.now(),
       );
       const result = await this.readRound(mode, revision, signal, eligible, retryEndpoints);
       if (result) return result;
@@ -325,7 +333,10 @@ export class NetworkObserver {
             reject(new Error("network_observation_timeout"));
           }, PROVIDER_TIMEOUT_MS);
       });
-      ip = await Promise.race([this.readResponse(endpoint, revision, attempt.signal), deadline]);
+      ip = await Promise.race([
+        this.readResponse(mode, endpoint, revision, attempt.signal),
+        deadline,
+      ]);
     } finally {
       clearTimeout(timer);
       signal.removeEventListener("abort", cancel);
@@ -348,7 +359,18 @@ export class NetworkObserver {
     if (!verified) throw new UnverifiedRouteError("network_route_unverified");
   }
 
+  /**
+   * A provider limits the address which asks: the one of a VPN location, which many
+   * users share, or the user's own. Its delay holds for that address only.
+   */
+  private cooldownKey(mode: RouteMode, endpoint: string): string {
+    const route =
+      mode === "vpn" ? `vpn:${this.options.getSnapshot().activeLocationId ?? ""}` : "direct";
+    return `${route}|${endpoint}`;
+  }
+
   private async readResponse(
+    mode: RouteMode,
     endpoint: string,
     revision: number,
     signal: AbortSignal,
@@ -376,9 +398,16 @@ export class NetworkObserver {
           ? Number(retryAfter) * 1_000
           : Date.parse(retryAfter) - this.now()
         : CACHE_MS;
+      const now = this.now();
+      // Those which have ended are forgotten: one remains per address and provider.
+      for (const [key, until] of this.providerRetryAt)
+        if (until <= now) this.providerRetryAt.delete(key);
       this.providerRetryAt.set(
-        endpoint,
-        this.now() + (Number.isFinite(delay) ? Math.max(CACHE_MS, delay) : CACHE_MS),
+        this.cooldownKey(mode, endpoint),
+        now +
+          (Number.isFinite(delay)
+            ? Math.min(MAX_PROVIDER_COOLDOWN_MS, Math.max(CACHE_MS, delay))
+            : CACHE_MS),
       );
       throw new Error("network_observation_rate_limited");
     }

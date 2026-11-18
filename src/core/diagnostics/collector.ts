@@ -76,7 +76,7 @@ export function diagnosticOperation(command: string): DiagnosticError["operation
   if (["initialize", "runtime.onStartup", "runtime.onInstalled"].includes(command))
     return "startup";
   if (command === "refresh_network") return "probe";
-  if (command === "proxy_authentication") return "connect";
+  if (command === "proxy_authentication" || command === "startup_connection") return "connect";
   if (command.startsWith("refresh_") || command === "alarms.onAlarm") return "refresh";
   if (command.startsWith("update_") || command.startsWith("retry_site")) return "update";
   return "unknown";

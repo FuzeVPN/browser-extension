@@ -133,6 +133,23 @@ entries have no owner: a new worker discards them when it establishes the accoun
 boundary, so an export covers the current worker lifetime. Logging and storage failures
 never delay connection commands.
 
+The ten-minute retention of the journal and of the diagnostic history is enforced by an
+alarm, which starts a worker when none is running. A worker started by that alarm alone
+records nothing of its own start-up, in either history, until a command or another event
+reaches it. An entry would need a purge of its own ten minutes later: an idle browser
+would otherwise start a worker, restore the account and query the API every ten minutes
+for as long as it stays open. The worker recognises this case by an alarm that was due
+before its script started.
+
+The popup asks for the network state every five seconds. An answer which succeeds is not
+written to the diagnostic history: it would fill its two hundred entries in a quarter of
+an hour and call for a purge of its own. A failed one is recorded, and a success still
+ends the count of the failures which preceded it. The purge alarm is set again only when
+its deadline changes or after it fired, the drafts are rewritten only when a count ends,
+and the diagnostics state is sent to open pages only when it differs from the one last
+sent. Unit tests count the storage writes, alarm calls and broadcasts of each case; a
+native Chromium check counts the history entries around five polls.
+
 A manual connection retains its explicitly requested location from the catalogue at
 the start of that operation. If the refreshed catalogue drops that row, the controller
 still makes the normal signed session request for that exact target. The API decides
@@ -161,6 +178,12 @@ which storage refuses, the assistance page's polling, content loading and refusa
 messages, and popup replies lost after their effect, failure messages, the first
 snapshot, the diagnostics control and the verification delay.
 
+Two further suites cover a renewal alarm delivered after its session expired, which must
+leave the session created meanwhile alone, and the time at which the marker of a session
+nobody could name ends: kept while that session may live, ended by the next worker or the
+next logout once it has expired, moved by a later unknown session only, and given to a
+marker which an earlier version stored without it.
+
 These tests use the same fakes as the other unit suites. None of them drives a real
 browser: they do not replace the native browser suites.
 
@@ -187,6 +210,97 @@ hour. The other native suites answer `404` to the conversion and keep exercising
 sessions. Firefox shares this code and its native suites run on classic sessions: no
 native Firefox check converts a session. None of these checks contacts the production
 API, so they do not establish that the deployed server applies the contract.
+
+## Popup opening
+
+The popup shows neither view until the background has said whether an account is signed
+in: the sign-in view used to be painted first, then replaced. If no state arrives within
+a second and a half, the popup shows that it is waiting; after ten seconds, or when the
+first read fails, it shows the failure and a button which reads the state again, without
+the welcome and the sign-in form. The two language catalogs are requested together, while
+the background answers. The lists of locations and of devices are built when their
+dialogs open.
+
+Unit tests cover the catalog loading: both requests at once, a preload reused, another
+language than the preloaded one, a preload which failed, and a failure reported to who
+asked. The native `popup-regressions` suite samples the views frame by frame while a
+signed-in popup opens and requires that the sign-in view is never painted, then that the
+list is empty until its dialog opens. No unit test renders the popup document.
+
+## Popup page
+
+The native `popup-audit-fixes` suite observes the page with a mutation observer and
+requires that a reply or a publication which changes nothing writes nothing, in the main
+view and with each dialog open. It scripts a first read which fails, one which is slow and
+one which never comes. It activates from the keyboard each control which is disabled while
+its own action is pending, and requires that the control has the focus again afterwards.
+The `site-exclusions-ui` suite removes sites from the keyboard and follows the focus to
+the neighbour, to the previous site and to the field, and requires in Arabic, Persian, Urdu
+and Pashto that no text in Arabic script is letter-spaced; the `diagnostics` suite requires
+the same of the assistance page. The `web-login-ui` suite opens the home view in a window
+shorter than the page needs and requires the tighter layout, then the full one again.
+
+The Firefox suite repeats, against the real background: no text rewritten at a poll, the
+focus kept by the subscription refresh, the focus given to the neighbour of a site removed
+from the keyboard, and the letter spacing in the four languages. These pages are opened in
+a tab: the height which a real popup window is given, zoomed or on a small screen, is not
+observed by any suite.
+
+Worker-level unit tests wait for the worker to come to rest, that is, to stop calling the
+browser it was given (`tests/common/worker-settle.ts`). A wait counted in turns of the
+event loop is too short on a busy machine: a worker's start hashes and reads responses,
+which take time, not turns.
+
+## Diagnostic reports refused for their session
+
+A report which the server refuses with `401` waits for another session of its account,
+and holds back the later reports of that account. The delivery state keeps a digest of
+each refused token, never the token: a worker which starts recognizes a refused token and
+keeps waiting, and sends with any other one, which the refusal did not concern. A state
+stored by an earlier version says a session is required without saying which token was
+refused: one attempt with the current token settles it. The unit suite starts successive
+workers over the same stored state, with the refused token, another one, two refused
+tokens, such an earlier state, and unusable digests. No native suite covers this path.
+
+## Worker start over a protected connection
+
+On Chromium, a worker which starts over a connection found exactly in place no longer
+closes the traffic guard. The unit suites start a second controller over what the first
+one left, with a guard which can attest its rules: they cover the guard kept open, with
+no intermediate state published, and every case which closes it first as before: a
+platform which attests nothing, altered rules, no allowance, an expired session or
+account, a proxy another extension took, unreadable exclusions, protection not requested.
+They also cover what closes it during the restoration: a device recovery, a failure
+midway, a guard which no longer reads as open, an explicit disconnection, and a later
+restoration of the same worker. The Chromium adapter tests cover the attestation itself,
+which reads only and refuses any rule which differs.
+
+The native `capacity-integration` suite stops the worker over a live connection, lets
+an ordinary page send a request every ten milliseconds for a second and a half, and
+requires that none fails. Firefox attests in the same way; its native suite stops the
+event page under an open page which keeps sending requests, and requires that every one
+passes. Both platforms also start the worker with a request which meets a proxy challenge
+(`proxy-auth` on Chromium), and require that it is answered. The synthetic proxy does not
+exist: these checks establish that requests are not blocked by the extension, not that
+they reach a tunnel.
+
+The suites which stop the worker note its stop when the browser reports it. Reading the
+latest state of the worker afterwards misses a stop which a page undid a moment later.
+
+## Account refresh at worker start
+
+A worker which starts no longer reads the profile, the subscription and the catalogue
+from the API when an earlier worker of the same browser session did so less than an hour
+before. The unit suites start successive controllers and workers over the same session
+storage. They cover the absence of any account request within the hour, at the purge
+alarm included, and the kept catalogue shown from the first publication. They also cover
+the refresh once it is due, its failure and its refusal by the server, the popup's
+refresh and a connection, which read the API whatever the age, a restored protected
+connection, and the record itself: named by a digest, never returned to another account,
+removed at logout, ignored when unreadable or invalid.
+
+These tests use fakes of the browser and of the API. No native suite measures the
+requests a real worker makes when the browser restarts it.
 
 ## Development dependency audit
 

@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: MPL-2.0
 
-import { ProxyAuthHandler } from "../../../src/platform/chromium/proxy-auth";
+import { ProxyAuthHandler, VERIFIED_ROUTES_KEY } from "../../../src/platform/chromium/proxy-auth";
 import { proxyConfig } from "../../../src/platform/chromium/proxy-controller";
 import { NOW, proxySession } from "./helpers";
 
@@ -17,7 +17,8 @@ function event<T>() {
   };
 }
 
-function fixture(initialPermission?: Promise<boolean>) {
+/** `kept` is what the browser session holds: an earlier worker's, shared with a later one. */
+function fixture(initialPermission?: Promise<boolean>, kept: Record<string, unknown> = {}) {
   const session = proxySession();
   const owned: ProxySetting = {
     levelOfControl: "controlled_by_this_extension",
@@ -43,6 +44,17 @@ function fixture(initialPermission?: Promise<boolean>) {
     extension: { isAllowedIncognitoAccess: permission },
     tabs: { get: getTab },
     proxy: { settings: { get, onChange: changed } },
+    storage: {
+      session: {
+        get: async (key: string) => ({ [key]: structuredClone(kept[key]) }),
+        set: async (values: Record<string, unknown>) => {
+          Object.assign(kept, structuredClone(values));
+        },
+        remove: async (key: string) => {
+          Reflect.deleteProperty(kept, key);
+        },
+      },
+    },
     webRequest: {
       onBeforeRequest: before,
       onAuthRequired: { addListener: () => undefined },
@@ -73,6 +85,7 @@ function fixture(initialPermission?: Promise<boolean>) {
     handler,
     state,
     session,
+    kept,
     foreign,
     get,
     getSession,
@@ -405,5 +418,202 @@ describe("request-bound proxy authentication ownership", () => {
     await expect(f.challenge("finished")).resolves.toEqual({});
     f[ending].emit({ requestId: "finished" });
     await expect(f.challenge("finished")).resolves.toEqual({ cancel: true });
+  });
+});
+
+describe("a request which began before the worker had read its route", () => {
+  afterEach(() => vi.unstubAllGlobals());
+
+  const session = proxySession();
+  const endpoint = [session.host, session.port] as const;
+  /** What a worker which verified this extension's proxy in both scopes leaves behind. */
+  const verified = () => ({
+    [VERIFIED_ROUTES_KEY]: [
+      [false, ...endpoint],
+      [true, ...endpoint],
+    ],
+  });
+  const credentials = {
+    authCredentials: { username: session.username, password: session.password },
+  };
+
+  it("answers the challenge when an earlier worker verified the route still in place", async () => {
+    const f = fixture(undefined, verified());
+    // The request which started this worker: nothing has been read yet.
+    f.start("waking");
+
+    await expect(f.challenge("waking")).resolves.toEqual(credentials);
+  });
+
+  it("answers it for the worker which follows the one which verified the route", async () => {
+    const earlier = fixture();
+    await earlier.settle();
+    expect(earlier.kept).toEqual(verified());
+
+    const next = fixture(undefined, earlier.kept);
+    next.start("waking");
+    await expect(next.challenge("waking")).resolves.toEqual(credentials);
+  });
+
+  it("is cancelled when no earlier worker verified a route", async () => {
+    const f = fixture();
+    f.start("waking");
+
+    await expect(f.challenge("waking")).resolves.toEqual({ cancel: true });
+    expect(f.getSession).not.toHaveBeenCalled();
+  });
+
+  it.each([
+    [
+      "another proxy",
+      [
+        [false, "other.example.com", 443],
+        [true, "other.example.com", 443],
+      ],
+    ],
+    [
+      "another port",
+      [
+        [false, session.host, 8443],
+        [true, session.host, 8443],
+      ],
+    ],
+    ["one scope only", [[false, ...endpoint]]],
+    [
+      "a scope twice",
+      [
+        [false, ...endpoint],
+        [false, ...endpoint],
+      ],
+    ],
+    [
+      "three scopes",
+      [
+        [false, ...endpoint],
+        [true, ...endpoint],
+        [true, ...endpoint],
+      ],
+    ],
+    ["no scope", []],
+    [
+      "no port",
+      [
+        [false, session.host],
+        [true, session.host],
+      ],
+    ],
+    [
+      "an invalid port",
+      [
+        [false, session.host, 0],
+        [true, session.host, 0],
+      ],
+    ],
+    [
+      "an empty host",
+      [
+        [false, "", 443],
+        [true, "", 443],
+      ],
+    ],
+    ["a text", "verified"],
+  ])("is cancelled when what was kept is %s", async (_name, kept) => {
+    const f = fixture(undefined, { [VERIFIED_ROUTES_KEY]: kept });
+    f.start("waking");
+
+    await expect(f.challenge("waking")).resolves.toEqual({ cancel: true });
+    expect(f.getSession).not.toHaveBeenCalled();
+  });
+
+  it("is cancelled when the settings are reported changed before its challenge", async () => {
+    const f = fixture(undefined, verified());
+    f.start("waking");
+    // Reported to this worker: the route of that request is no longer known.
+    f.changed.emit(f.state.regular);
+
+    await expect(f.challenge("waking")).resolves.toEqual({ cancel: true });
+    expect(f.getSession).not.toHaveBeenCalled();
+  });
+
+  it("is given nothing when the settings in place are no longer this extension's", async () => {
+    const f = fixture(undefined, verified());
+    f.state.regular = f.foreign;
+    f.state.private = f.foreign;
+    f.start("waking");
+
+    const answer = await f.challenge("waking");
+    expect(answer.authCredentials).toBeUndefined();
+    expect(f.getSession).not.toHaveBeenCalled();
+  });
+
+  it("inherits nothing once the first read of the worker has settled", async () => {
+    const f = fixture(undefined, verified());
+    await f.settle();
+    // A change which no event has reported yet: the request starts on another route.
+    f.state.regular = f.foreign;
+    f.state.private = f.foreign;
+    f.start("later");
+
+    // Decided by what this worker verified before the request, as it always was.
+    const answer = await f.challenge("later");
+    expect(answer.authCredentials).toBeUndefined();
+  });
+});
+
+describe("the routes a worker keeps for the next one", () => {
+  afterEach(() => vi.unstubAllGlobals());
+
+  it("are those it verified, and are forgotten as soon as the settings change", async () => {
+    const f = fixture();
+    await f.settle();
+    expect(f.kept[VERIFIED_ROUTES_KEY]).toEqual([
+      [false, f.session.host, f.session.port],
+      [true, f.session.host, f.session.port],
+    ]);
+
+    f.state.regular = f.foreign;
+    f.state.private = f.foreign;
+    f.changed.emit(f.foreign);
+    // Forgotten before the new settings are even read.
+    await Promise.resolve();
+    expect(f.kept).not.toHaveProperty(VERIFIED_ROUTES_KEY);
+    await f.settle();
+    expect(f.kept).not.toHaveProperty(VERIFIED_ROUTES_KEY);
+  });
+
+  it("are kept again once this extension's proxy is verified again", async () => {
+    const f = fixture();
+    const owned = f.state.regular;
+    f.state.regular = f.foreign;
+    f.state.private = f.foreign;
+    await f.settle();
+    expect(f.kept).not.toHaveProperty(VERIFIED_ROUTES_KEY);
+
+    f.state.regular = owned;
+    f.state.private = owned;
+    f.changed.emit(owned);
+    await f.settle();
+    expect(f.kept).toHaveProperty(VERIFIED_ROUTES_KEY);
+  });
+
+  it("are not kept when one scope could not be read", async () => {
+    const f = fixture();
+    f.get.mockImplementation(async ({ incognito }) => {
+      if (incognito) throw new Error("private settings unavailable");
+      return structuredClone(f.state.regular);
+    });
+    f.changed.emit(f.state.regular);
+    await f.settle();
+
+    expect(f.kept).not.toHaveProperty(VERIFIED_ROUTES_KEY);
+  });
+
+  it("hold the endpoint only, never a credential", async () => {
+    const f = fixture();
+    await f.settle();
+
+    const kept = JSON.stringify(f.kept);
+    expect(kept).not.toContain(f.session.username);
+    expect(kept).not.toContain(f.session.password);
   });
 });

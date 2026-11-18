@@ -361,6 +361,56 @@ export class PlatformNetworkSafetyService implements NetworkSafetyService {
     }
   }
 
+  async verifyAllowance(killSwitchEnabled: boolean): Promise<boolean> {
+    try {
+      // A guard of this worker, or the rules of one an earlier worker left, forbid it.
+      if (this.exclusionGuard !== null) return false;
+      const [dynamic, session] = await Promise.all([
+        chrome.declarativeNetRequest.getDynamicRules(),
+        chrome.declarativeNetRequest.getSessionRules(),
+      ]);
+      const rules = [
+        ...safetyFilterRules(chrome.runtime.id),
+        ...siteExclusionRules(this.exclusions),
+      ];
+      if (killSwitchEnabled) rules.push(baselineRule());
+      if (
+        !sameOwnedRules(dynamic, rules, ALL_OWNED_IDS) ||
+        !sameOwnedRules(session, [sessionRule()], ALL_OWNED_IDS)
+      )
+        return false;
+      // The same statement allow() requires, which also refuses any foreign allowance.
+      const status = await this.inspect();
+      return status.filterActive && status.blockingScope === "none" && !status.trafficBlocked;
+    } catch {
+      return false;
+    }
+  }
+
+  async verifyReleased(): Promise<boolean> {
+    try {
+      if (this.exclusionGuard !== null) return false;
+      const [dynamic, session, privacy] = await Promise.all([
+        chrome.declarativeNetRequest.getDynamicRules(),
+        chrome.declarativeNetRequest.getSessionRules(),
+        protectedBrowserContexts().then((contexts) =>
+          Promise.all(
+            contexts.map((incognito) =>
+              chrome.privacy.network.webRTCIPHandlingPolicy.get({ incognito }),
+            ),
+          ),
+        ),
+      ]);
+      return (
+        ![...dynamic, ...session].some((rule) => ALL_OWNED_IDS.includes(rule.id)) &&
+        privacy.length > 0 &&
+        privacy.every((setting) => setting.levelOfControl !== "controlled_by_this_extension")
+      );
+    } catch {
+      return false;
+    }
+  }
+
   async release(): Promise<void> {
     try {
       await this.removeSessionAllowance();

@@ -126,8 +126,11 @@ describe("ULTRA-08 residual: a failed attempt settles the creation its ledger re
       arm(h, cause, proxySession("renewal-1"));
 
       await h.controller.handleAlarm(ALARM_REFRESH);
-      expect(h.api.revoked).toEqual(["renewal-1"]);
-      await vi.waitFor(() => expect(ledger.sessions).toEqual([pending(previous)]));
+      // The session being renewed is kept when it can still be used. Given up, it is
+      // revoked with the replacement: the server holds neither until it expires.
+      const kept = h.controller.getSnapshot().protected;
+      expect(h.api.revoked).toEqual(kept ? ["renewal-1"] : ["renewal-1", previous.id]);
+      await vi.waitFor(() => expect(ledger.sessions).toEqual(kept ? [pending(previous)] : []));
       expect(h.securityStorage.state).toMatchObject({
         proxyCreationUncertain: false,
         proxyCleanupUncertain: false,

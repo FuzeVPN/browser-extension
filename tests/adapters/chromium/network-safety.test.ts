@@ -939,3 +939,230 @@ describe("persistent Chrome traffic guard", () => {
     await expect(safety.inspect()).resolves.toMatchObject({ webRtcProtected: true });
   });
 });
+
+describe("the allowance a new worker finds in place", () => {
+  let fake: FakeChromeSafety;
+  const EXCLUSIONS = [{ domain: "example.com", includeSubdomains: true }];
+
+  /** What a worker which authorized a session leaves in the browser. */
+  async function authorized(kill = true, exclusions: typeof EXCLUSIONS = []) {
+    const previous = new PlatformNetworkSafetyService();
+    previous.configureExclusions(exclusions);
+    await previous.block(kill);
+    await previous.allow();
+    fake.events = [];
+  }
+  /** The worker which the browser starts next. */
+  function nextWorker(exclusions: typeof EXCLUSIONS = []) {
+    const safety = new PlatformNetworkSafetyService();
+    safety.configureExclusions(exclusions);
+    return safety;
+  }
+
+  beforeEach(() => {
+    fake = new FakeChromeSafety();
+    fake.install();
+  });
+  afterEach(() => vi.unstubAllGlobals());
+
+  it.each([true, false])("is attested when nothing changed, kill switch %s", async (kill) => {
+    await authorized(kill);
+
+    await expect(nextWorker().verifyAllowance(kill)).resolves.toBe(true);
+    // Attesting reads only: no rule is written, and requests keep passing.
+    expect(fake.events).toEqual([]);
+    expect(fake.decision("https://example.com/")).toBe("allow");
+  });
+
+  it("is attested with the saved exclusions the rules were written for", async () => {
+    await authorized(true, EXCLUSIONS);
+
+    await expect(nextWorker(EXCLUSIONS).verifyAllowance(true)).resolves.toBe(true);
+    expect(fake.events).toEqual([]);
+  });
+
+  it("is refused when the exclusions in the rules are not the saved ones", async () => {
+    await authorized(true, EXCLUSIONS);
+    await expect(nextWorker().verifyAllowance(true)).resolves.toBe(false);
+
+    await authorized(true);
+    await expect(nextWorker(EXCLUSIONS).verifyAllowance(true)).resolves.toBe(false);
+  });
+
+  it("is refused when the kill switch rule is not the one the preference asks for", async () => {
+    await authorized(false);
+    await expect(nextWorker().verifyAllowance(true)).resolves.toBe(false);
+
+    await authorized(true);
+    await expect(nextWorker().verifyAllowance(false)).resolves.toBe(false);
+  });
+
+  it("is refused when nothing is installed", async () => {
+    await expect(nextWorker().verifyAllowance(true)).resolves.toBe(false);
+    await expect(nextWorker().verifyAllowance(false)).resolves.toBe(false);
+  });
+
+  it("is refused when the browser kept no allowance", async () => {
+    await authorized();
+    // A browser restart empties the rules of its session.
+    fake.session = [];
+
+    await expect(nextWorker().verifyAllowance(true)).resolves.toBe(false);
+  });
+
+  it("is refused when the allowance is not the one this extension writes", async () => {
+    await authorized();
+    fake.session = fake.session.map((rule) => ({ ...rule, priority: (rule.priority ?? 1) + 1 }));
+
+    await expect(nextWorker().verifyAllowance(true)).resolves.toBe(false);
+  });
+
+  it.each([
+    [
+      "a filter rule is missing",
+      (rules: Rule[]) => rules.filter((rule) => rule.id !== SAFETY_RULE_IDS.localIpv4),
+    ],
+    [
+      "a filter rule was altered",
+      (rules: Rule[]) =>
+        rules.map((rule) =>
+          rule.id === SAFETY_RULE_IDS.apiBlock ? { ...rule, priority: 1 } : rule,
+        ),
+    ],
+    [
+      "the kill switch rule was altered",
+      (rules: Rule[]) =>
+        rules.map((rule): Rule =>
+          rule.id === SAFETY_RULE_IDS.baseline
+            ? { ...rule, condition: { resourceTypes: ["main_frame"] } }
+            : rule,
+        ),
+    ],
+    [
+      "a rule of an exclusion transaction was left behind",
+      (rules: Rule[]) => [
+        ...rules,
+        {
+          id: SAFETY_EXCLUSION_GUARD_ID,
+          priority: 17,
+          action: { type: "block" as const },
+          condition: { resourceTypes: [...GUARDED_RESOURCE_TYPES] },
+        },
+      ],
+    ],
+    [
+      "an exclusion rule nobody saved is present",
+      (rules: Rule[]) => [
+        ...rules,
+        {
+          id: SAFETY_EXCLUSION_RULE_IDS[0]!,
+          priority: 15,
+          action: { type: "allow" as const },
+          condition: { resourceTypes: [...GUARDED_RESOURCE_TYPES], regexFilter: "^https://x/" },
+        },
+      ],
+    ],
+    [
+      "a foreign allowance is present",
+      (rules: Rule[]) => [
+        ...rules,
+        {
+          id: 9_999,
+          priority: 99,
+          action: { type: "allow" as const },
+          condition: { resourceTypes: [...GUARDED_RESOURCE_TYPES] },
+        },
+      ],
+    ],
+  ])("is refused when %s", async (_name, alter) => {
+    await authorized();
+    fake.dynamic = alter(fake.dynamic);
+
+    await expect(nextWorker().verifyAllowance(true)).resolves.toBe(false);
+    expect(fake.events).toEqual([]);
+  });
+
+  it("is refused while this worker holds an exclusion guard", async () => {
+    await authorized();
+    const safety = nextWorker();
+    await expect(safety.verifyAllowance(true)).resolves.toBe(true);
+
+    await safety.setExclusionGuard([]);
+
+    await expect(safety.verifyAllowance(true)).resolves.toBe(false);
+  });
+
+  it("is refused, without throwing, when the rules cannot be read", async () => {
+    await authorized();
+    fake.rejectRead = true;
+
+    await expect(nextWorker().verifyAllowance(true)).resolves.toBe(false);
+  });
+});
+
+describe("nothing of this extension left in place", () => {
+  let fake: FakeChromeSafety;
+  let safety: PlatformNetworkSafetyService;
+
+  beforeEach(() => {
+    fake = new FakeChromeSafety();
+    fake.install();
+    safety = new PlatformNetworkSafetyService();
+  });
+  afterEach(() => vi.unstubAllGlobals());
+
+  it("is attested when nothing was ever installed, without writing anything", async () => {
+    await expect(safety.verifyReleased()).resolves.toBe(true);
+    expect(fake.events).toEqual([]);
+  });
+
+  it("is attested after a connection was released", async () => {
+    await safety.block(true);
+    await safety.setWebRtc(true);
+    await safety.allow();
+    await safety.setWebRtc(false);
+    await safety.release();
+    fake.events = [];
+
+    await expect(new PlatformNetworkSafetyService().verifyReleased()).resolves.toBe(true);
+    expect(fake.events).toEqual([]);
+  });
+
+  it.each([true, false])(
+    "is refused while its rules are installed, kill switch %s",
+    async (kill) => {
+      await safety.block(kill);
+
+      await expect(new PlatformNetworkSafetyService().verifyReleased()).resolves.toBe(false);
+    },
+  );
+
+  it("is refused while an allowance of its own remains", async () => {
+    await safety.block(true);
+    await safety.allow();
+    // The rules are removed by hand; the allowance of the browser session is not.
+    fake.dynamic = [];
+
+    await expect(new PlatformNetworkSafetyService().verifyReleased()).resolves.toBe(false);
+  });
+
+  it("is refused while WebRTC is restricted by this extension", async () => {
+    await safety.setWebRtc(true);
+
+    await expect(new PlatformNetworkSafetyService().verifyReleased()).resolves.toBe(false);
+  });
+
+  it("is refused while this worker holds an exclusion guard", async () => {
+    await safety.setExclusionGuard([]);
+    // Whatever the rules say: this worker still has a transaction to settle.
+    fake.dynamic = [];
+
+    await expect(safety.verifyReleased()).resolves.toBe(false);
+  });
+
+  it("is refused, without throwing, when the rules cannot be read", async () => {
+    fake.rejectRead = true;
+
+    await expect(safety.verifyReleased()).resolves.toBe(false);
+  });
+});

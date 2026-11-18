@@ -379,6 +379,52 @@ export class PlatformNetworkSafetyService implements NetworkSafetyService {
     }
   }
 
+  async verifyAllowance(killSwitchEnabled: boolean): Promise<boolean> {
+    try {
+      // A guard of this event page, or the rules of one an earlier page left, forbid it.
+      if (this.exclusionGuard !== null) return false;
+      const [dynamic, session] = await Promise.all([
+        browser.declarativeNetRequest.getDynamicRules(),
+        browser.declarativeNetRequest.getSessionRules(),
+      ]);
+      const rules = [
+        ...safetyFilterRules(new URL(browser.runtime.getURL("")).hostname),
+        ...siteExclusionRules(this.exclusions),
+      ];
+      if (killSwitchEnabled) rules.push(baselineRule());
+      if (
+        !sameOwnedRules(dynamic, rules, ALL_OWNED_IDS) ||
+        !sameOwnedRules(session, [sessionRule()], ALL_OWNED_IDS)
+      )
+        return false;
+      // The same statement allow() requires: it also refuses any foreign allowance, and
+      // speculative connections which this extension no longer keeps disabled.
+      const status = await this.inspect();
+      return status.filterActive && status.blockingScope === "none" && !status.trafficBlocked;
+    } catch {
+      return false;
+    }
+  }
+
+  async verifyReleased(): Promise<boolean> {
+    try {
+      if (this.exclusionGuard !== null) return false;
+      const [dynamic, session, webRtc, prediction] = await Promise.all([
+        browser.declarativeNetRequest.getDynamicRules(),
+        browser.declarativeNetRequest.getSessionRules(),
+        browser.privacy.network.webRTCIPHandlingPolicy.get({}),
+        browser.privacy.network.networkPredictionEnabled.get({}),
+      ]);
+      return (
+        ![...dynamic, ...session].some((rule) => ALL_OWNED_IDS.includes(rule.id)) &&
+        webRtc.levelOfControl !== "controlled_by_this_extension" &&
+        prediction.levelOfControl !== "controlled_by_this_extension"
+      );
+    } catch {
+      return false;
+    }
+  }
+
   async release(): Promise<void> {
     try {
       await this.removeSessionAllowance();

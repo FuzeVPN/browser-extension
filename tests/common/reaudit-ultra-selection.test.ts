@@ -51,7 +51,12 @@ function selection(h: Harness) {
 }
 
 /** The superseded attempt hands its protection request to a prompt reconnection. */
-async function expectReconnectionTo(h: Harness, locationId: string) {
+/** `cause` is the failure which the scheduled reconnection follows, when one is recorded. */
+async function expectReconnectionTo(
+  h: Harness,
+  locationId: string,
+  cause: "network_error" | null = null,
+) {
   const reconnectAt = h.alarms.reconnectAt;
   expect(reconnectAt).not.toBeNull();
   expect(h.securityStorage.state).toMatchObject({
@@ -63,7 +68,7 @@ async function expectReconnectionTo(h: Harness, locationId: string) {
     status: "blocked",
     protectionRequested: true,
     nextRetryAt: reconnectAt,
-    error: null,
+    error: cause,
   });
   h.setNow(reconnectAt!);
   await h.controller.handleAlarm(ALARM_RECONNECT);
@@ -201,7 +206,8 @@ describe("a newer accepted selection supersedes an older connection target", () 
     expect(h.api.proofs).toHaveLength(0);
     // The consumed alarm is replaced: the popup must not announce a retry that never runs.
     expect(h.alarms.reconnectAt).toBeGreaterThan(dueAt!);
-    await expectReconnectionTo(h, "frankfurt-02");
+    // The connection is still down for the failure which that reconnection follows.
+    await expectReconnectionTo(h, "frankfurt-02", "network_error");
   });
 
   it("removes a late full target from the catalog without blocking the selection", async () => {

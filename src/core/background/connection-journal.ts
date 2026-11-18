@@ -107,6 +107,8 @@ export class ConnectionJournal {
   private revision = 0;
   private persistedRevision = -1;
   private generation = 0;
+  /** The last sequence which storage restored: what follows was recorded by this worker. */
+  private restoredSequence = 0;
   private readonly ready: Promise<void>;
 
   constructor(
@@ -175,6 +177,21 @@ export class ConnectionJournal {
     this.changed();
   }
 
+  /**
+   * Starts the history of the owner which a worker has just established. What storage
+   * restored is dropped, as nothing says whose it was. What this worker has recorded
+   * since it started is kept, and so are the recorders it has given: the command which
+   * starts a worker arrives before any owner is known, and belongs to that owner.
+   */
+  establish(): void {
+    // A restoration still reading storage keeps nothing of it either.
+    this.cleared = true;
+    this.events = this.events.filter((event) => event.sequence > this.restoredSequence);
+    this.revision++;
+    if (this.initialized) this.persist();
+    this.changed();
+  }
+
   count(): number {
     if (this.prune()) this.persist();
     return this.events.length + this.pending.length;
@@ -222,6 +239,7 @@ export class ConnectionJournal {
     } catch {
       /* In-memory recording and export still work without session storage. */
     }
+    this.restoredSequence = this.sequence;
     this.initialized = true;
     for (const entry of this.pending) this.append(entry);
     this.pending = [];

@@ -2,6 +2,7 @@
 
 import { readFileSync } from "node:fs";
 import { runInNewContext } from "node:vm";
+import { popupDom } from "./popup-dom";
 import ts from "typescript";
 import type { NetworkObservation } from "../../src/core/shared/network";
 import { EMPTY_SNAPSHOT, type AppSnapshot } from "../../src/core/shared/state";
@@ -44,8 +45,9 @@ function addressLine(next: AppSnapshot, communicationFailed = false): string {
   return rendered(next, communicationFailed).line;
 }
 
-function rendered(next: AppSnapshot, communicationFailed = false) {
+function rendered(next: AppSnapshot, communicationFailed = false, again: AppSnapshot[] = []) {
   let line = "";
+  let written = 0;
   const attributes: Record<string, string> = {};
   const context = {
     communicationFailed,
@@ -55,6 +57,7 @@ function rendered(next: AppSnapshot, communicationFailed = false) {
       publicIp: {
         title: "",
         replaceChildren(...parts: string[]) {
+          written += 1;
           line = parts.join("");
         },
         setAttribute(name: string, value: string) {
@@ -63,10 +66,34 @@ function rendered(next: AppSnapshot, communicationFailed = false) {
       },
     },
   };
-  runInNewContext(executable, context);
-  (context as unknown as { renderNetwork(next: AppSnapshot): void }).renderNetwork(next);
-  return { line, busy: attributes["aria-busy"] };
+  runInNewContext(executable, Object.assign(context, popupDom));
+  const render = (context as unknown as { renderNetwork(next: AppSnapshot): void }).renderNetwork;
+  for (const state of [next, ...again]) render(state);
+  return { line, busy: attributes["aria-busy"], written };
 }
+
+describe("the address line of the popup, which screen readers read when it is written", () => {
+  it("is written once for an address which every poll finds again", () => {
+    const ready = connected({ ...PARIS, status: "ready", checkedAt: 1 });
+    const polls = [2, 3, 4].map((checkedAt) => connected({ ...PARIS, status: "ready", checkedAt }));
+
+    const shown = rendered(ready, false, polls);
+
+    expect(shown.line).toBe("<vpnIp> · 8.8.4.4");
+    expect(shown.written).toBe(1);
+  });
+
+  it("is written again when the address changes, or stops being known", () => {
+    const paris = connected({ ...PARIS, status: "ready" });
+    const other = connected({ ...PARIS, status: "ready", ip: "8.8.8.8" });
+    const lost = connected({ ...PARIS, status: "unavailable", ip: null });
+
+    const shown = rendered(paris, false, [other, other, lost]);
+
+    expect(shown.line).toBe("<vpnIp> · <ipUnavailable>");
+    expect(shown.written).toBe(3);
+  });
+});
 
 describe("the address line of the popup for a location connected again", () => {
   it.each(["idle", "checking", "ready"] as const)(

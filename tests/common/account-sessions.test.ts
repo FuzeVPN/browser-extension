@@ -1008,6 +1008,51 @@ describe("the delay before a rotation is sent again", () => {
     expect(f.server.rotations[2]).toEqual(f.server.rotations[1]);
   });
 
+  it("goes on growing for the workers which follow, in place of starting over", async () => {
+    const f = setup();
+    // The server does not answer; each worker of the browser makes one attempt.
+    const waits: number[] = [];
+    let worker = f.sessions;
+    for (let attempt = 0; attempt < 6; attempt++) {
+      f.server.faults.push(new NetworkError("timeout"));
+      await worker.credential(HANDLE);
+      const { retryAt } = f.record() as unknown as { retryAt: number };
+      waits.push(retryAt - f.clock.now);
+      f.clock.now = retryAt;
+      worker = f.worker();
+    }
+
+    expect(waits).toEqual([2_000, 5_000, 15_000, 60_000, 5 * 60_000, 5 * 60_000]);
+
+    // The answer comes at last: the next failure starts from the shortest delay again.
+    expect(f.server.accepts(await worker.credential(HANDLE))).toBe(true);
+    expect(f.record()).not.toHaveProperty("failures");
+    f.clock.now += 56 * MINUTE;
+    f.server.faults.push(new NetworkError("timeout"));
+    await worker.credential(HANDLE);
+    const { retryAt } = f.record() as unknown as { retryAt: number };
+    expect(retryAt - f.clock.now).toBe(2_000);
+  });
+
+  it.each([-1, 1.5, "many", Number.MAX_SAFE_INTEGER + 2])(
+    "ignores a stored count of failures which is none (%s)",
+    async (failures) => {
+      const f = setup();
+      f.server.faults.push(new NetworkError("timeout"));
+      await f.sessions.credential(HANDLE);
+      const stored = f.stored();
+      (stored.sessions[0] as unknown as { failures: unknown }).failures = failures;
+      const { retryAt } = f.record() as unknown as { retryAt: number };
+      f.clock.now = retryAt;
+
+      const next = f.worker();
+      f.server.faults.push(new NetworkError("timeout"));
+      await next.credential(HANDLE);
+      const again = f.record() as unknown as { retryAt: number };
+      expect(again.retryAt - f.clock.now).toBe(2_000);
+    },
+  );
+
   it("is neither extended nor shortened by a change of the system time", async () => {
     const clock = { wall: START, running: 0 };
     const server = new FakeRenewalServer(() => clock.wall);
@@ -1280,8 +1325,9 @@ describe("a conversion which the server says it cannot perform, after a lost ans
     );
     expect(f.server.calls.filter((call) => call.route === "logout")).toEqual([]);
     expect(f.server.sessionCount).toBe(1);
-    // The repetition which follows recovers the session.
-    f.clock.now += 2_000;
+    // The repetition which follows recovers the session. It was the third failure in a
+    // row, counted with those of the worker before: its delay is the third one.
+    f.clock.now += 15_000;
     expect(f.server.accepts((await next.recover(HANDLE, HANDLE)) ?? "")).toBe(true);
   });
 

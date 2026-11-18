@@ -796,12 +796,23 @@ async function verifyBuiltApplication() {
   worker = await launch(extensionPath, "application-profile");
   await installSyntheticApi();
   popup = await popupFor(worker);
-  const restored = await message(popup, { type: "get_snapshot" });
-  assert.equal(restored.protectionRequested, true);
-  assert.equal(restored.protected, false);
-  assert.equal(restored.trafficBlocked, true, JSON.stringify(restored));
+  // The popup is answered at once, while the connection which the restart left to
+  // make is tried against an API which does not answer. Nothing passes meanwhile.
+  const restoring = await message(popup, { type: "get_snapshot" });
+  assert.equal(restoring.protectionRequested, true);
+  assert.equal(restoring.protected, false);
+  assert.equal(restoring.trafficBlocked, true, JSON.stringify(restoring));
   assert.deepEqual(await worker.evaluate(() => chrome.declarativeNetRequest.getSessionRules()), []);
   await blockedNavigation("https://public.invalid/application-restart");
+  let restored = restoring;
+  for (let attempt = 0; restored.status === "connecting" && attempt < 200; attempt++) {
+    await new Promise((done) => setTimeout(done, 50));
+    restored = await message(popup, { type: "get_snapshot" });
+  }
+  assert.notEqual(restored.status, "connecting", JSON.stringify(restored));
+  assert.equal(restored.protected, false);
+  assert.equal(restored.trafficBlocked, true, JSON.stringify(restored));
+  await popup.locator("#retryButton").waitFor({ state: "visible", timeout: 5000 });
   assert(!(await popup.locator("#statusCard").isVisible()));
   assert(!(await popup.locator("#protectButton").isVisible()));
   assert(await popup.locator("#retryButton").isVisible());

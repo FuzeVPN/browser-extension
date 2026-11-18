@@ -24,6 +24,10 @@ const TIMEOUT_MS = 15_000;
 const MAX_RESPONSE_BYTES = 16 * 1024;
 const SCHEDULE_RETRY_MS = 60_000;
 const DELAYS = [0, 60_000, 5 * 60_000, 30 * 60_000, 2 * HOUR];
+/** How many refused tokens an account remembers, the latest last. */
+const MAX_REJECTED = 4;
+/** The statuses of a report which nothing more will be done with. */
+const OVER: ReadonlySet<string> = new Set(["received", "failed", "cancelled", "expired"]);
 
 export interface DiagnosticAccount {
   ownerId: string;
@@ -48,6 +52,12 @@ interface AccountSettings {
   ownerId: string;
   automatic: boolean;
   sessionRequired: boolean;
+  /**
+   * Digests of the tokens the server refused, the latest last. A worker which starts
+   * knows from them whether the token it finds is one of those, or another one which
+   * is worth an attempt. Absent from a state stored before they were kept.
+   */
+  rejected?: string[];
   attempts: number[];
   automaticReports: number[];
 }
@@ -95,7 +105,8 @@ export class DiagnosticDeliveryError extends Error {
 }
 
 /** Consent and immutable delivery records are independent of the VPN state machine.
- * The injected account is used only in memory; neither tokens nor raw errors are stored. */
+ * The injected account is used only in memory; neither tokens nor raw errors are stored.
+ * Of a token the server refused, only a digest is: enough to recognize it later. */
 export class DiagnosticDelivery {
   private state: StoredDelivery = { version: 1, accounts: [], reports: [] };
   private initialization: Promise<void> | null = null;
@@ -113,6 +124,8 @@ export class DiagnosticDelivery {
   private readonly automaticDisabled = new Set<string>();
   private readonly observedAccounts = new Map<string, DiagnosticAccount>();
   private readonly rejectedTokens = new Map<string, Set<string>>();
+  /** Tokens already compared with the stored digests and found to be none of them. */
+  private readonly comparedTokens = new Set<string>();
   private readonly resumeAccounts = new Set<string>();
   private readonly waitingAccounts = new Set<string>();
   private readonly fetcher: typeof fetch;
@@ -287,7 +300,13 @@ export class DiagnosticDelivery {
         throw new DiagnosticDeliveryError("consent_required");
       if (automatic && account.automaticReports.length >= 5)
         throw new DiagnosticDeliveryError("queue_full");
-      if (next.reports.length >= MAX_REPORTS) throw new DiagnosticDeliveryError("queue_full");
+      // Reports which are over are kept a day for their receipt. They do not fill the
+      // queue: the oldest of them gives its place to a report which is still to be sent.
+      while (next.reports.length >= MAX_REPORTS) {
+        const over = next.reports.findIndex((entry) => OVER.has(entry.status));
+        if (over < 0) throw new DiagnosticDeliveryError("queue_full");
+        next.reports.splice(over, 1);
+      }
       const now = this.options.now();
       next.reports.push({
         ownerId,
@@ -304,6 +323,36 @@ export class DiagnosticDelivery {
     // Once committed, enqueue has succeeded. Dispatch does not depend on the alarm API.
     this.kick();
     await this.reschedule();
+  }
+
+  /**
+   * Whether an automatic report of this failure is still kept for this account: queued,
+   * or received within the day. A failure which lasts is then already reported.
+   */
+  reportedAutomatically(ownerId: string, code: string, operation: string): boolean {
+    const now = this.options.now();
+    return this.state.reports.some((entry) => {
+      if (
+        entry.ownerId !== ownerId ||
+        entry.expiresAt <= now ||
+        entry.status === "cancelled" ||
+        entry.status === "failed" ||
+        entry.status === "expired" ||
+        this.cancelled.has(entryKey(entry))
+      )
+        return false;
+      try {
+        const report = parseDiagnosticReport(entry.body);
+        return (
+          report.report_type === "simple" &&
+          report.consent.mode === "automatic_opt_in" &&
+          report.error?.code === code &&
+          report.error.operation === operation
+        );
+      } catch {
+        return false;
+      }
+    });
   }
 
   list(ownerId: string): DiagnosticReportSummary[] {
@@ -452,9 +501,40 @@ export class DiagnosticDelivery {
     });
   }
 
+  /**
+   * What an earlier worker stored of a refusal, for the account this one finds. The
+   * refused token is recognized by its digest and stays refused. Any other token is
+   * worth one attempt: the refusal was not its own. So is the current one when the
+   * state dates from a version which kept no digest, since nothing says which token
+   * was refused; a refusal of that attempt is then stored with its digest.
+   */
+  private async recallRejection(account: DiagnosticAccount): Promise<void> {
+    const owner = account.ownerId;
+    if (this.rejectedTokens.get(owner)?.has(account.token)) return;
+    const known = this.state.accounts.find((value) => value.ownerId === owner)?.rejected;
+    const compared = key(owner, account.token);
+    if (known?.length && !this.comparedTokens.has(compared)) {
+      const digest = await rejectionDigest(account).catch(() => null);
+      if (!sameAccount(account, this.account)) return;
+      // Without a digest nothing is known: the account waits, as it did.
+      if (digest === null) return;
+      if (known.includes(digest)) {
+        const rejected = this.rejectedTokens.get(owner) ?? new Set<string>();
+        rejected.add(account.token);
+        this.rejectedTokens.set(owner, rejected);
+        this.waitingAccounts.add(owner);
+        this.resumeAccounts.delete(owner);
+        return;
+      }
+      this.comparedTokens.add(compared);
+    }
+    if (this.waitingAccounts.has(owner)) this.resumeAccounts.add(owner);
+  }
+
   private async resumeWaiting(): Promise<void> {
     const account = this.account;
     const owner = account?.ownerId;
+    if (account) await this.recallRejection(account);
     if (owner && this.rejectedTokens.get(owner)?.has(account.token)) {
       await this.change((next) => {
         settings(next, owner).sessionRequired = true;
@@ -566,12 +646,14 @@ export class DiagnosticDelivery {
       }
     } finally {
       const current = this.isCurrent(active);
+      let refused: string | null = null;
       if (outcome.kind === "session" && current) {
         const rejected = this.rejectedTokens.get(entry.ownerId) ?? new Set<string>();
         rejected.add(active.account.token);
         this.rejectedTokens.set(entry.ownerId, rejected);
         this.waitingAccounts.add(entry.ownerId);
         this.resumeAccounts.delete(entry.ownerId);
+        refused = await rejectionDigest(active.account).catch(() => null);
       }
       await this.change((next) => {
         const saved = next.reports.find((candidate) => entryKey(candidate) === active.key);
@@ -601,7 +683,9 @@ export class DiagnosticDelivery {
           saved.nextAttemptAt = null;
           delete saved.error;
         } else if (outcome.kind === "session") {
-          settings(next, entry.ownerId).sessionRequired = true;
+          const account = settings(next, entry.ownerId);
+          account.sessionRequired = true;
+          rememberRejection(account, refused);
           saved.status = "session_required";
           saved.nextAttemptAt = null;
           saved.error = "session_required";
@@ -809,6 +893,34 @@ function settings(state: StoredDelivery, ownerId: string): AccountSettings {
   return account;
 }
 
+/** The digest under which a refused token is remembered; it tells nothing of the token. */
+async function rejectionDigest(account: DiagnosticAccount): Promise<string> {
+  const bytes = new Uint8Array(
+    await crypto.subtle.digest(
+      "SHA-256",
+      new TextEncoder().encode(`fuzevpn-diagnostic-refusal:${account.ownerId}:${account.token}`),
+    ),
+  );
+  return [...bytes].map((byte) => byte.toString(16).padStart(2, "0")).join("");
+}
+
+function rememberRejection(account: AccountSettings, digest: string | null): void {
+  if (digest === null) return;
+  account.rejected = [
+    ...(account.rejected ?? []).filter((value) => value !== digest),
+    digest,
+  ].slice(-MAX_REJECTED);
+}
+
+/** Stored digests which can be relied on; anything else is as if none had been kept. */
+function decodeRejected(value: unknown): string[] {
+  return Array.isArray(value) &&
+    value.length <= MAX_REJECTED &&
+    value.every((item) => typeof item === "string" && /^[0-9a-f]{64}$/.test(item))
+    ? [...new Set(value as string[])]
+    : [];
+}
+
 function key(ownerId: string, id: string): string {
   return JSON.stringify([ownerId, id]);
 }
@@ -869,10 +981,12 @@ function decodeStored(value: unknown): StoredDelivery {
       accounts.some((other) => other.ownerId === item.ownerId)
     )
       throw new Error("invalid_delivery_storage");
+    const rejected = decodeRejected(item.rejected);
     accounts.push({
       ownerId: item.ownerId,
       automatic: item.automatic,
       sessionRequired: item.sessionRequired === true,
+      ...(rejected.length ? { rejected } : {}),
       attempts: [...item.attempts].sort((a, b) => a - b),
       automaticReports: [...item.automaticReports].sort((a, b) => a - b),
     });
@@ -1045,19 +1159,10 @@ async function readResponse(response: Response, signal: AbortSignal): Promise<un
 }
 
 function decodeReceipt(value: unknown, id: string): DiagnosticReceipt | undefined {
+  // A field which this version does not know is ignored, and never kept: a server
+  // which says more has received the report all the same.
   if (
     !object(value) ||
-    Object.keys(value).some(
-      (key) =>
-        ![
-          "report_id",
-          "client_report_id",
-          "received_at",
-          "expires_at",
-          "status",
-          "duplicate",
-        ].includes(key),
-    ) ||
     !isDiagnosticId(value.report_id) ||
     value.report_id === id ||
     value.client_report_id !== id ||

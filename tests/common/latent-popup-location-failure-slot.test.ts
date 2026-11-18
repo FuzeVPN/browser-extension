@@ -2,6 +2,7 @@
 
 import { readFileSync } from "node:fs";
 import { runInNewContext } from "node:vm";
+import { popupDom } from "./popup-dom";
 import ts from "typescript";
 import type { Location } from "../../src/core/api/types";
 import type { CommandResult, ExtensionRequest } from "../../src/core/shared/messages";
@@ -41,7 +42,7 @@ class FakeElement {
   dataset: Record<string, string> = {};
   focus = vi.fn();
   private readonly classes = new Set<string>();
-  private readonly listeners = new Map<string, (() => void)[]>();
+  private readonly listeners = new Map<string, ((event: { detail: number }) => void)[]>();
   readonly classList = {
     toggle: (name: string, force: boolean) => {
       if (force) this.classes.add(name);
@@ -55,16 +56,17 @@ class FakeElement {
 
   setAttribute(): void {}
 
-  addEventListener(type: string, listener: () => void): void {
+  addEventListener(type: string, listener: (event: { detail: number }) => void): void {
     this.listeners.set(type, [...(this.listeners.get(type) ?? []), listener]);
   }
 
-  dispatch(type: string): void {
-    for (const listener of this.listeners.get(type) ?? []) listener();
+  /** `detail` counts the clicks of one gesture, as a browser does: 2 for a double-click. */
+  dispatch(type: string, detail = 1): void {
+    for (const listener of this.listeners.get(type) ?? []) listener({ detail });
   }
 
-  click(): void {
-    if (!this.disabled) this.dispatch("click");
+  click(detail = 1): void {
+    if (!this.disabled) this.dispatch("click", detail);
   }
 
   showModal(): void {
@@ -186,6 +188,7 @@ function setup() {
     locale: "fr",
     languageCatalogFailed: false,
     devicesFailure: null,
+    deviceRefusals: new Map<string, unknown>(),
     locationPreferenceFailure: null,
     locationFavoriteFailed: false,
     locationsRefreshFailed: false,
@@ -230,7 +233,7 @@ function setup() {
     replaceListChildren: vi.fn(),
   };
   // Execute the production functions, with only messaging and row rendering replaced.
-  runInNewContext(executable, context);
+  runInNewContext(executable, Object.assign(context, popupDom));
   const subject = context as unknown as Subject;
   subject.bindEvents();
   subject.renderLocations(subject.snapshot);
@@ -250,6 +253,9 @@ function setup() {
     subject,
     elements,
     answer,
+    /** What the worker publishes by itself, between two replies. */
+    published: (patch: Partial<AppSnapshot>) => subject.render(publish(patch)),
+    asked: () => context.extensionApi.runtime.sendMessage.mock.calls.map(([sent]) => sent.type),
     dialog: elements.locationDialog!,
     async openDialog() {
       elements.changeLocationButton!.click();
@@ -261,6 +267,31 @@ function setup() {
         : null,
   };
 }
+
+describe("the Protect button", () => {
+  it("takes a double-click for one request: the second click undoes nothing", async () => {
+    const { elements, answer, published, asked } = setup();
+    elements.protectButton!.click();
+    await answer("disconnect", { ok: true }, DISCONNECTED);
+
+    // The first click asks for the connection, which the worker starts at once.
+    elements.protectButton!.click(1);
+    published({ status: "connecting", protectionRequested: true });
+    // The second click of the same gesture finds a button which now disconnects.
+    elements.protectButton!.click(2);
+    await answer("connect", { ok: true }, CONNECTED);
+
+    expect(asked().filter((type) => type === "connect" || type === "disconnect")).toEqual([
+      "disconnect",
+      "connect",
+    ]);
+
+    // A click of its own, later, disconnects as before; so does the keyboard (detail 0).
+    elements.protectButton!.click(0);
+    await answer("disconnect", { ok: true }, DISCONNECTED);
+    expect(asked().filter((type) => type === "disconnect")).toHaveLength(2);
+  });
+});
 
 describe("the failure shown in the location dialog", () => {
   it("reports a refused location change in the dialog, which stays open", async () => {

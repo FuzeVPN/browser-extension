@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MPL-2.0
 
 import { extensionApi } from "@platform/bridge";
-import { DEFAULT_SECURITY_STATE, isSuspensionCause, type SecurityState } from "../shared/security";
+import {
+  DEFAULT_SECURITY_STATE,
+  isRetryCause,
+  isSuspensionCause,
+  type SecurityState,
+} from "../shared/security";
 
 export const SECURITY_STORAGE_KEY = "fuzevpnSecurityState";
 
@@ -102,7 +107,39 @@ function sanitize(value: unknown): SecurityState {
       value.capacityBlockedLocationId.length <= 256
         ? value.capacityBlockedLocationId
         : null,
+    // A deadline without its marker, or one which cannot be read, suspends nothing more
+    // than the marker alone does.
+    ...(value.proxyCreationUncertain === true &&
+    typeof value.proxyCreationUncertainUntil === "number" &&
+    Number.isSafeInteger(value.proxyCreationUncertainUntil) &&
+    value.proxyCreationUncertainUntil > 0
+      ? { proxyCreationUncertainUntil: value.proxyCreationUncertainUntil }
+      : {}),
+    // The same holds for the time at which the cleanup marker ends.
+    ...(value.proxyCleanupUncertain === true &&
+    typeof value.proxyCleanupUncertainUntil === "number" &&
+    Number.isSafeInteger(value.proxyCleanupUncertainUntil) &&
+    value.proxyCleanupUncertainUntil > 0
+      ? { proxyCleanupUncertainUntil: value.proxyCleanupUncertainUntil }
+      : {}),
     ...(isSuspensionCause(value.suspensionCause) ? { suspensionCause: value.suspensionCause } : {}),
+    // The cause of a retry is kept with that retry only.
+    ...(typeof value.nextRetryAt === "number" &&
+    Number.isSafeInteger(value.nextRetryAt) &&
+    value.nextRetryAt > 0 &&
+    isRetryCause(value.retryCause)
+      ? { retryCause: value.retryCause }
+      : {}),
+    ...(typeof value.backoffLevel === "number" &&
+    Number.isSafeInteger(value.backoffLevel) &&
+    value.backoffLevel > 0
+      ? { backoffLevel: Math.min(value.backoffLevel, 1_000) }
+      : {}),
+    ...(typeof value.connectedSince === "number" &&
+    Number.isSafeInteger(value.connectedSince) &&
+    value.connectedSince > 0
+      ? { connectedSince: value.connectedSince }
+      : {}),
   };
 }
 

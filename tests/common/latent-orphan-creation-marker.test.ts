@@ -2,7 +2,7 @@
 
 import { ApiError } from "../../src/core/api/client";
 import type { ProxySession } from "../../src/core/api/types";
-import { ALARM_RECONNECT } from "../../src/core/shared/config";
+import { ALARM_RECONNECT, PROXY_CREATION_UNCERTAINTY_MS } from "../../src/core/shared/config";
 import { authenticatedState, createHarness, NOW, proxySession } from "./helpers";
 
 function deferred<T = void>() {
@@ -51,13 +51,14 @@ describe("a session request still unanswered when a newer attempt fails before i
       // The user asks again: that attempt replaces the first one, then fails.
       await failBeforeRequest(h);
       expect(create).toHaveBeenCalledOnce();
-      // While the first request is unanswered, its marker rightly defers the retry.
+      // While the first request is unanswered, its marker rightly defers the retry:
+      // no sooner than the deadline by which a session it created has expired.
       expect(h.securityStorage.state).toMatchObject({
         protectionRequested: true,
         proxyCreationUncertain: true,
-        nextRetryAt: null,
+        nextRetryAt: NOW + PROXY_CREATION_UNCERTAINTY_MS,
       });
-      expect(h.alarms.reconnectAt).toBeNull();
+      expect(h.alarms.reconnectAt).toBe(NOW + PROXY_CREATION_UNCERTAINTY_MS);
 
       if (outcome === "answered with a session") response.resolve(proxySession("discarded-first"));
       else response.reject(new ApiError("rate_limited", 429, 30));

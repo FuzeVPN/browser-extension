@@ -575,19 +575,25 @@ export class FakeSecurityStorage implements SecurityStorage {
 export function createHarness(options?: {
   webAuth?: import("../../src/core/auth/web-auth").WebAuthService;
   remoteCleanupTimeoutMs?: number;
+  startupPreflightTimeoutMs?: number;
+  /** The draw which spreads retry delays; the middle of the spread unless given. */
+  random?: () => number;
   persisted?: PersistedState;
   transient?: TransientState;
   activeProxy?: ProxySession;
   security?: SecurityState;
   siteExclusionStorage?: import("../../src/core/storage/site-exclusion-storage").SiteExclusionStorage;
   cleanupStorage?: import("../../src/core/storage/proxy-cleanup-storage").ProxyCleanupStorage;
+  accountCache?: import("../../src/core/storage/account-cache-storage").AccountCacheStorage;
+  /** The guard a browser keeps between two workers, when a test shares it. */
+  safety?: FakeSafety;
 }) {
   const api = new FakeApi();
   const storage = new FakeStorage();
   const proxy = new FakeProxy();
   const alarms = new FakeAlarms();
   const identity = new FakeIdentity();
-  const safety = new FakeSafety();
+  const safety = options?.safety ?? new FakeSafety();
   const securityStorage = new FakeSecurityStorage();
   if (options?.security) securityStorage.state = structuredClone(options.security);
   let now = NOW;
@@ -609,8 +615,14 @@ export function createHarness(options?: {
     securityStorage,
     siteExclusionStorage: options?.siteExclusionStorage,
     cleanupStorage: options?.cleanupStorage,
+    accountCache: options?.accountCache,
     now: () => now,
+    // The middle of the spread: delays are exactly their nominal value.
+    random: options?.random ?? (() => 0.5),
     remoteCleanupTimeoutMs: options?.remoteCleanupTimeoutMs ?? 250,
+    ...(options?.startupPreflightTimeoutMs === undefined
+      ? {}
+      : { startupPreflightTimeoutMs: options.startupPreflightTimeoutMs }),
     onStateChanged: (snapshot) => snapshots.push(snapshot),
   });
   return {

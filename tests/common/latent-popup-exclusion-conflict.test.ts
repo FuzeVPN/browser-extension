@@ -2,6 +2,7 @@
 
 import { readFileSync } from "node:fs";
 import { runInNewContext } from "node:vm";
+import { popupDom } from "./popup-dom";
 import ts from "typescript";
 import type { ExtensionRequest } from "../../src/core/shared/messages";
 import type { SiteExclusion, SiteExclusionsState } from "../../src/core/shared/site-exclusions";
@@ -92,7 +93,7 @@ function setup(initial: SiteExclusionsState) {
       return { ok: true, snapshot: snapshot(worker.exclusions) };
     },
   };
-  runInNewContext(executable, context);
+  runInNewContext(executable, Object.assign(context, popupDom));
   return { subject: context as unknown as Subject, worker };
 }
 

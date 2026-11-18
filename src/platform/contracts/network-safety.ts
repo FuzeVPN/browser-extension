@@ -18,6 +18,18 @@ export interface NetworkSafetyService {
   /** Persist a stricter transaction guard until the definitive policy is committed. */
   setExclusionGuard?(entries: SiteExclusion[] | null): Promise<void>;
   suspend(): Promise<void>;
+  /**
+   * Whether the rules in place are exactly those which block() then allow() leave, the
+   * allowance included: nothing would be rewritten. Reads only, and never throws. A
+   * platform which cannot attest it leaves this out: its guard is closed at every start.
+   */
+  verifyAllowance?(killSwitchEnabled: boolean): Promise<boolean>;
+  /**
+   * Whether nothing of this extension is in place: no rule of its own in either store,
+   * and no privacy setting under its control. release() would then change nothing.
+   * Reads only, and never throws. A platform which cannot attest it leaves this out.
+   */
+  verifyReleased?(): Promise<boolean>;
   /** Request rules only; a blocking claim also requires ProxyService's verified route. */
   block(killSwitchEnabled: boolean): Promise<void>;
   allow(): Promise<void>;

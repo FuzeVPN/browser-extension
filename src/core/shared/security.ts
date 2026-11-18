@@ -8,13 +8,54 @@ export interface SecurityState {
   nextRetryAt: number | null;
   retrySuspended: boolean;
   proxyCreationUncertain: boolean;
+  /**
+   * When the unanswered creation stops suspending automatic retries: a session it may
+   * have created has expired by then. Absent, the marker suspends them until it is
+   * settled, as it does once a failure has suspended them for a cause of its own.
+   */
+  proxyCreationUncertainUntil?: number;
   proxyCleanupUncertain: boolean;
+  /**
+   * When every session the cleanup marker may stand for has expired: nothing is left to
+   * revoke from then on, and the next worker or logout ends the marker. Absent on a
+   * marker stored by an earlier version, which the worker reading it dates.
+   */
+  proxyCleanupUncertainUntil?: number;
   retryNotBefore: number | null;
   selectedLocationId: string | null;
   /** A confirmed full target remains paused until a deliberate connection action. */
   capacityBlockedLocationId?: string | null;
   /** Why retries are suspended, when only the user can resolve it. */
   suspensionCause?: SuspensionCause;
+  /**
+   * Why the retry which nextRetryAt schedules is needed. Kept with that retry only, for
+   * a worker which starts before it: it reports the failure it finds, not a generic one.
+   */
+  retryCause?: RetryCause;
+  /**
+   * How far the retry delays have grown. Unlike reconnectAttempts, a connection which
+   * succeeds does not end it: only one which lasted does, or a deliberate disconnection.
+   */
+  backoffLevel?: number;
+  /** Since when protection has been up without a failure. Absent while it is down. */
+  connectedSince?: number;
+}
+
+/** The failures after which the connection is tried again by itself. */
+export const RETRY_CAUSES = [
+  "network_error",
+  "request_timeout",
+  "proxy_unavailable",
+  "capacity_unavailable",
+  "proxy_certificate_invalid",
+  "session_expired",
+  "rate_limited",
+] as const;
+
+export type RetryCause = (typeof RETRY_CAUSES)[number];
+
+export function isRetryCause(value: unknown): value is RetryCause {
+  return RETRY_CAUSES.some((cause) => cause === value);
 }
 
 /**
@@ -39,6 +80,13 @@ export function withSuspensionCause(state: SecurityState, cause: unknown): Secur
   const next = { ...state };
   if (isSuspensionCause(cause)) next.suspensionCause = cause;
   else delete next.suspensionCause;
+  return next;
+}
+
+/** The state with its creation marker set or settled; the deadline never outlives the marker. */
+export function withCreationUncertainty(state: SecurityState, uncertain: boolean): SecurityState {
+  const next = { ...state, proxyCreationUncertain: uncertain };
+  if (!uncertain) delete next.proxyCreationUncertainUntil;
   return next;
 }
 

@@ -22,6 +22,7 @@ export class SiteExclusionController {
   private record: SiteExclusionRecord = emptySiteExclusionRecord();
   private error = false;
   private unreadable = true;
+  private reading: Promise<void> | null = null;
 
   constructor(
     private readonly storage: SiteExclusionStorage | undefined,
@@ -44,7 +45,18 @@ export class SiteExclusionController {
     return this.record.pending || this.unreadable;
   }
 
-  async initialize(): Promise<void> {
+  /**
+   * One read at a time: a caller arriving during a read joins it. No read is then left
+   * to end, with what storage held when it began, after a caller has moved on.
+   */
+  initialize(): Promise<void> {
+    this.reading ??= this.read().finally(() => {
+      this.reading = null;
+    });
+    return this.reading;
+  }
+
+  private async read(): Promise<void> {
     try {
       this.record = this.storage ? await this.storage.read() : emptySiteExclusionRecord();
       this.unreadable = false;

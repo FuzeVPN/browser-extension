@@ -2,6 +2,7 @@
 
 import { readFileSync } from "node:fs";
 import { runInNewContext } from "node:vm";
+import { popupDom } from "./popup-dom";
 import ts from "typescript";
 import type { Device } from "../../src/core/api/types";
 import type { ExtensionRequest, ExtensionResponse } from "../../src/core/shared/messages";
@@ -99,6 +100,7 @@ function setup(initial = state()) {
     loadedLocale: "fr",
     languageCatalogFailed: false,
     devicesFailure: null,
+    deviceRefusals: new Map<string, unknown>(),
     devicesRefreshPending: false,
     locationPreferenceFailure: null,
     locationsRefreshPending: false,
@@ -130,7 +132,7 @@ function setup(initial = state()) {
     },
   };
   // Execute the production functions, with only messaging and final rendering replaced.
-  runInNewContext(executable, context);
+  runInNewContext(executable, Object.assign(context, popupDom));
   return { subject: context as unknown as Subject, pending, renderCurrent: context.renderCurrent };
 }
 

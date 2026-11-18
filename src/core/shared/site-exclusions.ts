@@ -37,17 +37,37 @@ export const EMPTY_SITE_EXCLUSIONS: SiteExclusionsState = {
 
 const reservedDestinations = ["api.fuzevpn.com", "api.ipify.org", "api64.ipify.org"];
 const localSuffixes = ["localhost", "local", "internal", "lan", "home", "home.arpa", "onion"];
-const exactSuffixes = new Set<string>();
-const wildcardSuffixes = new Set<string>();
-const suffixExceptions = new Set<string>();
-const knownRoots = new Set<string>();
-for (const rule of publicSuffixRules) {
-  const domain = rule.replace(/^(?:!|\*\.)/, "");
-  const root = domain.split(".").at(-1);
-  if (root) knownRoots.add(root);
-  if (rule.startsWith("!")) suffixExceptions.add(domain);
-  else if (rule.startsWith("*.")) wildcardSuffixes.add(domain);
-  else exactSuffixes.add(domain);
+interface PublicSuffixes {
+  exact: Set<string>;
+  wildcard: Set<string>;
+  exceptions: Set<string>;
+  roots: Set<string>;
+}
+let publicSuffixes: PublicSuffixes | null = null;
+
+/**
+ * The public suffix rules, indexed. They are over ten thousand, and only the validation
+ * of a site reads them: the index is built at the first one, not each time the worker
+ * starts or the popup opens.
+ */
+function suffixes(): PublicSuffixes {
+  if (publicSuffixes) return publicSuffixes;
+  const built: PublicSuffixes = {
+    exact: new Set(),
+    wildcard: new Set(),
+    exceptions: new Set(),
+    roots: new Set(),
+  };
+  for (const rule of publicSuffixRules) {
+    const domain = rule.replace(/^(?:!|\*\.)/, "");
+    const root = domain.split(".").at(-1);
+    if (root) built.roots.add(root);
+    if (rule.startsWith("!")) built.exceptions.add(domain);
+    else if (rule.startsWith("*.")) built.wildcard.add(domain);
+    else built.exact.add(domain);
+  }
+  publicSuffixes = built;
+  return built;
 }
 
 export class SiteExclusionValidationError extends Error {
@@ -91,7 +111,7 @@ export function normalizeSiteExclusion(input: string, includeSubdomains: boolean
   }
   if (
     labels.length < 2 ||
-    !knownRoots.has(labels.at(-1) ?? "") ||
+    !suffixes().roots.has(labels.at(-1) ?? "") ||
     localSuffixes.some((suffix) => domain === suffix || domain.endsWith(`.${suffix}`))
   ) {
     throw new SiteExclusionValidationError("local");
@@ -111,12 +131,13 @@ export function normalizeSiteExclusion(input: string, includeSubdomains: boolean
 
 /** Longest matching PSL rule, with exception rules taking precedence. */
 function publicSuffixLength(labels: string[]): number {
+  const { exact, wildcard, exceptions } = suffixes();
   let length = 1;
   for (let index = 0; index < labels.length; index += 1) {
     const suffix = labels.slice(index).join(".");
-    if (suffixExceptions.has(suffix)) return labels.length - index - 1;
-    if (exactSuffixes.has(suffix)) length = Math.max(length, labels.length - index);
-    if (index > 0 && wildcardSuffixes.has(suffix)) {
+    if (exceptions.has(suffix)) return labels.length - index - 1;
+    if (exact.has(suffix)) length = Math.max(length, labels.length - index);
+    if (index > 0 && wildcard.has(suffix)) {
       length = Math.max(length, labels.length - index + 1);
     }
   }

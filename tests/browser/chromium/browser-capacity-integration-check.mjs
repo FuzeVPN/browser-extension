@@ -92,10 +92,21 @@ async function reply(route, status, body, headers = {}) {
   });
 }
 async function restartWorker(page) {
+  await stopWorker(page);
+  return snapshot(page);
+}
+/** Stops the worker as the browser does when it is idle; nothing starts it again here. */
+async function stopWorker(page) {
   const cdp = await context.newCDPSession(page);
   const versions = new Map();
+  // The open popup can start the worker again a millisecond after it stopped: the stop
+  // is noted when the browser reports it, not read from the latest state afterwards.
+  const stopped = new Set();
   cdp.on("ServiceWorker.workerVersionUpdated", ({ versions: changed }) => {
-    for (const version of changed) versions.set(version.versionId, version);
+    for (const version of changed) {
+      versions.set(version.versionId, version);
+      if (version.runningStatus === "stopped") stopped.add(version.versionId);
+    }
   });
   try {
     await cdp.send("ServiceWorker.enable");
@@ -107,13 +118,12 @@ async function restartWorker(page) {
       Boolean,
       { message: "Running worker was not discovered", timeoutMs: 5000 },
     );
+    stopped.clear();
     await cdp.send("ServiceWorker.stopWorker", { versionId: version.versionId });
-    await waitForRead(
-      () => versions.get(version.versionId),
-      (value) => value?.runningStatus === "stopped",
-      { message: "Worker did not stop", timeoutMs: 5000 },
-    );
-    return await snapshot(page);
+    await waitForRead(() => stopped.has(version.versionId), Boolean, {
+      message: "Worker did not stop",
+      timeoutMs: 5000,
+    });
   } finally {
     await cdp.detach();
   }
@@ -137,6 +147,14 @@ try {
   await context.route(/^https?:\/\//, (route) => route.abort("blockedbyclient"));
   await context.route(/^https:\/\/api(?:64)?\.ipify\.org\//, (route) =>
     reply(route, 200, { ip: "203.0.113.8" }),
+  );
+  await context.route("https://probe.capacity.test/**", (route) =>
+    route.fulfill({
+      status: 200,
+      headers: { "cache-control": "no-store" },
+      contentType: new URL(route.request().url()).pathname === "/" ? "text/html" : "text/plain",
+      body: "<!doctype html><title>probe</title>",
+    }),
   );
   await context.route("https://api.fuzevpn.com/**", async (route) => {
     const path = new URL(route.request().url()).pathname;
@@ -356,7 +374,63 @@ try {
     germany.id,
   );
   const creationsBeforeChangeRestart = counts().creations;
-  await restartWorker(page);
+  const beforeChangeRestart = counts();
+  const restartedChange = await restartWorker(page);
+  // The account requests a restored worker used to make left well within this delay.
+  await new Promise((resolve) => setTimeout(resolve, 1500));
+  assert.deepEqual(counts(), beforeChangeRestart);
+  assert.equal(restartedChange.protected, true);
+  assert.equal(restartedChange.profile.userId, "capacity-user");
+  assert.equal(restartedChange.locationsStatus, "ready");
+  assert.deepEqual(
+    restartedChange.locations.map(({ id }) => id),
+    [france.id],
+  );
+  record(
+    "A worker restarted soon after an account refresh restores the account and its catalogue without any API request",
+  );
+
+  const technicalHistory = () =>
+    page.evaluate(async () => {
+      const stored = await chrome.storage.session.get("fuzevpnDiagnosticHistory");
+      return stored.fuzevpnDiagnosticHistory?.items?.length ?? 0;
+    });
+  const historyBeforePolls = await technicalHistory();
+  for (let poll = 0; poll < 5; poll++)
+    assert.equal((await command(page, { type: "refresh_network" })).ok, true);
+  // Each poll used to be written to the technical history well within this delay.
+  await new Promise((resolve) => setTimeout(resolve, 1000));
+  assert.equal(await technicalHistory(), historyBeforePolls);
+  record("The network state the popup polls for is not written to the technical history");
+
+  // An ordinary page whose requests start the stopped worker, over the live connection.
+  const webPage = await context.newPage();
+  await webPage.goto("https://probe.capacity.test/");
+  await stopWorker(page);
+  const pageRequests = await webPage.evaluate(async () => {
+    const started = performance.now();
+    const pending = [];
+    while (performance.now() - started < 1500) {
+      pending.push(
+        fetch(`/ping?${pending.length}-${Math.random()}`, { cache: "no-store" }).then(
+          (response) => response.ok,
+          () => false,
+        ),
+      );
+      await new Promise((resolve) => setTimeout(resolve, 10));
+    }
+    return Promise.all(pending);
+  });
+  await webPage.close();
+  assert(pageRequests.length > 50);
+  // The start-up used to close the traffic guard for a moment, failing those sent then.
+  assert.equal(pageRequests.filter((ok) => !ok).length, 0);
+  const afterPageRequests = await snapshot(page);
+  assert.equal(afterPageRequests.protected, true);
+  assert.equal(afterPageRequests.activeLocationId, france.id);
+  record(
+    "Web requests which start the worker over a protected connection all pass: its start-up does not close the traffic guard",
+  );
   const restoredChange = await command(page, { type: "refresh_account" });
   assert.equal(restoredChange.snapshot.selectedLocationId, germany.id);
   assert.equal(restoredChange.snapshot.activeLocationId, france.id);

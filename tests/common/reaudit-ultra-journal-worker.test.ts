@@ -308,7 +308,13 @@ describe("worker commands keep a retried startup guard repair in their journal g
       expect(await worker.send({ type: "diagnostics_clear_history" })).toMatchObject({ ok: true });
       gate.resolve(undefined);
       // The restoration itself still happens; only its history belongs to the erased journal.
-      expect(await command).toMatchObject({ ok: true, snapshot: { protected: true } });
+      // A command which only retried it answers while the connection it left is made.
+      expect(await command).toMatchObject({ ok: true });
+      await vi.waitFor(async () =>
+        expect(await worker.send({ type: "get_snapshot" })).toMatchObject({
+          snapshot: { protected: true },
+        }),
+      );
       const exported = await worker.send<JournalResponse>({ type: "get_connection_journal" });
       expect(exported.ok).toBe(true);
       expect(operationEvents(exported.journal?.events)).toEqual([]);

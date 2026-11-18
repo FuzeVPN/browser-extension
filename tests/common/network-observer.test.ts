@@ -683,12 +683,16 @@ describe("network observation", () => {
     },
   );
 
-  it("keeps provider cooldowns across route changes and uses the other provider", async () => {
+  it("keeps the cooldown of a provider to the route which was limited", async () => {
     const f = setup(VPN, true);
     f.fetcher.mockResolvedValueOnce(
       new Response("", { status: 429, headers: { "retry-after": "60" } }),
     );
     await f.observer.refresh();
+    expect(f.fetcher.mock.calls.map(([url]) => url)).toEqual([PRIMARY, FALLBACK]);
+
+    // The provider limited the address of the VPN location, which many users share.
+    // The user's own address was not: disconnected, the same provider is asked.
     f.setSnapshot({
       protected: false,
       protectionRequested: false,
@@ -696,12 +700,52 @@ describe("network observation", () => {
       activeLocationId: null,
     });
     await f.observer.refresh();
-    expect(f.fetcher.mock.calls.map(([url]) => url)).toEqual([PRIMARY, FALLBACK, FALLBACK]);
-    f.advance(60_000);
+    expect(f.fetcher.mock.calls.at(-1)?.[0]).toBe(PRIMARY);
+    expect(f.observer.getState()).toMatchObject({ status: "ready", mode: "direct" });
+
+    // Back on the VPN within the minute: that route still waits, and uses the other one.
+    f.advance(30_000);
     f.setSnapshot(VPN);
+    await f.observer.refresh();
+    expect(f.fetcher.mock.calls.at(-1)?.[0]).toBe(FALLBACK);
+    f.advance(30_000);
     await f.observer.refresh();
     expect(f.fetcher.mock.calls.at(-1)?.[0]).toBe(PRIMARY);
     expect(f.observer.getState()).toMatchObject({ status: "ready", mode: "vpn", ip: "8.8.8.8" });
+  });
+
+  it("does not carry a cooldown over to another VPN location", async () => {
+    const f = setup(VPN, true);
+    f.fetcher.mockResolvedValueOnce(
+      new Response("", { status: 429, headers: { "retry-after": "60" } }),
+    );
+    await f.observer.refresh();
+
+    // Another location leaves by another address, which the provider did not limit.
+    f.setSnapshot({ ...VPN, activeLocationId: "another-location" });
+    await f.observer.refresh();
+    expect(f.fetcher.mock.calls.at(-1)?.[0]).toBe(PRIMARY);
+  });
+
+  it.each([
+    ["86400", 10 * 60_000],
+    ["Wed, 21 Oct 2099 07:28:00 GMT", 10 * 60_000],
+    ["120", 120_000],
+  ])("waits ten minutes at most for a provider which asks for %s", async (retryAfter, waited) => {
+    const f = setup({}, false);
+    f.fetcher.mockResolvedValueOnce(
+      new Response("", { status: 429, headers: { "retry-after": retryAfter } }),
+    );
+    await f.observer.refresh();
+    expect(f.fetcher).toHaveBeenCalledTimes(1);
+
+    f.advance(waited - 1);
+    await f.observer.refresh();
+    expect(f.fetcher).toHaveBeenCalledTimes(1);
+    f.advance(1);
+    await f.observer.refresh();
+    expect(f.fetcher).toHaveBeenCalledTimes(2);
+    expect(f.observer.getState().status).toBe("ready");
   });
 
   it("retries an available fallback after five seconds while the primary is cooling down", async () => {

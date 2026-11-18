@@ -247,6 +247,95 @@ async function open(beforeLoad = async () => {}) {
   await rendered(page);
   return page;
 }
+/**
+ * What `act` writes in the page: the nodes added, removed or rewritten, and the
+ * attributes which changed value. An attribute set again to the value it had is none.
+ */
+async function pageWrites(page, act) {
+  await page.evaluate(() => {
+    const name = (node) =>
+      node instanceof Element
+        ? node.id
+          ? `#${node.id}`
+          : `${name(node.parentNode)} > ${node.localName}`
+        : `${name(node.parentNode)} > text`;
+    window.pageWritten = [];
+    window.pageObserver = new MutationObserver((records) => {
+      for (const record of records) {
+        if (record.type !== "attributes") window.pageWritten.push(name(record.target));
+        else if (record.target.getAttribute(record.attributeName) !== record.oldValue)
+          window.pageWritten.push(`${name(record.target)} @${record.attributeName}`);
+      }
+    });
+    window.pageObserver.observe(document.body, {
+      subtree: true,
+      childList: true,
+      characterData: true,
+      attributes: true,
+      attributeOldValue: true,
+    });
+  });
+  await act();
+  await rendered(page);
+  return page.evaluate(() => {
+    window.pageObserver.disconnect();
+    return [...new Set(window.pageWritten)];
+  });
+}
+/** The address is asked again, as every few seconds, and the worker says the same. */
+const samePoll = (page) => () =>
+  page.evaluate(async () => {
+    const asked = window.fixture.commands.length;
+    window.dispatchEvent(new Event("online"));
+    while (window.fixture.commands.length === asked)
+      await new Promise((done) => setTimeout(done, 10));
+  });
+const samePublication = (page) => () => page.evaluate(() => window.fixture.publish({}));
+/**
+ * Opens the popup with a worker whose first answers are scripted by `patch`, applied to
+ * the fixture before the popup asks anything. Nothing is waited for: the caller does.
+ */
+async function openWith(patch) {
+  const page = await context.newPage();
+  page.on("pageerror", (error) => report.pageErrors.push(error.message));
+  await page.addInitScript((patch) => {
+    // Init scripts run in no stated order: the fixture may or may not exist yet.
+    if (window.fixture) Object.assign(window.fixture, patch);
+    else {
+      let fixture;
+      Object.defineProperty(window, "fixture", {
+        configurable: true,
+        get: () => fixture,
+        set(value) {
+          fixture = Object.assign(value, patch);
+        },
+      });
+    }
+  }, patch);
+  await page.goto("https://popup.invalid/popup/popup.html");
+  return page;
+}
+/** What the popup shows of its start: the views, the failure and the way to try again. */
+async function startView(page) {
+  return page.evaluate(() => {
+    const shown = (selector) => {
+      const node = document.querySelector(selector);
+      return node.getClientRects().length > 0 && getComputedStyle(node).visibility !== "hidden";
+    };
+    return {
+      boot: document.querySelector("main.shell").getAttribute("data-boot"),
+      waiting: shown(".boot-wait"),
+      welcome: shown(".login-hero"),
+      signInForm: shown("#loginForm"),
+      mainView: shown("#mainView"),
+      failure: shown("#loginErrorBanner")
+        ? document.getElementById("loginErrorMessage").textContent
+        : null,
+      retry: shown("#retryButton") ? document.getElementById("retryButton").textContent : null,
+      retryEnabled: !document.getElementById("retryButton").disabled,
+    };
+  });
+}
 async function status(page) {
   return page.evaluate(() => ({
     status: document.getElementById("statusLabel").textContent,
@@ -493,6 +582,237 @@ async function reviewPopupDesign() {
 }
 try {
   let page = await open();
+  const unchanged = {};
+  const observe = async (view) => {
+    unchanged[`${view}, poll`] = await pageWrites(page, samePoll(page));
+    unchanged[`${view}, publication`] = await pageWrites(page, samePublication(page));
+  };
+  await observe("main view");
+  await page.locator("#changeLocationButton").click();
+  await rendered(page);
+  await observe("locations");
+  await page.locator("#closeLocationButton").click();
+  await page.locator("#settingsButton").click();
+  await rendered(page);
+  await observe("settings");
+  await page.locator("#manageDevicesButton").click();
+  await rendered(page);
+  await observe("devices");
+  await page.locator("#closeDevicesButton").click();
+  await page.locator("#manageExclusionsButton").click();
+  await rendered(page);
+  await observe("exclusions");
+  assert.deepEqual(
+    Object.fromEntries(Object.entries(unchanged).filter(([, written]) => written.length > 0)),
+    {},
+  );
+  report.checks.push({
+    passed: true,
+    name: "A reply or a publication which changes nothing writes nothing in the page, in any view",
+    actual: Object.keys(unchanged),
+  });
+  await page.close();
+
+  const protectedStatus = (expected) =>
+    document.getElementById("statusLabel").textContent === expected &&
+    !document.getElementById("mainView").classList.contains("hidden");
+
+  // The worker does not answer the first read: nothing says whether an account is signed in.
+  page = await openWith({ failTypes: ["get_snapshot"] });
+  await page.waitForFunction(() => !document.querySelector("main.shell").hasAttribute("data-boot"));
+  await rendered(page);
+  const unanswered = await startView(page);
+  await page.screenshot({ animations: "disabled", path: join(output, "first-read-failed.png") });
+  assert.deepEqual(unanswered, {
+    boot: null,
+    waiting: false,
+    welcome: false,
+    signInForm: false,
+    mainView: false,
+    failure: catalog.extensionCommunicationError.message,
+    retry: catalog.retryConnection.message,
+    retryEnabled: true,
+  });
+  await page.evaluate(() => {
+    window.fixture.failTypes = [];
+  });
+  await page.locator("#retryButton").click();
+  await page.waitForFunction(protectedStatus, catalog.statusProtected.message);
+  assert.equal(
+    await page
+      .locator("main.shell")
+      .evaluate((shell) => shell.hasAttribute("data-account-unknown")),
+    false,
+  );
+  assert.equal(
+    await page.evaluate(() => window.fixture.commands.includes("retry_connection")),
+    false,
+  );
+  report.checks.push({
+    passed: true,
+    name: "A first read which fails shows the failure and a button which tries again, not the invitation to sign in; the account found is then shown without a new connection",
+    actual: unanswered,
+  });
+  await page.close();
+
+  // The worker is slow to answer the first read.
+  page = await openWith({ heldType: "get_snapshot" });
+  await page.waitForFunction(() => Boolean(window.fixture.held));
+  const early = await startView(page);
+  assert.deepEqual(
+    { boot: early.boot, waiting: early.waiting, welcome: early.welcome, mainView: early.mainView },
+    { boot: "", waiting: false, welcome: false, mainView: false },
+  );
+  await page.waitForFunction(
+    () => document.querySelector("main.shell").getAttribute("data-boot") === "waiting",
+  );
+  const slow = await startView(page);
+  await page.screenshot({ animations: "disabled", path: join(output, "first-read-slow.png") });
+  assert.deepEqual(
+    {
+      waiting: slow.waiting,
+      welcome: slow.welcome,
+      signInForm: slow.signInForm,
+      mainView: slow.mainView,
+      failure: slow.failure,
+    },
+    { waiting: true, welcome: false, signInForm: false, mainView: false, failure: null },
+  );
+  await page.evaluate(() => window.fixture.held());
+  await page.waitForFunction(protectedStatus, catalog.statusProtected.message);
+  assert.equal((await startView(page)).waiting, false);
+  report.checks.push({
+    passed: true,
+    name: "A first answer which is slow is waited for in the open: neither view is shown before it, and the main view is shown with it",
+    actual: slow,
+  });
+  await page.close();
+
+  // The worker never answers the first read.
+  page = await openWith({ heldType: "get_snapshot" });
+  const opened = Date.now();
+  await page.waitForFunction(
+    () => !document.getElementById("loginErrorBanner").classList.contains("hidden"),
+    null,
+    { timeout: 20_000 },
+  );
+  const reportedAfter = Date.now() - opened;
+  assert.ok(reportedAfter >= 9_000 && reportedAfter < 15_000, String(reportedAfter));
+  const silent = await startView(page);
+  assert.deepEqual(silent, unanswered);
+  // Its answer, when it comes at last, is shown.
+  await page.evaluate(() => window.fixture.held());
+  await page.waitForFunction(protectedStatus, catalog.statusProtected.message);
+  assert.equal((await startView(page)).failure, null);
+  report.checks.push({
+    passed: true,
+    name: "A worker which says nothing for ten seconds is reported as not answering, and its late answer is still shown",
+    actual: { reportedAfterMs: reportedAfter },
+  });
+  await page.close();
+
+  // A control is disabled while the worker has not answered its own action, and the
+  // browser then takes the keyboard focus from it.
+  const focusAfter = {};
+  const keyboardAction = async (
+    name,
+    selector,
+    key,
+    held,
+    prepare = async () => {},
+    // What the worker publishes while it works, and once it has finished.
+    [during, after] = [],
+  ) => {
+    page = await open();
+    await prepare();
+    await page.evaluate((type) => {
+      window.fixture.heldType = type;
+    }, held);
+    await page.locator(selector).focus();
+    await page.keyboard.press(key);
+    await page.waitForFunction(() => Boolean(window.fixture.held));
+    if (during) await page.evaluate(during);
+    await page.waitForFunction((control) => document.querySelector(control).disabled, selector);
+    await page.evaluate(() => window.fixture.held());
+    if (after) await page.evaluate(after);
+    await page.waitForFunction((control) => !document.querySelector(control).disabled, selector);
+    await rendered(page);
+    focusAfter[name] = await page.evaluate(() => `#${document.activeElement.id}`);
+    assert.equal(focusAfter[name], selector, name);
+    await page.close();
+  };
+  const openSettings = () => page.locator("#settingsButton").click();
+  await keyboardAction(
+    "subscription refresh",
+    "#refreshSubscriptionButton",
+    "Enter",
+    "refresh_account",
+  );
+  await keyboardAction("disconnection", "#protectButton", "Enter", "disconnect", undefined, [
+    () => window.fixture.publish({ status: "disconnecting" }),
+    () =>
+      window.fixture.publish({
+        status: "disconnected",
+        protected: false,
+        protectionRequested: false,
+        activeLocationId: null,
+      }),
+  ]);
+  await keyboardAction(
+    "kill switch",
+    "#killSwitchEnabled",
+    "Space",
+    "update_security_preferences",
+    openSettings,
+  );
+  await keyboardAction(
+    "device list refresh",
+    "#refreshDevicesButton",
+    "Enter",
+    "refresh_devices",
+    async () => {
+      await openSettings();
+      await page.locator("#manageDevicesButton").click();
+      await page.waitForFunction(() => !document.getElementById("refreshDevicesButton").disabled);
+    },
+  );
+  await keyboardAction(
+    "location list refresh",
+    "#refreshLocationsButton",
+    "Enter",
+    "refresh_locations",
+    async () => {
+      await page.locator("#changeLocationButton").click();
+      await page.waitForFunction(() => !document.getElementById("refreshLocationsButton").disabled);
+    },
+  );
+  await keyboardAction(
+    "site exclusions switch",
+    "#exclusionsEnabled",
+    "Space",
+    "update_site_exclusions",
+    async () => {
+      const saved = {
+        revision: 3,
+        enabled: true,
+        entries: [{ domain: "example.com", includeSubdomains: true }],
+      };
+      await page.evaluate((saved) => {
+        window.fixture.applyExclusions = true;
+        window.fixture.publish({
+          siteExclusions: { saved, applied: saved, pending: false, error: false },
+        });
+      }, saved);
+      await openSettings();
+      await page.locator("#manageExclusionsButton").click();
+    },
+  );
+  report.checks.push({
+    passed: true,
+    name: "A control disabled while its own keyboard action is pending has the focus again once the worker answered",
+    actual: focusAfter,
+  });
+  page = await open();
   await page.evaluate(() => {
     const f = window.fixture;
     f.commands = [];
@@ -1041,7 +1361,7 @@ try {
     await page.waitForFunction(() => Boolean(window.fixture.held));
     assert.equal(await page.locator("#loginButton").isDisabled(), true);
     assert.equal(await page.locator("#webLoginStatus").isVisible(), true);
-    assert.equal(await page.locator("#loginForm").getAttribute("aria-busy"), "true");
+    assert.equal(await page.locator("#loginButton").getAttribute("aria-busy"), "true");
     await page.locator("#loginButton").evaluate((button) => button.click());
     assert.equal(
       await page.evaluate(
@@ -1395,21 +1715,35 @@ try {
   await page.locator("#refreshDevicesButton").click();
   await page.waitForFunction(() => !document.getElementById("refreshDevicesButton").disabled);
   assert.equal(await page.locator("#devicesDialog").isVisible(), true);
+  // The refresh which failed says nothing of the refused deletion, whose device is
+  // still listed: both are reported, each on its line.
   assert.equal(
     await page.locator("#devicesError").textContent(),
-    catalog.extensionCommunicationError.message,
+    `${catalog.extensionCommunicationError.message}\n${catalog.error_not_found.message}`,
+  );
+  assert.equal(
+    await page
+      .locator("#devicesError")
+      .evaluate((banner) => banner.innerText.split("\n").filter(Boolean).length),
+    2,
   );
   await page.locator(".delete-device-button").click();
   await page.locator("#confirmationAcceptButton").click();
-  await page.waitForFunction(() => !document.querySelector(".delete-device-button").disabled);
+  // The button is not disabled before the confirmed deletion starts either.
+  await page.waitForFunction(
+    () =>
+      window.fixture.commands.filter((type) => type === "delete_device").length === 2 &&
+      !document.querySelector(".delete-device-button").disabled,
+  );
   assert.equal(await page.locator("#devicesDialog").isVisible(), true);
+  // Asked again, the deletion reports its new failure in place of the previous one.
   assert.equal(
     await page.locator("#devicesError").textContent(),
     catalog.extensionCommunicationError.message,
   );
   report.checks.push({
     passed: true,
-    name: "Pending device deletion survives unrelated rerenders, rejects duplicate clicks, and displays business/transport failures inside the modal without inviting local identity reset",
+    name: "Pending device deletion survives unrelated rerenders, rejects duplicate clicks, and displays business/transport failures inside the modal, a refused deletion beside a failed refresh, without inviting local identity reset",
   });
   await page.close();
 

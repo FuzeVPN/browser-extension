@@ -26,6 +26,7 @@ async function staleDevice(code = "device_identity_revoked") {
     return create(...args);
   });
   await h.controller.initialize();
+  await h.controller.startupConnectionSettled();
   return h;
 }
 
@@ -108,6 +109,7 @@ describe("automatic device recovery", () => {
     h.api.enrollError = null;
     const controller = restart(h);
     await controller.initialize();
+    await controller.startupConnectionSettled();
     expect(controller.getSnapshot().protected).toBe(true);
     expect(h.api.enrollments[1]?.publicKey).toBe(key);
     expect(h.identity.keyGenerations).toBe(generations);
@@ -157,6 +159,7 @@ describe("automatic device recovery", () => {
       exhausted: true,
     });
     await h.controller.handleAlarm(ALARM_RECONNECT);
+    await h.controller.startupConnectionSettled();
     expect(h.api.createProxySession).toHaveBeenCalledTimes(2);
     const controller = restart(h);
     await controller.initialize();
@@ -180,6 +183,7 @@ describe("automatic device recovery", () => {
     async (operation) => {
       const h = createHarness({ persisted: authenticatedState() });
       await h.controller.initialize();
+      await h.controller.startupConnectionSettled();
       await h.controller.connect("frankfurt-01");
       h.api.createError = new ApiError("device_identity_revoked", 403);
       h.api.enrollError = new NetworkError("network");

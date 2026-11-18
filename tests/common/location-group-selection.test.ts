@@ -86,9 +86,11 @@ describe.each([false, true])("selecting the retained server (resolver: %s)", (re
     expect(apply).not.toHaveBeenCalled();
     h.setNow(Date.parse(previous!.expiresAt));
     await h.controller.handleAlarm(ALARM_EXPIRY);
+    // The retained session was not extended: it ends at its own expiry. The only
+    // creation is the reconnection made then, which the full server still refuses.
     expect(h.controller.getSnapshot().protected).toBe(false);
     expect(await h.controller.getActiveSession()).toBeNull();
-    expect(create).not.toHaveBeenCalled();
+    expect(create).toHaveBeenCalledOnce();
   });
 
   it.each(["disconnect", "logout"] as const)(

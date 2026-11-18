@@ -9,6 +9,7 @@ import { authenticatedState, createHarness, NOW, proxySession } from "./helpers"
 async function rateLimitedWithoutSession() {
   const h = createHarness({ persisted: authenticatedState() });
   await h.controller.initialize();
+  await h.controller.startupConnectionSettled();
   h.api.createError = new ApiError("rate_limited", 429, 60);
   expect(await h.controller.connect("frankfurt-01")).toMatchObject({ ok: false });
   const reconnectAt = NOW + 60_000;
@@ -60,7 +61,9 @@ describe("guard route takeover while a reconnect is scheduled", () => {
         protected: false,
         trafficBlocked: true,
         blockingScope: "all",
-        error: null,
+        // The control error is gone. What still keeps protection down is displayed:
+        // the refusal which the scheduled reconnection follows.
+        error: "rate_limited",
         nextRetryAt: h.reconnectAt,
       });
       expect(h.alarms.reconnectAt).toBe(h.reconnectAt);
@@ -68,6 +71,7 @@ describe("guard route takeover while a reconnect is scheduled", () => {
       h.api.createError = null;
       h.setNow(h.reconnectAt + 1_000);
       await h.controller.handleAlarm(ALARM_RECONNECT);
+      await h.controller.startupConnectionSettled();
       expect(h.controller.getSnapshot()).toMatchObject({
         status: "connected",
         protected: true,
@@ -84,6 +88,7 @@ describe("guard route takeover while a reconnect is scheduled", () => {
     h.api.createError = null;
     h.setNow(h.reconnectAt + 1_000);
     await h.controller.handleAlarm(ALARM_RECONNECT);
+    await h.controller.startupConnectionSettled();
     expect(h.api.proofs).toHaveLength(creates);
     expect(h.alarms.reconnectAt).toBeNull();
     expect(h.securityStorage.state).toMatchObject({ nextRetryAt: null, retrySuspended: true });
@@ -107,8 +112,10 @@ describe("guard route takeover while a reconnect is scheduled", () => {
         // A failed restart rebuild retains and blocks the stale browser route.
         h.api.createError = new NetworkError("network");
         await h.controller.initialize();
+        await h.controller.startupConnectionSettled();
       } else {
         await h.controller.initialize();
+        await h.controller.startupConnectionSettled();
         h.api.createError = new ApiError("device_limit", 409);
         expect(await h.controller.connect("frankfurt-01")).toMatchObject({ ok: false });
       }
@@ -150,6 +157,7 @@ async function refusedGuardedRestore(killSwitchEnabled: boolean) {
   await h.proxy.ensureBlockingConfiguration();
   h.proxy.level = "controlled_by_other_extensions";
   await h.controller.initialize();
+  await h.controller.startupConnectionSettled();
   expect(h.controller.getSnapshot().error).toBe("proxy_controlled_by_extension");
   expect(h.storage.transient).toEqual(transient);
   // The repair finds the guard route ours again: restoring must reapply the session.
@@ -186,6 +194,7 @@ describe("startup guard repair on a guarded restoration", () => {
       const h = await refusedGuardedRestore(killSwitchEnabled);
       rejectControlChecks(h, 1);
       await h.controller.initialize();
+      await h.controller.startupConnectionSettled();
       expect(await h.controller.getActiveSession()).toEqual(h.session);
       expect(h.controller.getSnapshot()).toMatchObject({ protected: true, error: null });
       expect(h.storage.transient).toMatchObject({ proxySession: h.session, refreshAttempts: 2 });
@@ -199,12 +208,14 @@ describe("startup guard repair on a guarded restoration", () => {
       const h = await refusedGuardedRestore(killSwitchEnabled);
       rejectControlChecks(h, Number.POSITIVE_INFINITY);
       await h.controller.initialize();
+      await h.controller.startupConnectionSettled();
       expect(h.storage.transient).toEqual(h.transient);
       expect(h.snapshots.filter((snapshot) => snapshot.protected)).toEqual([]);
       expect(h.safety.events).not.toContain("allow");
 
       vi.restoreAllMocks();
       await h.controller.initialize();
+      await h.controller.startupConnectionSettled();
       expect(await h.controller.getActiveSession()).toEqual(h.session);
       expect(h.controller.getSnapshot()).toMatchObject({ protected: true, error: null });
       expect(h.api.proofs).toHaveLength(0);

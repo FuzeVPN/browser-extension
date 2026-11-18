@@ -2,7 +2,12 @@
 
 import { ApiError, NetworkError } from "../../src/core/api/client";
 import type { ProxySession } from "../../src/core/api/types";
-import { ALARM_EXPIRY, ALARM_RECONNECT, ALARM_REFRESH } from "../../src/core/shared/config";
+import {
+  ALARM_EXPIRY,
+  ALARM_RECONNECT,
+  ALARM_REFRESH,
+  PROXY_CREATION_UNCERTAINTY_MS,
+} from "../../src/core/shared/config";
 import { authenticatedState, createHarness, NOW, proxySession } from "./helpers";
 
 const AT = NOW + 510_000;
@@ -203,9 +208,9 @@ describe("known settlement of a superseded creation without a session", () => {
     expect(await h.controller.updateSecurityPreferences(true, false)).toEqual({ ok: true });
     h.setNow(Date.parse(previous.expiresAt));
     await h.controller.handleAlarm(ALARM_EXPIRY);
-    // Only the pending creation kept this retryable expiry from scheduling a reconnection.
+    // The pending creation defers the reconnection of this retryable expiry to its deadline.
     expect(h.controller.getSnapshot()).toMatchObject({ error: "session_expired" });
-    expect(h.alarms.reconnectAt).toBeNull();
+    expect(h.alarms.reconnectAt).toBe(AT + PROXY_CREATION_UNCERTAINTY_MS);
 
     response.resolve(fresh("discarded-renewal"));
     await renewing;

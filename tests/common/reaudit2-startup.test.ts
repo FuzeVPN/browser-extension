@@ -110,6 +110,7 @@ describe("reaudit 2: startup restoration control loss at the guarded route test"
           const loss = loseControlAtGuardedTest(h, level, reportEvent);
 
           await h.controller.initialize();
+          await h.controller.startupConnectionSettled();
           await Promise.all(loss.reports);
 
           // The early control check passed: only the guarded route test saw the loss.
@@ -155,6 +156,7 @@ describe("reaudit 2: startup restoration control loss at the guarded route test"
           const loss = loseControlAtGuardedTest(h, level, false, tlsFailure);
 
           await h.controller.initialize();
+          await h.controller.startupConnectionSettled();
           await Promise.all(loss.reports);
 
           expect(loss.trace.slice(0, 3)).toEqual([
@@ -193,6 +195,7 @@ describe("reaudit 2: startup restoration control loss at the guarded route test"
         const h = await fixture(kill);
         const loss = loseControlAtGuardedTest(h, "controlled_by_other_extensions", false);
         await h.controller.initialize();
+        await h.controller.startupConnectionSettled();
         // The refused startup has returned: the session waits for its repair.
         expect(h.storage.transient).toEqual(h.transient);
 
@@ -222,6 +225,7 @@ describe("reaudit 2: startup restoration control loss at the guarded route test"
     await h.proxy.clear();
 
     await h.controller.initialize();
+    await h.controller.startupConnectionSettled();
 
     expect(h.api.proofs).toHaveLength(1);
     expect(h.storage.transient.proxySession?.id).not.toBe(h.session.id);

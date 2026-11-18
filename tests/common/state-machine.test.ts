@@ -17,6 +17,7 @@ describe("connection state machine", () => {
   it("restores an authenticated disconnected account", async () => {
     const harness = createHarness({ persisted: authenticatedState() });
     await harness.controller.initialize();
+    await harness.controller.startupConnectionSettled();
     expect(harness.controller.getSnapshot()).toMatchObject({
       status: "disconnected",
       profile: PROFILE,
@@ -33,6 +34,7 @@ describe("connection state machine", () => {
       activeProxy: session,
     });
     await harness.controller.initialize();
+    await harness.controller.startupConnectionSettled();
     expect(harness.controller.getSnapshot().status).toBe("logged_out");
     expect(harness.storage.transient.proxySession).toBeNull();
     expect(harness.proxy.active).toBeNull();
@@ -42,6 +44,7 @@ describe("connection state machine", () => {
     const harness = createHarness({ persisted: authenticatedState() });
     harness.api.subscription = INACTIVE_SUBSCRIPTION;
     await harness.controller.initialize();
+    await harness.controller.startupConnectionSettled();
     await harness.controller.connect("frankfurt-01");
     expect(harness.controller.getSnapshot()).toMatchObject({
       status: "blocked",
@@ -56,6 +59,7 @@ describe("connection state machine", () => {
     const harness = createHarness({ persisted: authenticatedState() });
     harness.api.subscription = INACTIVE_SUBSCRIPTION;
     await harness.controller.initialize();
+    await harness.controller.startupConnectionSettled();
     // Local startup no longer waits for the best-effort remote account refresh.
     await vi.waitFor(() =>
       expect(harness.controller.getSnapshot().subscription?.hasAccess).toBe(false),
@@ -77,6 +81,7 @@ describe("connection state machine", () => {
     const session = proxySession();
     harness.api.sessions = [session];
     await harness.controller.initialize();
+    await harness.controller.startupConnectionSettled();
     await harness.controller.connect("frankfurt-01");
     expect(harness.controller.getSnapshot()).toMatchObject({
       status: "connected",
@@ -93,6 +98,7 @@ describe("connection state machine", () => {
     const harness = createHarness({ persisted: authenticatedState() });
     harness.api.sessions = [proxySession("first"), proxySession("second")];
     await harness.controller.initialize();
+    await harness.controller.startupConnectionSettled();
 
     await harness.controller.connect("frankfurt-01");
     await harness.controller.disconnect();
@@ -109,6 +115,7 @@ describe("connection state machine", () => {
     const harness = createHarness({ persisted: authenticatedState() });
     harness.api.replayProofOnce = true;
     await harness.controller.initialize();
+    await harness.controller.startupConnectionSettled();
 
     await harness.controller.connect("frankfurt-01");
 
@@ -121,6 +128,7 @@ describe("connection state machine", () => {
     const harness = createHarness({ persisted: authenticatedState() });
     harness.api.enrollError = new ApiError("device_limit", 409);
     await harness.controller.initialize();
+    await harness.controller.startupConnectionSettled();
 
     await harness.controller.connect("frankfurt-01");
 
@@ -161,6 +169,7 @@ describe("connection state machine", () => {
       ],
     };
     await harness.controller.initialize();
+    await harness.controller.startupConnectionSettled();
     await harness.controller.refreshDevices();
     expect(harness.controller.getSnapshot()).toMatchObject({
       deviceLimit: 2,
@@ -193,6 +202,7 @@ describe("connection state machine", () => {
       activeProxy: session,
     });
     await harness.controller.initialize();
+    await harness.controller.startupConnectionSettled();
     expect(harness.controller.getSnapshot()).toMatchObject({
       status: "connected",
       protected: true,
@@ -250,6 +260,7 @@ describe("connection state machine", () => {
     harness.api.createError = new NetworkError("network");
 
     await harness.controller.initialize();
+    await harness.controller.startupConnectionSettled();
 
     expect(harness.controller.getSnapshot()).toMatchObject({
       status: "blocked",
@@ -303,8 +314,10 @@ describe("connection state machine", () => {
     });
     harness.api.sessions = [replacement];
     await harness.controller.initialize();
+    await harness.controller.startupConnectionSettled();
     harness.setNow(refreshNow);
     await harness.controller.handleAlarm(ALARM_REFRESH);
+    await harness.controller.startupConnectionSettled();
     expect(harness.controller.getSnapshot().status).toBe("connected");
     expect(harness.storage.transient.proxySession?.id).toBe("new-session");
     expect(harness.api.revoked).not.toContain("old-session");
@@ -324,7 +337,9 @@ describe("connection state machine", () => {
     });
     harness.api.createError = new ApiError("rate_limited", 429);
     await harness.controller.initialize();
+    await harness.controller.startupConnectionSettled();
     await harness.controller.handleAlarm(ALARM_REFRESH);
+    await harness.controller.startupConnectionSettled();
     expect(harness.controller.getSnapshot()).toMatchObject({
       status: "refreshing",
       protected: true,
@@ -349,6 +364,7 @@ describe("connection state machine", () => {
     harness.api.ignoreCreateAbort = true;
     harness.api.sessions = [replacement];
     await harness.controller.initialize();
+    await harness.controller.startupConnectionSettled();
 
     const refresh = harness.controller.handleAlarm(ALARM_REFRESH);
     await vi.waitFor(() => expect(harness.api.proofs).toHaveLength(1));
@@ -381,6 +397,7 @@ describe("connection state machine", () => {
     });
     harness.api.sessions = [replacement];
     await harness.controller.initialize();
+    await harness.controller.startupConnectionSettled();
 
     const refresh = harness.controller.handleAlarm(ALARM_REFRESH);
     await vi.waitFor(() => expect(harness.proxy.applyCalls).toBe(1));
@@ -420,6 +437,7 @@ describe("connection state machine", () => {
     harness.api.ignoreCreateAbort = true;
     harness.api.sessions = [replacement];
     await harness.controller.initialize();
+    await harness.controller.startupConnectionSettled();
 
     const refresh = harness.controller.handleAlarm(ALARM_REFRESH);
     await vi.waitFor(() => expect(harness.api.proofs).toHaveLength(1));
@@ -452,6 +470,7 @@ describe("connection state machine", () => {
     harness.api.ignoreCreateAbort = true;
     harness.api.sessions = [staleRefresh, selectedSession];
     await harness.controller.initialize();
+    await harness.controller.startupConnectionSettled();
 
     const refresh = harness.controller.handleAlarm(ALARM_REFRESH);
     await vi.waitFor(() => expect(harness.api.proofs).toHaveLength(1));
@@ -479,6 +498,7 @@ describe("connection state machine", () => {
     });
     harness.api.createError = new NetworkError("network");
     await harness.controller.initialize();
+    await harness.controller.startupConnectionSettled();
     await harness.controller.changeLocation("frankfurt-02");
     expect(harness.controller.getSnapshot()).toMatchObject({
       status: "error",
@@ -502,6 +522,7 @@ describe("connection state machine", () => {
     });
     harness.api.sessions = [replacement];
     await harness.controller.initialize();
+    await harness.controller.startupConnectionSettled();
 
     await harness.controller.changeLocation("frankfurt-02");
 
@@ -526,6 +547,7 @@ describe("connection state machine", () => {
       activeProxy: session,
     });
     await harness.controller.initialize();
+    await harness.controller.startupConnectionSettled();
     await harness.controller.disconnect();
     expect(harness.controller.getSnapshot()).toMatchObject({
       status: "disconnected",
@@ -550,6 +572,7 @@ describe("connection state machine", () => {
       activeProxy: session,
     });
     await harness.controller.initialize();
+    await harness.controller.startupConnectionSettled();
 
     await harness.controller.logout();
 
@@ -562,6 +585,7 @@ describe("connection state machine", () => {
     const harness = createHarness({ persisted: authenticatedState() });
     harness.proxy.level = "controlled_by_other_extensions";
     await harness.controller.initialize();
+    await harness.controller.startupConnectionSettled();
     await harness.controller.connect("frankfurt-01");
     expect(harness.controller.getSnapshot()).toMatchObject({
       status: "error",
@@ -581,6 +605,7 @@ describe("connection state machine", () => {
       activeProxy: session,
     });
     await harness.controller.initialize();
+    await harness.controller.startupConnectionSettled();
 
     await harness.controller.handleProxyError("net::ERR_TUNNEL_CONNECTION_FAILED", true);
 
@@ -602,6 +627,7 @@ describe("connection state machine", () => {
       activeProxy: session,
     });
     await harness.controller.initialize();
+    await harness.controller.startupConnectionSettled();
 
     await harness.controller.handleProxyControlLost("controllable_by_this_extension");
 
@@ -622,6 +648,7 @@ describe("connection state machine", () => {
       activeProxy: session,
     });
     await harness.controller.initialize();
+    await harness.controller.startupConnectionSettled();
 
     await harness.controller.handleProxyError("net::ERR_PROXY_CONNECTION_FAILED", true);
     await harness.controller.handleProxyError("net::ERR_PROXY_CONNECTION_FAILED", true);
@@ -646,6 +673,7 @@ describe("connection state machine", () => {
       activeProxy: session,
     });
     await harness.controller.initialize();
+    await harness.controller.startupConnectionSettled();
 
     await harness.controller.handleProxyError("net::ERR_PROXY_CERTIFICATE_INVALID", true);
 
@@ -667,6 +695,7 @@ describe("connection state machine", () => {
     const session = proxySession();
     harness.api.sessions = [session];
     await harness.controller.initialize();
+    await harness.controller.startupConnectionSettled();
     await harness.controller.login("client@example.com", "account-password-must-not-persist");
     await harness.controller.connect("frankfurt-01");
     const persisted = JSON.stringify(harness.storage.persisted);

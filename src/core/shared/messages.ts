@@ -18,6 +18,7 @@ export type ExtensionRequest =
   | { type: "set_location_favorite"; locationId: string; favorite: boolean }
   | { type: "set_language_preference"; preference: LanguagePreference }
   | { type: "web_login"; disconnectFirst: boolean }
+  | { type: "cancel_web_login" }
   | { type: "select_location"; locationId: string }
   | { type: "connect"; locationId: string }
   | { type: "change_location"; locationId: string }
@@ -93,6 +94,7 @@ export function isExtensionRequest(value: unknown): value is ExtensionRequest {
   return [
     "retry_site_exclusions",
     "get_snapshot",
+    "cancel_web_login",
     "refresh_network",
     "select_automatic_location",
     "retry_connection",

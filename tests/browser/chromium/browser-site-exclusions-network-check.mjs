@@ -449,8 +449,14 @@ async function verify() {
   );
   const cdp = await context.newCDPSession(popup);
   const versions = new Map();
+  // The worker can start again a moment after it stopped: a stop is noted when the
+  // browser reports it, not read from the latest state of the worker afterwards.
+  const stopped = new Set();
   cdp.on("ServiceWorker.workerVersionUpdated", ({ versions: changed }) => {
-    for (const version of changed) versions.set(version.versionId, version);
+    for (const version of changed) {
+      versions.set(version.versionId, version);
+      if (version.runningStatus === "stopped") stopped.add(version.versionId);
+    }
   });
   await cdp.send("ServiceWorker.enable");
   async function waitUntil(condition, failure) {
@@ -470,11 +476,9 @@ async function verify() {
   const version = [...versions.values()].find(
     (value) => value.scriptURL === worker.url() && value.runningStatus === "running",
   );
+  stopped.delete(version.versionId);
   await cdp.send("ServiceWorker.stopWorker", { versionId: version.versionId });
-  await waitUntil(
-    () => versions.get(version.versionId)?.runningStatus === "stopped",
-    "Worker did not stop",
-  );
+  await waitUntil(() => stopped.has(version.versionId), "Worker did not stop");
   const restored = await message({ type: "get_snapshot" });
   assert.deepEqual(restored.siteExclusions.saved, editedBlocked.siteExclusions.saved);
   assert.deepEqual(restored.siteExclusions.applied, editedBlocked.siteExclusions.applied);
@@ -535,9 +539,10 @@ async function verify() {
     (value) => value.scriptURL === worker.url() && value.runningStatus === "running",
   );
   assert(interruptedVersion, "Running worker version unavailable for interruption");
+  stopped.delete(interruptedVersion.versionId);
   await cdp.send("ServiceWorker.stopWorker", { versionId: interruptedVersion.versionId });
   await waitUntil(
-    () => versions.get(interruptedVersion.versionId)?.runningStatus === "stopped",
+    () => stopped.has(interruptedVersion.versionId),
     "Interrupted worker did not stop",
   );
   await interruptedRequest;
@@ -608,11 +613,9 @@ async function verify() {
     (value) => value.scriptURL === worker.url() && value.runningStatus === "running",
   );
   assert(committedVersion, "Running worker version unavailable after commit");
+  stopped.delete(committedVersion.versionId);
   await cdp.send("ServiceWorker.stopWorker", { versionId: committedVersion.versionId });
-  await waitUntil(
-    () => versions.get(committedVersion.versionId)?.runningStatus === "stopped",
-    "Committed worker did not stop",
-  );
+  await waitUntil(() => stopped.has(committedVersion.versionId), "Committed worker did not stop");
   await committedRequest;
   const committedRecovery = await message({ type: "get_snapshot" });
   assert.equal(committedRecovery.siteExclusions.pending, false, JSON.stringify(committedRecovery));

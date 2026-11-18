@@ -10,6 +10,7 @@ import type {
 import { EMPTY_SNAPSHOT, type AppSnapshot } from "../../src/core/shared/state";
 import type { ProxySession } from "../../src/core/api/types";
 import type { ProxySettingsResult } from "../../src/core/background/proxy-controller";
+import { preferenceMark, preferenceOwnerDigest } from "../../src/core/background/preference-owner";
 import { proxySession } from "./helpers";
 
 const worker = vi.hoisted<{
@@ -48,7 +49,9 @@ type MessageListener = (
 const EXTENSION_ID = "fuzevpn-firefox@vpn1euro.com";
 const EXTENSION_HOST = "73d102e4-2b97-4f79-a2ca-c2449b331970";
 const LOCATION_KEY = "fuzevpnLocationPreferences";
+const OWNER_KEY = "fuzevpnPreferenceOwner";
 const LOCATION_ID = "frankfurt-01";
+const EXCLUDED = { domain: "example.com", includeSubdomains: false };
 const COMMAND_METHODS = [
   "webLogin",
   "selectLocation",
@@ -139,6 +142,10 @@ async function fixture(
   const diagnosticAlarms = new Map<string, number>();
   worker.controller = {
     initialize,
+    // Those who only read are given the same restoration.
+    ready: initialize,
+    // No restoration of this controller leaves a connection to be made.
+    startupConnectionSettled: async () => undefined,
     hasRestoredAccount: () => true,
     getSnapshot,
     getActiveSession,
@@ -166,6 +173,7 @@ async function fixture(
     ...Object.fromEntries(
       COMMAND_METHODS.map((name) => [name, (...args: unknown[]) => business(name, ...args)]),
     ),
+    updateSiteExclusions: (...args: unknown[]) => business("updateSiteExclusions", ...args),
   };
   worker.publish = undefined;
   let listener: MessageListener | undefined;
@@ -749,99 +757,88 @@ describe("worker command responses and fallback publication", () => {
       (snapshot: AppSnapshot): void => {
         snapshot.protectionRequested = true;
       },
+      { cancel: true },
     ],
     [
       "traffic guard",
       (snapshot: AppSnapshot): void => {
         snapshot.trafficBlocked = true;
       },
+      { cancel: true },
     ],
     [
       "blocking scope",
       (snapshot: AppSnapshot): void => {
         snapshot.blockingScope = "unverified";
       },
+      {},
     ],
     [
       "protected status",
       (snapshot: AppSnapshot): void => {
         snapshot.protected = true;
       },
+      {},
     ],
     [
       "kill switch",
       (snapshot: AppSnapshot): void => {
         snapshot.securityPreferences.killSwitchEnabled = false;
       },
+      {},
     ],
     [
       "WebRTC preference",
       (snapshot: AppSnapshot): void => {
         snapshot.securityPreferences.webRtcProtectionEnabled = false;
       },
+      {},
     ],
     [
       "WebRTC control",
       (snapshot: AppSnapshot): void => {
         snapshot.webRtcProtected = true;
       },
+      {},
     ],
     [
       "active location",
       (snapshot: AppSnapshot): void => {
         snapshot.activeLocationId = "replacement";
       },
+      {},
     ],
     [
       "account owner",
       (snapshot: AppSnapshot): void => {
         snapshot.profile!.userId = "replacement";
       },
+      {},
     ],
     [
       "exclusion transaction",
       (snapshot: AppSnapshot): void => {
         snapshot.siteExclusions.pending = true;
       },
+      {},
     ],
     [
       "exclusion error",
       (snapshot: AppSnapshot): void => {
         snapshot.siteExclusions.error = true;
       },
+      {},
     ],
     [
       "connection transition",
       (snapshot: AppSnapshot): void => {
         snapshot.status = "connecting";
       },
+      {},
     ],
-  ] as const)("cancels an in-flight route read after a %s change", async (_name, mutate) => {
-    const f = await fixture();
-    const reading = deferred();
-    f.getActiveSession.mockImplementationOnce(async () => {
-      await reading.promise;
-      return null;
-    });
-    const pending = f.emitEvent("webRequest.onBeforeSendHeaders", {
-      url: "https://example.com/",
-      type: "main_frame",
-    });
-    await vi.waitFor(() => expect(f.getActiveSession).toHaveBeenCalled());
-    mutate(f.snapshot);
-    worker.publish?.(f.snapshot);
-    reading.resolve();
-    await expect(pending).resolves.toEqual({ cancel: true });
-  });
-
-  it.each([
-    "proxy.settings.onChange",
-    "permissions.onRemoved",
-    "privacy.webRTCIPHandlingPolicy.onChange",
-    "privacy.networkPredictionEnabled.onChange",
-  ])(
-    "cancels a route read immediately on %s before controller recovery finishes",
-    async (event) => {
+  ] as const)(
+    "reads the route again after a %s change, and decides by what it then finds",
+    async (_name, mutate, decision) => {
       const f = await fixture();
       const reading = deferred();
       f.getActiveSession.mockImplementationOnce(async () => {
@@ -853,9 +850,44 @@ describe("worker command responses and fallback publication", () => {
         type: "main_frame",
       });
       await vi.waitFor(() => expect(f.getActiveSession).toHaveBeenCalled());
-      f.emitEvent(event, ...(event === "permissions.onRemoved" ? [{}] : []));
+      mutate(f.snapshot);
+      worker.publish?.(f.snapshot);
       reading.resolve();
-      await expect(pending).resolves.toEqual({ cancel: true });
+      // The request is neither decided by the state read before the change, nor failed
+      // for having met it: it is decided as one which arrives after the change.
+      await expect(pending).resolves.toEqual(decision);
+      expect(f.getActiveSession).toHaveBeenCalledTimes(2);
+    },
+  );
+
+  it.each([
+    "proxy.settings.onChange",
+    "permissions.onRemoved",
+    "privacy.webRTCIPHandlingPolicy.onChange",
+    "privacy.networkPredictionEnabled.onChange",
+  ])(
+    "discards a route read immediately on %s, before controller recovery finishes",
+    async (event) => {
+      for (const blockedSince of [true, false]) {
+        const f = await fixture();
+        const reading = deferred();
+        f.getActiveSession.mockImplementationOnce(async () => {
+          await reading.promise;
+          return null;
+        });
+        const pending = f.emitEvent("webRequest.onBeforeSendHeaders", {
+          url: "https://example.com/",
+          type: "main_frame",
+        });
+        await vi.waitFor(() => expect(f.getActiveSession).toHaveBeenCalled());
+        f.emitEvent(event, ...(event === "permissions.onRemoved" ? [{}] : []));
+        // What the controller holds once the event has reached it, not yet published.
+        f.snapshot.trafficBlocked = blockedSince;
+        reading.resolve();
+        // The route is read again at once: the request follows what is found then.
+        await expect(pending).resolves.toEqual(blockedSince ? { cancel: true } : {});
+        expect(f.getActiveSession).toHaveBeenCalledTimes(2);
+      }
     },
   );
 
@@ -885,6 +917,10 @@ describe("worker command responses and fallback publication", () => {
     expect(f.lifecycle).not.toHaveBeenCalled();
     f.emitEvent("permissions.onAdded", { permissions: ["proxy"] });
     expect(f.diagnosticPermissionsChanged).toHaveBeenCalledTimes(1);
+    // A permission of the connection which is granted back is verified again.
+    await vi.waitFor(() =>
+      expect(f.lifecycle).toHaveBeenCalledWith("handleProxyPermissionsChanged"),
+    );
   });
 
   it("still repairs VPN permissions when the same event also removes Mozilla diagnostic consent", async () => {
@@ -916,23 +952,34 @@ describe("worker command responses and fallback publication", () => {
         proxyInfo: { type: "https", host: session.host, port: session.port },
       }),
     ).resolves.toEqual({ cancel: true });
-    expect(f.isSessionCurrentForProxyAuth).toHaveBeenCalledTimes(2);
+    // Asked when the route is read, then when that read is about to be used: refused
+    // there, the kept read is asked once more and the route is read again, where the
+    // session is refused too. Nothing is routed to it.
+    expect(f.isSessionCurrentForProxyAuth).toHaveBeenCalledTimes(4);
   });
 
-  it("still rejects a changed exclusion policy before it is published", async () => {
-    const f = await fixture();
-    const { PlatformNetworkSafetyService } =
-      await import("../../src/core/background/network-safety");
-    vi.spyOn(PlatformNetworkSafetyService.prototype, "getRouteExclusions")
-      .mockReturnValueOnce([])
-      .mockReturnValue([{ domain: "example.com", includeSubdomains: false }]);
-    await expect(
-      f.emitEvent("webRequest.onBeforeSendHeaders", {
-        url: "https://example.com/",
-        type: "main_frame",
-      }),
-    ).resolves.toEqual({ cancel: true });
-  });
+  it.each([
+    ["no longer excludes its destination", [EXCLUDED], [], { cancel: true }],
+    ["now excludes its destination", [], [EXCLUDED], {}],
+  ] as const)(
+    "decides a request by an exclusion policy which %s, before it is published",
+    async (_name, read, since, decision) => {
+      const f = await fixture();
+      // Everything is blocked but the excluded destinations.
+      f.snapshot.trafficBlocked = true;
+      const { PlatformNetworkSafetyService } =
+        await import("../../src/core/background/network-safety");
+      vi.spyOn(PlatformNetworkSafetyService.prototype, "getRouteExclusions")
+        .mockReturnValueOnce([...read])
+        .mockReturnValue([...since]);
+      await expect(
+        f.emitEvent("webRequest.onBeforeSendHeaders", {
+          url: "https://example.com/",
+          type: "main_frame",
+        }),
+      ).resolves.toEqual(decision);
+    },
+  );
 
   it("coalesces a synchronous burst into one publication of the latest snapshot", async () => {
     const f = await fixture();
@@ -952,6 +999,48 @@ describe("worker command responses and fallback publication", () => {
       error: "network_error",
       trafficBlocked: true,
     });
+  });
+
+  it("gives the toolbar button its title when it changes, not at each publication", async () => {
+    const f = await fixture();
+    await f.send({ type: "get_snapshot" });
+    const published = async (patch: Partial<AppSnapshot>, count: number) => {
+      Object.assign(f.snapshot, patch);
+      worker.publish?.(f.snapshot);
+      await vi.waitFor(() => expect(f.sendMessage).toHaveBeenCalledTimes(count));
+    };
+
+    await published({ status: "blocked", trafficBlocked: true, error: "proxy_unavailable" }, 1);
+    // The same status, for other reasons: the pages are told, the button is not touched.
+    await published({ error: "network_error" }, 2);
+    await published({ error: "request_timeout" }, 3);
+    expect(f.setTitle.mock.calls).toEqual([[{ title: "actionBlocked" }]]);
+
+    await published({ status: "connected", trafficBlocked: false, error: null }, 4);
+    await published({ status: "blocked", trafficBlocked: true, error: "network_error" }, 5);
+    expect(f.setTitle.mock.calls.map(([details]) => details.title)).toEqual([
+      "actionBlocked",
+      "actionConnected",
+      "actionBlocked",
+    ]);
+  });
+
+  it("gives the toolbar button again a title which the browser refused", async () => {
+    const f = await fixture();
+    await f.send({ type: "get_snapshot" });
+    f.setTitle.mockRejectedValueOnce(new Error("action_unavailable"));
+    f.snapshot.status = "blocked";
+    worker.publish?.(f.snapshot);
+    await vi.waitFor(() => expect(f.sendMessage).toHaveBeenCalledTimes(1));
+
+    f.snapshot.error = "network_error";
+    worker.publish?.(f.snapshot);
+    await vi.waitFor(() => expect(f.sendMessage).toHaveBeenCalledTimes(2));
+    // Nothing says that the button shows this status: it is given again.
+    expect(f.setTitle.mock.calls).toEqual([
+      [{ title: "actionBlocked" }],
+      [{ title: "actionBlocked" }],
+    ]);
   });
 
   it("coalesces changes during an action update into one subsequent publication with ordered versions", async () => {
@@ -1175,5 +1264,242 @@ describe("worker command responses and fallback publication", () => {
     await vi.waitFor(() => expect(f.initialize).toHaveBeenCalledTimes(2));
     await expect(f.send({ type: "get_snapshot" })).resolves.toMatchObject({ ok: true });
     expect(console.warn).toHaveBeenCalledOnce();
+  });
+});
+
+describe("preferences kept in the profile when the signed-in account changes", () => {
+  beforeEach(() => vi.spyOn(console, "warn").mockImplementation(() => undefined));
+  afterEach(async () => {
+    await new Promise<void>((resolve) => setImmediate(resolve));
+    vi.restoreAllMocks();
+    vi.unstubAllGlobals();
+  });
+
+  const EXCLUSIONS = {
+    saved: {
+      revision: 3,
+      enabled: true,
+      entries: [{ domain: "example.com", includeSubdomains: true }],
+    },
+    applied: {
+      revision: 3,
+      enabled: true,
+      entries: [{ domain: "example.com", includeSubdomains: true }],
+    },
+    pending: false,
+    error: false,
+  };
+
+  const RESET = "00000000-0000-4000-8000-000000000001";
+  /** The mark which the worker gives to the exclusions above, whatever their revision. */
+  const leftByPrevious = () => preferenceMark(JSON.stringify([true, [["example.com", true]]]));
+
+  async function signedIn(recordedOwner?: { owner: string; pending?: object }) {
+    const f = await fixture({ favorites: [LOCATION_ID] });
+    f.stored[LOCATION_KEY] = {
+      favoriteIds: [LOCATION_ID],
+      recentIds: [LOCATION_ID],
+      automatic: true,
+    };
+    if (recordedOwner !== undefined) f.stored[OWNER_KEY] = recordedOwner;
+    f.snapshot.siteExclusions = structuredClone(EXCLUSIONS);
+    return f;
+  }
+
+  it("resets favourites, recent locations and site exclusions for another account", async () => {
+    const f = await signedIn({ owner: await preferenceOwnerDigest("previous-account") });
+    worker.publish?.(structuredClone(f.snapshot));
+
+    await vi.waitFor(async () =>
+      expect(f.stored[OWNER_KEY]).toEqual({ owner: await preferenceOwnerDigest("test-account") }),
+    );
+    const reset = (f.stored[LOCATION_KEY] as { reset?: string }).reset;
+    expect(reset).toMatch(/^[0-9a-f-]{36}$/);
+    expect(f.stored[LOCATION_KEY]).toEqual({
+      favoriteIds: [],
+      recentIds: [],
+      automatic: false,
+      reset,
+    });
+    expect(f.business).toHaveBeenCalledWith("updateSiteExclusions", 3, false, []);
+    expect(JSON.stringify(f.stored[OWNER_KEY])).not.toContain("test-account");
+    expect(JSON.stringify(f.stored[OWNER_KEY])).not.toContain("example.com");
+  });
+
+  it("keeps them for the account which set them", async () => {
+    const f = await signedIn({ owner: await preferenceOwnerDigest("test-account") });
+    worker.publish?.(structuredClone(f.snapshot));
+    await new Promise<void>((resolve) => setImmediate(resolve));
+
+    expect(f.stored[LOCATION_KEY]).toEqual({
+      favoriteIds: [LOCATION_ID],
+      recentIds: [LOCATION_ID],
+      automatic: true,
+    });
+    expect(f.business).not.toHaveBeenCalledWith(
+      "updateSiteExclusions",
+      expect.anything(),
+      expect.anything(),
+      expect.anything(),
+    );
+  });
+
+  it("keeps them and records the account when no owner was recorded yet", async () => {
+    const f = await signedIn();
+    worker.publish?.(structuredClone(f.snapshot));
+
+    await vi.waitFor(async () =>
+      expect(f.stored[OWNER_KEY]).toEqual({ owner: await preferenceOwnerDigest("test-account") }),
+    );
+    expect(f.stored[LOCATION_KEY]).toMatchObject({ favoriteIds: [LOCATION_ID] });
+    expect(f.business).not.toHaveBeenCalledWith(
+      "updateSiteExclusions",
+      expect.anything(),
+      expect.anything(),
+      expect.anything(),
+    );
+  });
+
+  it("changes nothing while no account is signed in", async () => {
+    const previous = await preferenceOwnerDigest("previous-account");
+    const f = await signedIn({ owner: previous });
+    worker.publish?.({ ...structuredClone(f.snapshot), profile: null });
+    await new Promise<void>((resolve) => setImmediate(resolve));
+
+    expect(f.stored[OWNER_KEY]).toEqual({ owner: previous });
+    expect(f.stored[LOCATION_KEY]).toMatchObject({ favoriteIds: [LOCATION_ID] });
+  });
+
+  it("keeps what remains to reset when the exclusions cannot be reset, and does not loop", async () => {
+    const f = await signedIn({ owner: await preferenceOwnerDigest("previous-account") });
+    f.business.mockImplementation(async (name) => {
+      if (name === "updateSiteExclusions") throw new Error("site_exclusion_revision_conflict");
+      return { ok: true };
+    });
+    worker.publish?.(structuredClone(f.snapshot));
+    await vi.waitFor(() =>
+      expect(f.business).toHaveBeenCalledWith("updateSiteExclusions", 3, false, []),
+    );
+    await new Promise<void>((resolve) => setImmediate(resolve));
+
+    // The locations are reset once; only the exclusions remain for a later attempt.
+    expect(f.stored[OWNER_KEY]).toEqual({
+      owner: await preferenceOwnerDigest("test-account"),
+      pending: { exclusions: await leftByPrevious() },
+    });
+    expect(f.stored[LOCATION_KEY]).toMatchObject({ favoriteIds: [], recentIds: [] });
+    worker.publish?.(structuredClone(f.snapshot));
+    await new Promise<void>((resolve) => setImmediate(resolve));
+    expect(f.business.mock.calls.filter(([name]) => name === "updateSiteExclusions")).toHaveLength(
+      1,
+    );
+  });
+
+  it("resumes a reset left by an earlier worker without resetting the locations again", async () => {
+    const f = await signedIn({
+      owner: await preferenceOwnerDigest("test-account"),
+      pending: { exclusions: await leftByPrevious() },
+    });
+    worker.publish?.(structuredClone(f.snapshot));
+
+    await vi.waitFor(async () =>
+      expect(f.stored[OWNER_KEY]).toEqual({ owner: await preferenceOwnerDigest("test-account") }),
+    );
+    expect(f.business).toHaveBeenCalledWith("updateSiteExclusions", 3, false, []);
+    // Favourites which the account has chosen since are its own.
+    expect(f.stored[LOCATION_KEY]).toMatchObject({ favoriteIds: [LOCATION_ID] });
+  });
+
+  it("resets exclusions which a cancelled attempt restored under a later revision", async () => {
+    const f = await signedIn({
+      owner: await preferenceOwnerDigest("test-account"),
+      pending: { exclusions: await leftByPrevious() },
+    });
+    // The first attempt was staged as revision 4, failed, and a disconnection cancelled
+    // it: the previous account's entries are back, under the revision of the attempt.
+    f.snapshot.siteExclusions.saved.revision = 4;
+    f.snapshot.siteExclusions.applied.revision = 4;
+    worker.publish?.(structuredClone(f.snapshot));
+
+    await vi.waitFor(async () =>
+      expect(f.stored[OWNER_KEY]).toEqual({ owner: await preferenceOwnerDigest("test-account") }),
+    );
+    expect(f.business).toHaveBeenCalledWith("updateSiteExclusions", 4, false, []);
+  });
+
+  it("neither resets nor forgets exclusions whose change is not settled", async () => {
+    const f = await signedIn({
+      owner: await preferenceOwnerDigest("test-account"),
+      pending: { exclusions: await leftByPrevious() },
+    });
+    // The attempt is staged and not applied: the saved list is empty, for now.
+    f.snapshot.siteExclusions.saved = { revision: 4, enabled: false, entries: [] };
+    f.snapshot.siteExclusions.pending = true;
+    worker.publish?.(structuredClone(f.snapshot));
+    await new Promise<void>((resolve) => setImmediate(resolve));
+    await new Promise<void>((resolve) => setImmediate(resolve));
+
+    expect(f.stored[OWNER_KEY]).toEqual({
+      owner: await preferenceOwnerDigest("test-account"),
+      pending: { exclusions: await leftByPrevious() },
+    });
+    expect(f.business).not.toHaveBeenCalledWith(
+      "updateSiteExclusions",
+      expect.anything(),
+      expect.anything(),
+      expect.anything(),
+    );
+  });
+
+  it("does not change the owner while the exclusions are not settled", async () => {
+    const previous = await preferenceOwnerDigest("previous-account");
+    const f = await signedIn({ owner: previous });
+    f.snapshot.siteExclusions.pending = true;
+    worker.publish?.(structuredClone(f.snapshot));
+    await new Promise<void>((resolve) => setImmediate(resolve));
+    await new Promise<void>((resolve) => setImmediate(resolve));
+
+    expect(f.stored[OWNER_KEY]).toEqual({ owner: previous });
+    expect(f.stored[LOCATION_KEY]).toMatchObject({ favoriteIds: [LOCATION_ID] });
+  });
+
+  it("leaves exclusions which the new account has saved since", async () => {
+    const f = await signedIn({
+      owner: await preferenceOwnerDigest("test-account"),
+      pending: {
+        exclusions: await preferenceMark(JSON.stringify([true, [["other.example", true]]])),
+      },
+    });
+    worker.publish?.(structuredClone(f.snapshot));
+
+    await vi.waitFor(async () =>
+      expect(f.stored[OWNER_KEY]).toEqual({ owner: await preferenceOwnerDigest("test-account") }),
+    );
+    expect(f.business).not.toHaveBeenCalledWith(
+      "updateSiteExclusions",
+      expect.anything(),
+      expect.anything(),
+      expect.anything(),
+    );
+  });
+
+  it("does not reset twice locations whose reset could not be struck off", async () => {
+    const f = await signedIn({
+      owner: await preferenceOwnerDigest("test-account"),
+      pending: { locations: RESET },
+    });
+    // The reset was done by an earlier worker, and the account chose a favourite since.
+    f.stored[LOCATION_KEY] = {
+      favoriteIds: [LOCATION_ID],
+      recentIds: [],
+      automatic: false,
+      reset: RESET,
+    };
+    worker.publish?.(structuredClone(f.snapshot));
+
+    await vi.waitFor(async () =>
+      expect(f.stored[OWNER_KEY]).toEqual({ owner: await preferenceOwnerDigest("test-account") }),
+    );
+    expect(f.stored[LOCATION_KEY]).toMatchObject({ favoriteIds: [LOCATION_ID], reset: RESET });
   });
 });

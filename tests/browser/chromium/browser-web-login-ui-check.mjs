@@ -107,6 +107,71 @@ const signedOut = {
   webRtcProtected: false,
   nextRetryAt: null,
 };
+const homeLocation = {
+  id: "us-phl-01",
+  displayName: "Philadelphia 01",
+  city: "Philadelphia",
+  countryCode: "US",
+  supportedProtocols: ["browser_proxy"],
+};
+const homeDisconnected = {
+  status: "disconnected",
+  profile: {
+    userId: "synthetic-home",
+    email: "home@example.invalid",
+    firstName: "Home",
+    lastName: "Synthetic",
+    countryCode: "FR",
+  },
+  subscription: {
+    status: "active",
+    hasAccess: true,
+    offerId: "home",
+    startedAt: null,
+    expiresAt: "2027-09-25T00:00:00Z",
+    renewsAutomatically: false,
+  },
+  locations: [homeLocation],
+  deviceLimit: 5,
+  selectedLocationId: homeLocation.id,
+  activeLocationId: null,
+  activeLocation: null,
+  protected: false,
+  protectionRequested: false,
+  trafficBlocked: false,
+  webRtcProtected: false,
+  locationPreferences: {
+    favoriteIds: [],
+    recentIds: [],
+    automatic: false,
+    recommendedLocationId: homeLocation.id,
+  },
+  network: {
+    status: "ready",
+    mode: "direct",
+    ip: "198.51.100.136",
+    checkedAt: Date.now(),
+    latencyMs: 40,
+    locationId: null,
+  },
+};
+const homeConnected = {
+  ...homeDisconnected,
+  status: "connected",
+  activeLocationId: homeLocation.id,
+  activeLocation: homeLocation,
+  protected: true,
+  protectionRequested: true,
+  webRtcProtected: true,
+  network: {
+    status: "ready",
+    mode: "vpn",
+    ip: "203.0.113.7",
+    checkedAt: Date.now(),
+    latencyMs: 30,
+    locationId: homeLocation.id,
+  },
+};
 const errors = [
   "web_login_cancelled",
   "web_login_timeout",
@@ -237,7 +302,10 @@ try {
   for (const language of SUPPORTED_LANGUAGES) {
     let { page, catalog } = await open(language);
     assert.equal(await page.locator("#loginView").isVisible(), true);
-    assert.equal(await page.locator("#loginForm button").count(), 1);
+    // The action which gives a pending sign-in up exists, and shows only while one is pending.
+    assert.equal(await page.locator("#loginForm button").count(), 2);
+    assert.equal(await page.locator("#loginForm button:visible").count(), 1);
+    assert.equal(await page.locator("#webLoginCancelButton").isVisible(), false);
     assert.equal(
       await page.locator("input[type=password], input[type=email], #email, #password").count(),
       0,
@@ -274,7 +342,15 @@ try {
 
     ({ page, catalog } = await open(language, { webLoginPending: true, status: "connecting" }));
     assert.equal(await page.locator("#loginButton").isDisabled(), true);
-    assert.equal(await page.locator("#loginForm").getAttribute("aria-busy"), "true");
+    assert.equal(await page.locator("#loginButton").getAttribute("aria-busy"), "true");
+    // The button which gives the sign-in up is offered while it is pending: nothing
+    // around it is marked busy, which would hide it from some screen readers.
+    assert.equal(
+      await page
+        .locator("#webLoginCancelButton")
+        .evaluate((cancel) => cancel.closest('[aria-busy="true"]') === null),
+      true,
+    );
     assert.equal(
       await page.locator("#webLoginButtonLabel").textContent(),
       catalog.webSignInPending.message,
@@ -284,8 +360,42 @@ try {
       catalog.webSignInStatus.message,
     );
     assert.equal(await page.locator("#webLoginStatus").isVisible(), true);
-    await capture(page, language, "pending", { text: designText, inView: ["#loginButton"] });
-    check(`Restored sign-in pending state is visible in ${language}`);
+    assert.equal(await page.locator("#webLoginCancelButton").isVisible(), true);
+    assert.equal(await page.locator("#webLoginCancelButton").isDisabled(), false);
+    assert.equal(
+      await page.locator("#webLoginCancelButton").textContent(),
+      catalog.cancelAction.message,
+    );
+    await capture(page, language, "pending", {
+      text: [...designText, "#webLoginCancelButton"],
+      controls: ["#webLoginCancelButton"],
+      inView: ["#loginButton", "#webLoginCancelButton"],
+    });
+    const cancellations = () =>
+      page.evaluate(
+        () =>
+          window.fixture.requests.filter((request) => request.type === "cancel_web_login").length,
+      );
+    // The pending view, with its extra action, still fits the popup without scrolling.
+    await page
+      .waitForFunction(() => document.documentElement.scrollHeight <= innerHeight, null, {
+        timeout: 5_000,
+      })
+      .catch(() => undefined);
+    const pendingPage = await page.evaluate(() => ({
+      viewport: innerHeight,
+      page: document.documentElement.scrollHeight,
+      level: Number(document.querySelector(".shell").dataset.fit ?? 0),
+    }));
+    assert.equal(
+      pendingPage.page <= pendingPage.viewport,
+      true,
+      `Pending sign-in scrolls in ${language}: ${JSON.stringify(pendingPage)}`,
+    );
+    assert.equal(await cancellations(), 0);
+    await page.locator("#webLoginCancelButton").click();
+    assert.equal(await cancellations(), 1);
+    check(`Restored sign-in pending state is visible and can be given up in ${language}`);
     for (const error of errors) {
       await page.evaluate(
         (error) => window.fixture.publish({ webLoginPending: false, error }),
@@ -298,6 +408,7 @@ try {
       assert.equal(await page.locator("#loginErrorBanner").isVisible(), true);
       assert.equal(await page.locator("#loginButton").isDisabled(), false);
       assert.equal(await page.locator("#webLoginStatus").isVisible(), false);
+      assert.equal(await page.locator("#webLoginCancelButton").isVisible(), false);
     }
     check(
       `Cancellation, timeout, unavailable, invalid, denied and busy errors are localized in ${language}`,
@@ -330,6 +441,100 @@ try {
     });
     check(`Recovery requires explicit consent and does not disconnect on focus in ${language}`);
     await page.close();
+
+    // A browser popup is at most 600px tall: signed in, the home view fits it in every
+    // language, disconnected and connected, so that nothing scrolls by a few pixels.
+    ({ page, catalog } = await open(language, homeDisconnected));
+    await page.locator("#mainView").waitFor({ state: "visible" });
+    const home = [];
+    for (const [state, patch, action] of [
+      ["disconnected", homeDisconnected, catalog.protectBrowser.message],
+      ["connected", homeConnected, catalog.disconnect.message],
+    ]) {
+      await page.evaluate((next) => window.fixture.publish(next), patch);
+      await page.waitForFunction(
+        (label) => document.getElementById("protectButton").textContent === label,
+        action,
+      );
+      await page
+        .waitForFunction(() => document.documentElement.scrollHeight <= innerHeight, null, {
+          timeout: 5_000,
+        })
+        .catch(() => undefined);
+      const fitted = await page.evaluate(() => {
+        const note = document.querySelector(".privacy-note").getBoundingClientRect();
+        return {
+          viewport: innerHeight,
+          page: document.documentElement.scrollHeight,
+          noteBottom: Math.round(note.bottom),
+          level: Number(document.querySelector(".shell").dataset.fit ?? 0),
+        };
+      });
+      assert.equal(
+        fitted.page <= fitted.viewport,
+        true,
+        `Home view scrolls in ${language} (${state}): ${JSON.stringify(fitted)}`,
+      );
+      assert.equal(
+        fitted.noteBottom <= fitted.viewport,
+        true,
+        `Home view is cut in ${language} (${state}): ${JSON.stringify(fitted)}`,
+      );
+      home.push({ state, ...fitted });
+    }
+    check(`Signed-in home fits the popup without scrolling in ${language}`, { home });
+    await page.close();
+  }
+
+  // Zoomed, or on a small screen, a popup is given less than 600px. Nothing tells the
+  // page how much: it sees its window stop growing below it, and fits that height.
+  {
+    const { page } = await open("fr", homeDisconnected);
+    await page.locator("#mainView").waitFor({ state: "visible" });
+    const measure = () =>
+      page.evaluate(() => ({
+        window: innerHeight,
+        content: document.querySelector(".shell").offsetHeight,
+        level: Number(document.querySelector(".shell").dataset.fit ?? 0),
+      }));
+    const settled = (level) =>
+      page.waitForFunction(
+        (level) =>
+          level === null
+            ? Number(document.querySelector(".shell").dataset.fit ?? 0) > 0
+            : Number(document.querySelector(".shell").dataset.fit ?? 0) === level,
+        level,
+        { timeout: 5_000 },
+      );
+    await page.waitForTimeout(400);
+    const usual = await measure();
+    assert.equal(usual.content <= usual.window, true, JSON.stringify(usual));
+
+    // The same page in a window eight pixels shorter than it needs.
+    await page.setViewportSize({ width: 360, height: usual.content - 8 });
+    await page.reload();
+    await page.locator("#mainView").waitFor({ state: "visible" });
+    await settled(null);
+    await page.waitForTimeout(400);
+    const shorter = await measure();
+    assert.equal(shorter.level > usual.level, true, JSON.stringify({ usual, shorter }));
+    assert.equal(
+      shorter.content <= shorter.window || shorter.level === 3,
+      true,
+      `The page scrolls in a shorter window: ${JSON.stringify({ usual, shorter })}`,
+    );
+
+    // The window is given its usual height again: the full layout comes back.
+    await page.setViewportSize({ width: 360, height: 600 });
+    await settled(usual.level);
+    const restored = await measure();
+    assert.equal(restored.content <= restored.window, true, JSON.stringify(restored));
+    check("The home view fits a window shorter than the usual popup, and its full layout returns", {
+      usual,
+      shorter,
+      restored,
+    });
+    await page.close();
   }
 
   let { page } = await open("fr");
@@ -355,7 +560,7 @@ try {
     window.fixture.publish({ webLoginPending: false, error: "web_login_cancelled" }),
   );
   await page.waitForFunction(() => !document.getElementById("loginButton").disabled);
-  assert.equal(await page.locator("#loginForm").getAttribute("aria-busy"), "false");
+  assert.equal(await page.locator("#loginButton").getAttribute("aria-busy"), "false");
   check(
     "Double submission starts one flow; reopening restores pending state; cancellation re-enables sign-in; reduced motion is respected",
   );
@@ -457,7 +662,7 @@ try {
   await page.waitForFunction(() => window.fixture.held !== null);
   await page.evaluate(() => window.fixture.finish("web_login_timeout"));
   await page.waitForFunction(() => !document.getElementById("loginButton").disabled);
-  assert.equal(await page.locator("#loginForm").getAttribute("aria-busy"), "false");
+  assert.equal(await page.locator("#loginButton").getAttribute("aria-busy"), "false");
   assert.equal(await page.locator("#loginErrorBanner").isVisible(), true);
   await page.locator("#loginButton").click();
   await page.waitForFunction(() => window.fixture.held !== null);

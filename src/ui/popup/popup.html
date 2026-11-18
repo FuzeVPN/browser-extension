@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="./popup.css" />
   </head>
   <body>
-    <main class="shell">
+    <main class="shell" data-boot aria-busy="true">
       <header class="topbar">
         <div class="brand-lockup">
           <img class="logo" src="/brand/fuzevpn-logo.svg" alt="FuzeVPN" />
@@ -99,6 +99,8 @@
         </div>
       </section>
 
+      <div class="boot-wait" aria-hidden="true"></div>
+
       <section id="loginView" class="view">
         <div class="intro login-hero">
           <div class="login-visual" aria-hidden="true">
@@ -156,6 +158,12 @@
             </svg>
             <span class="web-login-spinner" aria-hidden="true"></span>
           </button>
+          <button
+            id="webLoginCancelButton"
+            class="secondary web-login-cancel hidden"
+            type="button"
+            data-i18n="cancelAction"
+          ></button>
           <p
             id="webLoginStatus"
             class="web-login-status hidden"

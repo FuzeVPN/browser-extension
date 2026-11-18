@@ -25,6 +25,7 @@ function fixture() {
     })),
     onChange: event<unknown>(),
   };
+  const permissions = { onRemoved: event<unknown>(), onAdded: event<unknown>() };
   const handlers: PlatformEventHandlers = {
     proxyChanged: vi.fn(),
     proxyError: vi.fn(),
@@ -36,7 +37,7 @@ function fixture() {
   vi.stubGlobal("browser", {
     proxy: { onError, settings: { onChange: event<unknown>() } },
     webRequest: { onErrorOccurred },
-    permissions: { onRemoved: event<unknown>(), onAdded: event<unknown>() },
+    permissions,
     privacy: { network: { webRTCIPHandlingPolicy: privacy, networkPredictionEnabled: privacy } },
   });
   registerPlatformEvents(handlers);
@@ -47,8 +48,45 @@ function fixture() {
       proxyInfo: { type: "https", ...endpoint },
       ...change,
     });
-  return { handlers, fail, onError, privacy };
+  return { handlers, fail, onError, privacy, permissions };
 }
+
+describe("Firefox permission changes", () => {
+  afterEach(() => vi.unstubAllGlobals());
+
+  it.each([
+    ["a host permission", { origins: ["<all_urls>"] }],
+    ["an API permission", { permissions: ["proxy"] }],
+  ])("report %s which is granted, as one which is withdrawn", (_name, change) => {
+    const f = fixture();
+    f.permissions.onAdded.emit(change);
+    expect(f.handlers.permissionsChanged).toHaveBeenCalledOnce();
+    f.permissions.onRemoved.emit(change);
+    expect(f.handlers.permissionsChanged).toHaveBeenCalledTimes(2);
+  });
+
+  it("report a diagnostics consent alone to the diagnostics only", () => {
+    const f = fixture();
+    f.permissions.onAdded.emit({ data_collection: ["technicalAndInteraction"] });
+    f.permissions.onRemoved.emit({ data_collection: ["technicalAndInteraction"] });
+
+    expect(f.handlers.diagnosticsConsentAdded).toHaveBeenCalledOnce();
+    expect(f.handlers.diagnosticsConsentRemoved).toHaveBeenCalledOnce();
+    // The connection has nothing to verify again: its permissions are what they were.
+    expect(f.handlers.permissionsChanged).not.toHaveBeenCalled();
+  });
+
+  it("report a consent granted together with a host permission to both", () => {
+    const f = fixture();
+    f.permissions.onAdded.emit({
+      data_collection: ["technicalAndInteraction"],
+      origins: ["<all_urls>"],
+    });
+
+    expect(f.handlers.diagnosticsConsentAdded).toHaveBeenCalledOnce();
+    expect(f.handlers.permissionsChanged).toHaveBeenCalledOnce();
+  });
+});
 
 describe("Firefox native proxy error bridge", () => {
   afterEach(() => vi.unstubAllGlobals());

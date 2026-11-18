@@ -148,6 +148,7 @@ let vpnTunnelReadyDelayMs = 0;
 let vpnTunnelReadyAt = 0;
 let sessions = 0;
 let pendingChallenge;
+const staleChallenges = new Set();
 let proxyPort;
 const webAuthFixture = firefoxWebAuthFixture();
 const designReview = firefoxDesignReview({
@@ -392,11 +393,106 @@ async function snapshot() {
 }
 async function terminateBackground() {
   await driver.get("about:blank");
+  await stopBackground();
+}
+/** Stops the event page as the browser does when it is idle; no extension page may be open. */
+async function stopBackground() {
   const result = await privileged(
     `const done=arguments[arguments.length-1]; (async()=>{const {ExtensionParent}=ChromeUtils.importESModule("resource://gre/modules/ExtensionParent.sys.mjs"); const e=ExtensionParent.GlobalManager.getExtension(arguments[0]); await e.terminateBackground({disableResetIdleForTest:true}); done(true);})().catch(e=>done({error:String(e)}));`,
     extensionId,
   );
   assert.equal(result, true);
+}
+/**
+ * A page which is open keeps sending requests while the browser stops the event page
+ * and starts it again for the first of them. The connection is found exactly in place:
+ * none of these requests may fail, and none may leave by another route.
+ */
+async function verifyRequestsDuringRestoration(protectedUrl) {
+  const popupHandle = await driver.getWindowHandle();
+  const previous = await snapshot();
+  assert.equal(previous.status, "connected");
+  assert.equal(previous.protected, true);
+  // No extension page stays open, and the page stays in front: Firefox slows the
+  // timers of a tab in the background.
+  await driver.get("about:blank");
+  await driver.switchTo().newWindow("tab");
+  await driver.get(`${protectedUrl}/restoration-page`);
+  assert.equal(await driver.getTitle(), "Proxied fixture");
+  const pageHandle = await driver.getWindowHandle();
+  const read = () =>
+    driver.executeScript(
+      "return {sent:window.ticks.sent,passed:window.ticks.passed,failed:window.ticks.failed.slice()}",
+    );
+  await driver.executeScript(`window.ticks={sent:0,passed:0,failed:[]};
+    window.ticking=setInterval(()=>{const tick=window.ticks.sent++;
+      fetch('/restoration-tick-'+tick,{cache:'no-store'}).then(
+        reply=>{if(reply.ok)window.ticks.passed++;else window.ticks.failed.push(tick)},
+        ()=>window.ticks.failed.push(tick))},10);`);
+  await waitFor(read, (ticks) => ticks.passed >= 20, "Page requests pass before the restart");
+  const before = await read();
+  assert.deepEqual(before.failed, [], "Requests must pass while the event page runs");
+  await stopBackground();
+  // The requests of the page start the event page again; nothing else does.
+  await new Promise((done) => setTimeout(done, 2500));
+  await driver.switchTo().window(pageHandle);
+  await driver.executeScript("clearInterval(window.ticking)");
+  await waitFor(
+    read,
+    (ticks) => ticks.passed + ticks.failed.length === ticks.sent,
+    "Page requests settled",
+  );
+  const after = await read();
+  await driver.close();
+  await driver.switchTo().window(popupHandle);
+  await openPopup();
+  const restored = await snapshot();
+  assert.notEqual(restored.snapshotVersion.workerId, previous.snapshotVersion.workerId);
+  assert.equal(restored.status, "connected");
+  assert.equal(restored.protected, true);
+  const details = {
+    sentDuringRestart: after.sent - before.sent,
+    failed: after.failed,
+    firstFailedAfterMs: after.failed.length ? (after.failed[0] - before.sent) * 10 : null,
+  };
+  assert(details.sentDuringRestart > 100, "The page must have kept sending requests");
+  assert(
+    !received.direct.some((entry) => entry.startsWith("/restoration-tick-")),
+    "A request of the page must never leave by a direct route",
+  );
+  assert.deepEqual(after.failed, [], "Requests of an open page failed during the restoration");
+  record("Requests of an open page all pass while the event page is restored", details);
+}
+/**
+ * After a renewal the proxy refuses the credentials which the browser remembers, and
+ * asks again. The request which meets that challenge may be the one which starts the
+ * event page: its page must load all the same.
+ */
+async function verifyChallengeOfWakingRequest(protectedUrl) {
+  const previous = await snapshot();
+  assert.equal(previous.protected, true);
+  // With the event page running, the challenge is answered.
+  assert.equal((await navigate(`${protectedUrl}/stale-auth-running`)).title, "Proxied fixture");
+  await driver.get("about:blank");
+  await stopBackground();
+  const waking = await navigate(`${protectedUrl}/stale-auth-waking`);
+  await openPopup();
+  const restored = await snapshot();
+  const details = {
+    waking,
+    requests: received.proxy.filter((entry) => entry.path === "/stale-auth-waking"),
+    protected: restored.protected,
+    error: restored.error,
+  };
+  assert.notEqual(restored.snapshotVersion.workerId, previous.snapshotVersion.workerId);
+  assert.equal(waking.title, "Proxied fixture", JSON.stringify(details));
+  assert(!received.direct.includes("/stale-auth-waking"));
+  assert.equal(restored.protected, true, JSON.stringify(details));
+  assert.equal(restored.error, null);
+  record(
+    "A request which starts the event page again answers the proxy challenge it meets",
+    details,
+  );
 }
 async function verifyDelayedAccountRestoration(protectedUrl) {
   await openPopup();
@@ -440,8 +536,13 @@ async function verifyDelayedAccountRestoration(protectedUrl) {
     const samples = [];
     let finalSnapshot;
     while (Date.now() - started < 9000) {
+      // The list is built when its dialog opens: it is opened as a user would, by its
+      // button, as soon as the restored popup makes that button usable.
       const ui =
-        await driver.executeScript(`const visible=id=>{const e=document.getElementById(id);return Boolean(e && e.getClientRects().length && getComputedStyle(e).visibility!=='hidden')};return {
+        await driver.executeScript(`const visible=id=>{const e=document.getElementById(id);return Boolean(e && e.getClientRects().length && getComputedStyle(e).visibility!=='hidden')};
+        const change=document.querySelector('#changeLocationButton');
+        if(change && !change.disabled && visible('mainView') && !document.querySelector('#locationDialog').open) change.click();
+        return {
         location:document.querySelector('#locationName')?.textContent,
         locationVisible:visible('locationCard'),mainVisible:visible('mainView'),
         status:document.querySelector('#statusLabel')?.textContent,
@@ -757,6 +858,125 @@ async function click(selector) {
     `Clickable ${selector}`,
   );
   await element.click();
+}
+/**
+ * What the popup page does by itself, in Firefox and against the real background: what
+ * it writes when nothing changes, where the keyboard focus is after an action, and how
+ * it sets a language written in Arabic script.
+ */
+async function verifyPopupPage(policy) {
+  await openPopup();
+  const page = (script, ...args) => driver.executeScript(script, ...args);
+  await waitFor(
+    () =>
+      page(
+        "const main=document.getElementById('mainView'); const refresh=document.getElementById('refreshSubscriptionButton'); return !main.classList.contains('hidden') && refresh.getAttribute('aria-busy')==='false' && !refresh.disabled",
+      ),
+    Boolean,
+    "Main view settled",
+  );
+  await waitFor(snapshot, (value) => value.network.status === "ready", "Address measured");
+
+  // The address is asked again, as every few seconds, and the background says the same.
+  const written = await extension(
+    `const done = arguments[arguments.length - 1];
+    const name = (node) => node instanceof Element ? (node.id ? '#' + node.id : name(node.parentNode) + ' > ' + node.localName) : name(node.parentNode) + ' > text';
+    const written = new Set();
+    const observer = new MutationObserver((records) => { for (const record of records) written.add(name(record.target)); });
+    observer.observe(document.body, { subtree: true, childList: true, characterData: true });
+    (async () => {
+      for (let poll = 0; poll < 3; poll += 1) {
+        window.dispatchEvent(new Event('online'));
+        await new Promise((resolve) => setTimeout(resolve, 700));
+      }
+      observer.disconnect();
+      done([...written]);
+    })();`,
+  );
+  assert.deepEqual(written, []);
+  record("Firefox: a popup whose state does not change rewrites no text at its polls");
+
+  // A control disabled while its own action is pending has the focus again afterwards.
+  await page(
+    "window.refreshWasBusy=false; new MutationObserver(()=>{ if(document.getElementById('refreshSubscriptionButton').getAttribute('aria-busy')==='true') window.refreshWasBusy=true; }).observe(document.getElementById('refreshSubscriptionButton'),{attributes:true});",
+  );
+  await driver.findElement(By.css("#refreshSubscriptionButton")).sendKeys(Key.ENTER);
+  await waitFor(
+    () =>
+      page(
+        "const refresh=document.getElementById('refreshSubscriptionButton'); return window.refreshWasBusy && refresh.getAttribute('aria-busy')==='false' && !refresh.disabled",
+      ),
+    Boolean,
+    "Subscription refreshed from the keyboard",
+  );
+  assert.equal(await page("return document.activeElement.id"), "refreshSubscriptionButton");
+  record("Firefox: the subscription refresh keeps the keyboard focus once it has answered");
+
+  // A site removed from the keyboard leaves the focus to its neighbour.
+  const extra = { domain: "aaa-keyboard.example.org", includeSubdomains: true };
+  const added = await send({
+    type: "update_site_exclusions",
+    expectedRevision: policy.revision,
+    enabled: true,
+    entries: [extra, ...policy.entries],
+  });
+  assert.equal(added.ok, true, JSON.stringify(added));
+  await click("#settingsButton");
+  await click("#manageExclusionsButton");
+  await waitFor(
+    () => page("return document.querySelectorAll('.exclusion-row').length"),
+    (rows) => rows === policy.entries.length + 1,
+    "Sites listed",
+  );
+  await driver
+    .findElement(By.css(`.exclusion-remove[data-focus-key="${extra.domain}"]`))
+    .sendKeys(Key.ENTER);
+  await waitFor(
+    () => page("return document.querySelectorAll('.exclusion-row').length"),
+    (rows) => rows === policy.entries.length,
+    "Site removed from the keyboard",
+  );
+  await waitFor(
+    () => page("return document.activeElement.getAttribute('aria-disabled')"),
+    (unavailable) => unavailable === "false",
+    "Sites available again",
+  );
+  assert.equal(
+    await page("return document.activeElement.dataset.focusKey"),
+    policy.entries[0].domain,
+  );
+  const restored = (await snapshot()).siteExclusions;
+  assert.deepEqual(restored.saved.entries, policy.entries);
+  assert.equal(restored.pending, false);
+  record(
+    "Firefox: a site removed from the keyboard leaves the focus to the site which followed it",
+  );
+  await click("#closeExclusionsButton");
+  await click("#closeSettingsButton");
+
+  // Arabic script joins its letters: no text written in it is spaced.
+  for (const language of ["ar", "fa", "ur", "ps"]) {
+    assert.equal((await send({ type: "set_language_preference", preference: language })).ok, true);
+    await waitFor(
+      () => page("return document.documentElement.lang"),
+      (lang) => lang === language,
+      language,
+    );
+    const spaced = await page(
+      `const arabic = /[\u0600-\u06FF\u0750-\u077F\uFB50-\uFDFF\uFE70-\uFEFF]/;
+      return [...document.querySelectorAll('body *')]
+        .filter((node) => [...node.childNodes].some((child) => child.nodeType === Node.TEXT_NODE && arabic.test(child.data)) && !['normal', '0px'].includes(getComputedStyle(node).letterSpacing))
+        .map((node) => (node.id ? '#' + node.id : node.localName + '.' + node.className) + ' ' + getComputedStyle(node).letterSpacing);`,
+    );
+    assert.deepEqual(spaced, [], language);
+  }
+  assert.equal((await send({ type: "set_language_preference", preference: "fr" })).ok, true);
+  await waitFor(
+    () => page("return document.documentElement.lang"),
+    (lang) => lang === "fr",
+    "fr",
+  );
+  record("Firefox: no text in Arabic script is letter-spaced, in Arabic, Persian, Urdu and Pashto");
 }
 async function deviceUi() {
   return driver.executeScript(`return {
@@ -2037,7 +2257,11 @@ try {
           pendingChallenge = response;
           return;
         }
-        if (!authenticated) {
+        // The credentials which the browser remembers are refused once, as those of a
+        // session are once it was renewed; the answer to the challenge is accepted.
+        const stale = path.startsWith("/stale-auth-") && !staleChallenges.has(path);
+        if (stale) staleChallenges.add(path);
+        if (!authenticated || stale) {
           response.writeHead(407, {
             "Proxy-Authenticate": 'Basic realm="firefox-test"',
             "Content-Length": "0",
@@ -2297,6 +2521,10 @@ try {
     );
     assert(!received.direct.includes("/active-auth"));
     record("Protected navigation uses authenticated HTTPS proxy");
+    if (process.env.FIREFOX_DESIGN_ONLY !== "1" && !process.env.FIREFOX_LOCATION_AUDIT) {
+      await verifyRequestsDuringRestoration(protectedUrl);
+      await verifyChallengeOfWakingRequest(protectedUrl);
+    }
     if (process.env.FIREFOX_DESIGN_ONLY !== "1") {
       if (process.env.FIREFOX_LOCATION_AUDIT !== "baseline-disconnected")
         await verifyDelayedAccountRestoration(protectedUrl);
@@ -2358,6 +2586,7 @@ try {
     );
     assert(received.direct.includes("/excluded"));
     record("Committed site exclusion goes directly to local target");
+    await verifyPopupPage(excluded.snapshot.siteExclusions.saved);
     await screenshot("fr", "popup");
     await screenshot("ar", "popup");
     await screenshot("fr", "diagnostics");

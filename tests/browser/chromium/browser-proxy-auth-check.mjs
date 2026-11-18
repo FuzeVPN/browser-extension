@@ -53,6 +53,8 @@ function record(name, details) {
   report.checks.push({ name, passed: true, details });
   process.stdout.write(`PASS ${name}\n`);
 }
+const staleChallenges = new Set();
+
 function waitForRequest(path) {
   if (pending.has(path)) return Promise.resolve(pending.get(path));
   return new Promise((done, reject) => {
@@ -115,6 +117,21 @@ Path(sys.argv[1], "test-cert.pem").write_bytes(cert.public_bytes(serialization.E
         "Content-Length": "0",
       });
       response.end();
+    } else if (url.pathname.startsWith("/stale-auth-")) {
+      // The credentials which the browser remembers are refused once, as those of a
+      // session are once it was renewed; the answer to the challenge is accepted.
+      const challenged = staleChallenges.has(url.pathname);
+      staleChallenges.add(url.pathname);
+      if (challenged && request.headers["proxy-authorization"]) {
+        response.writeHead(200, { "Content-Type": "text/html", "Cache-Control": "no-store" });
+        response.end("<!doctype html><title>Isolated proxy fixture</title>");
+      } else {
+        response.writeHead(407, {
+          "Proxy-Authenticate": 'Basic realm="isolated-active-proxy"',
+          "Content-Length": "0",
+        });
+        response.end();
+      }
     } else if (url.pathname.startsWith("/delayed-")) {
       const value = { request, response };
       pending.set(url.pathname, value);
@@ -296,8 +313,14 @@ async function verify() {
   );
   const cdp = await context.newCDPSession(popup);
   const versions = new Map();
+  // The worker can start again a moment after it stopped: a stop is noted when the
+  // browser reports it, not read from the latest state of the worker afterwards.
+  const stopped = new Set();
   cdp.on("ServiceWorker.workerVersionUpdated", ({ versions: changed }) => {
-    for (const value of changed) versions.set(value.versionId, value);
+    for (const value of changed) {
+      versions.set(value.versionId, value);
+      if (value.runningStatus === "stopped") stopped.add(value.versionId);
+    }
   });
   await cdp.send("ServiceWorker.enable");
   async function waitUntil(condition, failure) {
@@ -340,11 +363,9 @@ async function verify() {
       const version = [...versions.values()].find(
         (value) => value.scriptURL === worker.url() && value.runningStatus === "running",
       );
+      stopped.delete(version.versionId);
       await cdp.send("ServiceWorker.stopWorker", { versionId: version.versionId });
-      await waitUntil(
-        () => versions.get(version.versionId)?.runningStatus === "stopped",
-        "Worker did not stop before challenge",
-      );
+      await waitUntil(() => stopped.has(version.versionId), "Worker did not stop before challenge");
       report.workerStoppedBefore407 = true;
     }
     assert(
@@ -399,6 +420,56 @@ async function verify() {
     received.some((request) => request.path === "/active-auth" && request.credentialsReceived),
   );
   record("Current active proxy still authenticates and loads a real page", { authenticated: true });
+
+  if (!baseline) {
+    // With the worker running, a challenge for remembered credentials is answered.
+    await activePage.goto("http://public.audit.invalid/stale-auth-running", { timeout: 12000 });
+    assert.equal(await activePage.title(), "Isolated proxy fixture");
+    // The same challenge, for the request which starts the worker again. No extension
+    // page stays open: one would start the worker before the request does.
+    await popup.goto("about:blank");
+    const running = () =>
+      [...versions.values()].filter(
+        (value) => value.scriptURL === worker.url() && value.runningStatus === "running",
+      );
+    await waitUntil(() => running().length > 0, "Worker version was not reported by DevTools");
+    const stopping = running()[0];
+    stopped.delete(stopping.versionId);
+    await cdp.send("ServiceWorker.stopWorker", { versionId: stopping.versionId });
+    await waitUntil(
+      () => stopped.has(stopping.versionId),
+      "Worker did not stop before the waking request",
+    );
+    const wakingOutcome = await activePage
+      .goto("http://public.audit.invalid/stale-auth-waking", { timeout: 12000 })
+      .then(
+        () => ({ error: null }),
+        (error) => ({ error: String(error.message) }),
+      );
+    const wakingTitle = wakingOutcome.error ? null : await activePage.title();
+    await popup.goto(`chrome-extension://${worker.url().split("/")[2]}/popup/popup.html`);
+    await observe();
+    worker =
+      context.serviceWorkers()[0] ??
+      (await context.waitForEvent("serviceworker", { timeout: 5000 }));
+    const afterWaking = await message({ type: "get_snapshot" });
+    const wakingDetails = {
+      outcome: wakingOutcome,
+      title: wakingTitle,
+      requests: received.filter((request) => request.path === "/stale-auth-waking"),
+      protected: afterWaking.protected,
+      error: afterWaking.error,
+    };
+    report.wakingChallenge = wakingDetails;
+    assert.equal(wakingOutcome.error, null, JSON.stringify(wakingDetails));
+    assert.equal(wakingTitle, "Isolated proxy fixture");
+    assert.equal(afterWaking.protected, true, JSON.stringify(wakingDetails));
+    assert.equal(afterWaking.error, null);
+    record(
+      "A request which starts the worker again answers the proxy challenge it meets",
+      wakingDetails,
+    );
+  }
 
   if (!baseline) {
     await popup.evaluate(() => {

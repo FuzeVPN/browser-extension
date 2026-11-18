@@ -41,12 +41,22 @@ function holdAuthenticationWrite(h: Harness, token = AUTH.accessToken) {
   return { writing: writing.promise, release: release.resolve };
 }
 
-/** Suspends the first security write which follows an account credential write. */
-function holdSecurityWriteAfterCredential(h: Harness) {
+/**
+ * Suspends the first security write which follows an account credential write.
+ * A sign-in writes the security state only when storage may not hold it already. Here an
+ * earlier write was left in doubt, so the sign-in makes its own: the test holds it.
+ */
+async function holdSecurityWriteAfterCredential(h: Harness) {
   const reached = deferred();
   const release = deferred();
   const writePersisted = h.storage.writePersisted.bind(h.storage);
   const writeSecurity = h.securityStorage.write.bind(h.securityStorage);
+  // Storage refuses a change of preference, and the write which takes it back.
+  const refusing = vi
+    .spyOn(h.securityStorage, "write")
+    .mockRejectedValue(new Error("storage unavailable"));
+  expect(await h.controller.updateSecurityPreferences(true, false)).toMatchObject({ ok: false });
+  refusing.mockRestore();
   let armed = false;
   let held = false;
   vi.spyOn(h.storage, "writePersisted").mockImplementation(async (state: PersistedState) => {
@@ -275,7 +285,7 @@ describe("ownership of a committed credential until its account is published", (
     async (_phase, hold) => {
       const h = createHarness({ webAuth });
       await h.controller.initialize();
-      const held = hold(h);
+      const held = await hold(h);
       const apiLogout = vi.spyOn(h.api, "logout");
       const loggingIn = h.controller.webLogin(false);
       await held.reached;
@@ -594,7 +604,7 @@ describe("ownership of a committed credential until its account is published", (
   it("never restores a credential which a superseded login abandons", async () => {
     const h = createHarness();
     await h.controller.initialize();
-    const committing = holdSecurityWriteAfterCredential(h);
+    const committing = await holdSecurityWriteAfterCredential(h);
     const hydrating = holdProfileRequest(h);
     const login = vi.spyOn(h.api, "login");
     const apiLogout = vi.spyOn(h.api as ApiService, "logout");
