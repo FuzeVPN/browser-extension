@@ -7,6 +7,7 @@ import { resolve, join, relative, extname } from "node:path";
 import { pathToFileURL } from "node:url";
 import { SUPPORTED_LANGUAGES, localeDirectory } from "../../../scripts/supported-locales.mjs";
 import { inspectDesign, inspectReducedMotion } from "./browser-design-review.mjs";
+import { reportErrorEvents } from "./page-error-events.mjs";
 
 const root = resolve(import.meta.dirname, "../../..");
 const extension = resolve(process.env.CHROME_EXTENSION_DIR || join(root, "dist/chrome"));
@@ -252,6 +253,7 @@ await context.addInitScript((catalog) => {
 async function open() {
   const page = await context.newPage();
   page.on("pageerror", (error) => evidence.pageErrors.push(error.message));
+  await reportErrorEvents(page, (message) => evidence.pageErrors.push(message));
   await page.goto("https://diagnostics.invalid/diagnostics-page/diagnostics.html");
   await page.waitForFunction(() => document.documentElement.lang === "fr");
   if (!legacy) await page.waitForFunction(() => !document.getElementById("runButton").disabled);

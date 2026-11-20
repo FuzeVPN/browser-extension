@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: MPL-2.0
 
 import { readWebAuthIdentity, isValidRedirectUri } from "@platform/web-auth";
-import type { WebAuthIdentity } from "../../platform/contracts/web-auth";
+import type { AuthenticationTab, WebAuthIdentity } from "../../platform/contracts/web-auth";
 export type { WebAuthIdentity } from "../../platform/contracts/web-auth";
 
 export const WEB_AUTH_CLIENT_ID = "fuzevpn-browser-extension";
@@ -63,6 +63,8 @@ interface Attempt {
   preparationAbort: AbortController;
   nativeStartedAt: number;
   nativePending: boolean;
+  /** The window of this attempt, when the platform can see it. */
+  tab: AuthenticationTab | null;
   resolve: (authorization: WebAuthorization) => void;
   reject: (error: Error) => void;
 }
@@ -73,6 +75,9 @@ interface Attempt {
  * cancellation/expiration retires its attempt, so a hidden, stalled native flow
  * cannot prevent an explicit retry. Retired responses are discarded. Launches after
  * abandonment are spaced to avoid accumulating windows through rapid cancellation.
+ * Where the platform can see the window of an attempt, an attempt retired while that
+ * window is open closes it: left open, it keeps offering a sign-in which nothing waits
+ * for, and a browser may refuse to open the window of the next attempt beside it.
  */
 export class ExtensionWebAuthService implements WebAuthService {
   private readonly startUrl: string;
@@ -119,6 +124,7 @@ export class ExtensionWebAuthService implements WebAuthService {
         preparationAbort: new AbortController(),
         nativeStartedAt: 0,
         nativePending: false,
+        tab: null,
         resolve,
         reject,
       };
@@ -158,6 +164,12 @@ export class ExtensionWebAuthService implements WebAuthService {
       if (locale) start.searchParams.set("locale", locale);
 
       let response: string | undefined;
+      try {
+        attempt.tab = this.identity.watchAuthenticationTab?.(start.href) ?? null;
+      } catch {
+        // A window which cannot be watched is only left open when the attempt is given up.
+        attempt.tab = null;
+      }
       attempt.nativeStartedAt = performance.now();
       attempt.nativePending = true;
       try {
@@ -208,17 +220,24 @@ export class ExtensionWebAuthService implements WebAuthService {
 
   private reject(attempt: Attempt, error: Error): void {
     if (attempt.settled) return;
-    if (attempt.nativePending)
+    if (attempt.nativePending) {
       this.nativeRetryAt = Math.max(
         this.nativeRetryAt,
         attempt.nativeStartedAt + NATIVE_RETRY_INTERVAL_MS,
       );
+      // The attempt ends here while its window is still open: nothing waits for it.
+      const abandoned = attempt.tab;
+      attempt.tab = null;
+      void abandoned?.close();
+    }
     this.finish(attempt);
     attempt.reject(error);
   }
 
   private finish(attempt: Attempt): void {
     attempt.settled = true;
+    attempt.tab?.release();
+    attempt.tab = null;
     clearTimeout(attempt.timer);
     attempt.signal?.removeEventListener("abort", attempt.onAbort);
     attempt.preparationAbort.abort();

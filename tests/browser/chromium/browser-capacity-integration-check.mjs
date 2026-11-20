@@ -10,6 +10,7 @@ import { homedir, tmpdir } from "node:os";
 import { join, resolve } from "node:path";
 import { pathToFileURL } from "node:url";
 import { waitForRead } from "../../../scripts/browser-wait.mjs";
+import { reportErrorEvents } from "./page-error-events.mjs";
 
 const root = resolve(import.meta.dirname, "../../..");
 const playwright =
@@ -240,6 +241,7 @@ try {
   workerUrl = worker.url();
   const page = await context.newPage();
   page.on("pageerror", (error) => report.pageErrors.push(String(error)));
+  await reportErrorEvents(page, (message) => report.pageErrors.push(message));
   await page.goto(`chrome-extension://${workerUrl.split("/")[2]}/popup/popup.html`);
   assert.equal((await command(page, { type: "web_login", disconnectFirst: false })).ok, true);
   await page.locator("#mainView").waitFor({ state: "visible" });

@@ -23,6 +23,15 @@ Les navigateurs ne permettent ni de fermer ni de retrouver la fenêtre de connex
 popup peut abandonner une tentative qui attend cette fenêtre (message `cancel_web_login`).
 Elle se termine alors comme une fenêtre fermée, et un retour tardif de cette fenêtre est
 ignoré sans échanger son code. Une fois le code reçu, il n'y a plus rien à abandonner.
+Sur Chromium, l'extension referme alors elle-même la fenêtre qu'elle a ouverte : laissée
+ouverte, elle continue de proposer une connexion que plus rien n'attend, et le navigateur
+peut refuser d'ouvrir celle de la tentative suivante à côté d'elle. L'onglet est reconnu
+par l'adresse ouverte et par son `state`, tiré au hasard pour cette seule tentative. Seuls
+les onglets créés pendant la tentative sont regardés, leur adresse n'est que comparée, et
+aucune permission n'est ajoutée. C'est la seule exception, avec la lecture d'un onglet pour
+l'authentification du proxy, à l'interdiction de l'API des onglets : les audits la limitent
+à écouter les créations, relire un onglet et en fermer un. Firefox ne montre pas l'adresse de l'onglet de sa fenêtre d'identité : faute de
+pouvoir la reconnaître avec certitude, l'extension la laisse ouverte, comme avant.
 Le formulaire public de connexion par mot de passe n'existe plus ; le message accepté
 est `web_login`. L'origine réelle de l'extension et l'identité de l'émetteur sont contrôlées.
 
@@ -306,7 +315,11 @@ demander quoi que ce soit au worker.
 Un navigateur donne au popup 600 px au plus, et moins lorsque la page est zoomée ou
 l'écran petit. Rien ne l'indique à la page : elle constate que sa fenêtre a cessé de
 grandir sous son contenu, et resserre sa mise en page à cette hauteur (`PopupFitter`),
-jusqu'au prochain changement de zoom ou d'écran.
+jusqu'au prochain changement de zoom ou d'écran. L'ajustement est fait dès que le contenu
+change, avant que le navigateur ne le mette en page. L'observateur de taille, qui voit le
+reste (une police qui se charge), ne fait que demander un ajustement avant l'image
+suivante : un observateur qui redimensionne ce qu'il observe est signalé par le navigateur
+parmi les erreurs de l'extension.
 
 L'écriture arabe lie ses lettres : dans ces langues (arabe, persan, ourdou, pachto), les
 titres et les étiquettes gardent l'espacement du texte.

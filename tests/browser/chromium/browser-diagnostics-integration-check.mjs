@@ -9,6 +9,7 @@ import { tmpdir } from "node:os";
 import { join, relative, resolve } from "node:path";
 import { pathToFileURL } from "node:url";
 import { waitForRead } from "../../../scripts/browser-wait.mjs";
+import { reportErrorEvents } from "./page-error-events.mjs";
 
 const root = resolve(import.meta.dirname, "../../..");
 const extension = resolve(process.env.CHROME_EXTENSION_DIR || join(root, "dist/chrome"));
@@ -245,6 +246,7 @@ async function waitStatus(id, status) {
 async function openPage() {
   page = await context.newPage();
   page.on("pageerror", (error) => evidence.pageErrors.push(error.name));
+  await reportErrorEvents(page, (message) => evidence.pageErrors.push(message));
   await page.goto(`chrome-extension://${extensionId}/diagnostics-page/diagnostics.html`);
   await page.waitForFunction(() => !document.getElementById("runButton").disabled);
 }

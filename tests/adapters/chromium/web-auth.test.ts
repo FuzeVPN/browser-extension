@@ -312,6 +312,117 @@ describe("web authentication return validation", () => {
   });
 });
 
+describe("the window which a web authentication opens", () => {
+  afterEach(() => {
+    vi.useRealTimers();
+  });
+
+  /** A browser whose authentication tab the platform can watch and close. */
+  function watched(options: Partial<WebAuthOptions> = {}) {
+    const tab = { close: vi.fn(async () => undefined), release: vi.fn() };
+    const watchAuthenticationTab = vi.fn((_url: string) => tab);
+    const f = fixture();
+    const service = new ExtensionWebAuthService({
+      startUrl: START_URL,
+      identity: {
+        getRedirectURL: f.getRedirectURL,
+        launchWebAuthFlow: f.launchWebAuthFlow,
+        watchAuthenticationTab,
+      },
+      crypto: f.cryptoImpl,
+      ...options,
+    });
+    return { ...f, service, tab, watchAuthenticationTab };
+  }
+
+  it("is watched from before it opens, by the address the attempt opens", async () => {
+    const f = watched();
+    void f.service.authorize().catch(() => undefined);
+    await prepare();
+    expect(f.watchAuthenticationTab).toHaveBeenCalledExactlyOnceWith(f.start().href);
+    expect(f.watchAuthenticationTab.mock.invocationCallOrder[0]).toBeLessThan(
+      f.launchWebAuthFlow.mock.invocationCallOrder[0]!,
+    );
+    expect(f.tab.close).not.toHaveBeenCalled();
+  });
+
+  it("is closed when the attempt is given up while it is open", async () => {
+    const f = watched();
+    const givenUp = new AbortController();
+    const attempt = f.service.authorize(givenUp.signal);
+    await prepare();
+    givenUp.abort();
+    await expect(attempt).rejects.toMatchObject({ name: "AbortError" });
+    expect(f.tab.close).toHaveBeenCalledOnce();
+  });
+
+  it("is closed when the attempt expires while it is open", async () => {
+    vi.useFakeTimers();
+    const f = watched({ timeoutMs: 1_000 });
+    const attempt = f.service.authorize();
+    const expired = expect(attempt).rejects.toMatchObject({ code: "web_login_timeout" });
+    await vi.advanceTimersByTimeAsync(1_000);
+    await expired;
+    expect(f.tab.close).toHaveBeenCalledOnce();
+  });
+
+  it("is left to the browser when the sign-in completes", async () => {
+    const f = watched();
+    const attempt = f.service.authorize();
+    await prepare();
+    f.response.resolve(f.callback());
+    await expect(attempt).resolves.toMatchObject({ code: CODE });
+    expect(f.tab.close).not.toHaveBeenCalled();
+    expect(f.tab.release).toHaveBeenCalled();
+  });
+
+  it("is left alone when the user closed it, or the browser could not open it", async () => {
+    for (const message of [
+      "The user did not approve access.",
+      "Authorization page could not be loaded.",
+    ]) {
+      const f = watched();
+      const attempt = f.service.authorize();
+      await prepare();
+      f.response.reject(new Error(message));
+      await expect(attempt).rejects.toBeInstanceOf(WebAuthError);
+      expect(f.tab.close).not.toHaveBeenCalled();
+      expect(f.tab.release).toHaveBeenCalled();
+    }
+  });
+
+  it("is not watched for an attempt given up before it opens", async () => {
+    const f = watched();
+    const givenUp = new AbortController();
+    const attempt = f.service.authorize(givenUp.signal);
+    givenUp.abort();
+    await expect(attempt).rejects.toMatchObject({ name: "AbortError" });
+    await prepare();
+    expect(f.launchWebAuthFlow).not.toHaveBeenCalled();
+    expect(f.tab.close).not.toHaveBeenCalled();
+  });
+
+  it("stays open, as before, on a platform which cannot watch it", async () => {
+    const f = fixture();
+    const givenUp = new AbortController();
+    const attempt = f.service.authorize(givenUp.signal);
+    await prepare();
+    givenUp.abort();
+    await expect(attempt).rejects.toMatchObject({ name: "AbortError" });
+  });
+
+  it("does not make the sign-in fail when it cannot be watched", async () => {
+    const f = watched();
+    f.watchAuthenticationTab.mockImplementation(() => {
+      throw new Error("tabs unavailable");
+    });
+    const attempt = f.service.authorize();
+    await prepare();
+    f.response.resolve(f.callback());
+    await expect(attempt).resolves.toMatchObject({ code: CODE });
+  });
+});
+
 describe("web authentication attempt lifecycle", () => {
   afterEach(() => vi.useRealTimers());
 

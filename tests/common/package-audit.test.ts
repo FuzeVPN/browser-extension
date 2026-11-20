@@ -10,6 +10,10 @@ const root = resolve(import.meta.dirname, "../..");
 // allowlist excludes aliases, every other tabs method and sensitive namespaces.
 const AUTH_CHROME_APIS =
   /\b(?:browser|chrome)\.(?:tabs\b(?!\.get\()|history\b|cookies\b|scripting\b)/;
+// The Chromium sign-in closes the window it opened when its attempt is given up. It
+// watches the tabs created meanwhile, reads one again and closes one: nothing else.
+const SIGN_IN_WINDOW_APIS =
+  /\b(?:browser|chrome)\.(?:tabs\b(?!\.(?:get|remove|onCreated\.(?:add|remove)Listener)\()|history\b|cookies\b|scripting\b)/;
 
 describe("source package audit", () => {
   it("restricts the proxy auth tab exception to a direct get call", () => {
@@ -27,6 +31,30 @@ describe("source package audit", () => {
       "browser.scripting.executeScript({})",
     ])
       expect(code).toMatch(AUTH_CHROME_APIS);
+  });
+  it("restricts the sign-in window exception to watching created tabs and closing one", () => {
+    for (const code of [
+      "chrome.tabs.onCreated.addListener(listener)",
+      "chrome.tabs.onCreated.removeListener(listener)",
+      "chrome.tabs.get(tabId)",
+      "chrome.tabs.remove(tabId)",
+    ])
+      expect(code).not.toMatch(SIGN_IN_WINDOW_APIS);
+    for (const code of [
+      "chrome.tabs.query({})",
+      "chrome.tabs.onUpdated.addListener(listener)",
+      "chrome.tabs.onCreated.hasListener(listener)",
+      "chrome.tabs.update(1,{})",
+      "chrome.tabs.captureVisibleTab()",
+      "chrome.tabs.create({})",
+      "watch(chrome.tabs, url)",
+      "const remove = chrome.tabs.remove",
+      "chrome.tabs['query']({})",
+      "chrome.history.search({})",
+      "chrome.cookies.get({})",
+      "chrome.scripting.executeScript({})",
+    ])
+      expect(code).toMatch(SIGN_IN_WINDOW_APIS);
   });
   it("uses exactly the approved permissions", async () => {
     const targets = (await import(pathToFileURL(resolve(root, "scripts/targets.mjs")).href)) as {
@@ -216,7 +244,9 @@ describe("source package audit", () => {
         file === resolve(root, "src/platform/firefox/proxy-auth.ts") ||
         file === resolve(root, "src/platform/chromium/proxy-auth.ts")
           ? AUTH_CHROME_APIS
-          : /\b(?:browser|chrome)\.(tabs|history|cookies|scripting)\b/;
+          : file === resolve(root, "src/platform/chromium/web-auth.ts")
+            ? SIGN_IN_WINDOW_APIS
+            : /\b(?:browser|chrome)\.(tabs|history|cookies|scripting)\b/;
       for (const pattern of [
         ...patterns,
         chromeApis,

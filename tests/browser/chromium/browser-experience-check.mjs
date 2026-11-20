@@ -14,6 +14,7 @@ import { pathToFileURL } from "node:url";
 import { SUPPORTED_LANGUAGES, localeDirectory } from "../../../scripts/supported-locales.mjs";
 import { waitForRead } from "../../../scripts/browser-wait.mjs";
 import { expandAllLocations } from "./browser-location-ui.mjs";
+import { reportErrorEvents } from "./page-error-events.mjs";
 
 const root = resolve(import.meta.dirname, "../../..");
 const require = createRequire(import.meta.url);
@@ -400,6 +401,7 @@ try {
     (await context.waitForEvent("serviceworker", { timeout: 15000 }));
   const page = await context.newPage();
   page.on("pageerror", (error) => report.pageErrors.push(String(error)));
+  await reportErrorEvents(page, (message) => report.pageErrors.push(message));
   await page.goto(`chrome-extension://${worker.url().split("/")[2]}/popup/popup.html`);
   await command(page, { type: "set_language_preference", preference: "en" });
   await command(page, { type: "web_login", disconnectFirst: false });

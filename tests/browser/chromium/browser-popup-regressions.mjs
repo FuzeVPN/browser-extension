@@ -11,6 +11,7 @@ import { homedir, tmpdir } from "node:os";
 import { join, resolve } from "node:path";
 import { pathToFileURL } from "node:url";
 import { waitForRead } from "../../../scripts/browser-wait.mjs";
+import { reportErrorEvents } from "./page-error-events.mjs";
 
 const root = resolve(import.meta.dirname, "../../..");
 const require = createRequire(import.meta.url);
@@ -240,18 +241,19 @@ try {
     context.serviceWorkers()[0] ??
     (await context.waitForEvent("serviceworker", { timeout: 15000 }));
   const url = `chrome-extension://${worker.url().split("/")[2]}/popup/popup.html`;
-  function trackErrors(page) {
+  async function trackErrors(page) {
     page.on("pageerror", (error) => report.pageErrors.push(String(error)));
+    await reportErrorEvents(page, (message) => report.pageErrors.push(message));
   }
   let page = await context.newPage();
-  trackErrors(page);
+  await trackErrors(page);
   await page.goto(url);
   await login(page);
   await page.close();
 
   // What a signed-in user sees while the popup opens, frame by frame.
   page = await context.newPage();
-  trackErrors(page);
+  await trackErrors(page);
   await page.addInitScript(() => {
     const views = (window.viewsPainted = []);
     const shown = (id) => {
@@ -294,7 +296,7 @@ try {
   // Reproduce the initial account refresh arriving during keyboard navigation.
   const accountRefresh = hold("/v1/me");
   page = await context.newPage();
-  trackErrors(page);
+  await trackErrors(page);
   await page.goto(url);
   await accountRefresh.arrived;
   await page.locator("#changeLocationButton").click();

@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: MPL-2.0
 
 import { WebAuthError } from "../../core/auth/web-auth";
+import { watchAuthenticationTab } from "../../core/auth/authentication-tab";
 import type { WebAuthIdentity } from "../contracts/web-auth";
 export type { WebAuthIdentity } from "../contracts/web-auth";
 
@@ -11,6 +12,19 @@ export function readWebAuthIdentity(): WebAuthIdentity {
   return {
     getRedirectURL: (path) => identity.getRedirectURL(path),
     launchWebAuthFlow: (details) => identity.launchWebAuthFlow(details),
+    // The only uses of the tabs API beside the single read of proxy authentication, and
+    // the audits hold them to these four calls: no list of tabs, no update, no capture.
+    // Addresses of tabs are visible through the host permissions of the extension.
+    watchAuthenticationTab: (url) =>
+      watchAuthenticationTab(
+        {
+          onCreated: (listener) => chrome.tabs.onCreated.addListener(listener),
+          offCreated: (listener) => chrome.tabs.onCreated.removeListener(listener),
+          get: (tabId) => chrome.tabs.get(tabId),
+          remove: (tabId) => chrome.tabs.remove(tabId),
+        },
+        url,
+      ),
   };
 }
 

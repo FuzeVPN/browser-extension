@@ -14,6 +14,7 @@ import {
   inspectKeyboardFocus,
   inspectReducedMotion,
 } from "./browser-design-review.mjs";
+import { reportErrorEvents } from "./page-error-events.mjs";
 const root = resolve(import.meta.dirname, "../../..");
 const output = resolve(
   process.env.POPUP_AUDIT_FIXES_OUTPUT ||
@@ -236,6 +237,7 @@ async function rendered(page) {
 async function open(beforeLoad = async () => {}) {
   const page = await context.newPage();
   page.on("pageerror", (error) => report.pageErrors.push(error.message));
+  await reportErrorEvents(page, (message) => report.pageErrors.push(message));
   await beforeLoad(page);
   await page.goto("https://popup.invalid/popup/popup.html");
   await page.waitForFunction(
@@ -298,6 +300,7 @@ const samePublication = (page) => () => page.evaluate(() => window.fixture.publi
 async function openWith(patch) {
   const page = await context.newPage();
   page.on("pageerror", (error) => report.pageErrors.push(error.message));
+  await reportErrorEvents(page, (message) => report.pageErrors.push(message));
   await page.addInitScript((patch) => {
     // Init scripts run in no stated order: the fixture may or may not exist yet.
     if (window.fixture) Object.assign(window.fixture, patch);

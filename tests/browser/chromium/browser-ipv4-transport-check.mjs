@@ -14,6 +14,7 @@ import { pathToFileURL } from "node:url";
 import { waitForRead } from "../../../scripts/browser-wait.mjs";
 import { assertInsideProject } from "../../../scripts/validation-common.mjs";
 import { localeDirectory } from "../../../scripts/supported-locales.mjs";
+import { reportErrorEvents } from "./page-error-events.mjs";
 
 const root = resolve(import.meta.dirname, "../../..");
 const target = process.argv[2] ?? process.env.EXTENSION_TARGET ?? "chrome";
@@ -481,6 +482,7 @@ async function verify() {
   const extensionId = worker.url().split("/")[2];
   popup = await context.newPage();
   popup.on("pageerror", (error) => report.pageErrors.push(String(error)));
+  await reportErrorEvents(popup, (message) => report.pageErrors.push(message));
   await popup.goto("chrome-extension://" + extensionId + "/popup/popup.html");
   cdp = await context.newCDPSession(popup);
   cdp.on("ServiceWorker.workerVersionUpdated", ({ versions }) => {

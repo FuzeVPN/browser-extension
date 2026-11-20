@@ -8,6 +8,7 @@ import { homedir, tmpdir } from "node:os";
 import { resolve, join, extname, relative } from "node:path";
 import { pathToFileURL } from "node:url";
 import { SUPPORTED_LANGUAGES, localeDirectory } from "../../../scripts/supported-locales.mjs";
+import { reportErrorEvents } from "./page-error-events.mjs";
 const root = resolve(import.meta.dirname, "../../..");
 const output = resolve(
   process.env.LOCATION_HIERARCHY_OUTPUT ||
@@ -239,6 +240,7 @@ async function rendered(page) {
 async function open() {
   const page = await context.newPage();
   page.on("pageerror", (error) => report.pageErrors.push(error.message));
+  await reportErrorEvents(page, (message) => report.pageErrors.push(message));
   await page.goto("https://popup.invalid/popup/popup.html");
   await page.waitForFunction(
     (expected) =>

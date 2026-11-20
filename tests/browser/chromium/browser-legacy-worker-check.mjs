@@ -7,6 +7,7 @@ import { cp, mkdir, writeFile } from "node:fs/promises";
 import { homedir } from "node:os";
 import { join, resolve } from "node:path";
 import { pathToFileURL } from "node:url";
+import { reportErrorEvents } from "./page-error-events.mjs";
 
 const root = resolve(import.meta.dirname, "../../..");
 const expectBroken = process.argv.includes("--expect-broken");
@@ -150,6 +151,7 @@ try {
   const worker = context.serviceWorkers()[0] ?? (await context.waitForEvent("serviceworker"));
   const page = await context.newPage();
   page.on("pageerror", (error) => report.pageErrors.push(String(error)));
+  await reportErrorEvents(page, (message) => report.pageErrors.push(message));
   await page.goto(`chrome-extension://${new URL(worker.url()).host}/popup/popup.html`);
   await page.waitForFunction(() => document.documentElement.lang === "en");
   if (expectBroken) {

@@ -9,6 +9,10 @@ export function readWebAuthIdentity(): WebAuthIdentity {
   return {
     getRedirectURL: (path) => identity.getRedirectURL(path),
     launchWebAuthFlow: (details) => identity.launchWebAuthFlow(details),
+    // No `watchAuthenticationTab`: Firefox does not show an extension the address of the
+    // tab of its identity window, even with every host permission granted. That window
+    // cannot be told from another one for certain, and is left open when an attempt is
+    // given up, as before.
   };
 }
 

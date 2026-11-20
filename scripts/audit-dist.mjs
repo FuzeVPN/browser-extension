@@ -74,9 +74,13 @@ export async function auditDist(target) {
       /<script[^>]+src=["']https?:/i,
       /\b(analytics|telemetry|tracker)\b/i,
       /-----BEGIN (?:RSA |EC |OPENSSH )?PRIVATE KEY-----/,
-      name === "background/service-worker.js"
-        ? /\b(?:chrome|browser)\.(?:tabs\b(?!\.get\()|history\b|cookies\b|scripting\b)/
-        : /\b(?:chrome|browser)\.(?:tabs|history|cookies|scripting)\b/,
+      // The background reads one tab for proxy authentication. On Chromium it also
+      // watches the tabs created during a sign-in, and closes the one it opened.
+      name !== "background/service-worker.js"
+        ? /\b(?:chrome|browser)\.(?:tabs|history|cookies|scripting)\b/
+        : target === "firefox"
+          ? /\b(?:chrome|browser)\.(?:tabs\b(?!\.get\()|history\b|cookies\b|scripting\b)/
+          : /\b(?:chrome|browser)\.(?:tabs\b(?!\.(?:get|remove|onCreated\.(?:add|remove)Listener)\()|history\b|cookies\b|scripting\b)/,
     ];
     for (const pattern of forbidden)
       if (pattern.test(text)) throw new Error(`${target}/${name}: forbidden ${pattern}`);

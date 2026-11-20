@@ -11,6 +11,7 @@ import { homedir, tmpdir } from "node:os";
 import { extname, join, relative, resolve } from "node:path";
 import { pathToFileURL } from "node:url";
 import { SUPPORTED_LANGUAGES, localeDirectory } from "../../../scripts/supported-locales.mjs";
+import { reportErrorEvents } from "./page-error-events.mjs";
 
 const root = resolve(import.meta.dirname, "../../..");
 const require = createRequire(import.meta.url);
@@ -202,6 +203,7 @@ try {
   );
   const page = await context.newPage();
   page.on("pageerror", (error) => report.pageErrors.push(error.message));
+  await reportErrorEvents(page, (message) => report.pageErrors.push(message));
   await page.goto("https://popup.invalid/popup/popup.html");
   await page.locator("#settingsButton").click();
   await page.locator("#manageExclusionsButton").click();

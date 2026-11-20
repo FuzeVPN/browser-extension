@@ -876,6 +876,12 @@ async function verifyPopupPage(policy) {
     "Main view settled",
   );
   await waitFor(snapshot, (value) => value.network.status === "ready", "Address measured");
+  // A fault which the browser reports as an error event of the window, without an
+  // exception, is listed among the errors of the extension: an observer of sizes whose
+  // callback resizes what it observes, for instance.
+  await page(
+    "window.errorEvents=[]; window.fitLevels=new Set(); window.addEventListener('error',(event)=>{ if(!event.error) window.errorEvents.push(String(event.message)); }); new MutationObserver(()=>window.fitLevels.add(document.querySelector('.shell').dataset.fit ?? '0')).observe(document.querySelector('.shell'),{attributes:true,attributeFilter:['data-fit']});",
+  );
 
   // The address is asked again, as every few seconds, and the background says the same.
   const written = await extension(
@@ -977,6 +983,12 @@ async function verifyPopupPage(policy) {
     "fr",
   );
   record("Firefox: no text in Arabic script is letter-spaced, in Arabic, Persian, Urdu and Pashto");
+  // The page was fitted again at each of these changes of language and of content.
+  const fitted = await page(
+    "return { errors: window.errorEvents, levels: [...window.fitLevels].sort() }",
+  );
+  assert.deepEqual(fitted.errors, []);
+  record("Firefox: fitting the popup to its height reports no error to the browser", fitted);
 }
 async function deviceUi() {
   return driver.executeScript(`return {

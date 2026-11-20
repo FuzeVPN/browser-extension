@@ -11,6 +11,7 @@ import { homedir } from "node:os";
 import { join, resolve } from "node:path";
 import { pathToFileURL } from "node:url";
 import { waitForRead } from "../../../scripts/browser-wait.mjs";
+import { reportErrorEvents } from "./page-error-events.mjs";
 import {
   assertInsideProject,
   fileHashes,
@@ -418,6 +419,7 @@ try {
     (await context.waitForEvent("serviceworker", { timeout: 15_000 }));
   popup = await context.newPage();
   popup.on("pageerror", (error) => report.pageErrors.push(redact(error.message)));
+  await reportErrorEvents(popup, (message) => report.pageErrors.push(message));
   await popup.goto(`chrome-extension://${worker.url().split("/")[2]}/popup/popup.html`);
   expectedRedirect = await popup.evaluate(() => chrome.identity.getRedirectURL("auth"));
   assert.match(expectedRedirect, /^https:\/\/[a-p]{32}\.chromiumapp\.org\/auth$/);
@@ -494,6 +496,41 @@ try {
   assert.equal(tokenCount(), cancelCount);
   await capture("native-cancelled");
   check("Closing the real native authentication window cancels sign-in without creating a session");
+
+  // The sign-in page is shown, and the user gives the attempt up from the popup: the
+  // extension closes the window it opened. Left open, it would keep offering a sign-in
+  // which nothing waits for.
+  const windowIds = () =>
+    popup.evaluate(async () => (await chrome.windows.getAll()).map(({ id }) => id));
+  const shownCount = tokenCount();
+  const shownWindowsBefore = await windowIds();
+  await start("cancel");
+  await waitForRead(windowIds, (ids) => ids.some((id) => !shownWindowsBefore.includes(id)), {
+    timeoutMs: 5_000,
+    message: "Native authentication window was not shown",
+  });
+  await popup.locator("#webLoginCancelButton").click();
+  const closedByPopup = await settled();
+  assert.equal(closedByPopup.profile, null);
+  assert.equal(closedByPopup.error, "web_login_cancelled");
+  await waitForRead(windowIds, (ids) => ids.every((id) => shownWindowsBefore.includes(id)), {
+    timeoutMs: 5_000,
+    message: "The sign-in window stayed open after the popup gave the attempt up",
+  });
+  assert.equal(tokenCount(), shownCount);
+  // Nothing is left beside the next attempt, which opens and completes.
+  await start("success");
+  const afterClosed = await settled();
+  assert.equal(afterClosed.profile?.userId, "synthetic-google-user");
+  assert.deepEqual(
+    (await windowIds()).filter((id) => !shownWindowsBefore.includes(id)),
+    [],
+  );
+  assert.equal((await command({ type: "logout" })).ok, true);
+  await waitForRead(snapshot, (state) => state.profile === null, {
+    message: "Sign-out after the reopened sign-in did not complete",
+  });
+  check("Giving a shown sign-in up from the popup closes its window, and the next sign-in opens");
 
   const givenUpCount = tokenCount();
   const givenUpWindowsBefore = await popup.evaluate(async () =>

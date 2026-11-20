@@ -12,6 +12,7 @@ import {
   inspectKeyboardFocus,
   inspectReducedMotion,
 } from "./browser-design-review.mjs";
+import { reportErrorEvents } from "./page-error-events.mjs";
 
 const root = resolve(import.meta.dirname, "../../..");
 const output = resolve(
@@ -187,6 +188,7 @@ async function open(language = "fr", patch = {}) {
   );
   const page = await context.newPage();
   page.on("pageerror", (error) => report.pageErrors.push(error.message));
+  await reportErrorEvents(page, (message) => report.pageErrors.push(message));
   await page.addInitScript(
     ({ language, catalog, initial }) => {
       const listeners = [];

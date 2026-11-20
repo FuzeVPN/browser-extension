@@ -10,6 +10,7 @@ import { homedir, tmpdir } from "node:os";
 import { join, resolve } from "node:path";
 import { pathToFileURL } from "node:url";
 import { waitForRead } from "../../../scripts/browser-wait.mjs";
+import { reportErrorEvents } from "./page-error-events.mjs";
 
 const root = resolve(import.meta.dirname, "../../..");
 const playwright =
@@ -402,6 +403,7 @@ try {
   await installSyntheticAuth();
   const page = await context.newPage();
   page.on("pageerror", (error) => report.pageErrors.push(error.name));
+  await reportErrorEvents(page, (message) => report.pageErrors.push(message));
   await page.goto(`chrome-extension://${worker.url().split("/")[2]}/popup/popup.html`);
 
   await login(page);

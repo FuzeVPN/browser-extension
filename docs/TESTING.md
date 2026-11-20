@@ -240,9 +240,20 @@ and Pashto that no text in Arabic script is letter-spaced; the `diagnostics` sui
 the same of the assistance page. The `web-login-ui` suite opens the home view in a window
 shorter than the page needs and requires the tighter layout, then the full one again.
 
+The `web-auth-integration` suite shows a real sign-in window, gives the attempt up from
+the popup, and requires that the window closes and that the next sign-in opens and
+completes. Firefox leaves that window open; no Firefox check covers it.
+
+Every Chromium suite which opens a page of the extension also reports the errors which
+that page dispatches without throwing (`tests/browser/chromium/page-error-events.mjs`),
+and fails on any. Playwright's `pageerror` is given uncaught exceptions only; a browser
+reports an observer of sizes whose callback resizes what it observes as an error event of
+the window, and lists it among the errors of the extension.
+
 The Firefox suite repeats, against the real background: no text rewritten at a poll, the
 focus kept by the subscription refresh, the focus given to the neighbour of a site removed
-from the keyboard, and the letter spacing in the four languages. These pages are opened in
+from the keyboard, the letter spacing in the four languages, and no error event while the
+page is fitted again at each of these changes. These pages are opened in
 a tab: the height which a real popup window is given, zoomed or on a small screen, is not
 observed by any suite.
 

@@ -112,8 +112,26 @@ export function keepPopupFitted(shell: HTMLElement): void {
   });
   const fit = () => void fitter.fit();
   fit();
-  // Texts differ by language and state, and fonts load after the first layout.
-  new ResizeObserver(fit).observe(shell);
+  // Texts differ by language and state: the page is fitted as soon as its content
+  // changes, before the browser lays it out, so that no frame shows it unfitted. The
+  // fitting itself only writes `data-fit` on the shell, which is not a change of content.
+  new MutationObserver((changes) => {
+    if (changes.some((change) => change.target !== shell || change.attributeName !== "data-fit"))
+      fit();
+  }).observe(shell, { subtree: true, childList: true, characterData: true, attributes: true });
+  // Whatever else changes the height, a font which loads for instance, is seen by its
+  // size. That observer only asks for a fitting, made before the next frame: a callback
+  // which resized what it observes is reported by the browser as an observer loop, among
+  // the errors of the extension.
+  let asked = false;
+  new ResizeObserver(() => {
+    if (asked) return;
+    asked = true;
+    requestAnimationFrame(() => {
+      asked = false;
+      fit();
+    });
+  }).observe(shell);
   void document.fonts.ready.then(fit);
   window.addEventListener("resize", () => fitter.windowResized());
   // A zoom, or a move to another screen, changes the pixel ratio of the page.
