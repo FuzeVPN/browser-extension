@@ -1,8 +1,1 @@
-[
-  {
-    "advisory": "GHSA-fc5q-39xc-vjpf",
-    "package": "picomatch",
-    "reason": "Every released version is affected (<= 4.0.7) and none fixes it. picomatch is used by the build and test tools only (vite, vitest, tinyglobby) on patterns written in this repository; it is not part of the extension.",
-    "until": "2026-12-18"
-  }
-]
+[]
