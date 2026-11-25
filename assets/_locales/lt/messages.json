@@ -293,6 +293,18 @@
   "recoveryHelp": {
     "message": "Spustelėkite „Bandyti dar kartą“, kad atnaujintumėte apsaugą. „Atjungti“ leidžia naršyti be FuzeVPN."
   },
+  "proxyConflictTitle": {
+    "message": "Naršyklės ryšį jau valdo kitas plėtinys"
+  },
+  "proxyConflictHelp": {
+    "message": "Jūsų naršyklė leidžia savo ryšį valdyti tik vienam plėtiniui, o šiuo metu juo naudojasi kitas. Išjunkite arba pašalinkite tą VPN arba tarpinio serverio plėtinį naršyklės plėtinių sąraše, tada pasirinkite „$1“: FuzeVPN iškart atnaujins jūsų apsaugą."
+  },
+  "proxyConflictWhy": {
+    "message": "Kodėl tai matau dabar?"
+  },
+  "proxyConflictWhyText": {
+    "message": "Šis pranešimas rodomas, kai naršyklės ryšį perima kitas plėtinys: dažniausiai jis ką tik įdiegtas, įjungtas arba atnaujintas, kartais automatiškai. Priežastis nėra FuzeVPN, jūsų paskyra ar prenumerata."
+  },
   "retryConnection": {
     "message": "Bandyti dar kartą"
   },

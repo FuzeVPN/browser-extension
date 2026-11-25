@@ -25,14 +25,16 @@ process.stdout.write(`Firefox toolchain evidence: ${output}\n`);
 if (args[0] === "--preflight")
   process.stdout.write(`${JSON.stringify(toolchain.evidence, null, 2)}\n`);
 else
-  for (const mode of ["web-auth", "consent", "full"]) {
+  for (const mode of ["web-auth", "consent", "proxy-conflict", "full"]) {
     const env = { ...environment };
     delete env.FIREFOX_WEB_AUTH_ONLY;
     delete env.FIREFOX_CONSENT_ONLY;
+    delete env.FIREFOX_PROXY_CONFLICT_ONLY;
     delete env.FIREFOX_LEGAL_ONLY;
     delete env.FIREFOX_DESIGN_ONLY;
     if (mode === "web-auth") env.FIREFOX_WEB_AUTH_ONLY = "1";
     if (mode === "consent") env.FIREFOX_CONSENT_ONLY = "1";
+    if (mode === "proxy-conflict") env.FIREFOX_PROXY_CONFLICT_ONLY = "1";
     const status = await new Promise((resolveStatus, reject) => {
       const child = spawn(
         process.execPath,

@@ -82,7 +82,11 @@
           <path d="M12 8v5m0 3h.01" />
         </svg>
         <p id="recoveryStatus" class="recovery-status"></p>
-        <p class="muted" data-i18n="recoveryHelp"></p>
+        <p id="recoveryHelp" class="muted"></p>
+        <details id="recoveryWhy" class="recovery-why hidden" data-fit-apart>
+          <summary data-i18n="proxyConflictWhy"></summary>
+          <p class="muted" data-i18n="proxyConflictWhyText"></p>
+        </details>
         <div class="recovery-actions">
           <button
             id="retryButton"

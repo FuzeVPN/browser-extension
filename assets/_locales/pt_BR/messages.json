@@ -293,6 +293,18 @@
   "recoveryHelp": {
     "message": "Tente novamente para retomar a proteção. Desconectar permite navegar sem o FuzeVPN."
   },
+  "proxyConflictTitle": {
+    "message": "Outra extensão já está gerenciando a conexão do navegador"
+  },
+  "proxyConflictHelp": {
+    "message": "Seu navegador permite que apenas uma extensão gerencie a conexão, e outra está usando esse controle agora. Desative ou remova essa extensão de VPN ou proxy nas extensões do navegador e depois selecione “$1”: o FuzeVPN retomará sua proteção imediatamente."
+  },
+  "proxyConflictWhy": {
+    "message": "Por que estou vendo isso agora?"
+  },
+  "proxyConflictWhyText": {
+    "message": "Esta mensagem aparece quando outra extensão assume a conexão do navegador: na maioria das vezes, ela acabou de ser instalada, ativada ou atualizada, às vezes automaticamente. A causa não é o FuzeVPN, a sua conta nem a sua assinatura."
+  },
   "retryConnection": {
     "message": "Tentar novamente"
   },

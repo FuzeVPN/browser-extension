@@ -293,6 +293,18 @@
   "recoveryHelp": {
     "message": "Sake gwadawa don ci gaba da kariya. Cire haɗi yana ba ka damar bincike ba tare da FuzeVPN ba."
   },
+  "proxyConflictTitle": {
+    "message": "Wani ƙari yana sarrafa haɗin burauza tuni"
+  },
+  "proxyConflictHelp": {
+    "message": "Burauzarka tana barin ƙari ɗaya kawai ya sarrafa haɗinta, kuma wani ƙari yana amfani da shi a yanzu. Kashe ko cire wannan ƙarin VPN ko proxy daga ƙare-ƙaren burauza, sannan ka zaɓi “$1”: FuzeVPN zai ci gaba da kare ka nan take."
+  },
+  "proxyConflictWhy": {
+    "message": "Me ya sa nake ganin wannan yanzu?"
+  },
+  "proxyConflictWhyText": {
+    "message": "Wannan saƙon yana bayyana ne idan wani ƙari ya karɓi ragamar haɗin burauza: galibi an shigar da shi, an kunna shi ko an sabunta shi ne yanzu-yanzu, wani lokaci ta atomatik. Ba FuzeVPN, asusunka ko biyan kuɗinka ne sanadi ba."
+  },
   "retryConnection": {
     "message": "Sake gwadawa"
   },

@@ -293,6 +293,18 @@
   "recoveryHelp": {
     "message": "Mēģiniet vēlreiz, lai atsāktu aizsardzību. Atvienojoties varat pārlūkot bez FuzeVPN."
   },
+  "proxyConflictTitle": {
+    "message": "Pārlūka savienojumu jau pārvalda cits paplašinājums"
+  },
+  "proxyConflictHelp": {
+    "message": "Jūsu pārlūks ļauj savienojumu pārvaldīt tikai vienam paplašinājumam, un pašlaik to izmanto cits. Izslēdziet vai noņemiet šo VPN vai starpniekservera paplašinājumu pārlūka paplašinājumu sarakstā un pēc tam izvēlieties „$1”: FuzeVPN uzreiz atsāks jūsu aizsardzību."
+  },
+  "proxyConflictWhy": {
+    "message": "Kāpēc es to redzu tagad?"
+  },
+  "proxyConflictWhyText": {
+    "message": "Šis ziņojums tiek rādīts, kad pārlūka savienojumu pārņem cits paplašinājums: visbiežāk tas ir tikko instalēts, ieslēgts vai atjaunināts, dažkārt automātiski. Cēlonis nav FuzeVPN, jūsu konts vai abonements."
+  },
   "retryConnection": {
     "message": "Mēģināt vēlreiz"
   },

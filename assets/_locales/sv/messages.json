@@ -293,6 +293,18 @@
   "recoveryHelp": {
     "message": "Försök igen för att återuppta skyddet. Koppla från låter dig surfa utan FuzeVPN."
   },
+  "proxyConflictTitle": {
+    "message": "Ett annat tillägg hanterar redan webbläsarens anslutning"
+  },
+  "proxyConflictHelp": {
+    "message": "Din webbläsare låter bara ett tillägg hantera anslutningen, och just nu används den av ett annat. Stäng av eller ta bort det VPN- eller proxytillägget bland webbläsarens tillägg och välj sedan ”$1”: FuzeVPN återupptar ditt skydd direkt."
+  },
+  "proxyConflictWhy": {
+    "message": "Varför ser jag det här nu?"
+  },
+  "proxyConflictWhyText": {
+    "message": "Det här meddelandet visas när ett annat tillägg tar över webbläsarens anslutning: oftast har det just installerats, aktiverats eller uppdaterats, ibland automatiskt. Det beror inte på FuzeVPN, ditt konto eller ditt abonnemang."
+  },
   "retryConnection": {
     "message": "Försök igen"
   },

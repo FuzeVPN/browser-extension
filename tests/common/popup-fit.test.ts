@@ -1,6 +1,13 @@
 // SPDX-License-Identifier: MPL-2.0
 
-import { FIT_LEVELS, POPUP_MAX_HEIGHT, PopupFitter, fitPopup } from "../../src/ui/popup/fit";
+import {
+  FIT_LEVELS,
+  POPUP_MAX_HEIGHT,
+  PopupFitter,
+  fitPopup,
+  mayChangeHeight,
+  openedHeight,
+} from "../../src/ui/popup/fit";
 
 /** A page whose height depends on the level its shell asks for. */
 function page(heights: number[], initial?: string) {
@@ -184,5 +191,110 @@ describe("fitting the popup page to a window which the browser makes shorter", (
     p.window.windowHeight = () => 900;
     expect(p.fitter.fit()).toBe(2);
     expect(p.settle()).toBe("2");
+  });
+});
+
+describe("the height an open disclosure adds", () => {
+  const box = (height: number) => ({ getBoundingClientRect: () => ({ height }) });
+  const disclosure = (height: number, summary: number | null) => ({
+    ...box(height),
+    querySelector: () => (summary === null ? null : box(summary)),
+  });
+
+  it("is what shows under the summary, fractions of a pixel included", () => {
+    expect(openedHeight([disclosure(101.59375, 24)])).toBe(77.59375);
+  });
+
+  it("adds up over several disclosures", () => {
+    expect(openedHeight([disclosure(100, 24), disclosure(60.5, 34)])).toBe(102.5);
+  });
+
+  it("is nothing when none is open", () => {
+    expect(openedHeight([])).toBe(0);
+  });
+
+  it("is the whole height of a disclosure without a summary", () => {
+    expect(openedHeight([disclosure(80, null)])).toBe(80);
+  });
+
+  it("is never negative", () => {
+    expect(openedHeight([disclosure(20, 24)])).toBe(0);
+  });
+});
+
+describe("the changes of the page which ask for a new fitting", () => {
+  const shell = { name: "shell" };
+  const node = { name: "node" };
+  const now = (current: string | null) => () => current;
+
+  it("counts a text or a node which changes", () => {
+    expect(mayChangeHeight({ type: "characterData", target: node }, shell, now(null))).toBe(true);
+    expect(mayChangeHeight({ type: "childList", target: node }, shell, now(null))).toBe(true);
+  });
+
+  it("counts an attribute whose value changes, a disclosure which opens for instance", () => {
+    expect(
+      mayChangeHeight(
+        { type: "attributes", target: node, attributeName: "open", oldValue: null },
+        shell,
+        now(""),
+      ),
+    ).toBe(true);
+    expect(
+      mayChangeHeight(
+        { type: "attributes", target: node, attributeName: "class", oldValue: "card" },
+        shell,
+        now("card hidden"),
+      ),
+    ).toBe(true);
+  });
+
+  it("leaves out an attribute set again to the value it had", () => {
+    expect(
+      mayChangeHeight(
+        { type: "attributes", target: node, attributeName: "aria-busy", oldValue: "false" },
+        shell,
+        now("false"),
+      ),
+    ).toBe(false);
+    expect(
+      mayChangeHeight(
+        { type: "attributes", target: node, attributeName: "hidden", oldValue: null },
+        shell,
+        now(null),
+      ),
+    ).toBe(false);
+  });
+
+  it("leaves out the level which the fitting writes on the shell", () => {
+    expect(
+      mayChangeHeight(
+        { type: "attributes", target: shell, attributeName: "data-fit", oldValue: null },
+        shell,
+        now("3"),
+      ),
+    ).toBe(false);
+  });
+
+  it("counts the same attribute anywhere else, and any other attribute of the shell", () => {
+    expect(
+      mayChangeHeight(
+        { type: "attributes", target: node, attributeName: "data-fit", oldValue: null },
+        shell,
+        now("3"),
+      ),
+    ).toBe(true);
+    expect(
+      mayChangeHeight(
+        {
+          type: "attributes",
+          target: shell,
+          attributeName: "data-account-unknown",
+          oldValue: null,
+        },
+        shell,
+        now(""),
+      ),
+    ).toBe(true);
   });
 });

@@ -319,7 +319,22 @@ jusqu'au prochain changement de zoom ou d'écran. L'ajustement est fait dès que
 change, avant que le navigateur ne le mette en page. L'observateur de taille, qui voit le
 reste (une police qui se charge), ne fait que demander un ajustement avant l'image
 suivante : un observateur qui redimensionne ce qu'il observe est signalé par le navigateur
-parmi les erreurs de l'extension.
+parmi les erreurs de l'extension. Un attribut réécrit à la valeur qu'il avait ne demande
+pas d'ajustement (`mayChangeHeight`) : la page en écrit à chaque interrogation, et
+l'ajustement retirerait puis remettrait son niveau à chaque fois. Un volet marqué
+`data-fit-apart`, que le lecteur ouvre lui-même, n'est pas compté dans la hauteur à
+ajuster (`openedHeight`) : l'ouvrir ne resserre rien d'autre, et la page défile s'il le
+faut.
+
+Un navigateur ne laisse qu'une extension régler son proxy. Lorsqu'une autre le tient
+(`proxy_controlled_by_extension`), FuzeVPN ne peut rien reprendre de lui-même, et
+réessayer échoue tant que l'autre extension est active. Le panneau de reprise dit alors ce
+qui se passe et quoi faire : désactiver ou supprimer l'autre extension, puis sélectionner
+« Réessayer », nommé par le libellé que ce bouton porte dans la langue affichée. Ce texte
+remplace celui du panneau et le bandeau d'erreur, qui le répéterait en moins de mots. Un
+volet « Pourquoi je vois ça maintenant ? », fermé par défaut, ajoute que l'autre extension
+vient le plus souvent d'être installée, activée ou mise à jour ; il se referme avec
+l'avertissement. Rien n'est reconnecté sans la demande de l'utilisateur.
 
 L'écriture arabe lie ses lettres : dans ces langues (arabe, persan, ourdou, pachto), les
 titres et les étiquettes gardent l'espacement du texte.

@@ -260,7 +260,11 @@ async function pageWrites(page, act) {
         ? node.id
           ? `#${node.id}`
           : `${name(node.parentNode)} > ${node.localName}`
-        : `${name(node.parentNode)} > text`;
+        : node === document
+          ? "document"
+          : node?.parentNode
+            ? `${name(node.parentNode)} > text`
+            : "removed";
     window.pageWritten = [];
     window.pageObserver = new MutationObserver((records) => {
       for (const record of records) {
@@ -348,6 +352,171 @@ async function status(page) {
     error: document.getElementById("errorMessage").textContent,
     commands: window.fixture.commands,
   }));
+}
+/**
+ * Another extension holds the proxy of the browser. The recovery panel says what happens
+ * and what to do, in place of its usual text and of the error banner, and explains on
+ * request why this shows now.
+ */
+async function reviewProxyConflict() {
+  const page = await open();
+  const conflict = {
+    status: "error",
+    protected: false,
+    protectionRequested: true,
+    trafficBlocked: false,
+    blockingScope: "unverified",
+    activeLocationId: null,
+    error: "proxy_controlled_by_extension",
+  };
+  await page.evaluate((conflict) => window.fixture.publish(conflict), conflict);
+  await page.locator("#recoveryWhy summary").waitFor({ state: "visible" });
+  const view = () =>
+    page.evaluate(() => {
+      const at = (id) => document.getElementById(id);
+      const why = at("recoveryWhy");
+      const summary = why.querySelector("summary");
+      const answer = why.querySelector("p");
+      const bottom = (id) => at(id).getBoundingClientRect().bottom;
+      return {
+        title: at("recoveryStatus").textContent,
+        help: at("recoveryHelp").textContent,
+        retry: at("retryButton").textContent,
+        question: summary.textContent,
+        answer: answer.textContent,
+        // A closed disclosure keeps the boxes of its text: only `checkVisibility` tells it hidden.
+        answerShown: answer.checkVisibility(),
+        open: why.open,
+        banner: at("errorBanner").getClientRects().length > 0,
+        statusCard: at("statusCard").getClientRects().length > 0,
+        level: Number(document.querySelector(".shell").dataset.fit ?? 0),
+        page: document.documentElement.scrollHeight,
+        viewport: innerHeight,
+        wide: document.documentElement.scrollWidth > innerWidth,
+        target: summary.getBoundingClientRect().height,
+        added: why.getBoundingClientRect().height - summary.getBoundingClientRect().height,
+        actionsTop: at("retryButton").getBoundingClientRect().top + scrollY,
+        actionsBottom:
+          Math.max(bottom("retryButton"), bottom("recoveryDisconnectButton")) + scrollY,
+      };
+    });
+  // The page is fitted again in the frame which follows a change of its size: once that
+  // is done, a poll or a publication which says the same writes nothing, its level included.
+  await rendered(page);
+  await rendered(page);
+  assert.deepEqual(await pageWrites(page, samePoll(page)), []);
+  assert.deepEqual(await pageWrites(page, samePublication(page)), []);
+
+  const scrolling = [];
+  const moved = [];
+  for (const locale of SUPPORTED_LANGUAGES) {
+    await page.evaluate((locale) => {
+      window.fixture.publish({ languagePreference: locale, effectiveLanguage: locale });
+    }, locale);
+    await page.waitForFunction((locale) => document.documentElement.lang === locale, locale);
+    await rendered(page);
+    const translated = JSON.parse(
+      await readFile(join(extension, `_locales/${localeDirectory(locale)}/messages.json`), "utf8"),
+    );
+    const closed = await view();
+    assert.equal(closed.title, translated.proxyConflictTitle.message);
+    // The instruction names the button to press by the label it has in this language.
+    assert.equal(
+      closed.help,
+      translated.proxyConflictHelp.message.replace("$1", translated.retryConnection.message),
+    );
+    assert.equal(closed.retry, translated.retryConnection.message);
+    assert.equal(closed.question, translated.proxyConflictWhy.message);
+    assert.equal(closed.open, false);
+    assert.equal(closed.answerShown, false);
+    assert.equal(closed.banner, false, `The banner repeats the warning in ${locale}`);
+    assert.equal(closed.statusCard, false);
+    assert.equal(closed.wide, false, `Horizontal overflow in ${locale}`);
+    assert(closed.target >= 24, `Small disclosure in ${locale}: ${String(closed.target)}`);
+    if (closed.page > closed.viewport) scrolling.push(`${locale}: ${String(closed.page)}`);
+
+    await page.locator("#recoveryWhy summary").click();
+    await rendered(page);
+    const opened = await view();
+    assert.equal(opened.open, true);
+    assert.equal(opened.answerShown, true);
+    assert.equal(opened.answer, translated.proxyConflictWhyText.message);
+    assert.equal(opened.wide, false, `Horizontal overflow of the explanation in ${locale}`);
+    // What the reader opened moves nothing else: the layout is the one fitted without
+    // it, and the actions are lower by the height of the text, to the fraction of a pixel.
+    const shift = opened.actionsTop - closed.actionsTop;
+    if (opened.level !== closed.level || Math.abs(shift - opened.added) >= 0.5)
+      moved.push(
+        `${locale}: level ${String(closed.level)} then ${String(opened.level)}, actions ${String(shift)} px lower for a text of ${String(opened.added)} px`,
+      );
+    assert(opened.added > 0);
+    assert(
+      opened.actionsBottom <= opened.viewport,
+      `The actions leave the popup in ${locale}: ${JSON.stringify(opened)}`,
+    );
+    await page.screenshot({
+      path: join(output, `conflict-${localeDirectory(locale)}.png`),
+      animations: "disabled",
+    });
+    await page.locator("#recoveryWhy summary").click();
+    await rendered(page);
+    assert.equal((await view()).open, false);
+  }
+  assert.deepEqual(scrolling, [], "The warning scrolls in some languages");
+  assert.deepEqual(moved, [], "Opening the explanation moves the rest in some languages");
+  report.checks.push({
+    passed: true,
+    name: "A proxy held by another extension is explained in seventy languages without scrolling, and its explanation opens without moving the rest",
+  });
+
+  await page.evaluate(() =>
+    window.fixture.publish({ languagePreference: "fr", effectiveLanguage: "fr" }),
+  );
+  await page.waitForFunction(() => document.documentElement.lang === "fr");
+  // From the keyboard: the question is reached and opened as any disclosure.
+  await page.locator("#recoveryWhy summary").focus();
+  await page.keyboard.press("Enter");
+  await rendered(page);
+  assert.equal((await view()).open, true);
+  // Another failure: the usual text and the banner are back, the explanation is closed.
+  await page.evaluate(() => window.fixture.publish({ error: "network_error" }));
+  await rendered(page);
+  assert.equal(await page.locator("#recoveryWhy").isVisible(), false);
+  assert.equal(await page.locator("#recoveryWhy").evaluate((node) => node.open), false);
+  assert.equal(
+    await page.locator("#recoveryStatus").textContent(),
+    catalog.securityBlockUnverified.message,
+  );
+  assert.equal(await page.locator("#recoveryHelp").textContent(), catalog.recoveryHelp.message);
+  assert.equal(await page.locator("#errorBanner").isVisible(), true);
+  assert.equal(
+    await page.locator("#errorMessage").textContent(),
+    catalog.error_network_error.message,
+  );
+  // The conflict again, then the protection given up: the status card is back, and the
+  // banner says the error which the panel no longer does.
+  await page.evaluate((conflict) => window.fixture.publish(conflict), conflict);
+  await rendered(page);
+  assert.equal(await page.locator("#errorBanner").isVisible(), false);
+  await page.evaluate(() =>
+    window.fixture.publish({
+      status: "disconnected",
+      protectionRequested: false,
+      blockingScope: "none",
+    }),
+  );
+  await rendered(page);
+  assert.equal(await page.locator("#recoveryPanel").isVisible(), false);
+  assert.equal(await page.locator("#errorBanner").isVisible(), true);
+  assert.equal(
+    await page.locator("#errorMessage").textContent(),
+    catalog.error_proxy_controlled_by_extension.message,
+  );
+  report.checks.push({
+    passed: true,
+    name: "The warning of a proxy held by another extension opens from the keyboard, and leaves with its explanation for any other state",
+  });
+  await page.close();
 }
 async function reviewPopupDesign() {
   const design = { screenshots: [], measurements: [] };
@@ -449,9 +618,45 @@ async function reviewPopupDesign() {
       }),
     );
     await capture("recovery", {
-      text: ["#recoveryPanel p", "#errorMessage", "#retryButton", "#recoveryDisconnectButton"],
+      text: ["#recoveryPanel > p", "#errorMessage", "#retryButton", "#recoveryDisconnectButton"],
       primary: ["#retryButton", "#recoveryDisconnectButton"],
     });
+    // Another extension holds the proxy: the panel explains it, and why on request.
+    await page.evaluate(() =>
+      window.fixture.publish({
+        status: "error",
+        trafficBlocked: false,
+        blockingScope: "unverified",
+        error: "proxy_controlled_by_extension",
+        nextRetryAt: null,
+      }),
+    );
+    await page.locator("#recoveryWhy summary").waitFor({ state: "visible" });
+    const conflict = {
+      text: [
+        "#recoveryPanel > p",
+        "#recoveryWhy summary",
+        "#retryButton",
+        "#recoveryDisconnectButton",
+      ],
+      controls: ["#recoveryWhy summary"],
+      primary: ["#retryButton", "#recoveryDisconnectButton"],
+      inView: ["#retryButton", "#recoveryDisconnectButton"],
+    };
+    await capture("conflict", conflict);
+    await page.locator("#recoveryWhy summary").click();
+    const explained = { ...conflict, text: [...conflict.text, "#recoveryWhy p"] };
+    await capture("conflict-explained", explained);
+    const theme = await page.evaluate(() => {
+      const before = document.documentElement.dataset.theme ?? null;
+      document.documentElement.dataset.theme = "dark";
+      return before;
+    });
+    await capture("conflict-explained-dark", explained);
+    await page.evaluate((theme) => {
+      if (theme === null) delete document.documentElement.dataset.theme;
+      else document.documentElement.dataset.theme = theme;
+    }, theme);
     await page.evaluate(() =>
       window.fixture.publish({
         status: "connected",
@@ -969,7 +1174,9 @@ try {
     catalog.statusBlockedAction.message,
   );
   assert.equal(await page.locator("#retryButton").isEnabled(), true);
-  assert.equal(await page.locator("#recoveryPanel [data-i18n='recoveryHelp']").isVisible(), true);
+  assert.equal(await page.locator("#recoveryHelp").textContent(), catalog.recoveryHelp.message);
+  assert.equal(await page.locator("#recoveryHelp").isVisible(), true);
+  assert.equal(await page.locator("#recoveryWhy").isVisible(), false);
   assert.equal(await page.locator("#errorBanner").isVisible(), true);
   await page.evaluate(() =>
     window.fixture.publish({
@@ -2543,6 +2750,7 @@ try {
     name: "Signed out, settings show no account group and keep protection, assistance and legal links",
   });
   await page.close();
+  await reviewProxyConflict();
   await reviewPopupDesign();
   assert.deepEqual(report.pageErrors, []);
   report.completed = true;

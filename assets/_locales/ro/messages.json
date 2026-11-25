@@ -293,6 +293,18 @@
   "recoveryHelp": {
     "message": "Reîncercați să reluați protecția. Deconectare vă permite să navigați fără FuzeVPN."
   },
+  "proxyConflictTitle": {
+    "message": "O altă extensie gestionează deja conexiunea browserului"
+  },
+  "proxyConflictHelp": {
+    "message": "Browserul dvs. permite unei singure extensii să îi gestioneze conexiunea, iar în acest moment o folosește alta. Dezactivați sau eliminați acea extensie VPN sau proxy din extensiile browserului, apoi selectați „$1”: FuzeVPN vă va relua imediat protecția."
+  },
+  "proxyConflictWhy": {
+    "message": "De ce văd acest mesaj acum?"
+  },
+  "proxyConflictWhyText": {
+    "message": "Acest mesaj apare atunci când o altă extensie preia conexiunea browserului: de cele mai multe ori tocmai a fost instalată, activată sau actualizată, uneori automat. Cauza nu este FuzeVPN, contul dvs. sau abonamentul dvs."
+  },
   "retryConnection": {
     "message": "Reîncercați"
   },

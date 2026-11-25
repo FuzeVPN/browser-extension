@@ -293,6 +293,18 @@
   "recoveryHelp": {
     "message": "Probeer opnieuw om de bescherming te hervatten. Verbreken laat je browsen zonder FuzeVPN."
   },
+  "proxyConflictTitle": {
+    "message": "Een andere extensie beheert de verbinding van de browser al"
+  },
+  "proxyConflictHelp": {
+    "message": "Je browser laat maar één extensie de verbinding beheren, en op dit moment gebruikt een andere die. Schakel die VPN- of proxy-extensie uit of verwijder deze via de extensies van je browser en kies daarna ‘$1’: FuzeVPN hervat je bescherming meteen."
+  },
+  "proxyConflictWhy": {
+    "message": "Waarom zie ik dit nu?"
+  },
+  "proxyConflictWhyText": {
+    "message": "Deze melding verschijnt wanneer een andere extensie de verbinding van de browser overneemt: meestal is die net geïnstalleerd, ingeschakeld of bijgewerkt, soms automatisch. Het ligt niet aan FuzeVPN, je account of je abonnement."
+  },
   "retryConnection": {
     "message": "Opnieuw proberen"
   },

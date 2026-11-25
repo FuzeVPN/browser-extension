@@ -293,6 +293,18 @@
   "recoveryHelp": {
     "message": "Isku day mar kale si ilaalintu u sii socoto. Ka goynta waxay kuu oggolaanaysaa inaad baadho adigoon FuzeVPN isticmaalin."
   },
+  "proxyConflictTitle": {
+    "message": "Kordhin kale ayaa hore u maamusha xiriirka biraawsarka"
+  },
+  "proxyConflictHelp": {
+    "message": "Biraawsarkaagu wuxuu u oggolaadaa hal kordhin oo keliya inuu maamulo xiriirkiisa, haddana mid kale ayaa isticmaalaya. Dami ama ka saar kordhintaas VPN ama proxy-ga ah kordhinnada biraawsarka, kadibna dooro “$1”: FuzeVPN isla markiiba wuxuu sii wadi doonaa ilaalintaada."
+  },
+  "proxyConflictWhy": {
+    "message": "Maxaan hadda tan u arkayaa?"
+  },
+  "proxyConflictWhyText": {
+    "message": "Fariintani waxay soo baxdaa marka kordhin kale la wareego xiriirka biraawsarka: inta badan hadda ayaa la rakibay, la shiday ama la cusboonaysiiyay, mararka qaar si otomaatig ah. Sababtu ma aha FuzeVPN, akoonkaaga ama rukunkaaga."
+  },
   "retryConnection": {
     "message": "Isku day mar kale"
   },

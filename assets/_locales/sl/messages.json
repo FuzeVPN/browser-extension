@@ -293,6 +293,18 @@
   "recoveryHelp": {
     "message": "Poskusite znova, da nadaljujete zaščito. „Prekini povezavo“ omogoča brskanje brez FuzeVPN."
   },
+  "proxyConflictTitle": {
+    "message": "Povezavo brskalnika že upravlja druga razširitev"
+  },
+  "proxyConflictHelp": {
+    "message": "Vaš brskalnik dovoli upravljanje svoje povezave samo eni razširitvi, trenutno pa jo uporablja druga. Izklopite ali odstranite to razširitev VPN ali proxy med razširitvami brskalnika in nato izberite „$1“: FuzeVPN bo takoj nadaljeval vašo zaščito."
+  },
+  "proxyConflictWhy": {
+    "message": "Zakaj to vidim zdaj?"
+  },
+  "proxyConflictWhyText": {
+    "message": "To sporočilo se prikaže, ko povezavo brskalnika prevzame druga razširitev: najpogosteje je bila pravkar nameščena, vklopljena ali posodobljena, včasih samodejno. Vzrok ni FuzeVPN, vaš račun ali vaša naročnina."
+  },
   "retryConnection": {
     "message": "Poskusi znova"
   },

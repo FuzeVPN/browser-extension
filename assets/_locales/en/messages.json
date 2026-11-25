@@ -293,6 +293,18 @@
   "recoveryHelp": {
     "message": "Retry to resume protection. Disconnect lets you browse without FuzeVPN."
   },
+  "proxyConflictTitle": {
+    "message": "Another extension is already managing this browser’s connection"
+  },
+  "proxyConflictHelp": {
+    "message": "Your browser lets only one extension manage its connection, and another one is using it right now. Turn off or remove that VPN or proxy extension from your browser’s extensions, then select “$1”: FuzeVPN will resume your protection right away."
+  },
+  "proxyConflictWhy": {
+    "message": "Why am I seeing this now?"
+  },
+  "proxyConflictWhyText": {
+    "message": "This message appears when another extension takes over the browser’s connection: most often it has just been installed, turned on or updated, sometimes automatically. FuzeVPN, your account and your subscription are not the cause."
+  },
   "retryConnection": {
     "message": "Retry"
   },

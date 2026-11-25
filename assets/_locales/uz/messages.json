@@ -293,6 +293,18 @@
   "recoveryHelp": {
     "message": "Himoyani tiklash uchun qayta urinib koʻring. Uzish tugmasi FuzeVPN ishlatmasdan veb-kezish imkonini beradi."
   },
+  "proxyConflictTitle": {
+    "message": "Brauzer ulanishini allaqachon boshqa kengaytma boshqarmoqda"
+  },
+  "proxyConflictHelp": {
+    "message": "Brauzeringiz ulanishini faqat bitta kengaytmaga boshqartiradi va hozir undan boshqa kengaytma foydalanmoqda. Oʻsha VPN yoki proksi kengaytmasini brauzer kengaytmalari boʻlimida oʻchirib qoʻying yoki olib tashlang, soʻng “$1” tugmasini tanlang: FuzeVPN himoyangizni darhol tiklaydi."
+  },
+  "proxyConflictWhy": {
+    "message": "Nega buni hozir koʻryapman?"
+  },
+  "proxyConflictWhyText": {
+    "message": "Bu xabar boshqa kengaytma brauzer ulanishini oʻz qoʻliga olganda chiqadi: koʻpincha u hozirgina oʻrnatilgan, yoqilgan yoki yangilangan boʻladi, baʼzan avtomatik tarzda. Sabab FuzeVPN, hisobingiz yoki obunangizda emas."
+  },
   "retryConnection": {
     "message": "Qayta urinish"
   },

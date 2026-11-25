@@ -293,6 +293,18 @@
   "recoveryHelp": {
     "message": "Kaitse jätkamiseks proovi uuesti. Ühenduse katkestamisel saad sirvida ilma FuzeVPN-ita."
   },
+  "proxyConflictTitle": {
+    "message": "Brauseri ühendust haldab juba mõni teine laiendus"
+  },
+  "proxyConflictHelp": {
+    "message": "Sinu brauser lubab ühendust hallata ainult ühel laiendusel ja praegu kasutab seda teine. Lülita see VPN- või puhverserveri laiendus brauseri laienduste alt välja või eemalda see ning vali seejärel „$1“: FuzeVPN taastab sinu kaitse kohe."
+  },
+  "proxyConflictWhy": {
+    "message": "Miks ma seda nüüd näen?"
+  },
+  "proxyConflictWhyText": {
+    "message": "See teade kuvatakse siis, kui mõni teine laiendus võtab brauseri ühenduse üle: enamasti on see äsja paigaldatud, sisse lülitatud või uuendatud, mõnikord automaatselt. Põhjus ei ole FuzeVPN-is, sinu kontos ega tellimuses."
+  },
   "retryConnection": {
     "message": "Proovi uuesti"
   },

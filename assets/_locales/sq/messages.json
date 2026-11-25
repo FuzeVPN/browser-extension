@@ -293,6 +293,18 @@
   "recoveryHelp": {
     "message": "Provoni përsëri për të rifilluar mbrojtjen. «Shkëput» ju lejon të shfletoni pa FuzeVPN."
   },
+  "proxyConflictTitle": {
+    "message": "Një shtesë tjetër po e menaxhon tashmë lidhjen e shfletuesit"
+  },
+  "proxyConflictHelp": {
+    "message": "Shfletuesi juaj lejon vetëm një shtesë të menaxhojë lidhjen e tij, dhe tani po e përdor një tjetër. Çaktivizoni ose hiqni atë shtesë VPN ose proxy te shtesat e shfletuesit, pastaj zgjidhni «$1»: FuzeVPN do ta rifillojë menjëherë mbrojtjen tuaj."
+  },
+  "proxyConflictWhy": {
+    "message": "Pse po e shoh këtë tani?"
+  },
+  "proxyConflictWhyText": {
+    "message": "Ky mesazh shfaqet kur një shtesë tjetër merr në dorë lidhjen e shfletuesit: më së shpeshti ajo sapo është instaluar, aktivizuar ose përditësuar, ndonjëherë automatikisht. Shkaku nuk është FuzeVPN, llogaria juaj apo abonimi juaj."
+  },
   "retryConnection": {
     "message": "Provo përsëri"
   },

@@ -293,6 +293,18 @@
   "recoveryHelp": {
     "message": "Coba lagi untuk melanjutkan perlindungan. Putuskan sambungan memungkinkan Anda menjelajah tanpa FuzeVPN."
   },
+  "proxyConflictTitle": {
+    "message": "Ekstensi lain sudah mengelola koneksi peramban"
+  },
+  "proxyConflictHelp": {
+    "message": "Peramban Anda hanya mengizinkan satu ekstensi mengelola koneksinya, dan saat ini ekstensi lain sedang menggunakannya. Nonaktifkan atau hapus ekstensi VPN atau proksi tersebut dari daftar ekstensi peramban, lalu pilih “$1”: FuzeVPN akan segera melanjutkan perlindungan Anda."
+  },
+  "proxyConflictWhy": {
+    "message": "Mengapa saya melihat ini sekarang?"
+  },
+  "proxyConflictWhyText": {
+    "message": "Pesan ini muncul saat ekstensi lain mengambil alih koneksi peramban: biasanya ekstensi itu baru saja dipasang, diaktifkan, atau diperbarui, terkadang secara otomatis. Penyebabnya bukan FuzeVPN, akun Anda, atau langganan Anda."
+  },
   "retryConnection": {
     "message": "Coba lagi"
   },

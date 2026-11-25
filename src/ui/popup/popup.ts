@@ -151,6 +151,8 @@ const elements = {
   confirmationAcceptButton: element<HTMLButtonElement>("confirmationAcceptButton"),
   recoveryPanel: element<HTMLElement>("recoveryPanel"),
   recoveryStatus: element<HTMLElement>("recoveryStatus"),
+  recoveryHelp: element<HTMLElement>("recoveryHelp"),
+  recoveryWhy: element<HTMLDetailsElement>("recoveryWhy"),
   retryButton: element<HTMLButtonElement>("retryButton"),
   recoveryDisconnectButton: element<HTMLButtonElement>("recoveryDisconnectButton"),
   killSwitchEnabled: element<HTMLInputElement>("killSwitchEnabled"),
@@ -1368,12 +1370,35 @@ function renderNetwork(next: AppSnapshot): void {
   elements.publicIp.title = message("ipLookupExplanation");
 }
 
-function renderSecurity(next: AppSnapshot): void {
+/** Whether the recovery panel takes the place of the status card. */
+function showsRecovery(next: AppSnapshot): boolean {
   const recovering = next.protectionRequested && !next.protected;
-  const showRecovery =
+  return (
     communicationFailed ||
     next.blockingScope === "unverified" ||
-    (!isConnectionProgress(next) && (recovering || next.trafficBlocked));
+    (!isConnectionProgress(next) && (recovering || next.trafficBlocked))
+  );
+}
+
+/**
+ * Another extension holds the proxy of the browser, which lets one extension at a time
+ * set it. FuzeVPN can do nothing about it, and trying again fails for as long as the
+ * other one is active: the recovery panel then says what happens and what the user can
+ * do, in place of its usual text and of the error banner. The panel belongs to the view
+ * of an account: without one, the banner of the sign-in view still says the error.
+ */
+function showsProxyConflict(next: AppSnapshot): boolean {
+  return (
+    !communicationFailed &&
+    next.profile !== null &&
+    next.error === "proxy_controlled_by_extension" &&
+    showsRecovery(next)
+  );
+}
+
+function renderSecurity(next: AppSnapshot): void {
+  const showRecovery = showsRecovery(next);
+  const proxyConflict = showsProxyConflict(next);
   elements.recoveryPanel.classList.toggle("hidden", !showRecovery);
   elements.statusCard.classList.toggle("hidden", showRecovery);
   // Recovery must retain access to the selector so an empty catalogue can be refreshed.
@@ -1390,17 +1415,29 @@ function renderSecurity(next: AppSnapshot): void {
   setText(
     elements.recoveryStatus,
     message(
-      communicationFailed || next.blockingScope === "unverified"
-        ? "securityBlockUnverified"
-        : next.blockingScope === "except_excluded"
-          ? "statusBlockedExceptions"
-          : next.trafficBlocked
-            ? next.nextRetryAt !== null || next.status === "connecting"
-              ? "statusBlockedRetry"
-              : "statusBlockedAction"
-            : "statusProtectionUnavailable",
+      proxyConflict
+        ? "proxyConflictTitle"
+        : communicationFailed || next.blockingScope === "unverified"
+          ? "securityBlockUnverified"
+          : next.blockingScope === "except_excluded"
+            ? "statusBlockedExceptions"
+            : next.trafficBlocked
+              ? next.nextRetryAt !== null || next.status === "connecting"
+                ? "statusBlockedRetry"
+                : "statusBlockedAction"
+              : "statusProtectionUnavailable",
     ),
   );
+  setText(
+    elements.recoveryHelp,
+    proxyConflict
+      ? // The instruction names the button by the label it has in this language.
+        message("proxyConflictHelp", [message("retryConnection")])
+      : message("recoveryHelp"),
+  );
+  // It worked for days, then this: the reason is one question away, closed by default.
+  elements.recoveryWhy.classList.toggle("hidden", !proxyConflict);
+  if (!proxyConflict && elements.recoveryWhy.open) elements.recoveryWhy.open = false;
   setDisabled(
     elements.retryButton,
     communicationFailed
@@ -1460,7 +1497,9 @@ function renderError(next: AppSnapshot): void {
     : next.error
       ? errorMessage(next.error, next.retryAfterSeconds)
       : "";
-  elements.errorBanner.classList.toggle("hidden", !visible || next.profile === null);
+  // The recovery panel says a conflict over the proxy itself, with what to do.
+  const said = showsProxyConflict(next);
+  elements.errorBanner.classList.toggle("hidden", !visible || said || next.profile === null);
   elements.loginErrorBanner.classList.toggle("hidden", !visible || next.profile !== null);
   setText(elements.errorMessage, text);
   setText(elements.loginErrorMessage, text);

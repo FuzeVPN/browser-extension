@@ -17,6 +17,7 @@ import firefox from "selenium-webdriver/firefox.js";
 import { existingFirefoxToolchain } from "./toolchain.mjs";
 import { firefoxDesignReview } from "./browser-firefox-design-review.mjs";
 import { firefoxConsentCheck } from "./browser-firefox-consent-check.mjs";
+import { firefoxProxyConflictCheck } from "./browser-firefox-proxy-conflict-check.mjs";
 import {
   firefoxWebAuthFixture,
   firefoxWebAuthLogin,
@@ -53,11 +54,13 @@ const report = {
       ? "web-auth-only"
       : process.env.FIREFOX_CONSENT_ONLY === "1"
         ? "consent-only"
-        : process.env.FIREFOX_LEGAL_ONLY === "1"
-          ? "legal-only"
-          : process.env.FIREFOX_DESIGN_ONLY === "1"
-            ? "design-only"
-            : "full",
+        : process.env.FIREFOX_PROXY_CONFLICT_ONLY === "1"
+          ? "proxy-conflict-only"
+          : process.env.FIREFOX_LEGAL_ONLY === "1"
+            ? "legal-only"
+            : process.env.FIREFOX_DESIGN_ONLY === "1"
+              ? "design-only"
+              : "full",
   scope:
     "Unchanged packaged Firefox extension, synthetic HTTPS API and authenticated TLS proxy on loopback, isolated Firefox profile",
   distSha256: sha256(JSON.stringify(before)),
@@ -2489,6 +2492,24 @@ try {
         setDiagnosticMode: (mode) => {
           diagnosticResponseMode = mode;
         },
+      });
+      report.success = true;
+      break runtimeValidation;
+    }
+    if (process.env.FIREFOX_PROXY_CONFLICT_ONLY === "1") {
+      await firefoxProxyConflictCheck({
+        driver,
+        dist,
+        output,
+        privileged,
+        send,
+        snapshot,
+        openPopup,
+        permissions,
+        click,
+        waitFor,
+        record,
+        loginViaWeb,
       });
       report.success = true;
       break runtimeValidation;

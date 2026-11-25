@@ -293,6 +293,18 @@
   "recoveryHelp": {
     "message": "Hãy thử lại để tiếp tục bảo vệ. Ngắt kết nối cho phép bạn duyệt mà không cần FuzeVPN."
   },
+  "proxyConflictTitle": {
+    "message": "Một tiện ích mở rộng khác đang quản lý kết nối của trình duyệt"
+  },
+  "proxyConflictHelp": {
+    "message": "Trình duyệt của bạn chỉ cho phép một tiện ích mở rộng quản lý kết nối, và hiện một tiện ích khác đang sử dụng quyền đó. Hãy tắt hoặc gỡ tiện ích mở rộng VPN hoặc proxy đó trong phần tiện ích mở rộng của trình duyệt, rồi chọn “$1”: FuzeVPN sẽ tiếp tục bảo vệ bạn ngay."
+  },
+  "proxyConflictWhy": {
+    "message": "Vì sao tôi thấy thông báo này lúc này?"
+  },
+  "proxyConflictWhyText": {
+    "message": "Thông báo này xuất hiện khi một tiện ích mở rộng khác giành quyền kết nối của trình duyệt: thường là tiện ích đó vừa được cài đặt, bật hoặc cập nhật, đôi khi một cách tự động. Nguyên nhân không phải do FuzeVPN, tài khoản hay gói đăng ký của bạn."
+  },
   "retryConnection": {
     "message": "Thử lại"
   },

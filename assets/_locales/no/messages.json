@@ -293,6 +293,18 @@
   "recoveryHelp": {
     "message": "Prøv på nytt for å gjenoppta beskyttelsen. Koble fra lar deg surfe uten FuzeVPN."
   },
+  "proxyConflictTitle": {
+    "message": "En annen utvidelse styrer allerede nettleserens tilkobling"
+  },
+  "proxyConflictHelp": {
+    "message": "Nettleseren din lar bare én utvidelse styre tilkoblingen, og en annen bruker den akkurat nå. Slå av eller fjern den VPN- eller proxy-utvidelsen under nettleserens utvidelser, og velg deretter «$1»: FuzeVPN gjenopptar beskyttelsen din med en gang."
+  },
+  "proxyConflictWhy": {
+    "message": "Hvorfor ser jeg dette nå?"
+  },
+  "proxyConflictWhyText": {
+    "message": "Denne meldingen vises når en annen utvidelse tar over nettleserens tilkobling: Som oftest er den nettopp installert, slått på eller oppdatert, noen ganger automatisk. Det skyldes verken FuzeVPN, kontoen din eller abonnementet ditt."
+  },
   "retryConnection": {
     "message": "Prøv på nytt"
   },

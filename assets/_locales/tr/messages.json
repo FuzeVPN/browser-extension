@@ -293,6 +293,18 @@
   "recoveryHelp": {
     "message": "Korumayı sürdürmeyi yeniden deneyin. Bağlantıyı Kes, FuzeVPN olmadan göz atmanıza olanak tanır."
   },
+  "proxyConflictTitle": {
+    "message": "Tarayıcının bağlantısını zaten başka bir uzantı yönetiyor"
+  },
+  "proxyConflictHelp": {
+    "message": "Tarayıcınız bağlantısını yalnızca bir uzantının yönetmesine izin verir ve şu anda başka bir uzantı onu kullanıyor. O VPN veya proxy uzantısını tarayıcının uzantılar bölümünden kapatın veya kaldırın, ardından “$1” seçeneğini belirleyin: FuzeVPN korumanızı hemen sürdürür."
+  },
+  "proxyConflictWhy": {
+    "message": "Bunu neden şimdi görüyorum?"
+  },
+  "proxyConflictWhyText": {
+    "message": "Bu mesaj, başka bir uzantı tarayıcının bağlantısını devraldığında görünür: çoğunlukla o uzantı az önce yüklenmiş, etkinleştirilmiş veya güncellenmiştir, bazen otomatik olarak. Neden FuzeVPN, hesabınız veya aboneliğiniz değildir."
+  },
   "retryConnection": {
     "message": "Yeniden dene"
   },

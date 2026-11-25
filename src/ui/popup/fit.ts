@@ -35,6 +35,58 @@ export function fitPopup(
   return level;
 }
 
+/** What has a height on the page, fractions of a pixel included. */
+interface Box {
+  getBoundingClientRect(): { height: number };
+}
+
+/** A disclosure of the page, as the fitter reads it. */
+interface Disclosure extends Box {
+  querySelector(selector: "summary"): Box | null;
+}
+
+/**
+ * The height which the open disclosures add under their summary.
+ *
+ * A text the reader asked for by opening it is theirs to scroll: the page is fitted
+ * for what it shows unasked, so that opening one moves nothing else. Heights are read
+ * with their fractions: rounded one by one, they would not add up to the page's.
+ */
+export function openedHeight(disclosures: ArrayLike<Disclosure>): number {
+  let height = 0;
+  for (const disclosure of Array.from(disclosures))
+    height += Math.max(
+      0,
+      disclosure.getBoundingClientRect().height -
+        (disclosure.querySelector("summary")?.getBoundingClientRect().height ?? 0),
+    );
+  return height;
+}
+
+/** A change of the page, as its observer reports it. */
+interface PageChange {
+  type: string;
+  target: unknown;
+  attributeName?: string | null;
+  oldValue?: string | null;
+}
+
+/**
+ * Whether a change of the page may change its height. The level the fitting itself
+ * writes on the shell does not, nor an attribute set again to the value it had: the
+ * page sets many of these at every poll of its state, and fitting again for them would
+ * take the level away and put it back each time.
+ */
+export function mayChangeHeight(
+  change: PageChange,
+  shell: unknown,
+  value: (target: unknown, attribute: string) => string | null,
+): boolean {
+  if (change.type !== "attributes" || !change.attributeName) return true;
+  if (change.target === shell && change.attributeName === "data-fit") return false;
+  return value(change.target, change.attributeName) !== (change.oldValue ?? null);
+}
+
 /** What the fitter reads of the window which shows the page. */
 export interface PopupWindow {
   /** The height of the content of the page. */
@@ -102,8 +154,16 @@ export function keepPopupFitted(shell: HTMLElement): void {
   let settling: ReturnType<typeof setTimeout> | undefined;
   const fitter = new PopupFitter(shell, {
     // The height of the content itself: the root's scroll height is never below the
-    // viewport, which is taller than a popup when the page is opened in a tab.
-    contentHeight: () => shell.offsetHeight,
+    // viewport, which is taller than a popup when the page is opened in a tab. What
+    // the reader opened of a disclosure left apart from the fitting is not counted.
+    contentHeight: () => {
+      const opened = openedHeight(
+        shell.querySelectorAll<HTMLElement>("details[open][data-fit-apart]"),
+      );
+      return opened === 0
+        ? shell.offsetHeight
+        : Math.round(shell.getBoundingClientRect().height - opened);
+    },
     windowHeight: () => window.innerHeight,
     whenSettled(check) {
       clearTimeout(settling);
@@ -113,12 +173,17 @@ export function keepPopupFitted(shell: HTMLElement): void {
   const fit = () => void fitter.fit();
   fit();
   // Texts differ by language and state: the page is fitted as soon as its content
-  // changes, before the browser lays it out, so that no frame shows it unfitted. The
-  // fitting itself only writes `data-fit` on the shell, which is not a change of content.
+  // changes, before the browser lays it out, so that no frame shows it unfitted.
+  const attribute = (target: unknown, name: string) => (target as Element).getAttribute(name);
   new MutationObserver((changes) => {
-    if (changes.some((change) => change.target !== shell || change.attributeName !== "data-fit"))
-      fit();
-  }).observe(shell, { subtree: true, childList: true, characterData: true, attributes: true });
+    if (changes.some((change) => mayChangeHeight(change, shell, attribute))) fit();
+  }).observe(shell, {
+    subtree: true,
+    childList: true,
+    characterData: true,
+    attributes: true,
+    attributeOldValue: true,
+  });
   // Whatever else changes the height, a font which loads for instance, is seen by its
   // size. That observer only asks for a fitting, made before the next frame: a callback
   // which resized what it observes is reported by the browser as an observer loop, among

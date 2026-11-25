@@ -293,6 +293,18 @@
   "recoveryHelp": {
     "message": "Riprova per riprendere la protezione. Disconnettere consente di navigare senza FuzeVPN."
   },
+  "proxyConflictTitle": {
+    "message": "Un’altra estensione gestisce già la connessione del browser"
+  },
+  "proxyConflictHelp": {
+    "message": "Il tuo browser consente a una sola estensione di gestire la sua connessione, e in questo momento la sta usando un’altra. Disattiva o rimuovi quell’estensione VPN o proxy dalle estensioni del browser, poi seleziona «$1»: FuzeVPN riprenderà subito la tua protezione."
+  },
+  "proxyConflictWhy": {
+    "message": "Perché lo vedo adesso?"
+  },
+  "proxyConflictWhyText": {
+    "message": "Questo messaggio compare quando un’altra estensione prende il controllo della connessione del browser: di solito è appena stata installata, attivata o aggiornata, a volte automaticamente. La causa non è FuzeVPN, né il tuo account, né il tuo abbonamento."
+  },
   "retryConnection": {
     "message": "Riprova"
   },

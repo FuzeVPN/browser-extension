@@ -6,8 +6,12 @@ import assert from "node:assert/strict";
 import { createHash } from "node:crypto";
 
 async function currentWorker(context) {
+  const workers = context.serviceWorkers();
   return (
-    context.serviceWorkers()[0] ?? (await context.waitForEvent("serviceworker", { timeout: 15000 }))
+    // A suite may load a second extension beside this one, with a worker of its own.
+    workers.find((worker) => worker.url().endsWith("/background/service-worker.js")) ??
+    workers[0] ??
+    (await context.waitForEvent("serviceworker", { timeout: 15000 }))
   );
 }
 

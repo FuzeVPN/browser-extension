@@ -293,6 +293,18 @@
   "recoveryHelp": {
     "message": "Pokušajte ponovno kako biste nastavili zaštitu. „Prekini vezu” omogućuje pregledavanje bez FuzeVPN-a."
   },
+  "proxyConflictTitle": {
+    "message": "Drugo proširenje već upravlja vezom preglednika"
+  },
+  "proxyConflictHelp": {
+    "message": "Vaš preglednik dopušta samo jednom proširenju da upravlja njegovom vezom, a trenutačno je koristi drugo. Isključite ili uklonite to VPN ili proxy proširenje u proširenjima preglednika, a zatim odaberite „$1”: FuzeVPN odmah će nastaviti vašu zaštitu."
+  },
+  "proxyConflictWhy": {
+    "message": "Zašto ovo vidim sada?"
+  },
+  "proxyConflictWhyText": {
+    "message": "Ova se poruka prikazuje kada drugo proširenje preuzme vezu preglednika: najčešće je upravo instalirano, uključeno ili ažurirano, ponekad automatski. Uzrok nije FuzeVPN, vaš račun ni vaša pretplata."
+  },
   "retryConnection": {
     "message": "Pokušaj ponovno"
   },

@@ -293,6 +293,18 @@
   "recoveryHelp": {
     "message": "重試恢復保護。斷開連線讓您無需 FuzeVPN 即可瀏覽。"
   },
+  "proxyConflictTitle": {
+    "message": "另一個擴充功能已在管理瀏覽器的連線"
+  },
+  "proxyConflictHelp": {
+    "message": "您的瀏覽器只允許一個擴充功能管理其連線，而目前另一個擴充功能正在使用它。請在瀏覽器的擴充功能中停用或移除該 VPN 或代理伺服器擴充功能，然後選取「$1」：FuzeVPN 會立即恢復對您的保護。"
+  },
+  "proxyConflictWhy": {
+    "message": "為什麼我現在會看到這則訊息？"
+  },
+  "proxyConflictWhyText": {
+    "message": "當另一個擴充功能接管瀏覽器的連線時，就會出現這則訊息：通常是因為它剛被安裝、啟用或更新，有時是自動進行的。這與 FuzeVPN、您的帳戶或您的訂閱無關。"
+  },
   "retryConnection": {
     "message": "重試"
   },

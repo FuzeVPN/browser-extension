@@ -293,6 +293,18 @@
   "recoveryHelp": {
     "message": "Tún gbìyànjú láti tẹ̀síwájú ààbò. Gígé ìsopọ̀ jẹ́ kí o wákiri láìsí FuzeVPN."
   },
+  "proxyConflictTitle": {
+    "message": "Àfikún mìíràn ti ń ṣàkóso ìsopọ̀ aṣàwákiri tẹ́lẹ̀"
+  },
+  "proxyConflictHelp": {
+    "message": "Aṣàwákiri rẹ ń jẹ́ kí àfikún kan ṣoṣo ṣàkóso ìsopọ̀ rẹ̀, àfikún mìíràn sì ń lò ó báyìí. Pa àfikún VPN tàbí proxy yẹn tàbí yọ ọ́ kúrò nínú àwọn àfikún aṣàwákiri, lẹ́yìn náà yan “$1”: FuzeVPN yóò tẹ̀síwájú ààbò rẹ lẹ́sẹ̀kẹsẹ̀."
+  },
+  "proxyConflictWhy": {
+    "message": "Kí ló dé tí mo fi ń rí èyí báyìí?"
+  },
+  "proxyConflictWhyText": {
+    "message": "Ìfiránṣẹ́ yìí máa ń hàn nígbà tí àfikún mìíràn bá gba ìṣàkóso ìsopọ̀ aṣàwákiri: lọ́pọ̀ ìgbà, wọ́n ṣẹ̀ṣẹ̀ fi sórí ẹ̀rọ, tàn án tàbí ṣe ìmúdójúìwọ̀n rẹ̀ ni, nígbà mìíràn láìfọwọ́yí. FuzeVPN, àkáǹtì rẹ tàbí ìforúkọsílẹ̀ rẹ kọ́ ni ìdí rẹ̀."
+  },
   "retryConnection": {
     "message": "Tún gbìyànjú"
   },

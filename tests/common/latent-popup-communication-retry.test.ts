@@ -35,6 +35,7 @@ class FakeElement {
   className = "";
   disabled = false;
   checked = false;
+  open = false;
   dataset: Record<string, string> = {};
   focus = vi.fn();
   scrollIntoView = vi.fn();
@@ -92,6 +93,8 @@ const functionNames = new Set([
   "renderError",
   "renderLogoutOutcome",
   "renderSecurity",
+  "showsRecovery",
+  "showsProxyConflict",
   "webLoginRequiresDisconnect",
   "isConnectionProgress",
   "isBusy",
@@ -113,6 +116,8 @@ function signedOut(revision: number): AppSnapshot {
     snapshotVersion: { workerId: "worker-a", revision },
   };
 }
+
+const version = (revision: number) => ({ workerId: "worker-a", revision });
 
 function signedIn(revision: number): AppSnapshot {
   return {
@@ -199,7 +204,8 @@ function setup() {
     expandedLocationCities: new Set<string>(),
     elements,
     systemDarkTheme: new FakeElement(),
-    message: (key: string) => key,
+    message: (key: string, substitutions?: string[]) =>
+      substitutions ? `${key}[${substitutions.join(",")}]` : key,
     extensionApi: {
       runtime: {
         sendMessage: vi.fn((message: ExtensionRequest) => {
@@ -301,6 +307,101 @@ describe("a signed-out popup whose first snapshot request failed", () => {
     pressSignIn();
     await settle();
     expect(sent().slice(1), "messages sent by the recovery button").toEqual(["get_snapshot"]);
+  });
+});
+
+describe("a popup whose proxy another extension holds", () => {
+  const conflict = (patch: Partial<AppSnapshot> = {}): AppSnapshot => ({
+    ...signedIn(1),
+    status: "error",
+    protected: false,
+    protectionRequested: true,
+    activeLocationId: null,
+    blockingScope: "unverified",
+    error: "proxy_controlled_by_extension",
+    ...patch,
+  });
+
+  it("says in the recovery panel what happens and what to do, in place of the error banner", () => {
+    const { subject, elements } = setup();
+    expect(subject.render(conflict(), true)).toBe(true);
+
+    expect(elements.recoveryPanel!.visible).toBe(true);
+    expect(elements.recoveryStatus!.textContent).toBe("proxyConflictTitle");
+    // The instruction names the button to press by its own label.
+    expect(elements.recoveryHelp!.textContent).toBe("proxyConflictHelp[retryConnection]");
+    // Said once: the banner would repeat it in fewer words.
+    expect(elements.errorBanner!.visible).toBe(false);
+    // Why it shows now, after days without it, is offered and not imposed.
+    expect(elements.recoveryWhy!.visible).toBe(true);
+    expect(elements.recoveryWhy!.open).toBe(false);
+    expect(elements.retryButton).toMatchObject({ textContent: "retryConnection", disabled: false });
+  });
+
+  it("returns to the usual recovery text for any other failure", () => {
+    const { subject, elements } = setup();
+    subject.render(conflict(), true);
+    // The reader opened the explanation: it does not stay open for another failure.
+    elements.recoveryWhy!.open = true;
+    subject.render({ ...conflict({ error: "network_error" }), snapshotVersion: version(2) }, true);
+
+    expect(elements.recoveryStatus!.textContent).toBe("securityBlockUnverified");
+    expect(elements.recoveryHelp!.textContent).toBe("recoveryHelp");
+    expect(elements.recoveryWhy!.visible).toBe(false);
+    expect(elements.recoveryWhy!.open).toBe(false);
+    expect(elements.errorBanner!.visible).toBe(true);
+    // This stand-in translates no error code: the banner falls back to its generic text.
+    expect(elements.errorMessage!.textContent).toBe("error_unknown_error");
+  });
+
+  it("keeps the usual recovery text when nothing failed", () => {
+    const { subject, elements } = setup();
+    subject.render(
+      conflict({ error: null, blockingScope: "all", trafficBlocked: true, status: "blocked" }),
+      true,
+    );
+    expect(elements.recoveryHelp!.textContent).toBe("recoveryHelp");
+    expect(elements.errorBanner!.visible).toBe(false);
+  });
+
+  it("keeps the banner when the recovery panel is not shown", () => {
+    const { subject, elements } = setup();
+    // The protection is no longer asked for: the status card is back, the error is still said.
+    subject.render(
+      conflict({ protectionRequested: false, blockingScope: "none", status: "disconnected" }),
+      true,
+    );
+    expect(elements.recoveryPanel!.visible).toBe(false);
+    expect(elements.errorBanner!.visible).toBe(true);
+    expect(elements.errorMessage!.textContent).not.toBe("");
+  });
+
+  it("keeps the banner of the sign-in view, where no recovery panel shows", () => {
+    const { subject, elements } = setup();
+    subject.render(
+      {
+        ...signedOut(1),
+        protectionRequested: true,
+        blockingScope: "unverified",
+        error: "proxy_controlled_by_extension",
+      },
+      true,
+    );
+    expect(elements.loginView!.visible).toBe(true);
+    expect(elements.recoveryWhy!.visible).toBe(false);
+    expect(elements.loginErrorBanner!.visible).toBe(true);
+    expect(elements.errorBanner!.visible).toBe(false);
+  });
+
+  it("says that the worker does not answer rather than what its last state said", async () => {
+    const popup = setup();
+    popup.subject.render(conflict(), true);
+    void popup.subject.initializePopup();
+    popup.pending[0]!.reject(new Error("worker_unreachable"));
+    await settle();
+    expect(popup.elements.recoveryStatus!.textContent).toBe("securityBlockUnverified");
+    expect(popup.elements.recoveryHelp!.textContent).toBe("recoveryHelp");
+    expect(popup.elements.errorMessage!.textContent).toBe("extensionCommunicationError");
   });
 });
 

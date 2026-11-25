@@ -293,6 +293,18 @@
   "recoveryHelp": {
     "message": "Nwaa ọzọ iji maliteghachi nchekwa. Ịkwụsị njikọ na-enye gị ohere ịchọgharị na-enweghị FuzeVPN."
   },
+  "proxyConflictTitle": {
+    "message": "Ndọtị ọzọ na-ejikwa njikọ ihe nchọgharị ugbu a"
+  },
+  "proxyConflictHelp": {
+    "message": "Ihe nchọgharị gị na-ekwe ka naanị otu ndọtị jikwaa njikọ ya, ma ndọtị ọzọ na-eji ya ugbu a. Gbanyụọ ma ọ bụ wepụ ndọtị VPN ma ọ bụ proxy ahụ na ndọtị nke ihe nchọgharị, wee họrọ “$1”: FuzeVPN ga-amaliteghachi nchekwa gị ozugbo."
+  },
+  "proxyConflictWhy": {
+    "message": "Gịnị mere m ji na-ahụ nke a ugbu a?"
+  },
+  "proxyConflictWhyText": {
+    "message": "Ozi a na-apụta mgbe ndọtị ọzọ weghaara njikọ ihe nchọgharị: ọtụtụ mgbe, a ka wụnyere ya, gbanye ya ma ọ bụ melite ya ugbu a, mgbe ụfọdụ na-akpaghị aka. Ọ bụghị FuzeVPN, akaụntụ gị ma ọ bụ ndebanye aha gị kpatara ya."
+  },
   "retryConnection": {
     "message": "Nwaa ọzọ"
   },

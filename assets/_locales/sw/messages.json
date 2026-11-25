@@ -293,6 +293,18 @@
   "recoveryHelp": {
     "message": "Chagua “Jaribu tena” ili kurejesha ulinzi. “Tenganisha” hukuruhusu kuvinjari bila FuzeVPN."
   },
+  "proxyConflictTitle": {
+    "message": "Kiendelezi kingine tayari kinasimamia muunganisho wa kivinjari"
+  },
+  "proxyConflictHelp": {
+    "message": "Kivinjari chako kinaruhusu kiendelezi kimoja tu kusimamia muunganisho wake, na kwa sasa kingine kinautumia. Zima au ondoa kiendelezi hicho cha VPN au proksi kwenye viendelezi vya kivinjari, kisha chagua “$1”: FuzeVPN itarejesha ulinzi wako mara moja."
+  },
+  "proxyConflictWhy": {
+    "message": "Kwa nini ninaona hili sasa?"
+  },
+  "proxyConflictWhyText": {
+    "message": "Ujumbe huu huonekana kiendelezi kingine kinapochukua muunganisho wa kivinjari: mara nyingi kimesakinishwa, kuwashwa au kusasishwa hivi punde, wakati mwingine kiotomatiki. Chanzo si FuzeVPN, akaunti yako wala usajili wako."
+  },
   "retryConnection": {
     "message": "Jaribu tena"
   },

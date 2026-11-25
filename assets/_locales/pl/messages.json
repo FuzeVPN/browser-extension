@@ -293,6 +293,18 @@
   "recoveryHelp": {
     "message": "Spróbuj ponownie, aby wznowić ochronę. Rozłączenie pozwala przeglądać bez FuzeVPN."
   },
+  "proxyConflictTitle": {
+    "message": "Inne rozszerzenie już zarządza połączeniem przeglądarki"
+  },
+  "proxyConflictHelp": {
+    "message": "Twoja przeglądarka pozwala zarządzać swoim połączeniem tylko jednemu rozszerzeniu, a w tej chwili korzysta z niego inne. Wyłącz lub usuń to rozszerzenie VPN lub proxy w rozszerzeniach przeglądarki, a następnie wybierz „$1”: FuzeVPN od razu wznowi Twoją ochronę."
+  },
+  "proxyConflictWhy": {
+    "message": "Dlaczego widzę to teraz?"
+  },
+  "proxyConflictWhyText": {
+    "message": "Ten komunikat pojawia się, gdy inne rozszerzenie przejmuje połączenie przeglądarki: najczęściej zostało właśnie zainstalowane, włączone lub zaktualizowane, czasem automatycznie. Przyczyną nie jest FuzeVPN, Twoje konto ani Twoja subskrypcja."
+  },
   "retryConnection": {
     "message": "Spróbuj ponownie"
   },

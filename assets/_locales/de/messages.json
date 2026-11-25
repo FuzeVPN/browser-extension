@@ -293,6 +293,18 @@
   "recoveryHelp": {
     "message": "Versuche es erneut, um den Schutz fortzusetzen. Trennen ermöglicht das Surfen ohne FuzeVPN."
   },
+  "proxyConflictTitle": {
+    "message": "Eine andere Erweiterung verwaltet bereits die Verbindung des Browsers"
+  },
+  "proxyConflictHelp": {
+    "message": "Dein Browser lässt nur eine Erweiterung seine Verbindung verwalten, und gerade nutzt sie eine andere. Deaktiviere oder entferne diese VPN- oder Proxy-Erweiterung in den Erweiterungen deines Browsers und wähle dann „$1“: FuzeVPN setzt deinen Schutz sofort fort."
+  },
+  "proxyConflictWhy": {
+    "message": "Warum sehe ich das jetzt?"
+  },
+  "proxyConflictWhyText": {
+    "message": "Diese Meldung erscheint, wenn eine andere Erweiterung die Verbindung des Browsers übernimmt: Meist wurde sie gerade installiert, aktiviert oder aktualisiert, manchmal automatisch. An FuzeVPN, deinem Konto oder deinem Abo liegt es nicht."
+  },
   "retryConnection": {
     "message": "Erneut versuchen"
   },

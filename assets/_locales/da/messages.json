@@ -293,6 +293,18 @@
   "recoveryHelp": {
     "message": "Prøv igen for at genoptage beskyttelsen. Afbryd lader dig browse uden FuzeVPN."
   },
+  "proxyConflictTitle": {
+    "message": "En anden udvidelse styrer allerede browserens forbindelse"
+  },
+  "proxyConflictHelp": {
+    "message": "Din browser lader kun én udvidelse styre forbindelsen, og en anden bruger den lige nu. Slå den VPN- eller proxyudvidelse fra, eller fjern den, under browserens udvidelser, og vælg derefter ”$1”: FuzeVPN genoptager straks din beskyttelse."
+  },
+  "proxyConflictWhy": {
+    "message": "Hvorfor ser jeg dette nu?"
+  },
+  "proxyConflictWhyText": {
+    "message": "Denne besked vises, når en anden udvidelse overtager browserens forbindelse: Oftest er den lige blevet installeret, slået til eller opdateret, nogle gange automatisk. Det skyldes hverken FuzeVPN, din konto eller dit abonnement."
+  },
   "retryConnection": {
     "message": "Prøv igen"
   },

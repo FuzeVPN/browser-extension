@@ -9,7 +9,7 @@ and a complete source-to-distribution comparison. Packaging also performs this c
 
 `npm run validate:browser` runs Chrome/Chromium, Edge and Firefox **successively**.
 Use `npm run validate:browser -- firefox` for the Firefox native authentication,
-diagnostic consent and full network/UI suites. Browser profiles, synthetic certificates,
+diagnostic consent, proxy conflict and full network/UI suites. Browser profiles, synthetic certificates,
 captures and raw reports remain under ignored `audit/local`. They are not release files.
 These tests must not use an existing personal browser profile or a production account.
 
@@ -243,6 +243,25 @@ shorter than the page needs and requires the tighter layout, then the full one a
 The `web-auth-integration` suite shows a real sign-in window, gives the attempt up from
 the popup, and requires that the window closes and that the next sign-in opens and
 completes. Firefox leaves that window open; no Firefox check covers it.
+
+The `proxy-conflict` suite loads a second extension beside the built one, which really
+sets the proxy of the browser, then gives it back. It requires that the conflict is
+reported as such with blocking rules still in place, that the popup explains it in place
+of the error banner and opens its explanation without moving the rest, that a retry under
+the other extension shows the same warning, and that the retry resumes the protection once
+the proxy is given back. The Firefox campaign runs the same scenario as its
+`proxy-conflict` mode, with a second temporary add-on which sets `proxy.settings`, and
+checks the warning there in the seventy languages. Which of two extensions a browser lets
+set its proxy is the browser's rule: these suites observe that the second one holds it,
+and do not establish that rule; no third-party VPN extension is run.
+
+The `popup-audit-fixes` suite checks the same warning in seventy languages on a mocked
+runtime: texts equal to the catalog, with the label of the retry button in place of its
+placeholder; no scrolling in a popup of 600 px and no horizontal overflow; the error
+banner hidden; the explanation opened without a change of fitting level, the actions lower
+by exactly its height and still inside the popup; nothing rewritten, the fitting level
+included, at a poll or a publication which says the same. It also opens the explanation
+from the keyboard and requires that it leaves, closed, with the warning.
 
 Every Chromium suite which opens a page of the extension also reports the errors which
 that page dispatches without throwing (`tests/browser/chromium/page-error-events.mjs`),

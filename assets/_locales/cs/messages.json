@@ -293,6 +293,18 @@
   "recoveryHelp": {
     "message": "Opakujte obnovení ochrany. Odpojit vám umožní procházet bez FuzeVPN."
   },
+  "proxyConflictTitle": {
+    "message": "Připojení prohlížeče už spravuje jiné rozšíření"
+  },
+  "proxyConflictHelp": {
+    "message": "Váš prohlížeč dovoluje spravovat své připojení jen jednomu rozšíření a právě ho používá jiné. Vypněte nebo odeberte toto rozšíření VPN či proxy v rozšířeních prohlížeče a pak zvolte „$1“: FuzeVPN vaši ochranu ihned obnoví."
+  },
+  "proxyConflictWhy": {
+    "message": "Proč to vidím právě teď?"
+  },
+  "proxyConflictWhyText": {
+    "message": "Tato zpráva se zobrazí, když připojení prohlížeče převezme jiné rozšíření: nejčastěji bylo právě nainstalováno, zapnuto nebo aktualizováno, někdy automaticky. Příčinou není FuzeVPN, váš účet ani vaše předplatné."
+  },
   "retryConnection": {
     "message": "Zkuste to znovu"
   },

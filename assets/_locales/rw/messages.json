@@ -293,6 +293,18 @@
   "recoveryHelp": {
     "message": "Ongera ugerageze kugira ngo uburinzi bukomeze. Guhagarika guhuza bigufasha gusura imbuga udakoresheje FuzeVPN."
   },
+  "proxyConflictTitle": {
+    "message": "Undi mugereka usanzwe ucunga ukwihuza kwa mushakisha"
+  },
+  "proxyConflictHelp": {
+    "message": "Mushakisha yawe yemerera umugereka umwe gusa gucunga ukwihuza kwayo, kandi ubu hari undi uri kubikoresha. Zimya cyangwa ukureho uwo mugereka wa VPN cyangwa porokisi mu migereka ya mushakisha, hanyuma uhitemo “$1”: FuzeVPN izahita ikomeza kukurinda."
+  },
+  "proxyConflictWhy": {
+    "message": "Kuki mbona ibi ubu?"
+  },
+  "proxyConflictWhyText": {
+    "message": "Ubu butumwa bugaragara iyo undi mugereka ufashe ukwihuza kwa mushakisha: akenshi uba umaze gushyirwamo, gufungurwa cyangwa kuvugururwa, rimwe na rimwe mu buryo bwikora. Impamvu si FuzeVPN, konti yawe cyangwa ifatabuguzi ryawe."
+  },
   "retryConnection": {
     "message": "Ongera ugerageze"
   },

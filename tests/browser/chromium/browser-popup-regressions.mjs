@@ -272,7 +272,9 @@ try {
   });
   await page.goto(url);
   await page.locator("#mainView").waitFor({ state: "visible" });
-  await rendered(page);
+  // A browser may show the main view in its very first frames: a few are sampled before
+  // they are read, however early the view came.
+  await page.waitForFunction(() => window.viewsPainted.length > 2);
   const viewsPainted = await page.evaluate(() => window.viewsPainted);
   assert(viewsPainted.length > 2);
   assert(viewsPainted.includes("main"));

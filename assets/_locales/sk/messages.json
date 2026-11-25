@@ -293,6 +293,18 @@
   "recoveryHelp": {
     "message": "Ochranu obnovíte tlačidlom „Skúsiť znova“. Tlačidlo „Odpojiť“ umožní prehliadať bez FuzeVPN."
   },
+  "proxyConflictTitle": {
+    "message": "Pripojenie prehliadača už spravuje iné rozšírenie"
+  },
+  "proxyConflictHelp": {
+    "message": "Váš prehliadač dovoľuje spravovať svoje pripojenie iba jednému rozšíreniu a práve ho používa iné. Vypnite alebo odstráňte toto rozšírenie VPN či proxy v rozšíreniach prehliadača a potom vyberte „$1“: FuzeVPN vašu ochranu ihneď obnoví."
+  },
+  "proxyConflictWhy": {
+    "message": "Prečo to vidím práve teraz?"
+  },
+  "proxyConflictWhyText": {
+    "message": "Táto správa sa zobrazí, keď pripojenie prehliadača prevezme iné rozšírenie: najčastejšie bolo práve nainštalované, zapnuté alebo aktualizované, niekedy automaticky. Príčinou nie je FuzeVPN, váš účet ani vaše predplatné."
+  },
   "retryConnection": {
     "message": "Skúsiť znova"
   },

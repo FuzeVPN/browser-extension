@@ -293,6 +293,18 @@
   "recoveryHelp": {
     "message": "Cuba semula untuk menyambung semula perlindungan. Putuskan sambungan membolehkan anda menyemak imbas tanpa FuzeVPN."
   },
+  "proxyConflictTitle": {
+    "message": "Sambungan pelayar lain sudah mengurus kesambungan pelayar ini"
+  },
+  "proxyConflictHelp": {
+    "message": "Pelayar anda hanya membenarkan satu sambungan pelayar mengurus kesambungannya, dan sambungan pelayar lain sedang menggunakannya sekarang. Matikan atau alih keluar sambungan pelayar VPN atau proksi itu daripada senarai sambungan pelayar, kemudian pilih “$1”: FuzeVPN akan segera meneruskan perlindungan anda."
+  },
+  "proxyConflictWhy": {
+    "message": "Mengapa saya melihat ini sekarang?"
+  },
+  "proxyConflictWhyText": {
+    "message": "Mesej ini muncul apabila sambungan pelayar lain mengambil alih kesambungan pelayar: lazimnya ia baru sahaja dipasang, dihidupkan atau dikemas kini, kadangkala secara automatik. Puncanya bukan FuzeVPN, akaun anda atau langganan anda."
+  },
   "retryConnection": {
     "message": "Cuba semula"
   },

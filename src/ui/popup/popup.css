@@ -161,9 +161,77 @@ a:focus-visible {
   margin-top: 8px;
 }
 
+/*
+ * The recovery panel is tallest when it explains that another extension holds the proxy:
+ * its text then says what happens and what to do.
+ */
+.shell[data-fit] .recovery-panel {
+  padding: 14px 16px;
+  margin-bottom: 10px;
+}
+
+.shell[data-fit] .recovery-icon {
+  width: 22px;
+  height: 22px;
+  margin-bottom: 6px;
+}
+
+.shell[data-fit="2"] .recovery-panel,
+.shell[data-fit="3"] .recovery-panel {
+  padding: 12px 14px;
+}
+
+.shell[data-fit="2"] .recovery-status,
+.shell[data-fit="3"] .recovery-status {
+  margin-bottom: 6px;
+}
+
+/* The icon stays, beside the title rather than above it. */
+.shell[data-fit="2"] .recovery-icon,
+.shell[data-fit="3"] .recovery-icon {
+  float: inline-start;
+  width: 18px;
+  height: 18px;
+  margin: 0;
+  margin-inline-end: 8px;
+}
+
+.shell[data-fit="2"] .recovery-why,
+.shell[data-fit="3"] .recovery-why {
+  margin: 4px 0 8px;
+}
+
 .shell[data-fit="3"] {
   padding-top: 10px;
   padding-bottom: 8px;
+}
+
+.shell[data-fit="3"] .recovery-panel {
+  padding-block: 10px;
+  margin-bottom: 8px;
+}
+
+.shell[data-fit="3"] .recovery-why {
+  margin: 2px 0 6px;
+}
+
+.shell[data-fit="3"] .privacy-note {
+  margin-top: 6px;
+}
+
+/* The longest languages: the two actions share a line, each as wide as its label asks. */
+.shell[data-fit="3"] .recovery-actions {
+  flex-direction: row;
+  align-items: stretch;
+}
+
+/* A label is cut between its words only, and never narrower than its longest one. */
+.shell[data-fit="3"] .recovery-actions button {
+  flex: 1 1 auto;
+  width: auto;
+  min-width: min-content;
+  padding-inline: 10px;
+  overflow-wrap: normal;
 }
 
 .shell[data-fit="3"] .topbar {
@@ -1164,6 +1232,52 @@ a {
   margin-bottom: 8px;
   color: #684508;
   font-weight: 750;
+}
+
+/*
+ * Why the warning shows now: asked for, not imposed. The chevron is drawn with physical
+ * borders: it points down, then up, whatever the direction of the text.
+ */
+.recovery-why {
+  margin: 8px 0 12px;
+}
+
+/* A block of its own, so that the disclosure is exactly as tall as it when closed. */
+.recovery-why summary {
+  display: flex;
+  align-items: center;
+  width: fit-content;
+  max-width: 100%;
+  gap: 8px;
+  min-height: 24px;
+  color: #684508;
+  font-weight: 700;
+  list-style: none;
+  cursor: pointer;
+}
+
+.recovery-why summary::-webkit-details-marker {
+  display: none;
+}
+
+.recovery-why summary::after {
+  flex: 0 0 auto;
+  width: 6px;
+  height: 6px;
+  margin-top: -3px;
+  border-right: 1.6px solid currentColor;
+  border-bottom: 1.6px solid currentColor;
+  transform: rotate(45deg);
+  content: "";
+}
+
+.recovery-why[open] summary::after {
+  margin-top: 3px;
+  transform: rotate(-135deg);
+}
+
+.recovery-why p {
+  margin: 6px 0 0;
 }
 
 .recovery-actions {
@@ -2330,6 +2444,7 @@ h3,
 }
 
 :root[data-theme="dark"] .recovery-icon,
+:root[data-theme="dark"] .recovery-why summary,
 :root[data-theme="dark"] .recovery-status {
   color: #f1d9a4;
 }

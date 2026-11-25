@@ -293,6 +293,18 @@
   "recoveryHelp": {
     "message": "Jatka suojausta valitsemalla Yritä uudelleen. Katkaise yhteys -toiminnolla voit selata ilman FuzeVPN:ää."
   },
+  "proxyConflictTitle": {
+    "message": "Toinen laajennus hallitsee jo selaimen yhteyttä"
+  },
+  "proxyConflictHelp": {
+    "message": "Selaimesi antaa vain yhden laajennuksen hallita yhteyttään, ja juuri nyt sitä käyttää toinen laajennus. Poista kyseinen VPN- tai välityspalvelinlaajennus käytöstä tai poista se selaimen laajennuksista ja valitse sitten ”$1”: FuzeVPN jatkaa suojaustasi heti."
+  },
+  "proxyConflictWhy": {
+    "message": "Miksi näen tämän nyt?"
+  },
+  "proxyConflictWhyText": {
+    "message": "Tämä viesti näkyy, kun toinen laajennus ottaa selaimen yhteyden hallintaansa: useimmiten se on juuri asennettu, otettu käyttöön tai päivitetty, joskus automaattisesti. Syy ei ole FuzeVPN:ssä, tilissäsi eikä tilauksessasi."
+  },
   "retryConnection": {
     "message": "Yritä uudelleen"
   },

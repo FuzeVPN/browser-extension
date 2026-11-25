@@ -293,6 +293,18 @@
   "recoveryHelp": {
     "message": "Andramo indray mba hamerenana ny fiarovana. Ny fanapahana dia ahafahanao mitety tsy misy FuzeVPN."
   },
+  "proxyConflictTitle": {
+    "message": "Fanitarana hafa no efa mitantana ny fifandraisan'ny mpitety"
+  },
+  "proxyConflictHelp": {
+    "message": "Fanitarana iray ihany no avelan'ny mpitetinao hitantana ny fifandraisany, ary misy hafa mampiasa azy amin'izao fotoana izao. Vonoy na esory ao amin'ny fanitaran'ny mpitety io fanitarana VPN na proxy io, avy eo safidio ny “$1”: haverin'ny FuzeVPN avy hatrany ny fiarovana anao."
+  },
+  "proxyConflictWhy": {
+    "message": "Nahoana aho no mahita an'ity izao?"
+  },
+  "proxyConflictWhyText": {
+    "message": "Miseho ity hafatra ity rehefa misy fanitarana hafa mandray an-tanana ny fifandraisan'ny mpitety: matetika dia vao avy napetraka, navitrika na nohavaozina izy io, indraindray ho azy. Tsy ny FuzeVPN, ny kaontinao na ny famandrihanao no antony."
+  },
   "retryConnection": {
     "message": "Andramo indray"
   },

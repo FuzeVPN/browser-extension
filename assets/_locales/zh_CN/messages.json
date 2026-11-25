@@ -293,6 +293,18 @@
   "recoveryHelp": {
     "message": "重试恢复保护。断开连接让您无需 FuzeVPN 即可浏览。"
   },
+  "proxyConflictTitle": {
+    "message": "另一个扩展程序已在管理浏览器的连接"
+  },
+  "proxyConflictHelp": {
+    "message": "您的浏览器只允许一个扩展程序管理其连接，而目前另一个扩展程序正在使用它。请在浏览器的扩展程序中停用或移除该 VPN 或代理扩展程序，然后选择“$1”：FuzeVPN 会立即恢复对您的保护。"
+  },
+  "proxyConflictWhy": {
+    "message": "为什么我现在会看到此消息？"
+  },
+  "proxyConflictWhyText": {
+    "message": "当另一个扩展程序接管浏览器的连接时，就会出现此消息：通常是因为它刚刚被安装、启用或更新，有时是自动进行的。这与 FuzeVPN、您的账号或您的订阅无关。"
+  },
   "retryConnection": {
     "message": "重试"
   },

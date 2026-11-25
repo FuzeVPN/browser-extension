@@ -293,6 +293,18 @@
   "recoveryHelp": {
     "message": "Subukang muli upang ipagpatuloy ang proteksyon. Hinahayaan ka ng Disconnect na mag-browse nang walang FuzeVPN."
   },
+  "proxyConflictTitle": {
+    "message": "May ibang extension na namamahala na sa koneksyon ng browser"
+  },
+  "proxyConflictHelp": {
+    "message": "Isang extension lang ang pinapayagan ng browser mo na mamahala sa koneksyon nito, at may ibang gumagamit nito ngayon. I-off o alisin ang VPN o proxy extension na iyon mula sa mga extension ng browser, pagkatapos ay piliin ang “$1”: agad na ipagpapatuloy ng FuzeVPN ang proteksyon mo."
+  },
+  "proxyConflictWhy": {
+    "message": "Bakit ko ito nakikita ngayon?"
+  },
+  "proxyConflictWhyText": {
+    "message": "Lumalabas ang mensaheng ito kapag may ibang extension na kumuha ng kontrol sa koneksyon ng browser: kadalasan, kaka-install, kaka-on o kaka-update lang nito, minsan nang awtomatiko. Hindi ang FuzeVPN, ang account mo o ang subscription mo ang dahilan."
+  },
   "retryConnection": {
     "message": "Subukan muli"
   },

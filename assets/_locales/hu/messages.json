@@ -293,6 +293,18 @@
   "recoveryHelp": {
     "message": "A védelem folytatásához próbálja újra. A kapcsolat bontásával FuzeVPN nélkül böngészhet."
   },
+  "proxyConflictTitle": {
+    "message": "Egy másik bővítmény már kezeli a böngésző kapcsolatát"
+  },
+  "proxyConflictHelp": {
+    "message": "A böngészője egyszerre csak egy bővítménynek engedi a kapcsolata kezelését, és most egy másik használja. Kapcsolja ki vagy távolítsa el azt a VPN- vagy proxybővítményt a böngésző bővítményei között, majd válassza a(z) „$1” lehetőséget: a FuzeVPN azonnal folytatja a védelmet."
+  },
+  "proxyConflictWhy": {
+    "message": "Miért látom ezt most?"
+  },
+  "proxyConflictWhyText": {
+    "message": "Ez az üzenet akkor jelenik meg, amikor egy másik bővítmény átveszi a böngésző kapcsolatát: többnyire nemrég telepítették, kapcsolták be vagy frissült, néha automatikusan. Nem a FuzeVPN, a fiókja vagy az előfizetése az oka."
+  },
   "retryConnection": {
     "message": "Újrapróbálás"
   },

@@ -293,6 +293,18 @@
   "recoveryHelp": {
     "message": "Qorumanı bərpa etmək üçün yenidən cəhd edin. «Bağlantını kəs» FuzeVPN olmadan internetdən istifadə etməyə imkan verir."
   },
+  "proxyConflictTitle": {
+    "message": "Brauzerin bağlantısını artıq başqa genişləndirmə idarə edir"
+  },
+  "proxyConflictHelp": {
+    "message": "Brauzeriniz bağlantısını yalnız bir genişləndirmənin idarə etməsinə icazə verir və hazırda ondan başqa genişləndirmə istifadə edir. Həmin VPN və ya proksi genişləndirməsini brauzerin genişləndirmələr bölməsində söndürün və ya silin, sonra «$1» seçin: FuzeVPN qorumanızı dərhal bərpa edəcək."
+  },
+  "proxyConflictWhy": {
+    "message": "Bunu niyə indi görürəm?"
+  },
+  "proxyConflictWhyText": {
+    "message": "Bu mesaj başqa genişləndirmə brauzerin bağlantısını öz üzərinə götürəndə görünür: çox vaxt o, yenicə quraşdırılıb, aktiv edilib və ya yenilənib, bəzən avtomatik olaraq. Səbəb FuzeVPN, hesabınız və ya abunəliyiniz deyil."
+  },
   "retryConnection": {
     "message": "Yenidən cəhd et"
   },
