@@ -308,6 +308,18 @@
   "retryConnection": {
     "message": "Ongera ugerageze"
   },
+  "adBlocker": {
+    "message": "Ikumira iyamamaza"
+  },
+  "adBlockerHelp": {
+    "message": "Ikumira domeni zizwi z'iyamamaza n'iz'ikurikirana."
+  },
+  "adBlockerPaused": {
+    "message": "Ntibiboneka by'agateganyo: amahitamo yawe arabitswe kandi azakurikizwa serivisi ikimara kugaruka."
+  },
+  "adBlockerFailed": {
+    "message": "Iri genamiterere ntiryashoboye gusomwa cyangwa guhindurwa. Ongera ufungure igenamiterere kugira ngo wongere ugerageze."
+  },
   "killSwitch": {
     "message": "Guhagarika byihutirwa"
   },

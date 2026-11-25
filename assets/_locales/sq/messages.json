@@ -308,6 +308,18 @@
   "retryConnection": {
     "message": "Provo përsëri"
   },
+  "adBlocker": {
+    "message": "Bllokuesi i reklamave"
+  },
+  "adBlockerHelp": {
+    "message": "Bllokon domenet e njohura të reklamave dhe të gjurmimit."
+  },
+  "adBlockerPaused": {
+    "message": "Përkohësisht i padisponueshëm: zgjedhja juaj ruhet dhe do të zbatohet sapo të rikthehet shërbimi."
+  },
+  "adBlockerFailed": {
+    "message": "Ky cilësim nuk mund të lexohej ose të ndryshohej. Rihapni cilësimet për të provuar përsëri."
+  },
   "killSwitch": {
     "message": "Bllokimi urgjent"
   },

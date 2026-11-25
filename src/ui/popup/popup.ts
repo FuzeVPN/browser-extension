@@ -155,6 +155,9 @@ const elements = {
   recoveryWhy: element<HTMLDetailsElement>("recoveryWhy"),
   retryButton: element<HTMLButtonElement>("retryButton"),
   recoveryDisconnectButton: element<HTMLButtonElement>("recoveryDisconnectButton"),
+  adBlockingRow: element<HTMLElement>("adBlockingRow"),
+  adBlockingEnabled: element<HTMLInputElement>("adBlockingEnabled"),
+  adBlockingNote: element<HTMLElement>("adBlockingNote"),
   killSwitchEnabled: element<HTMLInputElement>("killSwitchEnabled"),
   webRtcProtectionEnabled: element<HTMLInputElement>("webRtcProtectionEnabled"),
   securityState: element<HTMLElement>("securityState"),
@@ -201,6 +204,12 @@ let verificationObservedCooldown: number | null = null;
 let verificationFailure: { code: AppErrorCode; retryAfter: number | null } | null = null;
 let verificationTimer: ReturnType<typeof setTimeout> | undefined;
 let devicesRefreshPending: PendingRequest = false;
+let adBlockingPending: PendingRequest = false;
+// The choice asked for the ad blocker while its request is on its way: its control
+// shows it, whatever the states published meanwhile still say.
+let adBlockingWanted: boolean | null = null;
+// The last read or change of the ad blocker failed, and none succeeded since.
+let adBlockingFailed = false;
 let accountEpoch = 0;
 let devicesAction = 0;
 interface DeviceFailure {
@@ -402,7 +411,12 @@ function bindEvents(): void {
       });
   });
   elements.closeLocationButton.addEventListener("click", () => elements.locationDialog.close());
-  elements.settingsButton.addEventListener("click", () => elements.settingsPanel.showModal());
+  elements.settingsButton.addEventListener("click", () => {
+    elements.settingsPanel.showModal();
+    // The choice is that of the account: another device may have changed it.
+    void refreshAdBlocking();
+  });
+  elements.adBlockingEnabled.addEventListener("change", () => void changeAdBlocking());
   elements.retryButton.addEventListener("click", () => {
     if (communicationFailed) {
       // What the popup shows is not what the worker last said: its state is read again
@@ -911,6 +925,78 @@ function renderSiteExclusions(next: PopupSnapshot): void {
   );
 }
 
+/** Reads the choice of the account for the ad blocker. */
+async function refreshAdBlocking(): Promise<void> {
+  if (!snapshot?.profile || adBlockingPending) return;
+  await adBlockingRequest({ type: "refresh_ad_blocking" });
+}
+
+async function changeAdBlocking(): Promise<void> {
+  if (!snapshot) return;
+  if (!snapshot.profile || adBlockingPending) {
+    // Nothing is asked: the control returns to what it showed.
+    renderAdBlocking(snapshot);
+    return;
+  }
+  const enabled = elements.adBlockingEnabled.checked;
+  adBlockingWanted = enabled;
+  // A change which another request of the account interrupted may have been recorded
+  // all the same: the service is asked what it holds.
+  if (await adBlockingRequest({ type: "set_ad_blocking", enabled })) void refreshAdBlocking();
+}
+
+/** Sends a request about the ad blocker; answers whether the worker abandoned it. */
+async function adBlockingRequest(
+  command: Extract<ExtensionRequest, { type: "refresh_ad_blocking" | "set_ad_blocking" }>,
+): Promise<boolean> {
+  const epoch = accountEpoch;
+  const pending = {};
+  adBlockingPending = pending;
+  if (snapshot) renderAdBlocking(snapshot);
+  const release = () => {
+    // A newer account or worker may already own a request of its own.
+    if (adBlockingPending !== pending) return false;
+    adBlockingPending = false;
+    adBlockingWanted = null;
+    return true;
+  };
+  try {
+    const response = await request(command, release);
+    if (epoch !== accountEpoch) return false;
+    if (response.superseded) return true;
+    // The outcome is that of the command, even when the state it answers with was
+    // already displayed: a browser may deliver the publication before the reply.
+    adBlockingFailed = !response.ok && !response.effectConfirmed;
+    return false;
+  } finally {
+    release();
+    if (snapshot) renderAdBlocking(snapshot);
+  }
+}
+
+/**
+ * The ad blocker is a choice of the account, which the service applies. Its control is
+ * usable once that choice has been read; a note says when the service has turned the
+ * blocker off for everyone, or when the last read or change failed.
+ */
+function renderAdBlocking(next: PopupSnapshot): void {
+  const { enabled, available } = next.adBlocking;
+  elements.adBlockingRow.classList.toggle("hidden", next.profile === null);
+  elements.adBlockingEnabled.checked = adBlockingWanted ?? enabled ?? false;
+  setDisabled(
+    elements.adBlockingEnabled,
+    communicationFailed || Boolean(adBlockingPending) || enabled === null,
+  );
+  elements.adBlockingEnabled.setAttribute("aria-busy", String(Boolean(adBlockingPending)));
+  const note = adBlockingFailed
+    ? "adBlockerFailed"
+    : enabled !== null && !available
+      ? "adBlockerPaused"
+      : null;
+  elements.adBlockingNote.classList.toggle("hidden", note === null);
+  setText(elements.adBlockingNote, note === null ? "" : message(note));
+}
+
 async function refreshDevices(): Promise<void> {
   if (!snapshot?.profile || devicesRefreshPending) return;
   const epoch = accountEpoch;
@@ -1020,6 +1106,9 @@ function render(value: unknown, confirmed = false): boolean {
     // account or worker cannot block the current one.
     accountRefreshPending = false;
     devicesRefreshPending = false;
+    adBlockingPending = false;
+    adBlockingWanted = null;
+    adBlockingFailed = false;
     locationsRefreshPending = false;
     connectionRetryPending = false;
     securityPreferencesPending = false;
@@ -1165,6 +1254,7 @@ function renderCurrent(next: PopupSnapshot): void {
   renderError(next);
   renderLogoutOutcome(next);
   renderSecurity(next);
+  renderAdBlocking(next);
   renderSiteExclusions(next);
   if (!loggedIn) {
     returnToSettingsAfterDevices = false;
@@ -2356,6 +2446,8 @@ function connectionRequestState(
         : null;
     case "delete_device":
       return next.devices.some(({ deviceId }) => deviceId === command.deviceId) ? null : "deleted";
+    case "set_ad_blocking":
+      return next.adBlocking?.enabled === command.enabled ? String(command.enabled) : null;
     case "update_security_preferences":
       return next.securityPreferences.killSwitchEnabled === command.killSwitchEnabled &&
         next.securityPreferences.webRtcProtectionEnabled === command.webRtcProtectionEnabled
@@ -2451,6 +2543,7 @@ async function request(
     const newerStateSuffices = [
       "get_snapshot",
       "refresh_devices",
+      "refresh_ad_blocking",
       "refresh_locations",
       "set_location_favorite",
       "set_language_preference",

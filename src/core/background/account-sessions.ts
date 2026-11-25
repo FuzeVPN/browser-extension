@@ -2,6 +2,7 @@
 
 import { ApiError, NetworkError, type ApiService, type SessionRenewalService } from "../api/client";
 import type {
+  AdBlockingChoice,
   AuthSession,
   BillingSubscription,
   BrowserDeviceEnrollment,
@@ -753,6 +754,18 @@ export class RenewingApi implements ApiService {
   deleteDevice(token: string, deviceId: string, signal?: AbortSignal): Promise<void> {
     return this.authorized(token, signal, (credential) =>
       this.api.deleteDevice(credential, deviceId, signal),
+    );
+  }
+
+  getAdBlocking(token: string, signal?: AbortSignal): Promise<AdBlockingChoice> {
+    return this.authorized(token, signal, (credential) =>
+      this.api.getAdBlocking(credential, signal),
+    );
+  }
+
+  setAdBlocking(token: string, enabled: boolean, signal?: AbortSignal): Promise<AdBlockingChoice> {
+    return this.authorized(token, signal, (credential) =>
+      this.api.setAdBlocking(credential, enabled, signal),
     );
   }
 

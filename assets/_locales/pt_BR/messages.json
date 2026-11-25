@@ -308,6 +308,18 @@
   "retryConnection": {
     "message": "Tentar novamente"
   },
+  "adBlocker": {
+    "message": "Bloqueador de anúncios"
+  },
+  "adBlockerHelp": {
+    "message": "Bloqueia domínios conhecidos de publicidade e rastreamento."
+  },
+  "adBlockerPaused": {
+    "message": "Temporariamente indisponível: sua escolha fica salva e será aplicada assim que o serviço voltar."
+  },
+  "adBlockerFailed": {
+    "message": "Não foi possível ler nem alterar esta configuração. Abra as configurações novamente para tentar de novo."
+  },
   "killSwitch": {
     "message": "Bloqueio de emergência"
   },

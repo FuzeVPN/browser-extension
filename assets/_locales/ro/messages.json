@@ -308,6 +308,18 @@
   "retryConnection": {
     "message": "Reîncercați"
   },
+  "adBlocker": {
+    "message": "Blocare reclame"
+  },
+  "adBlockerHelp": {
+    "message": "Blochează domeniile cunoscute de publicitate și urmărire."
+  },
+  "adBlockerPaused": {
+    "message": "Temporar indisponibil: alegerea dvs. este păstrată și se va aplica imediat ce serviciul revine."
+  },
+  "adBlockerFailed": {
+    "message": "Această setare nu a putut fi citită sau modificată. Redeschideți setările pentru a încerca din nou."
+  },
   "killSwitch": {
     "message": "Comutator de oprire"
   },

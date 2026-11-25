@@ -308,6 +308,18 @@
   "retryConnection": {
     "message": "Coba lagi"
   },
+  "adBlocker": {
+    "message": "Pemblokir iklan"
+  },
+  "adBlockerHelp": {
+    "message": "Memblokir domain iklan dan pelacakan yang dikenal."
+  },
+  "adBlockerPaused": {
+    "message": "Sementara tidak tersedia: pilihan Anda disimpan dan akan berlaku segera setelah layanan kembali."
+  },
+  "adBlockerFailed": {
+    "message": "Pengaturan ini tidak dapat dibaca atau diubah. Buka kembali pengaturan untuk mencoba lagi."
+  },
   "killSwitch": {
     "message": "Tombol pemutus"
   },

@@ -308,6 +308,18 @@
   "retryConnection": {
     "message": "Qayta urinish"
   },
+  "adBlocker": {
+    "message": "Reklama bloklagich"
+  },
+  "adBlockerHelp": {
+    "message": "Maʼlum reklama va kuzatuv domenlarini bloklaydi."
+  },
+  "adBlockerPaused": {
+    "message": "Vaqtincha mavjud emas: tanlovingiz saqlangan va xizmat tiklanishi bilan kuchga kiradi."
+  },
+  "adBlockerFailed": {
+    "message": "Bu sozlamani oʻqib yoki oʻzgartirib boʻlmadi. Qayta urinish uchun sozlamalarni qaytadan oching."
+  },
   "killSwitch": {
     "message": "Favqulodda oʻchirgich"
   },

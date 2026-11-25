@@ -104,7 +104,8 @@ function view(page) {
       answerShown: answer.checkVisibility(),
       fit: document.querySelector(".shell").dataset.fit ?? "0",
       added: why.getBoundingClientRect().height - summary.getBoundingClientRect().height,
-      actionsTop: at("retryButton").getBoundingClientRect().top + scrollY,
+      // The block which holds the actions: a button under the pointer rises by a pixel.
+      actionsTop: at("retryButton").parentElement.getBoundingClientRect().top + scrollY,
     };
   });
 }

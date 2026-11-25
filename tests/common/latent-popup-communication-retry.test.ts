@@ -55,7 +55,13 @@ class FakeElement {
     return !this.classes.has("hidden");
   }
 
-  setAttribute(): void {}
+  readonly attributes = new Map<string, string>();
+
+  setAttribute(name: string, value: string): void {
+    this.attributes.set(name, value);
+  }
+
+  showModal(): void {}
 
   close(): void {}
 
@@ -93,6 +99,10 @@ const functionNames = new Set([
   "renderError",
   "renderLogoutOutcome",
   "renderSecurity",
+  "renderAdBlocking",
+  "refreshAdBlocking",
+  "changeAdBlocking",
+  "adBlockingRequest",
   "showsRecovery",
   "showsProxyConflict",
   "webLoginRequiresDisconnect",
@@ -168,6 +178,9 @@ function setup() {
     accountEpoch: 0,
     accountRefreshPending: false,
     devicesRefreshPending: false,
+    adBlockingPending: false,
+    adBlockingWanted: null,
+    adBlockingFailed: false,
     locationsRefreshPending: false,
     connectionRetryPending: false,
     stateReadPending: false,
@@ -451,5 +464,187 @@ describe("a signed-in popup whose worker stops answering", () => {
     expect(elements.retryButton!.disabled).toBe(true);
     elements.retryButton!.click();
     expect(asked()).toEqual(["get_snapshot", "get_snapshot"]);
+  });
+});
+
+describe("the ad blocker of the account", () => {
+  const choice = (
+    revision: number,
+    adBlocking: { enabled: boolean | null; available: boolean },
+  ): AppSnapshot => ({ ...signedIn(revision), adBlocking });
+  const off = { enabled: false, available: true };
+  const on = { enabled: true, available: true };
+
+  function shown(popup: ReturnType<typeof setup>) {
+    const control = popup.elements.adBlockingEnabled!;
+    const note = popup.elements.adBlockingNote!;
+    return {
+      checked: control.checked,
+      disabled: control.disabled,
+      busy: control.attributes.get("aria-busy"),
+      note: note.visible ? note.textContent : null,
+    };
+  }
+  /** The reader flips the control, as a click does. */
+  function flip(popup: ReturnType<typeof setup>) {
+    const control = popup.elements.adBlockingEnabled!;
+    control.checked = !control.checked;
+    control.dispatch("change");
+  }
+  async function answer(popup: ReturnType<typeof setup>, index: number, reply: unknown) {
+    popup.pending[index]!.resolve(reply);
+    await settle();
+  }
+
+  it("is not offered without an account", () => {
+    const popup = setup();
+    popup.subject.render(signedOut(1), true);
+    expect(popup.elements.adBlockingRow!.visible).toBe(false);
+  });
+
+  it("cannot be changed before the choice of the account has been read", () => {
+    const popup = setup();
+    popup.subject.render(signedIn(1), true);
+    expect(popup.elements.adBlockingRow!.visible).toBe(true);
+    expect(shown(popup)).toEqual({ checked: false, disabled: true, busy: "false", note: null });
+  });
+
+  it("reads the choice when the settings open", async () => {
+    const popup = setup();
+    popup.subject.render(signedIn(1), true);
+    popup.elements.settingsButton!.click();
+    expect(popup.sent()).toEqual(["refresh_ad_blocking"]);
+    expect(shown(popup)).toEqual({ checked: false, disabled: true, busy: "true", note: null });
+
+    await answer(popup, 0, { ok: true, snapshot: choice(2, on) });
+    expect(shown(popup)).toEqual({ checked: true, disabled: false, busy: "false", note: null });
+  });
+
+  it("shows the choice asked for while it is recorded, then what the service holds", async () => {
+    const popup = setup();
+    popup.subject.render(choice(1, off), true);
+    flip(popup);
+    expect(popup.pending[0]!.message).toEqual({ type: "set_ad_blocking", enabled: true });
+    expect(shown(popup)).toEqual({ checked: true, disabled: true, busy: "true", note: null });
+
+    // A state published meanwhile still says the earlier choice.
+    popup.subject.render(choice(2, off));
+    expect(shown(popup).checked).toBe(true);
+
+    await answer(popup, 0, { ok: true, snapshot: choice(3, on) });
+    expect(shown(popup)).toEqual({ checked: true, disabled: false, busy: "false", note: null });
+  });
+
+  it("returns to the recorded choice and says so when the change fails", async () => {
+    const popup = setup();
+    popup.subject.render(choice(1, off), true);
+    flip(popup);
+    await answer(popup, 0, { ok: false, commandError: "rate_limited", snapshot: choice(2, off) });
+    expect(shown(popup)).toEqual({
+      checked: false,
+      disabled: false,
+      busy: "false",
+      note: "adBlockerFailed",
+    });
+    // The failure is that of the ad blocker: nothing is said of the connection.
+    expect(popup.elements.errorBanner!.visible).toBe(false);
+
+    flip(popup);
+    await answer(popup, 1, { ok: true, snapshot: choice(3, on) });
+    expect(shown(popup)).toEqual({ checked: true, disabled: false, busy: "false", note: null });
+  });
+
+  it("takes the outcome of a reply whose state was published before it", async () => {
+    const popup = setup();
+    popup.subject.render(choice(1, off), true);
+    flip(popup);
+    await answer(popup, 0, { ok: false, commandError: "rate_limited", snapshot: choice(2, off) });
+    expect(shown(popup).note).toBe("adBlockerFailed");
+
+    // The worker publishes the recorded choice, then answers with that same state.
+    flip(popup);
+    popup.subject.render(choice(3, on));
+    await answer(popup, 1, { ok: true, snapshot: choice(3, on) });
+    expect(shown(popup)).toEqual({ checked: true, disabled: false, busy: "false", note: null });
+
+    // And the other way round: a refusal whose unchanged state was already displayed.
+    flip(popup);
+    popup.subject.render(choice(4, on));
+    await answer(popup, 2, { ok: false, commandError: "rate_limited", snapshot: choice(4, on) });
+    expect(shown(popup)).toEqual({
+      checked: true,
+      disabled: false,
+      busy: "false",
+      note: "adBlockerFailed",
+    });
+  });
+
+  it("says when the choice could not be read, and leaves the control alone", async () => {
+    const popup = setup();
+    popup.subject.render(signedIn(1), true);
+    popup.elements.settingsButton!.click();
+    await answer(popup, 0, { ok: false, commandError: "network_error", snapshot: signedIn(2) });
+    expect(shown(popup)).toEqual({
+      checked: false,
+      disabled: true,
+      busy: "false",
+      note: "adBlockerFailed",
+    });
+
+    // Opening the settings again reads it again.
+    popup.elements.settingsButton!.click();
+    await answer(popup, 1, { ok: true, snapshot: choice(3, on) });
+    expect(shown(popup)).toEqual({ checked: true, disabled: false, busy: "false", note: null });
+  });
+
+  it("says when the service has turned the blocker off, the choice staying changeable", () => {
+    const popup = setup();
+    popup.subject.render(choice(1, { enabled: true, available: false }), true);
+    expect(shown(popup)).toEqual({
+      checked: true,
+      disabled: false,
+      busy: "false",
+      note: "adBlockerPaused",
+    });
+  });
+
+  it("asks the service what it holds when the worker abandoned a change", async () => {
+    const popup = setup();
+    popup.subject.render(choice(1, off), true);
+    flip(popup);
+    await answer(popup, 0, { ok: false, superseded: true, snapshot: choice(2, off) });
+    expect(popup.sent()).toEqual(["set_ad_blocking", "refresh_ad_blocking"]);
+    // Abandoned is not failed: the reading which follows says what was recorded.
+    expect(shown(popup).note).toBeNull();
+    await answer(popup, 1, { ok: true, snapshot: choice(3, on) });
+    expect(shown(popup)).toEqual({ checked: true, disabled: false, busy: "false", note: null });
+  });
+
+  it("asks once while a request is on its way", () => {
+    const popup = setup();
+    popup.subject.render(choice(1, off), true);
+    popup.elements.settingsButton!.click();
+    popup.elements.settingsButton!.click();
+    // A change which reached the page all the same is not sent, and is not shown.
+    flip(popup);
+    expect(popup.sent()).toEqual(["refresh_ad_blocking"]);
+    expect(shown(popup).checked).toBe(false);
+  });
+
+  it("forgets the request and the failure of a previous account", async () => {
+    const popup = setup();
+    popup.subject.render(choice(1, off), true);
+    flip(popup);
+    await answer(popup, 0, { ok: false, commandError: "network_error", snapshot: choice(2, off) });
+    expect(shown(popup).note).toBe("adBlockerFailed");
+    flip(popup);
+    expect(shown(popup).busy).toBe("true");
+
+    const other = signedIn(3);
+    popup.subject.render({ ...other, profile: { ...other.profile!, userId: "other" } }, true);
+    expect(shown(popup)).toEqual({ checked: false, disabled: true, busy: "false", note: null });
+    // The reply owed to the previous account changes nothing for this one.
+    await answer(popup, 1, { ok: true, snapshot: choice(4, on) });
+    expect(shown(popup).checked).toBe(false);
   });
 });

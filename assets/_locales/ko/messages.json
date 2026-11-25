@@ -308,6 +308,18 @@
   "retryConnection": {
     "message": "재시도"
   },
+  "adBlocker": {
+    "message": "광고 차단"
+  },
+  "adBlockerHelp": {
+    "message": "알려진 광고 및 추적 도메인을 차단합니다."
+  },
+  "adBlockerPaused": {
+    "message": "일시적으로 사용할 수 없습니다. 선택 내용은 저장되어 있으며 서비스가 복구되는 즉시 적용됩니다."
+  },
+  "adBlockerFailed": {
+    "message": "이 설정을 읽거나 변경하지 못했습니다. 다시 시도하려면 설정을 다시 여세요."
+  },
   "killSwitch": {
     "message": "킬 스위치"
   },

@@ -308,6 +308,18 @@
   "retryConnection": {
     "message": "Subukan muli"
   },
+  "adBlocker": {
+    "message": "Ad blocker"
+  },
+  "adBlockerHelp": {
+    "message": "Bina-block ang mga kilalang domain ng advertising at tracking."
+  },
+  "adBlockerPaused": {
+    "message": "Pansamantalang hindi available: naka-save ang pinili mo at ilalapat ito sa sandaling bumalik ang serbisyo."
+  },
+  "adBlockerFailed": {
+    "message": "Hindi mabasa o mabago ang setting na ito. Buksan muli ang mga setting para subukan ulit."
+  },
   "killSwitch": {
     "message": "Patayin ang switch"
   },

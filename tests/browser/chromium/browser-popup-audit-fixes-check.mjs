@@ -354,6 +354,206 @@ async function status(page) {
   }));
 }
 /**
+ * The ad blocker is a choice of the account, read when the settings open and changed by
+ * one control, above the kill switch. A note says when the service has turned it off for
+ * everyone, or when the last read or change failed.
+ */
+async function reviewAdBlocker() {
+  const page = await open();
+  const off = { enabled: false, available: true };
+  const on = { enabled: true, available: true };
+  const answers = (type, adBlocking, result) =>
+    page.evaluate(
+      ({ type, adBlocking, result }) => {
+        window.fixture.responsePatches[type] = adBlocking ? { adBlocking } : {};
+        window.fixture.commandResults[type] = result ?? {};
+      },
+      { type, adBlocking, result },
+    );
+  const view = () =>
+    page.evaluate(() => {
+      const at = (id) => document.getElementById(id);
+      const shown = (node) => node.getClientRects().length > 0;
+      const control = at("adBlockingEnabled");
+      const row = at("adBlockingRow");
+      const box = row.getBoundingClientRect();
+      return {
+        row: shown(row),
+        label: row.querySelector(".setting-label span").textContent,
+        help: at("adBlockingHelp").textContent,
+        checked: control.checked,
+        disabled: control.disabled,
+        busy: control.getAttribute("aria-busy"),
+        note: shown(at("adBlockingNote")) ? at("adBlockingNote").textContent : null,
+        focused: document.activeElement === control,
+        aboveKillSwitch: row.nextElementSibling?.contains(at("killSwitchEnabled")) === true,
+        first: row.previousElementSibling === null,
+        overflow: row.scrollWidth > row.clientWidth + 1 || box.left < 0 || box.right > innerWidth,
+        sent: window.fixture.requests
+          .filter(({ type }) => type === "refresh_ad_blocking" || type === "set_ad_blocking")
+          .map((request) => (request.type === "set_ad_blocking" ? request.enabled : "read")),
+      };
+    });
+  const settled = async (expected) => {
+    await page.waitForFunction((expected) => {
+      const control = document.getElementById("adBlockingEnabled");
+      return control.getAttribute("aria-busy") === "false" && control.checked === expected;
+    }, expected);
+    await rendered(page);
+    return view();
+  };
+
+  // Before the settings open nothing is asked, and the control cannot be used.
+  assert.deepEqual((await view()).sent, []);
+  await answers("refresh_ad_blocking", off);
+  await page.locator("#settingsButton").click();
+  let shown = await settled(false);
+  assert.deepEqual(shown.sent, ["read"]);
+  assert.equal(shown.row, true);
+  assert.equal(shown.first && shown.aboveKillSwitch, true, JSON.stringify(shown));
+  assert.equal(shown.label, catalog.adBlocker.message);
+  assert.equal(shown.help, catalog.adBlockerHelp.message);
+  assert.deepEqual({ disabled: shown.disabled, note: shown.note }, { disabled: false, note: null });
+  report.checks.push({
+    passed: true,
+    name: "The ad blocker is the first setting of the protection, read from the account when the settings open",
+  });
+
+  // While the change is on its way the control shows the choice asked for, whatever the
+  // states published meanwhile say; then what the service answers.
+  await answers("set_ad_blocking", on);
+  await page.evaluate(() => (window.fixture.heldType = "set_ad_blocking"));
+  await page.locator("#adBlockingEnabled").click();
+  await page.waitForFunction(() => typeof window.fixture.held === "function");
+  await samePublication(page)();
+  await rendered(page);
+  shown = await view();
+  assert.deepEqual(
+    { checked: shown.checked, disabled: shown.disabled, busy: shown.busy, sent: shown.sent },
+    { checked: true, disabled: true, busy: "true", sent: ["read", true] },
+  );
+  await page.evaluate(() => window.fixture.held());
+  shown = await settled(true);
+  assert.deepEqual(
+    { disabled: shown.disabled, note: shown.note, focused: shown.focused },
+    { disabled: false, note: null, focused: true },
+  );
+  // From the keyboard, and the focus stays on the control once the service has answered.
+  await answers("set_ad_blocking", off);
+  await page.locator("#adBlockingEnabled").focus();
+  await page.keyboard.press("Space");
+  shown = await settled(false);
+  assert.deepEqual(
+    { sent: shown.sent, focused: shown.focused },
+    { sent: ["read", true, false], focused: true },
+  );
+  // Nothing is rewritten at a poll or a publication which says the same.
+  assert.deepEqual(await pageWrites(page, samePoll(page)), []);
+  assert.deepEqual(await pageWrites(page, samePublication(page)), []);
+  report.checks.push({
+    passed: true,
+    name: "The ad blocker is changed by its control, pointer or keyboard, which shows the choice asked for until the service answers",
+  });
+
+  // The service has turned the blocker off for everyone: the choice stays changeable.
+  await page.evaluate(() =>
+    window.fixture.publish({ adBlocking: { enabled: false, available: false } }),
+  );
+  await rendered(page);
+  shown = await view();
+  assert.deepEqual(
+    { note: shown.note, disabled: shown.disabled },
+    { note: catalog.adBlockerPaused.message, disabled: false },
+  );
+  await answers("set_ad_blocking", { enabled: true, available: false });
+  await page.locator("#adBlockingEnabled").click();
+  shown = await settled(true);
+  assert.equal(shown.note, catalog.adBlockerPaused.message);
+  for (const locale of SUPPORTED_LANGUAGES) {
+    await page.evaluate((locale) => {
+      window.fixture.publish({ languagePreference: locale, effectiveLanguage: locale });
+    }, locale);
+    await page.waitForFunction((locale) => document.documentElement.lang === locale, locale);
+    await rendered(page);
+    const translated = JSON.parse(
+      await readFile(join(extension, `_locales/${localeDirectory(locale)}/messages.json`), "utf8"),
+    );
+    shown = await view();
+    assert.equal(shown.label, translated.adBlocker.message);
+    assert.equal(shown.help, translated.adBlockerHelp.message);
+    assert.equal(shown.note, translated.adBlockerPaused.message);
+    assert.equal(shown.overflow, false, `Ad blocker overflow in ${locale}`);
+    await page.locator("#adBlockingRow").scrollIntoViewIfNeeded();
+    await page.screenshot({
+      path: join(output, `ad-blocker-${localeDirectory(locale)}.png`),
+      animations: "disabled",
+    });
+  }
+
+  // A change which fails: the control returns to the recorded choice and a note says so,
+  // without a word about the connection.
+  await answers("set_ad_blocking", null, { ok: false, commandError: "rate_limited" });
+  await page.locator("#adBlockingEnabled").click();
+  shown = await settled(true);
+  assert.deepEqual(shown.sent.slice(-2), [true, false]);
+  assert.equal(await page.locator("#errorBanner").isVisible(), false);
+  assert.equal(await page.locator("#settingsError").isVisible(), false);
+  for (const locale of SUPPORTED_LANGUAGES) {
+    await page.evaluate((locale) => {
+      window.fixture.publish({ languagePreference: locale, effectiveLanguage: locale });
+    }, locale);
+    await page.waitForFunction((locale) => document.documentElement.lang === locale, locale);
+    await rendered(page);
+    const translated = JSON.parse(
+      await readFile(join(extension, `_locales/${localeDirectory(locale)}/messages.json`), "utf8"),
+    );
+    shown = await view();
+    assert.equal(shown.note, translated.adBlockerFailed.message);
+    assert.equal(shown.overflow, false, `Ad blocker failure overflow in ${locale}`);
+  }
+  await page.evaluate(() =>
+    window.fixture.publish({ languagePreference: "fr", effectiveLanguage: "fr" }),
+  );
+  await page.waitForFunction(() => document.documentElement.lang === "fr");
+  // The next change which succeeds withdraws that note.
+  await answers("set_ad_blocking", off);
+  await page.locator("#adBlockingEnabled").click();
+  shown = await settled(false);
+  assert.equal(shown.note, null);
+  report.checks.push({
+    passed: true,
+    name: "The ad blocker says in seventy languages when the service has turned it off or a change failed, without horizontal overflow",
+  });
+
+  // Without an account there is no choice to show: the row leaves, and separates nothing.
+  const separator = () =>
+    page
+      .locator("#killSwitchEnabled")
+      .evaluate((node) => getComputedStyle(node.closest(".settings-row")).borderTopWidth);
+  assert.notEqual(await separator(), "0px");
+  await page.evaluate(() =>
+    window.fixture.publish({
+      profile: null,
+      subscription: null,
+      status: "logged_out",
+      protected: false,
+      protectionRequested: false,
+      activeLocationId: null,
+      devices: [],
+      deviceLimit: null,
+      adBlocking: { enabled: null, available: true },
+    }),
+  );
+  await rendered(page);
+  assert.equal(await page.locator("#adBlockingRow").isVisible(), false);
+  assert.equal(await separator(), "0px");
+  report.checks.push({
+    passed: true,
+    name: "Signed out, the settings show no ad blocker and the kill switch is their first row",
+  });
+  await page.close();
+}
+/**
  * Another extension holds the proxy of the browser. The recovery panel says what happens
  * and what to do, in place of its usual text and of the error banner, and explains on
  * request why this shows now.
@@ -377,7 +577,6 @@ async function reviewProxyConflict() {
       const why = at("recoveryWhy");
       const summary = why.querySelector("summary");
       const answer = why.querySelector("p");
-      const bottom = (id) => at(id).getBoundingClientRect().bottom;
       return {
         title: at("recoveryStatus").textContent,
         help: at("recoveryHelp").textContent,
@@ -395,9 +594,9 @@ async function reviewProxyConflict() {
         wide: document.documentElement.scrollWidth > innerWidth,
         target: summary.getBoundingClientRect().height,
         added: why.getBoundingClientRect().height - summary.getBoundingClientRect().height,
-        actionsTop: at("retryButton").getBoundingClientRect().top + scrollY,
-        actionsBottom:
-          Math.max(bottom("retryButton"), bottom("recoveryDisconnectButton")) + scrollY,
+        // The block which holds the actions: a button under the pointer rises by a pixel.
+        actionsTop: at("retryButton").parentElement.getBoundingClientRect().top + scrollY,
+        actionsBottom: at("retryButton").parentElement.getBoundingClientRect().bottom + scrollY,
       };
     });
   // The page is fitted again in the frame which follows a change of its size: once that
@@ -685,7 +884,12 @@ async function reviewPopupDesign() {
         "#settingsPanel .muted",
         "#settingsPanel .setting-label span",
       ],
-      controls: ["#closeSettingsButton", "#killSwitchEnabled", "#webRtcProtectionEnabled"],
+      controls: [
+        "#closeSettingsButton",
+        "#adBlockingEnabled",
+        "#killSwitchEnabled",
+        "#webRtcProtectionEnabled",
+      ],
     });
     await page.locator("#manageDevicesButton").click();
     await page.locator("#devicesDialog").waitFor({ state: "visible" });
@@ -2751,6 +2955,7 @@ try {
   });
   await page.close();
   await reviewProxyConflict();
+  await reviewAdBlocker();
   await reviewPopupDesign();
   assert.deepEqual(report.pageErrors, []);
   report.completed = true;

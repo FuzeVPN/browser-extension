@@ -308,6 +308,18 @@
   "retryConnection": {
     "message": "ניסיון חוזר"
   },
+  "adBlocker": {
+    "message": "חוסם פרסומות"
+  },
+  "adBlockerHelp": {
+    "message": "חוסם דומיינים מוכרים של פרסום ומעקב."
+  },
+  "adBlockerPaused": {
+    "message": "לא זמין כרגע: הבחירה שלכם נשמרה ותחול מיד כשהשירות יחזור."
+  },
+  "adBlockerFailed": {
+    "message": "לא ניתן היה לקרוא או לשנות את ההגדרה הזו. פתחו מחדש את ההגדרות כדי לנסות שוב."
+  },
   "killSwitch": {
     "message": "מתג חירום"
   },

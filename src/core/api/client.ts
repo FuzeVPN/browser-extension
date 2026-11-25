@@ -2,6 +2,7 @@
 
 import { API_BASE_URL, API_TIMEOUT_MS } from "../shared/config";
 import {
+  decodeAdBlocking,
   decodeApiError,
   decodeAuthSession,
   decodeBrowserDeviceEnrollment,
@@ -11,6 +12,7 @@ import {
   decodeProxySession,
   decodeRenewableSession,
   decodeSubscription,
+  type AdBlockingChoice,
   type AuthSession,
   type BillingSubscription,
   type BrowserDeviceEnrollment,
@@ -87,6 +89,9 @@ export interface ApiService {
   ): Promise<BrowserDeviceEnrollment>;
   getDevices(token: string, signal?: AbortSignal): Promise<DeviceList>;
   deleteDevice(token: string, deviceId: string, signal?: AbortSignal): Promise<void>;
+  /** The choice of the account for the ad blocker, which holds for all its devices. */
+  getAdBlocking(token: string, signal?: AbortSignal): Promise<AdBlockingChoice>;
+  setAdBlocking(token: string, enabled: boolean, signal?: AbortSignal): Promise<AdBlockingChoice>;
   revokeProxySession(token: string, sessionId: string): Promise<void>;
   resendVerification(token: string, signal?: AbortSignal): Promise<void>;
   logout(token: string): Promise<void>;
@@ -234,6 +239,28 @@ export class ApiClient implements ApiService, SessionRenewalService {
     });
   }
 
+  getAdBlocking(token: string, signal?: AbortSignal): Promise<AdBlockingChoice> {
+    return this.request("/v1/me/dns-filter", {
+      method: "GET",
+      token,
+      expectedStatus: 200,
+      decoder: decodeAdBlocking,
+      signal,
+    });
+  }
+
+  /** Idempotent: the body is the whole choice, and the reply the state it leaves. */
+  setAdBlocking(token: string, enabled: boolean, signal?: AbortSignal): Promise<AdBlockingChoice> {
+    return this.request("/v1/me/dns-filter", {
+      method: "PUT",
+      token,
+      body: { ad_blocking: enabled },
+      expectedStatus: 200,
+      decoder: decodeAdBlocking,
+      signal,
+    });
+  }
+
   revokeProxySession(token: string, sessionId: string): Promise<void> {
     return this.requestVoid(`/v1/proxy/sessions/${encodeURIComponent(sessionId)}`, {
       method: "DELETE",
@@ -351,7 +378,7 @@ export class ApiClient implements ApiService, SessionRenewalService {
 }
 
 interface RequestOptions {
-  method: "GET" | "POST" | "DELETE";
+  method: "GET" | "POST" | "PUT" | "DELETE";
   token?: string;
   body?: Record<string, unknown>;
   expectedStatus: number | number[];

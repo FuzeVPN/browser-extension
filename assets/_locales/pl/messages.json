@@ -308,6 +308,18 @@
   "retryConnection": {
     "message": "Spróbuj ponownie"
   },
+  "adBlocker": {
+    "message": "Blokowanie reklam"
+  },
+  "adBlockerHelp": {
+    "message": "Blokuje znane domeny reklamowe i śledzące."
+  },
+  "adBlockerPaused": {
+    "message": "Chwilowo niedostępne: Twój wybór jest zachowany i zacznie działać, gdy tylko usługa wróci."
+  },
+  "adBlockerFailed": {
+    "message": "Nie udało się odczytać ani zmienić tego ustawienia. Otwórz ustawienia ponownie, aby spróbować jeszcze raz."
+  },
   "killSwitch": {
     "message": "Blokada awaryjna"
   },

@@ -138,6 +138,7 @@ describe("extension message validation", () => {
       "refresh_account",
       "refresh_locations",
       "refresh_devices",
+      "refresh_ad_blocking",
       "reset_device_identity",
     ]) {
       expect(isExtensionRequest({ type })).toBe(true);

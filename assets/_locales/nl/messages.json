@@ -308,6 +308,18 @@
   "retryConnection": {
     "message": "Opnieuw proberen"
   },
+  "adBlocker": {
+    "message": "Advertentieblokkering"
+  },
+  "adBlockerHelp": {
+    "message": "Blokkeert bekende advertentie- en trackingdomeinen."
+  },
+  "adBlockerPaused": {
+    "message": "Tijdelijk niet beschikbaar: je keuze blijft bewaard en gaat in zodra de dienst terug is."
+  },
+  "adBlockerFailed": {
+    "message": "Deze instelling kon niet worden gelezen of gewijzigd. Open de instellingen opnieuw om het nog eens te proberen."
+  },
   "killSwitch": {
     "message": "Noodstop"
   },

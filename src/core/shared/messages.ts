@@ -34,6 +34,8 @@ export type ExtensionRequest =
   | { type: "refresh_account" }
   | { type: "refresh_locations" }
   | { type: "refresh_devices" }
+  | { type: "refresh_ad_blocking" }
+  | { type: "set_ad_blocking"; enabled: boolean }
   | { type: "delete_device"; deviceId: string }
   | { type: "reset_device_identity" };
 
@@ -88,6 +90,11 @@ export function isExtensionRequest(value: unknown): value is ExtensionRequest {
   if (type === "connect" || type === "change_location" || type === "select_location") {
     return typeof candidate.locationId === "string" && candidate.locationId.length > 0;
   }
+  if (type === "set_ad_blocking")
+    return (
+      typeof candidate.enabled === "boolean" &&
+      Object.keys(candidate).every((key) => key === "type" || key === "enabled")
+    );
   if (type === "delete_device") {
     return typeof candidate.deviceId === "string" && candidate.deviceId.length > 0;
   }
@@ -104,6 +111,7 @@ export function isExtensionRequest(value: unknown): value is ExtensionRequest {
     "refresh_account",
     "refresh_locations",
     "refresh_devices",
+    "refresh_ad_blocking",
     "reset_device_identity",
   ].includes(type);
 }

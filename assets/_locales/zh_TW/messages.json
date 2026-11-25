@@ -308,6 +308,18 @@
   "retryConnection": {
     "message": "重試"
   },
+  "adBlocker": {
+    "message": "廣告攔截"
+  },
+  "adBlockerHelp": {
+    "message": "攔截已知的廣告與追蹤網域。"
+  },
+  "adBlockerPaused": {
+    "message": "暫時無法使用：您的選擇已儲存，服務恢復後會立即生效。"
+  },
+  "adBlockerFailed": {
+    "message": "無法讀取或變更此設定。請重新開啟設定後再試一次。"
+  },
   "killSwitch": {
     "message": "終止開關"
   },

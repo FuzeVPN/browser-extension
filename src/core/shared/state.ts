@@ -61,6 +61,16 @@ export type AppErrorCode =
   | "email_delivery_unavailable"
   | "unknown_error";
 
+/** The ad blocker of the account, as the service last gave it. */
+export interface AdBlockingState {
+  /** The choice of the account; null until it has been read. */
+  enabled: boolean | null;
+  /** False while the service has turned the blocker off for every account. */
+  available: boolean;
+}
+
+export const EMPTY_AD_BLOCKING: AdBlockingState = { enabled: null, available: true };
+
 export interface LogoutOutcome {
   apiSession: "pending" | "confirmed" | "unconfirmed";
   proxySessions: "pending" | "confirmed" | "unconfirmed";
@@ -70,6 +80,7 @@ export interface AppSnapshot extends LanguageState {
   webLoginPending?: boolean;
   snapshotVersion?: { workerId: string; revision: number };
   logoutOutcome?: LogoutOutcome | null;
+  adBlocking?: AdBlockingState;
   siteExclusions: SiteExclusionsState;
   blockingScope?: "none" | "all" | "except_excluded" | "unverified";
   network: NetworkObservation;
@@ -100,6 +111,7 @@ export interface AppSnapshot extends LanguageState {
 export const EMPTY_SNAPSHOT: AppSnapshot = {
   webLoginPending: false,
   logoutOutcome: null,
+  adBlocking: EMPTY_AD_BLOCKING,
   siteExclusions: structuredClone(EMPTY_SITE_EXCLUSIONS),
   blockingScope: "none",
   network: { ...EMPTY_NETWORK_OBSERVATION },

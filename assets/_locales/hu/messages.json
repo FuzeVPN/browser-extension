@@ -308,6 +308,18 @@
   "retryConnection": {
     "message": "Újrapróbálás"
   },
+  "adBlocker": {
+    "message": "Hirdetésblokkoló"
+  },
+  "adBlockerHelp": {
+    "message": "Blokkolja az ismert hirdetési és nyomkövető domaineket."
+  },
+  "adBlockerPaused": {
+    "message": "Átmenetileg nem érhető el: a választását megőriztük, és érvénybe lép, amint a szolgáltatás visszatér."
+  },
+  "adBlockerFailed": {
+    "message": "Ezt a beállítást nem sikerült beolvasni vagy módosítani. Az újrapróbáláshoz nyissa meg újra a beállításokat."
+  },
   "killSwitch": {
     "message": "Vészleállító"
   },

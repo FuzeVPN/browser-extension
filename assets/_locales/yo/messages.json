@@ -308,6 +308,18 @@
   "retryConnection": {
     "message": "Tún gbìyànjú"
   },
+  "adBlocker": {
+    "message": "Adènà ìpolówó"
+  },
+  "adBlockerHelp": {
+    "message": "Ó ń dènà àwọn domain ìpolówó àti ìtọpinpin tí a mọ̀."
+  },
+  "adBlockerPaused": {
+    "message": "Kò sí fún ìgbà díẹ̀: a ti tọ́jú yíyàn rẹ, yóò sì bẹ̀rẹ̀ iṣẹ́ ní kété tí iṣẹ́ náà bá padà."
+  },
+  "adBlockerFailed": {
+    "message": "A kò lè ka ètò yìí tàbí yí i padà. Tún ètò ṣí láti tún gbìyànjú."
+  },
   "killSwitch": {
     "message": "Ìdádúró pàjáwìrì"
   },

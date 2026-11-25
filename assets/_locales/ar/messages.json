@@ -308,6 +308,18 @@
   "retryConnection": {
     "message": "أعد المحاولة"
   },
+  "adBlocker": {
+    "message": "حاجب الإعلانات"
+  },
+  "adBlockerHelp": {
+    "message": "يحجب نطاقات الإعلانات والتتبع المعروفة."
+  },
+  "adBlockerPaused": {
+    "message": "غير متاح مؤقتًا: اختيارك محفوظ وسيُطبَّق فور عودة الخدمة."
+  },
+  "adBlockerFailed": {
+    "message": "تعذّرت قراءة هذا الإعداد أو تغييره. أعد فتح الإعدادات للمحاولة مرة أخرى."
+  },
   "killSwitch": {
     "message": "قتل التبديل"
   },

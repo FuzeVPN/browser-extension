@@ -308,6 +308,18 @@
   "retryConnection": {
     "message": "Isku day mar kale"
   },
+  "adBlocker": {
+    "message": "Xannibaha xayeysiisyada"
+  },
+  "adBlockerHelp": {
+    "message": "Wuxuu xannibaa domain-nada la yaqaan ee xayeysiinta iyo raadraaca."
+  },
+  "adBlockerPaused": {
+    "message": "Si ku-meel-gaar ah looma heli karo: doorashadaada waa la kaydiyay waxayna dhaqan gelaysaa isla marka adeeggu soo noqdo."
+  },
+  "adBlockerFailed": {
+    "message": "Dejintan lama akhriyi karin ama lama beddeli karin. Dib u fur dejinta si aad mar kale isugu daydo."
+  },
   "killSwitch": {
     "message": "Joojiyaha degdegga ah"
   },

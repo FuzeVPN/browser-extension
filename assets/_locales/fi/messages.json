@@ -308,6 +308,18 @@
   "retryConnection": {
     "message": "Yritä uudelleen"
   },
+  "adBlocker": {
+    "message": "Mainosten esto"
+  },
+  "adBlockerHelp": {
+    "message": "Estää tunnetut mainos- ja seurantaverkkotunnukset."
+  },
+  "adBlockerPaused": {
+    "message": "Tilapäisesti poissa käytöstä: valintasi säilyy ja tulee voimaan heti, kun palvelu palaa."
+  },
+  "adBlockerFailed": {
+    "message": "Tätä asetusta ei voitu lukea tai muuttaa. Avaa asetukset uudelleen ja yritä uudelleen."
+  },
   "killSwitch": {
     "message": "Hätäkatkaisin"
   },

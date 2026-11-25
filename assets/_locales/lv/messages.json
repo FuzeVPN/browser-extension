@@ -308,6 +308,18 @@
   "retryConnection": {
     "message": "Mēģināt vēlreiz"
   },
+  "adBlocker": {
+    "message": "Reklāmu bloķētājs"
+  },
+  "adBlockerHelp": {
+    "message": "Bloķē zināmus reklāmu un izsekošanas domēnus."
+  },
+  "adBlockerPaused": {
+    "message": "Īslaicīgi nav pieejams: jūsu izvēle ir saglabāta un stāsies spēkā, tiklīdz pakalpojums atsāks darbu."
+  },
+  "adBlockerFailed": {
+    "message": "Šo iestatījumu neizdevās nolasīt vai mainīt. Atveriet iestatījumus vēlreiz, lai mēģinātu vēlreiz."
+  },
   "killSwitch": {
     "message": "Avārijas slēdzis"
   },

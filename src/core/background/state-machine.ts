@@ -7,7 +7,7 @@ import {
   isDefinitiveProxyCreationRejection,
   type ApiService,
 } from "../api/client";
-import type { AuthSession, Device, Location, ProxySession } from "../api/types";
+import type { AdBlockingChoice, AuthSession, Device, Location, ProxySession } from "../api/types";
 import { WebAuthError, type WebAuthorization, type WebAuthService } from "../auth/web-auth";
 import {
   ALARM_EXPIRY,
@@ -26,6 +26,7 @@ import {
   STARTUP_PREFLIGHT_TIMEOUT_MS,
 } from "../shared/config";
 import {
+  EMPTY_AD_BLOCKING,
   EMPTY_SNAPSHOT,
   type AppErrorCode,
   type AppSnapshot,
@@ -199,6 +200,10 @@ export class AppController {
   /** The catalogue as the API last returned it, before any location was removed locally. */
   private receivedCatalog: Location[] | null = null;
   private deviceListRevision = 0;
+  /** Requests about the ad blocker reach the service one after the other, in their order. */
+  private adBlockingRequests: Promise<unknown> = Promise.resolve();
+  /** The account whose choice for the ad blocker the snapshot shows. */
+  private adBlockingUserId: string | null = null;
   private deviceSessionRevision = 0;
   private deviceQuotaError: "device_limit" | "device_revoked_limit" | null = null;
   // The error a guard route takeover replaced, with the operation then current: a later
@@ -2089,6 +2094,54 @@ export class AppController {
       await this.handleOperationError(error, this.snapshot.protected);
       return failedCommand(error);
     }
+  }
+
+  /** Reads the choice of the account for the ad blocker. */
+  refreshAdBlocking(): Promise<CommandResult> {
+    return this.adBlockingRequest((token, signal) =>
+      this.dependencies.api.getAdBlocking(token, signal),
+    );
+  }
+
+  /** Records the choice of the account: the service applies it to all its devices. */
+  setAdBlocking(enabled: boolean): Promise<CommandResult> {
+    return this.adBlockingRequest((token, signal) =>
+      this.dependencies.api.setAdBlocking(token, enabled, signal),
+    );
+  }
+
+  /**
+   * A read or a change of the ad blocker, which publishes the state the service answers.
+   * They are sent in the order they were asked: a read which overtook a change would
+   * show the choice it replaced.
+   */
+  private async adBlockingRequest(
+    call: (token: string, signal: AbortSignal) => Promise<AdBlockingChoice>,
+  ): Promise<CommandResult> {
+    await this.initialize();
+    if (!this.startupSecondaryStorageLoaded)
+      return failedCommand(new LocalError("storage_unavailable"));
+    const signal = this.accountAbort.signal;
+    const run = async (): Promise<CommandResult> => {
+      try {
+        assertNotAborted(signal);
+        const userId = this.requireUserId();
+        const choice = await call(this.requireToken(), signal);
+        assertNotAborted(signal);
+        this.adBlockingUserId = userId;
+        this.publish({ adBlocking: { enabled: choice.enabled, available: choice.available } });
+        return { ok: true };
+      } catch (error) {
+        if (signal.aborted) return supersededCommand();
+        // As for the catalogue: only a refused credential concerns the account. Any
+        // other failure is the caller's to show, and changes nothing of the connection.
+        if (isUnauthorized(error)) await this.handleOperationError(error, this.snapshot.protected);
+        return failedCommand(error);
+      }
+    };
+    const result = this.adBlockingRequests.then(run, run);
+    this.adBlockingRequests = result.catch(() => undefined);
+    return result;
   }
 
   async deleteDevice(
@@ -5794,6 +5847,12 @@ export class AppController {
     if (changes.retryAfterSeconds !== undefined)
       this.retryAfterSince = changes.retryAfterSeconds === null ? null : this.dependencies.now();
     this.snapshot = { ...this.snapshot, ...changes };
+    // The choice shown for the ad blocker is that of one account, never of the next.
+    if (
+      this.snapshot.adBlocking?.enabled != null &&
+      this.adBlockingUserId !== (this.snapshot.profile?.userId ?? null)
+    )
+      this.snapshot.adBlocking = EMPTY_AD_BLOCKING;
     this.snapshot.activeLocation = this.locationMetadata(this.activeSession);
     this.emit();
   }

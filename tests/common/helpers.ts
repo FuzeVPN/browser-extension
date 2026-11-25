@@ -5,6 +5,7 @@ import type {
   AuthSession,
   BillingSubscription,
   BrowserDeviceEnrollment,
+  AdBlockingChoice,
   DeviceList,
   DeviceProof,
   ExtensionCodeExchange,
@@ -123,6 +124,10 @@ export class FakeApi implements ApiService {
   logoutCalls = 0;
   proofs: DeviceProof[] = [];
   enrollCalls = 0;
+  adBlocking: AdBlockingChoice = { enabled: false, available: true };
+  adBlockingError: unknown = null;
+  /** Each request about the ad blocker, in order: a read, or the choice written. */
+  adBlockingCalls: ("read" | boolean)[] = [];
   enrollments: { token: string; name: string; publicKey: string }[] = [];
   deletedDevices: string[] = [];
   devices: DeviceList = { limit: 2, devices: [] };
@@ -191,6 +196,19 @@ export class FakeApi implements ApiService {
       kind: "browser_extension",
       createdAt: "2026-08-26T12:00:00Z",
     };
+  }
+
+  async getAdBlocking(): Promise<AdBlockingChoice> {
+    this.adBlockingCalls.push("read");
+    if (this.adBlockingError) throw this.adBlockingError;
+    return { ...this.adBlocking };
+  }
+
+  async setAdBlocking(_token: string, enabled: boolean): Promise<AdBlockingChoice> {
+    this.adBlockingCalls.push(enabled);
+    if (this.adBlockingError) throw this.adBlockingError;
+    this.adBlocking = { ...this.adBlocking, enabled };
+    return { ...this.adBlocking };
   }
 
   async getDevices(): Promise<DeviceList> {

@@ -343,6 +343,20 @@
           </div>
           <p id="settingsError" class="error-banner hidden" role="alert"></p>
           <div class="settings-card">
+            <div id="adBlockingRow" class="settings-row hidden">
+              <label class="setting-label" for="adBlockingEnabled">
+                <span data-i18n="adBlocker"></span>
+                <input
+                  id="adBlockingEnabled"
+                  type="checkbox"
+                  disabled
+                  aria-busy="false"
+                  aria-describedby="adBlockingHelp adBlockingNote"
+                />
+              </label>
+              <p id="adBlockingHelp" class="settings-help muted" data-i18n="adBlockerHelp"></p>
+              <p id="adBlockingNote" class="settings-help settings-note hidden" role="status"></p>
+            </div>
             <div class="settings-row">
               <label class="setting-label" for="killSwitchEnabled">
                 <span data-i18n="killSwitch"></span>

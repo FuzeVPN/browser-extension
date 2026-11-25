@@ -18,6 +18,7 @@ import { existingFirefoxToolchain } from "./toolchain.mjs";
 import { firefoxDesignReview } from "./browser-firefox-design-review.mjs";
 import { firefoxConsentCheck } from "./browser-firefox-consent-check.mjs";
 import { firefoxProxyConflictCheck } from "./browser-firefox-proxy-conflict-check.mjs";
+import { firefoxAdBlockerCheck } from "./browser-firefox-ad-blocker-check.mjs";
 import {
   firefoxWebAuthFixture,
   firefoxWebAuthLogin,
@@ -84,7 +85,10 @@ const received = {
   diagnostics: [],
   ip: [],
   ipTunnelRejections: [],
+  adBlocker: [],
 };
+/** The ad blocker choice which the synthetic account API holds, and how it answers. */
+const adBlockerService = { enabled: false, available: true, mode: "normal" };
 let diagnosticResponseMode = "success";
 const legalFixtureRequests = [];
 const fixtureDevices = new Map([
@@ -288,6 +292,23 @@ function apiReply(path, method, payload = {}) {
     };
     fixtureDevices.set(device.device_id, device);
     return [201, device];
+  }
+  if (path === "/v1/me/dns-filter") {
+    if (adBlockerService.mode === "limited") return [429, { error: "rate_limited" }];
+    if (method === "PUT") {
+      // The contract of the route: the whole choice, and nothing else.
+      if (Object.keys(payload).join() !== "ad_blocking" || typeof payload.ad_blocking !== "boolean")
+        return [400, { error: "invalid_request" }];
+      adBlockerService.enabled = payload.ad_blocking;
+    } else if (method !== "GET") return [404, { error: "not_found" }];
+    return [
+      200,
+      {
+        ad_blocking: adBlockerService.enabled,
+        available: adBlockerService.available,
+        updated_at: null,
+      },
+    ];
   }
   if (path === "/v1/devices") {
     if (failNextDeviceList) {
@@ -2199,6 +2220,13 @@ try {
           if (payload.length > 100_000) throw new Error("Oversized synthetic API request");
         }
         const parsed = payload ? JSON.parse(payload) : {};
+        if (path === "/v1/me/dns-filter")
+          received.adBlocker.push({
+            method: request.method,
+            // Whether a credential came with it; the credential itself is not kept.
+            authorized: /^Bearer \S+$/.test(request.headers.authorization ?? ""),
+            body: payload,
+          });
         if (path === "/v1/diagnostics" && request.method === "POST") {
           const item = {
             id: parsed.report_id,
@@ -2620,6 +2648,18 @@ try {
     assert(received.direct.includes("/excluded"));
     record("Committed site exclusion goes directly to local target");
     await verifyPopupPage(excluded.snapshot.siteExclusions.saved);
+    await firefoxAdBlockerCheck({
+      driver,
+      dist,
+      service: adBlockerService,
+      requests: received.adBlocker,
+      send,
+      snapshot,
+      openPopup,
+      click,
+      waitFor,
+      record,
+    });
     await screenshot("fr", "popup");
     await screenshot("ar", "popup");
     await screenshot("fr", "diagnostics");

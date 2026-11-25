@@ -308,6 +308,18 @@
   "retryConnection": {
     "message": "Zkuste to znovu"
   },
+  "adBlocker": {
+    "message": "Blokování reklam"
+  },
+  "adBlockerHelp": {
+    "message": "Blokuje známé reklamní a sledovací domény."
+  },
+  "adBlockerPaused": {
+    "message": "Dočasně nedostupné: vaše volba je uložena a použije se, jakmile bude služba opět dostupná."
+  },
+  "adBlockerFailed": {
+    "message": "Toto nastavení se nepodařilo načíst ani změnit. Otevřete nastavení znovu a zkuste to ještě jednou."
+  },
   "killSwitch": {
     "message": "Kill switch"
   },

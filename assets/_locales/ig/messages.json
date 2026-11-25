@@ -308,6 +308,18 @@
   "retryConnection": {
     "message": "Nwaa ọzọ"
   },
+  "adBlocker": {
+    "message": "Ihe mgbochi mgbasa ozi"
+  },
+  "adBlockerHelp": {
+    "message": "Ọ na-egbochi ngalaba mgbasa ozi na nsochi a maara."
+  },
+  "adBlockerPaused": {
+    "message": "Ọ dịghị ugbu a: e debere nhọrọ gị, a ga-etinye ya n'ọrụ ozugbo ọrụ ahụ laghachiri."
+  },
+  "adBlockerFailed": {
+    "message": "Enweghị ike ịgụ ma ọ bụ gbanwee ntọala a. Mepee ntọala ọzọ ka ị nwaa ọzọ."
+  },
   "killSwitch": {
     "message": "Mgbanyụ mberede"
   },

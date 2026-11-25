@@ -255,6 +255,23 @@ checks the warning there in the seventy languages. Which of two extensions a bro
 set its proxy is the browser's rule: these suites observe that the second one holds it,
 and do not establish that rule; no third-party VPN extension is run.
 
+The ad blocker is a choice of the account which the service applies: no suite resolves
+or blocks an advertising domain. The unit suites cover the decoding of the reply, the two
+requests of the client (path, method, credential, a body which is the whole choice), the
+commands, requests sent in the order they were asked, failures left to their caller, the
+sign-out on a refused credential, and a choice never shown for another account. The popup
+harness covers the control while a request is on its way, the two notes, a change which
+the worker abandoned and a change of account. The `ad-blocker` suite drives the built
+worker and popup against a synthetic API which records the choice: nothing asked before
+the settings open and a reading at each opening, one click recorded with the credential
+of the account while the connection keeps its session, a blocker which the service has
+turned off, a refusal and a missing route said beside the setting, and nothing kept after
+sign-out. The Firefox campaign repeats the reading, the change and the two notes against
+its real background. `popup-audit-fixes` checks the row on a mocked runtime: first of the
+protection settings, changed by pointer and keyboard with the focus kept, its texts in
+seventy languages without horizontal overflow, nothing rewritten at a poll which says the
+same, and no row when signed out.
+
 The `popup-audit-fixes` suite checks the same warning in seventy languages on a mocked
 runtime: texts equal to the catalog, with the label of the retry button in place of its
 placeholder; no scrolling in a popup of 600 px and no horizontal overflow; the error

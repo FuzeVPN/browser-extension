@@ -308,6 +308,18 @@
   "retryConnection": {
     "message": "Thử lại"
   },
+  "adBlocker": {
+    "message": "Trình chặn quảng cáo"
+  },
+  "adBlockerHelp": {
+    "message": "Chặn các miền quảng cáo và theo dõi đã biết."
+  },
+  "adBlockerPaused": {
+    "message": "Tạm thời không khả dụng: lựa chọn của bạn được lưu và sẽ áp dụng ngay khi dịch vụ hoạt động trở lại."
+  },
+  "adBlockerFailed": {
+    "message": "Không thể đọc hoặc thay đổi cài đặt này. Hãy mở lại phần cài đặt để thử lại."
+  },
   "killSwitch": {
     "message": "Công tắc tiêu diệt"
   },

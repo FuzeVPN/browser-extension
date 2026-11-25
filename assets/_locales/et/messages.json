@@ -308,6 +308,18 @@
   "retryConnection": {
     "message": "Proovi uuesti"
   },
+  "adBlocker": {
+    "message": "Reklaamiblokeerija"
+  },
+  "adBlockerHelp": {
+    "message": "Blokeerib teadaolevad reklaami- ja jälitusdomeenid."
+  },
+  "adBlockerPaused": {
+    "message": "Ajutiselt pole saadaval: sinu valik on salvestatud ja rakendub kohe, kui teenus taastub."
+  },
+  "adBlockerFailed": {
+    "message": "Seda seadet ei õnnestunud lugeda ega muuta. Uuesti proovimiseks ava seaded uuesti."
+  },
   "killSwitch": {
     "message": "Hädalüliti"
   },

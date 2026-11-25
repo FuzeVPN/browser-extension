@@ -308,6 +308,18 @@
   "retryConnection": {
     "message": "Pokušaj ponovno"
   },
+  "adBlocker": {
+    "message": "Blokiranje oglasa"
+  },
+  "adBlockerHelp": {
+    "message": "Blokira poznate domene za oglašavanje i praćenje."
+  },
+  "adBlockerPaused": {
+    "message": "Privremeno nedostupno: vaš je odabir spremljen i primijenit će se čim se usluga vrati."
+  },
+  "adBlockerFailed": {
+    "message": "Ovu postavku nije bilo moguće pročitati ni promijeniti. Ponovno otvorite postavke da biste pokušali opet."
+  },
   "killSwitch": {
     "message": "Sigurnosni prekidač"
   },

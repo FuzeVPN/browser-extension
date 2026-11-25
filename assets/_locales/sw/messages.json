@@ -308,6 +308,18 @@
   "retryConnection": {
     "message": "Jaribu tena"
   },
+  "adBlocker": {
+    "message": "Kizuia matangazo"
+  },
+  "adBlockerHelp": {
+    "message": "Huzuia vikoa vinavyojulikana vya matangazo na ufuatiliaji."
+  },
+  "adBlockerPaused": {
+    "message": "Haipatikani kwa muda: chaguo lako limehifadhiwa na litatumika mara huduma itakaporejea."
+  },
+  "adBlockerFailed": {
+    "message": "Mpangilio huu haukuweza kusomwa wala kubadilishwa. Fungua tena mipangilio ili ujaribu tena."
+  },
   "killSwitch": {
     "message": "Swichi ya dharura"
   },

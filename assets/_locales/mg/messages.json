@@ -308,6 +308,18 @@
   "retryConnection": {
     "message": "Andramo indray"
   },
+  "adBlocker": {
+    "message": "Mpanakana dokambarotra"
+  },
+  "adBlockerHelp": {
+    "message": "Manakana ireo sehatra fantatra amin'ny dokambarotra sy fanarahan-dia."
+  },
+  "adBlockerPaused": {
+    "message": "Tsy misy vonjimaika: voatahiry ny safidinao ary hampiharina raha vao miverina ny tolotra."
+  },
+  "adBlockerFailed": {
+    "message": "Tsy afaka novakina na novaina ity fikirana ity. Sokafy indray ny fikirana mba hanandramana indray."
+  },
   "killSwitch": {
     "message": "Sakana vonjy maika"
   },

@@ -308,6 +308,18 @@
   "retryConnection": {
     "message": "እንደገና ሞክር"
   },
+  "adBlocker": {
+    "message": "የማስታወቂያ ማገጃ"
+  },
+  "adBlockerHelp": {
+    "message": "የታወቁ የማስታወቂያ እና የክትትል ጎራዎችን ያግዳል።"
+  },
+  "adBlockerPaused": {
+    "message": "ለጊዜው አይገኝም፦ ምርጫዎ ተቀምጧል፣ አገልግሎቱ እንደተመለሰም ይተገበራል።"
+  },
+  "adBlockerFailed": {
+    "message": "ይህን ቅንብር ማንበብ ወይም መቀየር አልተቻለም። እንደገና ለመሞከር ቅንብሮችን ዘግተው ይክፈቱ።"
+  },
   "killSwitch": {
     "message": "ኪል ስዊች"
   },

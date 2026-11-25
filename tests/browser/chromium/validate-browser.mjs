@@ -171,6 +171,14 @@ const suites = [
       "Built worker and popup beside a second extension which takes, then gives back, the proxy; intercepted synthetic API",
   },
   {
+    name: "ad-blocker",
+    script: "browser-ad-blocker-check.mjs",
+    output: "AD_BLOCKER_OUTPUT",
+    report: "report.json",
+    scope:
+      "Built worker and popup; intercepted synthetic API which records the ad blocker choice of the account",
+  },
+  {
     name: "location-hierarchy",
     script: "browser-location-hierarchy-check.mjs",
     output: "LOCATION_HIERARCHY_OUTPUT",

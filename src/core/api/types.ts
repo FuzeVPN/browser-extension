@@ -85,6 +85,13 @@ export interface DeviceList {
   devices: Device[];
 }
 
+/** The ad blocker of an account: its own choice, and whether the service applies it. */
+export interface AdBlockingChoice {
+  enabled: boolean;
+  /** False while the service has turned the blocker off for every account. */
+  available: boolean;
+}
+
 export interface DeviceProof {
   deviceId: string;
   deviceTimestamp: number;
@@ -279,6 +286,13 @@ export function decodeBrowserDeviceEnrollment(value: unknown): BrowserDeviceEnro
     kind: "browser_extension",
     createdAt: data.created_at,
   };
+}
+
+export function decodeAdBlocking(value: unknown): AdBlockingChoice | null {
+  const root = object(value);
+  if (!root || typeof root.ad_blocking !== "boolean" || typeof root.available !== "boolean")
+    return null;
+  return { enabled: root.ad_blocking, available: root.available };
 }
 
 export function decodeDeviceList(value: unknown): DeviceList | null {

@@ -688,6 +688,10 @@ async function handleMessage(
       return controller.refreshDevices();
     case "delete_device":
       return controller.deleteDevice(message.deviceId, recordConnection);
+    case "refresh_ad_blocking":
+      return controller.refreshAdBlocking();
+    case "set_ad_blocking":
+      return controller.setAdBlocking(message.enabled);
     case "reset_device_identity":
       return controller.resetDeviceIdentity();
   }

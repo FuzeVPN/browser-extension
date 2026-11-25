@@ -2072,6 +2072,14 @@ h3,
 .settings-row + .settings-row {
   border-top: 1px solid var(--wash);
 }
+/* A row which is not shown separates nothing. */
+.settings-row.hidden + .settings-row {
+  border-top: 0;
+}
+/* What the reader must know of a setting just now, beside its standing description. */
+.settings-panel .settings-note {
+  font-weight: 650;
+}
 .settings-row-action {
   padding: 0;
 }

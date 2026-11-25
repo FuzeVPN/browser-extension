@@ -65,6 +65,8 @@ const COMMAND_METHODS = [
   "refreshAccount",
   "refreshLocations",
   "refreshDevices",
+  "refreshAdBlocking",
+  "setAdBlocking",
   "deleteDevice",
   "resetDeviceIdentity",
 ] as const;
@@ -506,6 +508,8 @@ describe("worker command responses and fallback publication", () => {
     { request: { type: "refresh_account" }, method: "refreshAccount", args: [] },
     { request: { type: "refresh_locations" }, method: "refreshLocations", args: [] },
     { request: { type: "refresh_devices" }, method: "refreshDevices", args: [] },
+    { request: { type: "refresh_ad_blocking" }, method: "refreshAdBlocking", args: [] },
+    { request: { type: "set_ad_blocking", enabled: true }, method: "setAdBlocking", args: [true] },
     {
       request: { type: "delete_device", deviceId: "old-device" },
       method: "deleteDevice",

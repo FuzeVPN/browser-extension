@@ -308,6 +308,18 @@
   "retryConnection": {
     "message": "Försök igen"
   },
+  "adBlocker": {
+    "message": "Annonsblockering"
+  },
+  "adBlockerHelp": {
+    "message": "Blockerar kända annons- och spårningsdomäner."
+  },
+  "adBlockerPaused": {
+    "message": "Tillfälligt otillgängligt: ditt val är sparat och börjar gälla så snart tjänsten är tillbaka."
+  },
+  "adBlockerFailed": {
+    "message": "Den här inställningen kunde inte läsas eller ändras. Öppna inställningarna igen för att försöka på nytt."
+  },
   "killSwitch": {
     "message": "Nödstopp"
   },

@@ -308,6 +308,18 @@
   "retryConnection": {
     "message": "Cuba semula"
   },
+  "adBlocker": {
+    "message": "Penyekat iklan"
+  },
+  "adBlockerHelp": {
+    "message": "Menyekat domain pengiklanan dan penjejakan yang diketahui."
+  },
+  "adBlockerPaused": {
+    "message": "Tidak tersedia buat sementara: pilihan anda disimpan dan akan berkuat kuasa sebaik sahaja perkhidmatan kembali."
+  },
+  "adBlockerFailed": {
+    "message": "Tetapan ini tidak dapat dibaca atau diubah. Buka semula tetapan untuk mencuba lagi."
+  },
   "killSwitch": {
     "message": "Matikan suis"
   },

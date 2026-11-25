@@ -54,8 +54,10 @@ describe("the API with a renewable account session", () => {
     await f.api.revokeProxySession(HANDLE, "proxy-session-1");
     await f.api.deleteDevice(HANDLE, "browser-device-1");
     await f.api.resendVerification(HANDLE);
+    await f.api.getAdBlocking(HANDLE);
+    await f.api.setAdBlocking(HANDLE, true);
 
-    expect(f.presented).toHaveLength(8);
+    expect(f.presented).toHaveLength(10);
     expect(new Set(f.presented).size).toBe(1);
     expect(f.presented).not.toContain(HANDLE);
     expect(f.server.rotations).toHaveLength(1);
@@ -64,6 +66,7 @@ describe("the API with a renewable account session", () => {
     expect(f.fake.proofs).toEqual([PROOF]);
     expect(f.fake.revoked).toEqual(["proxy-session-1"]);
     expect(f.fake.deletedDevices).toEqual(["browser-device-1"]);
+    expect(f.fake.adBlockingCalls).toEqual(["read", true]);
   });
 
   it("leaves the routes without account token alone", async () => {

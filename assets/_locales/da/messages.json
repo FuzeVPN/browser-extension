@@ -308,6 +308,18 @@
   "retryConnection": {
     "message": "Prøv igen"
   },
+  "adBlocker": {
+    "message": "Annonceblokering"
+  },
+  "adBlockerHelp": {
+    "message": "Blokerer kendte annonce- og sporingsdomæner."
+  },
+  "adBlockerPaused": {
+    "message": "Midlertidigt utilgængelig: Dit valg er gemt og træder i kraft, så snart tjenesten er tilbage."
+  },
+  "adBlockerFailed": {
+    "message": "Denne indstilling kunne ikke læses eller ændres. Åbn indstillingerne igen for at prøve igen."
+  },
   "killSwitch": {
     "message": "Nødafbryder"
   },

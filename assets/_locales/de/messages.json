@@ -308,6 +308,18 @@
   "retryConnection": {
     "message": "Erneut versuchen"
   },
+  "adBlocker": {
+    "message": "Werbeblocker"
+  },
+  "adBlockerHelp": {
+    "message": "Blockiert bekannte Werbe- und Tracking-Domains."
+  },
+  "adBlockerPaused": {
+    "message": "Vorübergehend nicht verfügbar: Deine Auswahl bleibt gespeichert und gilt, sobald der Dienst zurück ist."
+  },
+  "adBlockerFailed": {
+    "message": "Diese Einstellung konnte nicht gelesen oder geändert werden. Öffne die Einstellungen erneut, um es noch einmal zu versuchen."
+  },
   "killSwitch": {
     "message": "Kill Switch"
   },

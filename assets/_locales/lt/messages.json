@@ -308,6 +308,18 @@
   "retryConnection": {
     "message": "Bandyti dar kartą"
   },
+  "adBlocker": {
+    "message": "Reklamų blokavimas"
+  },
+  "adBlockerHelp": {
+    "message": "Blokuoja žinomus reklamos ir sekimo domenus."
+  },
+  "adBlockerPaused": {
+    "message": "Laikinai nepasiekiama: jūsų pasirinkimas išsaugotas ir bus pritaikytas, kai tik paslauga vėl veiks."
+  },
+  "adBlockerFailed": {
+    "message": "Šio nustatymo nepavyko nuskaityti arba pakeisti. Atidarykite nustatymus iš naujo ir bandykite dar kartą."
+  },
   "killSwitch": {
     "message": "Avarinis išjungiklis"
   },

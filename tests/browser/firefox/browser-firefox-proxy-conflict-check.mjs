@@ -32,6 +32,8 @@ export async function firefoxProxyConflictCheck({
       await readFile(join(dist, `_locales/${localeDirectory(language)}/messages.json`), "utf8"),
     );
   // A closed disclosure keeps the boxes of its text: only `checkVisibility` tells it hidden.
+  // The actions are measured by the block which holds them: a button under the pointer
+  // rises by a pixel, and is read midway while it does.
   const view = () =>
     driver.executeScript(
       `const shell=document.querySelector('.shell'); const why=document.getElementById('recoveryWhy');
@@ -41,9 +43,9 @@ export async function firefoxProxyConflictCheck({
         title: at('recoveryStatus').textContent, help: at('recoveryHelp').textContent, retry: at('retryButton').textContent,
         why: shown(why), open: why.open, question: summary.textContent, answer: answer.textContent, answerShown: answer.checkVisibility(),
         fit: shell.dataset.fit ?? '0', height: shell.offsetHeight,
-        added: why.getBoundingClientRect().height - summary.getBoundingClientRect().height, actionsTop: at('retryButton').getBoundingClientRect().top + scrollY,
+        added: why.getBoundingClientRect().height - summary.getBoundingClientRect().height, actionsTop: at('retryButton').parentElement.getBoundingClientRect().top + scrollY,
         target: summary.getBoundingClientRect().height, wide: document.documentElement.scrollWidth > innerWidth,
-        actionsBottom: Math.max(at('retryButton').getBoundingClientRect().bottom, at('recoveryDisconnectButton').getBoundingClientRect().bottom) + scrollY };`,
+        actionsBottom: at('retryButton').parentElement.getBoundingClientRect().bottom + scrollY };`,
     );
   const held = (value) => value.error === "proxy_controlled_by_extension" && !value.protected;
 

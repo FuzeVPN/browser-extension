@@ -308,6 +308,18 @@
   "retryConnection": {
     "message": "Yeniden dene"
   },
+  "adBlocker": {
+    "message": "Reklam engelleyici"
+  },
+  "adBlockerHelp": {
+    "message": "Bilinen reklam ve izleme alan adlarını engeller."
+  },
+  "adBlockerPaused": {
+    "message": "Geçici olarak kullanılamıyor: seçiminiz saklanıyor ve hizmet geri döner dönmez uygulanacak."
+  },
+  "adBlockerFailed": {
+    "message": "Bu ayar okunamadı veya değiştirilemedi. Yeniden denemek için ayarları tekrar açın."
+  },
   "killSwitch": {
     "message": "Kapatma anahtarı"
   },

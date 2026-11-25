@@ -308,6 +308,18 @@
   "retryConnection": {
     "message": "Yenidən cəhd et"
   },
+  "adBlocker": {
+    "message": "Reklam bloklayıcı"
+  },
+  "adBlockerHelp": {
+    "message": "Məlum reklam və izləmə domenlərini bloklayır."
+  },
+  "adBlockerPaused": {
+    "message": "Müvəqqəti əlçatmazdır: seçiminiz saxlanılıb və xidmət bərpa olunan kimi tətbiq ediləcək."
+  },
+  "adBlockerFailed": {
+    "message": "Bu parametri oxumaq və ya dəyişmək mümkün olmadı. Yenidən cəhd etmək üçün parametrləri yenidən açın."
+  },
   "killSwitch": {
     "message": "Təcili bloklama"
   },

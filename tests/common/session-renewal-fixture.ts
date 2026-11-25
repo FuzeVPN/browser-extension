@@ -232,6 +232,8 @@ const ACCOUNT_ROUTES = [
   "enrollBrowserDevice",
   "getDevices",
   "deleteDevice",
+  "getAdBlocking",
+  "setAdBlocking",
   "revokeProxySession",
   "resendVerification",
 ] as const;

@@ -308,6 +308,18 @@
   "retryConnection": {
     "message": "Skúsiť znova"
   },
+  "adBlocker": {
+    "message": "Blokovanie reklám"
+  },
+  "adBlockerHelp": {
+    "message": "Blokuje známe reklamné a sledovacie domény."
+  },
+  "adBlockerPaused": {
+    "message": "Dočasne nedostupné: vaša voľba je uložená a použije sa hneď, ako bude služba opäť dostupná."
+  },
+  "adBlockerFailed": {
+    "message": "Toto nastavenie sa nepodarilo načítať ani zmeniť. Otvorte nastavenia znova a skúste to ešte raz."
+  },
   "killSwitch": {
     "message": "Núdzový vypínač"
   },

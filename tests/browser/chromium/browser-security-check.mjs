@@ -687,7 +687,13 @@ async function verifyBuiltApplication() {
       assert.equal(snapshot.effectiveLanguage, code);
       assert.equal(snapshot.languagePreference, code);
     }
-    assert.equal(apiRequests.length, requests, "Language change made API requests");
+    // Opening the settings reads the ad blocker choice of the account, and nothing
+    // else; a change of language asks the service nothing.
+    assert.deepEqual(
+      apiRequests.slice(requests).filter((entry) => entry !== "GET /v1/me/dns-filter"),
+      [],
+      "Language change made API requests",
+    );
     assert.equal(
       await worker.evaluate(() => globalThis.languageAuditOperations.length),
       operations,

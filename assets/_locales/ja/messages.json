@@ -308,6 +308,18 @@
   "retryConnection": {
     "message": "再試行"
   },
+  "adBlocker": {
+    "message": "広告ブロッカー"
+  },
+  "adBlockerHelp": {
+    "message": "既知の広告ドメインとトラッキングドメインをブロックします。"
+  },
+  "adBlockerPaused": {
+    "message": "一時的に利用できません。選択内容は保存されており、サービスが復旧しだい適用されます。"
+  },
+  "adBlockerFailed": {
+    "message": "この設定を読み込めなかったか、変更できませんでした。設定を開き直して、もう一度お試しください。"
+  },
   "killSwitch": {
     "message": "キルスイッチ"
   },

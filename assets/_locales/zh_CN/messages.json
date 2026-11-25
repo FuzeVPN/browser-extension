@@ -308,6 +308,18 @@
   "retryConnection": {
     "message": "重试"
   },
+  "adBlocker": {
+    "message": "广告拦截"
+  },
+  "adBlockerHelp": {
+    "message": "拦截已知的广告和跟踪域名。"
+  },
+  "adBlockerPaused": {
+    "message": "暂时不可用：您的选择已保存，服务恢复后会立即生效。"
+  },
+  "adBlockerFailed": {
+    "message": "无法读取或更改此设置。请重新打开设置后再试。"
+  },
   "killSwitch": {
     "message": "终止开关"
   },

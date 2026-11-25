@@ -308,6 +308,18 @@
   "retryConnection": {
     "message": "Sake gwadawa"
   },
+  "adBlocker": {
+    "message": "Mai toshe tallace-tallace"
+  },
+  "adBlockerHelp": {
+    "message": "Yana toshe sanannun yankunan tallace-tallace da bin diddigi."
+  },
+  "adBlockerPaused": {
+    "message": "Ba ya samuwa na ɗan lokaci: an adana zaɓinka kuma zai fara aiki da zarar sabis ɗin ya dawo."
+  },
+  "adBlockerFailed": {
+    "message": "Ba a iya karanta ko canza wannan saitin ba. Sake buɗe saituna don sake gwadawa."
+  },
   "killSwitch": {
     "message": "Maɓallin katsewa"
   },

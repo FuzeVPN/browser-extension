@@ -29,6 +29,31 @@ describe("popup compatibility during extension updates", () => {
     expect(legacy.siteExclusions).toBeUndefined();
   });
 
+  it("takes the ad blocker for unread when a worker says nothing readable of it", () => {
+    const unread = { enabled: null, available: true };
+    expect(popupSnapshot({ ...connected, adBlocking: undefined }).adBlocking).toEqual(unread);
+    for (const adBlocking of [
+      null,
+      true,
+      {},
+      { enabled: "yes", available: true },
+      { enabled: true },
+    ])
+      expect(
+        popupSnapshot({ ...connected, adBlocking }).adBlocking,
+        JSON.stringify(adBlocking),
+      ).toEqual(unread);
+  });
+
+  it("copies the ad blocker a worker published, and nothing more of it", () => {
+    const published = { enabled: true, available: false, userId: "user" };
+    const normalized = popupSnapshot({ ...connected, adBlocking: published });
+    expect(normalized.adBlocking).toEqual({ enabled: true, available: false });
+    expect(normalized.adBlocking).not.toBe(published);
+    // The shared empty state is never handed out to be changed.
+    expect(popupSnapshot(connected).adBlocking).not.toBe(EMPTY_SNAPSHOT.adBlocking);
+  });
+
   it("keeps legacy capability unavailable across repeated renders and preserves errors/devices", () => {
     const device = {
       deviceId: "legacy-device",

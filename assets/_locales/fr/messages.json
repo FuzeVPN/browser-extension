@@ -308,6 +308,18 @@
   "retryConnection": {
     "message": "Réessayer"
   },
+  "adBlocker": {
+    "message": "Bloqueur de publicité"
+  },
+  "adBlockerHelp": {
+    "message": "Bloque les domaines de publicité et de pistage connus."
+  },
+  "adBlockerPaused": {
+    "message": "Momentanément indisponible : votre choix est conservé et s’appliquera dès le retour du service."
+  },
+  "adBlockerFailed": {
+    "message": "Ce réglage n’a pas pu être lu ou modifié. Rouvrez les réglages pour réessayer."
+  },
   "killSwitch": {
     "message": "Kill switch"
   },

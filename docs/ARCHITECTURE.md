@@ -339,6 +339,27 @@ l'avertissement. Rien n'est reconnecté sans la demande de l'utilisateur.
 L'écriture arabe lie ses lettres : dans ces langues (arabe, persan, ourdou, pachto), les
 titres et les étiquettes gardent l'espacement du texte.
 
+## Bloqueur de publicité
+
+Le bloqueur de publicité est un choix du compte, que le service applique lui-même :
+l'extension ne filtre rien et ne tient aucune liste. Elle lit ce choix
+(`GET /v1/me/dns-filter`) à chaque ouverture des réglages, car un autre appareil du compte
+peut l'avoir changé, et l'enregistre par `PUT /v1/me/dns-filter`, dont le corps est le
+choix entier (`{"ad_blocking": true}`). Rien n'est demandé à la connexion, à l'ouverture
+du popup ni au démarrage. Le choix n'est pas stocké dans le navigateur : le worker le garde
+en mémoire dans l'état publié (`adBlocking`), inconnu tant qu'il n'a pas été lu, et
+l'oublie à la déconnexion. Il n'est jamais montré pour un autre compte que celui pour
+lequel il a été lu.
+
+Lectures et changements partent l'un après l'autre, dans l'ordre demandé : une lecture qui
+doublerait un changement montrerait le choix qu'il remplace. Un échec ne concerne que ce
+réglage : il est rendu à l'appelant, sans toucher à l'état ni à l'erreur de la connexion ;
+seul un identifiant refusé suit le traitement commun des requêtes de compte. Le popup
+montre le choix demandé tant que sa requête est en route, puis ce que le service répond.
+Une note à côté du réglage dit quand le service a coupé le bloqueur pour tous
+(`available: false`, le choix restant modifiable) ou quand la dernière lecture ou le
+dernier changement a échoué. Sans compte, la ligne n'est pas affichée.
+
 ## Choix délibérés
 
 Les réglages du proxy et l'accès aux fenêtres privées sont relus au navigateur à chaque

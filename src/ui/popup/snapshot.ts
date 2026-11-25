@@ -11,10 +11,24 @@ import {
 } from "../../core/shared/location-preferences";
 import { isLanguagePreference } from "../../core/shared/language";
 import { normalizeSubscription } from "../../core/shared/subscription";
-import type { AppSnapshot, LogoutOutcome } from "../../core/shared/state";
+import {
+  EMPTY_AD_BLOCKING,
+  type AdBlockingState,
+  type AppSnapshot,
+  type LogoutOutcome,
+} from "../../core/shared/state";
 
 export interface PopupSnapshot extends AppSnapshot {
   siteExclusionsAvailable: boolean;
+  adBlocking: AdBlockingState;
+}
+
+function isAdBlocking(value: unknown): value is AdBlockingState {
+  return (
+    isObject(value) &&
+    (value.enabled === null || typeof value.enabled === "boolean") &&
+    typeof value.available === "boolean"
+  );
 }
 
 interface SnapshotVersion {
@@ -112,6 +126,10 @@ export function popupSnapshot(value: unknown): PopupSnapshot {
         ? structuredClone(source.activeLocation)
         : null,
     logoutOutcome: isLogoutOutcome(source.logoutOutcome) ? { ...source.logoutOutcome } : null,
+    // A worker of an earlier version says nothing of it: the choice is then not known.
+    adBlocking: isAdBlocking(source.adBlocking)
+      ? { enabled: source.adBlocking.enabled, available: source.adBlocking.available }
+      : { ...EMPTY_AD_BLOCKING },
     deviceLimit:
       typeof source.deviceLimit === "number" &&
       Number.isSafeInteger(source.deviceLimit) &&
